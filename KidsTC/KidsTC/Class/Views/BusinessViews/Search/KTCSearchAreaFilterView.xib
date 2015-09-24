@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="KTCSearchAreaFilterView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="nAI-Bk-qiI">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="nAI-Bk-qiI" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="07H-gM-pne"/>
+                <constraint firstItem="nAI-Bk-qiI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8ud-3V-WhJ"/>
+                <constraint firstAttribute="bottom" secondItem="nAI-Bk-qiI" secondAttribute="bottom" id="tI1-qu-tQn"/>
+                <constraint firstAttribute="trailing" secondItem="nAI-Bk-qiI" secondAttribute="trailing" id="ugh-RD-SdW"/>
+            </constraints>
+            <connections>
+                <outlet property="tableView" destination="nAI-Bk-qiI" id="ks5-y0-avN"/>
+            </connections>
+            <point key="canvasLocation" x="394" y="355"/>
+        </view>
+    </objects>
+</document>

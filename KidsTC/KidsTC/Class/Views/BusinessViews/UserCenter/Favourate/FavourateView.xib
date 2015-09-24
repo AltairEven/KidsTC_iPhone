@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="FavourateView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MnR-No-FY3" userLabel="topBG">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ARW-nG-dmA" customClass="AUISegmentView">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="ARW-nG-dmA" secondAttribute="bottom" id="Bs6-a8-FuS"/>
+                        <constraint firstItem="ARW-nG-dmA" firstAttribute="top" secondItem="MnR-No-FY3" secondAttribute="top" id="HKU-hZ-5OM"/>
+                        <constraint firstAttribute="trailing" secondItem="ARW-nG-dmA" secondAttribute="trailing" id="PVK-Kn-9MN"/>
+                        <constraint firstItem="ARW-nG-dmA" firstAttribute="leading" secondItem="MnR-No-FY3" secondAttribute="leading" id="SxZ-OT-vYj"/>
+                        <constraint firstAttribute="height" constant="50" id="XW8-ag-yzX"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="fQH-z7-Npg"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tDH-7o-teZ" userLabel="listBG">
+                    <rect key="frame" x="0.0" y="50" width="320" height="518"/>
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="xPl-Od-ica">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
+                            <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="xPl-Od-ica" secondAttribute="bottom" id="B9r-o1-Mde"/>
+                        <constraint firstItem="xPl-Od-ica" firstAttribute="leading" secondItem="tDH-7o-teZ" secondAttribute="leading" id="Znq-oo-dLI"/>
+                        <constraint firstAttribute="trailing" secondItem="xPl-Od-ica" secondAttribute="trailing" id="iAi-T1-Nkn"/>
+                        <constraint firstItem="xPl-Od-ica" firstAttribute="top" secondItem="tDH-7o-teZ" secondAttribute="top" id="yB2-Rh-btw"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="tDH-7o-teZ" secondAttribute="trailing" id="21r-zS-RSj"/>
+                <constraint firstAttribute="bottom" secondItem="tDH-7o-teZ" secondAttribute="bottom" id="BUU-Mm-Jkr"/>
+                <constraint firstItem="tDH-7o-teZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Ee2-df-E7r"/>
+                <constraint firstItem="MnR-No-FY3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Qeb-iB-nt9"/>
+                <constraint firstItem="MnR-No-FY3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="b2G-ex-WKv"/>
+                <constraint firstItem="tDH-7o-teZ" firstAttribute="top" secondItem="MnR-No-FY3" secondAttribute="bottom" id="d7b-LO-rEr"/>
+                <constraint firstAttribute="trailing" secondItem="MnR-No-FY3" secondAttribute="trailing" id="nxU-Dl-fqw"/>
+            </constraints>
+            <connections>
+                <outlet property="segmentView" destination="ARW-nG-dmA" id="677-mF-aAb"/>
+                <outlet property="tableView" destination="xPl-Od-ica" id="3Sh-8Y-csP"/>
+            </connections>
+            <point key="canvasLocation" x="379" y="321"/>
+        </view>
+    </objects>
+</document>

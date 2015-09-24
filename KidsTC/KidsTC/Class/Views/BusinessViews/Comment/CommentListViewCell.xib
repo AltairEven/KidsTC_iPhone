@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="140" id="KGk-i7-Jjw" customClass="CommentListViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="139"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wme-3O-2zd" userLabel="bgView">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="139"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="06Q-OD-gsj" customClass="FiveStarsView">
+                                <rect key="frame" x="15" y="15" width="290" height="15"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="BBP-6K-Dn2"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="评论内容" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4tB-UV-xLn">
+                                <rect key="frame" x="15" y="45" width="290" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y6B-do-UtH" customClass="AUIImageGridView">
+                                <rect key="frame" x="15" y="76" width="290" height="48"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4tB-UV-xLn" firstAttribute="leading" secondItem="06Q-OD-gsj" secondAttribute="leading" id="5fr-uM-Azb"/>
+                            <constraint firstItem="y6B-do-UtH" firstAttribute="leading" secondItem="Wme-3O-2zd" secondAttribute="leading" constant="15" id="Cfh-4V-dFv"/>
+                            <constraint firstItem="y6B-do-UtH" firstAttribute="top" secondItem="4tB-UV-xLn" secondAttribute="bottom" constant="15" id="FxC-BF-KMr"/>
+                            <constraint firstAttribute="bottom" secondItem="y6B-do-UtH" secondAttribute="bottom" constant="15" id="KLL-ke-9L2"/>
+                            <constraint firstAttribute="trailing" secondItem="4tB-UV-xLn" secondAttribute="trailing" constant="15" id="Pe6-Kj-E0v"/>
+                            <constraint firstItem="4tB-UV-xLn" firstAttribute="top" secondItem="06Q-OD-gsj" secondAttribute="bottom" constant="15" id="PzM-fH-4Ix"/>
+                            <constraint firstAttribute="trailing" secondItem="y6B-do-UtH" secondAttribute="trailing" constant="15" id="fNB-ol-gOD"/>
+                            <constraint firstItem="06Q-OD-gsj" firstAttribute="top" secondItem="Wme-3O-2zd" secondAttribute="top" constant="15" id="fRF-T4-6UX"/>
+                            <constraint firstItem="06Q-OD-gsj" firstAttribute="leading" secondItem="Wme-3O-2zd" secondAttribute="leading" constant="15" id="oHY-Wr-dtO"/>
+                            <constraint firstAttribute="trailing" secondItem="06Q-OD-gsj" secondAttribute="trailing" constant="15" id="ofe-Jb-hee"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Wme-3O-2zd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="KCg-LV-fVJ"/>
+                    <constraint firstAttribute="bottom" secondItem="Wme-3O-2zd" secondAttribute="bottom" id="gU2-cp-ZQY"/>
+                    <constraint firstAttribute="trailing" secondItem="Wme-3O-2zd" secondAttribute="trailing" id="h3R-aF-PAA"/>
+                    <constraint firstItem="Wme-3O-2zd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="kah-hW-Odf"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="commentLabel" destination="4tB-UV-xLn" id="C4B-zo-ALe"/>
+                <outlet property="imageGridView" destination="y6B-do-UtH" id="FL1-nh-8qJ"/>
+                <outlet property="starsView" destination="06Q-OD-gsj" id="RwK-hr-34g"/>
+            </connections>
+            <point key="canvasLocation" x="443" y="369"/>
+        </tableViewCell>
+    </objects>
+</document>

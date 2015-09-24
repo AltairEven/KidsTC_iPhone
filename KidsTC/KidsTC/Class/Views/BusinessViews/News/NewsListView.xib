@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="NewsListView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="WDc-c8-unh">
+                    <rect key="frame" x="0.0" y="120" width="320" height="448"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4f3-9n-cU7" customClass="AUILinearView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="120" id="nX8-7Q-NKH"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="WDc-c8-unh" firstAttribute="top" secondItem="4f3-9n-cU7" secondAttribute="bottom" id="EbS-fC-obA"/>
+                <constraint firstAttribute="trailing" secondItem="WDc-c8-unh" secondAttribute="trailing" id="JMA-oX-Rm7"/>
+                <constraint firstAttribute="trailing" secondItem="4f3-9n-cU7" secondAttribute="trailing" id="MdQ-gs-sTu"/>
+                <constraint firstItem="WDc-c8-unh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="XyA-76-a4o"/>
+                <constraint firstItem="4f3-9n-cU7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="vki-ID-ARg"/>
+                <constraint firstAttribute="bottom" secondItem="WDc-c8-unh" secondAttribute="bottom" id="vui-L4-xNl"/>
+                <constraint firstItem="4f3-9n-cU7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="wbt-ks-g3Z"/>
+            </constraints>
+            <connections>
+                <outlet property="linearView" destination="4f3-9n-cU7" id="hZV-qA-K0p"/>
+                <outlet property="tableView" destination="WDc-c8-unh" id="u01-ce-gvx"/>
+            </connections>
+            <point key="canvasLocation" x="392" y="354"/>
+        </view>
+    </objects>
+</document>

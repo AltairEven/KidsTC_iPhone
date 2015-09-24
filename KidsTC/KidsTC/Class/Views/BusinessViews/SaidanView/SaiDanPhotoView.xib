@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SaiDanPhotoView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XYF-0y-fc1">
+                    <rect key="frame" x="4" y="4" width="70" height="70"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="70" id="9tb-QX-dcq"/>
+                        <constraint firstAttribute="width" constant="70" id="wBs-V6-O4b"/>
+                    </constraints>
+                    <state key="normal" image="addPhoto">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="touchTakephotos:" destination="iN0-l3-epB" eventType="touchUpInside" id="Wih-sV-uRR"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="XYF-0y-fc1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="eDr-QR-bld"/>
+                <constraint firstItem="XYF-0y-fc1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="4" id="yZJ-3C-RVH"/>
+            </constraints>
+            <connections>
+                <outlet property="addphotos" destination="XYF-0y-fc1" id="WrB-gL-hv1"/>
+            </connections>
+            <point key="canvasLocation" x="76" y="341"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="addPhoto" width="83" height="83"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

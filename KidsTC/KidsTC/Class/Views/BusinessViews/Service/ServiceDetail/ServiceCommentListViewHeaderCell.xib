@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="64" id="Z0C-pu-mHN" customClass="ServiceCommentListViewHeaderCell">
+            <rect key="frame" x="0.0" y="0.0" width="85" height="64"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z0C-pu-mHN" id="XLl-qd-Vwr">
+                <rect key="frame" x="0.0" y="0.0" width="85" height="63"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJ2-21-5X4">
+                        <rect key="frame" x="0.0" y="5" width="85" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="count" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WEj-Yu-zmr">
+                        <rect key="frame" x="0.0" y="26" width="85" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QFJ-cz-n5V" userLabel="tag">
+                        <rect key="frame" x="0.0" y="62" width="85" height="1"/>
+                        <color key="backgroundColor" red="1" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="AgR-wq-BM8"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="QFJ-cz-n5V" secondAttribute="bottom" id="3pK-5e-bIj"/>
+                    <constraint firstAttribute="trailing" secondItem="cJ2-21-5X4" secondAttribute="trailing" id="4tW-2G-jao"/>
+                    <constraint firstItem="cJ2-21-5X4" firstAttribute="top" secondItem="XLl-qd-Vwr" secondAttribute="top" constant="5" id="Cil-t9-xzH"/>
+                    <constraint firstItem="QFJ-cz-n5V" firstAttribute="leading" secondItem="XLl-qd-Vwr" secondAttribute="leading" id="Lfr-zv-uyq"/>
+                    <constraint firstItem="cJ2-21-5X4" firstAttribute="leading" secondItem="XLl-qd-Vwr" secondAttribute="leading" id="TuR-tP-obc"/>
+                    <constraint firstItem="WEj-Yu-zmr" firstAttribute="top" secondItem="cJ2-21-5X4" secondAttribute="bottom" constant="5" id="iYV-qF-GGb"/>
+                    <constraint firstItem="WEj-Yu-zmr" firstAttribute="leading" secondItem="XLl-qd-Vwr" secondAttribute="leading" id="ri2-nx-eTS"/>
+                    <constraint firstAttribute="trailing" secondItem="QFJ-cz-n5V" secondAttribute="trailing" id="uS7-n0-4Ps"/>
+                    <constraint firstAttribute="trailing" secondItem="WEj-Yu-zmr" secondAttribute="trailing" id="xrd-Xv-f3I"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="-6.5" y="293"/>
+        </tableViewCell>
+    </objects>
+</document>

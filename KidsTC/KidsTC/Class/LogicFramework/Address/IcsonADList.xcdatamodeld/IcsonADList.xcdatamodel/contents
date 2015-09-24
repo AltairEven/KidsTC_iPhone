@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="14C109" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="AdministrativeDivision" representedClassName="AdministrativeDivision" isAbstract="YES" syncable="YES">
+        <attribute name="adminLevel" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="gbAreaId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sortId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="uniqueId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="IcsonCity" representedClassName="IcsonCity" parentEntity="AdministrativeDivision" syncable="YES">
+        <attribute name="isMunicipality" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="countyList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="IcsonCounty" inverseName="city" inverseEntity="IcsonCounty" syncable="YES"/>
+        <relationship name="province" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IcsonProvince" inverseName="cityList" inverseEntity="IcsonProvince" syncable="YES"/>
+    </entity>
+    <entity name="IcsonCountryAD" representedClassName="IcsonCountryAD" parentEntity="AdministrativeDivision" syncable="YES">
+        <attribute name="md5" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="provinceList" optional="YES" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="IcsonProvince" inverseName="country" inverseEntity="IcsonProvince" syncable="YES"/>
+    </entity>
+    <entity name="IcsonCounty" representedClassName="IcsonCounty" parentEntity="AdministrativeDivision" syncable="YES">
+        <attribute name="hasTowns" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="city" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IcsonCity" inverseName="countyList" inverseEntity="IcsonCity" syncable="YES"/>
+        <relationship name="townList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="IcsonTown" inverseName="county" inverseEntity="IcsonTown" syncable="YES"/>
+    </entity>
+    <entity name="IcsonProvince" representedClassName="IcsonProvince" parentEntity="AdministrativeDivision" syncable="YES">
+        <attribute name="isMunicipality" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="cityList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="IcsonCity" inverseName="province" inverseEntity="IcsonCity" syncable="YES"/>
+        <relationship name="country" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IcsonCountryAD" inverseName="provinceList" inverseEntity="IcsonCountryAD" syncable="YES"/>
+    </entity>
+    <entity name="IcsonTown" representedClassName="IcsonTown" parentEntity="AdministrativeDivision" syncable="YES">
+        <relationship name="county" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IcsonCounty" inverseName="townList" inverseEntity="IcsonCounty" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="AdministrativeDivision" positionX="-252" positionY="-135" width="128" height="118"/>
+        <element name="IcsonCountryAD" positionX="-569" positionY="18" width="128" height="73"/>
+        <element name="IcsonCity" positionX="-126" positionY="146" width="128" height="88"/>
+        <element name="IcsonCounty" positionX="97" positionY="243" width="128" height="88"/>
+        <element name="IcsonProvince" positionX="-324" positionY="65" width="128" height="88"/>
+        <element name="IcsonTown" positionX="349" positionY="347" width="128" height="58"/>
+    </elements>
+</model>

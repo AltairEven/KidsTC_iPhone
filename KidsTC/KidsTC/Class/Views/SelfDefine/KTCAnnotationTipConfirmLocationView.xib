@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view alpha="0.69999999999999996" contentMode="scaleToFill" id="iN0-l3-epB" customClass="KTCAnnotationTipConfirmLocationView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D5X-oy-AcF" userLabel="tipBG">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="isX-he-UCG">
+                            <rect key="frame" x="0.0" y="266" width="320" height="16"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="isX-he-UCG" firstAttribute="leading" secondItem="D5X-oy-AcF" secondAttribute="leading" id="C0r-4d-R3M"/>
+                        <constraint firstAttribute="trailing" secondItem="isX-he-UCG" secondAttribute="trailing" id="aDK-xP-4Ld"/>
+                        <constraint firstAttribute="centerY" secondItem="isX-he-UCG" secondAttribute="centerY" id="zVS-Vf-h8X"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CUY-Lv-nAX" userLabel="buttonBG">
+                    <rect key="frame" x="0.0" y="548" width="320" height="20"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzI-nL-sSz">
+                            <rect key="frame" x="0.0" y="0.0" width="160" height="20"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <state key="normal" title="取消">
+                                <color key="titleColor" red="0.80392156859999997" green="0.0039215686269999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="didClickedCancelButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="aJm-EJ-tk2"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0A3-uI-ObT">
+                            <rect key="frame" x="160" y="0.0" width="160" height="20"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <state key="normal" title="确认">
+                                <color key="titleColor" red="0.80392156859999997" green="0.0039215686269999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="didClickedConfirmButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="hf6-eb-f7i"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="bzI-nL-sSz" secondAttribute="bottom" id="FtJ-Ha-a2a"/>
+                        <constraint firstItem="0A3-uI-ObT" firstAttribute="leading" secondItem="bzI-nL-sSz" secondAttribute="trailing" id="STB-oo-nlu"/>
+                        <constraint firstAttribute="trailing" secondItem="0A3-uI-ObT" secondAttribute="trailing" id="TJ3-pG-VLS"/>
+                        <constraint firstAttribute="bottom" secondItem="0A3-uI-ObT" secondAttribute="bottom" id="YtX-Ef-nNJ"/>
+                        <constraint firstItem="0A3-uI-ObT" firstAttribute="top" secondItem="CUY-Lv-nAX" secondAttribute="top" id="gcI-Ol-N5n"/>
+                        <constraint firstItem="bzI-nL-sSz" firstAttribute="leading" secondItem="CUY-Lv-nAX" secondAttribute="leading" id="hAJ-d7-psk"/>
+                        <constraint firstItem="bzI-nL-sSz" firstAttribute="width" secondItem="0A3-uI-ObT" secondAttribute="width" id="mHd-fl-giU"/>
+                        <constraint firstItem="bzI-nL-sSz" firstAttribute="top" secondItem="CUY-Lv-nAX" secondAttribute="top" id="o0b-r0-9d8"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="CUY-Lv-nAX" firstAttribute="top" secondItem="D5X-oy-AcF" secondAttribute="bottom" id="7ST-9f-5Ew"/>
+                <constraint firstItem="D5X-oy-AcF" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="9Pb-rE-3nk"/>
+                <constraint firstItem="D5X-oy-AcF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Na8-JO-nGO"/>
+                <constraint firstAttribute="bottom" secondItem="D5X-oy-AcF" secondAttribute="bottom" constant="20" id="Q9k-ey-dcR"/>
+                <constraint firstAttribute="trailing" secondItem="D5X-oy-AcF" secondAttribute="trailing" id="XY0-J4-W8d"/>
+                <constraint firstAttribute="trailing" secondItem="CUY-Lv-nAX" secondAttribute="trailing" id="aAG-Rx-7n6"/>
+                <constraint firstAttribute="bottom" secondItem="CUY-Lv-nAX" secondAttribute="bottom" id="qzO-SC-yp7"/>
+                <constraint firstItem="CUY-Lv-nAX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="xfq-re-P6R"/>
+            </constraints>
+            <connections>
+                <outlet property="cancelButton" destination="bzI-nL-sSz" id="0QF-sX-XFM"/>
+                <outlet property="confirmButton" destination="0A3-uI-ObT" id="z2X-yV-qDM"/>
+                <outlet property="tipLabel" destination="isX-he-UCG" id="Icg-Vh-R7v"/>
+            </connections>
+            <point key="canvasLocation" x="392" y="354"/>
+        </view>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

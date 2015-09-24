@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="KGk-i7-Jjw" customClass="KTCSearchResultFilterLevel1Cell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z0e-2t-OEd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6aa-1O-g0b" userLabel="dot">
+                                <rect key="frame" x="5" y="5" width="5" height="5"/>
+                                <color key="backgroundColor" red="1" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="5" id="6TW-JR-Pdy"/>
+                                    <constraint firstAttribute="width" constant="5" id="O14-z0-2Mq"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tAe-Zm-2ib">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L11-Fo-6yZ">
+                                <rect key="frame" x="315" y="5" width="5" height="33"/>
+                                <color key="backgroundColor" red="1" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="5" id="Pd8-JC-av5"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6aa-1O-g0b" firstAttribute="leading" secondItem="z0e-2t-OEd" secondAttribute="leading" constant="5" id="0nu-PD-ULs"/>
+                            <constraint firstItem="6aa-1O-g0b" firstAttribute="top" secondItem="z0e-2t-OEd" secondAttribute="top" constant="5" id="1i6-Dx-qjT"/>
+                            <constraint firstAttribute="bottom" secondItem="tAe-Zm-2ib" secondAttribute="bottom" id="4V1-op-YWK"/>
+                            <constraint firstItem="L11-Fo-6yZ" firstAttribute="top" secondItem="z0e-2t-OEd" secondAttribute="top" constant="5" id="B52-zx-aJP"/>
+                            <constraint firstAttribute="bottom" secondItem="L11-Fo-6yZ" secondAttribute="bottom" constant="5" id="GQ2-8g-dAF"/>
+                            <constraint firstItem="tAe-Zm-2ib" firstAttribute="leading" secondItem="z0e-2t-OEd" secondAttribute="leading" id="Oxw-o9-qZH"/>
+                            <constraint firstAttribute="trailing" secondItem="tAe-Zm-2ib" secondAttribute="trailing" id="Yw8-vI-U7p"/>
+                            <constraint firstAttribute="trailing" secondItem="L11-Fo-6yZ" secondAttribute="trailing" id="bwi-AB-Mt7"/>
+                            <constraint firstItem="tAe-Zm-2ib" firstAttribute="top" secondItem="z0e-2t-OEd" secondAttribute="top" id="oq8-hb-awT"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="z0e-2t-OEd" secondAttribute="trailing" id="JbY-Z8-aEb"/>
+                    <constraint firstItem="z0e-2t-OEd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="K4D-tD-TWx"/>
+                    <constraint firstItem="z0e-2t-OEd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="azH-0W-fMb"/>
+                    <constraint firstAttribute="bottom" secondItem="z0e-2t-OEd" secondAttribute="bottom" id="sWu-az-Ycd"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="dot" destination="6aa-1O-g0b" id="gMX-9I-dbQ"/>
+                <outlet property="tagView" destination="L11-Fo-6yZ" id="FVI-LE-s4w"/>
+                <outlet property="titleLabel" destination="tAe-Zm-2ib" id="w16-da-kWh"/>
+            </connections>
+            <point key="canvasLocation" x="394" y="321"/>
+        </tableViewCell>
+    </objects>
+</document>

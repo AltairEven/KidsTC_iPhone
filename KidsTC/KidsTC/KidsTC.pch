@@ -1,0 +1,73 @@
+//
+//  KidsTC.pch
+//  KidsTC
+//
+//  Created by 钱烨 on 7/7/15.
+//  Copyright (c) 2015 KidsTC. All rights reserved.
+//
+
+//#ifndef KidsTC_KidsTC_pch
+//#define KidsTC_KidsTC_pch
+//
+//// Include any system framework and library headers here that should be included in all compilation units.
+//// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+//
+//#endif
+
+
+#import <Availability.h>
+
+#ifndef __IPHONE_4_0
+#warning "This project uses features only available in iOS SDK 4.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#endif
+
+#ifdef __OBJC__
+#import "GConfig.h"
+#import "GToolUtil.h"
+//#import "ASIDataProvider.h"
+#import "AppDelegate.h"
+#import "ASIHTTPRequest.h"
+#import "UserWrapper.h"
+#import "ASIDataProvider.h"
+#import "GErrCode.h"
+#import "StatisticLogUtil.h"
+//#import "LoginService.h"
+#import "GInfoView.h"
+#import "GAlertLoadingView.h"
+#import "iToast.h"
+#import "GViewController.h"
+#import "NSData+Json.h"
+#import "UILabel+Additions.h"
+#import "HttpRequestClient.h"
+#import "UIView+GViewExtension.h"
+#import "UIColor+GColor.h"
+#import "GlobalConfig.h"
+#import "UIImageView+AFNetworking.h"
+#import "UIImage+GImageExtension.h"
+#import "Shortcut.h"
+#import "KTCUser.h"
+#import "KTCArea.h"
+#import "KTCAgeScope.h"
+#import "KTCSearchService.h"
+#import "MJRefresh.h"
+
+#define SuppressPerformSelectorLeakWarning(Stuff) \
+do { \
+_Pragma("clang diagnostic push") \
+_Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"") \
+Stuff; \
+_Pragma("clang diagnostic pop") \
+} while (0)
+
+#define ROOT_VIEW_CONTROLLER        (UIViewController*)((AppDelegate*)([UIApplication sharedApplication].delegate).window.rootViewController);
+
+#define LOG_METHOD  NSLog(@"%@:%@",[self class], NSStringFromSelector(_cmd));
+//#define DEBUG_URL
+// kInterfaceDownLoad ==1 打开接口下发  kInterfaceDownLoad ＝＝0 关闭接口下发
+#define  kInterfaceDownLoad  1
+#endif

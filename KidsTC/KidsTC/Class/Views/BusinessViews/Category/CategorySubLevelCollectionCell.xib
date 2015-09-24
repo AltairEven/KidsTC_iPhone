@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="OSB-CB-bRJ" customClass="CategorySubLevelCollectionCell">
+            <rect key="frame" x="0.0" y="0.0" width="92" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="92" height="50"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ikV-OL-ovT">
+                        <rect key="frame" x="0.0" y="0.0" width="92" height="50"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="宝宝理发" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j8N-8I-EIt">
+                                <rect key="frame" x="0.0" y="0.0" width="92" height="50"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="j8N-8I-EIt" firstAttribute="top" secondItem="ikV-OL-ovT" secondAttribute="top" id="0Rp-Ah-j0n"/>
+                            <constraint firstAttribute="bottom" secondItem="j8N-8I-EIt" secondAttribute="bottom" id="8kz-YG-iks"/>
+                            <constraint firstAttribute="trailing" secondItem="j8N-8I-EIt" secondAttribute="trailing" id="RBQ-xj-5fW"/>
+                            <constraint firstItem="j8N-8I-EIt" firstAttribute="leading" secondItem="ikV-OL-ovT" secondAttribute="leading" id="SuJ-IV-bGR"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="ikV-OL-ovT" secondAttribute="bottom" id="5Jz-Wp-Gwb"/>
+                <constraint firstAttribute="trailing" secondItem="ikV-OL-ovT" secondAttribute="trailing" id="9CT-Ui-ECN"/>
+                <constraint firstItem="ikV-OL-ovT" firstAttribute="top" secondItem="OSB-CB-bRJ" secondAttribute="top" id="ySU-gr-pJ0"/>
+                <constraint firstItem="ikV-OL-ovT" firstAttribute="leading" secondItem="OSB-CB-bRJ" secondAttribute="leading" id="z53-9P-luf"/>
+            </constraints>
+            <size key="customSize" width="92" height="50"/>
+            <connections>
+                <outlet property="titleLabel" destination="j8N-8I-EIt" id="Bp6-kp-M9X"/>
+            </connections>
+            <point key="canvasLocation" x="566" y="321"/>
+        </collectionViewCell>
+    </objects>
+</document>

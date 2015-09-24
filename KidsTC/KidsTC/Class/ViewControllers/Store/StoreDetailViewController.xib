@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7706"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StoreDetailViewController">
+            <connections>
+                <outlet property="bottomView" destination="iy3-7m-NdH" id="R3s-iT-9s9"/>
+                <outlet property="detailView" destination="c1j-ly-lAK" id="V8L-q4-IdE"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c1j-ly-lAK" customClass="StoreDetailView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iy3-7m-NdH" customClass="StoreDetailBottomView">
+                    <rect key="frame" x="0.0" y="508" width="320" height="60"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="gEu-3h-e2R"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="c1j-ly-lAK" secondAttribute="bottom" id="0Hv-mT-gEv"/>
+                <constraint firstAttribute="trailing" secondItem="iy3-7m-NdH" secondAttribute="trailing" id="4rh-3a-KL1"/>
+                <constraint firstAttribute="trailing" secondItem="c1j-ly-lAK" secondAttribute="trailing" id="6M6-Yf-Zc3"/>
+                <constraint firstItem="c1j-ly-lAK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="7Qj-ui-yGa"/>
+                <constraint firstItem="iy3-7m-NdH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Ad8-QZ-5IZ"/>
+                <constraint firstItem="c1j-ly-lAK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="m5O-4n-m9L"/>
+                <constraint firstAttribute="bottom" secondItem="iy3-7m-NdH" secondAttribute="bottom" id="yHK-bX-qt7"/>
+            </constraints>
+            <point key="canvasLocation" x="443" y="321"/>
+        </view>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

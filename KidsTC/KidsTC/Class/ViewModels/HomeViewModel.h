@@ -1,0 +1,22 @@
+//
+//  HomeViewModel.h
+//  KidsTC
+//
+//  Created by 钱烨 on 8/13/15.
+//  Copyright (c) 2015 KidsTC. All rights reserved.
+//
+
+#import "BaseViewModel.h"
+#import "HomeView.h"
+
+extern NSString *const kHomeViewDataFinishLoadingNotification;
+
+@interface HomeViewModel : BaseViewModel
+
+- (void)refreshHomeData;
+
+- (void)getCustomerRecommendWithSucceed:(void(^)(NSDictionary *data))succeed failure:(void(^)(NSError *error))failure;
+
+- (NSArray *)sectionModelsArray;
+
+@end

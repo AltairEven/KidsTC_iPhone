@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view alpha="0.69999999999999996" contentMode="scaleToFill" id="iN0-l3-epB" customClass="KTCAnnotationTipDestinationView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pVZ-CL-p2j" userLabel="contentBG">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FLA-BV-Mpf">
+                            <rect key="frame" x="3" y="3" width="314" height="542"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="FLA-BV-Mpf" secondAttribute="trailing" constant="3" id="6Fd-dV-trF"/>
+                        <constraint firstItem="FLA-BV-Mpf" firstAttribute="leading" secondItem="pVZ-CL-p2j" secondAttribute="leading" constant="3" id="Wpr-zL-ZfD"/>
+                        <constraint firstAttribute="bottom" secondItem="FLA-BV-Mpf" secondAttribute="bottom" constant="3" id="m2p-hF-crO"/>
+                        <constraint firstItem="FLA-BV-Mpf" firstAttribute="top" secondItem="pVZ-CL-p2j" secondAttribute="top" constant="3" id="mMU-Cs-SnO"/>
+                    </constraints>
+                </view>
+                <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Hd-7O-5q0" userLabel="buttonBG">
+                    <rect key="frame" x="0.0" y="548" width="320" height="20"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QWx-WV-LNk">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <state key="normal" title="前往">
+                                <color key="titleColor" red="0.80392156859999997" green="0.0039215686269999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="didClickedConfirmButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="nNU-lq-AFJ"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="QWx-WV-LNk" firstAttribute="leading" secondItem="2Hd-7O-5q0" secondAttribute="leading" id="UZd-D0-wPh"/>
+                        <constraint firstAttribute="trailing" secondItem="QWx-WV-LNk" secondAttribute="trailing" id="fOG-fw-6UQ"/>
+                        <constraint firstItem="QWx-WV-LNk" firstAttribute="top" secondItem="2Hd-7O-5q0" secondAttribute="top" id="gZP-8x-HEV"/>
+                        <constraint firstAttribute="bottom" secondItem="QWx-WV-LNk" secondAttribute="bottom" id="ylX-kV-3Ip"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="pVZ-CL-p2j" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="B7c-V2-HKR"/>
+                <constraint firstAttribute="bottom" secondItem="pVZ-CL-p2j" secondAttribute="bottom" constant="20" id="PN7-ak-8d1"/>
+                <constraint firstAttribute="bottom" secondItem="2Hd-7O-5q0" secondAttribute="bottom" id="Tdf-w0-2lc"/>
+                <constraint firstItem="2Hd-7O-5q0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="UF3-Lu-RvK"/>
+                <constraint firstAttribute="trailing" secondItem="pVZ-CL-p2j" secondAttribute="trailing" id="cK3-hM-OkI"/>
+                <constraint firstItem="pVZ-CL-p2j" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="dV0-lX-akr"/>
+                <constraint firstAttribute="trailing" secondItem="2Hd-7O-5q0" secondAttribute="trailing" id="qDl-60-8A5"/>
+                <constraint firstItem="2Hd-7O-5q0" firstAttribute="top" secondItem="pVZ-CL-p2j" secondAttribute="bottom" id="y0E-B0-lUi"/>
+            </constraints>
+            <connections>
+                <outlet property="confirmButton" destination="QWx-WV-LNk" id="bkS-FG-FfE"/>
+                <outlet property="descriptionLabel" destination="FLA-BV-Mpf" id="gvU-BN-prF"/>
+            </connections>
+            <point key="canvasLocation" x="392" y="357"/>
+        </view>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AppointmentOrderListView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Wt-pk-UDQ" userLabel="headerBG">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dJE-Ks-SNg" customClass="AUISegmentView">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="dJE-Ks-SNg" firstAttribute="top" secondItem="1Wt-pk-UDQ" secondAttribute="top" id="6cM-pg-KAe"/>
+                        <constraint firstItem="dJE-Ks-SNg" firstAttribute="leading" secondItem="1Wt-pk-UDQ" secondAttribute="leading" id="6wR-wv-P8A"/>
+                        <constraint firstAttribute="height" constant="44" id="Xgs-JT-aVv"/>
+                        <constraint firstAttribute="trailing" secondItem="dJE-Ks-SNg" secondAttribute="trailing" id="hqu-9W-Qw4"/>
+                        <constraint firstAttribute="bottom" secondItem="dJE-Ks-SNg" secondAttribute="bottom" id="z2L-im-zNj"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TIw-i3-BVY" userLabel="contentBG">
+                    <rect key="frame" x="0.0" y="44" width="320" height="524"/>
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="vy9-jA-jeg">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
+                            <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="vy9-jA-jeg" firstAttribute="top" secondItem="TIw-i3-BVY" secondAttribute="top" id="4Dq-f2-qeR"/>
+                        <constraint firstItem="vy9-jA-jeg" firstAttribute="leading" secondItem="TIw-i3-BVY" secondAttribute="leading" id="UJn-Fo-0H0"/>
+                        <constraint firstAttribute="trailing" secondItem="vy9-jA-jeg" secondAttribute="trailing" id="eBk-Ow-E8v"/>
+                        <constraint firstAttribute="bottom" secondItem="vy9-jA-jeg" secondAttribute="bottom" id="xYh-A0-EaP"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="TIw-i3-BVY" firstAttribute="top" secondItem="1Wt-pk-UDQ" secondAttribute="bottom" id="8DQ-KE-UBE"/>
+                <constraint firstItem="1Wt-pk-UDQ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BsS-N0-4d9"/>
+                <constraint firstAttribute="trailing" secondItem="1Wt-pk-UDQ" secondAttribute="trailing" id="TSU-iU-o5x"/>
+                <constraint firstAttribute="trailing" secondItem="TIw-i3-BVY" secondAttribute="trailing" id="kVG-be-rXO"/>
+                <constraint firstItem="1Wt-pk-UDQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="oRA-s7-g9R"/>
+                <constraint firstAttribute="bottom" secondItem="TIw-i3-BVY" secondAttribute="bottom" id="pkD-Yw-5cP"/>
+                <constraint firstItem="TIw-i3-BVY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="uvx-r4-tFO"/>
+            </constraints>
+            <connections>
+                <outlet property="headerTab" destination="dJE-Ks-SNg" id="P2J-wy-SQc"/>
+                <outlet property="tableView" destination="vy9-jA-jeg" id="XqP-sp-J1X"/>
+            </connections>
+            <point key="canvasLocation" x="392" y="324"/>
+        </view>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

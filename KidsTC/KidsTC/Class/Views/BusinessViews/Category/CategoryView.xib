@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CategoryView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="he5-aM-Jk0">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="0.96470588235294119" green="0.96862745098039216" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="he5-aM-Jk0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="0DJ-AI-PsT"/>
+                <constraint firstAttribute="trailing" secondItem="he5-aM-Jk0" secondAttribute="trailing" id="JQ0-Fm-Hgq"/>
+                <constraint firstAttribute="bottom" secondItem="he5-aM-Jk0" secondAttribute="bottom" id="fX4-0X-KbI"/>
+                <constraint firstItem="he5-aM-Jk0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="luJ-iI-1AW"/>
+            </constraints>
+            <connections>
+                <outlet property="tableView" destination="he5-aM-Jk0" id="BPU-HS-HpW"/>
+            </connections>
+            <point key="canvasLocation" x="417" y="321"/>
+        </view>
+    </objects>
+</document>

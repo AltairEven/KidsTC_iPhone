@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="TwinklingElfCell">
+            <rect key="frame" x="0.0" y="0.0" width="80" height="95"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="80" height="95"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tsj-YT-Yn4" userLabel="imageAreaBG">
+                        <rect key="frame" x="0.0" y="0.0" width="80" height="75"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="v3M-X6-YR2">
+                                <rect key="frame" x="18" y="18" width="44" height="44"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="v3M-X6-YR2" firstAttribute="leading" secondItem="tsj-YT-Yn4" secondAttribute="leading" constant="18" id="DBi-2g-dOs"/>
+                            <constraint firstItem="v3M-X6-YR2" firstAttribute="top" secondItem="tsj-YT-Yn4" secondAttribute="top" constant="18" id="IEU-vr-sN5"/>
+                            <constraint firstAttribute="trailing" secondItem="v3M-X6-YR2" secondAttribute="trailing" constant="18" id="YWI-25-3a6"/>
+                            <constraint firstAttribute="bottom" secondItem="v3M-X6-YR2" secondAttribute="bottom" constant="13" id="wC3-mN-ijF"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TFR-AI-336" userLabel="titleBg">
+                        <rect key="frame" x="0.0" y="75" width="80" height="20"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="天天特价" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iQx-Gh-UFU">
+                                <rect key="frame" x="2" y="0.0" width="76" height="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="0cJ-XQ-uoz"/>
+                            <constraint firstItem="iQx-Gh-UFU" firstAttribute="leading" secondItem="TFR-AI-336" secondAttribute="leading" constant="2" id="655-02-zPF"/>
+                            <constraint firstAttribute="centerX" secondItem="iQx-Gh-UFU" secondAttribute="centerX" id="I9Q-on-L9Q"/>
+                            <constraint firstAttribute="trailing" secondItem="iQx-Gh-UFU" secondAttribute="trailing" constant="2" id="S6m-yt-Q1T"/>
+                            <constraint firstItem="iQx-Gh-UFU" firstAttribute="top" secondItem="TFR-AI-336" secondAttribute="top" id="aLG-k6-Xjg"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="tsj-YT-Yn4" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="695-zY-9vy"/>
+                <constraint firstItem="TFR-AI-336" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="FeT-Ht-HoP"/>
+                <constraint firstAttribute="trailing" secondItem="TFR-AI-336" secondAttribute="trailing" id="HHT-fG-L8c"/>
+                <constraint firstItem="tsj-YT-Yn4" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="LCO-QA-SY9"/>
+                <constraint firstAttribute="bottom" secondItem="TFR-AI-336" secondAttribute="bottom" id="R1L-bs-DR1"/>
+                <constraint firstItem="TFR-AI-336" firstAttribute="top" secondItem="tsj-YT-Yn4" secondAttribute="bottom" id="jnP-IS-KVv"/>
+                <constraint firstAttribute="trailing" secondItem="tsj-YT-Yn4" secondAttribute="trailing" id="wsO-3Y-cq6"/>
+            </constraints>
+            <size key="customSize" width="79" height="95"/>
+            <connections>
+                <outlet property="cellImageView" destination="v3M-X6-YR2" id="8kZ-Dk-KhX"/>
+                <outlet property="titleLabel" destination="iQx-Gh-UFU" id="qti-6A-XWX"/>
+            </connections>
+            <point key="canvasLocation" x="380" y="339.5"/>
+        </collectionViewCell>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

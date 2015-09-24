@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="IcsonBaseCategory" representedClassName="IcsonBaseCategory" isAbstract="YES" syncable="YES">
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="parentId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="conditions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="IcsonCategoryCondition" inverseName="category" inverseEntity="IcsonCategoryCondition" syncable="YES"/>
+    </entity>
+    <entity name="IcsonCategories" representedClassName="IcsonCategories" syncable="YES">
+        <attribute name="md5" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="level1Categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="IcsonLevel1Category" inverseName="categoryList" inverseEntity="IcsonLevel1Category" syncable="YES"/>
+    </entity>
+    <entity name="IcsonCategoryCondition" representedClassName="IcsonCategoryCondition" syncable="YES">
+        <attribute name="conditionItem" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="key" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IcsonBaseCategory" inverseName="conditions" inverseEntity="IcsonBaseCategory" syncable="YES"/>
+    </entity>
+    <entity name="IcsonLevel1Category" representedClassName="IcsonLevel1Category" parentEntity="IcsonBaseCategory" syncable="YES">
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="categoryList" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IcsonCategories" inverseName="level1Categories" inverseEntity="IcsonCategories" syncable="YES"/>
+        <relationship name="level2Categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="IcsonLevel2Category" inverseName="parent" inverseEntity="IcsonLevel2Category" syncable="YES"/>
+    </entity>
+    <entity name="IcsonLevel2Category" representedClassName="IcsonLevel2Category" parentEntity="IcsonBaseCategory" syncable="YES">
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="level3Categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="IcsonLevel3Category" inverseName="parent" inverseEntity="IcsonLevel3Category" syncable="YES"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IcsonLevel1Category" inverseName="level2Categories" inverseEntity="IcsonLevel1Category" syncable="YES"/>
+    </entity>
+    <entity name="IcsonLevel3Category" representedClassName="IcsonLevel3Category" parentEntity="IcsonBaseCategory" syncable="YES">
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IcsonLevel2Category" inverseName="level3Categories" inverseEntity="IcsonLevel2Category" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="IcsonBaseCategory" positionX="-207" positionY="-1861" width="128" height="118"/>
+        <element name="IcsonCategories" positionX="-497" positionY="-1656" width="128" height="75"/>
+        <element name="IcsonCategoryCondition" positionX="43" positionY="-1845" width="128" height="90"/>
+        <element name="IcsonLevel1Category" positionX="-272" positionY="-1620" width="128" height="88"/>
+        <element name="IcsonLevel2Category" positionX="-81" positionY="-1549" width="128" height="88"/>
+        <element name="IcsonLevel3Category" positionX="153" positionY="-1498" width="128" height="73"/>
+    </elements>
+</model>
