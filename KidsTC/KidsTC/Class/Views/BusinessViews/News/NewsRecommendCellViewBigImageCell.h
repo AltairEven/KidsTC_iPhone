@@ -10,4 +10,10 @@
 
 @interface NewsRecommendCellViewBigImageCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *cellImageView;
+
+@property (weak, nonatomic) IBOutlet UILabel *newsTitleLabel;
+
++ (CGFloat)cellHeight;
+
 @end

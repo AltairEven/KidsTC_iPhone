@@ -26,7 +26,7 @@
     self.newsView.delegate = self;
     
     self.newsViewModel = [[NewsViewModel alloc] initWithView:self.newsView];
-    [self.newsViewModel startUpdateDataWithSucceed:nil failure:nil];
+    [self.newsViewModel refreshNewsWithViewTag:NewsViewTagRecommend Succeed:nil failure:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -53,7 +53,7 @@
 #pragma mark NewsViewDelegate
 
 - (void)newsView:(NewsView *)newsView didClickedSegmentControlWithNewsViewTag:(NewsViewTag)viewTag {
-    
+    [self.newsViewModel resetNewsViewWithViewTag:viewTag];
 }
 
 - (void)newsView:(NewsView *)newsView didSelectedItem:(NewsListItemModel *)item {

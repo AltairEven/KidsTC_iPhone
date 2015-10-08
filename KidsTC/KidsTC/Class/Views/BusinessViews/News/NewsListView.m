@@ -100,7 +100,8 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 #pragma mark UITableViewDataSource & UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.listItemModels count];
+    _itemCount = [self.listItemModels count];
+    return self.itemCount;
 }
 
 

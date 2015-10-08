@@ -49,7 +49,41 @@
 }
 
 - (void)getMoreNewsWithViewTag:(NewsViewTag)viewTag Succeed:(void(^)(NSDictionary *data))succeed failure:(void(^)(NSError *error))failure {
-    
+    switch (viewTag) {
+        case NewsViewTagRecommend:
+        {
+            [self.recommendListViewModel getMoreRecommendNewsWithSucceed:succeed failure:failure];
+        }
+            break;
+        case NewsViewTagMore:
+        {
+            [self.listViewModel getMoreNewsWithSucceed:succeed failure:failure];
+        }
+        default:
+            break;
+    }
+}
+
+- (void)resetNewsViewWithViewTag:(NewsViewTag)viewTag {
+    [self stopUpdateData];
+    self.currentViewTag = viewTag;
+    switch (viewTag) {
+        case NewsViewTagRecommend:
+        {
+            if ([self.recommendListViewModel.resultListItems count] == 0) {
+                [self.recommendListViewModel startUpdateDataWithSucceed:nil failure:nil];
+            }
+        }
+            break;
+        case NewsViewTagMore:
+        {
+            if ([self.listViewModel.resultListItems count] == 0) {
+                [self.listViewModel startUpdateDataWithSucceed:nil failure:nil];
+            }
+        }
+        default:
+            break;
+    }
 }
 
 - (NSArray *)resultListItemsWithViewTag:(NewsViewTag)viewTag {
@@ -69,5 +103,20 @@
     }
     return nil;
 }
+
+- (void)stopUpdateData {
+    switch (self.currentViewTag) {
+        case NewsViewTagRecommend:
+        {
+            [self.recommendListViewModel stopUpdateData];
+        }
+            break;
+        case NewsViewTagMore:
+        {
+            [self.listViewModel stopUpdateData];
+        }
+        default:
+            break;
+    }}
 
 @end

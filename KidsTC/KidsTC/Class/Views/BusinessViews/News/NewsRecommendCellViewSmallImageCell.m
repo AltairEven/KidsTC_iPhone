@@ -8,6 +8,12 @@
 
 #import "NewsRecommendCellViewSmallImageCell.h"
 
+@interface NewsRecommendCellViewSmallImageCell ()
+
+@property (weak, nonatomic) IBOutlet UIView *bgView;
+
+@end
+
 @implementation NewsRecommendCellViewSmallImageCell
 
 - (void)awakeFromNib {
@@ -18,6 +24,10 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
++ (CGFloat)cellHeight {
+    return 60;
 }
 
 @end

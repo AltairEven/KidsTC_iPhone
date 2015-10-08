@@ -101,11 +101,17 @@
         case NewsViewTagRecommend:
         {
             [self.listBG bringSubviewToFront:self.recommendListView];
+            if (self.recommendListView.itemCount == 0) {
+                [self.recommendListView startLoadMore];
+            }
         }
             break;
         case NewsViewTagMore:
         {
             [self.listBG bringSubviewToFront:self.newsListView];
+            if (self.newsListView.itemCount == 0) {
+                [self.newsListView startRefresh];
+            }
         }
             break;
         default:
@@ -114,7 +120,6 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(newsView:didClickedSegmentControlWithNewsViewTag:)]) {
         [self.delegate newsView:self didClickedSegmentControlWithNewsViewTag:viewTag];
     }
-    
 }
 
 /*

@@ -7,7 +7,6 @@
 //
 
 #import "NewsRecommendListViewModel.h"
-#import "NewsRecommendListView.h"
 
 @interface NewsRecommendListViewModel () <NewsRecommendListViewDataSource>
 
@@ -111,10 +110,9 @@
 - (void)reloadListViewWithData:(NSDictionary *)data {
     NSArray *dataArray = [data objectForKey:@"data"];
     if ([dataArray isKindOfClass:[NSArray class]] && [dataArray count] > 0) {
-        
         NSMutableArray *tempContainer = [[NSMutableArray alloc] init];
         for (NSDictionary *singleItem in dataArray) {
-            NewsListItemModel *model = [[NewsListItemModel alloc] initWithRawData:singleItem];
+            NewsRecommendListModel *model = [[NewsRecommendListModel alloc] initWithRawData:singleItem];
             if (model) {
                 [tempContainer addObject:model];
             }
@@ -134,6 +132,13 @@
 #pragma mark Public methods
 
 - (void)startUpdateDataWithSucceed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
+    if (YES) {
+        NSData *data = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"资讯2" ofType:@".txt"]];
+        NSError *error = nil;
+        NSDictionary *respData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+        [self loadNewsSucceed:respData];
+        return;
+    }
     if (!self.loadNewsRequest) {
         self.loadNewsRequest = [HttpRequestClient clientWithUrlAliasName:@"SEARCH_ARTICLE"];
     }

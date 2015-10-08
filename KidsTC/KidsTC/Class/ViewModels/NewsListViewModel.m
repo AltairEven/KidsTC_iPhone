@@ -138,6 +138,13 @@
 #pragma mark Public methods
 
 - (void)startUpdateDataWithSucceed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
+    if (YES) {
+        NSData *data = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"资讯" ofType:@".txt"]];
+        NSError *error = nil;
+        NSDictionary *respData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+        [self loadNewsSucceed:respData];
+        return;
+    }
     if (!self.loadNewsRequest) {
         self.loadNewsRequest = [HttpRequestClient clientWithUrlAliasName:@"SEARCH_ARTICLE"];
     }

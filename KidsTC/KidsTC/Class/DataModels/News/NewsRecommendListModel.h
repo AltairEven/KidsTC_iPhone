@@ -17,6 +17,8 @@
 
 @property (nonatomic, strong) NSArray<NewsListItemModel *> *cellModelsArray;
 
+- (instancetype)initWithRawData:(NSDictionary *)data;
+
 - (CGFloat)cellHeight;
 
 @end

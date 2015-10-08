@@ -8,6 +8,8 @@
 
 #import "NewsRecommendCellView.h"
 #import "NewsRecommendListModel.h"
+#import "NewsRecommendCellViewBigImageCell.h"
+#import "NewsRecommendCellViewSmallImageCell.h"
 
 static NSString *const kBigImageCellIdentifier = @"kBigImageCellIdentifier";
 static NSString *const kSmallImageCellIdentifier = @"kSmallImageCellIdentifier";
@@ -41,14 +43,29 @@ static NSString *const kSmallImageCellIdentifier = @"kSmallImageCellIdentifier";
 }
 
 - (void)buildSubviews {
+    self.tableView.layer.borderColor = RGBA(230, 230, 230, 1).CGColor;
+    self.tableView.layer.borderWidth = BORDER_WIDTH;
+    self.tableView.layer.masksToBounds = YES;
+    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 0, 0, 0)];
+    }
+    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [self.tableView setLayoutMargins:UIEdgeInsetsMake(0, 0, 0, 0)];
+    }
     
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
     if (!self.bigImageCellNib) {
         self.bigImageCellNib = [UINib nibWithNibName:NSStringFromClass([NewsRecommendCellViewBigImageCell class]) bundle:nil];
         [self.tableView registerNib:self.bigImageCellNib forCellReuseIdentifier:kBigImageCellIdentifier];
+    }
+    if (!self.smallImageCellNib) {
+        self.smallImageCellNib = [UINib nibWithNibName:NSStringFromClass([NewsRecommendCellViewSmallImageCell class]) bundle:nil];
+        [self.tableView registerNib:self.smallImageCellNib forCellReuseIdentifier:kSmallImageCellIdentifier];
     }
     
     if (self.itemModels) {
@@ -67,6 +84,16 @@ static NSString *const kSmallImageCellIdentifier = @"kSmallImageCellIdentifier";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.itemModels count];
+}
+
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsMake(0, 0, 0, 0)];
+    }
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsMake(0, 0, 0, 0)];
+    }
 }
 
 
@@ -105,6 +132,7 @@ static NSString *const kSmallImageCellIdentifier = @"kSmallImageCellIdentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView reloadData];//解决cell刷新问题
     if (self.delegate && [self.delegate respondsToSelector:@selector(newsRecommendCellView:didSelectedItemAtIndex:)]) {
         [self.delegate newsRecommendCellView:self didSelectedItemAtIndex:indexPath.row];
     }
@@ -117,42 +145,5 @@ static NSString *const kSmallImageCellIdentifier = @"kSmallImageCellIdentifier";
     // Drawing code
 }
 */
-
-@end
-
-
-@implementation NewsRecommendCellViewBigImageCell
-
-- (void)awakeFromNib {
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
-}
-
-+ (CGFloat)cellHeight {
-    return 150;
-}
-
-@end
-
-@implementation NewsRecommendCellViewSmallImageCell
-
-- (void)awakeFromNib {
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
-}
-
-+ (CGFloat)cellHeight {
-    return 60;
-}
 
 @end

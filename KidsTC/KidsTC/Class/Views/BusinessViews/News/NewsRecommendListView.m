@@ -60,13 +60,14 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 }
 
 - (NSUInteger)pageSize {
-    return 5;
+    return 3;
 }
 
 #pragma mark UITableViewDataSource & UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.listItemModels count];
+    _itemCount = [self.listItemModels count];
+    return self.itemCount;
 }
 
 
@@ -77,6 +78,8 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     }
     NewsRecommendListModel *model = [self.listItemModels objectAtIndex:indexPath.row];
     [cell setListItemModel:model];
+    cell.delegate = self;
+    cell.indexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section];
     return cell;
 }
 
@@ -95,7 +98,8 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 
 - (void)newsRecommendListViewCell:(NewsRecommendListViewCell *)cell didClickedAtIndex:(NSUInteger)index {
     if (self.delegate && [self.delegate respondsToSelector:@selector(newsRecommendListView:didSelectedCellItem:)]) {
-        NewsListItemModel *model = [self.listItemModels objectAtIndex:index];
+        NewsRecommendListModel *recommendListModel = [self.listItemModels objectAtIndex:cell.indexPath.row];
+        NewsListItemModel *model = [recommendListModel.cellModelsArray objectAtIndex:index];
         [self.delegate newsRecommendListView:self didSelectedCellItem:model];
     }
 }

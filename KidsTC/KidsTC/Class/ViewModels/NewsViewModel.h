@@ -17,6 +17,8 @@
 
 - (void)getMoreNewsWithViewTag:(NewsViewTag)viewTag Succeed:(void(^)(NSDictionary *data))succeed failure:(void(^)(NSError *error))failure;
 
+- (void)resetNewsViewWithViewTag:(NewsViewTag)viewTag;
+
 - (NSArray *)resultListItemsWithViewTag:(NewsViewTag)viewTag;
 
 @end

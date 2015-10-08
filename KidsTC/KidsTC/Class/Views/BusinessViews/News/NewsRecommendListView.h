@@ -32,6 +32,8 @@
 @property (nonatomic, assign) id<NewsRecommendListViewDataSource> dataSource;
 @property (nonatomic, assign) id<NewsRecommendListViewDelegate> delegate;
 
+@property (nonatomic, readonly) NSUInteger itemCount;;
+
 - (NSUInteger)pageSize;
 
 - (void)reloadData;

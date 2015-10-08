@@ -8,13 +8,45 @@
 
 #import "NewsRecommendListModel.h"
 
+@interface NewsRecommendListModel ()
+
+- (void)fillWithRawData:(NSDictionary *)data;
+
+@end
+
 @implementation NewsRecommendListModel
+
+- (instancetype)initWithRawData:(NSDictionary *)data {
+    if (!data || ![data isKindOfClass:[NSDictionary class]]) {
+        return nil;
+    }
+    self = [super init];
+    if (self) {
+        [self fillWithRawData:data];
+    }
+    return self;
+}
+
+- (void)fillWithRawData:(NSDictionary *)data {
+    self.timeDescription = [data objectForKey:@"time"];
+    NSArray *dataArray = [data objectForKey:@"news"];
+    if ([dataArray isKindOfClass:[NSArray class]] && [dataArray count] > 0) {
+        NSMutableArray *tempContainer = [[NSMutableArray alloc] init];
+        for (NSDictionary *singleItem in dataArray) {
+            NewsListItemModel *model = [[NewsListItemModel alloc] initWithRawData:singleItem];
+            if (model) {
+                [tempContainer addObject:model];
+            }
+        }
+        self.cellModelsArray = [NSArray arrayWithArray:tempContainer];
+    }
+}
 
 - (CGFloat)cellHeight {
     CGFloat height = 0;
     NSUInteger count = [self.cellModelsArray count];
     if (count > 0) {
-        height = 150 + (count - 1) * 60;
+        height = 40 + 150 + (count - 1) * 60;
     }
     
     return height;
