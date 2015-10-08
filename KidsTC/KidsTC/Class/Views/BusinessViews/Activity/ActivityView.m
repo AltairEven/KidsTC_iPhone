@@ -1,18 +1,18 @@
 //
-//  ParentingStrategyView.m
+//  ActivityView.m
 //  KidsTC
 //
-//  Created by 钱烨 on 7/23/15.
-//  Copyright (c) 2015 KidsTC. All rights reserved.
+//  Created by 钱烨 on 10/8/15.
+//  Copyright © 2015 KidsTC. All rights reserved.
 //
 
-#import "ParentingStrategyView.h"
+#import "ActivityView.h"
 #import "HorizontalCalendarView.h"
-#import "ParentingStrategyViewCell.h"
+#import "ActivityViewCell.h"
 
 static NSString *const kCellIdentifier = @"kCellIdentifier";
 
-@interface ParentingStrategyView () <UITableViewDataSource, UITableViewDelegate, HorizontalCalendarViewDelegate>
+@interface ActivityView () <HorizontalCalendarViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet HorizontalCalendarView *calendarView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -30,7 +30,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 
 @end
 
-@implementation ParentingStrategyView
+@implementation ActivityView
 
 #pragma mark Initialization
 
@@ -42,7 +42,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     if (!bLoad)
     {
         bLoad = YES;
-        ParentingStrategyView *view = [GConfig getObjectFromNibWithView:self];
+        ActivityView *view = [GConfig getObjectFromNibWithView:self];
         [view buildSubviews];
         return view;
     }
@@ -59,10 +59,10 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 5)];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 5)];
     if (!self.cellNib) {
-        self.cellNib = [UINib nibWithNibName:NSStringFromClass([ParentingStrategyViewCell class]) bundle:nil];
+        self.cellNib = [UINib nibWithNibName:NSStringFromClass([ActivityViewCell class]) bundle:nil];
         [self.tableView registerNib:self.cellNib forCellReuseIdentifier:kCellIdentifier];
     }
-    __weak ParentingStrategyView *weakSelf = self;
+    __weak ActivityView *weakSelf = self;
     [weakSelf.tableView addLegendHeaderWithRefreshingBlock:^{
         [weakSelf pullDownToRefresh];
     }];
@@ -89,8 +89,8 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 
 - (void)HorizontalCalendarView:(HorizontalCalendarView *)calendarView didClickedAtIndex:(NSUInteger)index {
     _currentCalendarIndex = self.calendarView.currentIndex;
-    if (self.delegate && [self.delegate respondsToSelector:@selector(parentingStrategyView:didClickedCalendarButtonAtIndex:)]) {
-        [self.delegate parentingStrategyView:self didClickedCalendarButtonAtIndex:index];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(activityView:didClickedCalendarButtonAtIndex:)]) {
+        [self.delegate activityView:self didClickedCalendarButtonAtIndex:index];
     }
 }
 
@@ -103,9 +103,9 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ParentingStrategyViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:indexPath];
+    ActivityViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:indexPath];
     if (!cell) {
-        cell =  [[[NSBundle mainBundle] loadNibNamed:@"ParentingStrategyViewCell" owner:nil options:nil] objectAtIndex:0];
+        cell =  [[[NSBundle mainBundle] loadNibNamed:@"ActivityViewCell" owner:nil options:nil] objectAtIndex:0];
     }
     [cell configWithItemModel:[self.listModels objectAtIndex:indexPath.row]];
     return cell;
@@ -113,37 +113,37 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ParentingStrategyListItemModel *model = [self.listModels objectAtIndex:indexPath.row];
+    ActivityListItemModel *model = [self.listModels objectAtIndex:indexPath.row];
     return [model cellHeight];
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(parentingStrategyView:didSelectedItemAtIndex:)]) {
-        [self.delegate parentingStrategyView:self didSelectedItemAtIndex:indexPath.row];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(activityView:didSelectedItemAtIndex:)]) {
+        [self.delegate activityView:self didSelectedItemAtIndex:indexPath.row];
     }
 }
 
 #pragma mark Private methods
 
 - (void)pullDownToRefresh {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(parentingStrategyView:DidPullDownToRefreshForCalendarIndex:)]) {
-        [self.delegate parentingStrategyView:self DidPullDownToRefreshForCalendarIndex:self.currentCalendarIndex];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(activityView:DidPullDownToRefreshForCalendarIndex:)]) {
+        [self.delegate activityView:self DidPullDownToRefreshForCalendarIndex:self.currentCalendarIndex];
     }
 }
 
 - (void)pullUpToLoadMore {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(parentingStrategyView:DidPullUpToLoadMoreForCalendarIndex:)]) {
-        [self.delegate parentingStrategyView:self DidPullUpToLoadMoreForCalendarIndex:self.currentCalendarIndex];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(activityView:DidPullUpToLoadMoreForCalendarIndex:)]) {
+        [self.delegate activityView:self DidPullUpToLoadMoreForCalendarIndex:self.currentCalendarIndex];
     }
 }
 
 #pragma mark Public methods
 
 - (void)reloadData {
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(listItemModelsOfParentingStrategyView:atCalendarIndex:)]) {
-        self.listModels = [self.dataSource listItemModelsOfParentingStrategyView:self atCalendarIndex:self.currentCalendarIndex];
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(listItemModelsOfActivityView:atCalendarIndex:)]) {
+        self.listModels = [self.dataSource listItemModelsOfActivityView:self atCalendarIndex:self.currentCalendarIndex];
         [self.tableView reloadData];
         if ([self.listModels count] > 0) {
             [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];

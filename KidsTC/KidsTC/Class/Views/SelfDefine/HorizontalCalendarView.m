@@ -1,14 +1,14 @@
 //
-//  ParentingStrategyCalendarView.m
+//  HorizontalCalendarView.m
 //  KidsTC
 //
 //  Created by 钱烨 on 7/23/15.
 //  Copyright (c) 2015 KidsTC. All rights reserved.
 //
 
-#import "ParentingStrategyCalendarView.h"
+#import "HorizontalCalendarView.h"
 
-@interface ParentingStrategyCalendarView ()
+@interface HorizontalCalendarView ()
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollBGView;
 
@@ -22,7 +22,7 @@
 
 @end
 
-@implementation ParentingStrategyCalendarView
+@implementation HorizontalCalendarView
 
 
 #pragma mark Initialization
@@ -35,7 +35,7 @@
     if (!bLoad)
     {
         bLoad = YES;
-        ParentingStrategyCalendarView *view = [GConfig getObjectFromNibWithView:self];
+        HorizontalCalendarView *view = [GConfig getObjectFromNibWithView:self];
         [view buildSubviews];
         return view;
     }
@@ -97,8 +97,8 @@
         return;
     }
     [self selectButtonAtIndex:index];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(parentingStrategyCalendarView:didClickedAtIndex:)]) {
-        [self.delegate parentingStrategyCalendarView:self didClickedAtIndex:index];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(HorizontalCalendarView:didClickedAtIndex:)]) {
+        [self.delegate HorizontalCalendarView:self didClickedAtIndex:index];
     }
 }
 
