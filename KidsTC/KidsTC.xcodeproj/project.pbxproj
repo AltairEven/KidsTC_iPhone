@@ -386,6 +386,9 @@
 		1E7995281BC7656C0099CFF9 /* ParentingStrategyDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E7995261BC7656C0099CFF9 /* ParentingStrategyDetailViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		1E79952F1BC79E3A0099CFF9 /* HomeViewImageNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E79952D1BC79E3A0099CFF9 /* HomeViewImageNewsCell.m */; settings = {ASSET_TAGS = (); }; };
 		1E7995301BC79E3A0099CFF9 /* HomeViewImageNewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E79952E1BC79E3A0099CFF9 /* HomeViewImageNewsCell.xib */; settings = {ASSET_TAGS = (); }; };
+		1E7995331BC7BD5D0099CFF9 /* HomeFloorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7995321BC7BD5D0099CFF9 /* HomeFloorModel.m */; settings = {ASSET_TAGS = (); }; };
+		1E7995361BC7C2DE0099CFF9 /* HomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7995351BC7C2DE0099CFF9 /* HomeModel.m */; settings = {ASSET_TAGS = (); }; };
+		1E7995381BC7CC770099CFF9 /* 首页.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1E7995371BC7CC770099CFF9 /* 首页.txt */; settings = {ASSET_TAGS = (); }; };
 		1E8017081BB006D100B6C352 /* HomeViewWholeImageNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8017061BB006D100B6C352 /* HomeViewWholeImageNewsCell.m */; settings = {ASSET_TAGS = (); }; };
 		1E8017091BB006D100B6C352 /* HomeViewWholeImageNewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E8017071BB006D100B6C352 /* HomeViewWholeImageNewsCell.xib */; settings = {ASSET_TAGS = (); }; };
 		1E80170D1BB006EF00B6C352 /* HomeViewNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E80170B1BB006EF00B6C352 /* HomeViewNewsCell.m */; settings = {ASSET_TAGS = (); }; };
@@ -1455,6 +1458,11 @@
 		1E79952C1BC79E3A0099CFF9 /* HomeViewImageNewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewImageNewsCell.h; sourceTree = "<group>"; };
 		1E79952D1BC79E3A0099CFF9 /* HomeViewImageNewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewImageNewsCell.m; sourceTree = "<group>"; };
 		1E79952E1BC79E3A0099CFF9 /* HomeViewImageNewsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewImageNewsCell.xib; sourceTree = "<group>"; };
+		1E7995311BC7BD5D0099CFF9 /* HomeFloorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeFloorModel.h; sourceTree = "<group>"; };
+		1E7995321BC7BD5D0099CFF9 /* HomeFloorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeFloorModel.m; sourceTree = "<group>"; };
+		1E7995341BC7C2DE0099CFF9 /* HomeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeModel.h; sourceTree = "<group>"; };
+		1E7995351BC7C2DE0099CFF9 /* HomeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeModel.m; sourceTree = "<group>"; };
+		1E7995371BC7CC770099CFF9 /* 首页.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "首页.txt"; sourceTree = "<group>"; };
 		1E8017051BB006D100B6C352 /* HomeViewWholeImageNewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewWholeImageNewsCell.h; sourceTree = "<group>"; };
 		1E8017061BB006D100B6C352 /* HomeViewWholeImageNewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewWholeImageNewsCell.m; sourceTree = "<group>"; };
 		1E8017071BB006D100B6C352 /* HomeViewWholeImageNewsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewWholeImageNewsCell.xib; sourceTree = "<group>"; };
@@ -2638,6 +2646,7 @@
 		1E3D7E781B4BD83D00275C35 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1E7995371BC7CC770099CFF9 /* 首页.txt */,
 				1E79951E1BC75BB40099CFF9 /* interface_list.plist */,
 				1E943EBD1B7375F60029FE74 /* Area.plist */,
 				1E0B7B591B709A2100A58AD4 /* Category.plist */,
@@ -4365,6 +4374,10 @@
 		1EC73BBA1B5E36E7008B39EA /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				1E7995341BC7C2DE0099CFF9 /* HomeModel.h */,
+				1E7995351BC7C2DE0099CFF9 /* HomeModel.m */,
+				1E7995311BC7BD5D0099CFF9 /* HomeFloorModel.h */,
+				1E7995321BC7BD5D0099CFF9 /* HomeFloorModel.m */,
 				1E943F1D1B7CAFCA0029FE74 /* HomeSectionModel.h */,
 				1E943F1E1B7CAFCA0029FE74 /* HomeSectionModel.m */,
 				1EC73BF21B5F4EDE008B39EA /* HomeCell */,
@@ -4668,6 +4681,7 @@
 				1EA8B6BD1B638B0F00F90688 /* detail_banner.png in Resources */,
 				1E8EFCE61B674A3100D00808 /* OrderCommentViewController.xib in Resources */,
 				1E827B541B8DC059008F3F08 /* NotificationCenterView.xib in Resources */,
+				1E7995381BC7CC770099CFF9 /* 首页.txt in Resources */,
 				1E827B731B8F0937008F3F08 /* KTCAnnotationTipConfirmLocationView.xib in Resources */,
 				1EC73C451B6099F8008B39EA /* ParentingStrategyView.xib in Resources */,
 				1E8EFCF81B68697700D00808 /* ServiceCommentListViewHeaderCell.xib in Resources */,
@@ -5089,6 +5103,7 @@
 				1E5CD7461B4F69EF00D177CB /* ServiceListView.m in Sources */,
 				1E0B77F91B6B798100A58AD4 /* KTCSearchResultSortCell.m in Sources */,
 				1E0B7A971B6F67B800A58AD4 /* GComboBox.m in Sources */,
+				1E7995331BC7BD5D0099CFF9 /* HomeFloorModel.m in Sources */,
 				1E3D8F571B4D1D4D00275C35 /* UserCenterView.m in Sources */,
 				1EC73C591B611289008B39EA /* ParentingStrategyFilterView.m in Sources */,
 				1E3D8CDD1B4BF4A100275C35 /* IcsonProvince.m in Sources */,
@@ -5199,6 +5214,7 @@
 				1EC73BA11B5E25A4008B39EA /* HotActivityGroupView.m in Sources */,
 				1E3D8F701B4D37CA00275C35 /* OrderListView.m in Sources */,
 				1E3D8DAD1B4BF4A100275C35 /* UIButton+Color.m in Sources */,
+				1E7995361BC7C2DE0099CFF9 /* HomeModel.m in Sources */,
 				1E3D8CDF1B4BF4A100275C35 /* IcsonBaseCategory.m in Sources */,
 				1E8017081BB006D100B6C352 /* HomeViewWholeImageNewsCell.m in Sources */,
 				1E827B7A1B9064E2008F3F08 /* KTCAnnotationTipDestinationView.m in Sources */,

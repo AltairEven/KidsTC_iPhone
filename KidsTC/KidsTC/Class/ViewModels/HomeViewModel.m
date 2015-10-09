@@ -169,6 +169,22 @@ NSString *const kHomeViewDataFinishLoadingNotification = @"kHomeViewDataFinishLo
 #pragma mark Public methods
 
 - (void)refreshHomeData {
+    if (YES) {
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"首页" ofType:@".txt"];
+        NSData *data = [NSData dataWithContentsOfFile:path];
+        NSDictionary *respData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        self.updating = NO;
+        [self loadHomeDataSucceed:respData];
+        if (!self.alreadyFirstLoaded) {
+            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kHomeViewDataFinishLoadingNotification object:nil]];
+            self.alreadyFirstLoaded = YES;
+        }
+        if (self.refreshSucceedBlock) {
+            self.refreshSucceedBlock(respData);
+        }
+        
+        return;
+    }
     if (!self.loadHomeDataRequest) {
         self.loadHomeDataRequest = [HttpRequestClient clientWithUrlAliasName:@"GET_PAGE_HOME"];
         [self.loadHomeDataRequest setTimeoutSeconds:5];
