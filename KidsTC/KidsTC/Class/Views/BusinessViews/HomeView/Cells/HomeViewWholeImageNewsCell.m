@@ -8,6 +8,13 @@
 
 #import "HomeViewWholeImageNewsCell.h"
 
+@interface HomeViewWholeImageNewsCell ()
+
+@property (weak, nonatomic) IBOutlet UIImageView *cellImageView;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
+@end
+
 @implementation HomeViewWholeImageNewsCell
 
 - (void)awakeFromNib {

@@ -9,6 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "ParentingStrategyDetailModel.h"
 
+@class ParentingStrategyDetailView;
+
+@protocol ParentingStrategyDetailViewDataSource <NSObject>
+
+- (ParentingStrategyDetailModel *)detailModelForParentingStrategyDetailView:(ParentingStrategyDetailView *)detailView;
+
+@end
+
 @interface ParentingStrategyDetailView : UIView
+
+@property (nonatomic, assign) id<ParentingStrategyDetailViewDataSource> dataSource;
 
 @end

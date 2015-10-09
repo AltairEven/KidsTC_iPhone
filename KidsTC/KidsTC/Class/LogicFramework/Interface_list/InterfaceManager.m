@@ -8,7 +8,7 @@
 
 #import "InterfaceManager.h"
 
-#define MAIN_GETINTERFACE     @"http://api.sqkids.com:8000/json.php?mod=main&&act=getinterface"
+#define MAIN_GETINTERFACE     @"http://api.kidstc.com:8000/json.php?mod=main&&act=getinterface"
 
 static InterfaceManager *_sharedInstance = nil;
 

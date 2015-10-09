@@ -11,7 +11,7 @@
 #import "UIDevice+IdentifierAddition.h"
 
 
-#define CookieDomain (@".sqkids.com")
+#define CookieDomain (@".kidstc.com")
 
 static HttpIcsonCookieManager *_sharedManager = nil;
 

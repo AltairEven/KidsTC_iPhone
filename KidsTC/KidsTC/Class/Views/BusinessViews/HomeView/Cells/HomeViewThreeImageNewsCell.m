@@ -8,6 +8,14 @@
 
 #import "HomeViewThreeImageNewsCell.h"
 
+@interface HomeViewThreeImageNewsCell ()
+
+@property (weak, nonatomic) IBOutlet UIImageView *imageView1;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView2;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView3;
+
+@end
+
 @implementation HomeViewThreeImageNewsCell
 
 - (void)awakeFromNib {

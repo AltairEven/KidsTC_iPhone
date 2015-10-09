@@ -12,13 +12,15 @@
 
 @interface ParentingStrategyDetailModel : NSObject
 
+@property (nonatomic, copy) NSString *identifier;
+
 @property (nonatomic, strong) NSURL *mainImageUrl;
 
 @property (nonatomic, copy) NSString *title;
 
 @property (nonatomic, strong) NSArray<ParentingStrategyDetailCellModel *> *cellModels;
 
-- (instancetype)initWithRawData:(NSDictionary *)data;
+- (void)fillWithRawData:(NSDictionary *)data;
 
 @end
 

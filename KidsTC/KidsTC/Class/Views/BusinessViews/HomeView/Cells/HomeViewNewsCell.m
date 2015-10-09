@@ -8,6 +8,14 @@
 
 #import "HomeViewNewsCell.h"
 
+@interface HomeViewNewsCell ()
+
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *viewNumber;
+@property (weak, nonatomic) IBOutlet UILabel *commentNumber;
+
+@end
+
 @implementation HomeViewNewsCell
 
 - (void)awakeFromNib {

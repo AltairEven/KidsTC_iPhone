@@ -2,11 +2,20 @@
 //  HomeViewImageNewsCell.m
 //  KidsTC
 //
-//  Created by 钱烨 on 9/21/15.
+//  Created by 钱烨 on 10/9/15.
 //  Copyright © 2015 KidsTC. All rights reserved.
 //
 
 #import "HomeViewImageNewsCell.h"
+
+@interface HomeViewImageNewsCell ()
+
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *viewNumberLabel;
+@property (weak, nonatomic) IBOutlet UILabel *commentNumberLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *cellImageView;
+
+@end
 
 @implementation HomeViewImageNewsCell
 
