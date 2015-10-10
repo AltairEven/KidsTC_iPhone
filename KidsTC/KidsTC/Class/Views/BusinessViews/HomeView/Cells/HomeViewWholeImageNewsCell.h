@@ -11,6 +11,8 @@
 
 @interface HomeViewWholeImageNewsCell : UITableViewCell
 
+@property (nonatomic, strong) NSIndexPath *indexPath;
+
 - (void)configWithModel:(HomeWholeImageNewsCellModel *)model;
 
 @end

@@ -21,6 +21,8 @@
 
 @property (nonatomic, assign) id<HomeViewThreeImageNewsCellDelegate> delegate;
 
+@property (nonatomic, strong) NSIndexPath *indexPath;
+
 - (void)configWithModel:(HomeThreeImageNewsCellModel *)model;
 
 @end

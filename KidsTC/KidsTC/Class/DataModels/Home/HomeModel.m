@@ -22,8 +22,9 @@
             _naviControlledFloorCount = 0;
             NSMutableArray *tempSections = [[NSMutableArray alloc] init];
             NSMutableArray *tempNaviedNames = [[NSMutableArray alloc] init];
-            for (NSDictionary *dic in floorArray) {
-                HomeFloorModel *model = [[HomeFloorModel alloc] initWithRawData:dic];
+            for (NSUInteger index = 0; index < [floorArray count]; index ++) {
+                NSDictionary *dic = [floorArray objectAtIndex:index];
+                HomeFloorModel *model = [[HomeFloorModel alloc] initWithRawData:dic floorIndex:index];
                 if (model) {
                     [tempArray addObject:model];
                     [tempSections addObjectsFromArray:model.sectionModels];
@@ -40,6 +41,10 @@
         _floorCount = [self.floorModels count];
     }
     return self;
+}
+
+- (HomeSegueModel *)segueModelAtHomeClickCoordinate:(HomeClickCoordinate)coordinate {
+    return nil;
 }
 
 @end

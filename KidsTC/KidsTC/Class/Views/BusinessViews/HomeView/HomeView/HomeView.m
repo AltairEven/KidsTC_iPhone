@@ -18,6 +18,10 @@
 #import "HomeViewThemeCell.h"
 #import "HomeViewTwinklingElfCell.h"
 #import "HomeViewHorizontalListCell.h"
+#import "HomeViewNewsCell.h"
+#import "HomeViewImageNewsCell.h"
+#import "HomeViewThreeImageNewsCell.h"
+#import "HomeViewWholeImageNewsCell.h"
 
 static NSString *const kNormalTitleCellIdentifier = @"kNormalTitleCellIdentifier";
 static NSString *const kCountDownTitleCellIdentifier = @"kCountDownTitleCellIdentifier";
@@ -28,6 +32,10 @@ static NSString *const kThreeCellIdentifier = @"kThreeCellIdentifier";
 static NSString *const kThemeCellIdentifier = @"kThemeCellIdentifier";
 static NSString *const kTwinklingElfCellIdentifier = @"kTwinklingElfCellIdentifier";
 static NSString *const kHorizontalListCellIdentifier = @"kHorizontalListCellIdentifier";
+static NSString *const kNewsCellIdentifier = @"kNewsCellIdentifier";
+static NSString *const kImageNewsCellIdentifier = @"kImageNewsCellIdentifier";
+static NSString *const kThreeImageNewsCellIdentifier = @"kThreeImageNewsCellIdentifier";
+static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIdentifier";
 
 @interface HomeView () <HomeTopViewDelegate, UITableViewDataSource, UITableViewDelegate, HomeViewBannerCellDelegate, HomeViewThemeCellDelegate, HomeViewThreeCellDelegate, HomeViewTwinklingElfCellDelegate, HomeViewHorizontalListCellDelegate, UIScrollViewDelegate>
 
@@ -47,16 +55,21 @@ static NSString *const kHorizontalListCellIdentifier = @"kHorizontalListCellIden
 @property (nonatomic, strong) UINib *themeCellNib;
 @property (nonatomic, strong) UINib *twinklingElfCellNib;
 @property (nonatomic, strong) UINib *horizontalListCellNib;
+@property (nonatomic, strong) UINib *newsCellNib;
+@property (nonatomic, strong) UINib *imageNewsCellNib;
+@property (nonatomic, strong) UINib *threeImageNewsCellNib;
+@property (nonatomic, strong) UINib *wholeImageNewsCellNib;
+
 @property (nonatomic, strong) UIView *splitFooterView;
 @property (weak, nonatomic) IBOutlet UIButton *backToTopButton;
 
 @property (nonatomic, strong) NSMutableDictionary *cellModelsDic;
 
-@property (nonatomic, strong) NSArray *homeSectionModels;
+@property (nonatomic, strong) HomeModel *homeModel;
 
-@property (nonatomic, strong) NSArray *customerRecommendModels;
+@property (nonatomic, strong) HomeModel *customerRecommendModel;
 
-@property (nonatomic, strong) NSArray *totablSectionModels;
+@property (nonatomic, strong) NSArray *totalSectionModels;
 
 @property (nonatomic, assign) BOOL noMoreData;
 
@@ -143,6 +156,22 @@ static NSString *const kHorizontalListCellIdentifier = @"kHorizontalListCellIden
         self.horizontalListCellNib = [UINib nibWithNibName:NSStringFromClass([HomeViewHorizontalListCell class]) bundle:nil];
         [self.tableView registerNib:self.horizontalListCellNib forCellReuseIdentifier:kHorizontalListCellIdentifier];
     }
+    if (!self.newsCellNib) {
+        self.newsCellNib = [UINib nibWithNibName:NSStringFromClass([HomeViewNewsCell class]) bundle:nil];
+        [self.tableView registerNib:self.newsCellNib forCellReuseIdentifier:kNewsCellIdentifier];
+    }
+    if (!self.imageNewsCellNib) {
+        self.imageNewsCellNib = [UINib nibWithNibName:NSStringFromClass([HomeViewImageNewsCell class]) bundle:nil];
+        [self.tableView registerNib:self.imageNewsCellNib forCellReuseIdentifier:kImageNewsCellIdentifier];
+    }
+    if (!self.threeImageNewsCellNib) {
+        self.threeImageNewsCellNib = [UINib nibWithNibName:NSStringFromClass([HomeViewThreeImageNewsCell class]) bundle:nil];
+        [self.tableView registerNib:self.threeImageNewsCellNib forCellReuseIdentifier:kThreeImageNewsCellIdentifier];
+    }
+    if (!self.wholeImageNewsCellNib) {
+        self.wholeImageNewsCellNib = [UINib nibWithNibName:NSStringFromClass([HomeViewWholeImageNewsCell class]) bundle:nil];
+        [self.tableView registerNib:self.wholeImageNewsCellNib forCellReuseIdentifier:kWholeImageNewsCellIdentifier];
+    }
     
     self.cellModelsDic = [[NSMutableDictionary alloc] init];
     
@@ -191,8 +220,9 @@ static NSString *const kHorizontalListCellIdentifier = @"kHorizontalListCellIden
 #pragma mark HomeViewBannerCellDelegate
 
 - (void)homeViewBannerCell:(HomeViewBannerCell *)bannerCell didClickedAtIndex:(NSUInteger)index {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(homeView:didSelectedAtIndexPath:subIndex:)]) {
-        [self.delegate homeView:self didSelectedAtIndexPath:bannerCell.indexPath subIndex:index];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(homeView:didClickedAtCoordinate:)]) {
+        HomeSectionModel *model = [self.totalSectionModels objectAtIndex:bannerCell.indexPath.section];
+        [self.delegate homeView:self didClickedAtCoordinate:HomeClickMakeCoordinate(model.floorIndex, bannerCell.indexPath.section, index)];
     }
 }
 
@@ -200,8 +230,9 @@ static NSString *const kHorizontalListCellIdentifier = @"kHorizontalListCellIden
 #pragma mark HomeViewThemeCellDelegate
 
 - (void)homeViewThemeCell:(HomeViewThemeCell *)themeCell didSelectedItemAtIndex:(NSUInteger)index {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(homeView:didSelectedAtIndexPath:subIndex:)]) {
-        [self.delegate homeView:self didSelectedAtIndexPath:themeCell.indexPath subIndex:index];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(homeView:didClickedAtCoordinate:)]) {
+        HomeSectionModel *model = [self.totalSectionModels objectAtIndex:themeCell.indexPath.section];
+        [self.delegate homeView:self didClickedAtCoordinate:HomeClickMakeCoordinate(model.floorIndex, themeCell.indexPath.section, index)];
     }
 }
 
@@ -209,8 +240,9 @@ static NSString *const kHorizontalListCellIdentifier = @"kHorizontalListCellIden
 #pragma mark HomeViewThreeCellDelegate
 
 - (void)homeViewThreeCell:(HomeViewThreeCell *)cell didClickedAtIndex:(NSUInteger)index {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(homeView:didSelectedAtIndexPath:subIndex:)]) {
-        [self.delegate homeView:self didSelectedAtIndexPath:cell.indexPath subIndex:index];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(homeView:didClickedAtCoordinate:)]) {
+        HomeSectionModel *model = [self.totalSectionModels objectAtIndex:cell.indexPath.section];
+        [self.delegate homeView:self didClickedAtCoordinate:HomeClickMakeCoordinate(model.floorIndex, cell.indexPath.section, index)];
     }
 }
 
@@ -218,16 +250,18 @@ static NSString *const kHorizontalListCellIdentifier = @"kHorizontalListCellIden
 #pragma mark HomeViewTwinklingElfCellDelegate
 
 - (void)twinklingElfCell:(HomeViewTwinklingElfCell *)twinklingElfCell didClickedAtIndex:(NSUInteger)index {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(homeView:didSelectedAtIndexPath:subIndex:)]) {
-        [self.delegate homeView:self didSelectedAtIndexPath:twinklingElfCell.indexPath subIndex:index];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(homeView:didClickedAtCoordinate:)]) {
+        HomeSectionModel *model = [self.totalSectionModels objectAtIndex:twinklingElfCell.indexPath.section];
+        [self.delegate homeView:self didClickedAtCoordinate:HomeClickMakeCoordinate(model.floorIndex, twinklingElfCell.indexPath.section, index)];
     }
 }
 
 #pragma mark HomeViewHorizontalListCellDelegate
 
 - (void)homeViewHorizontalListCell:(HomeViewHorizontalListCell *)listCell didSelectedItemAtIndex:(NSUInteger)index {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(homeView:didSelectedAtIndexPath:subIndex:)]) {
-        [self.delegate homeView:self didSelectedAtIndexPath:listCell.indexPath subIndex:index];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(homeView:didClickedAtCoordinate:)]) {
+        HomeSectionModel *model = [self.totalSectionModels objectAtIndex:listCell.indexPath.section];
+        [self.delegate homeView:self didClickedAtCoordinate:HomeClickMakeCoordinate(model.floorIndex, listCell.indexPath.section, index)];
     }
 }
 
@@ -235,14 +269,19 @@ static NSString *const kHorizontalListCellIdentifier = @"kHorizontalListCellIden
 #pragma mark UITableViewDataSource & UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [self.totablSectionModels count];
+    return [self.totalSectionModels count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSUInteger number = 1;
-    HomeSectionModel *model = [self.totablSectionModels objectAtIndex:section];
+    HomeSectionModel *model = [self.totalSectionModels objectAtIndex:section];
     if (model.hasTitle) {
         number = 2;
+    }
+    if (model.contentModel.type == HomeContentCellTypeNews) {
+        number += [((HomeNewsCellModel *)model.contentModel).elementsArray count] - 1;
+    } else if (model.contentModel.type == HomeContentCellTypeImageNews) {
+        number += [((HomeImageNewsCellModel *)model.contentModel).elementsArray count] - 1;
     }
     
     return number;
@@ -261,7 +300,7 @@ static NSString *const kHorizontalListCellIdentifier = @"kHorizontalListCellIden
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    HomeSectionModel *model = [self.totablSectionModels objectAtIndex:indexPath.section];
+    HomeSectionModel *model = [self.totalSectionModels objectAtIndex:indexPath.section];
     if (model.hasTitle && indexPath.row == 0) {
         switch (model.titleModel.type) {
             case HomeTitleCellTypeNormalTitle:
@@ -371,6 +410,50 @@ static NSString *const kHorizontalListCellIdentifier = @"kHorizontalListCellIden
                 return cell;
             }
                 break;
+            case HomeContentCellTypeNews:
+            {
+                HomeViewNewsCell *cell = [tableView dequeueReusableCellWithIdentifier:kNewsCellIdentifier];
+                if (!cell) {
+                    cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewNewsCell" owner:nil options:nil] objectAtIndex:0];
+                }
+                [cell configWithModel:[((HomeNewsCellModel *)contentModel).elementsArray objectAtIndex:indexPath.row]];
+                cell.indexPath = indexPath;
+                return cell;
+            }
+                break;
+            case HomeContentCellTypeImageNews:
+            {
+                HomeViewImageNewsCell *cell = [tableView dequeueReusableCellWithIdentifier:kImageNewsCellIdentifier];
+                if (!cell) {
+                    cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewImageNewsCell" owner:nil options:nil] objectAtIndex:0];
+                }
+                [cell configWithModel:[((HomeImageNewsCellModel *)contentModel).elementsArray objectAtIndex:indexPath.row]];
+                cell.indexPath = indexPath;
+                return cell;
+            }
+                break;
+            case HomeContentCellTypeThreeImageNews:
+            {
+                HomeViewThreeImageNewsCell *cell = [tableView dequeueReusableCellWithIdentifier:kThreeImageNewsCellIdentifier];
+                if (!cell) {
+                    cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewThreeImageNewsCell" owner:nil options:nil] objectAtIndex:0];
+                }
+                [cell configWithModel:(HomeThreeImageNewsCellModel *)contentModel];
+                cell.indexPath = indexPath;
+                return cell;
+            }
+                break;
+            case HomeContentCellTypeWholeImageNews:
+            {
+                HomeViewWholeImageNewsCell *cell = [tableView dequeueReusableCellWithIdentifier:kWholeImageNewsCellIdentifier];
+                if (!cell) {
+                    cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewWholeImageNewsCell" owner:nil options:nil] objectAtIndex:0];
+                }
+                [cell configWithModel:(HomeWholeImageNewsCellModel *)contentModel];
+                cell.indexPath = indexPath;
+                return cell;
+            }
+                break;
             default:
                 break;
         }
@@ -383,7 +466,7 @@ static NSString *const kHorizontalListCellIdentifier = @"kHorizontalListCellIden
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat height = 0;
     
-    HomeSectionModel *model = [self.totablSectionModels objectAtIndex:indexPath.section];
+    HomeSectionModel *model = [self.totalSectionModels objectAtIndex:indexPath.section];
     if (model.hasTitle && indexPath.row == 0) {
         height = [model.titleModel cellHeight];
     } else {
@@ -403,7 +486,7 @@ static NSString *const kHorizontalListCellIdentifier = @"kHorizontalListCellIden
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     CGFloat height = 2.5;
-    if ([self.homeSectionModels count] == section + 1) {
+    if ([[self.homeModel allSectionModels] count] == section + 1) {
         height = 40;
     }
     return height;
@@ -411,7 +494,7 @@ static NSString *const kHorizontalListCellIdentifier = @"kHorizontalListCellIden
 
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    if ([self.homeSectionModels count] != section + 1) {
+    if ([[self.homeModel allSectionModels] count] != section + 1) {
         return nil;
     }
     if (!self.splitFooterView) {
@@ -442,8 +525,9 @@ static NSString *const kHorizontalListCellIdentifier = @"kHorizontalListCellIden
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(homeView:didSelectedAtIndexPath:)]) {
-        [self.delegate homeView:self didSelectedAtIndexPath:indexPath];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(homeView:didClickedAtCoordinate:)]) {
+        HomeSectionModel *model = [self.totalSectionModels objectAtIndex:indexPath.section];
+        [self.delegate homeView:self didClickedAtCoordinate:HomeClickMakeCoordinate(model.floorIndex, indexPath.section, indexPath.row)];
     }
 }
 
@@ -521,15 +605,15 @@ static NSString *const kHorizontalListCellIdentifier = @"kHorizontalListCellIden
 
 - (void)reloadData {
     if (self.dataSource) {
-        if ([self.dataSource respondsToSelector:@selector(homeSectionModesArrayForHomeView:)]) {
-            self.homeSectionModels = [self.dataSource homeSectionModesArrayForHomeView:self];
+        if ([self.dataSource respondsToSelector:@selector(homeModelForHomeView:)]) {
+            self.homeModel= [self.dataSource homeModelForHomeView:self];
         }
-        if ([self.dataSource respondsToSelector:@selector(customerRecommendModesArrayForHomeView:)]) {
-            self.customerRecommendModels = [self.dataSource customerRecommendModesArrayForHomeView:self];
+        if ([self.dataSource respondsToSelector:@selector(customerRecommendModelForHomeView:)]) {
+            self.customerRecommendModel = [self.dataSource customerRecommendModelForHomeView:self];
         }
-        NSMutableArray *array = [[NSMutableArray alloc] initWithArray:self.homeSectionModels];
-        [array addObjectsFromArray:self.customerRecommendModels];
-        self.totablSectionModels = [NSArray arrayWithArray:array];
+        NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[self.homeModel allSectionModels]];
+        [array addObjectsFromArray:[self.customerRecommendModel allSectionModels]];
+        self.totalSectionModels = [NSArray arrayWithArray:array];
         [self.tableView reloadData];
     }
 }

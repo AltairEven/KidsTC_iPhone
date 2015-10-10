@@ -10,13 +10,22 @@
 #import "HomeNormalTitleCellModel.h"
 #import "HomeCountDownTitleCellModel.h"
 #import "HomeMoreTitleCellModel.h"
+#import "HomeCountDownMoreTitleCellModel.h"
 #import "HomeBannerCellModel.h"
 #import "HomeTwinklingElfCellModel.h"
 #import "HomeHorizontalListCellModel.h"
 #import "HomeThreeCellModel.h"
 #import "HomeTwoColumnCellModel.h"
+#import "HomeNewsCellModel.h"
+#import "HomeImageNewsCellModel.h"
+#import "HomeThreeImageNewsCellModel.h"
+#import "HomeWholeImageNewsCellModel.h"
 
 @interface HomeSectionModel : NSObject
+
+@property (nonatomic, assign) NSUInteger floorIndex;
+
+@property (nonatomic, copy) NSString *floorName;
 
 @property (nonatomic, readonly) BOOL hasTitle;
 

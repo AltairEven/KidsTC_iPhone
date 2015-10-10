@@ -13,9 +13,9 @@
 
 @protocol HomeViewDataSource <NSObject>
 
-- (NSArray *)homeSectionModesArrayForHomeView:(HomeView *)homeView;
+- (HomeModel *)homeModelForHomeView:(HomeView *)homeView;
 
-- (NSArray *)customerRecommendModesArrayForHomeView:(HomeView *)homeView;
+- (HomeModel *)customerRecommendModelForHomeView:(HomeView *)homeView;
 
 @end
 
@@ -31,9 +31,7 @@
 
 - (void)homeViewDidPulledUpToloadMore:(HomeView *)homeView;
 
-- (void)homeView:(HomeView *)homeView didSelectedAtIndexPath:(NSIndexPath *)indexPath;
-
-- (void)homeView:(HomeView *)homeView didSelectedAtIndexPath:(NSIndexPath *)indexPath subIndex:(NSUInteger)subIndex;
+- (void)homeView:(HomeView *)homeView didClickedAtCoordinate:(HomeClickCoordinate)coordinate;
 
 @optional
 

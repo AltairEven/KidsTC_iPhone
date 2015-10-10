@@ -9,6 +9,20 @@
 #import <Foundation/Foundation.h>
 #import "HomeFloorModel.h"
 
+typedef struct HomeIndex {
+    NSUInteger floorIndex;
+    NSUInteger sectionIndex;
+    NSInteger contentIndex; //未选中则传<0
+}HomeClickCoordinate;
+
+NS_INLINE HomeClickCoordinate HomeClickMakeCoordinate(NSUInteger floor, NSUInteger section, NSInteger content) {
+    HomeClickCoordinate coord;
+    coord.floorIndex = floor;
+    coord.sectionIndex = section;
+    coord.contentIndex = content;
+    return coord;
+}
+
 @interface HomeModel : NSObject
 
 @property (nonatomic, strong, readonly) NSArray<HomeFloorModel *> *floorModels;
@@ -22,5 +36,7 @@
 @property (nonatomic, strong, readonly) NSArray<NSString *> *allNaviControlledNames;
 
 - (instancetype)initWithRawData:(NSDictionary *)data;
+
+- (HomeSegueModel *)segueModelAtHomeClickCoordinate:(HomeClickCoordinate)coordinate;
 
 @end

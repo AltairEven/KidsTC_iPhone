@@ -10,12 +10,13 @@
 
 @implementation HomeFloorModel
 
-- (instancetype)initWithRawData:(NSDictionary *)data {
+- (instancetype)initWithRawData:(NSDictionary *)data floorIndex:(NSUInteger)index{
     if (!data || ![data isKindOfClass:[NSDictionary class]]) {
         return nil;
     }
     self = [super init];
     if (self) {
+        self.floorIndex = index;
         self.floorType = (HomeFloorType)[[data objectForKey:@"floorType"] integerValue];
         self.floorName = [data objectForKey:@"floorName"];
         NSArray *sectionArray = [data objectForKey:@"floors"];
@@ -24,6 +25,8 @@
             for (NSDictionary *dic in sectionArray) {
                 HomeSectionModel *model = [[HomeSectionModel alloc] initWithRawData:dic];
                 if (model) {
+                    model.floorIndex = index;
+                    model.floorName = self.floorName;
                     [tempArray addObject:model];
                 }
             }

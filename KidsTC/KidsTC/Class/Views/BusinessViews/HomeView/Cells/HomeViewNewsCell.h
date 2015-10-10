@@ -11,6 +11,8 @@
 
 @interface HomeViewNewsCell : UITableViewCell
 
+@property (nonatomic, strong) NSIndexPath *indexPath;
+
 - (void)configWithModel:(HomeNewsElement *)model;
 
 @end

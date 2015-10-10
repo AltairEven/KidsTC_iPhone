@@ -17,12 +17,14 @@ typedef enum {
 
 @interface HomeFloorModel : NSObject
 
+@property (nonatomic, assign) NSUInteger floorIndex;
+
 @property (nonatomic, assign) HomeFloorType floorType;
 
 @property (nonatomic, copy) NSString *floorName;
 
 @property (nonatomic, strong) NSArray <HomeSectionModel *> *sectionModels;
 
-- (instancetype)initWithRawData:(NSDictionary *)data;
+- (instancetype)initWithRawData:(NSDictionary *)data floorIndex:(NSUInteger)index;
 
 @end
