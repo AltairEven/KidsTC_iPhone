@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "HomeElementBaseModel.h"
 
 @interface HomeCellModel : NSObject {
     CGFloat cellHeight;

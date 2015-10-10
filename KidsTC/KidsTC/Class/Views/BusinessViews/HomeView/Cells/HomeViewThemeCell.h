@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomeTwoColumnCellModel.h"
 
 @class HomeViewThemeCell;
 
@@ -20,10 +21,8 @@
 
 @property (nonatomic, assign) id<HomeViewThemeCellDelegate> delegate;
 
-@property (nonatomic, assign) CGFloat ratio;
-
-@property (nonatomic, strong) NSArray *imageUrlsArray;
-
 @property (nonatomic, strong) NSIndexPath *indexPath;
+
+- (void)configWithModel:(HomeTwoColumnCellModel *)model;
 
 @end

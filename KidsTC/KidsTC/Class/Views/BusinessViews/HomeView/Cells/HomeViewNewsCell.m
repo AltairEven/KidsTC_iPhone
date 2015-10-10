@@ -28,4 +28,12 @@
     // Configure the view for the selected state
 }
 
+- (void)configWithModel:(HomeNewsElement *)model {
+    if (model) {
+        [self.titleLabel setText:model.title];
+        [self.viewNumber setText:[NSString stringWithFormat:@"%lu", (unsigned long)model.viewCount]];
+        [self.commentNumber setText:[NSString stringWithFormat:@"%lu", (unsigned long)model.commentCount]];
+    }
+}
+
 @end

@@ -29,4 +29,13 @@
     // Configure the view for the selected state
 }
 
+- (void)configWithModel:(HomeImageNewsElement *)model {
+    if (model) {
+        [self.titleLabel setText:model.title];
+        [self.viewNumberLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)model.viewCount]];
+        [self.commentNumberLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)model.commentCount]];
+        [self.cellImageView setImageWithURL:model.imageUrl];
+    }
+}
+
 @end

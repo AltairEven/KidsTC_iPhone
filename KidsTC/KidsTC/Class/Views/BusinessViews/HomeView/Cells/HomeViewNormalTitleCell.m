@@ -8,6 +8,12 @@
 
 #import "HomeViewNormalTitleCell.h"
 
+@interface HomeViewNormalTitleCell ()
+
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
+@end
+
 @implementation HomeViewNormalTitleCell
 
 - (void)awakeFromNib {
@@ -20,8 +26,10 @@
     // Configure the view for the selected state
 }
 
-+ (CGFloat)cellHeight {
-    return 44;
+- (void)configWithModel:(HomeNormalTitleCellModel *)model {
+    if (model) {
+        [self.titleLabel setText:model.mainTitle];
+    }
 }
 
 @end

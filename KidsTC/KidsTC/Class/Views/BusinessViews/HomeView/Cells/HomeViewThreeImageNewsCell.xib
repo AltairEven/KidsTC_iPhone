@@ -17,13 +17,13 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lIS-rM-oVc">
                         <rect key="frame" x="0.0" y="0.0" width="363" height="127"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FbZ-m1-AD9" userLabel="Image View1">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FbZ-m1-AD9" userLabel="Image View1">
                                 <rect key="frame" x="0.0" y="0.0" width="121" height="127"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DB5-Pj-6o8" userLabel="Image View2">
+                            <imageView tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DB5-Pj-6o8" userLabel="Image View2">
                                 <rect key="frame" x="121" y="0.0" width="121" height="127"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lev-tv-haW" userLabel="Image View3">
+                            <imageView tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lev-tv-haW" userLabel="Image View3">
                                 <rect key="frame" x="242" y="0.0" width="121" height="127"/>
                             </imageView>
                         </subviews>

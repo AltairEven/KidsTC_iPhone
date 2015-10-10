@@ -20,12 +20,16 @@
 
 @property (nonatomic, strong) HomeViewModel *viewModel;
 
+- (void)userRoleHasChanged:(id)info;
+
 @end
 
 @implementation HomeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userRoleHasChanged:) name:UserRoleHasChangedNotification object:nil];
     // Do any additional setup after loading the view from its nib.
     self.homeView.delegate = self;
     self.floorNavigationView.dataSource = self;
@@ -60,6 +64,10 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UserRoleHasChangedNotification object:nil];
 }
 
 #pragma mark HomeViewDelegate
@@ -157,6 +165,13 @@
 
 - (void)floorNavigationView:(AUIFloorNavigationView *)navigationView didSelectedAtIndex:(NSUInteger)index {
     [self.homeView scrollHomeViewToSectionGroupIndex:index];
+}
+
+
+#pragma mark Private method
+
+- (void)userRoleHasChanged:(id)info {
+    
 }
 
 

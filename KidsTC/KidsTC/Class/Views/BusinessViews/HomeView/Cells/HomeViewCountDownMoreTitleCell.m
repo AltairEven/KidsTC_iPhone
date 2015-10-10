@@ -1,27 +1,28 @@
 //
-//  HomeViewCountDownTitleCell.m
+//  HomeViewCountDownMoreTitleCell.m
 //  KidsTC
 //
-//  Created by 钱烨 on 7/21/15.
-//  Copyright (c) 2015 KidsTC. All rights reserved.
+//  Created by 钱烨 on 10/10/15.
+//  Copyright © 2015 KidsTC. All rights reserved.
 //
 
-#import "HomeViewCountDownTitleCell.h"
+#import "HomeViewCountDownMoreTitleCell.h"
 
 
-@interface HomeViewCountDownTitleCell ()
+@interface HomeViewCountDownMoreTitleCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIView *countDownBGView;
 @property (weak, nonatomic) IBOutlet UILabel *hourLabel;
 @property (weak, nonatomic) IBOutlet UILabel *minuteLabel;
 @property (weak, nonatomic) IBOutlet UILabel *secondLabel;
+@property (weak, nonatomic) IBOutlet UILabel *subTitleLabel;
 
 @property (nonatomic, strong) ATCountDown *countDownTimer;
 
 @end
 
-@implementation HomeViewCountDownTitleCell
+@implementation HomeViewCountDownMoreTitleCell
 
 - (void)awakeFromNib {
     // Initialization code
@@ -36,9 +37,10 @@
     // Configure the view for the selected state
 }
 
-- (void)configWithModel:(HomeCountDownTitleCellModel *)model {
+- (void)configWithModel:(HomeCountDownMoreTitleCellModel *)model {
     if (model) {
         [self.titleLabel setText:model.mainTitle];
+        [self.subTitleLabel setText:model.subTitle];
         [self setLeftTime:model.timeLeft];
     }
 }
@@ -46,7 +48,7 @@
 - (void)setLeftTime:(NSTimeInterval)leftTime {
     if (!self.countDownTimer) {
         self.countDownTimer = [[ATCountDown alloc] initWithLeftTimeInterval:leftTime];
-        __weak HomeViewCountDownTitleCell *weakSelf = self;
+        __weak HomeViewCountDownMoreTitleCell *weakSelf = self;
         [weakSelf.countDownTimer startCountDownWithCurrentTimeLeft:^(NSTimeInterval currentTimeLeft) {
             [weakSelf setLabelsWithTime:[GToolUtil countDownTimeStructHMSWithLeftTime2:currentTimeLeft]];
         }];

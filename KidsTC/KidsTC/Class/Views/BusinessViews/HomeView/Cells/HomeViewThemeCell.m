@@ -15,6 +15,8 @@
 
 @property (weak, nonatomic) IBOutlet HotActivityGroupView *groupView;
 
+@property (nonatomic, strong) NSArray *imageUrlsArray;
+
 - (NSUInteger)indexOfIndexPath:(NSIndexPath *)indexPath;
 
 @end
@@ -33,13 +35,11 @@
     // Configure the view for the selected state
 }
 
-- (void)setRatio:(CGFloat)ratio {
-    _ratio = ratio;
-    self.groupView.ratio = ratio;
-}
-
-- (void)setImageUrlsArray:(NSArray *)imageUrlsArray {
-    _imageUrlsArray = [NSArray arrayWithArray:imageUrlsArray];
+- (void)configWithModel:(HomeTwoColumnCellModel *)model {
+    if (model) {
+        self.groupView.ratio = model.ratio;
+        _imageUrlsArray = [model imageUrlsArray];
+    }
     [self.groupView reloadData];
 }
 

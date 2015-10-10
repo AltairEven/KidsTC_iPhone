@@ -75,17 +75,7 @@ NSString *const kHomeViewDataFinishLoadingNotification = @"kHomeViewDataFinishLo
 
 
 - (void)loadHomeDataSucceed:(NSDictionary *)data {
-    NSArray *contentArray = [data objectForKey:@"data"];
-    NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-    if (contentArray && [contentArray isKindOfClass:[NSArray class]]) {
-        for (NSDictionary *singleSection in contentArray) {
-            HomeSectionModel *model = [[HomeSectionModel alloc] initWithRawData:singleSection];
-            if (model) {
-                [tempArray addObject:model];
-            }
-        }
-        self.homeSectionModelsArray = [NSArray arrayWithArray:tempArray];
-    }
+    self.model = [[HomeModel alloc] initWithRawData:data];
     if ([self.homeSectionModelsArray count] > 0) {
         [self.view reloadData];
     }
@@ -169,22 +159,22 @@ NSString *const kHomeViewDataFinishLoadingNotification = @"kHomeViewDataFinishLo
 #pragma mark Public methods
 
 - (void)refreshHomeData {
-    if (YES) {
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"首页" ofType:@".txt"];
-        NSData *data = [NSData dataWithContentsOfFile:path];
-        NSDictionary *respData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-        self.updating = NO;
-        [self loadHomeDataSucceed:respData];
-        if (!self.alreadyFirstLoaded) {
-            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kHomeViewDataFinishLoadingNotification object:nil]];
-            self.alreadyFirstLoaded = YES;
-        }
-        if (self.refreshSucceedBlock) {
-            self.refreshSucceedBlock(respData);
-        }
-        
-        return;
-    }
+//    if (YES) {
+//        NSString *path = [[NSBundle mainBundle] pathForResource:@"首页" ofType:@".txt"];
+//        NSData *data = [NSData dataWithContentsOfFile:path];
+//        NSDictionary *respData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+//        self.updating = NO;
+//        [self loadHomeDataSucceed:respData];
+//        if (!self.alreadyFirstLoaded) {
+//            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kHomeViewDataFinishLoadingNotification object:nil]];
+//            self.alreadyFirstLoaded = YES;
+//        }
+//        if (self.refreshSucceedBlock) {
+//            self.refreshSucceedBlock(respData);
+//        }
+//        
+//        return;
+//    }
     if (!self.loadHomeDataRequest) {
         self.loadHomeDataRequest = [HttpRequestClient clientWithUrlAliasName:@"GET_PAGE_HOME"];
         [self.loadHomeDataRequest setTimeoutSeconds:5];
@@ -193,8 +183,9 @@ NSString *const kHomeViewDataFinishLoadingNotification = @"kHomeViewDataFinishLo
     [self.loadCustomerRecommendRequest cancel];
     [self.customerRecommendModelsArray removeAllObjects];
     self.updating = YES;
+    NSDictionary *param = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:[KTCUser currentUser].userRole] forKey:@"type"];
     __weak HomeViewModel *weakSelf = self;
-    [weakSelf.loadHomeDataRequest startHttpRequestWithParameter:nil success:^(HttpRequestClient *client, NSDictionary *responseData) {
+    [weakSelf.loadHomeDataRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         weakSelf.updating = NO;
         [weakSelf loadHomeDataSucceed:responseData];
         if (!weakSelf.alreadyFirstLoaded) {

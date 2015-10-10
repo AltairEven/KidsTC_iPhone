@@ -8,7 +8,7 @@
 
 #import "HomeViewTwinklingElfCell.h"
 #import "TwinklingElvesView.h"
-#import "HomeTwinklingElf.h"
+#import "HomeTwinklingElfCellModel.h"
 
 
 #define SectionNumber (4)
@@ -16,6 +16,8 @@
 @interface HomeViewTwinklingElfCell () <TwinklingElvesViewDataSource, TwinklingElvesViewDelegate>
 
 @property (weak, nonatomic) IBOutlet TwinklingElvesView *twinklingElves;
+
+@property (nonatomic, strong) NSArray *twinklingElfModels;
 
 - (NSUInteger)indexOfIndexPath:(NSIndexPath *)indexPath;
 
@@ -35,9 +37,14 @@
     // Configure the view for the selected state
 }
 
-- (void)setTwinklingElfModels:(NSArray *)twinklingElfModels {
-    _twinklingElfModels = [NSArray arrayWithArray:twinklingElfModels];
+- (void)configWithModel:(HomeTwinklingElfCellModel *)model {
+    if (model) {
+        _twinklingElfModels = model.twinklingElvesArray;
+    }
     [self.twinklingElves reloadData];
+}
+
+- (void)setTwinklingElfModels:(NSArray *)twinklingElfModels {
 }
 
 #pragma mark TwinklingElvesViewDataSource & TwinklingElvesViewDelegate
@@ -67,7 +74,7 @@
     if ([twinklingElf hasLocalImage]) {
         imageUrl = [NSURL URLWithString:twinklingElf.imageName];
     } else {
-        imageUrl = [NSURL URLWithString:twinklingElf.pictureUrlString];
+        imageUrl = twinklingElf.imageUrl;
     }
     return imageUrl;
 }

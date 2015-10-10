@@ -7,10 +7,18 @@
 //
 
 #import "HomeContentCellModel.h"
-#import "HomeTimeQiangElement.h"
+
+@class HomeHorizontalListElement;
 
 @interface HomeHorizontalListCellModel : HomeContentCellModel
 
-@property (nonatomic, strong) NSArray *timeQiangElementsArray;
+@property (nonatomic, strong) NSArray<HomeHorizontalListElement *> *elementsArray;
+
+@end
+
+
+@interface HomeHorizontalListElement : HomeElementBaseModel
+
+@property (nonatomic, assign) CGFloat price;
 
 @end

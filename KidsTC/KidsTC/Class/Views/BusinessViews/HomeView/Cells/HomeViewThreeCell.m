@@ -11,6 +11,10 @@
 
 @interface HomeViewThreeCell ()
 
+@property (weak, nonatomic) IBOutlet UIImageView *firstImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *secondImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *thirdImageView;
+
 - (void)didClickedOnImage:(id)sender;
 
 @end
@@ -19,7 +23,6 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    self.ratio = 1;
     
     UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickedOnImage:)];
     [self.firstImageView addGestureRecognizer:tap1];
@@ -33,6 +36,14 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)configWithModel:(HomeThreeCellModel *)model {
+    if (model) {
+        [self.firstImageView setImageWithURL:model.firstElement.imageUrl];
+        [self.secondImageView setImageWithURL:model.secondeElement.imageUrl];
+        [self.thirdImageView setImageWithURL:model.thirdElement.imageUrl];
+    }
 }
 
 - (void)didClickedOnImage:(id)sender {

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomeBannerCellModel.h"
 
 @class HomeViewBannerCell;
 
@@ -20,10 +21,8 @@
 
 @property (nonatomic, assign) id<HomeViewBannerCellDelegate> delegate;
 
-@property (nonatomic, strong) NSArray *imageUrlsArray;
-
-@property (nonatomic, assign) CGFloat ratio;
-
 @property (nonatomic, strong) NSIndexPath *indexPath;
+
+- (void)configWithModel:(HomeBannerCellModel *)model;
 
 @end

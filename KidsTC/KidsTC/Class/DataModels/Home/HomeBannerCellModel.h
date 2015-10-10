@@ -7,12 +7,17 @@
 //
 
 #import "HomeContentCellModel.h"
-#import "HomeBanner.h"
+
+@class HomeBanner;
 
 @interface HomeBannerCellModel : HomeContentCellModel
 
-@property (nonatomic, strong) NSArray *homeBannersArray;
+@property (nonatomic, strong) NSArray<HomeBanner *> *homeBannersArray;
 
 - (NSArray *)imageUrlsArray;
+
+@end
+
+@interface HomeBanner : HomeElementBaseModel
 
 @end

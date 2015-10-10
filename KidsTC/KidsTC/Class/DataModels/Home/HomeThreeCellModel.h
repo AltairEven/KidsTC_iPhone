@@ -7,7 +7,8 @@
 //
 
 #import "HomeContentCellModel.h"
-#import "HomeThreePictureElement.h"
+
+@class HomeThreePictureElement;
 
 @interface HomeThreeCellModel : HomeContentCellModel
 
@@ -16,5 +17,10 @@
 @property (nonatomic, strong) HomeThreePictureElement *secondeElement;
 
 @property (nonatomic, strong) HomeThreePictureElement *thirdElement;
+
+@end
+
+
+@interface HomeThreePictureElement : HomeElementBaseModel
 
 @end

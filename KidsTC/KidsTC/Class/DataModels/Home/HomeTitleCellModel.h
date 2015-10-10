@@ -6,13 +6,14 @@
 //  Copyright (c) 2015 KidsTC. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "HomeCellModel.h"
+#import "HomeSegueModel.h"
 
 typedef enum {
     HomeTitleCellTypeNormalTitle = 1,
     HomeTitleCellTypeCountDownTitle,
-    HomeTitleCellTypeMoreTitle
+    HomeTitleCellTypeMoreTitle,
+    HomeTitleCellTypeCountDownMoreTitle
 }HomeTitleCellType;
 
 @interface HomeTitleCellModel : HomeCellModel
@@ -21,9 +22,7 @@ typedef enum {
 
 @property (nonatomic, copy) NSString *mainTitle;
 
-@property (nonatomic, assign) HomeSegueDestination segueDestination;
-
-@property (nonatomic, copy) NSString *linkUrl;
+@property (nonatomic, strong) HomeSegueModel *segueModel;
 
 - (instancetype)initWithRawData:(NSDictionary *)data;
 

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomeTwinklingElfCellModel.h"
 
 @class HomeViewTwinklingElfCell;
 
@@ -20,8 +21,8 @@
 
 @property (nonatomic, assign) id<HomeViewTwinklingElfCellDelegate> delegate;
 
-@property (nonatomic, strong) NSArray *twinklingElfModels;
-
 @property (nonatomic, strong) NSIndexPath *indexPath;
+
+- (void)configWithModel:(HomeTwinklingElfCellModel *)model;
 
 @end

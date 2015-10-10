@@ -7,7 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomeThreeImageNewsCellModel.h"
+
+@class HomeViewThreeImageNewsCell;
+
+@protocol HomeViewThreeImageNewsCellDelegate <NSObject>
+
+- (void)homeViewThreeImageNewsCell:(HomeViewThreeImageNewsCell *)cell didClickedAtIndex:(NSUInteger)index;
+
+@end
 
 @interface HomeViewThreeImageNewsCell : UITableViewCell
+
+@property (nonatomic, assign) id<HomeViewThreeImageNewsCellDelegate> delegate;
+
+- (void)configWithModel:(HomeThreeImageNewsCellModel *)model;
 
 @end

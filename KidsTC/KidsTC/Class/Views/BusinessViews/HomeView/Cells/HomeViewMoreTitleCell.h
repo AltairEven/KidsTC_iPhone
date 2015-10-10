@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomeMoreTitleCellModel.h"
 
 @interface HomeViewMoreTitleCell : UITableViewCell
 
-- (void)setMainTitle:(NSString *)main subTitle:(NSString *)sub;
-
-+ (CGFloat)cellHeight;
+- (void)configWithModel:(HomeMoreTitleCellModel *)model;
 
 @end

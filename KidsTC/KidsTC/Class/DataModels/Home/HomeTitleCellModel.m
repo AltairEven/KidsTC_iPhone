@@ -24,9 +24,9 @@
 - (void)parseRawData:(NSDictionary *)data {
     self.mainTitle = [data objectForKey:@"name"];
     
-    self.segueDestination = (HomeSegueDestination)[[data objectForKey:@"linkType"] integerValue];
+    HomeSegueDestination destination = (HomeSegueDestination)[[data objectForKey:@"linkType"] integerValue];
     
-    self.linkUrl = [data objectForKey:@"linkUrl"];
+    self.segueModel = [[HomeSegueModel alloc] initWithDestination:destination paramRawData:[data objectForKey:@"params"]];
 }
 
 - (CGFloat)cellHeight {

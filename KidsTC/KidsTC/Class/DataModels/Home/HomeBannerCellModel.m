@@ -39,12 +39,19 @@
 - (NSArray *)imageUrlsArray {
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
     for (HomeBanner *singleEle in self.homeBannersArray) {
-        NSURL *imageUrl = [NSURL URLWithString:singleEle.pictureUrlString];
-        if (imageUrl) {
-            [tempArray addObject:imageUrl];
+        if (singleEle.imageUrl) {
+            [tempArray addObject:singleEle.imageUrl];
         }
     }
     return [NSArray arrayWithArray:tempArray];
+}
+
+@end
+
+@implementation HomeBanner
+
+- (void)parseHomeData:(NSDictionary *)data {
+    [super parseHomeData:data];
 }
 
 @end

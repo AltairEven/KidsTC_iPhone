@@ -6,15 +6,19 @@
 //  Copyright (c) 2015 KidsTC. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "HomeCellModel.h"
+#import "HomeNewsBaseModel.h"
 
 typedef enum {
     HomeContentCellTypeBanner = 1,
-    HomeContentCellTypeTwinklingElf,
-    HomeContentCellTypeHorizontalList,
-    HomeContentCellTypeThree,
-    HomeContentCellTypeTwoColumn
+    HomeContentCellTypeTwinklingElf = 2,
+    HomeContentCellTypeHorizontalList = 3,
+    HomeContentCellTypeThree = 4,
+    HomeContentCellTypeTwoColumn = 5,
+    HomeContentCellTypeNews = 6,
+    HomeContentCellTypeImageNews = 7,
+    HomeContentCellTypeThreeImageNews = 8,
+    HomeContentCellTypeWholeImageNews = 11
 }HomeContentCellType;
 
 @interface HomeContentCellModel : HomeCellModel

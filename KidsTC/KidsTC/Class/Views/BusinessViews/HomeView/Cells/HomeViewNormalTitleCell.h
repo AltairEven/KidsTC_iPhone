@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomeNormalTitleCellModel.h"
 
 @interface HomeViewNormalTitleCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-
-+ (CGFloat)cellHeight;
+- (void)configWithModel:(HomeNormalTitleCellModel *)model;
 
 @end

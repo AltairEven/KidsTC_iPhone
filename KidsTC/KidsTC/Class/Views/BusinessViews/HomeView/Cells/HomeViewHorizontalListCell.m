@@ -9,7 +9,7 @@
 #import "HomeViewHorizontalListCell.h"
 #import "HomeTimeQiangCell.h"
 #import "AUISegmentView.h"
-#import "HomeTimeQiangElement.h"
+#import "HomeHorizontalListCellModel.h"
 
 static NSString *const kCellIdentifier = @"kCellIdentifier";
 
@@ -18,6 +18,8 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 @property (weak, nonatomic) IBOutlet AUISegmentView *listView;
 
 @property (nonatomic, strong) UINib *cellNib;
+
+@property (nonatomic, strong) NSArray *elementsArray;
 
 @end
 
@@ -41,15 +43,17 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     // Configure the view for the selected state
 }
 
-- (void)setTimeQiangElementsArray:(NSArray *)timeQiangElementsArray {
-    _timeQiangElementsArray = timeQiangElementsArray;
+- (void)configWithModel:(HomeHorizontalListCellModel *)model {
+    if (model) {
+        self.elementsArray = model.elementsArray;
+    }
     [self.listView reloadData];
 }
 
 #pragma mark AUISegmentViewDataSource & AUISegmentViewDelegate
 
 - (NSUInteger)numberOfCellsForSegmentView:(AUISegmentView *)segmentView {
-    return [self.timeQiangElementsArray count];
+    return [self.elementsArray count];
 }
 
 - (UITableViewCell *)segmentView:(AUISegmentView *)segmentView cellAtIndex:(NSUInteger)index {
@@ -58,8 +62,8 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     if (!cell) {
         cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeTimeQiangCell" owner:nil options:nil] objectAtIndex:0];
     }
-    HomeTimeQiangElement *element = [self.timeQiangElementsArray objectAtIndex:index];
-    [cell setImageUrl:[NSURL URLWithString:element.pictureUrlString]];
+    HomeHorizontalListElement *element = [self.elementsArray objectAtIndex:index];
+    [cell setImageUrl:element.imageUrl];
     [cell setPrice:element.price];
     return cell;
 }

@@ -12,6 +12,7 @@
 #import "HomeViewNormalTitleCell.h"
 #import "HomeViewCountDownTitleCell.h"
 #import "HomeViewMoreTitleCell.h"
+#import "HomeViewCountDownMoreTitleCell.h"
 #import "HomeViewBannerCell.h"
 #import "HomeViewThreeCell.h"
 #import "HomeViewThemeCell.h"
@@ -21,6 +22,7 @@
 static NSString *const kNormalTitleCellIdentifier = @"kNormalTitleCellIdentifier";
 static NSString *const kCountDownTitleCellIdentifier = @"kCountDownTitleCellIdentifier";
 static NSString *const kMoreTitleCellIdentifier = @"kMoreTitleCellIdentifier";
+static NSString *const kCountDownMoreTitleCellIdentifier = @"kCountDownMoreTitleCellIdentifier";
 static NSString *const kBannerCellIdentifier = @"kBannerCellIdentifier";
 static NSString *const kThreeCellIdentifier = @"kThreeCellIdentifier";
 static NSString *const kThemeCellIdentifier = @"kThemeCellIdentifier";
@@ -39,6 +41,7 @@ static NSString *const kHorizontalListCellIdentifier = @"kHorizontalListCellIden
 @property (nonatomic, strong) UINib *normalTitleCellNib;
 @property (nonatomic, strong) UINib *countDownTitleCellNib;
 @property (nonatomic, strong) UINib *moreTitleCellNib;
+@property (nonatomic, strong) UINib *countDownMoreTitleCellNib;
 @property (nonatomic, strong) UINib *bannerCellNib;
 @property (nonatomic, strong) UINib *threeCellNib;
 @property (nonatomic, strong) UINib *themeCellNib;
@@ -115,6 +118,10 @@ static NSString *const kHorizontalListCellIdentifier = @"kHorizontalListCellIden
     if (!self.moreTitleCellNib) {
         self.moreTitleCellNib = [UINib nibWithNibName:NSStringFromClass([HomeViewMoreTitleCell class]) bundle:nil];
         [self.tableView registerNib:self.moreTitleCellNib forCellReuseIdentifier:kMoreTitleCellIdentifier];
+    }
+    if (!self.countDownMoreTitleCellNib) {
+        self.countDownMoreTitleCellNib = [UINib nibWithNibName:NSStringFromClass([HomeViewCountDownMoreTitleCell class]) bundle:nil];
+        [self.tableView registerNib:self.countDownMoreTitleCellNib forCellReuseIdentifier:kCountDownMoreTitleCellIdentifier];
     }
     if (!self.bannerCellNib) {
         self.bannerCellNib = [UINib nibWithNibName:NSStringFromClass([HomeViewBannerCell class]) bundle:nil];
@@ -256,15 +263,14 @@ static NSString *const kHorizontalListCellIdentifier = @"kHorizontalListCellIden
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     HomeSectionModel *model = [self.totablSectionModels objectAtIndex:indexPath.section];
     if (model.hasTitle && indexPath.row == 0) {
-        HomeTitleCellModel *titleModel = model.titleModel;
-        switch (titleModel.type) {
+        switch (model.titleModel.type) {
             case HomeTitleCellTypeNormalTitle:
             {
                 HomeViewNormalTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:kNormalTitleCellIdentifier];
                 if (!cell) {
                     cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewNormalTitleCell" owner:nil options:nil] objectAtIndex:0];
                 }
-                [cell.titleLabel setText:titleModel.mainTitle];
+                [cell configWithModel:(HomeNormalTitleCellModel *)model.titleModel];
                 return cell;
             }
                 break;
@@ -274,8 +280,7 @@ static NSString *const kHorizontalListCellIdentifier = @"kHorizontalListCellIden
                 if (!cell) {
                     cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewCountDownTitleCell" owner:nil options:nil] objectAtIndex:0];
                 }
-                [cell.titleLabel setText:titleModel.mainTitle];
-                [cell setLeftTime:((HomeCountDownTitleCellModel *)titleModel).timeLeft];
+                [cell configWithModel:(HomeCountDownTitleCellModel *)model.titleModel];
                 return cell;
             }
                 break;
@@ -285,8 +290,17 @@ static NSString *const kHorizontalListCellIdentifier = @"kHorizontalListCellIden
                 if (!cell) {
                     cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewMoreTitleCell" owner:nil options:nil] objectAtIndex:0];
                 }
-                [cell setMainTitle:((HomeMoreTitleCellModel *)titleModel).mainTitle
-                          subTitle:((HomeMoreTitleCellModel *)titleModel).subTitle];
+                [cell configWithModel:(HomeMoreTitleCellModel *)model.titleModel];
+                return cell;
+            }
+                break;
+            case HomeTitleCellTypeCountDownMoreTitle:
+            {
+                HomeViewCountDownMoreTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:kMoreTitleCellIdentifier];
+                if (!cell) {
+                    cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewCountDownMoreTitleCell" owner:nil options:nil] objectAtIndex:0];
+                }
+                [cell configWithModel:(HomeCountDownMoreTitleCellModel *)model.titleModel];
                 return cell;
             }
                 break;
@@ -302,8 +316,7 @@ static NSString *const kHorizontalListCellIdentifier = @"kHorizontalListCellIden
                 if (!cell) {
                     cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewBannerCell" owner:nil options:nil] objectAtIndex:0];
                 }
-                cell.ratio = contentModel.ratio;
-                [cell setImageUrlsArray:[((HomeBannerCellModel *)contentModel) imageUrlsArray]];
+                [cell configWithModel:(HomeBannerCellModel *)contentModel];
                 cell.indexPath = indexPath;
                 cell.delegate = self;
                 return cell;
@@ -316,7 +329,7 @@ static NSString *const kHorizontalListCellIdentifier = @"kHorizontalListCellIden
                     cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewTwinklingElfCell" owner:nil options:nil] objectAtIndex:0];
                 }
                 
-                [cell setTwinklingElfModels:((HomeTwinklingElfCellModel *)contentModel).twinklingElvesArray];
+                [cell configWithModel:(HomeTwinklingElfCellModel *)contentModel];
                 cell.indexPath = indexPath;
                 cell.delegate = self;
                 return cell;
@@ -328,7 +341,7 @@ static NSString *const kHorizontalListCellIdentifier = @"kHorizontalListCellIden
                 if (!cell) {
                     cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewHorizontalListCell" owner:nil options:nil] objectAtIndex:0];
                 }
-                [cell setTimeQiangElementsArray:((HomeHorizontalListCellModel *)contentModel).timeQiangElementsArray];
+                [cell configWithModel:(HomeHorizontalListCellModel *)contentModel];
                 cell.indexPath = indexPath;
                 cell.delegate = self;
                 return cell;
@@ -340,12 +353,7 @@ static NSString *const kHorizontalListCellIdentifier = @"kHorizontalListCellIden
                 if (!cell) {
                     cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewThreeCell" owner:nil options:nil] objectAtIndex:0];
                 }
-                HomeThreeCellModel *threeCellModel = (HomeThreeCellModel *)contentModel;
-                
-                cell.ratio = threeCellModel.ratio;
-                [cell.firstImageView setImageWithURL:[NSURL URLWithString:threeCellModel.firstElement.pictureUrlString] placeholderImage:[UIImage imageNamed:@"home2"]];
-                [cell.secondImageView setImageWithURL:[NSURL URLWithString:threeCellModel.secondeElement.pictureUrlString] placeholderImage:[UIImage imageNamed:@"home1"]];
-                [cell.thirdImageView setImageWithURL:[NSURL URLWithString:threeCellModel.thirdElement.pictureUrlString] placeholderImage:[UIImage imageNamed:@"home3"]];
+                [cell configWithModel:(HomeThreeCellModel *)contentModel];
                 cell.indexPath = indexPath;
                 cell.delegate = self;
                 return cell;
@@ -357,8 +365,7 @@ static NSString *const kHorizontalListCellIdentifier = @"kHorizontalListCellIden
                 if (!cell) {
                     cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewThemeCell" owner:nil options:nil] objectAtIndex:0];
                 }
-                cell.ratio = contentModel.ratio;
-                [cell setImageUrlsArray:[((HomeTwoColumnCellModel *)contentModel) imageUrlsArray]];
+                [cell configWithModel:(HomeTwoColumnCellModel *)contentModel];
                 cell.indexPath = indexPath;
                 cell.delegate = self;
                 return cell;

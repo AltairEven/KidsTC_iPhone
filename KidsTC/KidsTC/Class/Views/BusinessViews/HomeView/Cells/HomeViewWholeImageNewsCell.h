@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomeWholeImageNewsCellModel.h"
 
 @interface HomeViewWholeImageNewsCell : UITableViewCell
+
+- (void)configWithModel:(HomeWholeImageNewsCellModel *)model;
 
 @end

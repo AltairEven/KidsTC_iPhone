@@ -52,7 +52,7 @@
 
 - (void)CategoryView:(CategoryView *)view didClickedAtLevel1Index:(NSUInteger)level1Index subIndex:(NSUInteger)subIndex {
     NSDictionary *searchData = [self.viewModel searchUrlAndParamsOfLevel1Index:level1Index level2Index:subIndex];
-    KTCSearchResultViewController *controller = [[KTCSearchResultViewController alloc] initWithNibName:@"KTCSearchResultViewController" bundle:nil];
+    KTCSearchResultViewController *controller = [[KTCSearchResultViewController alloc] initWithSearchType:KTCSearchTypeService condition:[searchData objectForKey:kSearchParamKey]];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
 }

@@ -13,6 +13,10 @@
 
 @property (weak, nonatomic) IBOutlet AUIBannerScrollView *bannerScrollView;
 
+@property (nonatomic, strong) NSArray *imageUrlsArray;
+
+@property (nonatomic, assign) CGFloat ratio;
+
 @end
 
 @implementation HomeViewBannerCell
@@ -22,7 +26,6 @@
     self.bannerScrollView.dataSource = self;
     self.bannerScrollView.delegate = self;
     [self.bannerScrollView setEnableClicking:YES];
-    _ratio = 0.5;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -31,9 +34,12 @@
     // Configure the view for the selected state
 }
 
-- (void)setImageUrlsArray:(NSArray *)imageUrlsArray {
-    _imageUrlsArray = [NSArray arrayWithArray:imageUrlsArray];
-    [self.bannerScrollView reloadData];
+- (void)configWithModel:(HomeBannerCellModel *)model {
+    if (model) {
+        self.ratio = model.ratio;
+        self.imageUrlsArray = [model imageUrlsArray];
+        [self.bannerScrollView reloadData];
+    }
 }
 
 #pragma mark AUIBannerScrollViewDataSource & AUIBannerScrollViewDelegate

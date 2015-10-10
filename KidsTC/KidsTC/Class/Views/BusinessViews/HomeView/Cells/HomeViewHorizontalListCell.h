@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomeHorizontalListCellModel.h"
 
 @class HomeViewHorizontalListCell;
 
@@ -20,8 +21,8 @@
 
 @property (nonatomic, assign) id<HomeViewHorizontalListCellDelegate> delegate;
 
-@property (nonatomic, strong) NSArray *timeQiangElementsArray;
-
 @property (nonatomic, strong) NSIndexPath *indexPath;
+
+- (void)configWithModel:(HomeHorizontalListCellModel *)model;
 
 @end

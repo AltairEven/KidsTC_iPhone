@@ -1,19 +1,19 @@
 //
-//  HomeHorizontalListCellModel.m
+//  HomeNewsCellModel.m
 //  KidsTC
 //
-//  Created by 钱烨 on 8/14/15.
-//  Copyright (c) 2015 KidsTC. All rights reserved.
+//  Created by 钱烨 on 10/10/15.
+//  Copyright © 2015 KidsTC. All rights reserved.
 //
 
-#import "HomeHorizontalListCellModel.h"
+#import "HomeNewsCellModel.h"
 
-@implementation HomeHorizontalListCellModel
+@implementation HomeNewsCellModel
 
 - (instancetype)initWithRawData:(NSArray *)dataArray {
     self = [super initWithRawData:dataArray];
     if (self) {
-        self.type = HomeContentCellTypeHorizontalList;
+        self.type = HomeContentCellTypeNews;
     }
     return self;
 }
@@ -22,7 +22,7 @@
     [super parseRawData:dataArray];
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
     for (NSDictionary *singleData in dataArray) {
-        HomeHorizontalListElement *item = [[HomeHorizontalListElement alloc] initWithHomeData:singleData];
+        HomeNewsElement *item = [[HomeNewsElement alloc] initWithHomeData:singleData];
         if (item) {
             [tempArray addObject:item];
         }
@@ -38,13 +38,10 @@
 
 @end
 
-@implementation HomeHorizontalListElement
+@implementation HomeNewsElement
 
 - (void)parseHomeData:(NSDictionary *)data {
     [super parseHomeData:data];
-    
-    //标题
-    self.price = [[data objectForKey:@"price"] floatValue];
 }
 
 @end

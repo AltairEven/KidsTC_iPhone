@@ -47,12 +47,16 @@
 - (NSArray *)imageUrlsArray {
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
     for (HomeTwoColumnElement *singleEle in self.twoColumnElementsArray) {
-        NSURL *imageUrl = [NSURL URLWithString:singleEle.pictureUrlString];
-        if (imageUrl) {
-            [tempArray addObject:imageUrl];
+        if (singleEle.imageUrl) {
+            [tempArray addObject:singleEle.imageUrl];
         }
     }
     return [NSArray arrayWithArray:tempArray];
 }
+
+@end
+
+
+@implementation HomeTwoColumnElement
 
 @end

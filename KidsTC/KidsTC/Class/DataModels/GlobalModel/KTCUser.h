@@ -10,6 +10,8 @@
 
 @interface KTCUser : NSObject
 
+@property (nonatomic, assign) UserRole userRole;
+
 @property (nonatomic, copy) NSString *userName;
 
 @property (nonatomic, copy) NSString *uid;

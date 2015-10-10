@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HomeSectionModel.h"
+#import "HomeModel.h"
 
 @class HomeView;
 

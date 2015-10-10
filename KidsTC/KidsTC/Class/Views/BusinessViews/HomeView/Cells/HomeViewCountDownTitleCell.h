@@ -7,13 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomeCountDownTitleCellModel.h"
 
 @interface HomeViewCountDownTitleCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-
-+ (CGFloat)cellHeight;
-
-- (void)setLeftTime:(NSTimeInterval)leftTime;
+- (void)configWithModel:(HomeCountDownTitleCellModel *)model;
 
 @end

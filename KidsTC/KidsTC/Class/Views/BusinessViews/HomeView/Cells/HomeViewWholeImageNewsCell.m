@@ -27,4 +27,11 @@
     // Configure the view for the selected state
 }
 
+- (void)configWithModel:(HomeWholeImageNewsCellModel *)model {
+    if (model) {
+        [self.cellImageView setImageWithURL:model.newsModel.imageUrl];
+        [self.titleLabel setText:model.newsModel.title];
+    }
+}
+
 @end

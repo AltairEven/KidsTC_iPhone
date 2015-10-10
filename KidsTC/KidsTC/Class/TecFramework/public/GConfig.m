@@ -15,6 +15,7 @@
 
 static GConfig *_sharedConfig;
 
+
 //是否加载网络图片
 static BOOL bLoadWebImage = YES;
 

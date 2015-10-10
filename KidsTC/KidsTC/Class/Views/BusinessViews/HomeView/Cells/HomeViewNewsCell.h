@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomeNewsCellModel.h"
 
 @interface HomeViewNewsCell : UITableViewCell
+
+- (void)configWithModel:(HomeNewsElement *)model;
 
 @end

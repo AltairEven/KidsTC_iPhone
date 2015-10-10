@@ -27,6 +27,12 @@
     // Configure the view for the selected state
 }
 
+- (void)configWithModel:(HomeMoreTitleCellModel *)model {
+    if (model) {
+        [self setMainTitle:model.mainTitle subTitle:model.subTitle];
+    }
+}
+
 - (void)setMainTitle:(NSString *)main subTitle:(NSString *)sub {
     [self.mainTitleLabel setText:main];
     if ([sub length] > 0) {
@@ -35,10 +41,6 @@
     } else {
         [self.subTitleLabel setHidden:YES];
     }
-}
-
-+ (CGFloat)cellHeight {
-    return 44;
 }
 
 @end

@@ -16,13 +16,13 @@
     }
     self = [super init];
     if (self) {
-        NSArray *sectionArray = [data objectForKey:@"floors"];
-        if ([sectionArray isKindOfClass:[NSArray class]]) {
+        NSArray *floorArray = [data objectForKey:@"data"];
+        if ([floorArray isKindOfClass:[NSArray class]]) {
             NSMutableArray *tempArray = [[NSMutableArray alloc] init];
             _naviControlledFloorCount = 0;
             NSMutableArray *tempSections = [[NSMutableArray alloc] init];
             NSMutableArray *tempNaviedNames = [[NSMutableArray alloc] init];
-            for (NSDictionary *dic in sectionArray) {
+            for (NSDictionary *dic in floorArray) {
                 HomeFloorModel *model = [[HomeFloorModel alloc] initWithRawData:dic];
                 if (model) {
                     [tempArray addObject:model];

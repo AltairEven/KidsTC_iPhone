@@ -7,12 +7,18 @@
 //
 
 #import "HomeContentCellModel.h"
-#import "HomeTwoColumnElement.h"
+
+@class HomeTwoColumnElement;
 
 @interface HomeTwoColumnCellModel : HomeContentCellModel
 
-@property (nonatomic, strong) NSArray *twoColumnElementsArray;
+@property (nonatomic, strong) NSArray<HomeTwoColumnElement *> *twoColumnElementsArray;
 
 - (NSArray *)imageUrlsArray;
+
+@end
+
+
+@interface HomeTwoColumnElement : HomeElementBaseModel
 
 @end

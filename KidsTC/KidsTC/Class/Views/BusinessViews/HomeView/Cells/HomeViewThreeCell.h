@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomeThreeCellModel.h"
 
 @class HomeViewThreeCell;
 
@@ -20,12 +21,8 @@
 
 @property (nonatomic, assign) id<HomeViewThreeCellDelegate> delegate;
 
-@property (weak, nonatomic) IBOutlet UIImageView *firstImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *secondImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *thirdImageView;
-
-@property (nonatomic, assign) CGFloat ratio;
-
 @property (nonatomic, strong) NSIndexPath *indexPath;
+
+- (void)configWithModel:(HomeThreeCellModel *)model;
 
 @end
