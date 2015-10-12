@@ -222,7 +222,7 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
 - (void)homeViewBannerCell:(HomeViewBannerCell *)bannerCell didClickedAtIndex:(NSUInteger)index {
     if (self.delegate && [self.delegate respondsToSelector:@selector(homeView:didClickedAtCoordinate:)]) {
         HomeSectionModel *model = [self.totalSectionModels objectAtIndex:bannerCell.indexPath.section];
-        [self.delegate homeView:self didClickedAtCoordinate:HomeClickMakeCoordinate(model.floorIndex, bannerCell.indexPath.section, index)];
+        [self.delegate homeView:self didClickedAtCoordinate:HomeClickMakeCoordinate(model.floorIndex, bannerCell.indexPath.section, NO, index)];
     }
 }
 
@@ -232,7 +232,7 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
 - (void)homeViewThemeCell:(HomeViewThemeCell *)themeCell didSelectedItemAtIndex:(NSUInteger)index {
     if (self.delegate && [self.delegate respondsToSelector:@selector(homeView:didClickedAtCoordinate:)]) {
         HomeSectionModel *model = [self.totalSectionModels objectAtIndex:themeCell.indexPath.section];
-        [self.delegate homeView:self didClickedAtCoordinate:HomeClickMakeCoordinate(model.floorIndex, themeCell.indexPath.section, index)];
+        [self.delegate homeView:self didClickedAtCoordinate:HomeClickMakeCoordinate(model.floorIndex, themeCell.indexPath.section, NO, index)];
     }
 }
 
@@ -242,7 +242,7 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
 - (void)homeViewThreeCell:(HomeViewThreeCell *)cell didClickedAtIndex:(NSUInteger)index {
     if (self.delegate && [self.delegate respondsToSelector:@selector(homeView:didClickedAtCoordinate:)]) {
         HomeSectionModel *model = [self.totalSectionModels objectAtIndex:cell.indexPath.section];
-        [self.delegate homeView:self didClickedAtCoordinate:HomeClickMakeCoordinate(model.floorIndex, cell.indexPath.section, index)];
+        [self.delegate homeView:self didClickedAtCoordinate:HomeClickMakeCoordinate(model.floorIndex, cell.indexPath.section, NO, index)];
     }
 }
 
@@ -252,7 +252,7 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
 - (void)twinklingElfCell:(HomeViewTwinklingElfCell *)twinklingElfCell didClickedAtIndex:(NSUInteger)index {
     if (self.delegate && [self.delegate respondsToSelector:@selector(homeView:didClickedAtCoordinate:)]) {
         HomeSectionModel *model = [self.totalSectionModels objectAtIndex:twinklingElfCell.indexPath.section];
-        [self.delegate homeView:self didClickedAtCoordinate:HomeClickMakeCoordinate(model.floorIndex, twinklingElfCell.indexPath.section, index)];
+        [self.delegate homeView:self didClickedAtCoordinate:HomeClickMakeCoordinate(model.floorIndex, twinklingElfCell.indexPath.section, NO, index)];
     }
 }
 
@@ -261,7 +261,7 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
 - (void)homeViewHorizontalListCell:(HomeViewHorizontalListCell *)listCell didSelectedItemAtIndex:(NSUInteger)index {
     if (self.delegate && [self.delegate respondsToSelector:@selector(homeView:didClickedAtCoordinate:)]) {
         HomeSectionModel *model = [self.totalSectionModels objectAtIndex:listCell.indexPath.section];
-        [self.delegate homeView:self didClickedAtCoordinate:HomeClickMakeCoordinate(model.floorIndex, listCell.indexPath.section, index)];
+        [self.delegate homeView:self didClickedAtCoordinate:HomeClickMakeCoordinate(model.floorIndex, listCell.indexPath.section, NO, index)];
     }
 }
 
@@ -478,14 +478,15 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     CGFloat height = 0.01;
-    if (section > 0) {
-        height = 2.5;
+    HomeSectionModel *model = [self.totalSectionModels objectAtIndex:section];
+    if (model.marginTop >= 1) {
+        height = model.marginTop;
     }
     return height;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    CGFloat height = 2.5;
+    CGFloat height = 0.01;
     if ([[self.homeModel allSectionModels] count] == section + 1) {
         height = 40;
     }
@@ -527,7 +528,11 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if (self.delegate && [self.delegate respondsToSelector:@selector(homeView:didClickedAtCoordinate:)]) {
         HomeSectionModel *model = [self.totalSectionModels objectAtIndex:indexPath.section];
-        [self.delegate homeView:self didClickedAtCoordinate:HomeClickMakeCoordinate(model.floorIndex, indexPath.section, indexPath.row)];
+        BOOL isTitle = NO;
+        if (model.hasTitle && indexPath.row == 0) {
+            isTitle = YES;
+        }
+        [self.delegate homeView:self didClickedAtCoordinate:HomeClickMakeCoordinate(model.floorIndex, indexPath.section, isTitle, indexPath.row)];
     }
 }
 

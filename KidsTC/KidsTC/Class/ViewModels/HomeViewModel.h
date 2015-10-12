@@ -13,7 +13,7 @@ extern NSString *const kHomeViewDataFinishLoadingNotification;
 
 @interface HomeViewModel : BaseViewModel
 
-@property (nonatomic, strong) HomeModel *model;
+@property (nonatomic, strong) HomeModel *homeModel;
 
 - (void)refreshHomeData;
 

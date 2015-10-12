@@ -13,7 +13,7 @@
 - (instancetype)initWithRawData:(NSArray *)dataArray {
     self = [super initWithRawData:dataArray];
     if (self) {
-        self.type = HomeContentCellTypeBanner;
+        self.type = HomeContentCellTypeWholeImageNews;
     }
     return self;
 }
@@ -27,6 +27,10 @@
 - (CGFloat)cellHeight {
     cellHeight = self.ratio * SCREEN_WIDTH;
     return cellHeight;
+}
+
+- (NSArray *)elementModelsArray {
+    return [NSArray arrayWithObject:self.newsModel];
 }
 
 @end

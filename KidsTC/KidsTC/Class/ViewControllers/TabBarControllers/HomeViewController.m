@@ -11,6 +11,7 @@
 #import "KTCSearchViewController.h"
 #import "CategoryViewController.h"
 #import "AUIFloorNavigationView.h"
+#import "KTCWebViewController.h"
 
 
 @interface HomeViewController () <HomeViewDelegate, AUIFloorNavigationViewDataSource, AUIFloorNavigationViewDelegate>
@@ -95,10 +96,60 @@
     //[self.viewModel getCustomerRecommendWithSucceed:nil failure:nil];
 }
 
-- (void)homeView:(HomeView *)homeView didSelectedAtIndexPath:(NSIndexPath *)indexPath {
-}
-
-- (void)homeView:(HomeView *)homeView didSelectedAtIndexPath:(NSIndexPath *)indexPath subIndex:(NSUInteger)subIndex {
+- (void)homeView:(HomeView *)homeView didClickedAtCoordinate:(HomeClickCoordinate)coordinate {
+    HomeSegueModel *segueModel = [self.viewModel.homeModel segueModelAtHomeClickCoordinate:coordinate];
+    switch (segueModel.destination) {
+        case HomeSegueDestinationH5:
+        {
+            KTCWebViewController *controller = [[KTCWebViewController alloc] init];
+            [controller setWebUrlString:[segueModel.segueParam objectForKey:kHomeSegueParameterKeyLinkUrl]];
+            [controller setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+            break;
+        case HomeSegueDestinationNewsRecommend:
+        {
+            
+        }
+            break;
+        case HomeSegueDestinationNewsList:
+        {
+            
+        }
+            break;
+        case HomeSegueDestinationActivity:
+        {
+            
+        }
+            break;
+        case HomeSegueDestinationBabyHouse:
+        {
+            
+        }
+            break;
+        case HomeSegueDestinationHospital:
+        {
+            
+        }
+            break;
+        case HomeSegueDestinationStrategyList:
+        {
+            
+        }
+            break;
+        case HomeSegueDestinationServiceList:
+        {
+            
+        }
+            break;
+        case HomeSegueDestinationStoreList:
+        {
+            
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)homeView:(HomeView *)homeView didScrolled:(CGPoint)offset {
@@ -106,15 +157,15 @@
 }
 
 - (void)homeView:(HomeView *)homeView didScrolledIntoVisionWithSectionGroupIndex:(NSUInteger)index {
-    [self.floorNavigationView setSelectedIndex:index];
+//    [self.floorNavigationView setSelectedIndex:index];
 }
 
 - (void)homeView:(HomeView *)homeView didEndDeDidEndDecelerating:(BOOL)downDirection {
-    if (downDirection) {
-        [self.floorNavigationView setSelectedIndex:0];
-    } else {
-        [self.floorNavigationView setSelectedIndex:[[self.viewModel sectionModelsArray] count] - 3];
-    }
+//    if (downDirection) {
+//        [self.floorNavigationView setSelectedIndex:0];
+//    } else {
+//        [self.floorNavigationView setSelectedIndex:[[self.viewModel sectionModelsArray] count] - 3];
+//    }
 }
 
 #pragma mark AUIFloorNavigationViewDataSource & AUIFloorNavigationViewDelegate

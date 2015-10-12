@@ -58,33 +58,54 @@
     switch (contentType) {
         case HomeContentCellTypeBanner:
         {
-            _contentModel = [[HomeBannerCellModel alloc] initWithRawData:[data objectForKey:@"content"]];
+            _contentModel = [[HomeBannerCellModel alloc] initWithRawData:[data objectForKey:@"contents"]];
         }
             break;
         case HomeContentCellTypeTwinklingElf:
         {
-            _contentModel = [[HomeTwinklingElfCellModel alloc] initWithRawData:[data objectForKey:@"content"]];
+            _contentModel = [[HomeTwinklingElfCellModel alloc] initWithRawData:[data objectForKey:@"contents"]];
         }
             break;
         case HomeContentCellTypeHorizontalList:
         {
-            _contentModel = [[HomeHorizontalListCellModel alloc] initWithRawData:[data objectForKey:@"content"]];
+            _contentModel = [[HomeHorizontalListCellModel alloc] initWithRawData:[data objectForKey:@"contents"]];
         }
             break;
         case HomeContentCellTypeThree:
         {
-            _contentModel = [[HomeThreeCellModel alloc] initWithRawData:[data objectForKey:@"content"]];
+            _contentModel = [[HomeThreeCellModel alloc] initWithRawData:[data objectForKey:@"contents"]];
         }
             break;
         case HomeContentCellTypeTwoColumn:
         {
-            _contentModel = [[HomeTwoColumnCellModel alloc] initWithRawData:[data objectForKey:@"content"]];
+            _contentModel = [[HomeTwoColumnCellModel alloc] initWithRawData:[data objectForKey:@"contents"]];
+        }
+            break;
+        case HomeContentCellTypeNews:
+        {
+            _contentModel = [[HomeNewsCellModel alloc] initWithRawData:[data objectForKey:@"contents"]];
+        }
+            break;
+        case HomeContentCellTypeImageNews:
+        {
+            _contentModel = [[HomeImageNewsCellModel alloc] initWithRawData:[data objectForKey:@"contents"]];
+        }
+            break;
+        case HomeContentCellTypeThreeImageNews:
+        {
+            _contentModel = [[HomeThreeImageNewsCellModel alloc] initWithRawData:[data objectForKey:@"contents"]];
+        }
+            break;
+        case HomeContentCellTypeWholeImageNews:
+        {
+            _contentModel = [[HomeWholeImageNewsCellModel alloc] initWithRawData:[data objectForKey:@"contents"]];
         }
             break;
         default:
             break;
     }
     _contentModel.ratio = [[data objectForKey:@"ratio"] floatValue];
+    _marginTop = [[data objectForKey:@"marginTop"] floatValue];
 }
 
 @end

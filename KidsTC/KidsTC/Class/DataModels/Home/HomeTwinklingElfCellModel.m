@@ -45,6 +45,10 @@
     return cellHeight;
 }
 
+- (NSArray *)elementModelsArray {
+    return self.twinklingElvesArray;
+}
+
 @end
 
 @implementation HomeTwinklingElf

@@ -22,29 +22,27 @@
                             </imageView>
                             <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nrm-xE-MVK" userLabel="alphaView">
                                 <rect key="frame" x="0.0" y="122" width="320" height="50"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="标题" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJk-HC-NYl">
-                                        <rect key="frame" x="10" y="14" width="300" height="21"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="fJk-HC-NYl" firstAttribute="leading" secondItem="Nrm-xE-MVK" secondAttribute="leading" constant="10" id="EdC-E5-yvd"/>
-                                    <constraint firstItem="fJk-HC-NYl" firstAttribute="centerY" secondItem="Nrm-xE-MVK" secondAttribute="centerY" id="Yao-7b-eiS"/>
-                                    <constraint firstAttribute="trailing" secondItem="fJk-HC-NYl" secondAttribute="trailing" constant="10" id="niR-CR-edt"/>
                                     <constraint firstAttribute="height" constant="50" id="qBe-WQ-cud"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="标题" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJk-HC-NYl">
+                                <rect key="frame" x="10" y="137" width="300" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="Nrm-xE-MVK" secondAttribute="bottom" id="FLe-GZ-cTC"/>
                             <constraint firstAttribute="bottom" secondItem="KI2-6u-UGB" secondAttribute="bottom" id="HvT-A5-eNn"/>
                             <constraint firstAttribute="trailing" secondItem="KI2-6u-UGB" secondAttribute="trailing" id="LXQ-nt-4jf"/>
+                            <constraint firstAttribute="trailing" secondItem="fJk-HC-NYl" secondAttribute="trailing" constant="10" id="MUn-6j-RPp"/>
                             <constraint firstAttribute="trailing" secondItem="Nrm-xE-MVK" secondAttribute="trailing" id="ViC-ai-ZIn"/>
+                            <constraint firstItem="fJk-HC-NYl" firstAttribute="centerY" secondItem="Nrm-xE-MVK" secondAttribute="centerY" id="mls-p7-AYd"/>
+                            <constraint firstItem="fJk-HC-NYl" firstAttribute="leading" secondItem="qy7-GM-ap2" secondAttribute="leading" constant="10" id="uh8-FH-7VA"/>
                             <constraint firstItem="KI2-6u-UGB" firstAttribute="top" secondItem="qy7-GM-ap2" secondAttribute="top" id="wI3-Hy-Lun"/>
                             <constraint firstItem="KI2-6u-UGB" firstAttribute="leading" secondItem="qy7-GM-ap2" secondAttribute="leading" id="xza-jE-y5p"/>
                             <constraint firstItem="Nrm-xE-MVK" firstAttribute="leading" secondItem="qy7-GM-ap2" secondAttribute="leading" id="yhh-c3-kdc"/>

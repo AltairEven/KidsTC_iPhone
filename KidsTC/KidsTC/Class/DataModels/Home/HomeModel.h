@@ -12,13 +12,15 @@
 typedef struct HomeIndex {
     NSUInteger floorIndex;
     NSUInteger sectionIndex;
+    BOOL isTitle;
     NSInteger contentIndex; //未选中则传<0
 }HomeClickCoordinate;
 
-NS_INLINE HomeClickCoordinate HomeClickMakeCoordinate(NSUInteger floor, NSUInteger section, NSInteger content) {
+NS_INLINE HomeClickCoordinate HomeClickMakeCoordinate(NSUInteger floor, NSUInteger section, BOOL isTitle, NSInteger content) {
     HomeClickCoordinate coord;
     coord.floorIndex = floor;
     coord.sectionIndex = section;
+    coord.isTitle = isTitle;
     coord.contentIndex = content;
     return coord;
 }

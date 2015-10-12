@@ -23,7 +23,7 @@
 
 - (void)parseHomeData:(NSDictionary *)data {
     
-    self.imageUrl = [NSURL URLWithString:[data objectForKey:@"imgUrl"]];
+    self.imageUrl = [NSURL URLWithString:[data objectForKey:@"imageUrl"]];
     
     //跳转目的地
     HomeSegueDestination segueDestination = (HomeSegueDestination)[[data objectForKey:@"linkType"] integerValue];

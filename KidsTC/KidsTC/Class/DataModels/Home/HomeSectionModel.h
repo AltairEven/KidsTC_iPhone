@@ -27,6 +27,8 @@
 
 @property (nonatomic, copy) NSString *floorName;
 
+@property (nonatomic, readonly) CGFloat marginTop;
+
 @property (nonatomic, readonly) BOOL hasTitle;
 
 @property (nonatomic, strong, readonly) HomeTitleCellModel *titleModel;

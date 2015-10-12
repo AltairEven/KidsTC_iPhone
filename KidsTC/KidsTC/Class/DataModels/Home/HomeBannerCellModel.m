@@ -46,6 +46,10 @@
     return [NSArray arrayWithArray:tempArray];
 }
 
+- (NSArray *)elementModelsArray {
+    return self.homeBannersArray;
+}
+
 @end
 
 @implementation HomeBanner

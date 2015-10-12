@@ -29,4 +29,8 @@
     return 0;
 }
 
+- (NSArray *)elementModelsArray {
+    return nil;
+}
+
 @end

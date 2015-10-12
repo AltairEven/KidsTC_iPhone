@@ -14,6 +14,7 @@
     self = [super initWithRawData:dataArray];
     if (self) {
         self.type = HomeContentCellTypeImageNews;
+        cellHeight = 110;
     }
     return self;
 }
@@ -32,8 +33,11 @@
 
 
 - (CGFloat)cellHeight {
-    cellHeight = self.ratio * SCREEN_WIDTH;
     return cellHeight;
+}
+
+- (NSArray *)elementModelsArray {
+    return self.elementsArray;
 }
 
 @end

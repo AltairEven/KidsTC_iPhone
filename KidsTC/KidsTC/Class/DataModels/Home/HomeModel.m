@@ -44,7 +44,19 @@
 }
 
 - (HomeSegueModel *)segueModelAtHomeClickCoordinate:(HomeClickCoordinate)coordinate {
-    return nil;
+    HomeClickCoordinate clickCoord = coordinate;
+    HomeSegueModel *segueModel = nil;
+    HomeSectionModel *sectionModel = [self.allSectionModels objectAtIndex:clickCoord.sectionIndex];
+    if (clickCoord.isTitle) {
+        segueModel = sectionModel.titleModel.segueModel;
+    } else if (clickCoord.contentIndex >= 0) {
+        NSArray *elementsArray = [sectionModel.contentModel elementModelsArray];
+        if ([elementsArray count] > coordinate.contentIndex) {
+            segueModel = ((HomeElementBaseModel *)[elementsArray objectAtIndex:clickCoord.contentIndex]).segueModel;
+        }
+    }
+    
+    return segueModel;
 }
 
 @end

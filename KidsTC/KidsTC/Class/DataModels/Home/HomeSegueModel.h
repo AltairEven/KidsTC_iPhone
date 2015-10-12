@@ -22,17 +22,17 @@ typedef enum {
 }HomeSegueDestination;
 
 //H5
-extern NSString *const kParameterKeyLinkUrl;
+extern NSString *const kHomeSegueParameterKeyLinkUrl;
 //资讯列表
-extern NSString *const kParameterKeyNewsKind;
-extern NSString *const kParameterKeyNewsTag;
-extern NSString *const kParameterKeyNewsType;
+extern NSString *const kHomeSegueParameterKeyNewsKind;
+extern NSString *const kHomeSegueParameterKeyNewsTag;
+extern NSString *const kHomeSegueParameterKeyNewsType;
 //搜索
-extern NSString *const kParameterKeySearchKeyWord;
-extern NSString *const kParameterKeySearchArea;
-extern NSString *const kParameterKeySearchAge;
-extern NSString *const kParameterKeySearchCategory;
-extern NSString *const kParameterKeySearchSort;
+extern NSString *const kHomeSegueParameterKeySearchKeyWord;
+extern NSString *const kHomeSegueParameterKeySearchArea;
+extern NSString *const kHomeSegueParameterKeySearchAge;
+extern NSString *const kHomeSegueParameterKeySearchCategory;
+extern NSString *const kHomeSegueParameterKeySearchSort;
 
 @interface HomeSegueModel : NSObject
 

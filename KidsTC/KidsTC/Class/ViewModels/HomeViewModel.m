@@ -30,7 +30,7 @@ NSString *const kHomeViewDataFinishLoadingNotification = @"kHomeViewDataFinishLo
 
 @property (nonatomic, assign) BOOL alreadyFirstLoaded;
 
-@property (nonatomic, strong) NSArray *homeSectionModelsArray;
+@property (nonatomic, strong) HomeModel *customerRecommendHomeModel;
 
 @property (nonatomic, strong) NSMutableArray *customerRecommendModelsArray;
 
@@ -63,8 +63,12 @@ NSString *const kHomeViewDataFinishLoadingNotification = @"kHomeViewDataFinishLo
 
 #pragma mark HomeViewDataSource
 
-- (NSArray *)homeSectionModesArrayForHomeView:(HomeView *)homeView {
-    return self.homeSectionModelsArray;
+- (HomeModel *)homeModelForHomeView:(HomeView *)homeView {
+    return self.homeModel;
+}
+
+- (HomeModel *)customerRecommendModelForHomeView:(HomeView *)homeView {
+    return nil;
 }
 
 - (NSArray *)customerRecommendModesArrayForHomeView:(HomeView *)homeView {
@@ -75,8 +79,8 @@ NSString *const kHomeViewDataFinishLoadingNotification = @"kHomeViewDataFinishLo
 
 
 - (void)loadHomeDataSucceed:(NSDictionary *)data {
-    self.model = [[HomeModel alloc] initWithRawData:data];
-    if ([self.homeSectionModelsArray count] > 0) {
+    self.homeModel = [[HomeModel alloc] initWithRawData:data];
+    if (self.homeModel) {
         [self.view reloadData];
     }
     [self.view endRefresh];
@@ -108,7 +112,7 @@ NSString *const kHomeViewDataFinishLoadingNotification = @"kHomeViewDataFinishLo
 
 
 - (BOOL)loadLocalFileToModel {
-    if ([self.homeSectionModelsArray count] > 0) {
+    if (self.homeModel) {
         //如果已经有内存缓存，则直接return;
         return YES;
     }
@@ -126,7 +130,7 @@ NSString *const kHomeViewDataFinishLoadingNotification = @"kHomeViewDataFinishLo
             }
         }
         [self loadHomeDataSucceed:data];
-        if ([self.homeSectionModelsArray count] > 0) {
+        if (self.homeModel) {
             return YES;
         }
     }
@@ -146,7 +150,7 @@ NSString *const kHomeViewDataFinishLoadingNotification = @"kHomeViewDataFinishLo
             }
         }
     }
-    if ([self.homeSectionModelsArray count] > 0) {
+    if (self.homeModel) {
         [self.view reloadData];
     }
     [self.view endLoadMore];
@@ -227,7 +231,7 @@ NSString *const kHomeViewDataFinishLoadingNotification = @"kHomeViewDataFinishLo
 }
 
 - (NSArray *)sectionModelsArray {
-    NSMutableArray *array = [[NSMutableArray alloc] initWithArray:self.homeSectionModelsArray];
+    NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[self.homeModel allSectionModels]];
     [array addObjectsFromArray:self.customerRecommendModelsArray];
     return [NSArray arrayWithArray:array];
 }

@@ -9,17 +9,17 @@
 #import "HomeSegueModel.h"
 
 //H5
-NSString *const kParameterKeyLinkUrl = @"kParameterKeyLinkUrl";
+NSString *const kHomeSegueParameterKeyLinkUrl = @"kHomeSegueParameterKeyLinkUrl";
 //资讯列表
-NSString *const kParameterKeyNewsKind = @"kParameterKeyNewsKind";
-NSString *const kParameterKeyNewsTag = @"kParameterKeyNewsTag";
-NSString *const kParameterKeyNewsType = @"kParameterKeyNewsType";
+NSString *const kHomeSegueParameterKeyNewsKind = @"kHomeSegueParameterKeyNewsKind";
+NSString *const kHomeSegueParameterKeyNewsTag = @"kHomeSegueParameterKeyNewsTag";
+NSString *const kHomeSegueParameterKeyNewsType = @"kHomeSegueParameterKeyNewsType";
 //搜索
-NSString *const kParameterKeySearchKeyWord = @"kParameterKeySearchKeyWord";
-NSString *const kParameterKeySearchArea = @"kParameterKeySearchArea";
-NSString *const kParameterKeySearchAge = @"kParameterKeySearchAge";
-NSString *const kParameterKeySearchCategory = @"kParameterKeySearchCategory";
-NSString *const kParameterKeySearchSort = @"kParameterKeySearchSort";
+NSString *const kHomeSegueParameterKeySearchKeyWord = @"kHomeSegueParameterKeySearchKeyWord";
+NSString *const kHomeSegueParameterKeySearchArea = @"kHomeSegueParameterKeySearchArea";
+NSString *const kHomeSegueParameterKeySearchAge = @"kHomeSegueParameterKeySearchAge";
+NSString *const kHomeSegueParameterKeySearchCategory = @"kHomeSegueParameterKeySearchCategory";
+NSString *const kHomeSegueParameterKeySearchSort = @"kHomeSegueParameterKeySearchSort";
 
 @interface HomeSegueModel ()
 
@@ -46,8 +46,8 @@ NSString *const kParameterKeySearchSort = @"kParameterKeySearchSort";
     switch (self.destination) {
         case HomeSegueDestinationH5:
         {
-            if ([data isKindOfClass:[NSString class]]) {
-                _segueParam = [NSDictionary dictionaryWithObject:data forKey:kParameterKeyLinkUrl];
+            if ([data isKindOfClass:[NSDictionary class]]) {
+                _segueParam = [NSDictionary dictionaryWithObject:[data objectForKey:@"linkurl"] forKey:kHomeSegueParameterKeyLinkUrl];
             } else {
                 _destination = HomeSegueDestinationNone;
             }

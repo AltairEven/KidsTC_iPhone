@@ -31,4 +31,6 @@ typedef enum {
 
 - (void)parseRawData:(NSArray *)dataArray;
 
+- (NSArray *)elementModelsArray;
+
 @end

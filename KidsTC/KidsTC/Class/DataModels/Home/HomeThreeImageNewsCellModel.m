@@ -34,6 +34,10 @@
     return cellHeight;
 }
 
+- (NSArray *)elementModelsArray {
+    return [NSArray arrayWithObjects:self.firstElement, self.secondeElement, self.thirdElement, nil];
+}
+
 @end
 
 

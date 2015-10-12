@@ -54,6 +54,10 @@
     return [NSArray arrayWithArray:tempArray];
 }
 
+- (NSArray *)elementModelsArray {
+    return self.twoColumnElementsArray;
+}
+
 @end
 
 
