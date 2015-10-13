@@ -79,9 +79,9 @@
     UIView *footBG = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
     self.submitButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.submitButton setFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 40)];
-    [self.submitButton setBackgroundColor:COLOR_GLOBAL_NORMAL forState:UIControlStateNormal];
-    [self.submitButton setBackgroundColor:COLOR_GLOBAL_HIGHLIGHT forState:UIControlStateHighlighted];
-    [self.submitButton setBackgroundColor:COLOR_GLOBAL_DISABLE forState:UIControlStateDisabled];
+    [self.submitButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.submitButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    [self.submitButton setBackgroundColor:[AUITheme theme].buttonBGColor_Disable forState:UIControlStateDisabled];
     [self.submitButton setTitle:@"发表评价" forState:UIControlStateNormal];
     [self.submitButton addTarget:self action:@selector(didClickedSubmitButton) forControlEvents:UIControlEventTouchUpInside];
     [footBG addSubview:self.submitButton];

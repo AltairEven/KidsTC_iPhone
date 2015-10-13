@@ -26,7 +26,7 @@
     UIImage *bgImage = [[UIImage imageNamed:@"coupon_cellBG"] resizableImageWithCapInsets:UIEdgeInsetsMake(20, 30, 28, 30) resizingMode:UIImageResizingModeTile];
     [self.cellBGView setImage:bgImage];
     
-    [self.discountPriceView setContentColor:COLOR_GLOBAL_NORMAL];
+    [self.discountPriceView setContentColor:[AUITheme theme].buttonBGColor_Normal];
     [self.discountPriceView.unitLabel setFont:[UIFont systemFontOfSize:SCREEN_WIDTH / 25]];
     [self.discountPriceView.priceLabel setFont:[UIFont boldSystemFontOfSize:SCREEN_WIDTH / 10]];
 }

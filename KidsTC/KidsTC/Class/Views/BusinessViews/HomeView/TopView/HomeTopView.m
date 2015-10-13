@@ -43,7 +43,7 @@
 - (void)buildSubviews {
     self.inputField.delegate = self;
     
-    self.backgroundColor = COLOR_NAVIBAR;
+    self.backgroundColor = [AUITheme theme].navibarBGColor;
 }
 
 - (IBAction)didClickedCategoryButton:(id)sender {

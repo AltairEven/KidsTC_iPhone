@@ -35,7 +35,7 @@ typedef enum {
 @property (nonatomic, strong) UserCenterViewController *userCenterVC;
 
 @property (nonatomic, strong) UINavigationController *homeTab;
-@property (nonatomic, strong) UINavigationController *storeAppointmentTab;
+@property (nonatomic, strong) UINavigationController *newsTab;
 @property (nonatomic, strong) UINavigationController *parentingStrategyTab;
 @property (nonatomic, strong) UINavigationController *userCenterTab;
 

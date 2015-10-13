@@ -79,15 +79,15 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
         self.cellNib = [UINib nibWithNibName:NSStringFromClass([SettlementPayTypeCell class]) bundle:nil];
         [self.tableView registerNib:self.cellNib forCellReuseIdentifier:kCellIdentifier];
     }
-    [self.orderPriceView setContentColor:COLOR_GLOBAL_NORMAL];
+    [self.orderPriceView setContentColor:[AUITheme theme].buttonBGColor_Normal];
     [self.orderPriceView.unitLabel setFont:[UIFont systemFontOfSize:16]];
     [self.orderPriceView.priceLabel setFont:[UIFont systemFontOfSize:20]];
     
-    [self.productTotalPriceView setContentColor:COLOR_GLOBAL_NORMAL];
+    [self.productTotalPriceView setContentColor:[AUITheme theme].buttonBGColor_Normal];
     [self.productTotalPriceView setFont:[UIFont systemFontOfSize:13]];
-    [self.promotionPriceView setContentColor:COLOR_GLOBAL_NORMAL];
+    [self.promotionPriceView setContentColor:[AUITheme theme].buttonBGColor_Normal];
     [self.promotionPriceView setFont:[UIFont systemFontOfSize:13]];
-    [self.scorePriceView setContentColor:COLOR_GLOBAL_NORMAL];
+    [self.scorePriceView setContentColor:[AUITheme theme].buttonBGColor_Normal];
     [self.scorePriceView setFont:[UIFont systemFontOfSize:13]];
     
     self.scoreField.delegate = self;
@@ -284,7 +284,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
             
             UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, SCREEN_WIDTH - 20, 15)];
             [titleLabel setFont:[UIFont systemFontOfSize:13]];
-            [titleLabel setTextColor:COLOR_GLOBAL_NORMAL];
+            [titleLabel setTextColor:[AUITheme theme].buttonBGColor_Normal];
             [titleLabel setText:@"提示：商品促销优惠与优惠券不可共用"];
             [view addSubview:titleLabel];
         }

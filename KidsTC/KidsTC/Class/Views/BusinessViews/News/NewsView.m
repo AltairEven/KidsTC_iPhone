@@ -40,7 +40,7 @@
 
 - (void)buildSubviews {
     //top
-    self.topView.backgroundColor = COLOR_NAVIBAR;
+    self.topView.backgroundColor = [AUITheme theme].navibarBGColor;
     //header
     [self.tabControl addTarget:self action:@selector(tabControlDidChangedSelectedIndex:) forControlEvents:UIControlEventValueChanged];
     [self.tabControl setSelectedSegmentIndex:0];
@@ -48,7 +48,7 @@
     [self.tabControl setTintColor:[UIColor whiteColor]];
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:15],NSFontAttributeName,[UIColor whiteColor], NSForegroundColorAttributeName, nil];
     [self.tabControl setTitleTextAttributes:attributes forState:UIControlStateNormal];
-    NSDictionary *highlightedAttributes = [NSDictionary dictionaryWithObject:COLOR_GLOBAL_NORMAL forKey:NSForegroundColorAttributeName];
+    NSDictionary *highlightedAttributes = [NSDictionary dictionaryWithObject:[AUITheme theme].buttonBGColor_Normal forKey:NSForegroundColorAttributeName];
     [self.tabControl setTitleTextAttributes:highlightedAttributes forState:UIControlStateHighlighted];
     //list
     self.recommendListView.delegate = self;

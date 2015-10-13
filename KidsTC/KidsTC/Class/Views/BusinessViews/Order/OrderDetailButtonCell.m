@@ -29,9 +29,9 @@
     
     [self.cancelButton setBackgroundColor:RGBA(239, 239, 239, 1) forState:UIControlStateNormal];
     [self.cancelButton setBackgroundColor:RGBA(200, 200, 200, 1) forState:UIControlStateHighlighted];
-    [self.rightButton setBackgroundColor:COLOR_GLOBAL_NORMAL forState:UIControlStateNormal];
-    [self.rightButton setBackgroundColor:COLOR_GLOBAL_HIGHLIGHT forState:UIControlStateHighlighted];
-    [self.rightButton setBackgroundColor:COLOR_GLOBAL_DISABLE forState:UIControlStateDisabled];
+    [self.rightButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.rightButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    [self.rightButton setBackgroundColor:[AUITheme theme].buttonBGColor_Disable forState:UIControlStateDisabled];
     
     [self.rightButton setHidden:YES];
     [self.cancelButton setHidden:YES];

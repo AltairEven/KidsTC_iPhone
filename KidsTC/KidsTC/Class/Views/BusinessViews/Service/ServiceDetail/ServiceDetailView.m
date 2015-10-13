@@ -103,7 +103,7 @@
     [footBG addSubview:self.footerView];
     self.tableView.tableFooterView = footBG;
     //price view
-    [self.promotionPriceView setContentColor:COLOR_GLOBAL_NORMAL];
+    [self.promotionPriceView setContentColor:[AUITheme theme].buttonBGColor_Normal];
     [self.promotionPriceView.unitLabel setFont:[UIFont systemFontOfSize:15]];
     [self.promotionPriceView.priceLabel setFont:[UIFont systemFontOfSize:25]];
     

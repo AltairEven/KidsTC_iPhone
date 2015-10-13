@@ -98,7 +98,7 @@
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setFrame:CGRectMake(15, 10, SCREEN_WIDTH - 30, 40)];
-    [button setBackgroundColor:COLOR_GLOBAL_NORMAL];
+    [button setBackgroundColor:[AUITheme theme].buttonBGColor_Normal];
     [button setTitle:@"退出账号" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(didClickedLogoutButton) forControlEvents:UIControlEventTouchUpInside];
     

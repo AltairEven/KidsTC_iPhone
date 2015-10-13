@@ -42,7 +42,7 @@
 }
 
 - (void)buildSubviews {
-    self.backgroundColor = COLOR_NAVIBAR;
+    self.backgroundColor = [AUITheme theme].navibarBGColor;
     
     [self.searchFieldBG.layer setCornerRadius:5];
     [self.searchFieldBG.layer setBorderWidth:0.5];

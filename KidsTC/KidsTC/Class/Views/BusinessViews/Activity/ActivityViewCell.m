@@ -32,12 +32,12 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
-    [self.priceView setContentColor:COLOR_GLOBAL_NORMAL];
+    [self.priceView setContentColor:[AUITheme theme].buttonBGColor_Normal];
     [self.priceView.unitLabel setFont:[UIFont systemFontOfSize:20]];
     [self.priceView.priceLabel setFont:[UIFont systemFontOfSize:30]];
     
     self.progressView.layer.cornerRadius = 5;
-    self.progressView.layer.borderColor = COLOR_GLOBAL_NORMAL.CGColor;
+    self.progressView.layer.borderColor = [AUITheme theme].buttonBGColor_Normal.CGColor;
     self.progressView.layer.borderWidth = BORDER_WIDTH;
     self.progressView.layer.masksToBounds = YES;
 }

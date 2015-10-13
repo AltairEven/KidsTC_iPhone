@@ -119,7 +119,7 @@ static NSString *const kStoreCellIdentifier = @"kStoreCellIdentifier";
 
 - (void)buildSubviews {
     //top
-    self.topView.backgroundColor = COLOR_NAVIBAR;
+    self.topView.backgroundColor = [AUITheme theme].navibarBGColor;
     //lines
     [GConfig resetLineView:self.line1 withLayoutAttribute:NSLayoutAttributeHeight];
     [GConfig resetLineView:self.line2 withLayoutAttribute:NSLayoutAttributeHeight];
@@ -132,7 +132,7 @@ static NSString *const kStoreCellIdentifier = @"kStoreCellIdentifier";
     [self.segmentControl setTintColor:[UIColor whiteColor]];
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:15],NSFontAttributeName,[UIColor whiteColor], NSForegroundColorAttributeName, nil];
     [self.segmentControl setTitleTextAttributes:attributes forState:UIControlStateNormal];
-    NSDictionary *highlightedAttributes = [NSDictionary dictionaryWithObject:COLOR_GLOBAL_NORMAL forKey:NSForegroundColorAttributeName];
+    NSDictionary *highlightedAttributes = [NSDictionary dictionaryWithObject:[AUITheme theme].buttonBGColor_Normal forKey:NSForegroundColorAttributeName];
     [self.segmentControl setTitleTextAttributes:highlightedAttributes forState:UIControlStateHighlighted];
     //sort
     self.sortView.dataSource = self;

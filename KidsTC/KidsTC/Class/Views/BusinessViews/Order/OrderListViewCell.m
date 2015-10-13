@@ -33,8 +33,8 @@
     // Initialization code
     [super awakeFromNib];
     
-    [self.rightButton setBackgroundColor:COLOR_GLOBAL_NORMAL forState:UIControlStateNormal];
-    [self.rightButton setBackgroundColor:COLOR_GLOBAL_DISABLE forState:UIControlStateDisabled];
+    [self.rightButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.rightButton setBackgroundColor:[AUITheme theme].buttonBGColor_Disable forState:UIControlStateDisabled];
     
     //price view
     [self.priceView setContentColor:[UIColor darkGrayColor]];

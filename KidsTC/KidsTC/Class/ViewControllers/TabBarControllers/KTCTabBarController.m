@@ -28,7 +28,7 @@ static KTCTabBarController* _shareTabBarController = nil;
     {
         if (!_shareTabBarController) {
             _shareTabBarController = [[self alloc] init];
-            [_shareTabBarController.tabBar setBarTintColor:COLOR_NAVIBAR];
+            [_shareTabBarController.tabBar setBarTintColor:[AUITheme theme].tabbarBGColor];
         }
         
         return _shareTabBarController;
@@ -54,35 +54,35 @@ static KTCTabBarController* _shareTabBarController = nil;
     self.homeVC = [[HomeViewController alloc] initWithNibName:@"HomeViewController" bundle:nil];
     self.homeTab = [[GNavController alloc] initWithRootViewController:self.homeVC];
     self.homeTab.tabBarItem.title = @"首页";
-    [self.homeTab.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor colorWithRed:59/255.0 green:85/255.0 blue:111/255.0 alpha:1] forKey:NSForegroundColorAttributeName] forState:UIControlStateNormal];
-    [self.homeTab.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor colorWithRed:215/255.0 green:26/255.0 blue:33/255.0 alpha:1] forKey:NSForegroundColorAttributeName] forState:UIControlStateHighlighted];
-    self.homeTab.tabBarItem.image = [[UIImage imageNamed:@"tabbar_home_n"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    self.homeTab.tabBarItem.selectedImage = [[UIImage imageNamed:@"tabbar_home_h"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [self.homeTab.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObject:[AUITheme theme].tabbarTitleColor_Normal forKey:NSForegroundColorAttributeName] forState:UIControlStateNormal];
+    [self.homeTab.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObject:[AUITheme theme].tabbarTitleColor_Highlight forKey:NSForegroundColorAttributeName] forState:UIControlStateHighlighted];
+    self.homeTab.tabBarItem.image = [[AUITheme theme].tabbar1Image_Normal imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    self.homeTab.tabBarItem.selectedImage = [[AUITheme theme].tabbar1Image_Highlight imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     self.newsListVC = [[NewsViewController alloc]initWithNibName:@"NewsViewController" bundle:nil];
-    self.storeAppointmentTab = [[GNavController alloc] initWithRootViewController:self.newsListVC];
-    self.storeAppointmentTab.tabBarItem.title = @"资讯";
-    [self.storeAppointmentTab.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor colorWithRed:59/255.0 green:85/255.0 blue:111/255.0 alpha:1] forKey:NSForegroundColorAttributeName] forState:UIControlStateNormal];
-    [self.storeAppointmentTab.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor colorWithRed:215/255.0 green:26/255.0 blue:33/255.0 alpha:1] forKey:NSForegroundColorAttributeName] forState:UIControlStateHighlighted];
-    self.storeAppointmentTab.tabBarItem.image = [[UIImage imageNamed:@"tabbar_discovery_n"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    self.storeAppointmentTab.tabBarItem.selectedImage = [[UIImage imageNamed:@"tabbar_discovery_h"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    self.newsTab = [[GNavController alloc] initWithRootViewController:self.newsListVC];
+    self.newsTab.tabBarItem.title = @"资讯";
+    [self.newsTab.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObject:[AUITheme theme].tabbarTitleColor_Normal forKey:NSForegroundColorAttributeName] forState:UIControlStateNormal];
+    [self.newsTab.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObject:[AUITheme theme].tabbarTitleColor_Highlight forKey:NSForegroundColorAttributeName] forState:UIControlStateHighlighted];
+    self.newsTab.tabBarItem.image = [[AUITheme theme].tabbar2Image_Normal imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    self.newsTab.tabBarItem.selectedImage = [[AUITheme theme].tabbar2Image_Highlight imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     self.parentingStrategyVC = [[ParentingStrategyViewController alloc]initWithNibName:@"ParentingStrategyViewController" bundle:nil];
     self.parentingStrategyTab = [[GNavController alloc] initWithRootViewController:self.parentingStrategyVC];
     self.parentingStrategyTab.tabBarItem.title = @"亲子攻略";
-    [self.parentingStrategyTab.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor colorWithRed:59/255.0 green:85/255.0 blue:111/255.0 alpha:1] forKey:NSForegroundColorAttributeName] forState:UIControlStateNormal];
-    [self.parentingStrategyTab.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor colorWithRed:215/255.0 green:26/255.0 blue:33/255.0 alpha:1] forKey:NSForegroundColorAttributeName] forState:UIControlStateHighlighted];
-    self.parentingStrategyTab.tabBarItem.image = [[UIImage imageNamed:@"tabbar_parantingStrategy_n"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    self.parentingStrategyTab.tabBarItem.selectedImage = [[UIImage imageNamed:@"tabbar_parantingStrategy_h"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [self.parentingStrategyTab.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObject:[AUITheme theme].tabbarTitleColor_Normal forKey:NSForegroundColorAttributeName] forState:UIControlStateNormal];
+    [self.parentingStrategyTab.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObject:[AUITheme theme].tabbarTitleColor_Highlight forKey:NSForegroundColorAttributeName] forState:UIControlStateHighlighted];
+    self.parentingStrategyTab.tabBarItem.image = [[AUITheme theme].tabbar3Image_Normal imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    self.parentingStrategyTab.tabBarItem.selectedImage = [[AUITheme theme].tabbar3Image_Highlight imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     self.userCenterVC = [[UserCenterViewController alloc]initWithNibName:@"UserCenterViewController" bundle:nil];
     self.userCenterTab = [[GNavController alloc] initWithRootViewController:self.userCenterVC];
     self.userCenterTab.tabBarItem.title = @"我";
-    [self.userCenterTab.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor colorWithRed:59/255.0 green:85/255.0 blue:111/255.0 alpha:1] forKey:NSForegroundColorAttributeName] forState:UIControlStateNormal];
-    [self.userCenterTab.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor colorWithRed:215/255.0 green:26/255.0 blue:33/255.0 alpha:1] forKey:NSForegroundColorAttributeName] forState:UIControlStateHighlighted];
-    self.userCenterTab.tabBarItem.image = [[UIImage imageNamed:@"tabbar_userCenter_n"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    self.userCenterTab.tabBarItem.selectedImage = [[UIImage imageNamed:@"tabbar_userCenter_h"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    [self setViewControllers:[NSArray arrayWithObjects: self.homeTab, self.storeAppointmentTab, self.parentingStrategyTab, self.userCenterTab, nil] animated: YES];
+    [self.userCenterTab.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObject:[AUITheme theme].tabbarTitleColor_Normal forKey:NSForegroundColorAttributeName] forState:UIControlStateNormal];
+    [self.userCenterTab.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObject:[AUITheme theme].tabbarTitleColor_Highlight forKey:NSForegroundColorAttributeName] forState:UIControlStateHighlighted];
+    self.userCenterTab.tabBarItem.image = [[AUITheme theme].tabbar4Image_Normal imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    self.userCenterTab.tabBarItem.selectedImage = [[AUITheme theme].tabbar4Image_Highlight imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [self setViewControllers:[NSArray arrayWithObjects: self.homeTab, self.newsTab, self.parentingStrategyTab, self.userCenterTab, nil] animated: YES];
     
     _selectTabBarButtonIndex = KTCTabHome;
     
@@ -119,7 +119,7 @@ static KTCTabBarController* _shareTabBarController = nil;
     if (viewController == self.homeTab) {
         _selectTabBarButtonIndex = KTCTabHome;
     }
-    else if(viewController == self.storeAppointmentTab)
+    else if(viewController == self.newsTab)
     {
         _selectTabBarButtonIndex = KTCTabStoreAppointment;
     }
@@ -204,7 +204,7 @@ static KTCTabBarController* _shareTabBarController = nil;
 - (void)allPopToRoot
 {
     [self.homeTab popToRootViewControllerAnimated:NO];
-    [self.storeAppointmentTab popToRootViewControllerAnimated:NO];
+    [self.newsTab popToRootViewControllerAnimated:NO];
     [self.parentingStrategyTab popToRootViewControllerAnimated:NO];
     [self.userCenterTab popToRootViewControllerAnimated:NO];
 }

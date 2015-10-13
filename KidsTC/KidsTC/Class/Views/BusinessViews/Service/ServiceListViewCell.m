@@ -20,7 +20,7 @@
     // Initialization code
     
     //price view
-    [self.promotionPriceView setContentColor:COLOR_GLOBAL_NORMAL];
+    [self.promotionPriceView setContentColor:[AUITheme theme].buttonBGColor_Normal];
     [self.promotionPriceView.unitLabel setFont:[UIFont systemFontOfSize:16]];
     [self.promotionPriceView.priceLabel setFont:[UIFont systemFontOfSize:20]];
 }

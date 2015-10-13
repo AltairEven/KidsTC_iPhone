@@ -30,11 +30,11 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    [self.leftPromotionPriceView setContentColor:COLOR_GLOBAL_NORMAL];
+    [self.leftPromotionPriceView setContentColor:[AUITheme theme].buttonBGColor_Normal];
     [self.leftPromotionPriceView.unitLabel setFont:[UIFont systemFontOfSize:16]];
     [self.leftPromotionPriceView.priceLabel setFont:[UIFont systemFontOfSize:20]];
     
-    [self.rightPromotionPriceView setContentColor:COLOR_GLOBAL_NORMAL];
+    [self.rightPromotionPriceView setContentColor:[AUITheme theme].buttonBGColor_Normal];
     [self.rightPromotionPriceView.unitLabel setFont:[UIFont systemFontOfSize:16]];
     [self.rightPromotionPriceView.priceLabel setFont:[UIFont systemFontOfSize:20]];
     

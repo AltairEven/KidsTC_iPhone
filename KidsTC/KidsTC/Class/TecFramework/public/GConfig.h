@@ -10,6 +10,7 @@
 #import "Constants.h"
 #import <CoreLocation/CoreLocation.h>
 #import "KTCLocation.h"
+#import "AUITheme.h"
 
 //#define DEBUG 0
 
@@ -37,7 +38,6 @@ static NSString *const kWeChatSourceValue = @"weixin";
 static NSString *const kCustomerServicePhoneNumber = @"15000168321";
 
 static NSString *const UserRoleHasChangedNotification = @"UserRoleHasChangedNotification";
-
 
 typedef enum {
     UserRolePrepregnancy = 1, //备孕
@@ -77,13 +77,6 @@ typedef enum {
 #define PRODUCT_TABLE_VIEW_CELL_HEIGHT 98.0
 #define PROMO_TABLE_VIEW_CELL_HEIGHT   44.0
 #define ENERGY_SUBSIDY_INTRO_CELL_HEIGHT 330.0f
-
-#define COLOR_GLOBAL_NORMAL RGBA(255, 136, 136, 1)
-#define COLOR_GLOBAL_HIGHLIGHT RGBA(230, 120, 120, 1)
-#define COLOR_GLOBAL_DISABLE RGBA(230, 230, 230, 1)
-
-#define COLOR_NAVIBAR RGBA(255, 136, 136, 1)
-#define COLOR_GLOBAL_BG RGBA(252, 248, 245, 1)
 
 #define TOOLBAR_COLOR RGBA(49.0, 124.0, 228.0, 1.0)
 #define TOOLBAR_TEXT_COLOR_NORMAL RGBA(68.0, 68.0, 68.0, 1.0)

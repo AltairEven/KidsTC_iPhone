@@ -17,7 +17,7 @@
 	if(self = [super initWithRootViewController:_rootViewController])
 	{
         UINavigationBar *navigationBar = [UINavigationBar appearance];
-        [navigationBar setBarTintColor:COLOR_NAVIBAR];
+        [navigationBar setBarTintColor:[AUITheme theme].navibarBGColor];
         [navigationBar setBarStyle:UIBarStyleBlack];
 //        self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor], NSFontAttributeName : [UIFont systemFontOfSize:18]};
 	}

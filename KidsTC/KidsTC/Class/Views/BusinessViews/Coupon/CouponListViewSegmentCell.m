@@ -26,7 +26,7 @@
 
     // Configure the view for the selected state
     if (selected) {
-        [self.titleLabel setTextColor:COLOR_GLOBAL_NORMAL];
+        [self.titleLabel setTextColor:[AUITheme theme].buttonBGColor_Normal];
         [self.tagView setHidden:NO];
     } else {
         [self.titleLabel setTextColor:[UIColor darkGrayColor]];

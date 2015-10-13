@@ -107,7 +107,7 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
 
 - (void)buildSubviews {
     self.topView.delegate = self;
-    [self.topView setBackgroundColor:COLOR_NAVIBAR];
+    [self.topView setBackgroundColor:[AUITheme theme].navibarBGColor];
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;

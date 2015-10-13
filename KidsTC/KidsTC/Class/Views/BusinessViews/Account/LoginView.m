@@ -52,8 +52,8 @@
     self.userNameField.delegate = self;
     self.passwordField.delegate = self;
 
-    [self.loginButton setBackgroundColor:COLOR_GLOBAL_NORMAL forState:UIControlStateNormal];
-    [self.loginButton setBackgroundColor:COLOR_GLOBAL_HIGHLIGHT forState:UIControlStateHighlighted];
+    [self.loginButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.loginButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
     
     [self.thirdPartyLoginView setViewGap:20];
     

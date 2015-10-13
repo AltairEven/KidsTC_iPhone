@@ -78,8 +78,8 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
     self.getCodeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.getCodeButton setFrame:CGRectMake(15, 10, SCREEN_WIDTH - 30, 40)];
-    [self.getCodeButton setBackgroundColor:COLOR_GLOBAL_NORMAL forState:UIControlStateNormal];
-    [self.getCodeButton setBackgroundColor:COLOR_GLOBAL_HIGHLIGHT forState:UIControlStateHighlighted];
+    [self.getCodeButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.getCodeButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
     [self.getCodeButton setTitle:@"获取消费码" forState:UIControlStateNormal];
     [self.getCodeButton addTarget:self action:@selector(didClickedGetCodeButton:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -95,7 +95,7 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
     }
     
     //price views
-    [self.servicePriceView setContentColor:COLOR_GLOBAL_NORMAL];
+    [self.servicePriceView setContentColor:[AUITheme theme].buttonBGColor_Normal];
     [self.servicePriceView setFont:[UIFont systemFontOfSize:15]];
     [self.servicePriceView sizeToFitParameters];
     

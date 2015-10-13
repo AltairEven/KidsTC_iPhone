@@ -21,7 +21,7 @@
 - (void)awakeFromNib {
     // Initialization code
     //price view
-    [self.priceView setContentColor:COLOR_GLOBAL_NORMAL];
+    [self.priceView setContentColor:[AUITheme theme].buttonBGColor_Normal];
     [self.priceView.unitLabel setFont:[UIFont systemFontOfSize:12]];
     [self.priceView.priceLabel setFont:[UIFont systemFontOfSize:16]];
 }

@@ -39,12 +39,12 @@
 }
 
 - (void)buildSubviews {
-    [self.priceView setContentColor:COLOR_GLOBAL_NORMAL];
+    [self.priceView setContentColor:[AUITheme theme].buttonBGColor_Normal];
     [self.priceView.unitLabel setFont:[UIFont systemFontOfSize:15]];
     [self.priceView.priceLabel setFont:[UIFont systemFontOfSize:25]];
     
-    [self.confirmButton setBackgroundColor:COLOR_GLOBAL_NORMAL forState:UIControlStateNormal];
-    [self.confirmButton setBackgroundColor:COLOR_GLOBAL_HIGHLIGHT forState:UIControlStateHighlighted];
+    [self.confirmButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.confirmButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
 }
 
 - (void)setPrice:(CGFloat)price {

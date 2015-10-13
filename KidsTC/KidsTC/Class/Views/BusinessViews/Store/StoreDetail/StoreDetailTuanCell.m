@@ -22,7 +22,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    [self.tuanPriceView setContentColor:COLOR_GLOBAL_NORMAL];
+    [self.tuanPriceView setContentColor:[AUITheme theme].buttonBGColor_Normal];
     [self.tuanPriceView.unitLabel setFont:[UIFont systemFontOfSize:16]];
     [self.tuanPriceView.priceLabel setFont:[UIFont systemFontOfSize:20]];
 }

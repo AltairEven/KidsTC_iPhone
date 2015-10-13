@@ -62,8 +62,8 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    [self.commentButton setBackgroundColor:COLOR_GLOBAL_NORMAL forState:UIControlStateNormal];
-    [self.commentButton setBackgroundColor:COLOR_GLOBAL_HIGHLIGHT forState:UIControlStateHighlighted];
+    [self.commentButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.commentButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
     
     self.cancelAppointmentButton.layer.borderWidth = BORDER_WIDTH;
     self.cancelAppointmentButton.layer.borderColor = RGBA(255, 125, 125, 1).CGColor;
@@ -73,8 +73,8 @@
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
     self.getCodeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.getCodeButton setFrame:CGRectMake(15, 10, SCREEN_WIDTH - 30, 40)];
-    [self.getCodeButton setBackgroundColor:COLOR_GLOBAL_NORMAL forState:UIControlStateNormal];
-    [self.getCodeButton setBackgroundColor:COLOR_GLOBAL_HIGHLIGHT forState:UIControlStateHighlighted];
+    [self.getCodeButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.getCodeButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
     [self.getCodeButton setTitle:@"获取消费码" forState:UIControlStateNormal];
     [self.getCodeButton addTarget:self action:@selector(didClickedGetCodeButton:) forControlEvents:UIControlEventTouchUpInside];
     
