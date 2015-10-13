@@ -75,14 +75,16 @@
     
     self.cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.cancelButton setFrame:CGRectMake(10, 10, 40, 30)];
-    [self.cancelButton setTitleColor:RGBA(250, 130, 130, 1) forState:UIControlStateNormal];
+    [self.cancelButton setTitleColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.cancelButton setTitleColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
     [self.cancelButton.titleLabel setFont:[UIFont systemFontOfSize:13]];
     [self.cancelButton setTitle:@"取消" forState:UIControlStateNormal];
     [self.cancelButton addTarget:self action:@selector(didClickedCancelButton:) forControlEvents:UIControlEventTouchUpInside];
     
     self.confirmButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.confirmButton setFrame:CGRectMake(SCREEN_WIDTH - 50, 10, 40, 30)];
-    [self.confirmButton setTitleColor:RGBA(250, 130, 130, 1) forState:UIControlStateNormal];
+    [self.confirmButton setTitleColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.confirmButton setTitleColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
     [self.confirmButton.titleLabel setFont:[UIFont systemFontOfSize:13]];
     [self.confirmButton setTitle:@"确定" forState:UIControlStateNormal];
     [self.confirmButton addTarget:self action:@selector(didClickedConfirmButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -91,7 +93,7 @@
     [self.topView addSubview:self.confirmButton];
     
     self.pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 50, SCREEN_WIDTH, pickerBG.frame.size.height - 50)];
-    [self.pickerView setBackgroundColor:RGBA(250, 130, 130, 1)];
+    [self.pickerView setBackgroundColor:[AUITheme theme].globalBGColor];
     self.pickerView.dataSource = self;
     self.pickerView.delegate = self;
     

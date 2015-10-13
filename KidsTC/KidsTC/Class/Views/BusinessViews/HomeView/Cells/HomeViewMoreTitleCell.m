@@ -10,6 +10,7 @@
 
 @interface HomeViewMoreTitleCell ()
 
+@property (weak, nonatomic) IBOutlet UIView *tagView;
 @property (weak, nonatomic) IBOutlet UILabel *mainTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *subTitleLabel;
 
@@ -20,6 +21,7 @@
 - (void)awakeFromNib {
     // Initialization code
     [self.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.tagView setBackgroundColor:[AUITheme theme].globalThemeColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

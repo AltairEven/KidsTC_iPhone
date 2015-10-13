@@ -110,6 +110,7 @@
                 <outlet property="hourLabel" destination="y6w-Mn-glG" id="ogh-kw-OWD"/>
                 <outlet property="minuteLabel" destination="PBf-0D-yeX" id="OTy-zb-XHz"/>
                 <outlet property="secondLabel" destination="QaK-37-Edi" id="esc-GF-KWD"/>
+                <outlet property="tagView" destination="WwK-uW-Fsb" id="DGR-i9-aeH"/>
                 <outlet property="titleLabel" destination="Erh-XH-Cdj" id="nQx-Vx-9vl"/>
             </connections>
             <point key="canvasLocation" x="213" y="333"/>

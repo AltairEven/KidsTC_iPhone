@@ -26,7 +26,7 @@
     // Initialization code
     [self.bgView setBackgroundColor:[AUITheme theme].globalCellBGColor];
     self.cancelButton.layer.borderWidth = BORDER_WIDTH;
-    self.cancelButton.layer.borderColor = RGBA(255, 125, 125, 1).CGColor;
+    self.cancelButton.layer.borderColor = [AUITheme theme].globalThemeColor.CGColor;
     [self.cancelButton.layer setMasksToBounds:YES];
     
     [self.cancelButton setBackgroundColor:RGBA(239, 239, 239, 1) forState:UIControlStateNormal];

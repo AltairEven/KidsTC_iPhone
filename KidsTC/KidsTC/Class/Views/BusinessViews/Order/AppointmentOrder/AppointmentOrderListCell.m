@@ -28,6 +28,8 @@
     [GConfig resetLineView:self.gapLine withLayoutAttribute:NSLayoutAttributeHeight];
     [self.headerBG setBackgroundColor:[AUITheme theme].globalCellBGColor];
     [self.infoBG setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    
+    [self.orderStatusDesLabel setTextColor:[AUITheme theme].globalThemeColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

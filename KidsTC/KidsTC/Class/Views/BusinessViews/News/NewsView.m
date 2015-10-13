@@ -41,6 +41,7 @@
 - (void)buildSubviews {
     //top
     self.topView.backgroundColor = [AUITheme theme].navibarBGColor;
+    [self.listBG setBackgroundColor:[AUITheme theme].navibarBGColor];
     //header
     [self.tabControl addTarget:self action:@selector(tabControlDidChangedSelectedIndex:) forControlEvents:UIControlEventValueChanged];
     [self.tabControl setSelectedSegmentIndex:0];

@@ -94,6 +94,8 @@
     self.waitcommentCountLabel.layer.cornerRadius = 7;
     self.waitcommentCountLabel.layer.masksToBounds = YES;
     
+    self.tableView.backgroundView = nil;
+    [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     

@@ -20,6 +20,7 @@
     // Initialization code
     [self.tagView setHidden:YES];
     [self.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.tagView setBackgroundColor:[AUITheme theme].globalThemeColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

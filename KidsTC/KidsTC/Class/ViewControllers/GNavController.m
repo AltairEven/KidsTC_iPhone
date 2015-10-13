@@ -17,8 +17,15 @@
 	if(self = [super initWithRootViewController:_rootViewController])
 	{
         UINavigationBar *navigationBar = [UINavigationBar appearance];
-        [navigationBar setBarTintColor:[AUITheme theme].navibarBGColor];
-        [navigationBar setBarStyle:UIBarStyleBlack];
+        UIColor *color = [AUITheme theme].navibarBGColor;
+        [navigationBar setBarTintColor:color];
+        CGFloat white = 0.0;
+        [color getWhite:&white alpha:NULL];
+        if (white > 0.8) {
+            [navigationBar setBarStyle:UIBarStyleDefault];
+        } else {
+            [navigationBar setBarStyle:UIBarStyleBlack];
+        }
 //        self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor], NSFontAttributeName : [UIFont systemFontOfSize:18]};
 	}
 

@@ -41,6 +41,9 @@
 - (void)buildSubviews {
     self.hideNameButton.selected = NO;
     [self.hideNameButton setBackgroundColor:[AUITheme theme].globalBGColor forState:UIControlStateNormal];
+    
+    [self.submitButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.submitButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
 }
 
 /*

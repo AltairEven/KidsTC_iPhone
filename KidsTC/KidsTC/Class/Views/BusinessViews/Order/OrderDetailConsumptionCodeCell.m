@@ -19,6 +19,7 @@
 - (void)awakeFromNib {
     // Initialization code
     [self.bgView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.consumptionCodeLabel setTextColor:[AUITheme theme].globalThemeColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

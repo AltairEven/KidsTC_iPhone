@@ -47,6 +47,8 @@ static NSString *const kSmallImageCellIdentifier = @"kSmallImageCellIdentifier";
     self.tableView.layer.borderWidth = BORDER_WIDTH;
     self.tableView.layer.masksToBounds = YES;
     
+    self.tableView.backgroundView = nil;
+    [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     

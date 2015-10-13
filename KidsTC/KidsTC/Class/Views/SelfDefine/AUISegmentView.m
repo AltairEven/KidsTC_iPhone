@@ -39,6 +39,8 @@
 }
 
 - (void)buildSubviews {
+    self.tableView.backgroundView = nil;
+    [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
     CGRect tableViewRect = CGRectMake(0.0, 0.0, self.frame.size.height, SCREEN_WIDTH);
     self.tableView = [[UITableView alloc] initWithFrame:tableViewRect style:UITableViewStylePlain];
     self.tableView.delegate = self;

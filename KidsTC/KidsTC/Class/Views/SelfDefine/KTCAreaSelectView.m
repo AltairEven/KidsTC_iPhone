@@ -101,6 +101,8 @@ typedef void (^ SelectionBlock) (KTCAreaItem *);
 
 
 - (void)buildSubviews {
+    self.tableView.backgroundView = nil;
+    [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
@@ -119,7 +121,7 @@ typedef void (^ SelectionBlock) (KTCAreaItem *);
     if (!self.tableView.tableHeaderView) {
         //table header
         self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(20.0f, 0.0f, self.tableView.bounds.size.width, 0.5f)];
-        [self.tableView.tableHeaderView setBackgroundColor:[UIColor colorWithRed:200/255.0 green:199/255.0 blue:204/255.0 alpha:1]];
+        [self.tableView.tableHeaderView setBackgroundColor:[AUITheme theme].globalBGColor];
     }
     self.dataArray = [[[KTCArea area] areaItems] copy];
     [self.tableView reloadData];
@@ -227,10 +229,10 @@ typedef void (^ SelectionBlock) (KTCAreaItem *);
     [cell.contentLabel setText:item.name];
     if (self.selectedIndex == indexPath.row) {
         cell.selectedImage.hidden = NO;
-        [cell.contentLabel setTextColor:[UIColor colorWithRed:4/255.0 green:113/255.0 blue:249/255.0 alpha:1]];
+        [cell.contentLabel setTextColor:[UIColor darkGrayColor]];
     } else {
         cell.selectedImage.hidden = YES;
-        [cell.contentLabel setTextColor:[UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1]];
+        [cell.contentLabel setTextColor:[UIColor lightGrayColor]];
     }
     
     return cell;

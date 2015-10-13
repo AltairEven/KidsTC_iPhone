@@ -56,6 +56,12 @@
     [self.loginButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
     [self.loginButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
     
+    [self.findPasswordButton setTitleColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.findPasswordButton setTitleColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    
+    [self.registerButton setTitleColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.registerButton setTitleColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    
     [self.thirdPartyLoginView setViewGap:20];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnView)];

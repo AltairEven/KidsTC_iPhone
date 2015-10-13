@@ -100,7 +100,7 @@ static NSString *const kLevel2CellIdentifier = @"kLevel2CellIdentifier";
     
     self.level2Table.delegate = self;
     self.level2Table.dataSource = self;
-//    self.level2Table.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 5)];
+    self.level2Table.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
     if (!self.level2CellNib) {
         self.level2CellNib = [UINib nibWithNibName:NSStringFromClass([KTCSearchResultFilterLevel2Cell class]) bundle:nil];
         [self.level2Table registerNib:self.level2CellNib forCellReuseIdentifier:kLevel2CellIdentifier];
@@ -108,6 +108,9 @@ static NSString *const kLevel2CellIdentifier = @"kLevel2CellIdentifier";
     
     self.currentLevel1Index = -1;
     self.currentLevel2Index = -1;
+    
+    [self.confirmButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.confirmButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
 }
 
 - (void)setPeopleButtonSelected:(BOOL)peopleButtonSelected {

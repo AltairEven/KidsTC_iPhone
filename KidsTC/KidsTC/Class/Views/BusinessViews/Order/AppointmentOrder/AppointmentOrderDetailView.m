@@ -59,6 +59,8 @@
 }
 
 - (void)buildSubviews {
+    self.tableView.backgroundView = nil;
+    [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -66,7 +68,7 @@
     [self.commentButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
     
     self.cancelAppointmentButton.layer.borderWidth = BORDER_WIDTH;
-    self.cancelAppointmentButton.layer.borderColor = RGBA(255, 125, 125, 1).CGColor;
+    self.cancelAppointmentButton.layer.borderColor = [AUITheme theme].globalThemeColor.CGColor;
     [self.cancelAppointmentButton.layer setMasksToBounds:YES];
     
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];

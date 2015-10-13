@@ -10,6 +10,7 @@
 
 
 @interface HomeViewCountDownMoreTitleCell ()
+@property (weak, nonatomic) IBOutlet UIView *tagView;
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIView *countDownBGView;
@@ -30,6 +31,11 @@
     self.countDownBGView.layer.borderColor = [UIColor orangeColor].CGColor;
     self.countDownBGView.layer.masksToBounds = YES;
     [self.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.tagView setBackgroundColor:[AUITheme theme].globalThemeColor];
+    
+    [self.hourLabel setTextColor:[AUITheme theme].globalThemeColor];
+    [self.minuteLabel setTextColor:[AUITheme theme].globalThemeColor];
+    [self.secondLabel setTextColor:[AUITheme theme].globalThemeColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

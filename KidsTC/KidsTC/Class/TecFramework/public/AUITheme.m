@@ -130,7 +130,7 @@ static AUITheme *_sharedInstance = nil;
 
 - (UIColor *)tabbarTitleColor_Normal {
     if (!_tabbarTitleColor_Normal) {
-        _tabbarTitleColor_Normal = RGBA(200, 200, 200, 1);
+        _tabbarTitleColor_Normal = RGBA(230, 230, 230, 1);
     }
     return _tabbarTitleColor_Normal;
 }

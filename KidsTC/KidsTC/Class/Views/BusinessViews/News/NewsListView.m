@@ -53,6 +53,8 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     self.linearView.delegate = self;
     [self.linearView setHidden:YES];
     
+    self.tableView.backgroundView = nil;
+    [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     

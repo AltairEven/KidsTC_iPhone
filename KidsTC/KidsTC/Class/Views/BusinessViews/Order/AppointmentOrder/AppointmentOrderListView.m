@@ -55,6 +55,8 @@ static NSString *const kCellIdentifier = @"cellIdentifier";
 }
 
 - (void)buildSubviews {
+    self.tableView.backgroundView = nil;
+    [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     

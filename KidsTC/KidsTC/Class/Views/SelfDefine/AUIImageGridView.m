@@ -97,7 +97,7 @@
     NSUInteger index = 0;
     for (; index < [dataArray count]; index ++) {
         UIView *tempView = [[UIView alloc] initWithFrame:CGRectMake(xPosition, yPosition, self.gridSize.width, self.gridSize.height)];
-        [tempView setBackgroundColor:[UIColor redColor]];
+        [tempView setBackgroundColor:[AUITheme theme].globalThemeColor];
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(xPosition, yPosition, self.gridSize.width, self.gridSize.height)];
         if (type == AUIImageGridViewTypeImage) {
             UIImage *image = [dataArray objectAtIndex:index];

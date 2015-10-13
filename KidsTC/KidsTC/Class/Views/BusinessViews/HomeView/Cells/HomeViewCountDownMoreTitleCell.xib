@@ -141,6 +141,7 @@
                 <outlet property="minuteLabel" destination="Smu-0s-xX3" id="nsm-Rn-Fip"/>
                 <outlet property="secondLabel" destination="9rg-4D-3pS" id="gs9-08-Ix9"/>
                 <outlet property="subTitleLabel" destination="9sM-u6-apQ" id="TZN-i3-FHY"/>
+                <outlet property="tagView" destination="oWh-NF-wTj" id="BMI-l8-dqW"/>
                 <outlet property="titleLabel" destination="Hxl-lV-zi5" id="yXj-F0-eNg"/>
             </connections>
             <point key="canvasLocation" x="213" y="333"/>

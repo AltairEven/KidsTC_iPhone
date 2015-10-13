@@ -47,7 +47,7 @@
     } else {
         [self.promotionPriceView setPrice:0];
     }
-    [self.saledCountLabel setText:[NSString stringWithFormat:@"%d", model.saledCount]];
+    [self.saledCountLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)model.saledCount]];
 }
 
 + (CGFloat)cellHeight {

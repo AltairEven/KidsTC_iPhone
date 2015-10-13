@@ -57,6 +57,7 @@
             <connections>
                 <outlet property="mainTitleLabel" destination="T36-dn-LrB" id="eIu-dI-IFS"/>
                 <outlet property="subTitleLabel" destination="DDB-QX-4W6" id="Da0-ze-mNk"/>
+                <outlet property="tagView" destination="qxK-jP-eg1" id="Iba-qF-zxc"/>
             </connections>
             <point key="canvasLocation" x="205" y="279"/>
         </tableViewCell>
