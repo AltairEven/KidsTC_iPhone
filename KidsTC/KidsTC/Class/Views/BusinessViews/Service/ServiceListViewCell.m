@@ -18,6 +18,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    [self.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
     
     //price view
     [self.promotionPriceView setContentColor:[AUITheme theme].buttonBGColor_Normal];

@@ -138,6 +138,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
             [self.orderNameLabel setText:self.model.serviceName];
             [self.orderPriceView setPrice:self.model.price];
             [self.countLabel setText:[NSString stringWithFormat:@"x%lu", (unsigned long)self.model.count]];
+            [self.orderCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
             return self.orderCell;
         }
             break;
@@ -151,6 +152,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
                     [self.couponDescriptionLabel setTextColor:[UIColor darkGrayColor]];
                     [self.couponDescriptionLabel setText:@"未使用"];
                 }
+                [self.couponCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
                 return self.couponCell;
             } else {
                 NSString *scoreText = [NSString stringWithFormat:@"%lu", (unsigned long)self.model.score];
@@ -158,6 +160,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
                 NSMutableAttributedString *attrText = [[NSMutableAttributedString alloc] initWithString:text];
                 [attrText addAttribute:NSForegroundColorAttributeName value:[UIColor orangeColor] range:NSMakeRange(2,[scoreText length])];
                 [self.totalScoreLabel setAttributedText:attrText];
+                [self.scoreCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
                 return self.scoreCell;
             }
         }
@@ -171,6 +174,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
             PaymentTypeModel *paymentModel = [self.model.supportedPaymentTypes objectAtIndex:indexPath.row];
             [cell setLogo:paymentModel.logo];
             [cell setPaymentName:paymentModel.name];
+            [cell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
             return cell;
         }
             break;
@@ -189,6 +193,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
             
             CGFloat scorePrice = self.model.usedScore * ScoreCoefficient;
             [self.scorePriceView setPrice:scorePrice];
+            [self.settlementCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
             return self.settlementCell;
         }
             break;

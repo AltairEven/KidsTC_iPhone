@@ -10,6 +10,7 @@
 
 @interface OrderDetailButtonCell ()
 
+@property (weak, nonatomic) IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet UIButton *rightButton;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
@@ -23,6 +24,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    [self.bgView setBackgroundColor:[AUITheme theme].globalCellBGColor];
     self.cancelButton.layer.borderWidth = BORDER_WIDTH;
     self.cancelButton.layer.borderColor = RGBA(255, 125, 125, 1).CGColor;
     [self.cancelButton.layer setMasksToBounds:YES];

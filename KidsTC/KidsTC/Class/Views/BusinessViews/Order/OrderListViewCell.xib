@@ -180,8 +180,11 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="buttonBGView" destination="egd-fB-uD6" id="DDk-9a-myN"/>
                 <outlet property="gapView" destination="JP9-Rs-w9x" id="Gj5-7A-JVC"/>
+                <outlet property="headerBGView" destination="foj-P0-qr0" id="Hef-U1-A58"/>
                 <outlet property="headerGap" destination="wSK-IO-8V5" id="8nC-Xe-ZMV"/>
+                <outlet property="infoBGView" destination="SSP-dr-Ca4" id="vQV-Dr-4Ku"/>
                 <outlet property="orderDateLabel" destination="nCJ-3a-Hcd" id="xeL-qQ-Yni"/>
                 <outlet property="orderIdLabel" destination="bKz-iU-o8H" id="5Bn-KD-dno"/>
                 <outlet property="orderImageView" destination="8X3-kZ-uK7" id="rhy-sl-Dt3"/>

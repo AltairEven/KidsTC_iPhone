@@ -87,11 +87,12 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     
     [self.stepperView enableInput:NO];
     self.stepperView.stepperDelegate = self;
+    [self.infoBGView setBackgroundColor:[AUITheme theme].globalBGColor];
 }
 
 - (void)setStockNumber:(NSUInteger)stockNumber {
     _stockNumber = stockNumber;
-    [self.stockNumberLabel setText:[NSString stringWithFormat:@"%d", stockNumber]];
+    [self.stockNumberLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)stockNumber]];
     [self.stepperView setMaxVal:stockNumber andMinVal:1];
 }
 

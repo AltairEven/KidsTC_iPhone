@@ -114,6 +114,8 @@
             <connections>
                 <outlet property="appointmentTimeDesLabel" destination="Gdv-fc-QFi" id="I0F-MJ-D7g"/>
                 <outlet property="gapLine" destination="tQO-gn-qa1" id="qIp-fS-6Ih"/>
+                <outlet property="headerBG" destination="CxG-JV-Oag" id="kEq-q3-x8r"/>
+                <outlet property="infoBG" destination="23R-MZ-Mbc" id="zra-AH-uOx"/>
                 <outlet property="orderIdLabel" destination="ldv-Nc-0JD" id="JTG-rs-tP2"/>
                 <outlet property="orderStatusDesLabel" destination="rq2-Uq-dri" id="hL4-Xe-ZWF"/>
                 <outlet property="storeImageView" destination="xJ3-l4-zWQ" id="1tq-Og-qbW"/>

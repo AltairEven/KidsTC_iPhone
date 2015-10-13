@@ -46,6 +46,9 @@
     UITapGestureRecognizer *rightTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClicked:)];
     [self.leftBG addGestureRecognizer:leftTap];
     [self.rightBG addGestureRecognizer:rightTap];
+    
+    [self.leftBG setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.rightBG setBackgroundColor:[AUITheme theme].globalCellBGColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

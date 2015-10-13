@@ -146,6 +146,7 @@
             break;
         case ServiceDetailSubviewSectionReviews:
         {
+            [self.reviewCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
             return self.reviewCell;
         }
             break;
@@ -248,6 +249,7 @@
 }
 
 - (void)configTopCell {
+    [self.topCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
     //banner
     [self.bannerScrollView reloadData];
     //others
@@ -269,6 +271,7 @@
 }
 
 - (CGFloat)configDescriptionCell {
+    [self.descriptionCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
     CGFloat height = 130;
     [self.serviceDescriptionLabel setText:self.model.promotionDescription];
     [self.descriptionCell layoutIfNeeded];
@@ -282,6 +285,7 @@
 }
 
 - (void)configStoreCell {
+    [self.storeCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
     if (self.model.currentStoreModel) {
         [self.storeImageView setImageWithURL:self.model.currentStoreModel.imageUrl placeholderImage:PLACEHOLDERIMAGE_SMALL];
         [self.storeNameLabel setText:self.model.currentStoreModel.storeName];

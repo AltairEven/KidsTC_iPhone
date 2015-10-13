@@ -22,6 +22,10 @@ static NSString *const kLevel1CellIdentifier = @"kLevel1CellIdentifier";
 static NSString *const kLevel2CellIdentifier = @"kLevel2CellIdentifier";
 
 @interface KTCSearchFilterView () <UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UIView *filterBGView;
+@property (weak, nonatomic) IBOutlet UIView *lvl1BGView;
+@property (weak, nonatomic) IBOutlet UIView *lvl2BGView;
+@property (weak, nonatomic) IBOutlet UIView *peopleBGView;
 
 @property (weak, nonatomic) IBOutlet UIView *peopleDot;
 @property (weak, nonatomic) IBOutlet UIButton *peopleButton;
@@ -74,6 +78,13 @@ static NSString *const kLevel2CellIdentifier = @"kLevel2CellIdentifier";
 }
 
 - (void)buildSubviews {
+    [self.filterBGView setBackgroundColor:[AUITheme theme].globalBGColor];
+    [self.lvl1BGView setBackgroundColor:[AUITheme theme].globalBGColor];
+    [self.lvl2BGView setBackgroundColor:[AUITheme theme].globalBGColor];
+    [self.peopleBGView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.peopleTag setBackgroundColor:[AUITheme theme].globalThemeColor];
+    [self.peopleDot setBackgroundColor:[AUITheme theme].globalThemeColor];
+    
     self.peopleDot.layer.cornerRadius = 2.5;
     self.peopleDot.layer.masksToBounds = YES;
     [self.peopleDot setHidden:YES];

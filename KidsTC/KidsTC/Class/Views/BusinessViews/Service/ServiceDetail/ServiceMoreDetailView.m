@@ -43,6 +43,7 @@
 
 - (void)buildSubviews {
     self.webView.scrollView.delegate = self;
+    [self setBackgroundColor:[AUITheme theme].globalBGColor];
 }
 
 

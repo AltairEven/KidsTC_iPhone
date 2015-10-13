@@ -49,6 +49,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bgView" destination="2oW-ds-ISi" id="2eJ-r1-15F"/>
                 <outlet property="timeLabel" destination="eAa-07-nSI" id="ZBe-9K-S1U"/>
                 <outlet property="titleLabel" destination="wPx-oA-gfd" id="z8e-ZQ-ay2"/>
             </connections>

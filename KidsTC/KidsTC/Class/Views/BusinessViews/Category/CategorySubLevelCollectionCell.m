@@ -10,6 +10,12 @@
 
 NSString *const kCategorySubLevelCollectionCellIdentifier = @"CategorySubLevelCollectionCell";
 
+@interface CategorySubLevelCollectionCell ()
+
+@property (weak, nonatomic) IBOutlet UIView *bgView;
+
+@end
+
 @implementation CategorySubLevelCollectionCell
 
 - (id)initWithFrame:(CGRect)frame
@@ -25,6 +31,7 @@ NSString *const kCategorySubLevelCollectionCellIdentifier = @"CategorySubLevelCo
             return nil;
         }
         self = [arrayOfViews objectAtIndex:0];
+        [self.bgView setBackgroundColor:[AUITheme theme].globalCellBGColor];
     }
     return self;
 }

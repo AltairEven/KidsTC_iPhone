@@ -106,6 +106,7 @@
             [self.appointmentTimeDesLabel setText:self.orderModel.appointmentTimeDes];
             [self.commentButton setHidden:[self.orderModel canComment]];
             [self.cancelAppointmentButton setHidden:[self.orderModel canCancel]];
+            [self.storeInfoCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
             return self.storeInfoCell;
         }
             break;
@@ -114,6 +115,7 @@
             [self.orderStatusDesLabel setText:self.orderModel.statusDescription];
             [self.phoneLabel setText:self.orderModel.phoneNumber];
             [self.appointmentNameLabel setText:self.orderModel.appointmentName];
+            [self.orderInfoCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
             return self.orderInfoCell;
         }
             break;

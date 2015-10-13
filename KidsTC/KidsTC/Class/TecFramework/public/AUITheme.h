@@ -14,7 +14,11 @@
 
 //global
 
+@property (nonatomic, strong) UIColor *globalThemeColor; //全局主题色
+
 @property (nonatomic, strong) UIColor *globalBGColor; //全局背景色
+
+@property (nonatomic, strong) UIColor *globalCellBGColor; //全局背景色
 
 @property (nonatomic, strong) UIColor *darkTextColor; //字体深色
 

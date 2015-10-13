@@ -51,6 +51,7 @@
 - (void)buildSubviews {
     self.userNameField.delegate = self;
     self.passwordField.delegate = self;
+    [self setBackgroundColor:[AUITheme theme].globalBGColor];
 
     [self.loginButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
     [self.loginButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];

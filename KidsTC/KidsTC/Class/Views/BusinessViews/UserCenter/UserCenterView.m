@@ -11,6 +11,7 @@
 #define UserInfoRatio (0.5)
 
 @interface UserCenterView () <UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
 
 @property (weak, nonatomic) IBOutlet UIView *userInfoContainerView;
 @property (weak, nonatomic) IBOutlet UIView *userInfoBGView;
@@ -65,6 +66,7 @@
 }
 
 - (void)buildSubviews {
+    [self.bottomView setBackgroundColor:[AUITheme theme].globalBGColor];
     self.faceButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.faceButton setFrame:CGRectMake(0, 0, 80, 80)];
     self.faceButton.tag = 0;
@@ -98,6 +100,10 @@
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
     
     [self reloadTopView];
+    
+    [self.appointCountLabel setBackgroundColor:[AUITheme theme].globalThemeColor];
+    [self.waitpayCountLabel setBackgroundColor:[AUITheme theme].globalThemeColor];
+    [self.waitcommentCountLabel setBackgroundColor:[AUITheme theme].globalThemeColor];
 }
 
 /*
@@ -122,18 +128,22 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case 0:{
+            [self.allOrderCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
             return self.allOrderCell;
         }
             break;
         case 1:{
+            [self.couponCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
             return self.couponCell;
         }
             break;
         case 2:{
+            [self.myFavourateCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
             return self.myFavourateCell;
         }
             break;
         case 3:{
+            [self.settingCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
             return self.settingCell;
         }
             break;

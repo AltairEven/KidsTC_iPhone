@@ -75,6 +75,10 @@
     [self.selectedAreaLabel setText:@"全部"];
     
     _currentAreaSelectedIndex = NSUIntegerMax;
+    
+    
+    [self.editorSortButton setBackgroundColor:[AUITheme theme].globalCellBGColor forState:UIControlStateNormal];
+    [self.editorSortButton setBackgroundColor:[AUITheme theme].globalCellBGColor forState:UIControlStateNormal];
 }
 
 

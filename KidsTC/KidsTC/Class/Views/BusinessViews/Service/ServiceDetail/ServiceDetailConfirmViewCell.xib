@@ -66,6 +66,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bgView" destination="ul5-mR-0Bp" id="hGQ-jm-xn6"/>
                 <outlet property="distanceLabel" destination="Plj-lD-nVr" id="EGI-7y-K9N"/>
                 <outlet property="starsView" destination="6gI-my-FHD" id="pit-VK-a8f"/>
                 <outlet property="storeNameLabel" destination="duf-gT-yXt" id="FWM-kK-bOb"/>

@@ -10,6 +10,7 @@
 
 @interface KTCSearchResultFilterLevel2Cell ()
 
+@property (weak, nonatomic) IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet UIImageView *selectImageView;
 
 @end
@@ -18,6 +19,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    [self.bgView setBackgroundColor:[AUITheme theme].globalCellBGColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

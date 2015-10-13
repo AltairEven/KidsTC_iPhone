@@ -8,10 +8,17 @@
 
 #import "CommentListViewHeaderCell.h"
 
+@interface CommentListViewHeaderCell ()
+
+@property (weak, nonatomic) IBOutlet UIView *bgView;
+
+@end
+
 @implementation CommentListViewHeaderCell
 
 - (void)awakeFromNib {
     // Initialization code
+    [self.bgView setBackgroundColor:[AUITheme theme].globalCellBGColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

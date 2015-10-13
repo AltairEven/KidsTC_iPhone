@@ -10,6 +10,7 @@
 
 @interface HomeViewImageNewsCell ()
 
+@property (weak, nonatomic) IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *viewNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentNumberLabel;
@@ -21,6 +22,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    [self.bgView setBackgroundColor:[AUITheme theme].globalCellBGColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

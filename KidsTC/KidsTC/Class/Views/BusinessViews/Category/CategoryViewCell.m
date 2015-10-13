@@ -26,6 +26,7 @@
 @implementation CategoryViewCell
 
 - (void)awakeFromNib {
+    [self.bgView setBackgroundColor:[AUITheme theme].globalCellBGColor];
     // Initialization code
     self.sublevelView.dataSource = self;
     self.sublevelView.delegate = self;

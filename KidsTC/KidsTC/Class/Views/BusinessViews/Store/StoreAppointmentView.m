@@ -206,6 +206,7 @@ typedef enum {
                 break;
         }
     }
+    [cell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
     return cell;
 }
 

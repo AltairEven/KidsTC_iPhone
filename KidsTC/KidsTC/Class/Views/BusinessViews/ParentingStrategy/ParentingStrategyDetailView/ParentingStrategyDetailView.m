@@ -46,6 +46,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 - (void)buildSubviews {
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    [self setBackgroundColor:[AUITheme theme].globalBGColor];
     
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 5)];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 5)];

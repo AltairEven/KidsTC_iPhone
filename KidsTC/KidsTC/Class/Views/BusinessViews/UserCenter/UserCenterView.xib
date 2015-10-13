@@ -293,6 +293,7 @@
                 <outlet property="BGImageView" destination="Q7e-9h-vdt" id="JvO-Oc-SO5"/>
                 <outlet property="allOrderCell" destination="ip2-Oj-G4x" id="pOR-9G-zff"/>
                 <outlet property="appointCountLabel" destination="L48-h2-JJ6" id="6Av-2J-zLe"/>
+                <outlet property="bottomView" destination="24q-hi-HAE" id="Bgu-RG-qVJ"/>
                 <outlet property="couponCell" destination="Tgs-Pa-ucn" id="IgG-gL-o8B"/>
                 <outlet property="levelTitleLabel" destination="5kF-ZT-BXh" id="nMm-yy-EhG"/>
                 <outlet property="myAppointmentTapView" destination="DFo-r9-zh2" id="cC6-6s-8Z4"/>

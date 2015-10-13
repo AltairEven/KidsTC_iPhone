@@ -28,6 +28,7 @@
     self.countDownBGView.layer.borderWidth = 0.5;
     self.countDownBGView.layer.borderColor = [UIColor orangeColor].CGColor;
     self.countDownBGView.layer.masksToBounds = YES;
+    [self.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

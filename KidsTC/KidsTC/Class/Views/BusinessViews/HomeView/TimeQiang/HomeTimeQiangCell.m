@@ -11,6 +11,7 @@
 
 @interface HomeTimeQiangCell ()
 
+@property (weak, nonatomic) IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet UIImageView *cellImageView;
 @property (weak, nonatomic) IBOutlet RichPriceView *priceView;
 
@@ -20,6 +21,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    [self.bgView setBackgroundColor:[AUITheme theme].globalCellBGColor];
     //price view
     [self.priceView setContentColor:[AUITheme theme].buttonBGColor_Normal];
     [self.priceView.unitLabel setFont:[UIFont systemFontOfSize:12]];

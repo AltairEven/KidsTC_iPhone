@@ -312,6 +312,7 @@ static NSString *const kListCellIdentifier = @"kListCellIdentifier";
         default:
             break;
     }
+    [cell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
     return cell;
 }
 

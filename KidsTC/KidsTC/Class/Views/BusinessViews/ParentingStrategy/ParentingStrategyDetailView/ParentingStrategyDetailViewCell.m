@@ -24,6 +24,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    [self.cellBGView setBackgroundColor:[AUITheme theme].globalCellBGColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

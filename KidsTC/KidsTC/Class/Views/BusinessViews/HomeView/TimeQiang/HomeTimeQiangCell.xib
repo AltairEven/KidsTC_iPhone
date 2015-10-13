@@ -49,6 +49,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bgView" destination="uKB-K2-X5l" id="GBV-jn-5VJ"/>
                 <outlet property="cellImageView" destination="lNc-Fs-Byz" id="HbC-zC-wAn"/>
                 <outlet property="priceView" destination="Yft-2t-4xW" id="OQV-L4-epe"/>
             </connections>

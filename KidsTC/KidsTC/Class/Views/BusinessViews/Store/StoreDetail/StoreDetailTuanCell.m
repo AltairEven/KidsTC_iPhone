@@ -11,6 +11,7 @@
 
 @interface StoreDetailTuanCell ()
 
+@property (weak, nonatomic) IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet UIImageView *tuanImageView;
 @property (weak, nonatomic) IBOutlet UILabel *tuanTitleLabel;
 @property (weak, nonatomic) IBOutlet RichPriceView *tuanPriceView;
@@ -21,6 +22,7 @@
 @implementation StoreDetailTuanCell
 
 - (void)awakeFromNib {
+    [self.bgView setBackgroundColor:[AUITheme theme].globalCellBGColor];
     // Initialization code
     [self.tuanPriceView setContentColor:[AUITheme theme].buttonBGColor_Normal];
     [self.tuanPriceView.unitLabel setFont:[UIFont systemFontOfSize:16]];

@@ -9,6 +9,9 @@
 #import "OrderListViewCell.h"
 
 @interface OrderListViewCell ()
+@property (weak, nonatomic) IBOutlet UIView *headerBGView;
+@property (weak, nonatomic) IBOutlet UIView *infoBGView;
+@property (weak, nonatomic) IBOutlet UIView *buttonBGView;
 
 @property (weak, nonatomic) IBOutlet UIImageView *orderImageView;
 @property (weak, nonatomic) IBOutlet UILabel *orderIdLabel;
@@ -32,6 +35,9 @@
 - (void)awakeFromNib {
     // Initialization code
     [super awakeFromNib];
+    [self.headerBGView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.infoBGView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.buttonBGView setBackgroundColor:[AUITheme theme].globalCellBGColor];
     
     [self.rightButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
     [self.rightButton setBackgroundColor:[AUITheme theme].buttonBGColor_Disable forState:UIControlStateDisabled];

@@ -193,6 +193,7 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
         default:
             break;
     }
+    [cell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
     return cell;
 }
 

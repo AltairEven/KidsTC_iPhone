@@ -9,6 +9,8 @@
 #import "AppointmentOrderListCell.h"
 
 @interface AppointmentOrderListCell ()
+@property (weak, nonatomic) IBOutlet UIView *headerBG;
+@property (weak, nonatomic) IBOutlet UIView *infoBG;
 
 @property (weak, nonatomic) IBOutlet UILabel *orderIdLabel;
 @property (weak, nonatomic) IBOutlet UILabel *orderStatusDesLabel;
@@ -24,6 +26,8 @@
 - (void)awakeFromNib {
     // Initialization code
     [GConfig resetLineView:self.gapLine withLayoutAttribute:NSLayoutAttributeHeight];
+    [self.headerBG setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.infoBG setBackgroundColor:[AUITheme theme].globalCellBGColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

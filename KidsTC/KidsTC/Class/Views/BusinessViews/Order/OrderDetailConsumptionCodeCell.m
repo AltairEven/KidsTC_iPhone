@@ -8,10 +8,17 @@
 
 #import "OrderDetailConsumptionCodeCell.h"
 
+@interface OrderDetailConsumptionCodeCell ()
+
+@property (weak, nonatomic) IBOutlet UIView *bgView;
+
+@end
+
 @implementation OrderDetailConsumptionCodeCell
 
 - (void)awakeFromNib {
     // Initialization code
+    [self.bgView setBackgroundColor:[AUITheme theme].globalCellBGColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

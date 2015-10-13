@@ -61,6 +61,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bgView" destination="z0e-2t-OEd" id="Tni-it-YjS"/>
                 <outlet property="dot" destination="6aa-1O-g0b" id="gMX-9I-dbQ"/>
                 <outlet property="tagView" destination="L11-Fo-6yZ" id="FVI-LE-s4w"/>
                 <outlet property="titleLabel" destination="tAe-Zm-2ib" id="w16-da-kWh"/>

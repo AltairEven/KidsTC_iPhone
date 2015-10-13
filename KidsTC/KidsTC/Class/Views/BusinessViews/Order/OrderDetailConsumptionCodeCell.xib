@@ -48,6 +48,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bgView" destination="Buf-na-dIo" id="j6p-Tz-sYZ"/>
                 <outlet property="consumptionCodeLabel" destination="LVW-8W-7yO" id="7g5-Os-uTc"/>
             </connections>
             <point key="canvasLocation" x="392" y="358"/>

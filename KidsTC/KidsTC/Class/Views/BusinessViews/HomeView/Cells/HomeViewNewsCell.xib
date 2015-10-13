@@ -47,7 +47,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="bMZ-qf-1t2" firstAttribute="leading" secondItem="rCp-fM-5tf" secondAttribute="trailing" constant="2" id="0rI-bl-jfe"/>
                                     <constraint firstItem="rCp-fM-5tf" firstAttribute="centerY" secondItem="Q7R-um-nXq" secondAttribute="centerY" id="BlC-qa-yvc"/>
@@ -70,7 +70,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="tKI-3Y-M3j" firstAttribute="centerY" secondItem="pVa-w4-2Yu" secondAttribute="centerY" id="IBY-7s-Frb"/>
                                     <constraint firstItem="tKI-3Y-M3j" firstAttribute="leading" secondItem="pVa-w4-2Yu" secondAttribute="leading" constant="10" id="MXf-ti-zXQ"/>
@@ -98,6 +98,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bgView" destination="Zv5-Lj-Gg2" id="DVD-Iw-3sE"/>
                 <outlet property="commentNumber" destination="tGR-1j-11H" id="8dS-JX-oEu"/>
                 <outlet property="titleLabel" destination="tKI-3Y-M3j" id="1aN-Nk-aYC"/>
                 <outlet property="viewNumber" destination="bMZ-qf-1t2" id="eNw-JE-qqr"/>

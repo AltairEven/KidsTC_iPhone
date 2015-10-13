@@ -76,7 +76,7 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="YIs-bp-im3" firstAttribute="leading" secondItem="bMc-LQ-eKI" secondAttribute="leading" id="W2g-z8-VTR"/>
                                         <constraint firstAttribute="centerY" secondItem="YIs-bp-im3" secondAttribute="centerY" id="kqy-a7-pmc"/>
@@ -101,7 +101,7 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="cS2-d6-fps" firstAttribute="leading" secondItem="mQ1-de-PhM" secondAttribute="leading" id="9FO-D1-Fqd"/>
                                         <constraint firstAttribute="centerY" secondItem="cS2-d6-fps" secondAttribute="centerY" id="NEg-S1-AHw"/>
@@ -109,7 +109,7 @@
                                     </constraints>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="gbi-Mp-VWC" firstAttribute="leading" secondItem="cFE-K6-ita" secondAttribute="leading" id="LEZ-EM-Zkb"/>
                                 <constraint firstItem="gbi-Mp-VWC" firstAttribute="top" secondItem="cFE-K6-ita" secondAttribute="top" id="LZm-VU-AKT"/>
@@ -159,7 +159,7 @@
                                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 </tableView>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="t6l-Um-Kc3" firstAttribute="leading" secondItem="sMg-gJ-W8x" secondAttribute="leading" id="H9K-tM-A4B"/>
                                 <constraint firstAttribute="trailing" secondItem="t6l-Um-Kc3" secondAttribute="trailing" id="OXE-1f-tI6"/>
@@ -194,7 +194,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="15B-Da-j8e" firstAttribute="top" secondItem="8Dc-rK-8qn" secondAttribute="top" id="2M6-zy-Ypi"/>
                                 <constraint firstAttribute="trailing" secondItem="15B-Da-j8e" secondAttribute="trailing" id="Frv-zJ-7Ex"/>

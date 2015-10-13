@@ -67,6 +67,7 @@
     }
     KTCSearchResultFilterModel *filter = [self.filterModel.subArray objectAtIndex:indexPath.row];
     [cell.textLabel setText:filter.name];
+    [cell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
     return cell;
 }
 

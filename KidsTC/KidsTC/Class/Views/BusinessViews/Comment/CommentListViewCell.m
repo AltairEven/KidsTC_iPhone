@@ -12,6 +12,7 @@
 
 @interface CommentListViewCell () <AUIImageGridViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet FiveStarsView *starsView;
 @property (weak, nonatomic) IBOutlet UILabel *commentLabel;
 @property (weak, nonatomic) IBOutlet AUIImageGridView *imageGridView;
@@ -23,6 +24,7 @@
 - (void)awakeFromNib {
     // Initialization code
     self.imageGridView.delegate = self;
+    [self.bgView setBackgroundColor:[AUITheme theme].globalCellBGColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

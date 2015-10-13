@@ -10,6 +10,7 @@
 
 @interface KTCSearchResultSortCell ()
 
+@property (weak, nonatomic) IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet UIView *tagView;
 @property (weak, nonatomic) IBOutlet UIView *dot;
 
@@ -19,6 +20,10 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    [self.bgView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.tagView setBackgroundColor:[AUITheme theme].globalThemeColor];
+    [self.dot setBackgroundColor:[AUITheme theme].globalThemeColor];
+    
     self.dot.layer.cornerRadius = 2.5;
     self.dot.layer.masksToBounds = YES;
     [self.dot setHidden:YES];

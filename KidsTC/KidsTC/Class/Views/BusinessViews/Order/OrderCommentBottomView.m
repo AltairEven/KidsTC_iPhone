@@ -40,6 +40,7 @@
 
 - (void)buildSubviews {
     self.hideNameButton.selected = NO;
+    [self.hideNameButton setBackgroundColor:[AUITheme theme].globalBGColor forState:UIControlStateNormal];
 }
 
 /*

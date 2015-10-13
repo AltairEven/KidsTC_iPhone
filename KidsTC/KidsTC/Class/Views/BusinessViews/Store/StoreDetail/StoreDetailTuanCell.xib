@@ -83,6 +83,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bgView" destination="rhS-ji-Mya" id="3my-Eo-0Ww"/>
                 <outlet property="tuanCountLabel" destination="F2J-Fy-9W0" id="rav-eQ-Eth"/>
                 <outlet property="tuanImageView" destination="hCl-L1-uh9" id="G6G-3C-NgC"/>
                 <outlet property="tuanPriceView" destination="Oev-Uk-Zud" id="S7R-3v-b8j"/>

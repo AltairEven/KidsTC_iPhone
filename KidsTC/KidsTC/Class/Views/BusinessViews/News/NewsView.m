@@ -51,6 +51,7 @@
     NSDictionary *highlightedAttributes = [NSDictionary dictionaryWithObject:[AUITheme theme].buttonBGColor_Normal forKey:NSForegroundColorAttributeName];
     [self.tabControl setTitleTextAttributes:highlightedAttributes forState:UIControlStateHighlighted];
     //list
+    [self.listBG setBackgroundColor:[AUITheme theme].globalBGColor];
     self.recommendListView.delegate = self;
     
     self.newsListView.delegate = self;

@@ -28,6 +28,7 @@
     {
         bLoad = YES;
         StoreMoreDetailView *view = [GConfig getObjectFromNibWithView:self];
+        [view setBackgroundColor:[AUITheme theme].globalBGColor];
         return view;
     }
     bLoad = NO;

@@ -154,8 +154,12 @@
             <connections>
                 <outlet property="clearButton" destination="S1c-CX-s9Y" id="0ZM-0J-zaG"/>
                 <outlet property="confirmButton" destination="qYT-Hj-Jgw" id="vWJ-CQ-P7W"/>
+                <outlet property="filterBGView" destination="iN0-l3-epB" id="GQx-Jf-zCv"/>
                 <outlet property="level1Table" destination="BeD-lH-plc" id="icP-5e-UQx"/>
                 <outlet property="level2Table" destination="58l-KQ-kyh" id="xug-RY-goE"/>
+                <outlet property="lvl1BGView" destination="zma-5g-xAq" id="PeH-BO-afH"/>
+                <outlet property="lvl2BGView" destination="lPH-If-ooy" id="hMf-De-J3a"/>
+                <outlet property="peopleBGView" destination="8ZX-U1-RYX" id="TbQ-a5-SRJ"/>
                 <outlet property="peopleButton" destination="fHk-42-pga" id="jTE-g5-bP9"/>
                 <outlet property="peopleDot" destination="C0T-5B-VkL" id="apP-WC-YXZ"/>
                 <outlet property="peopleTag" destination="O3h-bZ-BqA" id="PAQ-J4-Q1k"/>

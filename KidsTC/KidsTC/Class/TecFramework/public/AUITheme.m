@@ -26,11 +26,25 @@ static AUITheme *_sharedInstance = nil;
 
 #pragma mark Global
 
+- (UIColor *)globalThemeColor {
+    if (!_globalThemeColor) {
+        _globalThemeColor = RGBA(255, 136, 136, 1);
+    }
+    return _globalThemeColor;
+}
+
 - (UIColor *)globalBGColor {
     if (!_globalBGColor) {
         _globalBGColor = RGBA(252, 248, 245, 1);
     }
     return _globalBGColor;
+}
+
+- (UIColor *)globalCellBGColor {
+    if (!_globalCellBGColor) {
+        _globalCellBGColor = RGBA(255, 255, 255, 1);
+    }
+    return _globalCellBGColor;
 }
 
 - (UIColor *)darkTextColor {

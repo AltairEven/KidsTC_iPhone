@@ -43,6 +43,7 @@
             </constraints>
             <size key="customSize" width="92" height="50"/>
             <connections>
+                <outlet property="bgView" destination="ikV-OL-ovT" id="AOR-NW-RfF"/>
                 <outlet property="titleLabel" destination="j8N-8I-EIt" id="Bp6-kp-M9X"/>
             </connections>
             <point key="canvasLocation" x="566" y="321"/>

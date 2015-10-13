@@ -58,21 +58,25 @@
     switch (indexPath.row) {
         case 0:
         {
+            [self.userNameCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
             return self.userNameCell;
         }
             break;
         case 1:
         {
+            [self.passwordCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
             return self.passwordCell;
         }
             break;
         case 2:
         {
+            [self.mobilePhoneCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
             return self.mobilePhoneCell;
         }
             break;
         case 3:
         {
+            [self.emailCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
             return self.emailCell;
         }
             break;

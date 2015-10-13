@@ -19,6 +19,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    [self.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

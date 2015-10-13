@@ -39,7 +39,7 @@
                                     <constraint firstAttribute="centerY" secondItem="6WO-UJ-i7f" secondAttribute="centerY" id="L0a-nm-vel"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="virtualLine_vertical" translatesAutoresizingMaskIntoConstraints="NO" id="eTl-Gg-e3w">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="virtualLine_vertical" translatesAutoresizingMaskIntoConstraints="NO" id="eTl-Gg-e3w">
                                 <rect key="frame" x="104" y="30" width="1" height="100"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J6f-gY-KfC" userLabel="desBG">

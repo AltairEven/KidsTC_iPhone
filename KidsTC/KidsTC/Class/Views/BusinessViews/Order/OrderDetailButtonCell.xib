@@ -76,6 +76,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bgView" destination="8zR-9Z-Qkv" id="A0F-br-qR9"/>
                 <outlet property="cancelButton" destination="KSt-Hs-e5T" id="mRU-HY-oBE"/>
                 <outlet property="descriptionLabel" destination="Tzc-GI-gjp" id="gfw-bb-frS"/>
                 <outlet property="rightButton" destination="4en-PA-zOB" id="OKz-WA-qTm"/>
