@@ -32,21 +32,39 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+    [self.priceView setContentColor:COLOR_GLOBAL_NORMAL];
+    [self.priceView.unitLabel setFont:[UIFont systemFontOfSize:20]];
+    [self.priceView.priceLabel setFont:[UIFont systemFontOfSize:30]];
+    
+    self.progressView.layer.cornerRadius = 5;
+    self.progressView.layer.borderColor = COLOR_GLOBAL_NORMAL.CGColor;
+    self.progressView.layer.borderWidth = BORDER_WIDTH;
+    self.progressView.layer.masksToBounds = YES;
 }
 
 - (void)configWithItemModel:(ActivityListItemModel *)itemModel {
     if (itemModel) {
+        NSArray *constraintsArray = [self.mainImageView constraints];
+        for (NSLayoutConstraint *constraint in constraintsArray) {
+            if (constraint.firstAttribute == NSLayoutAttributeHeight) {
+                //height constraint
+                //new
+                constraint.constant = itemModel.ratio * SCREEN_WIDTH;
+                break;
+            }
+        }
         [self.mainImageView setImageWithURL:itemModel.imageUrl];
         [self.titleLabel setText:itemModel.title];
         [self.contentLabel setText:itemModel.activityContent];
         [self.priceView setPrice:itemModel.price];
+        [self.progressView setProgress:itemModel.percent / 100 animated:YES];
         //tips
-        NSString *wholeString = [NSString stringWithFormat:@"已售%f%%,剩余%lu", itemModel.percent, (unsigned long)itemModel.leftNumber];
+        NSString *wholeString = [NSString stringWithFormat:@"已售%g%%，剩余%lu", itemModel.percent, (unsigned long)itemModel.leftNumber];
         NSMutableAttributedString *labelString = [[NSMutableAttributedString alloc] initWithString:wholeString];
         NSDictionary *attribute = [NSDictionary dictionaryWithObject:[UIColor cyanColor] forKey:NSForegroundColorAttributeName];
-        NSUInteger commaIndex = [wholeString rangeOfString:@","].location;
+        NSUInteger commaIndex = [wholeString rangeOfString:@"，"].location;
         NSRange percentRange = NSMakeRange(2, commaIndex - 2);
-        NSRange leftRange = NSMakeRange(commaIndex + 2, [wholeString length] - commaIndex - 2);
+        NSRange leftRange = NSMakeRange(commaIndex + 3, [wholeString length] - commaIndex - 3);
         [labelString setAttributes:attribute range:percentRange];
         [labelString addAttributes:attribute range:leftRange];
         [self.tipsLabel setAttributedText:labelString];

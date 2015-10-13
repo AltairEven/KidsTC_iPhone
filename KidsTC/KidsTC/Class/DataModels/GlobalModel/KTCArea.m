@@ -69,6 +69,34 @@ static NSUInteger retryCount = 0;
     return _md5String;
 }
 
+- (NSInteger)indexOfAreaIdentifier:(NSString *)identifier {
+    NSInteger itemIndex = -1;
+    if ([identifier length] > 0) {
+        for (NSUInteger index = 0; index < [self.areaItems count]; index ++) {
+            KTCAreaItem *item = [self.areaItems objectAtIndex:index];
+            if ([item.identifier isEqualToString:identifier]) {
+                itemIndex = index;
+                break;
+            }
+        }
+    }
+    return itemIndex;
+}
+
+- (NSInteger)indexOfAreaItem:(KTCAreaItem *)item {
+    NSInteger itemIndex = -1;
+    if (item) {
+        for (NSUInteger index = 0; index < [self.areaItems count]; index ++) {
+            KTCAreaItem *areaItem = [self.areaItems objectAtIndex:index];
+            if ([areaItem.identifier isEqualToString:item.identifier]) {
+                itemIndex = index;
+                break;
+            }
+        }
+    }
+    return itemIndex;
+}
+
 #pragma mark Private methods
 
 - (void)getCachedData {

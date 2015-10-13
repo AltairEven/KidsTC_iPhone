@@ -34,6 +34,7 @@
 - (void)setupLeftBarButton;
 - (void)setupLeftBarButtonWithFrontImage:(NSString*)frontImgName andBackImage:(NSString *)backImgName;
 - (void)setupRightBarButton:(NSString*)title target:(id)object action:(SEL)selector frontImage:(NSString*)frontImgName andBackImage:(NSString *)backImgName;
+- (void)setRightBarButtonTitle:(NSString*)title frontImage:(NSString*)frontImgName andBackImage:(NSString *)backImgName;
 - (void)goBackController:(id)sender;
 
 - (void)showConnectError:(BOOL)show;

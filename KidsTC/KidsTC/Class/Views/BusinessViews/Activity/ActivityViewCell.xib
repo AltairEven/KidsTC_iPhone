@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -22,7 +21,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wnc-hU-6Yc">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="192"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" secondItem="wnc-hU-6Yc" secondAttribute="width" multiplier="6:10" id="kWl-aE-TIq"/>
+                                    <constraint firstAttribute="height" constant="192" id="swd-bQ-6wp"/>
                                 </constraints>
                             </imageView>
                             <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zjv-0r-uOl" userLabel="alphaView">
@@ -39,10 +38,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iJp-Qa-dnM" userLabel="contentBGView">
-                                <rect key="frame" x="0.0" y="192" width="320" height="96"/>
+                                <rect key="frame" x="0.0" y="192" width="320" height="106"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小编推荐：视听动吃，各种感官的体验，带着宝宝一起去吧！视动吃各种感官的体验，带着宝宝一起去吧！" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ARz-gH-YuV">
-                                        <rect key="frame" x="10" y="40" width="300" height="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小编推荐：视听动吃，各种感官的体验，带着宝宝一起去吧！视动吃各种感官的体验，带着宝宝一起去吧！" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ARz-gH-YuV">
+                                        <rect key="frame" x="10" y="28" width="300" height="51"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -56,10 +55,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kpw-DM-zQv" userLabel="priceBGView">
-                                <rect key="frame" x="0.0" y="288" width="320" height="50"/>
+                                <rect key="frame" x="0.0" y="298" width="320" height="40"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uKn-1U-djx" customClass="RichPriceView">
-                                        <rect key="frame" x="10" y="15" width="30" height="20"/>
+                                        <rect key="frame" x="10" y="10" width="30" height="20"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="ciH-5V-eh8"/>
@@ -67,7 +66,7 @@
                                         </constraints>
                                     </view>
                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="qAR-yX-E5a">
-                                        <rect key="frame" x="115" y="20" width="100" height="15"/>
+                                        <rect key="frame" x="115" y="15" width="100" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="15" id="hYo-pY-B9s"/>
                                         </constraints>
@@ -75,7 +74,7 @@
                                         <color key="trackTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </progressView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已售10%，剩余20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7hm-Vn-rnu">
-                                        <rect key="frame" x="220" y="20" width="90" height="15"/>
+                                        <rect key="frame" x="220" y="15" width="90" height="15"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -86,7 +85,7 @@
                                     <constraint firstItem="uKn-1U-djx" firstAttribute="centerY" secondItem="kpw-DM-zQv" secondAttribute="centerY" id="9wa-3r-OjN"/>
                                     <constraint firstAttribute="trailing" secondItem="7hm-Vn-rnu" secondAttribute="trailing" constant="10" id="I2Y-qF-O3A"/>
                                     <constraint firstItem="7hm-Vn-rnu" firstAttribute="centerY" secondItem="qAR-yX-E5a" secondAttribute="centerY" id="KWi-kz-XAk"/>
-                                    <constraint firstAttribute="height" constant="50" id="Nuy-aa-Poe"/>
+                                    <constraint firstAttribute="height" constant="40" id="Nuy-aa-Poe"/>
                                     <constraint firstItem="qAR-yX-E5a" firstAttribute="width" secondItem="kpw-DM-zQv" secondAttribute="width" multiplier="10:32" id="Sma-Vo-3uA"/>
                                     <constraint firstItem="7hm-Vn-rnu" firstAttribute="bottom" secondItem="uKn-1U-djx" secondAttribute="bottom" id="Wb4-iw-F3u"/>
                                     <constraint firstItem="7hm-Vn-rnu" firstAttribute="leading" secondItem="qAR-yX-E5a" secondAttribute="trailing" constant="5" id="j7b-Zr-gjD"/>

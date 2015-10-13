@@ -51,8 +51,6 @@
 #import "UIImage+GImageExtension.h"
 #import "Shortcut.h"
 #import "KTCUser.h"
-#import "KTCArea.h"
-#import "KTCAgeScope.h"
 #import "KTCSearchService.h"
 #import "MJRefresh.h"
 

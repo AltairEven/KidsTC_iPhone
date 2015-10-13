@@ -54,6 +54,8 @@ typedef enum {
 
 @interface GViewController() <UIGestureRecognizerDelegate>
 
+@property (nonatomic, strong) CusNavButton *rightBarButton;
+
 @end
 
 @implementation GViewController
@@ -275,13 +277,12 @@ typedef enum {
 	{
 		[rightButton setTitle:title forState:UIControlStateNormal];
 		[rightButton setTitle:title forState:UIControlStateHighlighted];
-		rightButton.titleLabel.font = [UIFont systemFontOfSize:17.0f];
-        [rightButton setTitleColor:[UIColor colorWithRed:4/255.0 green:113/255.0 blue:249/255.0 alpha:1] forState:UIControlStateNormal];
+		rightButton.titleLabel.font = [UIFont systemFontOfSize:15.0f];
+        [rightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         
         if (title.length > 3) {
             CGSize size = [title sizeWithAttributes:[NSDictionary dictionaryWithObject:[UIFont systemFontOfSize:15.0] forKey:NSFontAttributeName]];
-            CGRect rect = rightButton.frame;
-            rect.size.width = size.width + 20.0f;
+            CGRect rect = CGRectMake(rightButton.frame.origin.x, rightButton.frame.origin.y, size.width + 40.0f, rightButton.frame.size.height);
             rightButton.frame = rect;
         }
 	}
@@ -321,8 +322,53 @@ typedef enum {
 		[rightButton addTarget:object action:selector forControlEvents:UIControlEventTouchUpInside];
 	}
     
+    self.rightBarButton = rightButton;
 	UIBarButtonItem *rItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
 	self.navigationItem.rightBarButtonItem = rItem;
+}
+
+- (void)setRightBarButtonTitle:(NSString *)title frontImage:(NSString *)frontImgName andBackImage:(NSString *)backImgName {
+    
+    if (title != nil && [title length] > 0)
+    {
+        [self.rightBarButton setTitle:title forState:UIControlStateNormal];
+        [self.rightBarButton setTitle:title forState:UIControlStateHighlighted];
+        
+        if (title.length > 3) {
+            CGSize size = [title sizeWithAttributes:[NSDictionary dictionaryWithObject:[UIFont systemFontOfSize:15.0] forKey:NSFontAttributeName]];
+            CGRect rect = CGRectMake(self.rightBarButton.frame.origin.x, self.rightBarButton.frame.origin.y, size.width + 40.0f, self.rightBarButton.frame.size.height);
+            self.rightBarButton.frame = rect;
+        }
+    }
+    
+    if (frontImgName != nil)
+    {
+        if ([frontImgName rangeOfString:@".png"].location != NSNotFound)
+        {
+            NSUInteger index = [frontImgName rangeOfString:@".png"].location;
+            frontImgName = [frontImgName substringToIndex:index];
+        }
+        
+        UIImage *imageFront = [UIImage imageNamed:frontImgName];
+        CGFloat scaleFactor = imageFront.scale;
+        CGRect rect = self.rightBarButton.frame;
+        CGSize imageSize = imageFront.size;
+        CGFloat l = (rect.size.width - imageSize.width*scaleFactor/2.0f)/2.0f;
+        CGFloat w = (rect.size.height - imageSize.height*scaleFactor/2.0f)/2.0f;
+        if(w <= 0.0000001) w = 0.0f;
+        if(l <= 0.0000001) l = 0.0f;
+        
+        UIImage *imageBack = [UIImage imageNamed:backImgName];
+        
+        UIEdgeInsets buttonEdgeInsets = UIEdgeInsetsZero;
+        if ([self.rightBarButton respondsToSelector:@selector(alignmentRectInsets)])
+        {
+            buttonEdgeInsets = [self.rightBarButton alignmentRectInsets];
+        }
+        
+        [self.rightBarButton setImage:imageFront forState:UIControlStateNormal];
+        [self.rightBarButton setImage:imageBack forState:UIControlStateHighlighted];
+    }
 }
 
 - (void)goBackController:(id)sender

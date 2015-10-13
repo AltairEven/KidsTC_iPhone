@@ -398,6 +398,13 @@
 		1E79954C1BC8F2BB0099CFF9 /* HomeImageNewsCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E79954B1BC8F2BB0099CFF9 /* HomeImageNewsCellModel.m */; settings = {ASSET_TAGS = (); }; };
 		1E79954F1BC8F2E20099CFF9 /* HomeThreeImageNewsCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E79954E1BC8F2E20099CFF9 /* HomeThreeImageNewsCellModel.m */; settings = {ASSET_TAGS = (); }; };
 		1E7995521BC8F7C80099CFF9 /* HomeNewsBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7995511BC8F7C80099CFF9 /* HomeNewsBaseModel.m */; settings = {ASSET_TAGS = (); }; };
+		1E7995571BCB96DF0099CFF9 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7995551BCB96DF0099CFF9 /* ActivityViewController.m */; settings = {ASSET_TAGS = (); }; };
+		1E7995581BCB96DF0099CFF9 /* ActivityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E7995561BCB96DF0099CFF9 /* ActivityViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		1E79955B1BCB976A0099CFF9 /* ActivityViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E79955A1BCB976A0099CFF9 /* ActivityViewModel.m */; settings = {ASSET_TAGS = (); }; };
+		1E79955E1BCBCA380099CFF9 /* KTCAreaSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E79955D1BCBCA380099CFF9 /* KTCAreaSelectView.m */; settings = {ASSET_TAGS = (); }; };
+		1E7995601BCBCA4B0099CFF9 /* KTCAreaSelectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E79955F1BCBCA4B0099CFF9 /* KTCAreaSelectView.xib */; settings = {ASSET_TAGS = (); }; };
+		1E7995641BCBCB480099CFF9 /* AddressSelectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7995621BCBCB480099CFF9 /* AddressSelectTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		1E7995651BCBCB480099CFF9 /* AddressSelectTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E7995631BCBCB480099CFF9 /* AddressSelectTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		1E8017081BB006D100B6C352 /* HomeViewWholeImageNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8017061BB006D100B6C352 /* HomeViewWholeImageNewsCell.m */; settings = {ASSET_TAGS = (); }; };
 		1E8017091BB006D100B6C352 /* HomeViewWholeImageNewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E8017071BB006D100B6C352 /* HomeViewWholeImageNewsCell.xib */; settings = {ASSET_TAGS = (); }; };
 		1E80170D1BB006EF00B6C352 /* HomeViewNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E80170B1BB006EF00B6C352 /* HomeViewNewsCell.m */; settings = {ASSET_TAGS = (); }; };
@@ -1484,6 +1491,17 @@
 		1E79954E1BC8F2E20099CFF9 /* HomeThreeImageNewsCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeThreeImageNewsCellModel.m; sourceTree = "<group>"; };
 		1E7995501BC8F7C80099CFF9 /* HomeNewsBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeNewsBaseModel.h; sourceTree = "<group>"; };
 		1E7995511BC8F7C80099CFF9 /* HomeNewsBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeNewsBaseModel.m; sourceTree = "<group>"; };
+		1E7995541BCB96DF0099CFF9 /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
+		1E7995551BCB96DF0099CFF9 /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
+		1E7995561BCB96DF0099CFF9 /* ActivityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityViewController.xib; sourceTree = "<group>"; };
+		1E7995591BCB976A0099CFF9 /* ActivityViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewModel.h; sourceTree = "<group>"; };
+		1E79955A1BCB976A0099CFF9 /* ActivityViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewModel.m; sourceTree = "<group>"; };
+		1E79955C1BCBCA380099CFF9 /* KTCAreaSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCAreaSelectView.h; sourceTree = "<group>"; };
+		1E79955D1BCBCA380099CFF9 /* KTCAreaSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCAreaSelectView.m; sourceTree = "<group>"; };
+		1E79955F1BCBCA4B0099CFF9 /* KTCAreaSelectView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTCAreaSelectView.xib; sourceTree = "<group>"; };
+		1E7995611BCBCB480099CFF9 /* AddressSelectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressSelectTableViewCell.h; sourceTree = "<group>"; };
+		1E7995621BCBCB480099CFF9 /* AddressSelectTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressSelectTableViewCell.m; sourceTree = "<group>"; };
+		1E7995631BCBCB480099CFF9 /* AddressSelectTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddressSelectTableViewCell.xib; sourceTree = "<group>"; };
 		1E8017051BB006D100B6C352 /* HomeViewWholeImageNewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewWholeImageNewsCell.h; sourceTree = "<group>"; };
 		1E8017061BB006D100B6C352 /* HomeViewWholeImageNewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewWholeImageNewsCell.m; sourceTree = "<group>"; };
 		1E8017071BB006D100B6C352 /* HomeViewWholeImageNewsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewWholeImageNewsCell.xib; sourceTree = "<group>"; };
@@ -2320,6 +2338,12 @@
 				1E7994ED1BC651E00099CFF9 /* HorizontalCalendarView.h */,
 				1E7994EE1BC651E00099CFF9 /* HorizontalCalendarView.m */,
 				1E7994EF1BC651E00099CFF9 /* HorizontalCalendarView.xib */,
+				1E79955C1BCBCA380099CFF9 /* KTCAreaSelectView.h */,
+				1E79955D1BCBCA380099CFF9 /* KTCAreaSelectView.m */,
+				1E79955F1BCBCA4B0099CFF9 /* KTCAreaSelectView.xib */,
+				1E7995611BCBCB480099CFF9 /* AddressSelectTableViewCell.h */,
+				1E7995621BCBCB480099CFF9 /* AddressSelectTableViewCell.m */,
+				1E7995631BCBCB480099CFF9 /* AddressSelectTableViewCell.xib */,
 			);
 			path = SelfDefine;
 			sourceTree = "<group>";
@@ -2608,6 +2632,8 @@
 				1E827CD01B9BF0E3008F3F08 /* CouponListViewModel.m */,
 				1E7995201BC75E580099CFF9 /* ParentingStrategyDetailViewModel.h */,
 				1E7995211BC75E580099CFF9 /* ParentingStrategyDetailViewModel.m */,
+				1E7995591BCB976A0099CFF9 /* ActivityViewModel.h */,
+				1E79955A1BCB976A0099CFF9 /* ActivityViewModel.m */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -3280,6 +3306,7 @@
 		1E3D8EFC1B4CB83A00275C35 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				1E7995531BCB96CA0099CFF9 /* Activity */,
 				1E7995231BC765090099CFF9 /* ParentingStrategy */,
 				1E827CB51B9BD8F9008F3F08 /* Coupon */,
 				1E827B611B8EB8E9008F3F08 /* Map */,
@@ -3641,6 +3668,16 @@
 				1E7995261BC7656C0099CFF9 /* ParentingStrategyDetailViewController.xib */,
 			);
 			path = ParentingStrategy;
+			sourceTree = "<group>";
+		};
+		1E7995531BCB96CA0099CFF9 /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				1E7995541BCB96DF0099CFF9 /* ActivityViewController.h */,
+				1E7995551BCB96DF0099CFF9 /* ActivityViewController.m */,
+				1E7995561BCB96DF0099CFF9 /* ActivityViewController.xib */,
+			);
+			path = Activity;
 			sourceTree = "<group>";
 		};
 		1E827B291B8C403E008F3F08 /* News */ = {
@@ -4670,6 +4707,7 @@
 				1EC73BEC1B5E5FF3008B39EA /* HomeViewThreeCell.xib in Resources */,
 				1EC73C181B5F992E008B39EA /* home1.png in Resources */,
 				1E0B77FF1B6F32D300A58AD4 /* KTCSearchAreaFilterView.xib in Resources */,
+				1E7995581BCB96DF0099CFF9 /* ActivityViewController.xib in Resources */,
 				1E8EFCDC1B67293A00D00808 /* OrderCommentView.xib in Resources */,
 				1E8017091BB006D100B6C352 /* HomeViewWholeImageNewsCell.xib in Resources */,
 				1E8EFD201B68BBA100D00808 /* AccountSettingView.xib in Resources */,
@@ -4741,6 +4779,7 @@
 				1E827BDB1B941337008F3F08 /* ImageSelectedSmallOn@3x.png in Resources */,
 				1E943F011B7B23070029FE74 /* AppointmentOrderListViewController.xib in Resources */,
 				1E827B7C1B9064F0008F3F08 /* KTCAnnotationTipDestinationView.xib in Resources */,
+				1E7995601BCBCA4B0099CFF9 /* KTCAreaSelectView.xib in Resources */,
 				1EA8B6DB1B66127600F90688 /* CategorySubLevelCollectionCell.xib in Resources */,
 				1E3D8DA01B4BF4A100275C35 /* ReleaseNotes.txt in Resources */,
 				1EA8B6CE1B66080400F90688 /* CategoryView.xib in Resources */,
@@ -4754,6 +4793,7 @@
 				1E827C9E1B94144E008F3F08 /* LICENSE in Resources */,
 				1EC73BAA1B5E25A4008B39EA /* HomeTopView.xib in Resources */,
 				1EA8B6D31B66084D00F90688 /* CategoryViewCell.xib in Resources */,
+				1E7995651BCBCB480099CFF9 /* AddressSelectTableViewCell.xib in Resources */,
 				1E827B201B886237008F3F08 /* StoreMoreDetailView.xib in Resources */,
 				1E8EFD101B68836600D00808 /* CommentListViewCell.xib in Resources */,
 				1EC73BE21B5E4895008B39EA /* HomeViewMoreTitleCell.xib in Resources */,
@@ -4938,6 +4978,7 @@
 				1E0B7A9E1B6F67B800A58AD4 /* GCoverLineLab.m in Sources */,
 				1E0B77D71B6A3F2400A58AD4 /* ServiceDetailConfirmView.m in Sources */,
 				1E827B491B8C5BB5008F3F08 /* UserCenterModel.m in Sources */,
+				1E79955E1BCBCA380099CFF9 /* KTCAreaSelectView.m in Sources */,
 				1E0B7A7D1B6F67B800A58AD4 /* AUIStackView.m in Sources */,
 				1E827B421B8C47F5008F3F08 /* NewsListViewModel.m in Sources */,
 				1E3D7E7E1B4BD83D00275C35 /* AppDelegate.m in Sources */,
@@ -5078,6 +5119,7 @@
 				1EC4A1231B5D248300206BB9 /* KTCSearchResultViewController.m in Sources */,
 				1E943EA21B71E8370029FE74 /* KTCUser.m in Sources */,
 				1E0B7AA01B6F67B800A58AD4 /* GEventPageViewCell1.m in Sources */,
+				1E7995641BCBCB480099CFF9 /* AddressSelectTableViewCell.m in Sources */,
 				1E0B7B111B6F6C1400A58AD4 /* WelcomeView.m in Sources */,
 				1EC4A0F31B5A4C8600206BB9 /* FavourateView.m in Sources */,
 				1E0B7B4E1B6F891100A58AD4 /* GValidator.m in Sources */,
@@ -5132,6 +5174,7 @@
 				1E3D8CDD1B4BF4A100275C35 /* IcsonProvince.m in Sources */,
 				1E3D8DAC1B4BF4A100275C35 /* RemindManager.m in Sources */,
 				1E0B7B101B6F6C1400A58AD4 /* WelcomePage.m in Sources */,
+				1E79955B1BCB976A0099CFF9 /* ActivityViewModel.m in Sources */,
 				1E0B77D11B6A14A200A58AD4 /* PMCalendarView.m in Sources */,
 				1E0B7A961B6F67B800A58AD4 /* GColorsTextCell.m in Sources */,
 				1E3D8D5B1B4BF4A100275C35 /* HttpProcessHelper.m in Sources */,
@@ -5335,6 +5378,7 @@
 				1E3D8D7F1B4BF4A100275C35 /* AlixPay.m in Sources */,
 				1E0B7B391B6F721B00A58AD4 /* MessageCenterParser.m in Sources */,
 				1E827CB31B9457FC008F3F08 /* KTCImageUploader.m in Sources */,
+				1E7995571BCB96DF0099CFF9 /* ActivityViewController.m in Sources */,
 				1E0B7AC41B6F67B800A58AD4 /* MultiRollingView.m in Sources */,
 				1E943E9F1B71E7CD0029FE74 /* WeChatModel.m in Sources */,
 				1E3D8F301B4CD3EC00275C35 /* ParentingStrategyViewController.m in Sources */,
@@ -5487,7 +5531,7 @@
 					"-licucore",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a45c28ae-943f-4413-9cf3-102f629d1254";
+				PROVISIONING_PROFILE = "4f140705-39b9-4ca2-be61-0330b0943a05";
 			};
 			name = Debug;
 		};
@@ -5520,7 +5564,7 @@
 					"-licucore",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a45c28ae-943f-4413-9cf3-102f629d1254";
+				PROVISIONING_PROFILE = "4f140705-39b9-4ca2-be61-0330b0943a05";
 			};
 			name = Release;
 		};

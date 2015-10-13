@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class KTCAreaItem;
+
 @interface KTCArea : NSObject
 
 @property (nonatomic, strong, readonly) NSArray *areaItems;
@@ -17,6 +19,10 @@
 + (instancetype)area;
 
 - (void)synchronizeArea;
+
+- (NSInteger)indexOfAreaIdentifier:(NSString *)identifier;
+
+- (NSInteger)indexOfAreaItem:(KTCAreaItem *)item;
 
 @end
 

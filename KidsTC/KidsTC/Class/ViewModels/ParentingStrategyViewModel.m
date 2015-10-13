@@ -18,17 +18,7 @@
 
 @property (nonatomic, strong) NSMutableDictionary *totalResultsContainer;
 
-@property (nonatomic, strong) NSArray *dateDesArray;
-
 @property (nonatomic, strong) NSMutableDictionary *currentPageIndexs;
-
-@property (nonatomic, assign) NSUInteger currentCalendarIndex;
-
-- (void)fillDateDescriptionsWithData:(NSDictionary *)data;
-
-- (NSArray *)getDayDescriptionsWithOriginalDates:(NSArray *)datesArray outDateFormatter:(NSDateFormatter *)formatter;
-
-- (NSMutableArray *)strategyResultAtCalendarIndex:(NSUInteger)index;
 
 - (void)clearDataForCalendarIndex:(NSUInteger)index;
 
@@ -64,76 +54,8 @@
 
 #pragma mark Private methods
 
-- (void)fillDateDescriptionsWithData:(NSDictionary *)data {
-    NSArray *timesArray = [data objectForKey:@"time"];
-    if ([timesArray isKindOfClass:[NSArray class]]) {
-        NSString *firstResult = [timesArray firstObject];
-        if ([self.dateDesArray count] > 0) {
-            NSString *firstDate = [self.dateDesArray firstObject];
-            if (![firstDate isEqualToString:firstResult]) {
-                self.dateDesArray = [NSArray arrayWithArray:timesArray];
-                NSDateFormatter *dateFormatter =[[NSDateFormatter alloc] init];
-                [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-                NSMutableArray *tempDates = [[NSMutableArray alloc] init];
-                for (NSString *dateString in self.dateDesArray) {
-                    NSDate *date = [dateFormatter dateFromString:dateString];
-                    [tempDates addObject:date];
-                }
-                [dateFormatter setDateFormat:@"EEM月dd日"];
-                dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh-CN"];
-                [self.view setCalendarTitles:[self getDayDescriptionsWithOriginalDates:[NSArray arrayWithArray:tempDates] outDateFormatter:dateFormatter]];
-            }
-        } else {
-            self.dateDesArray = [NSArray arrayWithArray:timesArray];
-            NSDateFormatter *dateFormatter =[[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-            NSMutableArray *tempDates = [[NSMutableArray alloc] init];
-            for (NSString *dateString in self.dateDesArray) {
-                NSDate *date = [dateFormatter dateFromString:dateString];
-                [tempDates addObject:date];
-            }
-            [dateFormatter setDateFormat:@"EEM月dd日"];
-            dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh-CN"];
-            [self.view setCalendarTitles:[self getDayDescriptionsWithOriginalDates:[NSArray arrayWithArray:tempDates] outDateFormatter:dateFormatter]];
-        }
-    }
-}
-
-- (NSArray *)getDayDescriptionsWithOriginalDates:(NSArray *)datesArray outDateFormatter:(NSDateFormatter *)formatter {
-    NSMutableArray *retArray = [[NSMutableArray alloc] init];
-    for (NSUInteger left = 0; left < [datesArray count]; left ++) {
-        NSDate *newDate = [datesArray objectAtIndex:left];
-        NSString *dateString = nil;
-        NSString *day =[formatter stringFromDate:newDate];
-        if (left == 0) {
-            dateString = [NSString stringWithFormat:@"今天%@", [day substringFromIndex:2]];
-        } else if (left == 1) {
-            dateString = [NSString stringWithFormat:@"明天%@", [day substringFromIndex:2]];
-        } else if (left == 2) {
-            dateString = [NSString stringWithFormat:@"后天%@", [day substringFromIndex:2]];
-        } else {
-            dateString = day;
-        }
-        [retArray addObject:dateString];
-    }
-    if ([retArray count] > 0) {
-        return [NSArray arrayWithArray:retArray];
-    }
-    return nil;
-}
-
-- (NSMutableArray *)strategyResultAtCalendarIndex:(NSUInteger)index {
-    if ([self.totalResultsContainer count] > index) {
-        NSMutableArray *dataArray = [self.totalResultsContainer objectForKey:[NSNumber numberWithInteger:index]];
-        if (dataArray) {
-            return dataArray;
-        }
-    }
-    return nil;
-}
-
 - (void)clearDataForCalendarIndex:(NSUInteger)index {
-    NSMutableArray *dataArray = [self strategyResultAtCalendarIndex:index];
+    NSMutableArray *dataArray = nil;
     if (dataArray) {
         [dataArray removeAllObjects];
     }
@@ -156,7 +78,7 @@
         case -1003:
         {
             //没有数据
-            [self.view noMoreData:YES forCalendarIndex:index];
+            [self.view noMoreData:YES];
         }
             break;
         default:
@@ -185,7 +107,7 @@
         case -1003:
         {
             //没有数据
-            [self.view noMoreData:YES forCalendarIndex:index];
+            [self.view noMoreData:YES];
         }
             break;
         default:
@@ -196,39 +118,38 @@
 }
 
 - (void)reloadParentingStrategyViewWithData:(NSDictionary *)data calendarIndex:(NSUInteger)index {
-    [self fillDateDescriptionsWithData:data];
-    if ([self.dateDesArray count] > 0) {
-        NSArray *dataArray = [data objectForKey:@"data"];
-        if ([dataArray isKindOfClass:[NSArray class]] && [dataArray count] > 0) {
-            [self.view hideLoadMoreFooter:NO forCalendarIndex:index];
-            
-            NSMutableArray *tempContainer = [[NSMutableArray alloc] init];
-            for (NSDictionary *singleItem in dataArray) {
-                ParentingStrategyListItemModel *model = [[ParentingStrategyListItemModel alloc] initWithRawData:singleItem];
-                if (model) {
-                    [tempContainer addObject:model];
-                }
-            }
-            NSMutableArray *resultArray = [self strategyResultAtCalendarIndex:index];
-            if (resultArray) {
-                [resultArray addObjectsFromArray:tempContainer];
-            } else {
-                [self.totalResultsContainer setObject:tempContainer forKey:[NSNumber numberWithInteger:index]];
-            }
-            
-            if ([dataArray count] < PageSize) {
-                [self.view noMoreData:YES forCalendarIndex:index];
-            } else {
-                [self.view noMoreData:NO forCalendarIndex:index];
-            }
-        } else {
-            [self.view noMoreData:YES forCalendarIndex:index];
-            [self.view hideLoadMoreFooter:YES forCalendarIndex:index];
-        }
-        [self.view reloadData];
-        [self.view endRefresh];
-        [self.view endLoadMore];
-    }
+//    if ([self.dateDesArray count] > 0) {
+//        NSArray *dataArray = [data objectForKey:@"data"];
+//        if ([dataArray isKindOfClass:[NSArray class]] && [dataArray count] > 0) {
+//            [self.view hideLoadMoreFooter:NO forCalendarIndex:index];
+//            
+//            NSMutableArray *tempContainer = [[NSMutableArray alloc] init];
+//            for (NSDictionary *singleItem in dataArray) {
+//                ParentingStrategyListItemModel *model = [[ParentingStrategyListItemModel alloc] initWithRawData:singleItem];
+//                if (model) {
+//                    [tempContainer addObject:model];
+//                }
+//            }
+//            NSMutableArray *resultArray = [self strategyResultAtCalendarIndex:index];
+//            if (resultArray) {
+//                [resultArray addObjectsFromArray:tempContainer];
+//            } else {
+//                [self.totalResultsContainer setObject:tempContainer forKey:[NSNumber numberWithInteger:index]];
+//            }
+//            
+//            if ([dataArray count] < PageSize) {
+//                [self.view noMoreData:YES forCalendarIndex:index];
+//            } else {
+//                [self.view noMoreData:NO forCalendarIndex:index];
+//            }
+//        } else {
+//            [self.view noMoreData:YES forCalendarIndex:index];
+//            [self.view hideLoadMoreFooter:YES forCalendarIndex:index];
+//        }
+//        [self.view reloadData];
+//        [self.view endRefresh];
+//        [self.view endLoadMore];
+//    }
 }
 
 #pragma mark Public methods
@@ -239,10 +160,10 @@
     }
     
     NSString *dateString = @"";
-    if ([self.dateDesArray count] > index) {
-        //已经有数据的情况
-        dateString = [self.dateDesArray objectAtIndex:index];
-    }
+//    if ([self.dateDesArray count] > index) {
+//        //已经有数据的情况
+//        dateString = [self.dateDesArray objectAtIndex:index];
+//    }
     
     NSUInteger pageIndex = [[self.currentPageIndexs objectForKey:[NSNumber numberWithInteger:index]] integerValue];
     if (pageIndex <= 0) {
@@ -277,15 +198,15 @@
 }
 
 - (void)resetResultWithCalendarIndex:(NSUInteger)index {
-    self.currentCalendarIndex = index;
-    [self stopUpdateData];
-    NSMutableArray *dataArray = [self strategyResultAtCalendarIndex:index];
-    
-    if ([dataArray count] > 0) {
-        [self.view reloadData];
-    } else {
-        [self startUpdateDataWithCalendarIndex:index];
-    }
+//    self.currentCalendarIndex = index;
+//    [self stopUpdateData];
+//    NSMutableArray *dataArray = [self strategyResultAtCalendarIndex:index];
+//    
+//    if ([dataArray count] > 0) {
+//        [self.view reloadData];
+//    } else {
+//        [self startUpdateDataWithCalendarIndex:index];
+//    }
 }
 
 

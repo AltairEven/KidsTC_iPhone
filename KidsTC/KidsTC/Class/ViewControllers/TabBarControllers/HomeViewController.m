@@ -12,6 +12,7 @@
 #import "CategoryViewController.h"
 #import "AUIFloorNavigationView.h"
 #import "KTCWebViewController.h"
+#import "ActivityViewController.h"
 
 
 @interface HomeViewController () <HomeViewDelegate, AUIFloorNavigationViewDataSource, AUIFloorNavigationViewDelegate>
@@ -119,7 +120,9 @@
             break;
         case HomeSegueDestinationActivity:
         {
-            
+            ActivityViewController *controller = [[ActivityViewController alloc] initWithNibName:@"ActivityViewController" bundle:nil];
+            [controller setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:controller animated:YES];
         }
             break;
         case HomeSegueDestinationBabyHouse:

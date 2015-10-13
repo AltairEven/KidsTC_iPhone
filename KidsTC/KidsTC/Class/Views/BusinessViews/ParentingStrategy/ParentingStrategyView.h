@@ -12,17 +12,15 @@
 
 @protocol ParentingStrategyViewDataSource <NSObject>
 
-- (NSArray *)listItemModelsOfParentingStrategyView:(ParentingStrategyView *)strategyView atCalendarIndex:(NSUInteger)index;
+- (NSArray *)listItemModelsOfParentingStrategyView:(ParentingStrategyView *)strategyView;
 
 @end
 
 @protocol ParentingStrategyViewDelegate <NSObject>
 
-- (void)parentingStrategyView:(ParentingStrategyView *)strategyView didClickedCalendarButtonAtIndex:(NSUInteger)index;
+- (void)didPullDownToRefreshForParentingStrategyView:(ParentingStrategyView *)strategyView;
 
-- (void)parentingStrategyView:(ParentingStrategyView *)strategyView DidPullDownToRefreshForCalendarIndex:(NSUInteger)index;
-
-- (void)parentingStrategyView:(ParentingStrategyView *)strategyView DidPullUpToLoadMoreForCalendarIndex:(NSUInteger)index;
+- (void)didPullUpToLoadMoreForParentingStrategyView:(ParentingStrategyView *)strategyView;
 
 - (void)parentingStrategyView:(ParentingStrategyView *)strategyView didSelectedItemAtIndex:(NSUInteger)index;
 
@@ -33,9 +31,6 @@
 @property (nonatomic, assign) id<ParentingStrategyViewDataSource> dataSource;
 @property (nonatomic, assign) id<ParentingStrategyViewDelegate> delegate;
 
-@property (nonatomic, strong) NSArray *calendarTitles;
-@property (nonatomic, readonly) NSUInteger currentCalendarIndex;
-
 - (void)reloadData;
 
 - (void)startRefresh;
@@ -44,8 +39,8 @@
 
 - (void)endLoadMore;
 
-- (void)noMoreData:(BOOL)noMore forCalendarIndex:(NSUInteger)index;
+- (void)noMoreData:(BOOL)noMore;
 
-- (void)hideLoadMoreFooter:(BOOL)hidden forCalendarIndex:(NSUInteger)index;
+- (void)hideLoadMoreFooter:(BOOL)hidden;
 
 @end

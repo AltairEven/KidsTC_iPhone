@@ -45,6 +45,8 @@
 
 - (void)buildSubviews {
     self.buttonArray = [[NSMutableArray alloc] init];
+    
+    [self setBackgroundColor:COLOR_GLOBAL_BG];
 }
 
 
@@ -59,7 +61,7 @@
     CGFloat xPosition = 0;
     CGFloat yPosition = 5;
     CGFloat width = SCREEN_WIDTH / 3;
-    CGFloat height = 40 - (yPosition * 2);
+    CGFloat height = 50 - (yPosition * 2);
     CGFloat gap = 2;
     NSUInteger count = [self.titlesArray count];
     for (NSUInteger index = 0; index < count; index ++) {
@@ -69,8 +71,8 @@
         [button setTitleShadowColor:[UIColor clearColor] forState:UIControlStateSelected];
         [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-        [button setBackgroundColor:RGBA(246, 246, 246, 1) forState:UIControlStateNormal];
-        [button setBackgroundColor:[UIColor redColor] forState:UIControlStateSelected];
+        [button setBackgroundColor:[UIColor clearColor] forState:UIControlStateNormal];
+        [button setBackgroundColor:COLOR_GLOBAL_NORMAL forState:UIControlStateSelected];
         [button setTitle:[self.titlesArray objectAtIndex:index] forState:UIControlStateNormal];
         
         button.layer.cornerRadius = 10;

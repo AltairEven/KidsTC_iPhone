@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "KTCArea.h"
+#import "KTCAgeScope.h"
 
 @interface KTCUser : NSObject
 
@@ -19,6 +21,8 @@
 @property (nonatomic, copy) NSString *skey;
 
 @property (nonatomic, readonly) BOOL hasLogin;
+
+@property (nonatomic, strong) KTCAreaItem *currentArea;
 
 + (instancetype)currentUser;
 
