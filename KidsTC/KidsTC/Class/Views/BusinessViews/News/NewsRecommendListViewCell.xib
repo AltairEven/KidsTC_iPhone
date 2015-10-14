@@ -16,7 +16,7 @@
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vqA-67-AvN" customClass="NewsRecommendCellView">
                         <rect key="frame" x="10" y="40" width="300" height="86"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xac-xp-BZL">
                         <rect key="frame" x="10" y="0.0" width="300" height="40"/>

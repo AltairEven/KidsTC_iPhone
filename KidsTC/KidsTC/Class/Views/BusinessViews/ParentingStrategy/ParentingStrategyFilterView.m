@@ -11,10 +11,12 @@
 @interface ParentingStrategyFilterView () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *tapArea;
+@property (weak, nonatomic) IBOutlet UIView *filterBGView;
 //single select
-@property (weak, nonatomic) IBOutlet UIButton *editorSortButton;
+@property (weak, nonatomic) IBOutlet UIButton *hotSortButton;
 @property (weak, nonatomic) IBOutlet UIButton *timeSortButton;
 //area
+@property (weak, nonatomic) IBOutlet UIView *areaBGView;
 @property (weak, nonatomic) IBOutlet UILabel *selectedAreaLabel;
 @property (weak, nonatomic) IBOutlet UITableView *areaTable;
 //bottom
@@ -58,17 +60,19 @@
 }
 
 - (void)buildSubviews {
-    self.areaTable.delegate = self;
-    self.areaTable.dataSource = self;
-    
-    self.areaTable.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
+    [self.filterBGView setBackgroundColor:[AUITheme theme].globalBGColor];
+    [self.areaBGView setHidden:YES];
+//    self.areaTable.delegate = self;
+//    self.areaTable.dataSource = self;
+//    
+//    self.areaTable.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
     [self.tapArea addGestureRecognizer:tap];
     [self.tapArea setHidden:YES];
     
-    [self.editorSortButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];
-    [self.editorSortButton setImageEdgeInsets:UIEdgeInsetsMake(0, SCREEN_WIDTH -120, 0, 0)];
+    [self.hotSortButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];
+    [self.hotSortButton setImageEdgeInsets:UIEdgeInsetsMake(0, SCREEN_WIDTH -120, 0, 0)];
     [self.timeSortButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -20, 0, 0)];
     [self.timeSortButton setImageEdgeInsets:UIEdgeInsetsMake(0, SCREEN_WIDTH -120, 0, 0)];
     
@@ -76,9 +80,13 @@
     
     _currentAreaSelectedIndex = NSUIntegerMax;
     
+    [self.hotSortButton setBackgroundColor:[AUITheme theme].globalCellBGColor forState:UIControlStateNormal];
+    [self.hotSortButton setBackgroundColor:[AUITheme theme].globalCellBGColor forState:UIControlStateHighlighted];
+    [self.hotSortButton setBackgroundColor:[AUITheme theme].globalCellBGColor forState:UIControlStateSelected];
     
-    [self.editorSortButton setBackgroundColor:[AUITheme theme].globalCellBGColor forState:UIControlStateNormal];
-    [self.editorSortButton setBackgroundColor:[AUITheme theme].globalCellBGColor forState:UIControlStateNormal];
+    [self.timeSortButton setBackgroundColor:[AUITheme theme].globalCellBGColor forState:UIControlStateNormal];
+    [self.timeSortButton setBackgroundColor:[AUITheme theme].globalCellBGColor forState:UIControlStateHighlighted];
+    [self.timeSortButton setBackgroundColor:[AUITheme theme].globalCellBGColor forState:UIControlStateSelected];
 }
 
 
@@ -121,21 +129,15 @@
 
 - (void)selectSortType:(ParentingStrategySortType)type {
     switch (type) {
-        case ParentingStrategySortTypeDefault:
+        case ParentingStrategySortTypeHot:
         {
-            [self.editorSortButton setSelected:NO];
-            [self.timeSortButton setSelected:NO];
-        }
-            break;
-        case ParentingStrategySortTypeRecommend:
-        {
-            [self.editorSortButton setSelected:YES];
+            [self.hotSortButton setSelected:YES];
             [self.timeSortButton setSelected:NO];
         }
             break;
         case ParentingStrategySortTypeTime:
         {
-            [self.editorSortButton setSelected:NO];
+            [self.hotSortButton setSelected:NO];
             [self.timeSortButton setSelected:YES];
         }
             break;
@@ -168,7 +170,7 @@
 }
 
 - (IBAction)didClickedClearButton:(id)sender {
-    [self selectSortType:ParentingStrategySortTypeDefault];
+    [self selectSortType:ParentingStrategySortTypeTime];
     if (self.currentAreaSelectedIndex != NSUIntegerMax) {
         [self.areaTable deselectRowAtIndexPath:[NSIndexPath indexPathForRow:self.currentAreaSelectedIndex inSection:0] animated:YES];
     }

@@ -30,10 +30,20 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Voe-qw-urR">
+                                <rect key="frame" x="0.0" y="58" width="320" height="1"/>
+                                <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="abz-lT-9WC"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <constraints>
                             <constraint firstItem="ysq-t8-z8Z" firstAttribute="centerY" secondItem="eSV-zb-Prq" secondAttribute="centerY" id="G0y-RB-H7Z"/>
+                            <constraint firstAttribute="trailing" secondItem="Voe-qw-urR" secondAttribute="trailing" id="Im0-M9-Q6m"/>
+                            <constraint firstAttribute="bottom" secondItem="Voe-qw-urR" secondAttribute="bottom" id="VES-2e-yLz"/>
                             <constraint firstItem="vnu-e6-aGq" firstAttribute="centerY" secondItem="ysq-t8-z8Z" secondAttribute="centerY" id="dW7-XN-ccw"/>
+                            <constraint firstItem="Voe-qw-urR" firstAttribute="leading" secondItem="eSV-zb-Prq" secondAttribute="leading" id="gSp-b2-w1a"/>
                             <constraint firstAttribute="trailing" secondItem="ysq-t8-z8Z" secondAttribute="trailing" constant="10" id="o6n-c4-NFO"/>
                             <constraint firstItem="ysq-t8-z8Z" firstAttribute="leading" secondItem="vnu-e6-aGq" secondAttribute="trailing" constant="10" id="tPW-8u-UPW"/>
                             <constraint firstItem="vnu-e6-aGq" firstAttribute="leading" secondItem="eSV-zb-Prq" secondAttribute="leading" constant="10" id="yGS-WH-bMj"/>
@@ -51,6 +61,7 @@
                 <outlet property="bgView" destination="eSV-zb-Prq" id="0Ju-hK-HYK"/>
                 <outlet property="cellImageView" destination="ysq-t8-z8Z" id="P3u-S1-7xW"/>
                 <outlet property="newsTitleLabel" destination="vnu-e6-aGq" id="8kC-HU-3od"/>
+                <outlet property="separator" destination="Voe-qw-urR" id="eH0-ad-i2L"/>
             </connections>
             <point key="canvasLocation" x="589" y="355"/>
         </tableViewCell>

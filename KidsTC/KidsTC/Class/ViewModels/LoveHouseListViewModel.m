@@ -161,7 +161,7 @@
     return [NSArray arrayWithArray:self.itemModelsArray];
 }
 
-- (void)getMoreHouses {
+- (void)getMoreStrategies {
     if (!self.loadHouseRequest) {
         self.loadHouseRequest = [HttpRequestClient clientWithUrlAliasName:@"SEARCH_ARTICLE"];
     }

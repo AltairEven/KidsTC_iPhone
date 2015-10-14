@@ -4,6 +4,34 @@
 <dict>
 	<key>data</key>
 	<dict>
+		<key>ARTICLE_GET_HOT_TAG</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com:8000/json.php?mod=article&amp;&amp;act=get_hot_tag</string>
+		</dict>
+		<key>ARTICLE_GET_LIST</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com:8000/json.php?mod=article&amp;&amp;act=get_article_list</string>
+		</dict>
+		<key>ARTICLE_GET_POPULATION_TYPE</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com:8000/json.php?mod=article&amp;&amp;act=get_population_type</string>
+		</dict>
+		<key>ARTICLE_GET_RECOMMEND_LIST</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com:8000/json.php?mod=article&amp;&amp;act=get_recommend_article_list</string>
+		</dict>
 		<key>CATEGORY_GET</key>
 		<dict>
 			<key>method</key>
@@ -207,13 +235,6 @@
 			<key>url</key>
 			<string>http://api.kidstc.com:8000/json.php?mod=score&amp;&amp;act=query_score_flow</string>
 		</dict>
-		<key>SEARCH_ARTICLE</key>
-		<dict>
-			<key>method</key>
-			<string>post</string>
-			<key>url</key>
-			<string>http://api.kidstc.com:8000/json.php?mod=article&amp;&amp;act=search_article</string>
-		</dict>
 		<key>SEARCH_GET_HOTKEY</key>
 		<dict>
 			<key>method</key>
@@ -267,6 +288,6 @@
 	<key>errno</key>
 	<string>0</string>
 	<key>version</key>
-	<string>11</string>
+	<string>12</string>
 </dict>
 </plist>

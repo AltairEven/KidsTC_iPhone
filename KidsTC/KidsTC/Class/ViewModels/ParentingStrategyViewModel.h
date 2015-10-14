@@ -17,10 +17,8 @@
 
 @property (nonatomic, assign) NSUInteger currentAreaIndex;
 
-- (void)startUpdateDataWithCalendarIndex:(NSUInteger)index;
+- (void)getMoreStrategies;
 
-- (void)getMoreDataWithCalendarIndex:(NSUInteger)index;
-
-- (void)resetResultWithCalendarIndex:(NSUInteger)index;
+- (NSArray *)resutlStrategies;
 
 @end

@@ -380,7 +380,6 @@
 		1E79951B1BC758560099CFF9 /* NewsRecommendListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E79950A1BC758560099CFF9 /* NewsRecommendListViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		1E79951C1BC758560099CFF9 /* NewsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E79950C1BC758560099CFF9 /* NewsView.m */; settings = {ASSET_TAGS = (); }; };
 		1E79951D1BC758560099CFF9 /* NewsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E79950D1BC758560099CFF9 /* NewsView.xib */; settings = {ASSET_TAGS = (); }; };
-		1E79951F1BC75BB40099CFF9 /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E79951E1BC75BB40099CFF9 /* interface_list.plist */; settings = {ASSET_TAGS = (); }; };
 		1E7995221BC75E580099CFF9 /* ParentingStrategyDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7995211BC75E580099CFF9 /* ParentingStrategyDetailViewModel.m */; settings = {ASSET_TAGS = (); }; };
 		1E7995271BC7656C0099CFF9 /* ParentingStrategyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7995251BC7656C0099CFF9 /* ParentingStrategyDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		1E7995281BC7656C0099CFF9 /* ParentingStrategyDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E7995261BC7656C0099CFF9 /* ParentingStrategyDetailViewController.xib */; settings = {ASSET_TAGS = (); }; };
@@ -421,6 +420,7 @@
 		1E7995931BCE36C20099CFF9 /* HospitalListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7995921BCE36C20099CFF9 /* HospitalListViewModel.m */; settings = {ASSET_TAGS = (); }; };
 		1E7995971BCE38020099CFF9 /* HospitalListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7995951BCE38020099CFF9 /* HospitalListViewController.m */; settings = {ASSET_TAGS = (); }; };
 		1E7995981BCE38020099CFF9 /* HospitalListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E7995961BCE38020099CFF9 /* HospitalListViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		1E79959A1BCE5BEB0099CFF9 /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E7995991BCE5BEB0099CFF9 /* interface_list.plist */; settings = {ASSET_TAGS = (); }; };
 		1E8017081BB006D100B6C352 /* HomeViewWholeImageNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8017061BB006D100B6C352 /* HomeViewWholeImageNewsCell.m */; settings = {ASSET_TAGS = (); }; };
 		1E8017091BB006D100B6C352 /* HomeViewWholeImageNewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E8017071BB006D100B6C352 /* HomeViewWholeImageNewsCell.xib */; settings = {ASSET_TAGS = (); }; };
 		1E80170D1BB006EF00B6C352 /* HomeViewNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E80170B1BB006EF00B6C352 /* HomeViewNewsCell.m */; settings = {ASSET_TAGS = (); }; };
@@ -1476,7 +1476,6 @@
 		1E79950B1BC758560099CFF9 /* NewsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsView.h; sourceTree = "<group>"; };
 		1E79950C1BC758560099CFF9 /* NewsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsView.m; sourceTree = "<group>"; };
 		1E79950D1BC758560099CFF9 /* NewsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsView.xib; sourceTree = "<group>"; };
-		1E79951E1BC75BB40099CFF9 /* interface_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = interface_list.plist; sourceTree = "<group>"; };
 		1E7995201BC75E580099CFF9 /* ParentingStrategyDetailViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParentingStrategyDetailViewModel.h; sourceTree = "<group>"; };
 		1E7995211BC75E580099CFF9 /* ParentingStrategyDetailViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParentingStrategyDetailViewModel.m; sourceTree = "<group>"; };
 		1E7995241BC7656C0099CFF9 /* ParentingStrategyDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParentingStrategyDetailViewController.h; sourceTree = "<group>"; };
@@ -1545,6 +1544,7 @@
 		1E7995941BCE38020099CFF9 /* HospitalListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HospitalListViewController.h; sourceTree = "<group>"; };
 		1E7995951BCE38020099CFF9 /* HospitalListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HospitalListViewController.m; sourceTree = "<group>"; };
 		1E7995961BCE38020099CFF9 /* HospitalListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HospitalListViewController.xib; sourceTree = "<group>"; };
+		1E7995991BCE5BEB0099CFF9 /* interface_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = interface_list.plist; sourceTree = "<group>"; };
 		1E8017051BB006D100B6C352 /* HomeViewWholeImageNewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewWholeImageNewsCell.h; sourceTree = "<group>"; };
 		1E8017061BB006D100B6C352 /* HomeViewWholeImageNewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewWholeImageNewsCell.m; sourceTree = "<group>"; };
 		1E8017071BB006D100B6C352 /* HomeViewWholeImageNewsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewWholeImageNewsCell.xib; sourceTree = "<group>"; };
@@ -2730,7 +2730,7 @@
 		1E3D7E781B4BD83D00275C35 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				1E79951E1BC75BB40099CFF9 /* interface_list.plist */,
+				1E7995991BCE5BEB0099CFF9 /* interface_list.plist */,
 				1E943EBD1B7375F60029FE74 /* Area.plist */,
 				1E0B7B591B709A2100A58AD4 /* Category.plist */,
 				1E3D7E791B4BD83D00275C35 /* Info.plist */,
@@ -4799,6 +4799,7 @@
 				1E76003F1B56496100DF0972 /* ServiceDetailViewController.xib in Resources */,
 				1E0B7B0F1B6F6C1400A58AD4 /* SaiDanPhotoView.xib in Resources */,
 				1E0B7AAB1B6F67B800A58AD4 /* GNewCenterCell.xib in Resources */,
+				1E79959A1BCE5BEB0099CFF9 /* interface_list.plist in Resources */,
 				1E943EBE1B7375F60029FE74 /* Area.plist in Resources */,
 				1EC73BD81B5E4854008B39EA /* HomeViewNormalTitleCell.xib in Resources */,
 				1E8EFCE11B6729A900D00808 /* OrderCommentBottomView.xib in Resources */,
@@ -4808,7 +4809,6 @@
 				1EA8B6C71B63909200F90688 /* DiscoverViewController.xib in Resources */,
 				1E827CEF1B9D3E9F008F3F08 /* coupon_cellBG_h.png in Resources */,
 				1E7995741BCD25B80099CFF9 /* LoveHouseListViewCell.xib in Resources */,
-				1E79951F1BC75BB40099CFF9 /* interface_list.plist in Resources */,
 				1E827BCD1B941337008F3F08 /* ImageError.png in Resources */,
 				1E827BDD1B941337008F3F08 /* PlayButtonOverlayLarge@2x.png in Resources */,
 				1E827B251B886317008F3F08 /* StoreMoreDetailViewController.xib in Resources */,

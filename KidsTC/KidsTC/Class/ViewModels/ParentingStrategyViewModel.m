@@ -16,21 +16,16 @@
 
 @property (nonatomic, strong) HttpRequestClient *loadStrategriesRequest;
 
-@property (nonatomic, strong) NSMutableDictionary *totalResultsContainer;
+@property (nonatomic, strong) NSMutableArray *itemModelsArray;
 
-@property (nonatomic, strong) NSMutableDictionary *currentPageIndexs;
+@property (nonatomic, assign) NSUInteger currentPage;
 
-- (void)clearDataForCalendarIndex:(NSUInteger)index;
+- (void)loadStrategyListSucceed:(NSDictionary *)data;
+- (void)loadStrategyListFailed:(NSError *)error;
+- (void)loadMoreStrategyListSucceed:(NSDictionary *)data;
+- (void)loadMoreStrategyListFailed:(NSError *)error;
 
-- (void)loadStrategriesSucceedWithData:(NSDictionary *)data calendarIndex:(NSUInteger)index;
-
-- (void)loadStrategriesFailedWithError:(NSError *)error calendarIndex:(NSUInteger)index;
-
-- (void)loadMoreStrategriesSucceedWithData:(NSDictionary *)data calendarIndex:(NSUInteger)index;
-
-- (void)loadMoreStrategriesFailedWithError:(NSError *)error calendarIndex:(NSUInteger)index;
-
-- (void)reloadParentingStrategyViewWithData:(NSDictionary *)data calendarIndex:(NSUInteger)index;
+- (void)reloadListViewWithData:(NSDictionary *)data;
 
 @end
 
@@ -41,181 +36,148 @@
     if (self) {
         self.view = (ParentingStrategyView *)view;
         self.view.dataSource = self;
-        self.totalResultsContainer = [[NSMutableDictionary alloc] init];
+        self.itemModelsArray = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
-#pragma mark 
-
-- (NSArray *)listItemModelsOfParentingStrategyView:(ParentingStrategyView *)strategyView atCalendarIndex:(NSUInteger)index {
-    return [NSArray arrayWithArray:[self.totalResultsContainer objectForKey:[NSNumber numberWithInteger:index]]];
-}
-
-#pragma mark Private methods
-
-- (void)clearDataForCalendarIndex:(NSUInteger)index {
-    NSMutableArray *dataArray = nil;
-    if (dataArray) {
-        [dataArray removeAllObjects];
-    }
-}
-
-- (void)loadStrategriesSucceedWithData:(NSDictionary *)data calendarIndex:(NSUInteger)index {
-    [self clearDataForCalendarIndex:index];
-    [self reloadParentingStrategyViewWithData:data calendarIndex:index];
-}
-
-- (void)loadStrategriesFailedWithError:(NSError *)error calendarIndex:(NSUInteger)index {
-    [self clearDataForCalendarIndex:index];
-    switch (error.code) {
-        case -999:
-        {
-            //cancel
-            return;
-        }
-            break;
-        case -1003:
-        {
-            //没有数据
-            [self.view noMoreData:YES];
-        }
-            break;
-        default:
-            break;
-    }
-    [self reloadParentingStrategyViewWithData:nil calendarIndex:index];
-    [self.view endRefresh];
-}
-
-- (void)loadMoreStrategriesSucceedWithData:(NSDictionary *)data calendarIndex:(NSUInteger)index {
-    NSString *key = [NSString stringWithFormat:@"%lu", (unsigned long)index];
-    NSUInteger currentIndex = [[self.currentPageIndexs objectForKey:key] integerValue];
-    [self.currentPageIndexs setObject:[NSNumber numberWithInteger:currentIndex + 1] forKey:key];
-    [self reloadParentingStrategyViewWithData:data calendarIndex:index];
-    [self.view endLoadMore];
-}
-
-- (void)loadMoreStrategriesFailedWithError:(NSError *)error calendarIndex:(NSUInteger)index {
-    switch (error.code) {
-        case -999:
-        {
-            //cancel
-            return;
-        }
-            break;
-        case -1003:
-        {
-            //没有数据
-            [self.view noMoreData:YES];
-        }
-            break;
-        default:
-            break;
-    }
-    [self reloadParentingStrategyViewWithData:nil calendarIndex:index];
-    [self.view endLoadMore];
-}
-
-- (void)reloadParentingStrategyViewWithData:(NSDictionary *)data calendarIndex:(NSUInteger)index {
-//    if ([self.dateDesArray count] > 0) {
-//        NSArray *dataArray = [data objectForKey:@"data"];
-//        if ([dataArray isKindOfClass:[NSArray class]] && [dataArray count] > 0) {
-//            [self.view hideLoadMoreFooter:NO forCalendarIndex:index];
-//            
-//            NSMutableArray *tempContainer = [[NSMutableArray alloc] init];
-//            for (NSDictionary *singleItem in dataArray) {
-//                ParentingStrategyListItemModel *model = [[ParentingStrategyListItemModel alloc] initWithRawData:singleItem];
-//                if (model) {
-//                    [tempContainer addObject:model];
-//                }
-//            }
-//            NSMutableArray *resultArray = [self strategyResultAtCalendarIndex:index];
-//            if (resultArray) {
-//                [resultArray addObjectsFromArray:tempContainer];
-//            } else {
-//                [self.totalResultsContainer setObject:tempContainer forKey:[NSNumber numberWithInteger:index]];
-//            }
-//            
-//            if ([dataArray count] < PageSize) {
-//                [self.view noMoreData:YES forCalendarIndex:index];
-//            } else {
-//                [self.view noMoreData:NO forCalendarIndex:index];
-//            }
-//        } else {
-//            [self.view noMoreData:YES forCalendarIndex:index];
-//            [self.view hideLoadMoreFooter:YES forCalendarIndex:index];
-//        }
-//        [self.view reloadData];
-//        [self.view endRefresh];
-//        [self.view endLoadMore];
-//    }
-}
-
-#pragma mark Public methods
-
-- (void)startUpdateDataWithCalendarIndex:(NSUInteger)index {
+- (void)startUpdateDataWithSucceed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
     if (!self.loadStrategriesRequest) {
-        self.loadStrategriesRequest = [HttpRequestClient clientWithUrlAliasName:@"SEARCH_STRATEGY"];
+        self.loadStrategriesRequest = [HttpRequestClient clientWithUrlAliasName:@"SEARCH_ARTICLE"];
     }
-    
-    NSString *dateString = @"";
-//    if ([self.dateDesArray count] > index) {
-//        //已经有数据的情况
-//        dateString = [self.dateDesArray objectAtIndex:index];
-//    }
-    
-    NSUInteger pageIndex = [[self.currentPageIndexs objectForKey:[NSNumber numberWithInteger:index]] integerValue];
-    if (pageIndex <= 0) {
-        pageIndex = 1;
-    }
-    
-    NSString *areaId = @"0";
-    NSArray *areaArray = [[KTCArea area] areaItems];
-    if ([areaArray count] > index) {
-        KTCAreaItem *areaItem = [areaArray objectAtIndex:self.currentAreaIndex];
-        if (areaItem) {
-            areaId = areaItem.identifier;
-        }
-    }
-    
+    [self.loadStrategriesRequest cancel];
+    self.currentPage = 1;
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
-                           dateString, @"time",
-                           [NSNumber numberWithInteger:pageIndex], @"page",
-                           [NSNumber numberWithInteger:PageSize], @"pagecount",
-                           [NSNumber numberWithInteger:self.currentSortType], @"sort",
-                           areaId, @"area", nil];
+                           [NSNumber numberWithInteger:self.currentPage], @"page",
+                           [NSNumber numberWithInteger:PageSize], @"pagecount", nil];
     __weak ParentingStrategyViewModel *weakSelf = self;
     [weakSelf.loadStrategriesRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
-        [weakSelf loadStrategriesSucceedWithData:responseData calendarIndex:index];
+        [weakSelf loadStrategyListSucceed:responseData];
+        if (succeed) {
+            succeed(responseData);
+        }
     } failure:^(HttpRequestClient *client, NSError *error) {
-        [weakSelf loadStrategriesFailedWithError:error calendarIndex:index];
+        [weakSelf loadStrategyListFailed:error];
+        if (failure) {
+            failure(error);
+        }
     }];
 }
 
-- (void)getMoreDataWithCalendarIndex:(NSUInteger)index {
-    
-}
-
-- (void)resetResultWithCalendarIndex:(NSUInteger)index {
-//    self.currentCalendarIndex = index;
-//    [self stopUpdateData];
-//    NSMutableArray *dataArray = [self strategyResultAtCalendarIndex:index];
-//    
-//    if ([dataArray count] > 0) {
-//        [self.view reloadData];
-//    } else {
-//        [self startUpdateDataWithCalendarIndex:index];
-//    }
-}
-
-
-#pragma mark Super methods
 
 - (void)stopUpdateData {
     [self.loadStrategriesRequest cancel];
     [self.view endRefresh];
     [self.view endLoadMore];
+}
+
+
+#pragma mark StrategyListViewDataSource
+
+- (NSArray *)listItemModelsOfParentingStrategyView:(ParentingStrategyView *)strategyView {
+    return [self resutlStrategies];
+}
+
+#pragma mark Private methods
+
+- (void)loadStrategyListSucceed:(NSDictionary *)data {
+    [self.itemModelsArray removeAllObjects];
+    [self reloadListViewWithData:data];
+}
+
+- (void)loadStrategyListFailed:(NSError *)error {
+    [self.itemModelsArray removeAllObjects];
+    switch (error.code) {
+        case -999:
+        {
+            //cancel
+            return;
+        }
+            break;
+        case -2001:
+        {
+            //没有数据
+            [self.view noMoreData:YES];
+        }
+            break;
+        default:
+            break;
+    }
+    [self reloadListViewWithData:nil];
+    [self.view endRefresh];
+}
+
+- (void)loadMoreStrategyListSucceed:(NSDictionary *)data {
+    self.currentPage ++;
+    [self reloadListViewWithData:data];
+}
+
+- (void)loadMoreStrategyListFailed:(NSError *)error {
+    switch (error.code) {
+        case -999:
+        {
+            //cancel
+            return;
+        }
+            break;
+        case -2001:
+        {
+            //没有数据
+            [self.view noMoreData:YES];
+        }
+            break;
+        default:
+            break;
+    }
+    [self.view endLoadMore];
+}
+
+- (void)reloadListViewWithData:(NSDictionary *)data {
+    if ([data count] > 0) {
+        NSArray *dataArray = [data objectForKey:@"data"];
+        if ([dataArray isKindOfClass:[NSArray class]] && [dataArray count] > 0) {
+            [self.view hideLoadMoreFooter:NO];
+            for (NSDictionary *singleStrategy in dataArray) {
+                ParentingStrategyListItemModel *model = [[ParentingStrategyListItemModel alloc] initWithRawData:singleStrategy];
+                if (model) {
+                    [self.itemModelsArray addObject:model];
+                }
+            }
+            if ([dataArray count] < PageSize) {
+                [self.view noMoreData:YES];
+            }
+        } else {
+            [self.view noMoreData:YES];
+            [self.view hideLoadMoreFooter:YES];
+        }
+    } else {
+        [self.view hideLoadMoreFooter:YES];
+    }
+    [self.view reloadData];
+    [self stopUpdateData];
+}
+
+#pragma mark Public methods
+
+- (NSArray *)resutlStrategies {
+    return [NSArray arrayWithArray:self.itemModelsArray];
+}
+
+- (void)getMoreStrategies {
+    if (!self.loadStrategriesRequest) {
+        self.loadStrategriesRequest = [HttpRequestClient clientWithUrlAliasName:@"SEARCH_ARTICLE"];
+    }
+    [self.loadStrategriesRequest cancel];
+    NSUInteger nextPage = self.currentPage + 1;
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
+                           [NSNumber numberWithInteger:nextPage], @"page",
+                           [NSNumber numberWithInteger:PageSize], @"pagecount", nil];
+    __weak ParentingStrategyViewModel *weakSelf = self;
+    [weakSelf.loadStrategriesRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
+        [weakSelf loadMoreStrategyListSucceed:responseData];
+    } failure:^(HttpRequestClient *client, NSError *error) {
+        [weakSelf loadMoreStrategyListFailed:error];
+    }];
 }
 
 @end

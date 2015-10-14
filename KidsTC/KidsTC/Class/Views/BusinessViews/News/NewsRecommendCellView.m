@@ -52,13 +52,6 @@ static NSString *const kSmallImageCellIdentifier = @"kSmallImageCellIdentifier";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 0, 0, 0)];
-    }
-    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
-        [self.tableView setLayoutMargins:UIEdgeInsetsMake(0, 0, 0, 0)];
-    }
-    
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
     if (!self.bigImageCellNib) {
@@ -89,16 +82,6 @@ static NSString *const kSmallImageCellIdentifier = @"kSmallImageCellIdentifier";
 }
 
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-        [cell setSeparatorInset:UIEdgeInsetsMake(0, 0, 0, 0)];
-    }
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-        [cell setLayoutMargins:UIEdgeInsetsMake(0, 0, 0, 0)];
-    }
-}
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         NewsRecommendCellViewBigImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kBigImageCellIdentifier forIndexPath:indexPath];
@@ -108,6 +91,9 @@ static NSString *const kSmallImageCellIdentifier = @"kSmallImageCellIdentifier";
         NewsListItemModel *cellModel = [self.itemModels objectAtIndex:indexPath.row];
         [cell.cellImageView setImageWithURL:cellModel.imageUrl];
         [cell.newsTitleLabel setText:cellModel.title];
+        if ([self.itemModels count] == 1) {
+            [cell.separator setHidden:YES];
+        }
     } else {
         NewsRecommendCellViewSmallImageCell *cell = [tableView dequeueReusableCellWithIdentifier:kSmallImageCellIdentifier forIndexPath:indexPath];
         if (!cell) {
@@ -116,6 +102,9 @@ static NSString *const kSmallImageCellIdentifier = @"kSmallImageCellIdentifier";
         NewsListItemModel *cellModel = [self.itemModels objectAtIndex:indexPath.row];
         [cell.cellImageView setImageWithURL:cellModel.imageUrl];
         [cell.newsTitleLabel setText:cellModel.title];
+        if ([self.itemModels count] == indexPath.row + 1) {
+            [cell.separator setHidden:YES];
+        }
     }
     return [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
 }

@@ -139,7 +139,7 @@
 
 - (void)startUpdateDataWithSucceed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
     if (!self.loadNewsRequest) {
-        self.loadNewsRequest = [HttpRequestClient clientWithUrlAliasName:@"SEARCH_ARTICLE"];
+        self.loadNewsRequest = [HttpRequestClient clientWithUrlAliasName:@"ARTICLE_GET_LIST"];
     }
     [self.loadNewsRequest cancel];
     self.currentPage = 1;
@@ -156,7 +156,7 @@
 
 - (void)getMoreNewsWithSucceed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
     if (!self.loadNewsRequest) {
-        self.loadNewsRequest = [HttpRequestClient clientWithUrlAliasName:@"SEARCH_ARTICLE"];
+        self.loadNewsRequest = [HttpRequestClient clientWithUrlAliasName:@"ARTICLE_GET_LIST"];
     }
     [self.loadNewsRequest cancel];
     NSUInteger nextPage = self.currentPage + 1;

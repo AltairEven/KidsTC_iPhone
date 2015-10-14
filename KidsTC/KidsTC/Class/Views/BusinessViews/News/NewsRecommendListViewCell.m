@@ -21,7 +21,7 @@
 - (void)awakeFromNib {
     // Initialization code
     self.cellView.delegate = self;
-    [self.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.contentView setBackgroundColor:[AUITheme theme].globalBGColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

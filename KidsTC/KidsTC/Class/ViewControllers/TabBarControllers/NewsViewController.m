@@ -48,6 +48,7 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+    [self.newsViewModel stopUpdateData];
 }
 
 #pragma mark NewsViewDelegate
@@ -64,11 +65,11 @@
 }
 
 - (void)newsView:(NewsView *)newsView needRefreshTableWithNewsViewTag:(NewsViewTag)viewTag {
-    
+    [self.newsViewModel refreshNewsWithViewTag:viewTag Succeed:nil failure:nil];
 }
 
 - (void)newsView:(NewsView *)newsView needLoadMoreWithNewsViewTag:(NewsViewTag)viewTag {
-    
+    [self.newsViewModel getMoreNewsWithViewTag:viewTag Succeed:nil failure:nil];
 }
 
 - (void)didReceiveMemoryWarning {

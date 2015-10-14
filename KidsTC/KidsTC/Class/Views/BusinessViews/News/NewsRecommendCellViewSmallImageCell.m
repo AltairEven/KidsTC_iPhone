@@ -19,6 +19,7 @@
 - (void)awakeFromNib {
     // Initialization code
     [self.bgView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [GConfig resetLineView:self.separator withLayoutAttribute:NSLayoutAttributeHeight];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

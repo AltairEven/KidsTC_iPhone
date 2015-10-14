@@ -28,8 +28,8 @@
 }
 
 - (void)fillWithRawData:(NSDictionary *)data {
-    self.timeDescription = [data objectForKey:@"time"];
-    NSArray *dataArray = [data objectForKey:@"news"];
+    self.timeDescription = [data objectForKey:@"lastTime"];
+    NSArray *dataArray = [data objectForKey:@"item"];
     if ([dataArray isKindOfClass:[NSArray class]] && [dataArray count] > 0) {
         NSMutableArray *tempContainer = [[NSMutableArray alloc] init];
         for (NSDictionary *singleItem in dataArray) {
@@ -46,7 +46,7 @@
     CGFloat height = 0;
     NSUInteger count = [self.cellModelsArray count];
     if (count > 0) {
-        height = 40 + 150 + (count - 1) * 60;
+        height = 40 + ((SCREEN_WIDTH - 40) * 0.6) + (count - 1) * 60;
     }
     
     return height;

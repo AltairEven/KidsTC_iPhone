@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 
 typedef enum {
-    ParentingStrategySortTypeDefault,
-    ParentingStrategySortTypeRecommend,
+    ParentingStrategySortTypeHot,
     ParentingStrategySortTypeTime
 }ParentingStrategySortType;
 

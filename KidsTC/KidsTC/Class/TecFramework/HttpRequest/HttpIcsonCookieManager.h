@@ -15,6 +15,7 @@ extern NSString *const kHttpIcsonCookieKeyVersion;
 extern NSString *const kHttpIcsonCookieKeyDeviceId;
 extern NSString *const kHttpIcsonCookieKeyAppSource;
 extern NSString *const kHttpIcsonCookieKeyApp;
+extern NSString *const kHttpIcsonCookieKeyUserRole;
 
 //AFNetWorking共享NSHTTPCookieStorage中设置的cookie
 @interface HttpIcsonCookieManager : NSObject

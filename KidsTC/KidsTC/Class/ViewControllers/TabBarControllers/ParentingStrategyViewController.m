@@ -42,16 +42,12 @@
 
 #pragma mark ParentingStrategyViewDelegate
 
-- (void)parentingStrategyView:(ParentingStrategyView *)strategyView didClickedCalendarButtonAtIndex:(NSUInteger)index {
-    [self.viewModel resetResultWithCalendarIndex:index];
+- (void)didPullDownToRefreshForParentingStrategyView:(ParentingStrategyView *)strategyView {
+    [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
 }
 
-- (void)parentingStrategyView:(ParentingStrategyView *)strategyView DidPullDownToRefreshForCalendarIndex:(NSUInteger)index {
-    [self.viewModel startUpdateDataWithCalendarIndex:index];
-}
-
-- (void)parentingStrategyView:(ParentingStrategyView *)strategyView DidPullUpToLoadMoreForCalendarIndex:(NSUInteger)index {
-    [self.viewModel getMoreDataWithCalendarIndex:index];
+- (void)didPullUpToLoadMoreForParentingStrategyView:(ParentingStrategyView *)strategyView {
+    [self.viewModel getMoreStrategies];
 }
 
 - (void)parentingStrategyView:(ParentingStrategyView *)strategyView didSelectedItemAtIndex:(NSUInteger)index {
@@ -66,7 +62,7 @@
     if (self.viewModel.currentSortType != type || self.viewModel.currentAreaIndex != index) {
         [self.viewModel setCurrentSortType:type];
         [self.viewModel setCurrentAreaIndex:index];
-        [self.viewModel startUpdateDataWithCalendarIndex:index];
+        [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
     }
 }
 

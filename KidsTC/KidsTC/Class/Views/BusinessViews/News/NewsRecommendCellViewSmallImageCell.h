@@ -14,6 +14,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *newsTitleLabel;
 
+@property (weak, nonatomic) IBOutlet UIView *separator;
+
 + (CGFloat)cellHeight;
 
 @end

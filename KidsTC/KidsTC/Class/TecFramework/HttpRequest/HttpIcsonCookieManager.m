@@ -22,6 +22,7 @@ NSString *const kHttpIcsonCookieKeyVersion = @"version";
 NSString *const kHttpIcsonCookieKeyDeviceId = @"deviceid";
 NSString *const kHttpIcsonCookieKeyAppSource = @"appsource";
 NSString *const kHttpIcsonCookieKeyApp = @"app";
+NSString *const kHttpIcsonCookieKeyUserRole = @"population_type";
 
 @interface HttpIcsonCookieManager ()
 
@@ -77,6 +78,9 @@ NSString *const kHttpIcsonCookieKeyApp = @"app";
     
     NSDictionary *app = [NSDictionary dictionaryWithObject:@"1" forKey:kHttpIcsonCookieKeyApp];
     [cookieArray addObject:app];
+    
+    NSDictionary *userRole = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%d", [KTCUser currentUser].userRole] forKey:kHttpIcsonCookieKeyUserRole];
+    [cookieArray addObject:userRole];
     
     //设置cookie
     [self setIcsonCookiesWithNameValueDictionaries:[NSArray arrayWithArray:cookieArray]];

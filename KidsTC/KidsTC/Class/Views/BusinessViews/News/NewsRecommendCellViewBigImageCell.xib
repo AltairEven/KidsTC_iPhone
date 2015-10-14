@@ -48,10 +48,20 @@
                             <constraint firstItem="QLW-MP-GeL" firstAttribute="leading" secondItem="fVF-8l-zv0" secondAttribute="leading" id="voF-yF-lxz"/>
                         </constraints>
                     </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yC2-BY-SD1">
+                        <rect key="frame" x="0.0" y="148" width="320" height="1"/>
+                        <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="rPl-Bc-3Gh"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="fVF-8l-zv0" secondAttribute="trailing" constant="10" id="6Pn-mz-Ynu"/>
                     <constraint firstItem="fVF-8l-zv0" firstAttribute="top" secondItem="6dw-h7-N7C" secondAttribute="top" constant="10" id="CnZ-iC-qxg"/>
+                    <constraint firstAttribute="trailing" secondItem="yC2-BY-SD1" secondAttribute="trailing" id="GW3-sI-Wc8"/>
+                    <constraint firstItem="yC2-BY-SD1" firstAttribute="leading" secondItem="6dw-h7-N7C" secondAttribute="leading" id="Uhk-V8-x8m"/>
+                    <constraint firstAttribute="bottom" secondItem="yC2-BY-SD1" secondAttribute="bottom" id="hjZ-yA-xOa"/>
                     <constraint firstAttribute="bottom" secondItem="fVF-8l-zv0" secondAttribute="bottom" constant="10" id="mnL-ap-6Wm"/>
                     <constraint firstItem="fVF-8l-zv0" firstAttribute="leading" secondItem="6dw-h7-N7C" secondAttribute="leading" constant="10" id="tTd-lc-Dxm"/>
                 </constraints>
@@ -59,6 +69,7 @@
             <connections>
                 <outlet property="cellImageView" destination="wDm-Yg-0xn" id="D08-sB-5vc"/>
                 <outlet property="newsTitleLabel" destination="aAD-A1-EyP" id="CJY-hU-oQl"/>
+                <outlet property="separator" destination="yC2-BY-SD1" id="7mQ-zZ-4tO"/>
             </connections>
             <point key="canvasLocation" x="578" y="154"/>
         </tableViewCell>

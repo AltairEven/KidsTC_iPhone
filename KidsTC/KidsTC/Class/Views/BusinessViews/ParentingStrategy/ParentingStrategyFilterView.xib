@@ -61,16 +61,17 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bMc-LQ-eKI" userLabel="View1">
                                     <rect key="frame" x="0.0" y="44" width="240" height="38"/>
                                     <subviews>
-                                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YIs-bp-im3">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YIs-bp-im3">
                                             <rect key="frame" x="0.0" y="4" width="240" height="30"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <inset key="titleEdgeInsets" minX="-20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                             <inset key="imageEdgeInsets" minX="200" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" title="推荐优先" image="unselected">
+                                            <state key="normal" title="按热门排序" image="unselected">
                                                 <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </state>
                                             <state key="selected" image="selected"/>
+                                            <state key="highlighted" image="selected"/>
                                             <connections>
                                                 <action selector="didClickedSortButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="ttg-VM-zsq"/>
                                             </connections>
@@ -86,7 +87,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mQ1-de-PhM" userLabel="View2">
                                     <rect key="frame" x="0.0" y="82" width="240" height="38"/>
                                     <subviews>
-                                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cS2-d6-fps">
+                                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cS2-d6-fps">
                                             <rect key="frame" x="0.0" y="4" width="240" height="30"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <inset key="titleEdgeInsets" minX="-20" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -96,6 +97,7 @@
                                                 <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </state>
                                             <state key="selected" image="selected"/>
+                                            <state key="highlighted" image="selected"/>
                                             <connections>
                                                 <action selector="didClickedSortButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="hTR-uQ-7BE"/>
                                             </connections>
@@ -109,7 +111,7 @@
                                     </constraints>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="gbi-Mp-VWC" firstAttribute="leading" secondItem="cFE-K6-ita" secondAttribute="leading" id="LEZ-EM-Zkb"/>
                                 <constraint firstItem="gbi-Mp-VWC" firstAttribute="top" secondItem="cFE-K6-ita" secondAttribute="top" id="LZm-VU-AKT"/>
@@ -159,7 +161,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </tableView>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="t6l-Um-Kc3" firstAttribute="leading" secondItem="sMg-gJ-W8x" secondAttribute="leading" id="H9K-tM-A4B"/>
                                 <constraint firstAttribute="trailing" secondItem="t6l-Um-Kc3" secondAttribute="trailing" id="OXE-1f-tI6"/>
@@ -194,7 +196,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="15B-Da-j8e" firstAttribute="top" secondItem="8Dc-rK-8qn" secondAttribute="top" id="2M6-zy-Ypi"/>
                                 <constraint firstAttribute="trailing" secondItem="15B-Da-j8e" secondAttribute="trailing" id="Frv-zJ-7Ex"/>
@@ -208,7 +210,7 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="8Dc-rK-8qn" firstAttribute="leading" secondItem="XG2-nq-eR8" secondAttribute="leading" id="1Sq-Ey-FW7"/>
                         <constraint firstAttribute="bottom" secondItem="8Dc-rK-8qn" secondAttribute="bottom" id="38D-pk-xox"/>
@@ -236,10 +238,12 @@
                 <constraint firstItem="uSM-de-gm1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="v56-2f-AH2"/>
             </constraints>
             <connections>
+                <outlet property="areaBGView" destination="sMg-gJ-W8x" id="Nut-ZC-XVP"/>
                 <outlet property="areaTable" destination="CLa-SZ-HGx" id="lsR-f9-jun"/>
                 <outlet property="clearButton" destination="15B-Da-j8e" id="nSo-fh-FEO"/>
                 <outlet property="confirmButton" destination="rB9-dl-tvJ" id="vJI-1a-UgW"/>
-                <outlet property="editorSortButton" destination="YIs-bp-im3" id="9Hx-Qm-skK"/>
+                <outlet property="filterBGView" destination="XG2-nq-eR8" id="BQZ-3b-ING"/>
+                <outlet property="hotSortButton" destination="YIs-bp-im3" id="Zkn-vG-0NQ"/>
                 <outlet property="selectedAreaLabel" destination="vHT-NW-ZbC" id="ed6-wo-3aO"/>
                 <outlet property="tapArea" destination="uSM-de-gm1" id="L6x-x3-Zdp"/>
                 <outlet property="timeSortButton" destination="cS2-d6-fps" id="Yd9-G5-BuK"/>

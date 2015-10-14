@@ -59,6 +59,8 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     [self.tableView addLegendHeaderWithRefreshingBlock:^{
         [weakSelf pullToLoadMoreData];
     }];
+    [self.tableView.legendHeader setStateHidden:YES];
+    [self.tableView.legendHeader setUpdatedTimeHidden:YES];
 }
 
 - (NSUInteger)pageSize {

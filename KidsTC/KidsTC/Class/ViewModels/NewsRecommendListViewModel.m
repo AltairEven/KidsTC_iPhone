@@ -16,11 +16,7 @@
 
 @property (nonatomic, strong) NSMutableArray *listModels;
 
-@property (nonatomic, assign) NSUInteger currentPage;
-
-- (void)loadNewsSucceed:(NSDictionary *)data;
-
-- (void)loadNewsFailed:(NSError *)error;
+@property (nonatomic, copy) NSString *requestTimeDes;
 
 - (void)loadMoreNewsSucceed:(NSDictionary *)data;
 
@@ -37,10 +33,16 @@
     if (self) {
         self.view = (NewsRecommendListView *)view;
         self.view.dataSource = self;
-        self.currentPage = 1;
         self.listModels = [[NSMutableArray alloc] init];
     }
     return self;
+}
+
+- (NSString *)requestTimeDes {
+    if (!_requestTimeDes) {
+        _requestTimeDes = @"";
+    }
+    return _requestTimeDes;
 }
 
 - (NSArray *)resultListItems {
@@ -55,34 +57,7 @@
 
 #pragma mark Private methods
 
-- (void)loadNewsSucceed:(NSDictionary *)data {
-    [self.listModels removeAllObjects];
-    [self reloadListViewWithData:data];
-}
-
-- (void)loadNewsFailed:(NSError *)error {
-    [self.listModels removeAllObjects];
-    switch (error.code) {
-        case -999:
-        {
-            //cancel
-            return;
-        }
-            break;
-        case -1003:
-        {
-            //没有数据
-        }
-            break;
-        default:
-            break;
-    }
-    [self reloadListViewWithData:nil];
-    [self.view endLoadMore];
-}
-
 - (void)loadMoreNewsSucceed:(NSDictionary *)data {
-    self.currentPage ++;
     [self reloadListViewWithData:data];
     [self.view endLoadMore];
 }
@@ -108,6 +83,7 @@
 }
 
 - (void)reloadListViewWithData:(NSDictionary *)data {
+    self.requestTimeDes = [data objectForKey:@"time"];
     NSArray *dataArray = [data objectForKey:@"data"];
     if ([dataArray isKindOfClass:[NSArray class]] && [dataArray count] > 0) {
         NSMutableArray *tempContainer = [[NSMutableArray alloc] init];
@@ -117,7 +93,8 @@
                 [tempContainer addObject:model];
             }
         }
-        [self.listModels addObjectsFromArray:tempContainer];
+        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [tempContainer count])];
+        [self.listModels insertObjects:tempContainer atIndexes:indexSet];
         
         if ([dataArray count] < [self.view pageSize]) {
             //没有更多
@@ -132,31 +109,19 @@
 #pragma mark Public methods
 
 - (void)startUpdateDataWithSucceed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
-    if (!self.loadNewsRequest) {
-        self.loadNewsRequest = [HttpRequestClient clientWithUrlAliasName:@"SEARCH_ARTICLE"];
+    if ([self.listModels count] == 0) {
+        [self getMoreRecommendNewsWithSucceed:succeed failure:failure];
+    } else {
+        succeed(nil);
     }
-    [self.loadNewsRequest cancel];
-    self.currentPage = 1;
-    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
-                           [NSNumber numberWithInteger:self.currentPage], @"page",
-                           [NSNumber numberWithInteger:[self.view pageSize]], @"pagecount", nil];
-    __weak NewsRecommendListViewModel *weakSelf = self;
-    [weakSelf.loadNewsRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
-        [weakSelf loadNewsSucceed:responseData];
-    } failure:^(HttpRequestClient *client, NSError *error) {
-        [weakSelf loadNewsFailed:error];
-    }];
 }
 
 - (void)getMoreRecommendNewsWithSucceed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
     if (!self.loadNewsRequest) {
-        self.loadNewsRequest = [HttpRequestClient clientWithUrlAliasName:@"SEARCH_ARTICLE"];
+        self.loadNewsRequest = [HttpRequestClient clientWithUrlAliasName:@"ARTICLE_GET_RECOMMEND_LIST"];
     }
     [self.loadNewsRequest cancel];
-    NSUInteger nextPage = self.currentPage + 1;
-    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
-                           [NSNumber numberWithInteger:nextPage], @"page",
-                           [NSNumber numberWithInteger:[self.view pageSize]], @"pagecount", nil];
+    NSDictionary *param = [NSDictionary dictionaryWithObject:self.requestTimeDes forKey:@"time"];
     __weak NewsRecommendListViewModel *weakSelf = self;
     [weakSelf.loadNewsRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [weakSelf loadMoreNewsSucceed:responseData];

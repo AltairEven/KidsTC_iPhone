@@ -13,6 +13,8 @@
 - (void)awakeFromNib {
     // Initialization code
     [self.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    
+    [GConfig resetLineView:self.separator withLayoutAttribute:NSLayoutAttributeHeight];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -22,7 +24,7 @@
 }
 
 + (CGFloat)cellHeight {
-    return 150;
+    return (SCREEN_WIDTH - 40) * 0.6;
 }
 
 @end
