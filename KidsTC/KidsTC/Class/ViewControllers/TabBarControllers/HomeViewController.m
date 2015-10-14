@@ -13,6 +13,8 @@
 #import "AUIFloorNavigationView.h"
 #import "KTCWebViewController.h"
 #import "ActivityViewController.h"
+#import "LoveHouseListViewController.h"
+#import "HospitalListViewController.h"
 
 
 @interface HomeViewController () <HomeViewDelegate, AUIFloorNavigationViewDataSource, AUIFloorNavigationViewDelegate>
@@ -125,14 +127,18 @@
             [self.navigationController pushViewController:controller animated:YES];
         }
             break;
-        case HomeSegueDestinationBabyHouse:
+        case HomeSegueDestinationLoveHouse:
         {
-            
+            LoveHouseListViewController *controller = [[LoveHouseListViewController alloc] initWithNibName:@"LoveHouseListViewController" bundle:nil];
+            [controller setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:controller animated:YES];
         }
             break;
         case HomeSegueDestinationHospital:
         {
-            
+            HospitalListViewController *controller = [[HospitalListViewController alloc] initWithNibName:@"HospitalListViewController" bundle:nil];
+            [controller setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:controller animated:YES];
         }
             break;
         case HomeSegueDestinationStrategyList:

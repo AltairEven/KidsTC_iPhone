@@ -56,7 +56,7 @@ NSString *const kHomeSegueParameterKeySearchSort = @"kHomeSegueParameterKeySearc
         case HomeSegueDestinationNone:
         case HomeSegueDestinationNewsRecommend:
         case HomeSegueDestinationActivity:
-        case HomeSegueDestinationBabyHouse:
+        case HomeSegueDestinationLoveHouse:
         case HomeSegueDestinationHospital:
         case HomeSegueDestinationStrategyList:
             break;

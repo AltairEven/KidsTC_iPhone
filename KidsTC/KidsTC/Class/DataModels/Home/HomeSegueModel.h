@@ -14,7 +14,7 @@ typedef enum {
     HomeSegueDestinationNewsRecommend, //资讯推荐列表
     HomeSegueDestinationNewsList, //资讯列表
     HomeSegueDestinationActivity, //活动页面
-    HomeSegueDestinationBabyHouse, //爱心小屋
+    HomeSegueDestinationLoveHouse, //爱心小屋
     HomeSegueDestinationHospital, //医院
     HomeSegueDestinationStrategyList, //攻略列表
     HomeSegueDestinationServiceList, //服务列表

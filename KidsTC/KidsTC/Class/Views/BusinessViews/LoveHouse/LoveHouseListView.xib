@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="LoveHouseListView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="tjp-0t-Tjj">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="tjp-0t-Tjj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BGM-Lc-BCh"/>
+                <constraint firstItem="tjp-0t-Tjj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="FSQ-7t-93x"/>
+                <constraint firstAttribute="trailing" secondItem="tjp-0t-Tjj" secondAttribute="trailing" id="pyo-XL-Dge"/>
+                <constraint firstAttribute="bottom" secondItem="tjp-0t-Tjj" secondAttribute="bottom" id="q9b-zC-KG9"/>
+            </constraints>
+            <connections>
+                <outlet property="tableView" destination="tjp-0t-Tjj" id="I5t-Ac-YxT"/>
+            </connections>
+            <point key="canvasLocation" x="347" y="362"/>
+        </view>
+    </objects>
+</document>

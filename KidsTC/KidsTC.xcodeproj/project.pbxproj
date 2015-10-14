@@ -388,7 +388,6 @@
 		1E7995301BC79E3A0099CFF9 /* HomeViewImageNewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E79952E1BC79E3A0099CFF9 /* HomeViewImageNewsCell.xib */; settings = {ASSET_TAGS = (); }; };
 		1E7995331BC7BD5D0099CFF9 /* HomeFloorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7995321BC7BD5D0099CFF9 /* HomeFloorModel.m */; settings = {ASSET_TAGS = (); }; };
 		1E7995361BC7C2DE0099CFF9 /* HomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7995351BC7C2DE0099CFF9 /* HomeModel.m */; settings = {ASSET_TAGS = (); }; };
-		1E7995381BC7CC770099CFF9 /* 首页.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1E7995371BC7CC770099CFF9 /* 首页.txt */; settings = {ASSET_TAGS = (); }; };
 		1E79953B1BC8C4230099CFF9 /* HomeSegueModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E79953A1BC8C4230099CFF9 /* HomeSegueModel.m */; settings = {ASSET_TAGS = (); }; };
 		1E79953E1BC8E2320099CFF9 /* HomeCountDownMoreTitleCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E79953D1BC8E2320099CFF9 /* HomeCountDownMoreTitleCellModel.m */; settings = {ASSET_TAGS = (); }; };
 		1E7995421BC8E52F0099CFF9 /* HomeViewCountDownMoreTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7995401BC8E52F0099CFF9 /* HomeViewCountDownMoreTitleCell.m */; settings = {ASSET_TAGS = (); }; };
@@ -406,6 +405,22 @@
 		1E7995641BCBCB480099CFF9 /* AddressSelectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7995621BCBCB480099CFF9 /* AddressSelectTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		1E7995651BCBCB480099CFF9 /* AddressSelectTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E7995631BCBCB480099CFF9 /* AddressSelectTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		1E7995681BCCD7BA0099CFF9 /* AUITheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7995671BCCD7BA0099CFF9 /* AUITheme.m */; settings = {ASSET_TAGS = (); }; };
+		1E79956D1BCD25770099CFF9 /* LoveHouseListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E79956C1BCD25770099CFF9 /* LoveHouseListView.m */; settings = {ASSET_TAGS = (); }; };
+		1E79956F1BCD25860099CFF9 /* LoveHouseListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E79956E1BCD25860099CFF9 /* LoveHouseListView.xib */; settings = {ASSET_TAGS = (); }; };
+		1E7995731BCD25B80099CFF9 /* LoveHouseListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7995711BCD25B80099CFF9 /* LoveHouseListViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		1E7995741BCD25B80099CFF9 /* LoveHouseListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E7995721BCD25B80099CFF9 /* LoveHouseListViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		1E79957B1BCD26820099CFF9 /* LoveHouseListItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E79957A1BCD26820099CFF9 /* LoveHouseListItemModel.m */; settings = {ASSET_TAGS = (); }; };
+		1E79957E1BCD32B60099CFF9 /* LoveHouseListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E79957D1BCD32B60099CFF9 /* LoveHouseListViewModel.m */; settings = {ASSET_TAGS = (); }; };
+		1E7995821BCDFCC70099CFF9 /* LoveHouseListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7995801BCDFCC70099CFF9 /* LoveHouseListViewController.m */; settings = {ASSET_TAGS = (); }; };
+		1E7995831BCDFCC70099CFF9 /* LoveHouseListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E7995811BCDFCC70099CFF9 /* LoveHouseListViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		1E7995861BCE2C590099CFF9 /* HospitalListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7995851BCE2C590099CFF9 /* HospitalListView.m */; settings = {ASSET_TAGS = (); }; };
+		1E7995891BCE2C7C0099CFF9 /* HospitalListItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7995881BCE2C7C0099CFF9 /* HospitalListItemModel.m */; settings = {ASSET_TAGS = (); }; };
+		1E79958B1BCE2DC20099CFF9 /* HospitalListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E79958A1BCE2DC10099CFF9 /* HospitalListView.xib */; settings = {ASSET_TAGS = (); }; };
+		1E79958F1BCE2DEC0099CFF9 /* HospitalListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E79958D1BCE2DEC0099CFF9 /* HospitalListViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		1E7995901BCE2DEC0099CFF9 /* HospitalListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E79958E1BCE2DEC0099CFF9 /* HospitalListViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		1E7995931BCE36C20099CFF9 /* HospitalListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7995921BCE36C20099CFF9 /* HospitalListViewModel.m */; settings = {ASSET_TAGS = (); }; };
+		1E7995971BCE38020099CFF9 /* HospitalListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7995951BCE38020099CFF9 /* HospitalListViewController.m */; settings = {ASSET_TAGS = (); }; };
+		1E7995981BCE38020099CFF9 /* HospitalListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E7995961BCE38020099CFF9 /* HospitalListViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		1E8017081BB006D100B6C352 /* HomeViewWholeImageNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8017061BB006D100B6C352 /* HomeViewWholeImageNewsCell.m */; settings = {ASSET_TAGS = (); }; };
 		1E8017091BB006D100B6C352 /* HomeViewWholeImageNewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E8017071BB006D100B6C352 /* HomeViewWholeImageNewsCell.xib */; settings = {ASSET_TAGS = (); }; };
 		1E80170D1BB006EF00B6C352 /* HomeViewNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E80170B1BB006EF00B6C352 /* HomeViewNewsCell.m */; settings = {ASSET_TAGS = (); }; };
@@ -1474,7 +1489,6 @@
 		1E7995321BC7BD5D0099CFF9 /* HomeFloorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeFloorModel.m; sourceTree = "<group>"; };
 		1E7995341BC7C2DE0099CFF9 /* HomeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeModel.h; sourceTree = "<group>"; };
 		1E7995351BC7C2DE0099CFF9 /* HomeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeModel.m; sourceTree = "<group>"; };
-		1E7995371BC7CC770099CFF9 /* 首页.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "首页.txt"; sourceTree = "<group>"; };
 		1E7995391BC8C4230099CFF9 /* HomeSegueModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeSegueModel.h; sourceTree = "<group>"; };
 		1E79953A1BC8C4230099CFF9 /* HomeSegueModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeSegueModel.m; sourceTree = "<group>"; };
 		1E79953C1BC8E2320099CFF9 /* HomeCountDownMoreTitleCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCountDownMoreTitleCellModel.h; sourceTree = "<group>"; };
@@ -1505,6 +1519,32 @@
 		1E7995631BCBCB480099CFF9 /* AddressSelectTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddressSelectTableViewCell.xib; sourceTree = "<group>"; };
 		1E7995661BCCD7BA0099CFF9 /* AUITheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUITheme.h; sourceTree = "<group>"; };
 		1E7995671BCCD7BA0099CFF9 /* AUITheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUITheme.m; sourceTree = "<group>"; };
+		1E79956B1BCD25770099CFF9 /* LoveHouseListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoveHouseListView.h; sourceTree = "<group>"; };
+		1E79956C1BCD25770099CFF9 /* LoveHouseListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoveHouseListView.m; sourceTree = "<group>"; };
+		1E79956E1BCD25860099CFF9 /* LoveHouseListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoveHouseListView.xib; sourceTree = "<group>"; };
+		1E7995701BCD25B80099CFF9 /* LoveHouseListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoveHouseListViewCell.h; sourceTree = "<group>"; };
+		1E7995711BCD25B80099CFF9 /* LoveHouseListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoveHouseListViewCell.m; sourceTree = "<group>"; };
+		1E7995721BCD25B80099CFF9 /* LoveHouseListViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoveHouseListViewCell.xib; sourceTree = "<group>"; };
+		1E7995791BCD26820099CFF9 /* LoveHouseListItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoveHouseListItemModel.h; sourceTree = "<group>"; };
+		1E79957A1BCD26820099CFF9 /* LoveHouseListItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoveHouseListItemModel.m; sourceTree = "<group>"; };
+		1E79957C1BCD32B60099CFF9 /* LoveHouseListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoveHouseListViewModel.h; sourceTree = "<group>"; };
+		1E79957D1BCD32B60099CFF9 /* LoveHouseListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoveHouseListViewModel.m; sourceTree = "<group>"; };
+		1E79957F1BCDFCC70099CFF9 /* LoveHouseListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoveHouseListViewController.h; sourceTree = "<group>"; };
+		1E7995801BCDFCC70099CFF9 /* LoveHouseListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoveHouseListViewController.m; sourceTree = "<group>"; };
+		1E7995811BCDFCC70099CFF9 /* LoveHouseListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoveHouseListViewController.xib; sourceTree = "<group>"; };
+		1E7995841BCE2C590099CFF9 /* HospitalListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HospitalListView.h; sourceTree = "<group>"; };
+		1E7995851BCE2C590099CFF9 /* HospitalListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HospitalListView.m; sourceTree = "<group>"; };
+		1E7995871BCE2C7C0099CFF9 /* HospitalListItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HospitalListItemModel.h; sourceTree = "<group>"; };
+		1E7995881BCE2C7C0099CFF9 /* HospitalListItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HospitalListItemModel.m; sourceTree = "<group>"; };
+		1E79958A1BCE2DC10099CFF9 /* HospitalListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HospitalListView.xib; sourceTree = "<group>"; };
+		1E79958C1BCE2DEC0099CFF9 /* HospitalListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HospitalListViewCell.h; sourceTree = "<group>"; };
+		1E79958D1BCE2DEC0099CFF9 /* HospitalListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HospitalListViewCell.m; sourceTree = "<group>"; };
+		1E79958E1BCE2DEC0099CFF9 /* HospitalListViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HospitalListViewCell.xib; sourceTree = "<group>"; };
+		1E7995911BCE36C20099CFF9 /* HospitalListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HospitalListViewModel.h; sourceTree = "<group>"; };
+		1E7995921BCE36C20099CFF9 /* HospitalListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HospitalListViewModel.m; sourceTree = "<group>"; };
+		1E7995941BCE38020099CFF9 /* HospitalListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HospitalListViewController.h; sourceTree = "<group>"; };
+		1E7995951BCE38020099CFF9 /* HospitalListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HospitalListViewController.m; sourceTree = "<group>"; };
+		1E7995961BCE38020099CFF9 /* HospitalListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HospitalListViewController.xib; sourceTree = "<group>"; };
 		1E8017051BB006D100B6C352 /* HomeViewWholeImageNewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewWholeImageNewsCell.h; sourceTree = "<group>"; };
 		1E8017061BB006D100B6C352 /* HomeViewWholeImageNewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewWholeImageNewsCell.m; sourceTree = "<group>"; };
 		1E8017071BB006D100B6C352 /* HomeViewWholeImageNewsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewWholeImageNewsCell.xib; sourceTree = "<group>"; };
@@ -2637,6 +2677,10 @@
 				1E7995211BC75E580099CFF9 /* ParentingStrategyDetailViewModel.m */,
 				1E7995591BCB976A0099CFF9 /* ActivityViewModel.h */,
 				1E79955A1BCB976A0099CFF9 /* ActivityViewModel.m */,
+				1E79957C1BCD32B60099CFF9 /* LoveHouseListViewModel.h */,
+				1E79957D1BCD32B60099CFF9 /* LoveHouseListViewModel.m */,
+				1E7995911BCE36C20099CFF9 /* HospitalListViewModel.h */,
+				1E7995921BCE36C20099CFF9 /* HospitalListViewModel.m */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -2686,7 +2730,6 @@
 		1E3D7E781B4BD83D00275C35 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				1E7995371BC7CC770099CFF9 /* 首页.txt */,
 				1E79951E1BC75BB40099CFF9 /* interface_list.plist */,
 				1E943EBD1B7375F60029FE74 /* Area.plist */,
 				1E0B7B591B709A2100A58AD4 /* Category.plist */,
@@ -3286,6 +3329,8 @@
 		1E3D8EFA1B4CB83A00275C35 /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
+				1E7995781BCD262D0099CFF9 /* LoveHouse */,
+				1E7995771BCD262D0099CFF9 /* Hospital */,
 				1E7994F21BC6832A0099CFF9 /* Activity */,
 				1E827CF01B9D7722008F3F08 /* Promotion */,
 				1E827CB61B9BD90C008F3F08 /* Coupon */,
@@ -3311,6 +3356,8 @@
 		1E3D8EFC1B4CB83A00275C35 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				1E7995761BCD261F0099CFF9 /* LoveHouse */,
+				1E7995751BCD261F0099CFF9 /* Hospital */,
 				1E7995531BCB96CA0099CFF9 /* Activity */,
 				1E7995231BC765090099CFF9 /* ParentingStrategy */,
 				1E827CB51B9BD8F9008F3F08 /* Coupon */,
@@ -3389,6 +3436,8 @@
 		1E3D8F471B4D1D4D00275C35 /* BusinessViews */ = {
 			isa = PBXGroup;
 			children = (
+				1E79956A1BCD25510099CFF9 /* LoveHouse */,
+				1E7995691BCD25510099CFF9 /* Hospital */,
 				1E7994E21BC634020099CFF9 /* Activity */,
 				1E827CB41B9BD8E4008F3F08 /* Coupon */,
 				1E827B5B1B8EB72C008F3F08 /* Map */,
@@ -3683,6 +3732,70 @@
 				1E7995561BCB96DF0099CFF9 /* ActivityViewController.xib */,
 			);
 			path = Activity;
+			sourceTree = "<group>";
+		};
+		1E7995691BCD25510099CFF9 /* Hospital */ = {
+			isa = PBXGroup;
+			children = (
+				1E7995841BCE2C590099CFF9 /* HospitalListView.h */,
+				1E7995851BCE2C590099CFF9 /* HospitalListView.m */,
+				1E79958A1BCE2DC10099CFF9 /* HospitalListView.xib */,
+				1E79958C1BCE2DEC0099CFF9 /* HospitalListViewCell.h */,
+				1E79958D1BCE2DEC0099CFF9 /* HospitalListViewCell.m */,
+				1E79958E1BCE2DEC0099CFF9 /* HospitalListViewCell.xib */,
+			);
+			path = Hospital;
+			sourceTree = "<group>";
+		};
+		1E79956A1BCD25510099CFF9 /* LoveHouse */ = {
+			isa = PBXGroup;
+			children = (
+				1E79956B1BCD25770099CFF9 /* LoveHouseListView.h */,
+				1E79956C1BCD25770099CFF9 /* LoveHouseListView.m */,
+				1E79956E1BCD25860099CFF9 /* LoveHouseListView.xib */,
+				1E7995701BCD25B80099CFF9 /* LoveHouseListViewCell.h */,
+				1E7995711BCD25B80099CFF9 /* LoveHouseListViewCell.m */,
+				1E7995721BCD25B80099CFF9 /* LoveHouseListViewCell.xib */,
+			);
+			path = LoveHouse;
+			sourceTree = "<group>";
+		};
+		1E7995751BCD261F0099CFF9 /* Hospital */ = {
+			isa = PBXGroup;
+			children = (
+				1E7995941BCE38020099CFF9 /* HospitalListViewController.h */,
+				1E7995951BCE38020099CFF9 /* HospitalListViewController.m */,
+				1E7995961BCE38020099CFF9 /* HospitalListViewController.xib */,
+			);
+			path = Hospital;
+			sourceTree = "<group>";
+		};
+		1E7995761BCD261F0099CFF9 /* LoveHouse */ = {
+			isa = PBXGroup;
+			children = (
+				1E79957F1BCDFCC70099CFF9 /* LoveHouseListViewController.h */,
+				1E7995801BCDFCC70099CFF9 /* LoveHouseListViewController.m */,
+				1E7995811BCDFCC70099CFF9 /* LoveHouseListViewController.xib */,
+			);
+			path = LoveHouse;
+			sourceTree = "<group>";
+		};
+		1E7995771BCD262D0099CFF9 /* Hospital */ = {
+			isa = PBXGroup;
+			children = (
+				1E7995871BCE2C7C0099CFF9 /* HospitalListItemModel.h */,
+				1E7995881BCE2C7C0099CFF9 /* HospitalListItemModel.m */,
+			);
+			path = Hospital;
+			sourceTree = "<group>";
+		};
+		1E7995781BCD262D0099CFF9 /* LoveHouse */ = {
+			isa = PBXGroup;
+			children = (
+				1E7995791BCD26820099CFF9 /* LoveHouseListItemModel.h */,
+				1E79957A1BCD26820099CFF9 /* LoveHouseListItemModel.m */,
+			);
+			path = LoveHouse;
 			sourceTree = "<group>";
 		};
 		1E827B291B8C403E008F3F08 /* News */ = {
@@ -4678,6 +4791,7 @@
 				1E0B77D91B6A3F2F00A58AD4 /* ServiceDetailConfirmView.xib in Resources */,
 				1EC4A11A1B5CD3BB00206BB9 /* KTCSearchViewController.xib in Resources */,
 				1E827BE11B941337008F3F08 /* PlayButtonOverlayLargeTap@3x.png in Resources */,
+				1E7995831BCDFCC70099CFF9 /* LoveHouseListViewController.xib in Resources */,
 				1EC73BDD1B5E487E008B39EA /* HomeViewCountDownTitleCell.xib in Resources */,
 				1EC73C1B1B5F992E008B39EA /* home4.png in Resources */,
 				1E827BE91B941337008F3F08 /* UIBarButtonItemGrid@2x.png in Resources */,
@@ -4693,11 +4807,13 @@
 				1E827BD01B941337008F3F08 /* ImageSelectedOff.png in Resources */,
 				1EA8B6C71B63909200F90688 /* DiscoverViewController.xib in Resources */,
 				1E827CEF1B9D3E9F008F3F08 /* coupon_cellBG_h.png in Resources */,
+				1E7995741BCD25B80099CFF9 /* LoveHouseListViewCell.xib in Resources */,
 				1E79951F1BC75BB40099CFF9 /* interface_list.plist in Resources */,
 				1E827BCD1B941337008F3F08 /* ImageError.png in Resources */,
 				1E827BDD1B941337008F3F08 /* PlayButtonOverlayLarge@2x.png in Resources */,
 				1E827B251B886317008F3F08 /* StoreMoreDetailViewController.xib in Resources */,
 				1E3D8F721B4D37D700275C35 /* OrderListView.xib in Resources */,
+				1E79958B1BCE2DC20099CFF9 /* HospitalListView.xib in Resources */,
 				1E0B77A41B68C49000A58AD4 /* AccountSettingViewController.xib in Resources */,
 				1E827BCF1B941337008F3F08 /* ImageError@3x.png in Resources */,
 				1EC4A1261B5DE49400206BB9 /* KTCSearchResultHeaderView.xib in Resources */,
@@ -4717,6 +4833,7 @@
 				1E8017091BB006D100B6C352 /* HomeViewWholeImageNewsCell.xib in Resources */,
 				1E8EFD201B68BBA100D00808 /* AccountSettingView.xib in Resources */,
 				1EC73C191B5F992E008B39EA /* home2.png in Resources */,
+				1E7995901BCE2DEC0099CFF9 /* HospitalListViewCell.xib in Resources */,
 				1E0B7A831B6F67B800A58AD4 /* CouponGiftView.xib in Resources */,
 				1E5CD76D1B53522E00D177CB /* StoreListViewCell.xib in Resources */,
 				1E943F801B831DAF0029FE74 /* ServiceListViewController.xib in Resources */,
@@ -4743,7 +4860,6 @@
 				1EA8B6BD1B638B0F00F90688 /* detail_banner.png in Resources */,
 				1E8EFCE61B674A3100D00808 /* OrderCommentViewController.xib in Resources */,
 				1E827B541B8DC059008F3F08 /* NotificationCenterView.xib in Resources */,
-				1E7995381BC7CC770099CFF9 /* 首页.txt in Resources */,
 				1E827B731B8F0937008F3F08 /* KTCAnnotationTipConfirmLocationView.xib in Resources */,
 				1EC73C451B6099F8008B39EA /* ParentingStrategyView.xib in Resources */,
 				1E8EFCF81B68697700D00808 /* ServiceCommentListViewHeaderCell.xib in Resources */,
@@ -4817,6 +4933,7 @@
 				1EC4A1151B5CCD4200206BB9 /* KTCSearchHistoryView.xib in Resources */,
 				1E0B77E31B6B669000A58AD4 /* KTCSearchFilterView.xib in Resources */,
 				1EC4A0D31B59F1D400206BB9 /* StoreDetailTitleCell.xib in Resources */,
+				1E7995981BCE38020099CFF9 /* HospitalListViewController.xib in Resources */,
 				1EC4A0C01B5914CF00206BB9 /* StoreDetailViewServiceCell.xib in Resources */,
 				1E7600441B57585D00DF0972 /* ServiceDetailBottomView.xib in Resources */,
 				1E8EFD011B68770400D00808 /* CommentListView.xib in Resources */,
@@ -4846,6 +4963,7 @@
 				1E827CCE1B9BE9B9008F3F08 /* CouponListViewSegmentCell.xib in Resources */,
 				1E0B7B611B70A9A900A58AD4 /* ProjectResources.bundle in Resources */,
 				1E8EFD061B68782300D00808 /* CommentListViewSegmentCell.xib in Resources */,
+				1E79956F1BCD25860099CFF9 /* LoveHouseListView.xib in Resources */,
 				1E76003A1B5605F900DF0972 /* ServiceMoreDetailViewController.xib in Resources */,
 				1E80170E1BB006EF00B6C352 /* HomeViewNewsCell.xib in Resources */,
 				1E7995281BC7656C0099CFF9 /* ParentingStrategyDetailViewController.xib in Resources */,
@@ -4993,6 +5111,7 @@
 				1E3D8F081B4CCC5000275C35 /* GViewController.m in Sources */,
 				1E3D8CDE1B4BF4A100275C35 /* IcsonTown.m in Sources */,
 				1E943E901B71E7CD0029FE74 /* CheckFlashMD5.m in Sources */,
+				1E79958F1BCE2DEC0099CFF9 /* HospitalListViewCell.m in Sources */,
 				1E3D8D891B4BF4A100275C35 /* ASINetworkQueue.m in Sources */,
 				1EA8B6BB1B637FC000F90688 /* OrderListModel.m in Sources */,
 				1E0B7AB81B6F67B800A58AD4 /* GTabView.m in Sources */,
@@ -5017,6 +5136,7 @@
 				1E0B7AC21B6F67B800A58AD4 /* ICPopTipView.m in Sources */,
 				1E827CAB1B94144E008F3F08 /* UIImageView+HighlightedWebCache.m in Sources */,
 				1E827B711B8F0923008F3F08 /* KTCAnnotationTipConfirmLocationView.m in Sources */,
+				1E79956D1BCD25770099CFF9 /* LoveHouseListView.m in Sources */,
 				1E3D8CDA1B4BF4A100275C35 /* IcsonCity.m in Sources */,
 				1EA8B6D21B66084D00F90688 /* CategoryViewCell.m in Sources */,
 				1E827CA81B94144E008F3F08 /* UIButton+WebCache.m in Sources */,
@@ -5039,6 +5159,7 @@
 				1E7995491BC8F2980099CFF9 /* HomeNewsCellModel.m in Sources */,
 				1E3D8D791B4BF4A100275C35 /* AFSecurityPolicy.m in Sources */,
 				1E943EB31B7236080029FE74 /* KTCAgeScope.m in Sources */,
+				1E7995731BCD25B80099CFF9 /* LoveHouseListViewCell.m in Sources */,
 				1E8EFCFF1B6876F800D00808 /* CommentListView.m in Sources */,
 				1E827B5A1B8DD634008F3F08 /* KTCMapService.m in Sources */,
 				1E943E991B71E7CD0029FE74 /* RemindNotification.m in Sources */,
@@ -5054,6 +5175,7 @@
 				1E0B7B3A1B6F721B00A58AD4 /* MessageItem.m in Sources */,
 				1E79953E1BC8E2320099CFF9 /* HomeCountDownMoreTitleCellModel.m in Sources */,
 				1E5CD7881B53BF1100D177CB /* ServiceDetailView.m in Sources */,
+				1E7995891BCE2C7C0099CFF9 /* HospitalListItemModel.m in Sources */,
 				1E3D8CDB1B4BF4A100275C35 /* IcsonCountryAD.m in Sources */,
 				1E943E911B71E7CD0029FE74 /* GCommonFilterAttr.m in Sources */,
 				1EC73BD71B5E4854008B39EA /* HomeViewNormalTitleCell.m in Sources */,
@@ -5108,6 +5230,7 @@
 				1EC73BA91B5E25A4008B39EA /* HomeTopView.m in Sources */,
 				1E0B7AAC1B6F67B800A58AD4 /* GPageControl.m in Sources */,
 				1E7994E11BC622900099CFF9 /* ParentingStrategyDetailModel.m in Sources */,
+				1E7995931BCE36C20099CFF9 /* HospitalListViewModel.m in Sources */,
 				1E943E961B71E7CD0029FE74 /* HttpActionQueueItem.m in Sources */,
 				1E7994F51BC683950099CFF9 /* ActivityListItemModel.m in Sources */,
 				1EA5C91C1BAA67F5001E599D /* AUILinearView.m in Sources */,
@@ -5141,6 +5264,7 @@
 				1EC73BAB1B5E25A4008B39EA /* TwinklingElfCell.m in Sources */,
 				1E0B7ACE1B6F67B800A58AD4 /* UILabel+Additions.m in Sources */,
 				1E827CEC1B9D318F008F3F08 /* CouponUsableListViewController.m in Sources */,
+				1E7995971BCE38020099CFF9 /* HospitalListViewController.m in Sources */,
 				1EA8B6C11B638FFE00F90688 /* StoreAppointmentViewController.m in Sources */,
 				1EC4A1071B5CCCB100206BB9 /* KTCSearchHeaderView.m in Sources */,
 				1E0B7AA41B6F67B800A58AD4 /* GFitWidthBtn.m in Sources */,
@@ -5178,6 +5302,7 @@
 				1EC73C591B611289008B39EA /* ParentingStrategyFilterView.m in Sources */,
 				1E3D8CDD1B4BF4A100275C35 /* IcsonProvince.m in Sources */,
 				1E3D8DAC1B4BF4A100275C35 /* RemindManager.m in Sources */,
+				1E79957E1BCD32B60099CFF9 /* LoveHouseListViewModel.m in Sources */,
 				1E0B7B101B6F6C1400A58AD4 /* WelcomePage.m in Sources */,
 				1E79955B1BCB976A0099CFF9 /* ActivityViewModel.m in Sources */,
 				1E0B77D11B6A14A200A58AD4 /* PMCalendarView.m in Sources */,
@@ -5333,6 +5458,7 @@
 				1E827BA71B9412C6008F3F08 /* MWTapDetectingImageView.m in Sources */,
 				1E0B7B0C1B6F6C1400A58AD4 /* SaiDanOrderView.m in Sources */,
 				1E3D8D731B4BF4A100275C35 /* OneConfig.m in Sources */,
+				1E7995861BCE2C590099CFF9 /* HospitalListView.m in Sources */,
 				1E3D8D541B4BF4A100275C35 /* FMDatabasePool.m in Sources */,
 				1E0B77ED1B6B6C5000A58AD4 /* KTCSearchResultFilterLevel2Cell.m in Sources */,
 				1E0B77CF1B6A14A200A58AD4 /* PMCalendarBackgroundView.m in Sources */,
@@ -5344,6 +5470,7 @@
 				1E0B7B0E1B6F6C1400A58AD4 /* SaiDanPhotoView.m in Sources */,
 				1E943F251B7CB1F50029FE74 /* HomeContentCellModel.m in Sources */,
 				1E3D8D471B4BF4A100275C35 /* DDTTYLogger.m in Sources */,
+				1E7995821BCDFCC70099CFF9 /* LoveHouseListViewController.m in Sources */,
 				1E3D8D901B4BF4A100275C35 /* ASICloudFilesRequest.m in Sources */,
 				1E0B7AE91B6F693000A58AD4 /* PhotoItem.m in Sources */,
 				1E3D8D521B4BF4A100275C35 /* FMDatabase.m in Sources */,
@@ -5399,6 +5526,7 @@
 				1E3D8D4F1B4BF4A100275C35 /* GInterface.m in Sources */,
 				1E827BA81B9412C6008F3F08 /* MWTapDetectingView.m in Sources */,
 				1E827BA31B9412C6008F3F08 /* MWGridCell.m in Sources */,
+				1E79957B1BCD26820099CFF9 /* LoveHouseListItemModel.m in Sources */,
 				1E3D8D961B4BF4A100275C35 /* MJRefreshFooter.m in Sources */,
 				1E943EA51B7202890029FE74 /* LoginService.m in Sources */,
 			);

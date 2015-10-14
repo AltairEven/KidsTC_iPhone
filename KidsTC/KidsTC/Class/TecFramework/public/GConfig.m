@@ -474,6 +474,9 @@ static BOOL bLoadWebImage = YES;
 
 
 + (CGFloat)heightForLabelWithWidth:(CGFloat)width LineBreakMode:(NSLineBreakMode)mode Font:(UIFont *)font topGap:(CGFloat)tGap bottomGap:(CGFloat)bGap andText:(NSString *)text {
+    if ([text length] == 0) {
+        return 0;
+    }
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, font.pointSize)];
     [label setLineBreakMode:mode];
     [label setFont:font];

@@ -84,11 +84,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KidsTC/Class/ViewControllers/TabBarControllers/HomeViewController.m"
-            timestampString = "466338751.876788"
+            timestampString = "466499966.001398"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
             landmarkName = "-userRoleHasChanged:"
             landmarkType = "5">
          </BreakpointContent>
