@@ -10,22 +10,7 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="NewsRecommendCellView">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="grouped" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Gt1-8M-yhZ">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                </tableView>
-            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstItem="Gt1-8M-yhZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="GpL-1e-0Iy"/>
-                <constraint firstItem="Gt1-8M-yhZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="YN0-fx-xcE"/>
-                <constraint firstAttribute="trailing" secondItem="Gt1-8M-yhZ" secondAttribute="trailing" id="cAE-hM-wiA"/>
-                <constraint firstAttribute="bottom" secondItem="Gt1-8M-yhZ" secondAttribute="bottom" id="zms-cL-dYZ"/>
-            </constraints>
-            <connections>
-                <outlet property="tableView" destination="Gt1-8M-yhZ" id="yHB-k7-uq7"/>
-            </connections>
             <point key="canvasLocation" x="198" y="315"/>
         </view>
     </objects>

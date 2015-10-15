@@ -22,6 +22,10 @@
     // Initialization code
     self.cellView.delegate = self;
     [self.contentView setBackgroundColor:[AUITheme theme].globalBGColor];
+    
+    self.cellView.layer.borderWidth = BORDER_WIDTH;
+    self.cellView.layer.borderColor = RGBA(230, 230, 230, 1).CGColor;
+    self.cellView.layer.masksToBounds = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
