@@ -21,11 +21,13 @@ typedef enum {
 
 - (void)newsView:(NewsView *)newsView didClickedSegmentControlWithNewsViewTag:(NewsViewTag)viewTag;
 
+- (void)newsView:(NewsView *)newsView didChangedNewsTagIndex:(NSUInteger)index;
+
 - (void)newsView:(NewsView *)newsView didSelectedItem:(NewsListItemModel *)item;
 
-- (void)newsView:(NewsView *)newsView needRefreshTableWithNewsViewTag:(NewsViewTag)viewTag;
+- (void)newsView:(NewsView *)newsView needRefreshTableWithNewsViewTag:(NewsViewTag)viewTag tagIndex:(NSUInteger)index;
 
-- (void)newsView:(NewsView *)newsView needLoadMoreWithNewsViewTag:(NewsViewTag)viewTag;
+- (void)newsView:(NewsView *)newsView needLoadMoreWithNewsViewTag:(NewsViewTag)viewTag tagIndex:(NSUInteger)index;
 
 @end
 
@@ -38,5 +40,7 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet NewsListView *newsListView;
 
 @property (nonatomic, readonly) NewsViewTag currentViewTag;
+
+@property (nonatomic, readonly) NSUInteger currentNewsTagIndex;
 
 @end

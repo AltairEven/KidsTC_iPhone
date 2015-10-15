@@ -256,15 +256,18 @@
             return ;
         }
         */
-        
-        success(weakSelf, responseObject);
+        if (success) {
+            success(weakSelf, responseObject);
+        }
         
     } failure:^(AFHTTPClientV2 *request, NSError *error) {
         
         weakSelf.endTime = [NSDate date];
-        failure(weakSelf, error);
-        if (weakSelf.errorBlock) {
-            weakSelf.errorBlock(error);
+        if (failure) {
+            failure(weakSelf, error);
+            if (weakSelf.errorBlock) {
+                weakSelf.errorBlock(error);
+            }
         }
         
     }];

@@ -7,26 +7,39 @@
 //
 
 #import "NewsListViewModel.h"
+#import "NewsTagItemModel.h"
+
+#define PageSize (10)
 
 @interface NewsListViewModel () <NewsListViewDataSource>
 
 @property (nonatomic, weak) NewsListView *view;
 
+@property (nonatomic, strong) HttpRequestClient *loadNewsTagRequest;
+
 @property (nonatomic, strong) HttpRequestClient *loadNewsRequest;
 
-@property (nonatomic, strong) NSMutableArray *listModels;
+@property (nonatomic, strong) NSMutableDictionary *totalResultsContainer;
 
-@property (nonatomic, assign) NSUInteger currentPage;
+@property (nonatomic, strong) NSMutableArray *newsTagItemModels;
 
-- (void)loadNewsSucceed:(NSDictionary *)data;
+@property (nonatomic, strong) NSMutableDictionary *currentPageIndexs;
 
-- (void)loadNewsFailed:(NSError *)error;
+- (void)getNewsTags;
 
-- (void)loadMoreNewsSucceed:(NSDictionary *)data;
+- (NSMutableArray *)newsResultAtTagIndex:(NSUInteger)index;
 
-- (void)loadMoreNewsFailed:(NSError *)error;
+- (void)clearDataForTagIndex:(NSUInteger)index;
 
-- (void)reloadListViewWithData:(NSDictionary *)data;
+- (void)loadNewsSucceedWithData:(NSDictionary *)data tagIndex:(NSUInteger)index;
+
+- (void)loadNewsFailedWithError:(NSError *)error tagIndex:(NSUInteger)index;
+
+- (void)loadMoreNewsSucceedWithData:(NSDictionary *)data tagIndex:(NSUInteger)index;
+
+- (void)loadMoreNewsFailedWithError:(NSError *)error tagIndex:(NSUInteger)index;
+
+- (void)reloadNewsListViewWithData:(NSDictionary *)data tagIndex:(NSUInteger)index;
 
 @end
 
@@ -37,145 +50,242 @@
     if (self) {
         self.view = (NewsListView *)view;
         self.view.dataSource = self;
-        self.currentPage = 1;
-        self.listModels = [[NSMutableArray alloc] init];
+        self.totalResultsContainer = [[NSMutableDictionary alloc] init];
+        self.newsTagItemModels = [[NSMutableArray alloc] init];
+        self.currentPageIndexs = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
 
-- (NSArray *)resultListItems {
-    return [NSArray arrayWithArray:self.listModels];
-}
-
 #pragma mark NewsListViewDataSource
 
-- (NSArray *)newsListItemModelsForNewsListView:(NewsListView *)listView {
-    return [self resultListItems];
+- (NSArray *)newsTagItemModelsForNewsListView:(NewsListView *)listView {
+    return [NSArray arrayWithArray:self.newsTagItemModels];
+}
+
+- (NSArray *)newsListItemModelsForNewsListView:(NewsListView *)listView ofNewsTagIndex:(NSUInteger)index {
+    return [NSArray arrayWithArray:[self.totalResultsContainer objectForKey:[NSNumber numberWithInteger:index]]];
 }
 
 #pragma mark Private methods
 
-- (void)loadNewsSucceed:(NSDictionary *)data {
-    [self.listModels removeAllObjects];
-    [self reloadListViewWithData:data];
-}
-
-- (void)loadNewsFailed:(NSError *)error {
-    [self.listModels removeAllObjects];
-    switch (error.code) {
-        case -999:
-        {
-            //cancel
-            return;
-        }
-            break;
-        case -1003:
-        {
-            //没有数据
-            [self.view noMoreLoad];
-        }
-            break;
-        default:
-            break;
+- (void)getNewsTags {
+    if (!self.loadNewsTagRequest) {
+        self.loadNewsTagRequest = [HttpRequestClient clientWithUrlAliasName:@"ARTICLE_GET_HOT_TAG"];
     }
-    [self reloadListViewWithData:nil];
-    [self.view endRefresh];
-}
-
-- (void)loadMoreNewsSucceed:(NSDictionary *)data {
-    self.currentPage ++;
-    [self reloadListViewWithData:data];
-    [self.view endLoadMore];
-}
-
-- (void)loadMoreNewsFailed:(NSError *)error {
-    switch (error.code) {
-        case -999:
-        {
-            //cancel
-            return;
-        }
-            break;
-        case -1003:
-        {
-            //没有数据
-            [self.view noMoreLoad];
-        }
-            break;
-        default:
-            break;
-    }
-    [self reloadListViewWithData:nil];
-    [self.view endLoadMore];
-}
-
-- (void)reloadListViewWithData:(NSDictionary *)data {
-    NSArray *dataArray = [data objectForKey:@"data"];
-    if ([dataArray isKindOfClass:[NSArray class]] && [dataArray count] > 0) {
-        [self.view hideLoadMoreFooter:NO];
-        
-        NSMutableArray *tempContainer = [[NSMutableArray alloc] init];
-        for (NSDictionary *singleItem in dataArray) {
-            NewsListItemModel *model = [[NewsListItemModel alloc] initWithRawData:singleItem];
-            if (model) {
-                [tempContainer addObject:model];
+    [self.loadNewsTagRequest cancel];
+    __weak NewsListViewModel *weakSelf = self;
+    [weakSelf.loadNewsTagRequest startHttpRequestWithParameter:nil success:^(HttpRequestClient *client, NSDictionary *responseData) {
+        NSArray *array = [responseData objectForKey:@"data"];
+        [weakSelf.newsTagItemModels removeAllObjects];
+        if ([array isKindOfClass:[NSArray class]]) {
+            for (NSDictionary *dic in array) {
+                NewsTagItemModel *model = [[NewsTagItemModel alloc] initWithRawData:dic];
+                if (model) {
+                    [weakSelf.newsTagItemModels addObject:model];
+                }
             }
         }
-        [self.listModels addObjectsFromArray:tempContainer];
-        
-        if ([dataArray count] < [self.view pageSize]) {
-            [self.view noMoreLoad];
+        [weakSelf.view reloadNewsTag];
+    } failure:nil];
+}
+
+- (NSMutableArray *)newsResultAtTagIndex:(NSUInteger)index {
+    if ([self.totalResultsContainer count] > index) {
+        NSMutableArray *dataArray = [self.totalResultsContainer objectForKey:[NSNumber numberWithInteger:index]];
+        if (dataArray) {
+            return dataArray;
         }
-    } else {
-        [self.view noMoreLoad];
-        [self.view hideLoadMoreFooter:YES];
     }
-    [self.view reloadData];
+    return nil;
+}
+
+- (void)clearDataForTagIndex:(NSUInteger)index {
+    NSMutableArray *dataArray = [self newsResultAtTagIndex:index];
+    if (dataArray) {
+        [dataArray removeAllObjects];
+    }
+}
+
+- (void)loadNewsSucceedWithData:(NSDictionary *)data tagIndex:(NSUInteger)index {
+    [self clearDataForTagIndex:index];
+    [self reloadNewsListViewWithData:data tagIndex:index];
+}
+
+- (void)loadNewsFailedWithError:(NSError *)error tagIndex:(NSUInteger)index {
+    [self clearDataForTagIndex:index];
+    switch (error.code) {
+        case -999:
+        {
+            //cancel
+            return;
+        }
+            break;
+        case -1003:
+        {
+            //没有数据
+            [self.view noMoreData:YES forNewsTagIndex:index];
+        }
+            break;
+        default:
+            break;
+    }
+    [self reloadNewsListViewWithData:nil tagIndex:index];
     [self.view endRefresh];
+}
+
+- (void)loadMoreNewsSucceedWithData:(NSDictionary *)data tagIndex:(NSUInteger)index {
+    NSString *key = [NSString stringWithFormat:@"%lu", (unsigned long)index];
+    NSUInteger currentIndex = [[self.currentPageIndexs objectForKey:key] integerValue];
+    [self.currentPageIndexs setObject:[NSNumber numberWithInteger:currentIndex + 1] forKey:key];
+    [self reloadNewsListViewWithData:data tagIndex:index];
     [self.view endLoadMore];
+}
+
+- (void)loadMoreNewsFailedWithError:(NSError *)error tagIndex:(NSUInteger)index {
+    switch (error.code) {
+        case -999:
+        {
+            //cancel
+            return;
+        }
+            break;
+        case -1003:
+        {
+            //没有数据
+            [self.view noMoreData:YES forNewsTagIndex:index];
+        }
+            break;
+        default:
+            break;
+    }
+    [self reloadNewsListViewWithData:nil tagIndex:index];
+    [self.view endLoadMore];
+}
+
+- (void)reloadNewsListViewWithData:(NSDictionary *)data tagIndex:(NSUInteger)index {
+    if ([self.newsTagItemModels count] > 0) {
+        NSArray *dataArray = [data objectForKey:@"data"];
+        if ([dataArray isKindOfClass:[NSArray class]] && [dataArray count] > 0) {
+            [self.view hideLoadMoreFooter:NO forNewsTagIndex:index];
+            
+            NSMutableArray *tempContainer = [[NSMutableArray alloc] init];
+            for (NSDictionary *singleItem in dataArray) {
+                NewsListItemModel *model = [[NewsListItemModel alloc] initWithRawData:singleItem];
+                if (model) {
+                    [tempContainer addObject:model];
+                }
+            }
+            NSMutableArray *resultArray = [self newsResultAtTagIndex:index];
+            if (resultArray) {
+                [resultArray addObjectsFromArray:tempContainer];
+            } else {
+                [self.totalResultsContainer setObject:tempContainer forKey:[NSNumber numberWithInteger:index]];
+            }
+            
+            if ([dataArray count] < PageSize) {
+                [self.view noMoreData:YES forNewsTagIndex:index];
+            } else {
+                [self.view noMoreData:NO forNewsTagIndex:index];
+            }
+        } else {
+            [self.view noMoreData:YES forNewsTagIndex:index];
+            [self.view hideLoadMoreFooter:YES forNewsTagIndex:index];
+        }
+        [self.view reloadData];
+        [self.view endRefresh];
+        [self.view endLoadMore];
+    }
 }
 
 #pragma mark Public methods
 
-- (void)startUpdateDataWithSucceed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
+- (NSArray *)currentResultArray {
+    return [NSArray arrayWithArray:[self newsResultAtTagIndex:self.currentTagIndex]];
+}
+
+- (void)startUpdateDataWithNewsTagIndex:(NSUInteger)index {
+    if ([self.newsTagItemModels count] == 0) {
+        [self getNewsTags];
+        return;
+    }
     if (!self.loadNewsRequest) {
         self.loadNewsRequest = [HttpRequestClient clientWithUrlAliasName:@"ARTICLE_GET_LIST"];
     }
-    [self.loadNewsRequest cancel];
-    self.currentPage = 1;
+    
+    NSString *tagId = @"0";
+    if ([self.newsTagItemModels count] > index) {
+        //已经有数据的情况
+        NewsTagItemModel *model = [self.newsTagItemModels objectAtIndex:index];
+        tagId = model.identifier;
+    }
+    
+    NSUInteger pageIndex = [[self.currentPageIndexs objectForKey:[NSNumber numberWithInteger:index]] integerValue];
+    if (pageIndex <= 0) {
+        pageIndex = 1;
+    }
+    NewsTagItemModel *model = [self.newsTagItemModels objectAtIndex:self.currentTagIndex];
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
-                           [NSNumber numberWithInteger:self.currentPage], @"page",
-                           [NSNumber numberWithInteger:[self.view pageSize]], @"pagecount", nil];
+                           [NSNumber numberWithInteger:pageIndex], @"page",
+                           [NSNumber numberWithInteger:PageSize], @"pageCount",
+                           model.identifier, @"tagId",
+                           @"", @"authorId", nil];
     __weak NewsListViewModel *weakSelf = self;
     [weakSelf.loadNewsRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
-        [weakSelf loadNewsSucceed:responseData];
+        [weakSelf loadNewsSucceedWithData:responseData tagIndex:index];
     } failure:^(HttpRequestClient *client, NSError *error) {
-        [weakSelf loadNewsFailed:error];
+        [weakSelf loadNewsFailedWithError:error tagIndex:index];
     }];
 }
 
-- (void)getMoreNewsWithSucceed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
+- (void)getMoreDataWithNewsTagIndex:(NSUInteger)index {
     if (!self.loadNewsRequest) {
         self.loadNewsRequest = [HttpRequestClient clientWithUrlAliasName:@"ARTICLE_GET_LIST"];
     }
-    [self.loadNewsRequest cancel];
-    NSUInteger nextPage = self.currentPage + 1;
+    
+    NSString *tagId = @"0";
+    if ([self.newsTagItemModels count] > index) {
+        //已经有数据的情况
+        NewsTagItemModel *model = [self.newsTagItemModels objectAtIndex:index];
+        tagId = model.identifier;
+    }
+    
+    NSUInteger pageIndex = [[self.currentPageIndexs objectForKey:[NSNumber numberWithInteger:index]] integerValue];
+    pageIndex ++;
+    NewsTagItemModel *model = [self.newsTagItemModels objectAtIndex:self.currentTagIndex];
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
-                           [NSNumber numberWithInteger:nextPage], @"page",
-                           [NSNumber numberWithInteger:[self.view pageSize]], @"pagecount", nil];
+                           [NSNumber numberWithInteger:pageIndex], @"page",
+                           [NSNumber numberWithInteger:PageSize], @"pageCount",
+                           model.identifier, @"tagId",
+                           @"", @"authorId", nil];
     __weak NewsListViewModel *weakSelf = self;
     [weakSelf.loadNewsRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
-        [weakSelf loadMoreNewsSucceed:responseData];
+        [weakSelf loadNewsSucceedWithData:responseData tagIndex:index];
     } failure:^(HttpRequestClient *client, NSError *error) {
-        [weakSelf loadMoreNewsFailed:error];
+        [weakSelf loadNewsFailedWithError:error tagIndex:index];
     }];
 }
+
+- (void)resetResultWithNewsTagIndex:(NSUInteger)index{
+    self.currentTagIndex = index;
+    [self stopUpdateData];
+    NSMutableArray *dataArray = [self newsResultAtTagIndex:index];
+    
+    if ([dataArray count] > 0) {
+        [self.view reloadData];
+    } else {
+        [self.view startRefresh];
+    }
+}
+
+
+#pragma mark Super methods
 
 - (void)stopUpdateData {
+    [self.loadNewsTagRequest cancel];
     [self.loadNewsRequest cancel];
     [self.view endRefresh];
     [self.view endLoadMore];
 }
-
 
 @end

@@ -245,6 +245,10 @@
 
 #pragma mark Public methods
 
+- (NSArray *)currentResultArray {
+    return [NSArray arrayWithArray:[self activityResultAtCalendarIndex:self.currentCalendarIndex]];
+}
+
 - (void)startUpdateDataWithCalendarIndex:(NSUInteger)index {
     if (!self.loadStrategriesRequest) {
         self.loadStrategriesRequest = [HttpRequestClient clientWithUrlAliasName:@"SEARCH_STRATEGY"];
@@ -280,7 +284,35 @@
 }
 
 - (void)getMoreDataWithCalendarIndex:(NSUInteger)index {
+    if (!self.loadStrategriesRequest) {
+        self.loadStrategriesRequest = [HttpRequestClient clientWithUrlAliasName:@"SEARCH_STRATEGY"];
+    }
     
+    NSString *dateString = @"";
+    if ([self.dateDesArray count] > index) {
+        //已经有数据的情况
+        dateString = [self.dateDesArray objectAtIndex:index];
+    }
+    
+    NSUInteger pageIndex = [[self.currentPageIndexs objectForKey:[NSNumber numberWithInteger:index]] integerValue];
+    pageIndex ++;
+    
+    NSString *areaId = @"0";
+    if (self.currentAreaItem) {
+        areaId = self.currentAreaItem.identifier;
+    }
+    
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
+                           dateString, @"time",
+                           [NSNumber numberWithInteger:pageIndex], @"page",
+                           [NSNumber numberWithInteger:PageSize], @"pagecount",
+                           areaId, @"area", nil];
+    __weak ActivityViewModel *weakSelf = self;
+    [weakSelf.loadStrategriesRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
+        [weakSelf loadActivitiesSucceedWithData:responseData calendarIndex:index];
+    } failure:^(HttpRequestClient *client, NSError *error) {
+        [weakSelf loadActivitiesFailedWithError:error calendarIndex:index];
+    }];
 }
 
 - (void)resetResultWithCalendarIndex:(NSUInteger)index {

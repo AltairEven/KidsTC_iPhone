@@ -193,7 +193,6 @@
 
 - (void)didClickedHotKeyButton:(UIButton *)button {
     if (self.delegate && [self.delegate respondsToSelector:@selector(searchHistoryView:didSelectedHotKeyAtIndex:)]) {
-        NSLog(@"%d", button.tag);
         [self.delegate searchHistoryView:self didSelectedHotKeyAtIndex:button.tag];
     }
 }

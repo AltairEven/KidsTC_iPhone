@@ -12,8 +12,14 @@
 
 @interface NewsListViewModel : BaseViewModel
 
-- (NSArray *)resultListItems;
+@property (nonatomic, assign) NSUInteger currentTagIndex;
 
-- (void)getMoreNewsWithSucceed:(void(^)(NSDictionary *data))succeed failure:(void(^)(NSError *error))failure;
+- (NSArray *)currentResultArray;
+
+- (void)startUpdateDataWithNewsTagIndex:(NSUInteger)index;
+
+- (void)getMoreDataWithNewsTagIndex:(NSUInteger)index;
+
+- (void)resetResultWithNewsTagIndex:(NSUInteger)index;
 
 @end

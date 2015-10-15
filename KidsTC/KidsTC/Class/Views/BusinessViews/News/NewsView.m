@@ -68,28 +68,34 @@
 }
 
 - (void)newsRecommendListViewDidPulledToloadMore:(NewsRecommendListView *)listView {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(newsView:needLoadMoreWithNewsViewTag:)]) {
-        [self.delegate newsView:self needLoadMoreWithNewsViewTag:NewsViewTagRecommend];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(newsView:needLoadMoreWithNewsViewTag:tagIndex:)]) {
+        [self.delegate newsView:self needLoadMoreWithNewsViewTag:NewsViewTagRecommend tagIndex:0];
     }
 }
 
 #pragma mark NewsListViewDelegate
 
-- (void)newsListView:(NewsListView *)listView didSelectedItem:(NewsListItemModel *)item {
+- (void)newsListView:(NewsListView *)listView didSelectedNewsTagIndex:(NSUInteger)index {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(newsView:didChangedNewsTagIndex:)]) {
+        [self.delegate newsView:self didChangedNewsTagIndex:index];
+    }
+}
+
+- (void)newsListView:(NewsListView *)listView didSelectedItem:(NewsListItemModel *)item atNewsTagIndex:(NSUInteger)index {
     if (self.delegate && [self.delegate respondsToSelector:@selector(newsView:didSelectedItem:)]) {
         [self.delegate newsView:self didSelectedItem:item];
     }
 }
 
-- (void)newsListViewDidPulledDownToRefresh:(NewsListView *)listView {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(newsView:needRefreshTableWithNewsViewTag:)]) {
-        [self.delegate newsView:self needRefreshTableWithNewsViewTag:NewsViewTagMore];
+- (void)newsListViewDidPulledDownToRefresh:(NewsListView *)listView atNewsTagIndex:(NSUInteger)index {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(newsView:needRefreshTableWithNewsViewTag:tagIndex:)]) {
+        [self.delegate newsView:self needRefreshTableWithNewsViewTag:NewsViewTagMore tagIndex:index];
     }
 }
 
-- (void)newsListViewDidPulledUpToloadMore:(NewsListView *)listView {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(newsView:needLoadMoreWithNewsViewTag:)]) {
-        [self.delegate newsView:self needLoadMoreWithNewsViewTag:NewsViewTagMore];
+- (void)newsListViewDidPulledUpToloadMore:(NewsListView *)listView atNewsTagIndex:(NSUInteger)index {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(newsView:needLoadMoreWithNewsViewTag:tagIndex:)]) {
+        [self.delegate newsView:self needLoadMoreWithNewsViewTag:NewsViewTagMore tagIndex:index];
     }
 }
 

@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *newsImageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *authorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *viewCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *commentCountLabel;
 
 @end
 
@@ -35,6 +37,8 @@
         [self.newsImageView setImageWithURL:model.imageUrl placeholderImage:PLACEHOLDERIMAGE_SMALL];
         [self.titleLabel setText:model.title];
         [self.authorLabel setText:model.author];
+        [self.viewCountLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)model.viewCount]];
+        [self.commentCountLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)model.commentCount]];
     }
 }
 

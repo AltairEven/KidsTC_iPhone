@@ -44,4 +44,6 @@
 
 - (void)deselectIndex:(NSUInteger)index;
 
+- (void)scrollToIndex:(NSUInteger)index position:(UITableViewScrollPosition)position animated:(BOOL)animated;
+
 @end

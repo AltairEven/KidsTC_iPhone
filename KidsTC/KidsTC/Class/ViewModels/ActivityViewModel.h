@@ -13,6 +13,8 @@
 
 @property (nonatomic, strong) KTCAreaItem *currentAreaItem;
 
+- (NSArray *)currentResultArray;
+
 - (void)startUpdateDataWithCalendarIndex:(NSUInteger)index;
 
 - (void)getMoreDataWithCalendarIndex:(NSUInteger)index;

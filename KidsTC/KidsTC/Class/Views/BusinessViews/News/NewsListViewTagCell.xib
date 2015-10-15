@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="44" id="Zt3-kd-yEf" customClass="NewsListViewTagCell">
+            <rect key="frame" x="0.0" y="0.0" width="142" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Zt3-kd-yEf" id="ehf-Va-sDP">
+                <rect key="frame" x="0.0" y="0.0" width="142" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yrT-YS-Jt5">
+                        <rect key="frame" x="0.0" y="13" width="142" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a88-vh-xMk">
+                        <rect key="frame" x="0.0" y="41" width="142" height="2"/>
+                        <color key="backgroundColor" red="1" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="2" id="8QU-7f-Xg1"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="yrT-YS-Jt5" firstAttribute="leading" secondItem="ehf-Va-sDP" secondAttribute="leading" id="2Pe-ma-nNi"/>
+                    <constraint firstItem="a88-vh-xMk" firstAttribute="bottom" secondItem="ehf-Va-sDP" secondAttribute="bottom" id="8ga-Fw-nkr"/>
+                    <constraint firstItem="a88-vh-xMk" firstAttribute="leading" secondItem="ehf-Va-sDP" secondAttribute="leading" id="G0v-le-aEL"/>
+                    <constraint firstAttribute="trailing" secondItem="yrT-YS-Jt5" secondAttribute="trailing" id="MSH-T7-SRa"/>
+                    <constraint firstAttribute="trailing" secondItem="a88-vh-xMk" secondAttribute="trailing" id="oh6-SC-LsF"/>
+                    <constraint firstAttribute="centerY" secondItem="yrT-YS-Jt5" secondAttribute="centerY" id="uRa-QL-JYX"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="tagView" destination="a88-vh-xMk" id="tak-jn-afG"/>
+                <outlet property="titleLabel" destination="yrT-YS-Jt5" id="C5v-HW-eUV"/>
+            </connections>
+            <point key="canvasLocation" x="354" y="321"/>
+        </tableViewCell>
+    </objects>
+</document>

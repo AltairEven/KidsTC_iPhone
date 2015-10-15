@@ -173,6 +173,10 @@
     [self.tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] animated:YES];
 }
 
+- (void)scrollToIndex:(NSUInteger)index position:(UITableViewScrollPosition)position animated:(BOOL)animated {
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] atScrollPosition:position animated:animated];
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

@@ -23,6 +23,8 @@
         self.author = [data objectForKey:@"author"];
         self.imageUrl = [NSURL URLWithString:[data objectForKey:@"imgUrl"]];
         self.linkUrl = [data objectForKey:@"linkUrl"];
+        self.viewCount = [[data objectForKey:@"viewCount"] integerValue];
+        self.commentCount = [[data objectForKey:@"viewCount"] integerValue];
     }
     return self;
 }

@@ -26,7 +26,7 @@
     self.newsView.delegate = self;
     
     self.newsViewModel = [[NewsViewModel alloc] initWithView:self.newsView];
-    [self.newsViewModel refreshNewsWithViewTag:NewsViewTagRecommend Succeed:nil failure:nil];
+    [self.newsViewModel refreshNewsWithViewTag:NewsViewTagRecommend newsTagIndex:self.newsViewModel.currentNewsTagIndex];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -54,7 +54,11 @@
 #pragma mark NewsViewDelegate
 
 - (void)newsView:(NewsView *)newsView didClickedSegmentControlWithNewsViewTag:(NewsViewTag)viewTag {
-    [self.newsViewModel resetNewsViewWithViewTag:viewTag];
+    [self.newsViewModel resetNewsViewWithViewTag:viewTag newsTagIndex:0];
+}
+
+- (void)newsView:(NewsView *)newsView didChangedNewsTagIndex:(NSUInteger)index {
+    [self.newsViewModel resetNewsViewWithViewTag:NewsViewTagMore newsTagIndex:index];
 }
 
 - (void)newsView:(NewsView *)newsView didSelectedItem:(NewsListItemModel *)item {
@@ -64,12 +68,12 @@
     [self.navigationController pushViewController:controller animated:YES];
 }
 
-- (void)newsView:(NewsView *)newsView needRefreshTableWithNewsViewTag:(NewsViewTag)viewTag {
-    [self.newsViewModel refreshNewsWithViewTag:viewTag Succeed:nil failure:nil];
+- (void)newsView:(NewsView *)newsView needRefreshTableWithNewsViewTag:(NewsViewTag)viewTag tagIndex:(NSUInteger)index {
+    [self.newsViewModel refreshNewsWithViewTag:viewTag newsTagIndex:index];
 }
 
-- (void)newsView:(NewsView *)newsView needLoadMoreWithNewsViewTag:(NewsViewTag)viewTag {
-    [self.newsViewModel getMoreNewsWithViewTag:viewTag Succeed:nil failure:nil];
+- (void)newsView:(NewsView *)newsView needLoadMoreWithNewsViewTag:(NewsViewTag)viewTag tagIndex:(NSUInteger)index {
+    [self.newsViewModel getMoreNewsWithViewTag:viewTag newsTagIndex:index];
 }
 
 - (void)didReceiveMemoryWarning {

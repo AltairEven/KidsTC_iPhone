@@ -20,6 +20,10 @@
 
 @property (nonatomic, copy) NSString *linkUrl;
 
+@property (nonatomic, assign) NSUInteger viewCount;
+
+@property (nonatomic, assign) NSUInteger commentCount;
+
 - (instancetype)initWithRawData:(NSDictionary *)data;
 
 @end

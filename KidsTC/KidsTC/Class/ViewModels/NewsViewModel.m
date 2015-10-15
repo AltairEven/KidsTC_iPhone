@@ -32,39 +32,47 @@
     return self;
 }
 
-- (void)refreshNewsWithViewTag:(NewsViewTag)viewTag Succeed:(void(^)(NSDictionary *data))succeed failure:(void(^)(NSError *error))failure {
+- (void)setCurrentNewsTagIndex:(NSUInteger)currentNewsTagIndex {
+    _currentNewsTagIndex = currentNewsTagIndex;
+    self.listViewModel.currentTagIndex = currentNewsTagIndex;
+    if ([[self.listViewModel currentResultArray] count] == 0) {
+        [self.listViewModel startUpdateDataWithNewsTagIndex:self.currentNewsTagIndex];
+    }
+}
+
+- (void)refreshNewsWithViewTag:(NewsViewTag)viewTag newsTagIndex:(NSUInteger)index {
     switch (viewTag) {
         case NewsViewTagRecommend:
         {
-            [self.recommendListViewModel startUpdateDataWithSucceed:succeed failure:failure];
+            [self.recommendListViewModel startUpdateDataWithSucceed:nil failure:nil];
         }
             break;
         case NewsViewTagMore:
         {
-            [self.listViewModel startUpdateDataWithSucceed:succeed failure:failure];
+            [self.listViewModel startUpdateDataWithNewsTagIndex:index];
         }
         default:
             break;
     }
 }
 
-- (void)getMoreNewsWithViewTag:(NewsViewTag)viewTag Succeed:(void(^)(NSDictionary *data))succeed failure:(void(^)(NSError *error))failure {
+- (void)getMoreNewsWithViewTag:(NewsViewTag)viewTag newsTagIndex:(NSUInteger)index {
     switch (viewTag) {
         case NewsViewTagRecommend:
         {
-            [self.recommendListViewModel getMoreRecommendNewsWithSucceed:succeed failure:failure];
+            [self.recommendListViewModel getMoreRecommendNewsWithSucceed:nil failure:nil];
         }
             break;
         case NewsViewTagMore:
         {
-            [self.listViewModel getMoreNewsWithSucceed:succeed failure:failure];
+            [self.listViewModel getMoreDataWithNewsTagIndex:index];
         }
         default:
             break;
     }
 }
 
-- (void)resetNewsViewWithViewTag:(NewsViewTag)viewTag {
+- (void)resetNewsViewWithViewTag:(NewsViewTag)viewTag newsTagIndex:(NSUInteger)index {
     [self stopUpdateData];
     self.currentViewTag = viewTag;
     switch (viewTag) {
@@ -77,9 +85,8 @@
             break;
         case NewsViewTagMore:
         {
-            if ([self.listViewModel.resultListItems count] == 0) {
-                [self.listViewModel startUpdateDataWithSucceed:nil failure:nil];
-            }
+            self.currentNewsTagIndex = index;
+            [self.listViewModel resetResultWithNewsTagIndex:index];
         }
         default:
             break;
@@ -96,7 +103,7 @@
             break;
         case NewsViewTagMore:
         {
-            array = [self.listViewModel resultListItems];
+            array = [self.listViewModel currentResultArray];
         }
         default:
             break;

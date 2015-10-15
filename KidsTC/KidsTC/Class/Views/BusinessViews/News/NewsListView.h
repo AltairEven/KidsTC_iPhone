@@ -13,19 +13,23 @@
 
 @protocol NewsListViewDataSource <NSObject>
 
-- (NSArray *)newsListItemModelsForNewsListView:(NewsListView *)listView;
+- (NSArray *)newsTagItemModelsForNewsListView:(NewsListView *)listView;
+
+- (NSArray *)newsListItemModelsForNewsListView:(NewsListView *)listView ofNewsTagIndex:(NSUInteger)index;
 
 @end
 
 @protocol NewsListViewDelegate <NSObject>
 
-- (void)newsListView:(NewsListView *)listView didSelectedItem:(NewsListItemModel *)item;
+- (void)newsListView:(NewsListView *)listView didSelectedNewsTagIndex:(NSUInteger)index;
+
+- (void)newsListView:(NewsListView *)listView didSelectedItem:(NewsListItemModel *)item atNewsTagIndex:(NSUInteger)index;
 
 @optional
 
-- (void)newsListViewDidPulledDownToRefresh:(NewsListView *)listView;
+- (void)newsListViewDidPulledDownToRefresh:(NewsListView *)listView atNewsTagIndex:(NSUInteger)index;
 
-- (void)newsListViewDidPulledUpToloadMore:(NewsListView *)listView;
+- (void)newsListViewDidPulledUpToloadMore:(NewsListView *)listView atNewsTagIndex:(NSUInteger)index;
 
 @end
 
@@ -33,10 +37,10 @@
 
 @property (nonatomic, assign) id<NewsListViewDataSource> dataSource;
 @property (nonatomic, assign) id<NewsListViewDelegate> delegate;
+@property (nonatomic, readonly) NSUInteger itemCount;
+@property (nonatomic, readonly) NSUInteger currentNewsTagIndex;
 
-@property (nonatomic, readonly) NSUInteger itemCount;;
-
-- (NSUInteger)pageSize;
+- (void)reloadNewsTag;
 
 - (void)reloadData;
 
@@ -46,8 +50,8 @@
 
 - (void)endLoadMore;
 
-- (void)noMoreLoad;
+- (void)noMoreData:(BOOL)noMore forNewsTagIndex:(NSUInteger)index;
 
-- (void)hideLoadMoreFooter:(BOOL)hidden;
+- (void)hideLoadMoreFooter:(BOOL)hidden forNewsTagIndex:(NSUInteger)index;
 
 @end

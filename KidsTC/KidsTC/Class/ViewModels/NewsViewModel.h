@@ -13,11 +13,13 @@
 
 @property (nonatomic, assign) NewsViewTag currentViewTag;
 
-- (void)refreshNewsWithViewTag:(NewsViewTag)viewTag Succeed:(void(^)(NSDictionary *data))succeed failure:(void(^)(NSError *error))failure;
+@property (nonatomic, assign) NSUInteger currentNewsTagIndex;
 
-- (void)getMoreNewsWithViewTag:(NewsViewTag)viewTag Succeed:(void(^)(NSDictionary *data))succeed failure:(void(^)(NSError *error))failure;
+- (void)refreshNewsWithViewTag:(NewsViewTag)viewTag newsTagIndex:(NSUInteger)index;
 
-- (void)resetNewsViewWithViewTag:(NewsViewTag)viewTag;
+- (void)getMoreNewsWithViewTag:(NewsViewTag)viewTag newsTagIndex:(NSUInteger)index;
+
+- (void)resetNewsViewWithViewTag:(NewsViewTag)viewTag newsTagIndex:(NSUInteger)index;
 
 - (NSArray *)resultListItemsWithViewTag:(NewsViewTag)viewTag;
 
