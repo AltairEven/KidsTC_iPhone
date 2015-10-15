@@ -19,6 +19,8 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 
 @property (nonatomic, strong) NSArray *listItemModels;
 
+@property (nonatomic, assign) BOOL noMoreData;
+
 - (void)pullToLoadMoreData;
 
 @end
@@ -57,14 +59,13 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     }
     __weak NewsRecommendListView *weakSelf = self;
     [self.tableView addLegendHeaderWithRefreshingBlock:^{
+        if (weakSelf.noMoreData) {
+            return ;
+        }
         [weakSelf pullToLoadMoreData];
     }];
     [self.tableView.legendHeader setStateHidden:YES];
     [self.tableView.legendHeader setUpdatedTimeHidden:YES];
-}
-
-- (NSUInteger)pageSize {
-    return 3;
 }
 
 #pragma mark UITableViewDataSource & UITableViewDelegate
@@ -132,6 +133,11 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 
 - (void)endLoadMore {
     [self.tableView.legendHeader endRefreshing];
+}
+
+- (void)noMoreEarlierData:(BOOL)noMore {
+    self.noMoreData = noMore;
+    [self.tableView.legendHeader setHidden:noMore];
 }
 
 /*

@@ -58,6 +58,7 @@
 #pragma mark Private methods
 
 - (void)loadMoreNewsSucceed:(NSDictionary *)data {
+    self.requestTimeDes = [data objectForKey:@"time"];
     [self reloadListViewWithData:data];
     [self.view endLoadMore];
 }
@@ -70,9 +71,10 @@
             return;
         }
             break;
-        case -1003:
+        case -3001:
         {
             //没有数据
+            [self.view noMoreEarlierData:YES];
         }
             break;
         default:
@@ -83,9 +85,9 @@
 }
 
 - (void)reloadListViewWithData:(NSDictionary *)data {
-    self.requestTimeDes = [data objectForKey:@"time"];
     NSArray *dataArray = [data objectForKey:@"data"];
     if ([dataArray isKindOfClass:[NSArray class]] && [dataArray count] > 0) {
+        [self.view noMoreEarlierData:NO];
         NSMutableArray *tempContainer = [[NSMutableArray alloc] init];
         for (NSDictionary *singleItem in dataArray) {
             NewsRecommendListModel *model = [[NewsRecommendListModel alloc] initWithRawData:singleItem];
@@ -95,12 +97,9 @@
         }
         NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [tempContainer count])];
         [self.listModels insertObjects:tempContainer atIndexes:indexSet];
-        
-        if ([dataArray count] < [self.view pageSize]) {
-            //没有更多
-        }
     } else {
         //没有更多
+        [self.view noMoreEarlierData:YES];
     }
     [self.view reloadData];
     [self.view endLoadMore];

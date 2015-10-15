@@ -34,12 +34,12 @@
 
 @property (nonatomic, readonly) NSUInteger itemCount;;
 
-- (NSUInteger)pageSize;
-
 - (void)reloadData;
 
 - (void)startLoadMore;
 
 - (void)endLoadMore;
+
+- (void)noMoreEarlierData:(BOOL)noMore;
 
 @end
