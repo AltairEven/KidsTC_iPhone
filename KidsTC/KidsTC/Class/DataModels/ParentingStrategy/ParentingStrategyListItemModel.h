@@ -8,13 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum {
+    ParentingStrategyListTagNone,
+    ParentingStrategyListTagRecommend,
+    ParentingStrategyListTagHot,
+    ParentingStrategyListTagRNH
+}ParentingStrategyListTag;
+
 @interface ParentingStrategyListItemModel : NSObject
 
+@property (nonatomic, copy) NSString *identifier;
 @property (nonatomic, strong) NSURL *imageUrl;
 @property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *editorWord;
-@property (nonatomic, assign) BOOL isRecommend;
-@property (nonatomic, copy) NSString *linkUrlString;
+@property (nonatomic, copy) NSString *editorName;
+@property (nonatomic, assign) NSUInteger viewCount;
+@property (nonatomic, assign) NSUInteger commentCount;
+@property (nonatomic, assign) ParentingStrategyListTag listTag;
 
 @property (nonatomic, assign) CGFloat imageRatio;
 

@@ -13,13 +13,13 @@
 @interface ParentingStrategyViewCell ()
 
 @property (weak, nonatomic) IBOutlet UIView *contentBGView;
-@property (weak, nonatomic) IBOutlet UIView *imageFilterView;
 @property (weak, nonatomic) IBOutlet UIImageView *cellImageView;
 @property (weak, nonatomic) IBOutlet UIView *descriptionBGView;
-@property (weak, nonatomic) IBOutlet UIView *titleBGView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UIView *editorBGView;
 @property (weak, nonatomic) IBOutlet UILabel *editorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *viewCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *commentCountLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *tagImageView;
 
 @end
 
@@ -28,7 +28,6 @@
 - (void)awakeFromNib {
     // Initialization code
     
-    [self.contentBGView bringSubviewToFront:self.imageFilterView];
     [self.contentBGView bringSubviewToFront:self.descriptionBGView];
 }
 
@@ -50,20 +49,39 @@
             break;
         }
     }
-    [self.cellImageView setImageWithURL:model.imageUrl placeholderImage:[UIImage imageNamed:@"detail_banner"]];
-    //title
+    [self.cellImageView setImageWithURL:model.imageUrl];
     [self.titleLabel setText:model.title];
-    //editor
-    NSString *wholeString = [NSString stringWithFormat:@"小编推荐：%@", model.editorWord];
-//    NSMutableAttributedString *labelString = [[NSMutableAttributedString alloc] initWithString:wholeString];
-//    NSDictionary *attribute = [NSDictionary dictionaryWithObject:[UIColor redColor] forKey:NSForegroundColorAttributeName];
-//    [labelString setAttributes:attribute range:NSMakeRange(0, 5)];
-//    
-//    [self.editorLabel setAttributedText:labelString];
+    [self.editorLabel setText:model.editorName];
+    [self.viewCountLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)model.viewCount]];
+    [self.commentCountLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)model.commentCount]];
     
-    [self.editorLabel setText:wholeString];
-    
-    [self.contentBGView bringSubviewToFront:self.descriptionBGView];
+    switch (model.listTag) {
+        case ParentingStrategyListTagNone:
+        {
+            [self.tagImageView setHidden:YES];
+        }
+            break;
+        case ParentingStrategyListTagRecommend:
+        {
+            [self.tagImageView setHidden:NO];
+            [self.tagImageView setImage:[UIImage imageNamed:@""]];
+        }
+            break;
+        case ParentingStrategyListTagHot:
+        {
+            [self.tagImageView setHidden:NO];
+            [self.tagImageView setImage:[UIImage imageNamed:@""]];
+        }
+            break;
+        case ParentingStrategyListTagRNH:
+        {
+            [self.tagImageView setHidden:NO];
+            [self.tagImageView setImage:[UIImage imageNamed:@""]];
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 @end

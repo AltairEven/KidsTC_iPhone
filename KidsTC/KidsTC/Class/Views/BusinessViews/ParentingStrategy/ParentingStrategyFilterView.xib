@@ -77,7 +77,7 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="YIs-bp-im3" firstAttribute="leading" secondItem="bMc-LQ-eKI" secondAttribute="leading" id="W2g-z8-VTR"/>
                                         <constraint firstAttribute="centerY" secondItem="YIs-bp-im3" secondAttribute="centerY" id="kqy-a7-pmc"/>
@@ -85,10 +85,10 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mQ1-de-PhM" userLabel="View2">
-                                    <rect key="frame" x="0.0" y="82" width="240" height="38"/>
+                                    <rect key="frame" x="0.0" y="83" width="240" height="37"/>
                                     <subviews>
                                         <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cS2-d6-fps">
-                                            <rect key="frame" x="0.0" y="4" width="240" height="30"/>
+                                            <rect key="frame" x="0.0" y="3" width="240" height="30"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <inset key="titleEdgeInsets" minX="-20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                             <inset key="imageEdgeInsets" minX="200" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -103,7 +103,7 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="cS2-d6-fps" firstAttribute="leading" secondItem="mQ1-de-PhM" secondAttribute="leading" id="9FO-D1-Fqd"/>
                                         <constraint firstAttribute="centerY" secondItem="cS2-d6-fps" secondAttribute="centerY" id="NEg-S1-AHw"/>
@@ -111,7 +111,7 @@
                                     </constraints>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="gbi-Mp-VWC" firstAttribute="leading" secondItem="cFE-K6-ita" secondAttribute="leading" id="LEZ-EM-Zkb"/>
                                 <constraint firstItem="gbi-Mp-VWC" firstAttribute="top" secondItem="cFE-K6-ita" secondAttribute="top" id="LZm-VU-AKT"/>
@@ -123,7 +123,7 @@
                                 <constraint firstItem="bMc-LQ-eKI" firstAttribute="top" secondItem="gbi-Mp-VWC" secondAttribute="bottom" id="aLj-Z3-Gni"/>
                                 <constraint firstAttribute="trailing" secondItem="bMc-LQ-eKI" secondAttribute="trailing" id="gJn-Bc-3bN"/>
                                 <constraint firstItem="bMc-LQ-eKI" firstAttribute="height" secondItem="mQ1-de-PhM" secondAttribute="height" id="hiM-jb-giQ"/>
-                                <constraint firstItem="mQ1-de-PhM" firstAttribute="top" secondItem="bMc-LQ-eKI" secondAttribute="bottom" id="kH6-hY-1ck"/>
+                                <constraint firstItem="mQ1-de-PhM" firstAttribute="top" secondItem="bMc-LQ-eKI" secondAttribute="bottom" constant="1" id="kH6-hY-1ck"/>
                                 <constraint firstAttribute="trailing" secondItem="gbi-Mp-VWC" secondAttribute="trailing" id="yD7-QK-4k1"/>
                             </constraints>
                         </view>
@@ -243,6 +243,8 @@
                 <outlet property="clearButton" destination="15B-Da-j8e" id="nSo-fh-FEO"/>
                 <outlet property="confirmButton" destination="rB9-dl-tvJ" id="vJI-1a-UgW"/>
                 <outlet property="filterBGView" destination="XG2-nq-eR8" id="BQZ-3b-ING"/>
+                <outlet property="headerBar" destination="xhO-7Z-46G" id="IwV-BV-hSj"/>
+                <outlet property="headerLabel" destination="5hh-y1-Qvh" id="hbk-X4-UjZ"/>
                 <outlet property="hotSortButton" destination="YIs-bp-im3" id="Zkn-vG-0NQ"/>
                 <outlet property="selectedAreaLabel" destination="vHT-NW-ZbC" id="ed6-wo-3aO"/>
                 <outlet property="tapArea" destination="uSM-de-gm1" id="L6x-x3-Zdp"/>

@@ -43,13 +43,15 @@
 
 - (void)startUpdateDataWithSucceed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
     if (!self.loadStrategriesRequest) {
-        self.loadStrategriesRequest = [HttpRequestClient clientWithUrlAliasName:@"SEARCH_ARTICLE"];
+        self.loadStrategriesRequest = [HttpRequestClient clientWithUrlAliasName:@"ARTICLE_GET_LIST"];
     }
     [self.loadStrategriesRequest cancel];
     self.currentPage = 1;
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
                            [NSNumber numberWithInteger:self.currentPage], @"page",
-                           [NSNumber numberWithInteger:PageSize], @"pagecount", nil];
+                           [NSNumber numberWithInteger:PageSize], @"pageCount",
+                           @"0", @"tagId",
+                           @"", @"authorId", nil];
     __weak ParentingStrategyViewModel *weakSelf = self;
     [weakSelf.loadStrategriesRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [weakSelf loadStrategyListSucceed:responseData];

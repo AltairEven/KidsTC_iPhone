@@ -123,21 +123,21 @@ static AUITheme *_sharedInstance = nil;
 
 - (UIColor *)tabbarBGColor {
     if (!_tabbarBGColor) {
-        _tabbarBGColor = RGBA(255, 136, 136, 1);
+        _tabbarBGColor = RGBA(252, 248, 245, 1);
     }
     return _tabbarBGColor;
 }
 
 - (UIColor *)tabbarTitleColor_Normal {
     if (!_tabbarTitleColor_Normal) {
-        _tabbarTitleColor_Normal = RGBA(230, 230, 230, 1);
+        _tabbarTitleColor_Normal = RGBA(175, 158, 139, 1);
     }
     return _tabbarTitleColor_Normal;
 }
 
 - (UIColor *)tabbarTitleColor_Highlight {
     if (!_tabbarTitleColor_Highlight) {
-        _tabbarTitleColor_Highlight = RGBA(255, 255, 255, 1);
+        _tabbarTitleColor_Highlight = RGBA(255, 136, 136, 1);
     }
     return _tabbarTitleColor_Highlight;
 }

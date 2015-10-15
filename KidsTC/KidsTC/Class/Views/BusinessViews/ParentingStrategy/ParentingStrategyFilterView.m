@@ -12,6 +12,8 @@
 
 @property (weak, nonatomic) IBOutlet UIView *tapArea;
 @property (weak, nonatomic) IBOutlet UIView *filterBGView;
+@property (weak, nonatomic) IBOutlet UIView *headerBar;
+@property (weak, nonatomic) IBOutlet UILabel *headerLabel;
 //single select
 @property (weak, nonatomic) IBOutlet UIButton *hotSortButton;
 @property (weak, nonatomic) IBOutlet UIButton *timeSortButton;
@@ -60,6 +62,8 @@
 }
 
 - (void)buildSubviews {
+    [self.headerBar setBackgroundColor:[AUITheme theme].navibarBGColor];
+    [self.headerLabel setTextColor:[AUITheme theme].navibarTitleColor_Normal];
     [self.filterBGView setBackgroundColor:[AUITheme theme].globalBGColor];
     [self.areaBGView setHidden:YES];
 //    self.areaTable.delegate = self;

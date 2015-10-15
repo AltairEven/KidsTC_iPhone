@@ -8,7 +8,7 @@
 
 #import "ParentingStrategyViewController.h"
 #import "ParentingStrategyViewModel.h"
-#import "ServiceDetailViewController.h"
+
 
 @interface ParentingStrategyViewController () <ParentingStrategyViewDelegate ,ParentingStrategyFilterViewDelegate>
 
@@ -51,9 +51,9 @@
 }
 
 - (void)parentingStrategyView:(ParentingStrategyView *)strategyView didSelectedItemAtIndex:(NSUInteger)index {
-    ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithNibName:@"ServiceDetailViewController" bundle:nil];
-    [controller setHidesBottomBarWhenPushed:YES];
-    [self.navigationController pushViewController:controller animated:YES];
+//    ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithNibName:@"ServiceDetailViewController" bundle:nil];
+//    [controller setHidesBottomBarWhenPushed:YES];
+//    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark ParentingStrategyFilterViewDelegate
