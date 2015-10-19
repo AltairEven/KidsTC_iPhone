@@ -44,6 +44,7 @@
 
 - (void)loadDetailSucceed:(NSDictionary *)data {
     [self.detailModel fillWithRawData:[data objectForKey:@"data"]];
+    [self.view reloadData];
 }
 
 - (void)loadDetailFailed:(NSError *)error {
@@ -52,6 +53,9 @@
 #pragma mark Public methods
 
 - (void)startUpdateDataWithStrategyIdentifier:(NSString *)identifier Succeed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
+    
+    [self loadDetailSucceed:nil];
+    return;
     if ([identifier length] == 0) {
         return;
     }

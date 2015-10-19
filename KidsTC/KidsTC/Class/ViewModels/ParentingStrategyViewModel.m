@@ -42,6 +42,8 @@
 }
 
 - (void)startUpdateDataWithSucceed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
+//    [self loadStrategyListSucceed:[NSDictionary dictionaryWithObject:[NSArray arrayWithObject:[NSDictionary dictionaryWithObject:@"1" forKey:@"1"]] forKey:@"data"]];
+//    return;
     if (!self.loadStrategriesRequest) {
         self.loadStrategriesRequest = [HttpRequestClient clientWithUrlAliasName:@"ARTICLE_GET_LIST"];
     }

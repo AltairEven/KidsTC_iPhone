@@ -9,13 +9,21 @@
 #import "ParentingStrategyDetailViewController.h"
 #import "ParentingStrategyDetailViewModel.h"
 
-@interface ParentingStrategyDetailViewController ()
+@interface ParentingStrategyDetailViewController () <ParentingStrategyDetailViewDelegate>
 
 @property (weak, nonatomic) IBOutlet ParentingStrategyDetailView *detailView;
 
 @property (nonatomic, strong) ParentingStrategyDetailViewModel *viewModel;
 
 @property (nonatomic, copy) NSString *strategyId;
+
+- (void)buildRightBarItems;
+
+- (void)didClickedCommentButton;
+
+- (void)didClickedLikeButton;
+
+- (void)didClickedShareButton;
 
 @end
 
@@ -32,8 +40,75 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self buildRightBarItems];
     self.viewModel = [[ParentingStrategyDetailViewModel alloc] initWithView:self.detailView];
     [self.viewModel startUpdateDataWithStrategyIdentifier:self.strategyId Succeed:nil failure:nil];
+}
+
+#pragma mark ParentingStrategyDetailViewDelegate
+
+- (void)parentingStrategyDetailView:(ParentingStrategyDetailView *)detailView didClickedLocationButtonAtIndex:(NSUInteger)index {
+    
+}
+
+- (void)parentingStrategyDetailView:(ParentingStrategyDetailView *)detailView didClickedCommentButtonAtIndex:(NSUInteger)index {
+    
+}
+
+- (void)parentingStrategyDetailView:(ParentingStrategyDetailView *)detailView didClickedRelatedInfoButtonAtIndex:(NSUInteger)index {
+    
+}
+
+
+#pragma mark Private methods
+
+- (void)buildRightBarItems {
+    CGFloat buttonWidth = 30;
+    CGFloat buttonHeight = 30;
+    CGFloat buttonGap = 10;
+    
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, buttonWidth * 3 + buttonGap * 2, buttonHeight)];
+    [bgView setBackgroundColor:[UIColor clearColor]];
+    
+    CGFloat xPosition = 0;
+    //comment
+    UIButton *commentButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [commentButton setFrame:CGRectMake(xPosition, 0, buttonWidth, buttonHeight)];
+    [commentButton setBackgroundColor:[UIColor clearColor]];
+    [commentButton setImage:[UIImage imageNamed:@"comment_n"] forState:UIControlStateNormal];
+    [commentButton addTarget:self action:@selector(didClickedCommentButton) forControlEvents:UIControlEventTouchUpInside];
+    [bgView addSubview:commentButton];
+    //like
+    xPosition += buttonWidth + buttonGap;
+    UIButton *likeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [likeButton setFrame:CGRectMake(xPosition, 0, buttonWidth, buttonHeight)];
+    [likeButton setBackgroundColor:[UIColor clearColor]];
+    [likeButton setImage:[UIImage imageNamed:@"like_n"] forState:UIControlStateNormal];
+    [commentButton addTarget:self action:@selector(didClickedLikeButton) forControlEvents:UIControlEventTouchUpInside];
+    [bgView addSubview:likeButton];
+    //share
+    xPosition += buttonWidth + buttonGap;
+    UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [shareButton setFrame:CGRectMake(xPosition, 0, buttonWidth, buttonHeight)];
+    [shareButton setBackgroundColor:[UIColor clearColor]];
+    [shareButton setImage:[UIImage imageNamed:@"share_n"] forState:UIControlStateNormal];
+    [commentButton addTarget:self action:@selector(didClickedShareButton) forControlEvents:UIControlEventTouchUpInside];
+    [bgView addSubview:shareButton];
+    
+    UIBarButtonItem *rItem = [[UIBarButtonItem alloc] initWithCustomView:bgView];
+    self.navigationItem.rightBarButtonItem = rItem;
+}
+
+- (void)didClickedCommentButton {
+    
+}
+
+- (void)didClickedLikeButton {
+    
+}
+
+- (void)didClickedShareButton {
+    
 }
 
 - (void)didReceiveMemoryWarning {

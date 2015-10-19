@@ -220,7 +220,8 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     
     CGFloat xPosition = leftMargin;
     CGFloat yPosition = label.frame.origin.y + label.frame.size.height + topMargin;
-    CGFloat height = yPosition;
+    CGFloat buttonHeight = 30;
+    CGFloat height = 0;
     for (NSUInteger index = 0; index < [self.tagModels count]; index ++) {
         NewsTagItemModel *model = [self.tagModels objectAtIndex:index];
         NSString *title = model.name;
@@ -236,20 +237,27 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
         [self.newsTagView addSubview:button];
         
         //加点边距
-        [button setFrame:CGRectMake(xPosition, yPosition, button.frame.size.width + 10, 30)];
+        [button setFrame:CGRectMake(xPosition, yPosition, button.frame.size.width + 10, buttonHeight)];
         
         [button.layer setCornerRadius:5];
         [button.layer setBorderWidth:0.5];
         [button.layer setBorderColor:[UIColor lightGrayColor].CGColor];
         [button.layer setMasksToBounds:YES];
-        //下一个按钮位置调整
-        xPosition += button.frame.size.width + cellHMargin;
-        CGFloat rightM = button.frame.origin.x + button.frame.size.width;
-        CGFloat rightLimit = self.newsTagView.frame.size.width - rightMargin;
+        
+        CGFloat nextCellWidth = 0;
+        if (index + 1 < [self.tagModels count]) {
+            NewsTagItemModel *nextModel = [self.tagModels objectAtIndex:index + 1];
+            NSString *nextTitle = nextModel.name;
+            nextCellWidth = 15 * [nextTitle length] + 10;
+            //下一个按钮位置调整
+            xPosition += button.frame.size.width + cellHMargin;
+        }
+        CGFloat rightM = button.frame.origin.x + button.frame.size.width + cellHMargin + nextCellWidth;
+        CGFloat rightLimit = SCREEN_WIDTH - 80 - rightMargin;
         if (rightM > rightLimit) {
             xPosition = leftMargin;
-            yPosition += cellVMargin;
-            height = yPosition + topMargin;
+            yPosition += cellVMargin + buttonHeight;
+            height = yPosition + buttonHeight + topMargin;
         }
     }
     [self.newsTagView setContentSize:CGSizeMake(0, height)];

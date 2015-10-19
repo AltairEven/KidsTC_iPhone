@@ -17,8 +17,22 @@
 
 @end
 
+@protocol ParentingStrategyDetailViewDelegate <NSObject>
+
+- (void)parentingStrategyDetailView:(ParentingStrategyDetailView *)detailView didClickedLocationButtonAtIndex:(NSUInteger)index;
+
+- (void)parentingStrategyDetailView:(ParentingStrategyDetailView *)detailView didClickedCommentButtonAtIndex:(NSUInteger)index;
+
+- (void)parentingStrategyDetailView:(ParentingStrategyDetailView *)detailView didClickedRelatedInfoButtonAtIndex:(NSUInteger)index;
+
+@end
+
 @interface ParentingStrategyDetailView : UIView
 
 @property (nonatomic, assign) id<ParentingStrategyDetailViewDataSource> dataSource;
+
+@property (nonatomic, assign) id<ParentingStrategyDetailViewDelegate> delegate;
+
+- (void)reloadData;
 
 @end

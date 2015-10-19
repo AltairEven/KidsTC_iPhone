@@ -267,11 +267,17 @@
         [button.layer setBorderWidth:0.5];
         [button.layer setBorderColor:[UIColor lightGrayColor].CGColor];
         [button.layer setMasksToBounds:YES];
-        //下一个按钮位置调整
-        xPosition += button.frame.size.width + 10;
-        CGFloat rightMargin = button.frame.origin.x + button.frame.size.width;
+        
+        CGFloat nextCellWidth = 0;
+        if (index + 1 < [self.hotKeysArray count]) {
+            NSString *nextTitle = [self.hotKeysArray objectAtIndex:index + 1];
+            nextCellWidth = 15 * [nextTitle length] + 10;
+            //下一个按钮位置调整
+            xPosition += button.frame.size.width + 10;
+        }
+        CGFloat rightM = button.frame.origin.x + button.frame.size.width + 10 + nextCellWidth;
         CGFloat rightLimit = self.hotKeyContentView.frame.size.width - 10;
-        if (rightMargin > rightLimit) {
+        if (rightM > rightLimit) {
             xPosition = 0;
             yPosition += 30;
         }

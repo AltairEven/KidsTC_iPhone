@@ -18,7 +18,9 @@ typedef enum {
     HomeSegueDestinationHospital, //医院
     HomeSegueDestinationStrategyList, //攻略列表
     HomeSegueDestinationServiceList, //服务列表
-    HomeSegueDestinationStoreList //门店列表
+    HomeSegueDestinationStoreList, //门店列表
+    HomeSegueDestinationServiceDetail, //服务详情
+    HomeSegueDestinationStoreDetail //服务列表
 }HomeSegueDestination;
 
 //H5
