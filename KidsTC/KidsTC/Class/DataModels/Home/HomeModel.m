@@ -21,7 +21,7 @@
             NSMutableArray *tempArray = [[NSMutableArray alloc] init];
             _naviControlledFloorCount = 0;
             NSMutableArray *tempSections = [[NSMutableArray alloc] init];
-            NSMutableArray *tempNaviedNames = [[NSMutableArray alloc] init];
+            NSMutableArray *tempNaviedFloors = [[NSMutableArray alloc] init];
             for (NSUInteger index = 0; index < [floorArray count]; index ++) {
                 NSDictionary *dic = [floorArray objectAtIndex:index];
                 HomeFloorModel *model = [[HomeFloorModel alloc] initWithRawData:dic floorIndex:index];
@@ -30,13 +30,13 @@
                     [tempSections addObjectsFromArray:model.sectionModels];
                     if (model.floorType == HomeFloorTypeHasNavi) {
                         _naviControlledFloorCount ++;
-                        [tempNaviedNames addObject:model.floorName];
+                        [tempNaviedFloors addObject:model];
                     }
                 }
             }
             _floorModels = [NSArray arrayWithArray:tempArray];
             _allSectionModels = [NSArray arrayWithArray:tempSections];
-            _allNaviControlledNames = [NSArray arrayWithArray:tempNaviedNames];
+            _allNaviControlledFloors = [NSArray arrayWithArray:tempNaviedFloors];
         }
         _floorCount = [self.floorModels count];
     }

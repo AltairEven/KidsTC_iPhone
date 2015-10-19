@@ -37,7 +37,7 @@
 
 - (void)homeView:(HomeView *)homeView didScrolled:(CGPoint)offset;
 
-- (void)homeView:(HomeView *)homeView didScrolledIntoVisionWithSectionGroupIndex:(NSUInteger)index;
+- (void)homeView:(HomeView *)homeView didScrolledIntoVisionWithFloorIndex:(NSUInteger)index;
 
 - (void)homeView:(HomeView *)homeView didEndDeDidEndDecelerating:(BOOL)downDirection;
 
@@ -62,6 +62,6 @@
 
 - (void)hideLoadMoreFooter:(BOOL)hidden;
 
-- (void)scrollHomeViewToSectionGroupIndex:(NSUInteger)index;
+- (void)scrollHomeViewToFloorIndex:(NSUInteger)index;
 
 @end

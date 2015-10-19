@@ -312,12 +312,18 @@ typedef enum {
             }
         } completion:^(BOOL finished) {
             [self.collapseView setHidden:NO];
+            UIView *showingViewWhenCollapsed = [self.itemContainerView objectAtIndex:self.selectedIndex];
+            [self bringSubviewToFront:showingViewWhenCollapsed];
+            [self bringSubviewToFront:self.collapseView];
         }];
     } else {
         [self.collapseView setHidden:NO];
         for (UIView *containerView in self.itemContainerView) {
             [containerView setCenter:CGPointMake(self.viewSize.width / 2, self.viewSize.width / 2)];
         }
+        UIView *showingViewWhenCollapsed = [self.itemContainerView objectAtIndex:self.selectedIndex];
+        [self bringSubviewToFront:showingViewWhenCollapsed];
+        [self bringSubviewToFront:self.collapseView];
     }
     //timer
     [self.alphaTimer invalidate];

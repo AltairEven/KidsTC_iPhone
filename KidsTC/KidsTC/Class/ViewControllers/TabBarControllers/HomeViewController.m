@@ -96,7 +96,7 @@
 }
 
 - (void)homeViewDidPulledUpToloadMore:(HomeView *)homeView {
-    //[self.viewModel getCustomerRecommendWithSucceed:nil failure:nil];
+    [self.viewModel getCustomerRecommendWithSucceed:nil failure:nil];
 }
 
 - (void)homeView:(HomeView *)homeView didClickedAtCoordinate:(HomeClickCoordinate)coordinate {
@@ -165,53 +165,65 @@
     [self.floorNavigationView collapse:YES];
 }
 
-- (void)homeView:(HomeView *)homeView didScrolledIntoVisionWithSectionGroupIndex:(NSUInteger)index {
-//    [self.floorNavigationView setSelectedIndex:index];
+- (void)homeView:(HomeView *)homeView didScrolledIntoVisionWithFloorIndex:(NSUInteger)index {
+    for (NSUInteger naviIndex = 0; naviIndex < [self.viewModel.homeModel.allNaviControlledFloors count]; naviIndex ++) {
+        HomeFloorModel *floorModel = [self.viewModel.homeModel.allNaviControlledFloors objectAtIndex:naviIndex];
+        if (floorModel.floorIndex == index) {
+            [self.floorNavigationView setSelectedIndex:naviIndex];
+            break;
+        }
+    }
 }
 
 - (void)homeView:(HomeView *)homeView didEndDeDidEndDecelerating:(BOOL)downDirection {
-//    if (downDirection) {
-//        [self.floorNavigationView setSelectedIndex:0];
-//    } else {
-//        [self.floorNavigationView setSelectedIndex:[[self.viewModel sectionModelsArray] count] - 3];
-//    }
+    if (downDirection) {
+        [self.floorNavigationView setSelectedIndex:0];
+    } else {
+        [self.floorNavigationView setSelectedIndex:[self.viewModel.homeModel.allNaviControlledFloors count] - 1];
+    }
 }
 
 #pragma mark AUIFloorNavigationViewDataSource & AUIFloorNavigationViewDelegate
 
 - (NSUInteger)numberOfItemsOnFloorNavigationView:(AUIFloorNavigationView *)navigationView {
-    return 5;
+    return [self.viewModel.homeModel.allNaviControlledFloors count];
 }
 
 - (UIView *)floorNavigationView:(AUIFloorNavigationView *)navigationView viewForItemAtIndex:(NSUInteger)index {
+    HomeFloorModel *floorModel = [self.viewModel.homeModel.allNaviControlledFloors objectAtIndex:index];
+    
     UIView *itemView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-    [itemView setBackgroundColor:[UIColor orangeColor]];
+    [itemView setBackgroundColor:[AUITheme theme].globalBGColor];
     UILabel *label = [[UILabel alloc] initWithFrame:itemView.frame];
-    [label setText:[NSString stringWithFormat:@"孕%lu", (unsigned long)index]];
+    [label setText:floorModel.floorName];
     [label setFont:[UIFont systemFontOfSize:13]];
+    [label setTextColor:[AUITheme theme].globalThemeColor];
     [label setTextAlignment:NSTextAlignmentCenter];
     [itemView addSubview:label];
     
     itemView.layer.cornerRadius = 20;
     itemView.layer.borderWidth = 2;
-    itemView.layer.borderColor = [UIColor yellowColor].CGColor;
+    itemView.layer.borderColor = [AUITheme theme].globalThemeColor.CGColor;
     itemView.layer.masksToBounds = YES;
     
     return itemView;
 }
 
 - (UIView *)floorNavigationView:(AUIFloorNavigationView *)navigationView highlightViewForItemAtIndex:(NSUInteger)index {
+    HomeFloorModel *floorModel = [self.viewModel.homeModel.allNaviControlledFloors objectAtIndex:index];
+    
     UIView *highlightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-    [highlightView setBackgroundColor:[UIColor redColor]];
+    [highlightView setBackgroundColor:[AUITheme theme].globalThemeColor];
     UILabel *label = [[UILabel alloc] initWithFrame:highlightView.frame];
-    [label setText:[NSString stringWithFormat:@"孕%lu", (unsigned long)index]];
+    [label setText:floorModel.floorName];
     [label setFont:[UIFont systemFontOfSize:13]];
+    [label setTextColor:[AUITheme theme].navibarTitleColor_Normal];
     [label setTextAlignment:NSTextAlignmentCenter];
     [highlightView addSubview:label];
     
     highlightView.layer.cornerRadius = 20;
     highlightView.layer.borderWidth = 2;
-    highlightView.layer.borderColor = [UIColor yellowColor].CGColor;
+    highlightView.layer.borderColor = [AUITheme theme].globalBGColor.CGColor;
     highlightView.layer.masksToBounds = YES;
     
     return highlightView;
@@ -219,12 +231,13 @@
 
 - (UIView *)floorNavigationView:(AUIFloorNavigationView *)navigationView viewForItemGapAtIndex:(NSUInteger)index {
     UIView *gapView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 30)];
-    [gapView setBackgroundColor:[UIColor greenColor]];
+    [gapView setBackgroundColor:[AUITheme theme].globalBGColor];
     return gapView;
 }
 
 - (void)floorNavigationView:(AUIFloorNavigationView *)navigationView didSelectedAtIndex:(NSUInteger)index {
-    [self.homeView scrollHomeViewToSectionGroupIndex:index];
+    HomeFloorModel *floorModel = [self.viewModel.homeModel.allNaviControlledFloors objectAtIndex:index];
+    [self.homeView scrollHomeViewToFloorIndex:floorModel.floorIndex];
 }
 
 

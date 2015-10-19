@@ -79,9 +79,9 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
 
 - (IBAction)didClickedBackToTop:(id)sender;
 
-- (NSIndexPath *)indexPathAtCurrentScrollingPoint;
+- (NSUInteger)floorIndexAtCurrentScrollingPoint;
 
-- (CGPoint)offsetFromSectionGroupIndex:(NSUInteger)index;
+- (CGPoint)offsetFromFloorIndex:(NSUInteger)index;
 
 @end
 
@@ -550,12 +550,8 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
         if ([self.delegate respondsToSelector:@selector(homeView:didScrolled:)] && self.tableView.contentOffset.y > 0) {
             [self.delegate homeView:self didScrolled:self.tableView.contentOffset];
         }
-        NSIndexPath *indexPath = [self indexPathAtCurrentScrollingPoint];
-        if (indexPath.section > 1) {
-            NSUInteger index = indexPath.section - 2;
-            if ([self.delegate respondsToSelector:@selector(homeView:didScrolledIntoVisionWithSectionGroupIndex:)]) {
-                [self.delegate homeView:self didScrolledIntoVisionWithSectionGroupIndex:index];
-            }
+        if ([self.delegate respondsToSelector:@selector(homeView:didScrolledIntoVisionWithFloorIndex:)]) {
+            [self.delegate homeView:self didScrolledIntoVisionWithFloorIndex:[self floorIndexAtCurrentScrollingPoint]];
         }
     }
 }
@@ -590,13 +586,22 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
-- (NSIndexPath *)indexPathAtCurrentScrollingPoint {
+- (NSUInteger)floorIndexAtCurrentScrollingPoint {
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:CGPointMake(0, self.tableView.contentOffset.y + (SCREEN_HEIGHT - 49 - 64) - 100)];
-    return indexPath;
+    HomeSectionModel *sectionModel = [self.homeModel.allSectionModels objectAtIndex:indexPath.section];
+    return sectionModel.floorIndex;
 }
 
-- (CGPoint)offsetFromSectionGroupIndex:(NSUInteger)index {
-    NSUInteger section = index + 2;
+- (CGPoint)offsetFromFloorIndex:(NSUInteger)index {
+    NSUInteger section = 0;
+    for (NSUInteger floorIndex = 0; floorIndex < self.homeModel.floorCount; floorIndex ++) {
+        HomeFloorModel *floorModel = [self.homeModel.floorModels objectAtIndex:floorIndex];
+        if (floorIndex < index) {
+            section += [floorModel.sectionModels count];
+        } else {
+            break;
+        }
+    }
     CGRect area = [self.tableView rectForSection:section];
     CGFloat yOffset = self.tableView.contentOffset.y + area.origin.y - self.tableView.contentOffset.y - (SCREEN_HEIGHT - 49 - 64) + area.size.height;
     if (yOffset < 0) {
@@ -650,8 +655,8 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
     [self.tableView.legendFooter setHidden:hidden];
 }
 
-- (void)scrollHomeViewToSectionGroupIndex:(NSUInteger)index {
-    CGPoint offset = [self offsetFromSectionGroupIndex:index];
+- (void)scrollHomeViewToFloorIndex:(NSUInteger)index {
+    CGPoint offset = [self offsetFromFloorIndex:index];
     [self.tableView setContentOffset:offset animated:YES];
 }
 

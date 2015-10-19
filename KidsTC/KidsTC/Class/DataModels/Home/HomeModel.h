@@ -35,7 +35,7 @@ NS_INLINE HomeClickCoordinate HomeClickMakeCoordinate(NSUInteger floor, NSUInteg
 
 @property (nonatomic, strong, readonly) NSArray<HomeSectionModel *> *allSectionModels;
 
-@property (nonatomic, strong, readonly) NSArray<NSString *> *allNaviControlledNames;
+@property (nonatomic, strong, readonly) NSArray<HomeFloorModel *> *allNaviControlledFloors;
 
 - (instancetype)initWithRawData:(NSDictionary *)data;
 
