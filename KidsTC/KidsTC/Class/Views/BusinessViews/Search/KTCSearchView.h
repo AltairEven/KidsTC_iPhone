@@ -22,6 +22,8 @@
 
 - (void)didClickedCategoryButtonOnKTCSearchView:(KTCSearchView *)searchView;
 
+- (void)KTCSearchView:(KTCSearchView *)searchView didChangedToSearchType:(KTCSearchType)type;
+
 - (void)didClickedCancelButtonOnKTCSearchView:(KTCSearchView *)searchView;
 
 - (void)didClickedSearchButtonOnKTCSearchView:(KTCSearchView *)searchView;

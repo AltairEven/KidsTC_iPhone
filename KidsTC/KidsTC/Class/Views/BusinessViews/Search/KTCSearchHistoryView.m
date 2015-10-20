@@ -64,16 +64,21 @@
     self.tableView.delegate = self;
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
-    [footerView setBackgroundColor:RGBA(230, 230, 230, 1)];
+    [footerView setBackgroundColor:[AUITheme theme].globalBGColor];
     UIButton *clearHistoryButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [clearHistoryButton setFrame:CGRectMake(40, 10, SCREEN_WIDTH - 80, 30)];
     [clearHistoryButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
-    [clearHistoryButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    [clearHistoryButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [clearHistoryButton setTitle:@"清除历史记录" forState:UIControlStateNormal];
-    [clearHistoryButton setBackgroundColor:[UIColor lightGrayColor]];
+    [clearHistoryButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [clearHistoryButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
     [clearHistoryButton addTarget:self action:@selector(didClickedClearHistoryButton) forControlEvents:UIControlEventTouchUpInside];
     [footerView addSubview:clearHistoryButton];
     self.tableView.tableFooterView = footerView;
+    
+    [self.hotKeyScrollView setBackgroundColor:[AUITheme theme].globalBGColor];
+    
+    [self.hotKeyView setBackgroundColor:[AUITheme theme].globalBGColor];
 }
 
 
@@ -138,13 +143,15 @@
         {
             //历史
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+            [cell.textLabel setTextColor:[UIColor darkGrayColor]];
+            [cell.textLabel setFont:[UIFont systemFontOfSize:15]];
             [cell.textLabel setText:[self.historiesArray objectAtIndex:indexPath.row]];
         }
             break;
         default:
             break;
     }
-    [cell setBackgroundColor:RGBA(230, 230, 230, 1)];
+    [cell.contentView setBackgroundColor:[AUITheme theme].globalBGColor];
     return cell;
 }
 
@@ -208,9 +215,9 @@
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             [button setFrame:CGRectMake(xPosition, yPosition, 10, 10)];
             [button.titleLabel setFont:[UIFont systemFontOfSize:15]];
-            [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+            [button setTitleColor:[AUITheme theme].globalThemeColor forState:UIControlStateNormal];
             [button setTitle:title forState:UIControlStateNormal];
-            [button setBackgroundColor:[UIColor whiteColor]];
+            [button setBackgroundColor:[UIColor clearColor]];
             button.tag = index;
             [button addTarget:self action:@selector(didClickedHotKeyButton:) forControlEvents:UIControlEventTouchUpInside];
             [button sizeToFit];
@@ -221,7 +228,7 @@
         
             [button.layer setCornerRadius:5];
             [button.layer setBorderWidth:0.5];
-            [button.layer setBorderColor:[UIColor lightGrayColor].CGColor];
+            [button.layer setBorderColor:[AUITheme theme].globalThemeColor.CGColor];
             [button.layer setMasksToBounds:YES];
             xPosition += button.frame.size.width + 10;
         }
@@ -252,9 +259,9 @@
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setFrame:CGRectMake(xPosition, yPosition, 10, 10)];
         [button.titleLabel setFont:[UIFont systemFontOfSize:15]];
-        [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+        [button setTitleColor:[AUITheme theme].globalThemeColor forState:UIControlStateNormal];
         [button setTitle:title forState:UIControlStateNormal];
-        [button setBackgroundColor:[UIColor whiteColor]];
+        [button setBackgroundColor:[UIColor clearColor]];
         button.tag = index;
         [button addTarget:self action:@selector(didClickedHotKeyButton:) forControlEvents:UIControlEventTouchUpInside];
         [button sizeToFit];
@@ -265,7 +272,7 @@
         
         [button.layer setCornerRadius:5];
         [button.layer setBorderWidth:0.5];
-        [button.layer setBorderColor:[UIColor lightGrayColor].CGColor];
+        [button.layer setBorderColor:[AUITheme theme].globalThemeColor.CGColor];
         [button.layer setMasksToBounds:YES];
         
         CGFloat nextCellWidth = 0;

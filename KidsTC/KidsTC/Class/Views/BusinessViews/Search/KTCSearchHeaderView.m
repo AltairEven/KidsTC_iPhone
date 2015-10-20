@@ -11,12 +11,12 @@
 @interface KTCSearchHeaderView () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *searchFieldBG;
-@property (weak, nonatomic) IBOutlet UIButton *categoryButton;
+@property (strong, nonatomic) UIButton *categoryButton;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UIView *separator;
 
-- (IBAction)didClickedCategoryButton:(id)sender;
+- (void)didClickedCategoryButton;
 - (IBAction)didClickedCancelButton:(id)sender;
 
 @end
@@ -45,11 +45,21 @@
     self.backgroundColor = [AUITheme theme].navibarBGColor;
     
     [self.searchFieldBG.layer setCornerRadius:5];
-    [self.searchFieldBG.layer setBorderWidth:0.5];
-    [self.searchFieldBG.layer setBorderColor:[UIColor lightGrayColor].CGColor];
     [self.searchFieldBG.layer setMasksToBounds:YES];
     
+    self.categoryButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.categoryButton setFrame:CGRectMake(0, 0, 60, 30)];
+    [self.categoryButton setBackgroundColor:[UIColor clearColor]];
+    [self.categoryButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
+    [self.categoryButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.categoryButton addTarget:self action:@selector(didClickedCategoryButton) forControlEvents:UIControlEventTouchUpInside];
+    [self.categoryButton setTitle:@"服务" forState:UIControlStateNormal];
+    
+    [self.textField setLeftView:self.categoryButton];
+    self.textField.leftViewMode = UITextFieldViewModeAlways;
     [self.textField setReturnKeyType:UIReturnKeySearch];
+    [self.textField setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight];
+    [self.textField setTextColor:[UIColor whiteColor]];
     self.textField.delegate = self;
     [GConfig resetLineView:self.separator withLayoutAttribute:NSLayoutAttributeHeight];
 }
@@ -62,7 +72,7 @@
 }
 */
 
-- (IBAction)didClickedCategoryButton:(id)sender {
+- (void)didClickedCategoryButton {
     if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedCategoryButtonOnKTCSearchHeaderView:)]) {
         [self.delegate didClickedCategoryButtonOnKTCSearchHeaderView:self];
     }

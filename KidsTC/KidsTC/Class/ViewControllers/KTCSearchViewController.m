@@ -7,12 +7,14 @@
 //
 
 #import "KTCSearchViewController.h"
-#import "KTCSearchView.h"
+#import "SearchViewModel.h"
 #import "KTCSearchResultViewController.h"
 
-@interface KTCSearchViewController () <KTCSearchViewDataSource, KTCSearchViewDelegate>
+@interface KTCSearchViewController () <KTCSearchViewDelegate>
 
 @property (weak, nonatomic) IBOutlet KTCSearchView *searchView;
+
+@property (nonatomic, strong) SearchViewModel *viewModel;
 
 @end
 
@@ -21,14 +23,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.searchView.dataSource = self;
     self.searchView.delegate = self;
-    [self.searchView setCategoryArray:[NSArray arrayWithObjects:@"服务", @"门店", nil]];
-    [self.searchView reloadData];
+    self.viewModel = [[SearchViewModel alloc] initWithView:self.searchView];
+    [self.viewModel setSearchType:self.searchView.type];
+    [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self.viewModel getSearchHistory];
     [self.searchView endEditing];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
 }
@@ -48,20 +51,17 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+    [self.viewModel updateLocalSearchHistory];
 }
 
-#pragma mark
-
-- (NSArray *)hotKeysArrayForKTCSearchView:(KTCSearchView *)searchView {
-    return [NSArray arrayWithObjects:@"户外", @"儿童摄影", @"室外", @"生日派对", @"宝宝理发", @"家政月嫂", nil];
-}
-
-- (NSArray *)historiesArrayForKTCSearchView:(KTCSearchView *)searchView {
-    return [NSArray arrayWithObjects:@"户外", @"儿童摄影", @"室外", @"生日派对", @"宝宝理发", @"家政月嫂", nil];
-}
+#pragma mark KTCSearchViewDelegate
 
 - (void)didClickedCategoryButtonOnKTCSearchView:(KTCSearchView *)searchView {
     
+}
+
+- (void)KTCSearchView:(KTCSearchView *)searchView didChangedToSearchType:(KTCSearchType)type {
+    [self.viewModel setSearchType:type];
 }
 
 - (void)didClickedCancelButtonOnKTCSearchView:(KTCSearchView *)searchView {
@@ -70,6 +70,7 @@
 
 - (void)didClickedSearchButtonOnKTCSearchView:(KTCSearchView *)searchView {
     NSString *kw = [self.searchView keywords];
+    [self.viewModel addSearchHistoryWithType:self.searchView.type keyword:kw];
     KTCSearchCondition *condition = nil;
     switch (self.searchView.type) {
         case KTCSearchTypeService:

@@ -15,6 +15,36 @@
     return nil;
 }
 
++ (instancetype)conditionFromRawData:(NSDictionary *)data {
+    if (!data || ![data isKindOfClass:[NSDictionary class]]) {
+        return nil;
+    }
+    KTCSearchServiceCondition *condition = [[KTCSearchServiceCondition alloc] init];
+    if ([data isKindOfClass:[NSDictionary class]]) {
+        if ([data objectForKey:@"a"]) {
+            KTCAgeItem *ageItem = [[KTCAgeItem alloc] init];
+            ageItem.identifier = [NSString stringWithFormat:@"%@", [data objectForKey:@"a"]];
+            condition.age = ageItem;
+        }
+        if ([data objectForKey:@"c"]) {
+            condition.categoryIdentifier = [NSString stringWithFormat:@"%@", [data objectForKey:@"c"]];
+        }
+        if ([data objectForKey:@"k"]) {
+            condition.keyWord = [NSString stringWithFormat:@"%@", [data objectForKey:@"k"]];
+        }
+        if ([data objectForKey:@"s"]) {
+            KTCAreaItem *areaItem = [[KTCAreaItem alloc] init];
+            areaItem.identifier = [NSString stringWithFormat:@"%@", [data objectForKey:@"s"]];
+            condition.area = areaItem;
+        }
+        if ([data objectForKey:@"st"]) {
+            condition.sortType = (KTCSearchResultServiceSortType)[[data objectForKey:@"st"] integerValue];
+        }
+    }
+    
+    return condition;
+}
+
 @end
 
 

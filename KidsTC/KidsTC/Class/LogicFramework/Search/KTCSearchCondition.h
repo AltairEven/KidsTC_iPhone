@@ -42,6 +42,8 @@ typedef enum {
 
 + (instancetype)conditionFromCategory:(IcsonBaseCategory *)category;
 
++ (instancetype)conditionFromRawData:(NSDictionary *)data;
+
 @end
 
 

@@ -7,7 +7,25 @@
 //
 
 #import "BaseViewModel.h"
+#import "KTCSearchView.h"
+
+extern NSString *const kSearchHotKeyName;
+extern NSString *const kSearchHotKeyCondition;
 
 @interface SearchViewModel : BaseViewModel
+
+@property (nonatomic, strong, readonly) NSArray *hotSearchArray;
+
+@property (nonatomic, assign) KTCSearchType searchType;
+
+- (void)getSearchHistory;
+
+- (void)addSearchHistoryWithType:(KTCSearchType)type keyword:(NSString *)keyword;
+
+- (void)clearSearchHistory;
+
+- (void)updateLocalSearchHistory;
+
+- (NSDictionary *)searchHistory;
 
 @end
