@@ -82,7 +82,7 @@
     _serviceSortFilterCoordinate = serviceSortFilterCoordinate;
     if (serviceSortFilterCoordinate.level1Index >=0 && serviceSortFilterCoordinate.level2Index >= 0) {
         KTCSearchResultFilterModel *sortModel = [self.sortFilterModel.subArray objectAtIndex:serviceSortFilterCoordinate.level2Index];
-        self.searchServiceCondition.sortType = [sortModel.identifier integerValue];
+        self.searchServiceCondition.sortType = (KTCSearchResultServiceSortType)[sortModel.identifier integerValue];
     }
 }
 
@@ -399,10 +399,13 @@
                                    [NSNumber numberWithInteger:self.searchType], @"type",
                                    [NSNumber numberWithInteger:self.currentServicePage], @"page",
                                    [NSNumber numberWithInteger:[self.view serviceListPageSize]], @"pageSize", nil];
+            [[GAlertLoadingView sharedAlertLoadingView] showInView:self.view.listBG];
             [[KTCSearchService sharedService] startServiceSearchWithParamDic:param Condition:self.searchServiceCondition success:^(NSDictionary *responseData) {
                 [self loadServiceDataSucceed:responseData];
+                [[GAlertLoadingView sharedAlertLoadingView] hide];
             } failure:^(NSError *error) {
                 [self loadServiceDataFailed:error];
+                [[GAlertLoadingView sharedAlertLoadingView] hide];
             }];
         }
             break;
@@ -413,10 +416,13 @@
                                    [NSNumber numberWithInteger:self.searchType], @"type",
                                    [NSNumber numberWithInteger:self.currentStorePage], @"page",
                                    [NSNumber numberWithInteger:[self.view storeListPageSize]], @"pageSize", nil];
+            [[GAlertLoadingView sharedAlertLoadingView] showInView:self.view.listBG];
             [[KTCSearchService sharedService] startStoreSearchWithParamDic:param Condition:self.searchStoreCondition success:^(NSDictionary *responseData) {
                 [self loadStoreDataSucceed:responseData];
+                [[GAlertLoadingView sharedAlertLoadingView] hide];
             } failure:^(NSError *error) {
                 [self loadStoreDataFailed:error];
+                [[GAlertLoadingView sharedAlertLoadingView] hide];
             }];
         }
             break;
@@ -461,6 +467,7 @@
 }
 
 - (void)stopUpdateDataWithSearchType:(KTCSearchType)type {
+    [[GAlertLoadingView sharedAlertLoadingView] hide];
     switch (type) {
         case KTCSearchTypeService:
         {

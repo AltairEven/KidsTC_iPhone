@@ -9,7 +9,6 @@
 #import "ServiceDetailConfirmView.h"
 #import "StepperView.h"
 #import "ServiceDetailConfirmViewCell.h"
-#import "ServiceOwnerStoreModel.h"
 
 static NSString *const kCellIdentifier = @"kCellIdentifier";
 
@@ -116,7 +115,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     if (!cell) {
         cell =  [[[NSBundle mainBundle] loadNibNamed:@"ServiceDetailConfirmViewCell" owner:nil options:nil] objectAtIndex:0];
     }
-    ServiceOwnerStoreModel *item = [self.storeItemsArray objectAtIndex:indexPath.row];
+    StoreListItemModel *item = [self.storeItemsArray objectAtIndex:indexPath.row];
     [cell setStoreName:item.storeName];
     [cell setStarNumber:item.starNumber];
     [cell setDistance:item.distanceDescription];
@@ -131,7 +130,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.storeItemsArray count] > 0) {
-        ServiceOwnerStoreModel *item = [self.storeItemsArray objectAtIndex:indexPath.row];
+        StoreListItemModel *item = [self.storeItemsArray objectAtIndex:indexPath.row];
         [self.selectedStoreNameLabel setText:item.storeName];
         self.selectedIndex = indexPath.row;
     }

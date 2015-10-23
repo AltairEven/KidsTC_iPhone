@@ -308,7 +308,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
         [button setFrame:CGRectMake(xPosition, yPosition, 10, 10)];
         [button.titleLabel setFont:[UIFont systemFontOfSize:15]];
 //        [button setTitleColor:[AUITheme theme].globalThemeColor forState:UIControlStateNormal];
-        [button setTitleColor:RGBA(103, 216, 244, 1) forState:UIControlStateNormal];
+        [button setTitleColor:[AUITheme theme].highlightTextColor forState:UIControlStateNormal];
         [button setTitle:title forState:UIControlStateNormal];
         [button setBackgroundColor:[UIColor clearColor]];
         [button sizeToFit];
@@ -320,7 +320,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
         [button.layer setCornerRadius:10];
         [button.layer setBorderWidth:1];
 //        [button.layer setBorderColor:[AUITheme theme].globalThemeColor.CGColor];
-        [button.layer setBorderColor:RGBA(103, 216, 244, 1).CGColor];
+        [button.layer setBorderColor:[AUITheme theme].highlightTextColor.CGColor];
         [button.layer setMasksToBounds:YES];
         
         CGFloat nextCellWidth = 0;

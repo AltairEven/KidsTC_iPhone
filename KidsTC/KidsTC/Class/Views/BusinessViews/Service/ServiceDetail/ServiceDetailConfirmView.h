@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StoreListItemModel.h"
 
 @class ServiceDetailConfirmView;
-@class ServiceOwnerStoreModel;
 
 @protocol ServiceDetailConfirmViewDelegate <NSObject>
 
-- (void)didClickedSubmitButtonWithBuyNumber:(NSUInteger)number selectedStore:(ServiceOwnerStoreModel *)store;
+- (void)didClickedSubmitButtonWithBuyNumber:(NSUInteger)number selectedStore:(StoreListItemModel *)store;
 
 @end
 

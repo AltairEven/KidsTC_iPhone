@@ -61,6 +61,13 @@ static AUITheme *_sharedInstance = nil;
     return _lightTextColor;
 }
 
+- (UIColor *)highlightTextColor {
+    if (!_highlightTextColor) {
+        _highlightTextColor = RGBA(103, 216, 244, 1);
+    }
+    return _highlightTextColor;
+}
+
 - (UIColor *)buttonBGColor_Normal {
     if (!_buttonBGColor_Normal) {
         _buttonBGColor_Normal = RGBA(255, 136, 136, 1);

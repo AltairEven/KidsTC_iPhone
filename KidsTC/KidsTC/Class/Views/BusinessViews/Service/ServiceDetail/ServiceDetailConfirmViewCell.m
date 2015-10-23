@@ -29,6 +29,7 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+    [self.bgView setBackgroundColor:[[AUITheme theme].globalThemeColor colorWithAlphaComponent:0.5]];
 }
 
 - (void)setStoreName:(NSString *)storeName {

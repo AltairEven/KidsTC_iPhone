@@ -7,7 +7,6 @@
 //
 
 #import "ServiceDetailModel.h"
-#import "Insurance.h"
 
 @implementation ServiceDetailModel
 
@@ -28,54 +27,82 @@
     }
     
     self.serviceName = [data objectForKey:@"serveName"];
-    self.starNumber = [[data objectForKey:@"level"] integerValue];
     self.commentsNumber = [[data objectForKey:@"evaluate"] integerValue];
     self.saleCount = [[data objectForKey:@"saleCount"] integerValue];
     self.price = [[data objectForKey:@"price"] floatValue];
-    self.priceType = [[data objectForKey:@"priceSort"] integerValue];
     self.priceDescription = [data objectForKey:@"priceSortName"];
     self.countdownTime = [[data objectForKey:@"countDownTime"] integerValue];
     self.showCountdown = [[data objectForKey:@"showCountDown"] integerValue];
     self.supportedInsurances = [Insurance InsurancesWithRawData:[data objectForKey:@"insurance"]];
-    self.promotionDescription = [data objectForKey:@"promote"];
     
-    NSArray *ageArray = [data objectForKey:@"age"];
-    if ([ageArray isKindOfClass:[NSArray class]]) {
-        NSMutableString *string = [NSMutableString stringWithFormat:@""];
-        for (NSString *age in ageArray) {
-            [string appendString:age];
-            [string appendString:@" "];
-        }
-        self.ageDescription = [NSString stringWithString:string];
-    }
+    self.notice = [data objectForKey:@"notice"];
+    self.recommenderFaceImageUrl = [NSURL URLWithString:[data objectForKey:@"recommendImgUrl"]];
+    self.recommenderName = [data objectForKey:@"recommendName"];
+    self.recommendString = [data objectForKey:@"recommendContent"];
     
-    self.timeDescription = [data objectForKey:@"dateTime"];
+    self.notice  = @"购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知";
+    self.recommenderFaceImageUrl = [self.imageUrls firstObject];
+    self.recommenderName = @"小河马";
+    self.recommendString = @"小河马爱洗澡，萌萌哒满地跑，一不小心摔一跤，呜啊呜啊哭又闹。河马妈妈来看到，二话不说拿棍捣，小河马被打屁了，哈哈哈哈真搞笑。";
     
-    NSArray *storeArray = [data objectForKey:@"store"];
-    if ([storeArray isKindOfClass:[NSArray class]]) {
-        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-        for (NSDictionary *dic in storeArray) {
-            ServiceOwnerStoreModel *model = [[ServiceOwnerStoreModel alloc] initWithRawData:dic];
-            if (model) {
-                [tempArray addObject:model];
-            }
-        }
-        self.storeItemsArray = [NSArray arrayWithArray:tempArray];
-        if ([self.storeItemsArray count] > 0) {
-            self.currentStoreModel = [self.storeItemsArray firstObject];
-        }
-    }
+    self.isFavourate = [[data objectForKey:@"isFavor"] boolValue];
+    self.phoneNumber = [data objectForKey:@"phone"];
     
     self.stockNumber = [[data objectForKey:@"remainCount"] integerValue];
     self.maxLimit = [[data objectForKey:@"buyMaxNum"] integerValue];
     self.minLimit = [[data objectForKey:@"buyMinNum"] integerValue];
-    self.isFavourate = [[data objectForKey:@"isFavor"] boolValue];
     
-    if ([self.storeItemsArray count] > 0) {
-        ServiceOwnerStoreModel *model = [self.storeItemsArray firstObject];
-        self.phoneNumber = model.phoneNumber;
+    NSArray *storesArray = [data objectForKey:@"store"];
+    if ([storesArray isKindOfClass:[NSArray class]]) {
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        for (NSDictionary *singleDic in storesArray) {
+            StoreListItemModel *item = [[StoreListItemModel alloc] initWithRawData:singleDic];
+            [tempArray addObject:item];
+        }
+        self.storeItemsArray = [NSArray arrayWithArray:tempArray];
     }
+}
 
+
+- (CGFloat)topCellHeight {
+    //image
+    CGFloat height = SCREEN_WIDTH * 0.7;
+    //service name
+    height += [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 10 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:17] topGap:10 bottomGap:10 maxLine:2 andText:self.serviceName];
+    //service description
+    height += [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 10 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:13] topGap:10 bottomGap:10 maxLine:3 andText:self.serviceDescription];
+    
+    return height;
+}
+
+- (CGFloat)priceCellHeight {
+    return 40;
+}
+
+- (CGFloat)insuranceCellHeight {
+    return 30;
+}
+
+- (CGFloat)couponCellHeight {
+    return 40;
+}
+
+- (CGFloat)noticeTitleCellHeight {
+    return 40;
+}
+
+- (CGFloat)noticeCellHeight {
+    CGFloat height = [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 10 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:13] topGap:10 bottomGap:10 maxLine:0 andText:self.notice];
+    return height;
+}
+
+- (CGFloat)recommendCellHeight {
+    CGFloat height = [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 10 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:13] topGap:10 bottomGap:10 maxLine:0 andText:self.recommendString];
+    if (height < 80) {
+        height = 80;
+    }
+    
+    return height;
 }
 
 @end

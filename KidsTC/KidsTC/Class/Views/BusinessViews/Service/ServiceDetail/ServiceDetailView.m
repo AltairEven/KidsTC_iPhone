@@ -7,65 +7,78 @@
 //
 
 #import "ServiceDetailView.h"
-#import "FiveStarsView.h"
 #import "RichPriceView.h"
 #import "InsuranceView.h"
 #import "AUIBannerScrollView.h"
-#import "ServiceOwnerStoreModel.h"
+#import "AUISegmentView.h"
+#import "ServiceDetailSegmentCell.h"
 
 #define BannerRatio (0.7)
+#define SectionGap (10)
+#define SegmentViewHeight (40)
 
-@interface ServiceDetailView () <UITableViewDataSource, UITableViewDelegate, AUIBannerScrollViewDataSource>
+static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@interface ServiceDetailView () <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, AUIBannerScrollViewDataSource, AUISegmentViewDataSource, AUISegmentViewDelegate, ServiceDetailMoreInfoViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) UITableView *tableView;
+@property (nonatomic, strong) AUISegmentView *segmentView;
+@property (nonatomic, strong) ServiceDetailMoreInfoView *moreInfoView;
+
 @property (strong, nonatomic) IBOutlet UITableViewCell *topCell;
-@property (strong, nonatomic) IBOutlet UITableViewCell *descriptionCell;
-@property (strong, nonatomic) IBOutlet UITableViewCell *storeCell;
-@property (strong, nonatomic) IBOutlet UITableViewCell *reviewCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *priceCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *InsuranceCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *couponCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *noticeTitleCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *noticeCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *recommendCell;
 //top
 @property (weak, nonatomic) IBOutlet AUIBannerScrollView *bannerScrollView;
 @property (weak, nonatomic) IBOutlet UILabel *serviceNameLabel;
-@property (weak, nonatomic) IBOutlet FiveStarsView *serviceStarsView;
-@property (weak, nonatomic) IBOutlet UILabel *reviewCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *saledCountLabel;
-@property (weak, nonatomic) IBOutlet RichPriceView *promotionPriceView;
-@property (weak, nonatomic) IBOutlet UILabel *priceDescriptionLabel;
-@property (weak, nonatomic) IBOutlet InsuranceView *InsuranceView;
-@property (weak, nonatomic) IBOutlet UIView *countDownBGView;
-@property (weak, nonatomic) IBOutlet UILabel *countDownLabel;
-//description
 @property (weak, nonatomic) IBOutlet UILabel *serviceDescriptionLabel;
-@property (weak, nonatomic) IBOutlet UILabel *ageLabel;
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-//store
-@property (weak, nonatomic) IBOutlet UIImageView *storeImageView;
-@property (weak, nonatomic) IBOutlet UILabel *storeNameLabel;
-@property (weak, nonatomic) IBOutlet FiveStarsView *storeStarsView;
-@property (weak, nonatomic) IBOutlet UILabel *hotSalesCountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *followCountLabel;
-@property (weak, nonatomic) IBOutlet UIButton *goIntoStoreButton;
-@property (weak, nonatomic) IBOutlet UIButton *moreStoresButton;
-//review
-@property (weak, nonatomic) IBOutlet UIButton *gotoReviewButton;
+//price
+@property (weak, nonatomic) IBOutlet RichPriceView *priceView;
+@property (weak, nonatomic) IBOutlet UILabel *priceDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *commentNSaleLabel;
+//insurance
+@property (weak, nonatomic) IBOutlet InsuranceView *InsuranceView;
+//notice
+@property (weak, nonatomic) IBOutlet UIView *noticeTitleCellTagView;
+@property (weak, nonatomic) IBOutlet UILabel *noticeTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *noticeLabel;
 
-//footer
-@property (weak, nonatomic) IBOutlet UIView *footerView;
+//recommend
+@property (weak, nonatomic) IBOutlet UIImageView *recommentFaceImageView;
+@property (weak, nonatomic) IBOutlet UILabel *recommendLabel;
 
-//picker
-@property (weak, nonatomic) UIPickerView *storePickerView;
 
-@property (nonatomic, strong) ServiceDetailModel *model;
+@property (nonatomic, strong) UINib *segmentCellNib;
 
-//private methods
-- (void)footerViewDidPulled;
+@property (nonatomic, strong) ServiceDetailModel *detailModel;
+@property (nonatomic, strong) NSMutableArray *cellArray;
+@property (nonatomic, assign) CGFloat tableViewHeight;
+@property (nonatomic, assign) CGFloat viewHeight;
+
+- (void)initTableView;
+
+- (void)initSegmentView;
+
+- (void)initMoreInfoView;
 
 - (void)configTopCell;
 
-- (CGFloat)configDescriptionCell;
+- (void)configPriceCell;
 
-- (void)configStoreCell;
+- (void)configInsuranceCell;
 
-- (IBAction)didClickedButton:(id)sender;
+- (void)configCouponCell;
+
+- (void)configNoticeTitleCell;
+
+- (void)configNoticeCell;
+
+- (void)configRecommendCell;
 
 @end
 
@@ -91,129 +104,179 @@
 }
 
 - (void)buildSubviews {
-    self.tableView.backgroundView = nil;
-    [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
+    [self.scrollView setBackgroundColor:[AUITheme theme].globalBGColor];
+    self.scrollView.delegate = self;
     
     self.bannerScrollView.dataSource = self;
     
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
-    UIView *footBG = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
-    [self.footerView setFrame:CGRectMake(0, 5, SCREEN_WIDTH, 400)];
-    [self.footerView setBackgroundColor:[UIColor whiteColor]];
-    [footBG addSubview:self.footerView];
-    self.tableView.tableFooterView = footBG;
     //price view
-    [self.promotionPriceView setContentColor:[AUITheme theme].buttonBGColor_Normal];
-    [self.promotionPriceView.unitLabel setFont:[UIFont systemFontOfSize:15]];
-    [self.promotionPriceView.priceLabel setFont:[UIFont systemFontOfSize:25]];
+    [self.priceView setContentColor:[AUITheme theme].globalThemeColor];
+    [self.priceView.unitLabel setFont:[UIFont systemFontOfSize:15]];
+    [self.priceView.priceLabel setFont:[UIFont systemFontOfSize:25]];
     
     self.priceDescriptionLabel.layer.borderWidth = BORDER_WIDTH;
     self.priceDescriptionLabel.layer.borderColor = [UIColor orangeColor].CGColor;
     self.priceDescriptionLabel.layer.masksToBounds = YES;
+    //segment view
+    //moreinfo view
+    //cells
+    [self.topCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    
+    [self.priceCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    
+    [self.InsuranceCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    
+    [self.couponCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    
+    [self.noticeTitleCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.noticeTitleLabel setText:@"购买须知"];
+    [self.noticeTitleCellTagView setBackgroundColor:[AUITheme theme].globalThemeColor];
+    
+    [self.noticeCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    
+    [self.recommendCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    self.recommentFaceImageView.layer.cornerRadius = 30;
+    self.recommentFaceImageView.layer.masksToBounds = YES;
+    
+    self.cellArray = [[NSMutableArray alloc] init];
 }
 
 
 #pragma mark UITableViewDataSource & UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return ServiceDetailSubviewSectionReviews + 1;
+    return [self.cellArray count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    NSArray *rowArray = [self.cellArray objectAtIndex:section];
+    return [rowArray count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.section) {
-        case ServiceDetailSubviewSectionTop:
+    NSArray *rowArray = [self.cellArray objectAtIndex:indexPath.section];
+    UITableViewCell *cell = [rowArray objectAtIndex:indexPath.row];
+    switch (cell.tag) {
+        case 0:
         {
             [self configTopCell];
-            return self.topCell;
         }
             break;
-        case ServiceDetailSubviewSectionDescription:
+        case 1:
         {
-            [self configDescriptionCell];
-            return self.descriptionCell;
+            [self configPriceCell];
         }
             break;
-        case ServiceDetailSubviewSectionStore:
+        case 2:
         {
-            [self configStoreCell];
-            return self.storeCell;
+            [self configInsuranceCell];
         }
             break;
-        case ServiceDetailSubviewSectionReviews:
+        case 3:
         {
-            [self.reviewCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
-            return self.reviewCell;
+            [self configCouponCell];
+        }
+            break;
+        case 4:
+        {
+            [self configNoticeTitleCell];
+        }
+            break;
+        case 5:
+        {
+            [self configNoticeCell];
+        }
+            break;
+        case 6:
+        {
+            [self configRecommendCell];
         }
             break;
         default:
             break;
     }
-    return nil;
+    return cell;
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.section) {
-        case ServiceDetailSubviewSectionTop:
+    NSArray *rowArray = [self.cellArray objectAtIndex:indexPath.section];
+    UITableViewCell *cell = [rowArray objectAtIndex:indexPath.row];
+    
+    CGFloat height = 0;
+    switch (cell.tag) {
+        case 0:
         {
-            CGFloat height = [self heightForBannerScrollView:self.bannerScrollView] + 10;
-            UILabel *tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 20, 15)];
-            [tempLabel setFont:[UIFont systemFontOfSize:17]];
-            [tempLabel setLineBreakMode:NSLineBreakByTruncatingTail];
-            [tempLabel setText:self.model.serviceName];
-            height += [tempLabel sizeToFitWithMaximumNumberOfLines:2];
-            height += 80;
-            
-            if (self.model.showCountdown) {
-                height += 20;
-            }
-            
-            return height;
+            height = [self.detailModel topCellHeight];
         }
             break;
-        case ServiceDetailSubviewSectionDescription:
+        case 1:
         {
-            return [self configDescriptionCell];
+            height = [self.detailModel priceCellHeight];
         }
             break;
-        case ServiceDetailSubviewSectionStore:
+        case 2:
         {
-            return 180;
+            height = [self.detailModel insuranceCellHeight];
         }
             break;
-        case ServiceDetailSubviewSectionReviews:
+        case 3:
         {
-            return 40;
+            height = [self.detailModel couponCellHeight];
+        }
+            break;
+        case 4:
+        {
+            height = [self.detailModel noticeTitleCellHeight];
+        }
+            break;
+        case 5:
+        {
+            height = [self.detailModel noticeCellHeight];
+        }
+            break;
+        case 6:
+        {
+            height = [self.detailModel recommendCellHeight];
         }
             break;
         default:
             break;
     }
-    return 0;
+    return height;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    CGFloat height = 0;
-    if (section > ServiceDetailSubviewSectionTop) {
-        height = 5;
+    CGFloat height = 0.01;
+    if (section > 0) {
+        height = SectionGap / 2;
+    }
+    return height;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    CGFloat height = SectionGap / 2;
+    if (section == [self.cellArray count] - 1) {
+        height = SectionGap;
     }
     return height;
 }
 
 #pragma mark UIScrollViewDelegate
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    if (scrollView == self.tableView) {
-        CGFloat threshold = scrollView.contentSize.height - SCREEN_HEIGHT + PULL_THRESHOLD;
-        if (decelerate && (scrollView.contentOffset.y >= threshold)) {
-            [self footerViewDidPulled];
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView == self.scrollView) {
+        CGFloat offset = self.scrollView.contentOffset.y;
+        if (offset >= self.tableViewHeight) {
+            //segment view置顶
+            [self.segmentView setFrame:CGRectMake(0, offset, self.segmentView.frame.size.width, self.segmentView.frame.size.height)];
+            [self.moreInfoView setScrollEnabled:YES];
+        } else {
+            //segment view移动
+            [self.segmentView setFrame:CGRectMake(0, self.tableViewHeight, self.segmentView.frame.size.width, self.segmentView.frame.size.height)];
+            [self.moreInfoView setScrollEnabled:NO];
         }
     }
 }
@@ -222,16 +285,16 @@
 #pragma mark AUIBannerScrollViewDataSource
 
 - (NSUInteger)numberOfBannersOnScrollView:(AUIBannerScrollView *)scrollView {
-    return [self.model.imageUrls count];
+    return [self.detailModel.imageUrls count];
 }
 
 - (UIImageView *)bannerImageViewOnScrollView:(AUIBannerScrollView *)scrollView withViewFrame:(CGRect)frame atIndex:(NSUInteger)index {
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
-    NSURL *imageUrl = [self.model.imageUrls objectAtIndex:index];
+    NSURL *imageUrl = [self.detailModel.imageUrls objectAtIndex:index];
     if (index == 1) {
-        [imageView setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"home4"]];
+        [imageView setImageWithURL:imageUrl];
     } else {
-        [imageView setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"detail_banner"]];
+        [imageView setImageWithURL:imageUrl];
     }
     return imageView;
 }
@@ -241,108 +304,218 @@
     return SCREEN_WIDTH * BannerRatio;
 }
 
+#pragma mark AUISegmentViewDataSource & AUISegmentViewDelegate
 
-#pragma mark Private methods
-
-- (void)footerViewDidPulled {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(didPulledAtFooterViewOnServiceDetailView:)]) {
-        [self.delegate didPulledAtFooterViewOnServiceDetailView:self];
-    }
+- (NSUInteger)numberOfCellsForSegmentView:(AUISegmentView *)segmentView {
+    return 3;
 }
 
-- (void)configTopCell {
-    [self.topCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
-    //banner
-    [self.bannerScrollView reloadData];
-    //others
-    [self.serviceNameLabel setText:self.model.serviceName];
-    [self.serviceStarsView setStarNumber:self.model.starNumber];
-    [self.reviewCountLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)self.model.commentsNumber]];
-    [self.saledCountLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)self.model.saleCount]];
-    [self.promotionPriceView setPrice:self.model.price];
-    [self.InsuranceView setSupportedInsurance:self.model.supportedInsurances];
+- (UITableViewCell *)segmentView:(AUISegmentView *)segmentView cellAtIndex:(NSUInteger)index {
     
-    if ([self.model.priceDescription length] > 0) {
-        [self.priceDescriptionLabel setHidden:NO];
-        [self.priceDescriptionLabel setText:self.model.priceDescription];
-    } else {
-        [self.priceDescriptionLabel setHidden:YES];
+    ServiceDetailSegmentCell *cell = [segmentView dequeueReusableCellWithIdentifier:kSegmentCellIdentifier forIndex:index];
+    if (!cell) {
+        cell =  [[[NSBundle mainBundle] loadNibNamed:@"ServiceDetailSegmentCell" owner:nil options:nil] objectAtIndex:0];
     }
-    
-    [self.countDownBGView setHidden:!self.model.showCountdown];
-}
-
-- (CGFloat)configDescriptionCell {
-    [self.descriptionCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
-    CGFloat height = 130;
-    [self.serviceDescriptionLabel setText:self.model.promotionDescription];
-    [self.descriptionCell layoutIfNeeded];
-    CGFloat nowHeight = self.serviceDescriptionLabel.frame.size.height;
-    if (nowHeight > 20) {
-        height += nowHeight;
-    }
-    [self.ageLabel setText:self.model.ageDescription];
-    [self.dateLabel setText:self.model.timeDescription];
-    return height;
-}
-
-- (void)configStoreCell {
-    [self.storeCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
-    if (self.model.currentStoreModel) {
-        [self.storeImageView setImageWithURL:self.model.currentStoreModel.imageUrl placeholderImage:PLACEHOLDERIMAGE_SMALL];
-        [self.storeNameLabel setText:self.model.currentStoreModel.storeName];
-        [self.storeStarsView setStarNumber:self.model.currentStoreModel.starNumber];
-        [self.hotSalesCountLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)self.model.currentStoreModel.hotSaleCount]];
-        [self.followCountLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)self.model.currentStoreModel.favourateCount]];
-    }
-}
-
-- (IBAction)didClickedButton:(id)sender {
-    if (!self.delegate) {
-        return;
-    }
-    UIButton *button = (UIButton *)sender;
-    switch (button.tag) {
-        case 1000:
+    switch (index) {
+        case 0:
         {
-            if ([self.delegate respondsToSelector:@selector(didClickedGoIntoStoreButton)]) {
-                [self.delegate didClickedGoIntoStoreButton];
-            }
+            [cell.titleLabel setText:@"商品详情"];
         }
             break;
-        case 1001:
+        case 1:
         {
-            if ([self.delegate respondsToSelector:@selector(didClickedMoreStoresButton)]) {
-                [self.delegate didClickedMoreStoresButton];
-            }
+            [cell.titleLabel setText:@"商户"];
         }
             break;
-        case 1002:
+        case 2:
         {
-            if ([self.delegate respondsToSelector:@selector(didClickedCheckReviewsButton)]) {
-                [self.delegate didClickedCheckReviewsButton];
-            }
+            [cell.titleLabel setText:@"评价"];
         }
             break;
         default:
             break;
     }
+    return cell;
+}
+
+- (void)segmentView:(AUISegmentView *)segmentView didSelectedAtIndex:(NSUInteger)index {
+    ServiceDetailMoreInfoViewTag viewTag = (ServiceDetailMoreInfoViewTag)index;
+    [self.moreInfoView setViewTag:viewTag];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(serviceDetailView:didChangedMoreInfoViewTag:)]) {
+        [self.delegate serviceDetailView:self didChangedMoreInfoViewTag:viewTag];
+    }
+}
+
+#pragma mark ServiceDetailMoreInfoViewDelegate
+
+- (void)serviceDetailMoreInfoView:(ServiceDetailMoreInfoView *)infoView didChangedViewContentSize:(CGSize)size {
+    CGFloat moreInfoHeight = size.height;
+    CGFloat standardHeight = infoView.standardViewSize.height;
+    if (moreInfoHeight <= standardHeight) {
+        moreInfoHeight = standardHeight;
+    }
+    self.viewHeight = self.tableViewHeight + SegmentViewHeight + moreInfoHeight;
+    [self.scrollView setContentSize:CGSizeMake(0, self.viewHeight)];
+}
+
+#pragma mark Private methods
+
+- (void)initTableView {
+    if (!self.tableView) {
+        //table view initialization, init after scroll view built
+        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableViewHeight) style:UITableViewStyleGrouped];
+        self.tableView.backgroundView = nil;
+        [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
+        [self.tableView setScrollEnabled:NO];
+        [self.tableView setShowsHorizontalScrollIndicator:NO];
+        [self.tableView setShowsVerticalScrollIndicator:NO];
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        self.tableView.delegate = self;
+        self.tableView.dataSource = self;
+        [self.scrollView addSubview:self.tableView];
+    }
+    [self.tableView setFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableViewHeight)];
+}
+
+- (void)initSegmentView {
+    if (!self.segmentView) {
+        self.segmentView = [[AUISegmentView alloc] initWithFrame:CGRectMake(0, self.tableViewHeight, SCREEN_WIDTH, SegmentViewHeight)];
+        [self.segmentView setScrollEnable:NO];
+        [self.segmentView setShowSeparator:NO];
+        self.segmentView.dataSource = self;
+        self.segmentView.delegate = self;
+        if (!self.segmentCellNib) {
+            self.segmentCellNib = [UINib nibWithNibName:NSStringFromClass([ServiceDetailSegmentCell class]) bundle:nil];
+            [self.segmentView registerNib:self.segmentCellNib forCellReuseIdentifier:kSegmentCellIdentifier];
+        }
+        [self.segmentView reloadData];
+        [self.scrollView addSubview:self.segmentView];
+        [self.segmentView setSelectedIndex:0];
+        [self segmentView:self.segmentView didSelectedAtIndex:0];
+    }
+    [self.segmentView setFrame:CGRectMake(0, self.tableViewHeight, SCREEN_WIDTH, SegmentViewHeight)];
+}
+
+- (void)initMoreInfoView {
+    if (!self.moreInfoView) {
+        self.moreInfoView = [[ServiceDetailMoreInfoView alloc] init];
+        self.moreInfoView.delegate = self;
+        [self.scrollView addSubview:self.moreInfoView];
+        
+        [self.scrollView bringSubviewToFront:self.segmentView];
+    }
+    CGRect standardFrame = CGRectMake(0, self.tableViewHeight + SegmentViewHeight, SCREEN_WIDTH, self.frame.size.height - SegmentViewHeight);
+    [self.moreInfoView setFrame:standardFrame];
+    [self.moreInfoView setStandardViewSize:standardFrame.size];
+    [self.moreInfoView setViewTag:(ServiceDetailMoreInfoViewTag)self.segmentView.selectedIndex];
+    [self.moreInfoView setIntroductionHtmlString:self.detailModel.introductionHtmlString];
+    [self.moreInfoView setStoreListModels:self.detailModel.storeItemsArray];
+    [self.moreInfoView setCommentListModels:self.detailModel.commentItemsArray];
+}
+
+- (void)configTopCell {
+    //banner
+    [self.bannerScrollView reloadData];
+    //others
+    [self.serviceNameLabel setText:self.detailModel.serviceName];
+    [self.serviceDescriptionLabel setText:self.detailModel.serviceDescription];
+}
+
+- (void)configPriceCell {
+    //price
+    [self.priceView setPrice:self.detailModel.price];
+    if ([self.detailModel.priceDescription length] > 0) {
+        [self.priceDescriptionLabel setHidden:NO];
+        [self.priceDescriptionLabel setText:self.detailModel.priceDescription];
+    } else {
+        [self.priceDescriptionLabel setHidden:YES];
+    }
+    //count
+    NSString *commentCount = [NSString stringWithFormat:@"%lu", (unsigned long)self.detailModel.commentsNumber];
+    NSString *saleCount = [NSString stringWithFormat:@"%lu", (unsigned long)self.detailModel.saleCount];
+    
+    NSString *wholeString = [NSString stringWithFormat:@"%@评价|已售%@", commentCount, saleCount];
+    NSMutableAttributedString *labelString = [[NSMutableAttributedString alloc] initWithString:wholeString];
+    NSDictionary *attribute = [NSDictionary dictionaryWithObject:[AUITheme theme].highlightTextColor forKey:NSForegroundColorAttributeName];
+    [labelString setAttributes:attribute range:NSMakeRange(0, [commentCount length])];
+    [labelString addAttributes:attribute range:NSMakeRange([labelString length] - [saleCount length], [saleCount length])];
+    [self.commentNSaleLabel setAttributedText:labelString];
+}
+
+- (void)configInsuranceCell {
+    [self.InsuranceView setSupportedInsurance:self.detailModel.supportedInsurances];
+}
+
+- (void)configCouponCell {
+    
+}
+
+- (void)configNoticeTitleCell {
+}
+
+- (void)configNoticeCell {
+    [self.noticeLabel setText:self.detailModel.notice];
+}
+
+- (void)configRecommendCell {
+    [self.recommentFaceImageView setImageWithURL:self.detailModel.recommenderFaceImageUrl];
+    
+    NSString *recommderName = self.detailModel.recommenderName;
+    if ([recommderName length] == 0) {
+        recommderName = @"童童推荐";
+    }
+    NSString *wholeString = [NSString stringWithFormat:@"%@：%@", recommderName, self.detailModel.recommendString];
+    NSMutableAttributedString *labelString = [[NSMutableAttributedString alloc] initWithString:wholeString];
+    NSDictionary *attribute = [NSDictionary dictionaryWithObject:[UIFont boldSystemFontOfSize:15] forKey:NSFontAttributeName];
+    [labelString setAttributes:attribute range:NSMakeRange(0, [recommderName length] + 1)];
+    [self.recommendLabel setAttributedText:labelString];
+    
 }
 
 #pragma mark Public methods
 
-- (void)reloadData {
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(detailModelForServiceDetailView:)]) {
-        self.model = [self.dataSource detailModelForServiceDetailView:self];
-        [self.tableView reloadData];
-    }
+- (void)setIntroductionHtmlString:(NSString *)htmlString {
+    self.detailModel.introductionHtmlString = htmlString;
+    [self.moreInfoView setIntroductionHtmlString:htmlString];
 }
 
-- (void)resetStoreSection {
+- (void)reloadData {
+    [self.cellArray removeAllObjects];
+    self.tableViewHeight = 0;
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(detailModelForServiceDetailView:)]) {
-        self.model = [self.dataSource detailModelForServiceDetailView:self];
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:ServiceDetailSubviewSectionStore] withRowAnimation:UITableViewRowAnimationNone];
+        self.detailModel = [self.dataSource detailModelForServiceDetailView:self];
+        if (self.detailModel) {
+            NSArray *section1 = [NSArray arrayWithObjects:self.topCell, self.priceCell, self.InsuranceCell, nil];
+            [self.cellArray addObject:[NSArray arrayWithArray:section1]];
+            self.tableViewHeight = [self.detailModel topCellHeight] + [self.detailModel priceCellHeight] + [self.detailModel insuranceCellHeight];;
+            
+            if (self.detailModel.hasCoupon) {
+                NSArray *section2 = [NSArray arrayWithObject:self.couponCell];
+                [self.cellArray addObject:section2];
+                self.tableViewHeight += SectionGap;
+                self.tableViewHeight += [self.detailModel couponCellHeight];
+            }
+            if ([self.detailModel.notice length] > 0) {
+                NSArray *section3 = [NSArray arrayWithObjects:self.noticeTitleCell, self.noticeCell, nil];
+                [self.cellArray addObject:section3];
+                self.tableViewHeight += SectionGap;
+                self.tableViewHeight += [self.detailModel noticeTitleCellHeight] + [self.detailModel noticeCellHeight];
+            }
+            if ([self.detailModel.recommendString length] > 0) {
+                NSArray *section4 = [NSArray arrayWithObject:self.recommendCell];
+                [self.cellArray addObject:section4];
+                self.tableViewHeight += SectionGap;
+                self.tableViewHeight += [self.detailModel recommendCellHeight];
+            }
+            self.tableViewHeight += SectionGap;
+        }
     }
+    [self initTableView];
+    [self initSegmentView];
+    [self initMoreInfoView];
+    self.viewHeight = self.tableViewHeight + self.segmentView.frame.size.height + self.moreInfoView.frame.size.height;
+    [self.scrollView setContentSize:CGSizeMake(0, self.viewHeight)];
+    [self.tableView reloadData];
 }
 
 /*

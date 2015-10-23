@@ -8,19 +8,16 @@
 
 #import "ServiceDetailViewController.h"
 #import "ServiceDetailViewModel.h"
-#import "ServiceMoreDetailViewController.h"
 #import "ServiceDetailBottomView.h"
-#import "AUIStairsController.h"
 #import "AppDelegate.h"
 #import "Insurance.h"
 #import "AUIPickerView.h"
 #import "SettlementViewController.h"
 #import "CommentListViewController.h"
 #import "ServiceDetailConfirmView.h"
-#import "ServiceMoreDetailView.h"
 
 
-@interface ServiceDetailViewController () <ServiceDetailViewDelegate, AUIPickerViewDataSource, AUIPickerViewDelegate, ServiceDetailBottomViewDelegate, ServiceDetailConfirmViewDelegate>
+@interface ServiceDetailViewController () <ServiceDetailViewDelegate, ServiceDetailBottomViewDelegate, ServiceDetailConfirmViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *detailBGView;
 @property (weak, nonatomic) IBOutlet ServiceDetailView *detailView;
@@ -29,16 +26,11 @@
 @property (nonatomic, strong) AUIPickerView *pickerView;
 @property (nonatomic, strong) ServiceDetailConfirmView *confirmView;
 
-@property (nonatomic, strong) AUIStairsController *stairsController;
-
-@property (nonatomic, strong) ServiceMoreDetailViewController *moreDetailViewController;
-
 @property (nonatomic, copy) NSString *serviceId;
 @property (nonatomic, copy) NSString *channelId;
 
 @property (nonatomic, strong) ServiceDetailViewModel *viewModel;
 
-- (void)createStairsVC;
 - (void)loadConfirmView;
 - (void)setupBottomView;
 
@@ -64,8 +56,6 @@
     
     self.detailView.delegate = self;
     
-    self.pickerView = [[AUIPickerView alloc] initWithDataSource:self delegate:self];
-    
     self.bottomView.delegate = self;
     
     self.confirmView = [[ServiceDetailConfirmView alloc] init];
@@ -89,6 +79,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [self.viewModel stopUpdateData];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -97,33 +88,8 @@
 
 #pragma mark ServiceDetailViewDelegate
 
-- (void)didPulledAtFooterViewOnServiceDetailView:(ServiceDetailView *)detailView {
-    id nextView = [self.stairsController.views lastObject];
-    if (nextView) {
-        [self.stairsController goDownstairsToView:nextView animated:YES completion:^{
-            
-        }];
-    } else  {
-        [self createStairsVC];
-        nextView = [self.stairsController.views lastObject];
-        [self.stairsController goDownstairsToView:nextView animated:YES completion:^{
-            
-        }];
-    }
-}
-
-- (void)didClickedGoIntoStoreButton {
-    
-}
-
-- (void)didClickedMoreStoresButton {
-    [self.pickerView show];
-}
-
-- (void)didClickedCheckReviewsButton {
-    CommentListViewController *controller = [[CommentListViewController alloc] initWithIdentifier:self.serviceId object:KTCCommentObjectService];
-    [controller setHidesBottomBarWhenPushed:YES];
-    [self.navigationController pushViewController:controller animated:YES];
+- (void)serviceDetailView:(ServiceDetailView *)detailView didChangedMoreInfoViewTag:(ServiceDetailMoreInfoViewTag)viewTag {
+    [self.viewModel resetMoreInfoViewWithViewTag:viewTag];
 }
 
 #pragma mark ServiceDetailBottomViewDelegate
@@ -153,40 +119,13 @@
     [self.confirmView show];
 }
 
-#pragma mark UIPickerViewDataSource & UIPickerViewDelegate
-
-- (NSInteger)numberOfComponentsInPickerView:(AUIPickerView *)pickerView {
-    return 1;
-}
-
-- (NSInteger)pickerView:(AUIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return [self.viewModel.detailModel.storeItemsArray count];
-}
-
-- (NSString *)pickerView:(AUIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    ServiceOwnerStoreModel *model = [self.viewModel.detailModel.storeItemsArray objectAtIndex:row];
-    return model.storeName;
-}
-
-- (void)didCanceledPickerView:(AUIPickerView *)pickerView {
-    
-}
-
-- (void)pickerView:(AUIPickerView *)pickerView didConfirmedWithSelectedIndexArrayOfAllComponent:(NSArray *)indexArray {
-    ServiceOwnerStoreModel *model = [self.viewModel.detailModel.storeItemsArray objectAtIndex:[[indexArray firstObject] integerValue]];
-    if (![model.storeId isEqualToString:self.viewModel.detailModel.currentStoreModel.storeId]) {
-        [self.viewModel.detailModel setCurrentStoreModel:model];
-        [self.detailView resetStoreSection];
-    }
-}
-
 #pragma mark ServiceDetailConfirmViewDelegate
 
-- (void)didClickedSubmitButtonWithBuyNumber:(NSUInteger)number selectedStore:(ServiceOwnerStoreModel *)store {
+- (void)didClickedSubmitButtonWithBuyNumber:(NSUInteger)number selectedStore:(StoreListItemModel *)store {
     [GToolUtil checkLogin:^(NSString *uid) {
         __weak ServiceDetailViewController *weakSelf = self;
         [[GAlertLoadingView sharedAlertLoadingView] show];
-        [weakSelf.viewModel addToSettlementWithBuyCount:number storeId:store.storeId succeed:^(NSDictionary *data) {
+        [weakSelf.viewModel addToSettlementWithBuyCount:number storeId:store.identifier succeed:^(NSDictionary *data) {
             [[GAlertLoadingView sharedAlertLoadingView] hide];
             [weakSelf goSettlement];
         } failure:^(NSError *error) {
@@ -199,16 +138,6 @@
 }
 
 #pragma mark Private methods
-
-- (void)createStairsVC {
-    if (!self.stairsController) {
-        self.stairsController = [[AUIStairsController alloc] init];
-    }
-    if (!self.moreDetailViewController) {
-        self.moreDetailViewController = [[ServiceMoreDetailViewController alloc] initWithServiceId:self.serviceId supportStairsController:YES];
-    }
-    [self.stairsController setViews:[NSArray arrayWithObjects:[self stairControledView], [self.moreDetailViewController stairControledView], nil]];
-}
 
 - (void)loadConfirmView {
     [self.confirmView setStockNumber:self.viewModel.detailModel.stockNumber];
@@ -234,18 +163,12 @@
 
 #pragma mark Super method
 
-
-- (UIView *)stairControledView {
-    return self.detailView;
-}
-
 - (void)reloadNetworkData {
     [[GAlertLoadingView sharedAlertLoadingView] show];
     __weak ServiceDetailViewController *weakSelf = self;
     [self.viewModel startUpdateDataWithServiceId:self.serviceId channelId:self.channelId Succeed:^(NSDictionary *data) {
         [weakSelf.detailView reloadData];
         [[GAlertLoadingView sharedAlertLoadingView] hide];
-        [weakSelf createStairsVC];
         [weakSelf loadConfirmView];
         [weakSelf setupBottomView];
     } failure:^(NSError *error) {

@@ -7,15 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ServiceOwnerStoreModel.h"
-
-typedef enum {
-    ServicePriceTypeNormal,
-    ServicePriceTypeMobileOnly,
-    ServiceDetailModelTuan,
-    ServiceDetailModelQiang,
-    ServiceDetailModelMiao
-}ServicePriceType;
+#import "StoreListItemModel.h"
+#import "CommentListItemModel.h"
+#import "Insurance.h"
 
 @interface ServiceDetailModel : NSObject
 
@@ -27,17 +21,15 @@ typedef enum {
 
 @property (nonatomic, copy) NSString *serviceName;
 
-@property (nonatomic, assign) NSUInteger starNumber;
+@property (nonatomic, copy) NSString *serviceDescription;
+
+@property (nonatomic, assign) CGFloat price;
+
+@property (nonatomic, copy) NSString *priceDescription;
 
 @property (nonatomic, assign) NSUInteger commentsNumber;
 
 @property (nonatomic, assign) NSUInteger saleCount;
-
-@property (nonatomic, assign) CGFloat price;
-
-@property (nonatomic, assign) ServicePriceType priceType;
-
-@property (nonatomic, copy) NSString *priceDescription;
 
 @property (nonatomic, assign) NSTimeInterval countdownTime;
 
@@ -45,21 +37,27 @@ typedef enum {
 
 @property (nonatomic, assign) NSArray *supportedInsurances;
 
-@property (nonatomic, copy) NSString *promotionDescription;
+@property (nonatomic, assign) BOOL hasCoupon;
 
-@property (nonatomic, copy) NSString *ageDescription;
+@property (nonatomic, copy) NSString *notice;
 
-@property (nonatomic, copy) NSString *timeDescription;
+@property (nonatomic, strong) NSURL *recommenderFaceImageUrl;
 
-@property (nonatomic, strong) NSArray *storeItemsArray;
+@property (nonatomic, copy) NSString *recommenderName;
 
-@property (nonatomic, strong) ServiceOwnerStoreModel *currentStoreModel;
-
-@property (nonatomic, assign) NSUInteger stockNumber;
+@property (nonatomic, copy) NSString *recommendString;
 
 @property (nonatomic, assign) BOOL isFavourate;
 
 @property (nonatomic, copy) NSString *phoneNumber;
+
+@property (nonatomic, copy) NSString *introductionHtmlString;
+
+@property (nonatomic, strong) NSArray *storeItemsArray;
+
+@property (nonatomic, strong) NSArray *commentItemsArray;
+
+@property (nonatomic, assign) NSUInteger stockNumber;
 
 @property (nonatomic, assign) NSUInteger maxLimit;
 
@@ -70,5 +68,19 @@ typedef enum {
 @property (nonatomic, assign) CGFloat totalPrice;
 
 - (void)fillWithRawData:(NSDictionary *)data;
+
+- (CGFloat)topCellHeight;
+
+- (CGFloat)priceCellHeight;
+
+- (CGFloat)insuranceCellHeight;
+
+- (CGFloat)couponCellHeight;
+
+- (CGFloat)noticeTitleCellHeight;
+
+- (CGFloat)noticeCellHeight;
+
+- (CGFloat)recommendCellHeight;
 
 @end

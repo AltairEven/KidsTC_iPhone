@@ -176,12 +176,13 @@
 		1E0B7B691B70BAE900A58AD4 /* CategoryViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B7B681B70BAE900A58AD4 /* CategoryViewModel.m */; };
 		1E0B7B6C1B70BDB000A58AD4 /* BaseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B7B6B1B70BDB000A58AD4 /* BaseViewModel.m */; };
 		1E0B7B6F1B70BDFA00A58AD4 /* SearchViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B7B6E1B70BDFA00A58AD4 /* SearchViewModel.m */; };
-		1E1CFA191BD49EF60005653D /* 首页.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1E1CFA181BD49EF60005653D /* 首页.txt */; settings = {ASSET_TAGS = (); }; };
 		1E1CFA1D1BD4FEE20005653D /* KTCSearchViewCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1CFA1B1BD4FEE20005653D /* KTCSearchViewCategoryCell.m */; settings = {ASSET_TAGS = (); }; };
 		1E1CFA1E1BD4FEE20005653D /* KTCSearchViewCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E1CFA1C1BD4FEE20005653D /* KTCSearchViewCategoryCell.xib */; settings = {ASSET_TAGS = (); }; };
+		1E1CFA211BD72F4C0005653D /* ServiceDetailMoreInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1CFA201BD72F4C0005653D /* ServiceDetailMoreInfoView.m */; settings = {ASSET_TAGS = (); }; };
+		1E1CFA231BD72F5E0005653D /* ServiceDetailMoreInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E1CFA221BD72F5E0005653D /* ServiceDetailMoreInfoView.xib */; settings = {ASSET_TAGS = (); }; };
+		1E1CFA2C1BD8E1880005653D /* ServiceDetailSegmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1CFA2A1BD8E1880005653D /* ServiceDetailSegmentCell.m */; settings = {ASSET_TAGS = (); }; };
+		1E1CFA2D1BD8E1880005653D /* ServiceDetailSegmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E1CFA2B1BD8E1880005653D /* ServiceDetailSegmentCell.xib */; settings = {ASSET_TAGS = (); }; };
 		1E2D39DD1B54C316003BABE1 /* AUIStairsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2D39DC1B54C316003BABE1 /* AUIStairsController.m */; };
-		1E2D39E51B5531DA003BABE1 /* ServiceMoreDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E2D39E41B5531DA003BABE1 /* ServiceMoreDetailView.m */; };
-		1E2D39E71B553204003BABE1 /* ServiceMoreDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E2D39E61B553204003BABE1 /* ServiceMoreDetailView.xib */; };
 		1E37D9761B87244B004B03BD /* KTCCommentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E37D9751B87244B004B03BD /* KTCCommentManager.m */; };
 		1E37D9791B872C27004B03BD /* CommentListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E37D9781B872C27004B03BD /* CommentListViewModel.m */; };
 		1E3D7E7B1B4BD83D00275C35 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3D7E7A1B4BD83D00275C35 /* main.m */; };
@@ -347,8 +348,6 @@
 		1E5CD7881B53BF1100D177CB /* ServiceDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5CD7871B53BF1100D177CB /* ServiceDetailView.m */; };
 		1E5CD78A1B53BF3800D177CB /* ServiceDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E5CD7891B53BF3800D177CB /* ServiceDetailView.xib */; };
 		1E7600351B55FFF300DF0972 /* ServiceMoreDetailHotSalesItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7600341B55FFF300DF0972 /* ServiceMoreDetailHotSalesItemModel.m */; };
-		1E7600391B5605F900DF0972 /* ServiceMoreDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7600371B5605F900DF0972 /* ServiceMoreDetailViewController.m */; };
-		1E76003A1B5605F900DF0972 /* ServiceMoreDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E7600381B5605F900DF0972 /* ServiceMoreDetailViewController.xib */; };
 		1E76003E1B56496100DF0972 /* ServiceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E76003C1B56496100DF0972 /* ServiceDetailViewController.m */; };
 		1E76003F1B56496100DF0972 /* ServiceDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E76003D1B56496100DF0972 /* ServiceDetailViewController.xib */; };
 		1E7600421B5753AE00DF0972 /* ServiceDetailBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7600411B5753AE00DF0972 /* ServiceDetailBottomView.m */; };
@@ -604,7 +603,6 @@
 		1E943EC21B7457240029FE74 /* KTCSearchService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E943EC11B7457240029FE74 /* KTCSearchService.m */; };
 		1E943EC51B745F8A0029FE74 /* KTCSearchCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E943EC41B745F8A0029FE74 /* KTCSearchCondition.m */; };
 		1E943ECD1B75A6EC0029FE74 /* ServiceDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E943ECC1B75A6EC0029FE74 /* ServiceDetailModel.m */; };
-		1E943ED01B75AFAB0029FE74 /* ServiceOwnerStoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E943ECF1B75AFAB0029FE74 /* ServiceOwnerStoreModel.m */; };
 		1E943ED51B78A4760029FE74 /* FavourateViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E943ED41B78A4760029FE74 /* FavourateViewModel.m */; };
 		1E943ED91B78A8900029FE74 /* FavourateSegmentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E943ED71B78A8900029FE74 /* FavourateSegmentViewCell.m */; };
 		1E943EDA1B78A8900029FE74 /* FavourateSegmentViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E943ED81B78A8900029FE74 /* FavourateSegmentViewCell.xib */; };
@@ -1101,15 +1099,17 @@
 		1E0B7B6B1B70BDB000A58AD4 /* BaseViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewModel.m; sourceTree = "<group>"; };
 		1E0B7B6D1B70BDFA00A58AD4 /* SearchViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewModel.h; sourceTree = "<group>"; };
 		1E0B7B6E1B70BDFA00A58AD4 /* SearchViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewModel.m; sourceTree = "<group>"; };
-		1E1CFA181BD49EF60005653D /* 首页.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "首页.txt"; sourceTree = "<group>"; };
 		1E1CFA1A1BD4FEE20005653D /* KTCSearchViewCategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCSearchViewCategoryCell.h; sourceTree = "<group>"; };
 		1E1CFA1B1BD4FEE20005653D /* KTCSearchViewCategoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCSearchViewCategoryCell.m; sourceTree = "<group>"; };
 		1E1CFA1C1BD4FEE20005653D /* KTCSearchViewCategoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTCSearchViewCategoryCell.xib; sourceTree = "<group>"; };
+		1E1CFA1F1BD72F4C0005653D /* ServiceDetailMoreInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceDetailMoreInfoView.h; sourceTree = "<group>"; };
+		1E1CFA201BD72F4C0005653D /* ServiceDetailMoreInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceDetailMoreInfoView.m; sourceTree = "<group>"; };
+		1E1CFA221BD72F5E0005653D /* ServiceDetailMoreInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceDetailMoreInfoView.xib; sourceTree = "<group>"; };
+		1E1CFA291BD8E1880005653D /* ServiceDetailSegmentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceDetailSegmentCell.h; sourceTree = "<group>"; };
+		1E1CFA2A1BD8E1880005653D /* ServiceDetailSegmentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceDetailSegmentCell.m; sourceTree = "<group>"; };
+		1E1CFA2B1BD8E1880005653D /* ServiceDetailSegmentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceDetailSegmentCell.xib; sourceTree = "<group>"; };
 		1E2D39DB1B54C316003BABE1 /* AUIStairsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIStairsController.h; sourceTree = "<group>"; };
 		1E2D39DC1B54C316003BABE1 /* AUIStairsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIStairsController.m; sourceTree = "<group>"; };
-		1E2D39E31B5531DA003BABE1 /* ServiceMoreDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceMoreDetailView.h; sourceTree = "<group>"; };
-		1E2D39E41B5531DA003BABE1 /* ServiceMoreDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceMoreDetailView.m; sourceTree = "<group>"; };
-		1E2D39E61B553204003BABE1 /* ServiceMoreDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceMoreDetailView.xib; sourceTree = "<group>"; };
 		1E37D9741B87244B004B03BD /* KTCCommentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCCommentManager.h; sourceTree = "<group>"; };
 		1E37D9751B87244B004B03BD /* KTCCommentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCCommentManager.m; sourceTree = "<group>"; };
 		1E37D9771B872C27004B03BD /* CommentListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentListViewModel.h; sourceTree = "<group>"; };
@@ -1430,9 +1430,6 @@
 		1E5CD7891B53BF3800D177CB /* ServiceDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceDetailView.xib; sourceTree = "<group>"; };
 		1E7600331B55FFF300DF0972 /* ServiceMoreDetailHotSalesItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceMoreDetailHotSalesItemModel.h; sourceTree = "<group>"; };
 		1E7600341B55FFF300DF0972 /* ServiceMoreDetailHotSalesItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceMoreDetailHotSalesItemModel.m; sourceTree = "<group>"; };
-		1E7600361B5605F900DF0972 /* ServiceMoreDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceMoreDetailViewController.h; sourceTree = "<group>"; };
-		1E7600371B5605F900DF0972 /* ServiceMoreDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceMoreDetailViewController.m; sourceTree = "<group>"; };
-		1E7600381B5605F900DF0972 /* ServiceMoreDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceMoreDetailViewController.xib; sourceTree = "<group>"; };
 		1E76003B1B56496100DF0972 /* ServiceDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceDetailViewController.h; sourceTree = "<group>"; };
 		1E76003C1B56496100DF0972 /* ServiceDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceDetailViewController.m; sourceTree = "<group>"; };
 		1E76003D1B56496100DF0972 /* ServiceDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceDetailViewController.xib; sourceTree = "<group>"; };
@@ -1846,8 +1843,6 @@
 		1E943EC41B745F8A0029FE74 /* KTCSearchCondition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCSearchCondition.m; sourceTree = "<group>"; };
 		1E943ECB1B75A6EC0029FE74 /* ServiceDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceDetailModel.h; sourceTree = "<group>"; };
 		1E943ECC1B75A6EC0029FE74 /* ServiceDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceDetailModel.m; sourceTree = "<group>"; };
-		1E943ECE1B75AFAB0029FE74 /* ServiceOwnerStoreModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceOwnerStoreModel.h; sourceTree = "<group>"; };
-		1E943ECF1B75AFAB0029FE74 /* ServiceOwnerStoreModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceOwnerStoreModel.m; sourceTree = "<group>"; };
 		1E943ED31B78A4760029FE74 /* FavourateViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavourateViewModel.h; sourceTree = "<group>"; };
 		1E943ED41B78A4760029FE74 /* FavourateViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavourateViewModel.m; sourceTree = "<group>"; };
 		1E943ED61B78A8900029FE74 /* FavourateSegmentViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavourateSegmentViewCell.h; sourceTree = "<group>"; };
@@ -2745,7 +2740,6 @@
 		1E3D7E781B4BD83D00275C35 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				1E1CFA181BD49EF60005653D /* 首页.txt */,
 				1E7995991BCE5BEB0099CFF9 /* interface_list.plist */,
 				1E943EBD1B7375F60029FE74 /* Area.plist */,
 				1E0B7B591B709A2100A58AD4 /* Category.plist */,
@@ -3575,8 +3569,6 @@
 				1E7600341B55FFF300DF0972 /* ServiceMoreDetailHotSalesItemModel.m */,
 				1E943ECB1B75A6EC0029FE74 /* ServiceDetailModel.h */,
 				1E943ECC1B75A6EC0029FE74 /* ServiceDetailModel.m */,
-				1E943ECE1B75AFAB0029FE74 /* ServiceOwnerStoreModel.h */,
-				1E943ECF1B75AFAB0029FE74 /* ServiceOwnerStoreModel.m */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -3587,9 +3579,6 @@
 				1E76003B1B56496100DF0972 /* ServiceDetailViewController.h */,
 				1E76003C1B56496100DF0972 /* ServiceDetailViewController.m */,
 				1E76003D1B56496100DF0972 /* ServiceDetailViewController.xib */,
-				1E7600361B5605F900DF0972 /* ServiceMoreDetailViewController.h */,
-				1E7600371B5605F900DF0972 /* ServiceMoreDetailViewController.m */,
-				1E7600381B5605F900DF0972 /* ServiceMoreDetailViewController.xib */,
 				1E943F7C1B831DAF0029FE74 /* ServiceListViewController.h */,
 				1E943F7D1B831DAF0029FE74 /* ServiceListViewController.m */,
 				1E943F7E1B831DAF0029FE74 /* ServiceListViewController.xib */,
@@ -3639,9 +3628,12 @@
 				1E5CD7861B53BF1100D177CB /* ServiceDetailView.h */,
 				1E5CD7871B53BF1100D177CB /* ServiceDetailView.m */,
 				1E5CD7891B53BF3800D177CB /* ServiceDetailView.xib */,
-				1E2D39E31B5531DA003BABE1 /* ServiceMoreDetailView.h */,
-				1E2D39E41B5531DA003BABE1 /* ServiceMoreDetailView.m */,
-				1E2D39E61B553204003BABE1 /* ServiceMoreDetailView.xib */,
+				1E1CFA291BD8E1880005653D /* ServiceDetailSegmentCell.h */,
+				1E1CFA2A1BD8E1880005653D /* ServiceDetailSegmentCell.m */,
+				1E1CFA2B1BD8E1880005653D /* ServiceDetailSegmentCell.xib */,
+				1E1CFA1F1BD72F4C0005653D /* ServiceDetailMoreInfoView.h */,
+				1E1CFA201BD72F4C0005653D /* ServiceDetailMoreInfoView.m */,
+				1E1CFA221BD72F5E0005653D /* ServiceDetailMoreInfoView.xib */,
 				1E7600401B5753AE00DF0972 /* ServiceDetailBottomView.h */,
 				1E7600411B5753AE00DF0972 /* ServiceDetailBottomView.m */,
 				1E7600431B57585D00DF0972 /* ServiceDetailBottomView.xib */,
@@ -4812,7 +4804,6 @@
 				1E0B7A9D1B6F67B800A58AD4 /* GCountDownView.xib in Resources */,
 				1EC73BAC1B5E25A4008B39EA /* TwinklingElfCell.xib in Resources */,
 				1E5CD78A1B53BF3800D177CB /* ServiceDetailView.xib in Resources */,
-				1E1CFA191BD49EF60005653D /* 首页.txt in Resources */,
 				1E0B77D91B6A3F2F00A58AD4 /* ServiceDetailConfirmView.xib in Resources */,
 				1EC4A11A1B5CD3BB00206BB9 /* KTCSearchViewController.xib in Resources */,
 				1E827BE11B941337008F3F08 /* PlayButtonOverlayLargeTap@3x.png in Resources */,
@@ -4964,8 +4955,8 @@
 				1E7600441B57585D00DF0972 /* ServiceDetailBottomView.xib in Resources */,
 				1E8EFD011B68770400D00808 /* CommentListView.xib in Resources */,
 				1E827CC91B9BE696008F3F08 /* CouponListViewCell.xib in Resources */,
-				1E2D39E71B553204003BABE1 /* ServiceMoreDetailView.xib in Resources */,
 				1E3D8F631B4D1DFE00275C35 /* OrderListViewController.xib in Resources */,
+				1E1CFA2D1BD8E1880005653D /* ServiceDetailSegmentCell.xib in Resources */,
 				1E827BD11B941337008F3F08 /* ImageSelectedOff@2x.png in Resources */,
 				1E943F5E1B7DE67B0029FE74 /* logo_750_1334.png in Resources */,
 				1E827BD91B941337008F3F08 /* ImageSelectedSmallOn.png in Resources */,
@@ -4983,6 +4974,7 @@
 				1EC73C311B5F9D63008B39EA /* home5.png in Resources */,
 				1E7995131BC758560099CFF9 /* NewsRecommendCellView.xib in Resources */,
 				1E827BE71B941337008F3F08 /* UIBarButtonItemArrowRight@3x.png in Resources */,
+				1E1CFA231BD72F5E0005653D /* ServiceDetailMoreInfoView.xib in Resources */,
 				1EC73C321B5F9D63008B39EA /* home6.png in Resources */,
 				1E827BD21B941337008F3F08 /* ImageSelectedOff@3x.png in Resources */,
 				1E8017371BB3CDC900B6C352 /* NewsViewController.xib in Resources */,
@@ -4990,7 +4982,6 @@
 				1E0B7B611B70A9A900A58AD4 /* ProjectResources.bundle in Resources */,
 				1E8EFD061B68782300D00808 /* CommentListViewSegmentCell.xib in Resources */,
 				1E79956F1BCD25860099CFF9 /* LoveHouseListView.xib in Resources */,
-				1E76003A1B5605F900DF0972 /* ServiceMoreDetailViewController.xib in Resources */,
 				1E80170E1BB006EF00B6C352 /* HomeViewNewsCell.xib in Resources */,
 				1E7995281BC7656C0099CFF9 /* ParentingStrategyDetailViewController.xib in Resources */,
 				1E7994E71BC650830099CFF9 /* ActivityView.xib in Resources */,
@@ -5121,6 +5112,7 @@
 				1E3D8D501B4BF4A100275C35 /* GPageCache.m in Sources */,
 				1E3D8CE01B4BF4A100275C35 /* IcsonCategories.m in Sources */,
 				1E3D8D7C1B4BF4A100275C35 /* AFURLResponseSerialization.m in Sources */,
+				1E1CFA211BD72F4C0005653D /* ServiceDetailMoreInfoView.m in Sources */,
 				1EC4A1041B5CCC8F00206BB9 /* KTCSearchView.m in Sources */,
 				1E0B7B261B6F6FB100A58AD4 /* NSString+XXTEA.m in Sources */,
 				1EC4A0C41B5914FB00206BB9 /* StoreDetailViewActiveCell.m in Sources */,
@@ -5143,6 +5135,7 @@
 				1EA8B6BB1B637FC000F90688 /* OrderListModel.m in Sources */,
 				1E0B7AB81B6F67B800A58AD4 /* GTabView.m in Sources */,
 				1E827B8A1B93E7B3008F3F08 /* AUIPhotoBrowserViewController.m in Sources */,
+				1E1CFA2C1BD8E1880005653D /* ServiceDetailSegmentCell.m in Sources */,
 				1E8017191BB1052500B6C352 /* UINavigationBar+BackgroundColor.m in Sources */,
 				1E0B7B081B6F6C1400A58AD4 /* SaiDanCommentView.m in Sources */,
 				1E943E8F1B71E7CD0029FE74 /* CheckFirstInstalDataManager.m in Sources */,
@@ -5308,7 +5301,6 @@
 				1E0B7B4B1B6F891100A58AD4 /* GBtnMatrix.m in Sources */,
 				1E827C731B94144E008F3F08 /* README.md in Sources */,
 				1E827CB91B9BD9B2008F3F08 /* CouponListView.m in Sources */,
-				1E943ED01B75AFAB0029FE74 /* ServiceOwnerStoreModel.m in Sources */,
 				1EC73C4E1B60CCB2008B39EA /* ParentingStrategyViewCell.m in Sources */,
 				1E0B7A791B6F67B800A58AD4 /* AUIBannerScrollView.m in Sources */,
 				1E943EA91B7212660029FE74 /* SFHFKeychainUtils.m in Sources */,
@@ -5442,7 +5434,6 @@
 				1E3D8CDF1B4BF4A100275C35 /* IcsonBaseCategory.m in Sources */,
 				1E8017081BB006D100B6C352 /* HomeViewWholeImageNewsCell.m in Sources */,
 				1E827B7A1B9064E2008F3F08 /* KTCAnnotationTipDestinationView.m in Sources */,
-				1E7600391B5605F900DF0972 /* ServiceMoreDetailViewController.m in Sources */,
 				1E827B7F1B918637008F3F08 /* AUIImageGridView.m in Sources */,
 				1E3D8D851B4BF4A100275C35 /* ASIDownloadCache.m in Sources */,
 				1E7994EB1BC650B70099CFF9 /* ActivityViewCell.m in Sources */,
@@ -5452,7 +5443,6 @@
 				1E0B7B3D1B6F849600A58AD4 /* FeedbackImgUploadManager.m in Sources */,
 				1E0B7A941B6F67B800A58AD4 /* GCheckCell.m in Sources */,
 				1E3D8D4A1B4BF4A100275C35 /* DDMultiFormatter.m in Sources */,
-				1E2D39E51B5531DA003BABE1 /* ServiceMoreDetailView.m in Sources */,
 				1EC4A10D1B5CCCFF00206BB9 /* KTCSearchHistoryView.m in Sources */,
 				1E3D8CDC1B4BF4A100275C35 /* IcsonCounty.m in Sources */,
 				1E80170D1BB006EF00B6C352 /* HomeViewNewsCell.m in Sources */,

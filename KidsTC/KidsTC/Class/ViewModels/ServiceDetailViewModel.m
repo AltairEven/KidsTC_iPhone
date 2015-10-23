@@ -15,7 +15,15 @@
 
 @property (nonatomic, strong) HttpRequestClient *loadServiceDetailRequest;
 
+@property (nonatomic, strong) HttpRequestClient *loadIntroductionRequest;
+
 @property (nonatomic, strong) HttpRequestClient *addToSettlementRequest;
+
+- (void)loadIntroduction;
+
+- (void)loadIntroductionSucceed:(NSDictionary *)data;
+
+- (void)loadIntroductionFailed:(NSError *)error;
 
 - (void)loadDetailSucceed:(NSDictionary *)data;
 
@@ -48,6 +56,32 @@
 }
 
 - (void)loadDetailFailed:(NSError *)error {
+}
+
+- (void)loadIntroduction {
+    if (!self.loadIntroductionRequest) {
+        self.loadIntroductionRequest = [HttpRequestClient clientWithUrlAliasName:@"PRODUCT_GET_DESC"];
+    }
+    __weak ServiceDetailViewModel *weakSelf = self;
+    [weakSelf.loadIntroductionRequest startHttpRequestWithParameter:[NSDictionary dictionaryWithObject:self.detailModel.serviceId forKey:@"pid"] success:^(HttpRequestClient *client, NSDictionary *responseData) {
+        [weakSelf loadIntroductionSucceed:responseData];
+    } failure:^(HttpRequestClient *client, NSError *error) {
+        [weakSelf loadIntroductionFailed:error];
+    }];
+}
+
+- (void)loadIntroductionSucceed:(NSDictionary *)data {
+    NSString *htmlString = [data objectForKey:@"data"];
+    if ([htmlString isKindOfClass:[NSString class]]) {
+        if ([htmlString length] > 0) {
+            self.detailModel.introductionHtmlString = htmlString;
+            [self.view setIntroductionHtmlString:htmlString];
+        }
+    }
+}
+
+- (void)loadIntroductionFailed:(NSError *)error {
+    
 }
 
 #pragma mark Public methods
@@ -135,6 +169,21 @@
             }
         }];
     }
+}
+
+
+
+- (void)resetMoreInfoViewWithViewTag:(ServiceDetailMoreInfoViewTag)viewTag {
+    if (viewTag == ServiceDetailMoreInfoViewTagIntroduction && [self.detailModel.introductionHtmlString length] == 0) {
+        [self loadIntroduction];
+    }
+}
+
+#pragma mark Super methods
+
+- (void)stopUpdateData {
+    [self.loadServiceDetailRequest cancel];
+    [self.addToSettlementRequest cancel];
 }
 
 

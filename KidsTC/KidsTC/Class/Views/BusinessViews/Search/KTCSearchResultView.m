@@ -43,7 +43,6 @@ static NSString *const kStoreCellIdentifier = @"kStoreCellIdentifier";
 @property (nonatomic, strong) KTCSearchAreaFilterView *areaFilterView;
 @property (nonatomic, strong) KTCSearchSortFilterView *sortFilterView;
 //list
-@property (weak, nonatomic) IBOutlet UIView *listBG;
 @property (weak, nonatomic) IBOutlet ServiceListView *serviceTable;
 @property (weak, nonatomic) IBOutlet StoreListView *storeTable;
 @property (weak, nonatomic) IBOutlet UIButton *locationButton;

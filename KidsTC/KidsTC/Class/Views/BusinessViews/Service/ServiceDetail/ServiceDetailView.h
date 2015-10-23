@@ -8,15 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ServiceDetailModel.h"
+#import "ServiceDetailMoreInfoView.h"
 
 #define PULL_THRESHOLD (120)
-
-typedef enum {
-    ServiceDetailSubviewSectionTop,
-    ServiceDetailSubviewSectionDescription,
-    ServiceDetailSubviewSectionStore,
-    ServiceDetailSubviewSectionReviews
-}ServiceDetailViewSection;
 
 @class ServiceDetailView;
 
@@ -28,13 +22,7 @@ typedef enum {
 
 @protocol ServiceDetailViewDelegate <NSObject>
 
-- (void)didPulledAtFooterViewOnServiceDetailView:(ServiceDetailView *)detailView;
-
-- (void)didClickedGoIntoStoreButton;
-
-- (void)didClickedMoreStoresButton;
-
-- (void)didClickedCheckReviewsButton;
+- (void)serviceDetailView:(ServiceDetailView *)detailView didChangedMoreInfoViewTag:(ServiceDetailMoreInfoViewTag)viewTag;
 
 @end
 
@@ -43,8 +31,8 @@ typedef enum {
 @property (nonatomic, assign) id<ServiceDetailViewDataSource> dataSource;
 @property (nonatomic, assign) id<ServiceDetailViewDelegate> delegate;
 
-- (void)reloadData;
+- (void)setIntroductionHtmlString:(NSString *)htmlString;
 
-- (void)resetStoreSection;
+- (void)reloadData;
 
 @end

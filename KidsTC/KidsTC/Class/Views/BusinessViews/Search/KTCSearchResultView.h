@@ -57,6 +57,8 @@ typedef enum {
 
 @interface KTCSearchResultView : UIView
 
+@property (weak, nonatomic) IBOutlet UIView *listBG;
+
 @property (nonatomic, assign) id<KTCSearchResultViewDataSource> dataSource;
 @property (nonatomic, assign) id<KTCSearchResultViewDelegate> delegate;
 

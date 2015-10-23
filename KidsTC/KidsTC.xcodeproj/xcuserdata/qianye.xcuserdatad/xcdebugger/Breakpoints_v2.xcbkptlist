@@ -19,28 +19,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "KidsTC/Class/ViewControllers/PhotoBrowse/PhotosBrowserController.m"
-            timestampString = "462678265.77696"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "-initWithImageUrlStringsArray:imageIndex:finish:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "KidsTC/Class/TecFramework/HttpRequest/HttpRequestClient.m"
-            timestampString = "466591783.557307"
+            timestampString = "467209679.954587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "392"
-            endingLineNumber = "392"
+            startingLineNumber = "373"
+            endingLineNumber = "373"
             landmarkName = "-uploadImageWithData:success:failure:"
             landmarkType = "5">
          </BreakpointContent>
@@ -52,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KidsTC/Class/TecFramework/HttpRequest/HttpRequestClient.m"
-            timestampString = "466591783.557307"
+            timestampString = "467209681.775888"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "429"
-            endingLineNumber = "429"
+            startingLineNumber = "381"
+            endingLineNumber = "381"
             landmarkName = "-uploadImageWithData:success:failure:"
             landmarkType = "5">
          </BreakpointContent>
@@ -67,13 +51,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "KidsTC/Class/Views/BusinessViews/Order/OrderDetailView.m"
-            timestampString = "466423563.372639"
+            filePath = "KidsTC/Class/TecFramework/HttpRequest/HttpRequestClient.m"
+            timestampString = "467209692.482029"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "261"
-            endingLineNumber = "261"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            startingLineNumber = "432"
+            endingLineNumber = "432"
+            landmarkName = "-uploadImageWithData:success:failure:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -83,13 +67,45 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "KidsTC/Class/ViewControllers/TabBarControllers/HomeViewController.m"
-            timestampString = "466932584.596099"
+            filePath = "KidsTC/Class/TecFramework/HttpRequest/HttpRequestClient.m"
+            timestampString = "467209704.36327"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "247"
-            endingLineNumber = "247"
-            landmarkName = "-userRoleHasChanged:"
+            startingLineNumber = "269"
+            endingLineNumber = "269"
+            landmarkName = "-startHttpRequestWithSuccess:failure:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KidsTC/Class/TecFramework/HttpRequest/HttpRequestClient.m"
+            timestampString = "467258210.809015"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "203"
+            endingLineNumber = "203"
+            landmarkName = "-startHttpRequestWithSuccess:failure:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "KidsTC/Class/TecFramework/HttpRequest/HttpRequestClient.m"
+            timestampString = "467258212.563614"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
+            landmarkName = "-startHttpRequestWithSuccess:failure:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

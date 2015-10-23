@@ -22,4 +22,6 @@
 
 - (void)addOrRemoveFavouriteWithSucceed:(void (^)(NSDictionary *data))succeed failure:(void (^)(NSError *error))failure;
 
+- (void)resetMoreInfoViewWithViewTag:(ServiceDetailMoreInfoViewTag)viewTag;
+
 @end

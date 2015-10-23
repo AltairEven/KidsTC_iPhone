@@ -40,13 +40,8 @@ static GAlertLoadingView *_sharedAlertLoadingView;
 		[self sendSubviewToBack: bgView];
 
 		centerView = [[UIView alloc] initWithFrame: CGRectMake(0.0, 0.0, 100.0, 100.0)];
-		centerView.layer.cornerRadius = 5.0;
-
-		indicatorView = [[GActivityIndicatorView alloc] initWithFrame: CGRectMake(0.0, 0.0, 100.0, 100.0)];
-		indicatorView.delegate = self;
-		[indicatorView setCenter: CGPointMake(50.0, 50.0)];
-		[centerView addSubview: indicatorView];
-		[self addSubview: centerView];
+        centerView.layer.cornerRadius = 5.0;
+        [self addSubview: centerView];
     }
     return self;
 }
@@ -60,20 +55,32 @@ static GAlertLoadingView *_sharedAlertLoadingView;
 	self.frame = CGRectMake(0.0, 0.0, wSize.width, wSize.height);
 	bgView.frame = CGRectMake(0.0, 0.0, wSize.width, wSize.height);
 	[w addSubview: self];
-	[w bringSubviewToFront: self];
+    [w bringSubviewToFront: self];
+    
+    indicatorView = [[GActivityIndicatorView alloc] initWithFrame: CGRectMake(0.0, 0.0, 100.0, 100.0)];
+    indicatorView.delegate = self;
+    [indicatorView setCenter: CGPointMake(50.0, 50.0)];
+    [centerView addSubview: indicatorView];
 
-	[centerView setCenter: CGPointMake(wSize.width / 2.0, wSize.height / 2.0)];
+    [centerView setCenter: CGPointMake(wSize.width / 2.0, wSize.height / 2.0)];
 	[indicatorView startAnimating];
 }
 
 - (void)showInView:(UIView*)viewTemp
 {
-	[self setBackgroundColor: [UIColor clearColor]];	
+	[self setBackgroundColor: [UIColor clearColor]];
+    
 	CGSize wSize = viewTemp.frame.size;
 	self.frame = CGRectMake(0.0, 0.0, wSize.width, wSize.height);
 	bgView.frame = CGRectMake(0.0, 0.0, wSize.width, wSize.height);
 	[viewTemp addSubview: self];
-	[viewTemp bringSubviewToFront: self];
+    [viewTemp bringSubviewToFront: self];
+    
+    indicatorView = [[GActivityIndicatorView alloc] initWithFrame: CGRectMake(0.0, 0.0, 100.0, 100.0)];
+    indicatorView.delegate = self;
+    [indicatorView setCenter: CGPointMake(50.0, 50.0)];
+    [centerView addSubview: indicatorView];
+    
 	[centerView setCenter: CGPointMake(wSize.width / 2.0, wSize.height / 2.0)];
 	[indicatorView startAnimating];
 }
@@ -82,6 +89,8 @@ static GAlertLoadingView *_sharedAlertLoadingView;
 {
 	[indicatorView stopAnimating];
 	[self removeFromSuperview];
+    [indicatorView removeFromSuperview];
+    indicatorView = nil;
 }
 
 - (void)hideWithCompletitionBlock:(CompletitionAfterHideBlock)b

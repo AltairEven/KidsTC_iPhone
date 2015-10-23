@@ -486,6 +486,19 @@ static BOOL bLoadWebImage = YES;
 }
 
 
++ (CGFloat)heightForLabelWithWidth:(CGFloat)width LineBreakMode:(NSLineBreakMode)mode Font:(UIFont *)font topGap:(CGFloat)tGap bottomGap:(CGFloat)bGap maxLine:(NSUInteger)line andText:(NSString *)text {
+    if ([text length] == 0) {
+        return 0;
+    }
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, font.pointSize)];
+    [label setLineBreakMode:mode];
+    [label setFont:font];
+    [label setText:text];
+    CGFloat height = [label sizeToFitWithMaximumNumberOfLines:line] + tGap + bGap;
+    return height;
+}
+
+
 + (void)resetLineView:(UIView *)view withLayoutAttribute:(NSLayoutAttribute)attribute {
     NSArray *leftBorderConstraintsArray = [view constraints];
     for (NSLayoutConstraint *constraint in leftBorderConstraintsArray) {

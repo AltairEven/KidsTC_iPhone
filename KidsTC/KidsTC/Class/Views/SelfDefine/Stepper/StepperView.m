@@ -39,6 +39,7 @@
 //    [self addSubview:_inputFieldBg];
     
     _inputField = [[UITextField alloc] initWithFrame:CGRectMake(STEPPER_BTN_WIDTH, 0, STEPPER_TEXT_WIDTH, STEPPER_HEIGHT)];
+    [_inputField setBackgroundColor:[UIColor clearColor]];
     _inputField.textAlignment = NSTextAlignmentCenter;
     _inputField.keyboardType = UIKeyboardTypeNumberPad;
     _inputField.delegate = self;

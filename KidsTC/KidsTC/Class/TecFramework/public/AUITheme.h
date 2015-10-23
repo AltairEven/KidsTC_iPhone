@@ -24,6 +24,8 @@
 
 @property (nonatomic, strong) UIColor *lightTextColor; //字体浅色
 
+@property (nonatomic, strong) UIColor *highlightTextColor; //字体高亮色
+
 @property (nonatomic, strong) UIColor *buttonBGColor_Normal; //按钮背景色（普通）
 
 @property (nonatomic, strong) UIColor *buttonBGColor_Highlight; //按钮背景色（高亮）
