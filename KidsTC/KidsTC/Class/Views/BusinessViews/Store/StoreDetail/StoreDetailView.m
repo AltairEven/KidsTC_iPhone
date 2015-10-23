@@ -635,10 +635,19 @@ static NSString *const kListCellIdentifier = @"kListCellIdentifier";
     
     [self.starView setStarNumber:self.detailModel.starNumber];
     
-    [self.appointmentLabel setText:[NSString stringWithFormat:@"已有%lu人预约", (unsigned long)(self.detailModel.appointmentNumber)]];
+    NSString *appointmentCount = [NSString stringWithFormat:@"%lu", (unsigned long)self.detailModel.appointmentNumber];
+    NSString *wholeString = [NSString stringWithFormat:@"%@预约", appointmentCount];
+    NSMutableAttributedString *labelString = [[NSMutableAttributedString alloc] initWithString:wholeString];
+    NSDictionary *attribute = [NSDictionary dictionaryWithObject:[AUITheme theme].highlightTextColor forKey:NSForegroundColorAttributeName];
+    [labelString setAttributes:attribute range:NSMakeRange(0, [appointmentCount length])];
+    [self.appointmentLabel setAttributedText:labelString];
     [self.appointmentLabel sizeOfSizeToFitWithMaximumNumberOfLines:1];
     
-    [self.reviewLabel setText:[NSString stringWithFormat:@"%lu人评价", (unsigned long)(self.detailModel.commentNumber)]];
+    NSString *commentCount = [NSString stringWithFormat:@"%lu", (unsigned long)self.detailModel.commentNumber];
+    wholeString = [NSString stringWithFormat:@"%@评价", commentCount];
+    labelString = [[NSMutableAttributedString alloc] initWithString:wholeString];
+    [labelString setAttributes:attribute range:NSMakeRange(0, [commentCount length])];
+    [self.reviewLabel setAttributedText:labelString];
     [self.reviewLabel sizeOfSizeToFitWithMaximumNumberOfLines:1];
     
     [self.topCell layoutIfNeeded];

@@ -7,7 +7,6 @@
 //
 
 #import "GViewController.h"
-#import <BaiduMapAPI/BMapKit.h>
 
 typedef enum {
     KTCMapTypeLocate,
