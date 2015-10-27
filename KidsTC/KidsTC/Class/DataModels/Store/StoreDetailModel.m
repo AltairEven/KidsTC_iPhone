@@ -26,6 +26,7 @@
         }
         self.imageUrls = [NSArray arrayWithArray:tempArray];
     }
+    self.bannerRatio = 0.7;
     self.storeName = [data objectForKey:@"storeName"];
     self.starNumber = [[data objectForKey:@"level"] integerValue];
     self.appointmentNumber = [[data objectForKey:@"bookNum"] integerValue];
@@ -66,40 +67,51 @@
         }
         self.activeModelsArray = [NSArray arrayWithArray:tempArray];
     }
-    //tuan
+    //hot recommend
     NSArray *tuans = [data objectForKey:@"tuan"];
     if ([tuans isKindOfClass:[NSArray class]]) {
         NSMutableArray *tempArray = [[NSMutableArray alloc] init];
         for (NSDictionary *tuanDic in tuans) {
-            StoreTuanModel *model = [[StoreTuanModel alloc] initWithRawData:tuanDic];
+            StoreDetailHotRecommendModel *model = [[StoreDetailHotRecommendModel alloc] initWithRawData:tuanDic];
             if (model) {
                 [tempArray addObject:model];
             }
         }
-        self.tuanModelsArray = [NSArray arrayWithArray:tempArray];
+        self.hotRecommendServiceArray = [NSArray arrayWithArray:tempArray];
     }
-    //service
-    NSArray *services = [data objectForKey:@"serve"];
-    if ([services isKindOfClass:[NSArray class]]) {
-        NSMutableArray *tempArray = [[NSMutableArray alloc] initWithArray:services];
-        if ([services count] % 2 != 0) {
-            //补齐
-            NSDictionary *fixDic = [services lastObject];
-            [tempArray addObject:fixDic];
-        }
-        services = [NSArray arrayWithArray:tempArray];
-        [tempArray removeAllObjects];
-        for (NSDictionary *serviceDic in services) {
-            ServiceListItemModel *model = [[ServiceListItemModel alloc] initWithRawData:serviceDic];
-            model.serviceName = [serviceDic objectForKey:@"title"];
-            if (model) {
-                [tempArray addObject:model];
-            }
-        }
-        self.serviceModelsArray = [NSArray arrayWithArray:tempArray];
-    }
+    //recommend
+    self.recommenderFaceImageUrl = [NSURL URLWithString:[data objectForKey:@"recommendImgUrl"]];
+    self.recommenderName = [data objectForKey:@"recommendName"];
+    self.recommendString = [data objectForKey:@"recommendContent"];
+    self.recommenderFaceImageUrl = [self.imageUrls firstObject];
+    self.recommenderName = @"小河马";
+    self.recommendString = @"小河马爱洗澡，萌萌哒满地跑，一不小心摔一跤，呜啊呜啊哭又闹。河马妈妈来看到，二话不说拿棍捣，小河马被打屁了，哈哈哈哈真搞笑。";
     //brief
     self.storeBrief = [data objectForKey:@"breif"];
+    //comments
+    NSArray *comments = [data objectForKey:@"comment"];
+    if ([comments isKindOfClass:[NSArray class]]) {
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        for (NSDictionary *commentDic in comments) {
+            CommentListItemModel *model = [[CommentListItemModel alloc] initWithRawData:commentDic];
+            if (model) {
+                [tempArray addObject:model];
+            }
+        }
+        self.commentItemsArray = [NSArray arrayWithArray:tempArray];
+    }
+    //nearby
+    NSArray *nearbys = [data objectForKey:@"nearby"];
+    if ([nearbys isKindOfClass:[NSArray class]]) {
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        for (NSDictionary *nearbyDic in nearbys) {
+            StoreDetailNearbyModel *model = [[StoreDetailNearbyModel alloc] initWithRawData:nearbyDic];
+            if (model) {
+                [tempArray addObject:model];
+            }
+        }
+        self.nearbyFacilities = [NSArray arrayWithArray:tempArray];
+    }
     //brothers
     NSArray *brothers = [data objectForKey:@"broStore"];
     if ([brothers isKindOfClass:[NSArray class]]) {
@@ -120,6 +132,38 @@
         model.activities = self.activeModelsArray;
         self.brotherStores = [NSArray arrayWithObject:model];
     }
+    //services
+    NSArray *services = [data objectForKey:@"serve"];
+    if ([services isKindOfClass:[NSArray class]]) {
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        for (NSDictionary *serviceDic in services) {
+            StoreOwnedServiceModel *model = [[StoreOwnedServiceModel alloc] initWithRawData:serviceDic];
+            if (model) {
+                [tempArray addObject:model];
+            }
+        }
+        self.serviceModelsArray = [NSArray arrayWithArray:tempArray];
+    }
+}
+
+- (CGFloat)topCellHeight {
+    CGFloat height = self.bannerRatio * SCREEN_WIDTH;
+    height += [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 20 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:17] topGap:10 bottomGap:10 maxLine:2 andText:self.storeName];
+    height += 40;
+    return height;
+}
+
+- (CGFloat)recommendCellHeight {
+    CGFloat height = [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 10 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:13] topGap:10 bottomGap:10 maxLine:0 andText:self.recommendString];
+    if (height < 80) {
+        height = 80;
+    }
+    
+    return height;
+}
+
+- (CGFloat)briefCellHeight {
+    return [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 10 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:13] topGap:10 bottomGap:10 maxLine:0 andText:self.storeBrief];
 }
 
 

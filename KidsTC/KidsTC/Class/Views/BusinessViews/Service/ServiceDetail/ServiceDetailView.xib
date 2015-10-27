@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -37,8 +37,8 @@
                 <outlet property="priceDescriptionLabel" destination="rRJ-I7-DXa" id="18F-qT-sd5"/>
                 <outlet property="priceView" destination="gOc-Ty-LnP" id="W05-th-x5x"/>
                 <outlet property="recommendCell" destination="ePY-Lg-b3E" id="YxE-fY-94d"/>
+                <outlet property="recommendFaceImageView" destination="04l-xZ-wwa" id="qGd-RV-5Cr"/>
                 <outlet property="recommendLabel" destination="2mJ-YK-Uz3" id="bbu-tD-RAS"/>
-                <outlet property="recommentFaceImageView" destination="04l-xZ-wwa" id="mdh-wr-Yjx"/>
                 <outlet property="scrollView" destination="Zag-Ac-xUj" id="Oja-ZQ-KA2"/>
                 <outlet property="serviceDescriptionLabel" destination="DOn-mU-Dnq" id="Y5x-mT-6fX"/>
                 <outlet property="serviceNameLabel" destination="GnX-9g-l0a" id="fuP-vE-df2"/>

@@ -10,9 +10,6 @@
 
 @interface StoreDetailTitleCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *mainTitleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *subTitleLabel;
-
 - (void)resetWithMainTitle:(NSString *)mainTitle subTitle:(NSString *)subTitle;
 
 + (CGFloat)cellHeight;

@@ -7,11 +7,10 @@
 //
 
 #import "StoreMoreDetailViewController.h"
-#import "StoreMoreDetailView.h"
 
 @interface StoreMoreDetailViewController ()
 
-@property (weak, nonatomic) IBOutlet StoreMoreDetailView *moreDetailView;
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @property (nonatomic, copy) NSString *storeId;
 
@@ -26,7 +25,7 @@
 @implementation StoreMoreDetailViewController
 
 - (instancetype)initWithStoreId:(NSString *)storeId {
-    self = [super initWithNibName:@"ServiceMoreDetailViewController" bundle:nil];
+    self = [super initWithNibName:@"StoreMoreDetailViewController" bundle:nil];
     if (self) {
         self.storeId = storeId;
         self.loadDetailRequest = [HttpRequestClient clientWithUrlAliasName:@"STORE_GET_DESC"];
@@ -38,6 +37,8 @@
     [super viewDidLoad];
     _navigationTitle = @"门店详情";
     // Do any additional setup after loading the view from its nib.
+    
+    [self.view setBackgroundColor:[AUITheme theme].globalBGColor];
     __weak StoreMoreDetailViewController *weakSelf = self;
     [weakSelf.loadDetailRequest startHttpRequestWithParameter:[NSDictionary dictionaryWithObject:self.storeId forKey:@"storeno"] success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [weakSelf loadDetailSucceed:responseData];
@@ -50,7 +51,7 @@
     NSString *dataString = [data objectForKey:@"data"];
     if ([dataString isKindOfClass:[NSString class]] && [dataString length] > 0) {
         NSString *htmlString = [NSString stringWithFormat:@"<html>%@</html>", dataString];
-        [self.moreDetailView setHtmlString:htmlString];
+        [self.webView loadHTMLString:htmlString baseURL:nil];
     }
 }
 

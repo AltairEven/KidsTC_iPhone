@@ -8,11 +8,21 @@
 
 #import "StoreDetailTitleCell.h"
 
+@interface StoreDetailTitleCell ()
+
+@property (weak, nonatomic) IBOutlet UIView *tagView;
+@property (weak, nonatomic) IBOutlet UILabel *mainTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *subTitleLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *arrowImageView;
+
+@end
+
 @implementation StoreDetailTitleCell
 
 - (void)awakeFromNib {
     // Initialization code
     [self.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.tagView setBackgroundColor:[AUITheme theme].globalThemeColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -23,7 +33,14 @@
 
 - (void)resetWithMainTitle:(NSString *)mainTitle subTitle:(NSString *)subTitle {
     [self.mainTitleLabel setText:mainTitle];
-    [self.subTitleLabel setText:subTitle];
+    if ([subTitle length] > 0) {
+        [self.arrowImageView setHidden:NO];
+        [self.subTitleLabel setHidden:NO];
+        [self.subTitleLabel setText:subTitle];
+    } else {
+        [self.arrowImageView setHidden:YES];
+        [self.subTitleLabel setHidden:YES];
+    }
 }
 
 

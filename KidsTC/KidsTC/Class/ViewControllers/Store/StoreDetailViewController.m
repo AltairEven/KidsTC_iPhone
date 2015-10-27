@@ -70,29 +70,17 @@
     NSLog(@"Clicked Address");
 }
 
-- (void)didClickedActiveOnStoreDetailView:(StoreDetailView *)detailView {
+- (void)didClickedActiveOnStoreDetailView:(StoreDetailView *)detailView atIndex:(NSUInteger)index {
     
 }
 
-- (void)didClickedAllTuanOnStoreDetailView:(StoreDetailView *)detailView {
+- (void)didClickedAllHotRecommendOnStoreDetailView:(StoreDetailView *)detailView {
+    
 }
 
-- (void)storeDetailView:(StoreDetailView *)detailView didSelectedTuanAtIndex:(NSUInteger)index {
-    StoreTuanModel *tuanModel = [self.viewModel.detailModel.tuanModelsArray objectAtIndex:index];
+- (void)storeDetailView:(StoreDetailView *)detailView didSelectedHotRecommendAtIndex:(NSUInteger)index {
+    StoreDetailHotRecommendModel *tuanModel = [self.viewModel.detailModel.hotRecommendServiceArray objectAtIndex:index];
     ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithServiceId:tuanModel.serviceId channelId:tuanModel.channelId];
-    [controller setHidesBottomBarWhenPushed:YES];
-    [self.navigationController pushViewController:controller animated:YES];
-}
-
-- (void)didClickedAllServiceOnStoreDetailView:(StoreDetailView *)detailView {
-    ServiceListViewController *controller = [[ServiceListViewController alloc] initWithListItemModels:self.viewModel.detailModel.serviceModelsArray];
-    [controller setHidesBottomBarWhenPushed:YES];
-    [self.navigationController pushViewController:controller animated:YES];
-}
-
-- (void)storeDetailView:(StoreDetailView *)detailView didClickedServiceAtIndex:(NSUInteger)index {
-    ServiceListItemModel *serviceModel = [self.viewModel.detailModel.serviceModelsArray objectAtIndex:index];
-    ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithServiceId:serviceModel.identifier channelId:serviceModel.channelId];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
 }
@@ -103,21 +91,21 @@
     [self.navigationController pushViewController:controller animated:YES];
 }
 
+- (void)didClickedMoreReviewOnStoreDetailView:(StoreDetailView *)detailView {
+    CommentListViewController *controller = [[CommentListViewController alloc] initWithIdentifier:self.storeId object:KTCCommentObjectStore];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
 - (void)didClickedMoreBrothersStoreOnStoreDetailView:(StoreDetailView *)detailView {
     StoreListViewController *controller = [[StoreListViewController alloc] initWithStoreListItemModels:self.viewModel.detailModel.brotherStores];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
 }
 
-- (void)didClickedBrotherStoreOnStoreDetailView:(StoreDetailView *)detailView {
-    StoreListItemModel *broStore = [self.viewModel.detailModel.brotherStores firstObject];
-    StoreDetailViewController *controller = [[StoreDetailViewController alloc] initWithStoreId:broStore.identifier];
-    [controller setHidesBottomBarWhenPushed:YES];
-    [self.navigationController pushViewController:controller animated:YES];
-}
-
-- (void)didClickedReviewOnStoreDetailView:(StoreDetailView *)detailView {
-    CommentListViewController *controller = [[CommentListViewController alloc] initWithIdentifier:self.storeId object:KTCCommentObjectStore];
+- (void)storeDetailView:(StoreDetailView *)detailView didClickedServiceAtIndex:(NSUInteger)index {
+    StoreOwnedServiceModel *serviceModel = [self.viewModel.detailModel.serviceModelsArray objectAtIndex:index];
+    ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithServiceId:serviceModel.serviceId channelId:serviceModel.channelId];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
 }

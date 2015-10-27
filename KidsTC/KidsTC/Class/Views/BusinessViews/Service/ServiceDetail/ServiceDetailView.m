@@ -49,7 +49,7 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
 @property (weak, nonatomic) IBOutlet UILabel *noticeLabel;
 
 //recommend
-@property (weak, nonatomic) IBOutlet UIImageView *recommentFaceImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *recommendFaceImageView;
 @property (weak, nonatomic) IBOutlet UILabel *recommendLabel;
 
 
@@ -136,8 +136,8 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
     [self.noticeCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
     
     [self.recommendCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
-    self.recommentFaceImageView.layer.cornerRadius = 30;
-    self.recommentFaceImageView.layer.masksToBounds = YES;
+    self.recommendFaceImageView.layer.cornerRadius = 30;
+    self.recommendFaceImageView.layer.masksToBounds = YES;
     
     self.cellArray = [[NSMutableArray alloc] init];
 }
@@ -458,7 +458,7 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
 }
 
 - (void)configRecommendCell {
-    [self.recommentFaceImageView setImageWithURL:self.detailModel.recommenderFaceImageUrl];
+    [self.recommendFaceImageView setImageWithURL:self.detailModel.recommenderFaceImageUrl];
     
     NSString *recommderName = self.detailModel.recommenderName;
     if ([recommderName length] == 0) {

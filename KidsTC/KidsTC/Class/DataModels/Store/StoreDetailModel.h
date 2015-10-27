@@ -8,15 +8,19 @@
 
 #import <Foundation/Foundation.h>
 #import "ActiveModel.h"
-#import "StoreTuanModel.h"
-#import "ServiceListItemModel.h"
+#import "StoreDetailHotRecommendModel.h"
+#import "StoreOwnedServiceModel.h"
 #import "StoreListItemModel.h"
+#import "CommentListItemModel.h"
+#import "StoreDetailNearbyModel.h"
 
 @interface StoreDetailModel : NSObject
 
 @property (nonatomic, copy) NSString *storeId;
 
 @property (nonatomic, strong) NSArray *imageUrls;
+
+@property (nonatomic, assign) CGFloat bannerRatio;
 
 @property (nonatomic, copy) NSString *storeName;
 
@@ -28,6 +32,30 @@
 
 @property (nonatomic, copy) NSString *phoneNumber;
 
+@property (nonatomic, assign) CLLocationCoordinate2D storeCoordinate;
+
+@property (nonatomic, copy) NSString *storeAddress;
+
+@property (nonatomic, strong) NSArray *activeModelsArray;
+
+@property (nonatomic, strong) NSArray *hotRecommendServiceArray;
+
+@property (nonatomic, strong) NSURL *recommenderFaceImageUrl;
+
+@property (nonatomic, copy) NSString *recommenderName;
+
+@property (nonatomic, copy) NSString *recommendString;
+
+@property (nonatomic, copy) NSString *storeBrief;
+
+@property (nonatomic, strong) NSArray *commentItemsArray;
+
+@property (nonatomic, strong) NSArray *nearbyFacilities;
+
+@property (nonatomic, strong) NSArray *brotherStores;
+
+@property (nonatomic, strong) NSArray *serviceModelsArray;
+
 @property (nonatomic, assign) BOOL isFavourate;
 
 @property (nonatomic, strong) NSDate *appointmentStartDate;
@@ -36,20 +64,12 @@
 
 @property (nonatomic, strong) NSArray *appointmentTimes;
 
-@property (nonatomic, assign) CLLocationCoordinate2D storeCoordinate;
-
-@property (nonatomic, copy) NSString *storeAddress;
-
-@property (nonatomic, strong) NSArray *activeModelsArray;
-
-@property (nonatomic, strong) NSArray *tuanModelsArray;
-
-@property (nonatomic, strong) NSArray *serviceModelsArray;
-
-@property (nonatomic, copy) NSString *storeBrief;
-
-@property (nonatomic, strong) NSArray *brotherStores;
-
 - (void)fillWithRawData:(NSDictionary *)data;
+
+- (CGFloat)topCellHeight;
+
+- (CGFloat)recommendCellHeight;
+
+- (CGFloat)briefCellHeight;
 
 @end

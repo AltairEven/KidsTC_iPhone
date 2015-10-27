@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="161" id="KGk-i7-Jjw" customClass="StoreDetailServiceLinearCell">
+            <rect key="frame" x="0.0" y="0.0" width="100" height="160"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="100" height="159"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uah-JP-nTg">
+                        <rect key="frame" x="0.0" y="0.0" width="100" height="159"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eHf-lZ-ct4">
+                                <rect key="frame" x="5" y="10" width="90" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" secondItem="eHf-lZ-ct4" secondAttribute="width" multiplier="1:1" id="Xdy-oo-lK2"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xi9-Eo-0yi">
+                                <rect key="frame" x="5" y="110" width="90" height="16"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Mm-wI-wuH" customClass="RichPriceView">
+                                <rect key="frame" x="5" y="131" width="30" height="20"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="5Cq-x9-pIY"/>
+                                    <constraint firstAttribute="width" constant="30" id="N7p-bh-aAT"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5Mm-wI-wuH" firstAttribute="top" secondItem="Xi9-Eo-0yi" secondAttribute="bottom" constant="5" id="AwB-kk-N94"/>
+                            <constraint firstItem="Xi9-Eo-0yi" firstAttribute="trailing" secondItem="eHf-lZ-ct4" secondAttribute="trailing" id="GNR-FZ-EqS"/>
+                            <constraint firstAttribute="trailing" secondItem="eHf-lZ-ct4" secondAttribute="trailing" constant="5" id="Ncr-MY-DRc"/>
+                            <constraint firstItem="5Mm-wI-wuH" firstAttribute="leading" secondItem="Xi9-Eo-0yi" secondAttribute="leading" id="O3y-L7-dOW"/>
+                            <constraint firstItem="eHf-lZ-ct4" firstAttribute="leading" secondItem="uah-JP-nTg" secondAttribute="leading" constant="5" id="c5n-DW-jYW"/>
+                            <constraint firstItem="Xi9-Eo-0yi" firstAttribute="leading" secondItem="eHf-lZ-ct4" secondAttribute="leading" id="kQ3-5d-6SV"/>
+                            <constraint firstItem="eHf-lZ-ct4" firstAttribute="top" secondItem="uah-JP-nTg" secondAttribute="top" constant="10" id="pnS-Y3-3Rm"/>
+                            <constraint firstItem="Xi9-Eo-0yi" firstAttribute="top" secondItem="eHf-lZ-ct4" secondAttribute="bottom" constant="10" id="s6G-Zf-Ds2"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="uah-JP-nTg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="JVq-Ie-MCH"/>
+                    <constraint firstItem="uah-JP-nTg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ht3-qp-DmD"/>
+                    <constraint firstAttribute="bottom" secondItem="uah-JP-nTg" secondAttribute="bottom" id="hyx-kY-JNK"/>
+                    <constraint firstAttribute="trailing" secondItem="uah-JP-nTg" secondAttribute="trailing" id="wwY-Ke-fbn"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="bgView" destination="uah-JP-nTg" id="KyL-RA-8rc"/>
+                <outlet property="cellImageView" destination="eHf-lZ-ct4" id="CWB-T0-hye"/>
+                <outlet property="priceView" destination="5Mm-wI-wuH" id="kzF-D7-R2Y"/>
+                <outlet property="titleLabel" destination="Xi9-Eo-0yi" id="IGN-Ab-PDa"/>
+            </connections>
+            <point key="canvasLocation" x="294" y="420.5"/>
+        </tableViewCell>
+    </objects>
+</document>

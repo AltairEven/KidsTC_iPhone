@@ -1,18 +1,17 @@
 //
-//  StoreTuanModel.m
+//  StoreOwnedServiceModel.m
 //  KidsTC
 //
-//  Created by 钱烨 on 8/17/15.
-//  Copyright (c) 2015 KidsTC. All rights reserved.
+//  Created by 钱烨 on 10/27/15.
+//  Copyright © 2015 KidsTC. All rights reserved.
 //
 
-#import "StoreTuanModel.h"
+#import "StoreOwnedServiceModel.h"
 
-@implementation StoreTuanModel
-
+@implementation StoreOwnedServiceModel
 
 - (instancetype)initWithRawData:(NSDictionary *)data {
-    if (!data || ![data isKindOfClass:[NSDictionary class]]) {
+    if (!data) {
         return nil;
     }
     self = [super init];
@@ -23,10 +22,9 @@
         if ([data objectForKey:@"channelId"]) {
             self.channelId = [NSString stringWithFormat:@"%@", [data objectForKey:@"channelId"]];
         }
-        self.tuanName = [data objectForKey:@"title"];
+        self.serviceName = [data objectForKey:@"title"];
         self.imageUrl = [NSURL URLWithString:[data objectForKey:@"imgUrl"]];
         self.price = [[data objectForKey:@"price"] floatValue];
-        self.tuanCount = [[data objectForKey:@"tuanCount"] integerValue];
     }
     return self;
 }

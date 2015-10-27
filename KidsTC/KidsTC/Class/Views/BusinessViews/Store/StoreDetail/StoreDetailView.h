@@ -24,23 +24,19 @@
 
 - (void)didClickedAddressOnStoreDetailView:(StoreDetailView *)detailView;
 
-- (void)didClickedActiveOnStoreDetailView:(StoreDetailView *)detailView;
+- (void)didClickedActiveOnStoreDetailView:(StoreDetailView *)detailView atIndex:(NSUInteger)index;
 
-- (void)didClickedAllTuanOnStoreDetailView:(StoreDetailView *)detailView;
+- (void)didClickedAllHotRecommendOnStoreDetailView:(StoreDetailView *)detailView;
 
-- (void)storeDetailView:(StoreDetailView *)detailView didSelectedTuanAtIndex:(NSUInteger)index;
-
-- (void)didClickedAllServiceOnStoreDetailView:(StoreDetailView *)detailView;
-
-- (void)storeDetailView:(StoreDetailView *)detailView didClickedServiceAtIndex:(NSUInteger)index;
+- (void)storeDetailView:(StoreDetailView *)detailView didSelectedHotRecommendAtIndex:(NSUInteger)index;
 
 - (void)didClickedMoreDetailOnStoreDetailView:(StoreDetailView *)detailView;
 
+- (void)didClickedMoreReviewOnStoreDetailView:(StoreDetailView *)detailView;
+
 - (void)didClickedMoreBrothersStoreOnStoreDetailView:(StoreDetailView *)detailView;
 
-- (void)didClickedBrotherStoreOnStoreDetailView:(StoreDetailView *)detailView;
-
-- (void)didClickedReviewOnStoreDetailView:(StoreDetailView *)detailView;
+- (void)storeDetailView:(StoreDetailView *)detailView didClickedServiceAtIndex:(NSUInteger)index;
 
 @end
 

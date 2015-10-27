@@ -9,40 +9,47 @@
 #import "StoreDetailView.h"
 #import "AUIBannerScrollView.h"
 #import "FiveStarsView.h"
-#import "InsuranceView.h"
+#import "AUISegmentView.h"
 #import "StoreDetailViewActiveCell.h"
-#import "StoreDetailViewServiceCell.h"
 #import "StoreListViewCell.h"
 #import "StoreDetailTitleCell.h"
-#import "StoreDetailTuanCell.h"
+#import "StoreDetailHotRecommendCell.h"
+#import "StoreDetailCommentCell.h"
+#import "StoreDetailServiceLinearCell.h"
 
-#define BannerRatio (0.7)
+
 
 typedef enum {
-    StoreDetailViewSectionTop,
-    StoreDetailViewSectionContact,
-    StoreDetailViewSectionActive,
-    StoreDetailViewSectionTuan,
-    StoreDetailViewSectionService,
-    StoreDetailViewSectionDescription,
-    StoreDetailViewSectionBrother,
-    StoreDetailViewSectionReview
+    StoreDetailViewSectionTop = 0,
+    StoreDetailViewSectionPhone = 1,
+    StoreDetailViewSectionAddress = 2,
+    StoreDetailViewSectionActivity = 3,
+    StoreDetailViewSectionHotRecommend = 4,
+    StoreDetailViewSectionRecommend = 5,
+    StoreDetailViewSectionBrief = 6,
+    StoreDetailViewSectionComment = 7,
+    StoreDetailViewSectionNearby = 8,
+    StoreDetailViewSectionBrother = 9,
+    StoreDetailViewSectionService = 10
 }StoreDetailViewSection;
 
-static NSString *const kActiveCellIdentifier = @"kActiveCellIdentifier";
-static NSString *const kTuanCellIdentifier = @"kTuanCellIdentifier";
-static NSString *const kServiceCellIdentifier = @"kServiceCellIdentifier";
-static NSString *const kTitleCellIdentifier = @"kTitleCellIdentifier";
-static NSString *const kListCellIdentifier = @"kListCellIdentifier";
 
-@interface StoreDetailView () <UITableViewDataSource, UITableViewDelegate, AUIBannerScrollViewDataSource, StoreDetailViewServiceCellDelegate>
+static NSString *const kTitleCellIdentifier = @"kTitleCellIdentifier";
+static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
+static NSString *const kHotRecommendCellIdentifier = @"kHotRecommendCellIdentifier";
+static NSString *const kCommentCellIdentifier = @"kCommentCellIdentifier";
+static NSString *const kBrotherStoreCellIdentifier = @"kBrotherStoreCellIdentifier";
+static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdentifier";
+
+@interface StoreDetailView () <UITableViewDataSource, UITableViewDelegate, AUIBannerScrollViewDataSource, AUISegmentViewDataSource, AUISegmentViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UITableViewCell *topCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *telCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *addressCell;
-@property (strong, nonatomic) IBOutlet UITableViewCell *descriptionCell;
-@property (strong, nonatomic) IBOutlet StoreDetailTitleCell *reviewCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *briefCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *recommendCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *serviceLinearCell;
 
 //banner
 @property (weak, nonatomic) IBOutlet AUIBannerScrollView *bannerScrollView;
@@ -55,23 +62,32 @@ static NSString *const kListCellIdentifier = @"kListCellIdentifier";
 @property (weak, nonatomic) IBOutlet UILabel *telephoneLabel;
 //address
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
-//service
+//commend
+@property (weak, nonatomic) IBOutlet UIView *recommendBGView;
+@property (weak, nonatomic) IBOutlet UIImageView *recommenderFaceImageView;
+@property (weak, nonatomic) IBOutlet UILabel *recommendLabel;
 //description
 @property (weak, nonatomic) IBOutlet UILabel *storeBriefLabel;
 //brothers
+//service
+@property (weak, nonatomic) IBOutlet AUISegmentView *serviceLinearView;
 
-@property (nonatomic, strong) UINib *activeCellNib;
-@property (nonatomic, strong) UINib *tuanCellNib;
-@property (nonatomic, strong) UINib *serviceCellNib;
 @property (nonatomic, strong) UINib *titleCellNib;
-@property (nonatomic, strong) UINib *listCellNib;
+@property (nonatomic, strong) UINib *activityCellNib;
+@property (nonatomic, strong) UINib *hotRecommendCellNib;
+@property (nonatomic, strong) UINib *commentCellNib;
+@property (nonatomic, strong) UINib *brotherStoreCellNib;
+@property (nonatomic, strong) UINib *serviceLinearCellNib;
 
 @property (nonatomic, strong) StoreDetailModel *detailModel;
 
+@property (nonatomic, strong) NSArray *sectionIdentifiersArray;
+
 - (UITableViewCell *)createTableCellWithIdentifier:(NSString *)identifier forTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath;
 
-- (void)configTopCell;
 - (void)configTitleCell:(StoreDetailTitleCell *)cell WithSection:(StoreDetailViewSection)section;
+- (void)configTopCell;
+- (void)configRecommendCell;
 
 @end
 
@@ -113,64 +129,74 @@ static NSString *const kListCellIdentifier = @"kListCellIdentifier";
         [self.tableView setLayoutMargins:UIEdgeInsetsZero];
     }
     
-    if (!self.activeCellNib) {
-        self.activeCellNib = [UINib nibWithNibName:NSStringFromClass([StoreDetailViewActiveCell class]) bundle:nil];
-        [self.tableView registerNib:self.activeCellNib forCellReuseIdentifier:kActiveCellIdentifier];
-    }
-    if (!self.tuanCellNib) {
-        self.tuanCellNib = [UINib nibWithNibName:NSStringFromClass([StoreDetailTuanCell class]) bundle:nil];
-        [self.tableView registerNib:self.tuanCellNib forCellReuseIdentifier:kTuanCellIdentifier];
-    }
-    if (!self.serviceCellNib) {
-        self.serviceCellNib = [UINib nibWithNibName:NSStringFromClass([StoreDetailViewServiceCell class]) bundle:nil];
-        [self.tableView registerNib:self.serviceCellNib forCellReuseIdentifier:kServiceCellIdentifier];
-    }
     if (!self.titleCellNib) {
         self.titleCellNib = [UINib nibWithNibName:NSStringFromClass([StoreDetailTitleCell class]) bundle:nil];
         [self.tableView registerNib:self.titleCellNib forCellReuseIdentifier:kTitleCellIdentifier];
     }
-    if (!self.listCellNib) {
-        self.listCellNib = [UINib nibWithNibName:NSStringFromClass([StoreListViewCell class]) bundle:nil];
-        [self.tableView registerNib:self.listCellNib forCellReuseIdentifier:kListCellIdentifier];
+    if (!self.activityCellNib) {
+        self.activityCellNib = [UINib nibWithNibName:NSStringFromClass([StoreDetailViewActiveCell class]) bundle:nil];
+        [self.tableView registerNib:self.activityCellNib forCellReuseIdentifier:kActivityCellIdentifier];
     }
-}
-
-- (void)reloadData {
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(detailModelForStoreDetailView:)]) {
-        self.detailModel = [self.dataSource detailModelForStoreDetailView:self];
-        [self.tableView reloadData];
-        [self.bannerScrollView reloadData];
+    if (!self.hotRecommendCellNib) {
+        self.hotRecommendCellNib = [UINib nibWithNibName:NSStringFromClass([StoreDetailHotRecommendCell class]) bundle:nil];
+        [self.tableView registerNib:self.hotRecommendCellNib forCellReuseIdentifier:kHotRecommendCellIdentifier];
     }
+    if (!self.commentCellNib) {
+        self.commentCellNib = [UINib nibWithNibName:NSStringFromClass([StoreDetailCommentCell class]) bundle:nil];
+        [self.tableView registerNib:self.commentCellNib forCellReuseIdentifier:kCommentCellIdentifier];
+    }
+    if (!self.brotherStoreCellNib) {
+        self.brotherStoreCellNib = [UINib nibWithNibName:NSStringFromClass([StoreListViewCell class]) bundle:nil];
+        [self.tableView registerNib:self.brotherStoreCellNib forCellReuseIdentifier:kBrotherStoreCellIdentifier];
+    }
+    if (!self.serviceLinearCellNib) {
+        self.serviceLinearCellNib = [UINib nibWithNibName:NSStringFromClass([StoreDetailServiceLinearCell class]) bundle:nil];
+        [self.serviceLinearView registerNib:self.serviceLinearCellNib forCellReuseIdentifier:kServiceLinearCellIdentifier];
+    }
+    
+    [self.serviceLinearView setScrollEnable:YES];
+    [self.serviceLinearView setShowSeparator:NO];
+    self.serviceLinearView.dataSource = self;
+    self.serviceLinearView.delegate = self;
+    
+    [self.recommendCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    self.recommenderFaceImageView.layer.cornerRadius = 30;
+    self.recommenderFaceImageView.layer.masksToBounds = YES;
 }
-
 
 #pragma mark UITableViewDataSource & UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return StoreDetailViewSectionReview + 1;
+    return [self.sectionIdentifiersArray count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    StoreDetailViewSection sectionEnum = (StoreDetailViewSection)[[self.sectionIdentifiersArray objectAtIndex:section] integerValue];
     NSUInteger number = 0;
-    switch (section) {
+    switch (sectionEnum) {
         case StoreDetailViewSectionTop:
         {
             number = 1;
         }
             break;
-        case StoreDetailViewSectionContact:
+        case StoreDetailViewSectionPhone:
         {
-            number = 2;
+            number = 1;
         }
             break;
-        case StoreDetailViewSectionActive:
+        case StoreDetailViewSectionAddress:
+        {
+            number = 1;
+        }
+            break;
+        case StoreDetailViewSectionActivity:
         {
             number = [self.detailModel.activeModelsArray count];
         }
             break;
-        case StoreDetailViewSectionTuan:
+        case StoreDetailViewSectionHotRecommend:
         {
-            NSUInteger count = [self.detailModel.tuanModelsArray count];
+            NSUInteger count = [self.detailModel.hotRecommendServiceArray count];
             if (count > 0) {
                 //include title
                 count ++;
@@ -178,9 +204,20 @@ static NSString *const kListCellIdentifier = @"kListCellIdentifier";
             number = count;
         }
             break;
-        case StoreDetailViewSectionService:
+        case StoreDetailViewSectionRecommend:
         {
-            NSUInteger count = [self.detailModel.serviceModelsArray count] / 2;
+            number = 1;
+        }
+            break;
+        case StoreDetailViewSectionBrief:
+        {
+            //include title
+            number = 2;
+        }
+            break;
+        case StoreDetailViewSectionComment:
+        {
+            NSUInteger count = [self.detailModel.commentItemsArray count];
             if (count > 0) {
                 //include title
                 count ++;
@@ -188,19 +225,22 @@ static NSString *const kListCellIdentifier = @"kListCellIdentifier";
             number = count;
         }
             break;
-        case StoreDetailViewSectionDescription:
+        case StoreDetailViewSectionNearby:
         {
+            //include title
             number = 2;
         }
             break;
         case StoreDetailViewSectionBrother:
         {
+            //include title
             number = 2;
         }
             break;
-        case StoreDetailViewSectionReview:
+        case StoreDetailViewSectionService:
         {
-            number = 1;
+            //include title
+            number = 2;
         }
             break;
         default:
@@ -223,74 +263,73 @@ static NSString *const kListCellIdentifier = @"kListCellIdentifier";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = nil;
-    switch (indexPath.section) {
+    StoreDetailViewSection sectionEnum = (StoreDetailViewSection)[[self.sectionIdentifiersArray objectAtIndex:indexPath.section] integerValue];
+    switch (sectionEnum) {
         case StoreDetailViewSectionTop:
         {
-            [self configTopCell];
             cell = self.topCell;
         }
             break;
-        case StoreDetailViewSectionContact:
+        case StoreDetailViewSectionPhone:
         {
-            switch (indexPath.row) {
-                case 0:
-                {
-                    [self.telephoneLabel setText:self.detailModel.phoneNumber];
-                    cell = self.telCell;
-                }
-                    break;
-                case 1:
-                {
-                    [self.addressLabel setText:self.detailModel.storeAddress];
-                    cell = self.addressCell;
-                }
-                default:
-                    break;
-            }
+            cell = self.telCell;
         }
             break;
-        case StoreDetailViewSectionActive:
+        case StoreDetailViewSectionAddress:
         {
-            cell = [self createTableCellWithIdentifier:kActiveCellIdentifier forTableView:tableView atIndexPath:indexPath];
+            cell = self.addressCell;
+        }
+            break;
+        case StoreDetailViewSectionActivity:
+        {
+            cell = [self createTableCellWithIdentifier:kActivityCellIdentifier forTableView:tableView atIndexPath:indexPath];
             [((StoreDetailViewActiveCell *)cell) configWithModel:[self.detailModel.activeModelsArray objectAtIndex:indexPath.row]];
         }
             break;
-        case StoreDetailViewSectionTuan:
-        {
-            if (indexPath.row == 0) {
-                cell = [self createTableCellWithIdentifier:kActiveCellIdentifier forTableView:tableView atIndexPath:indexPath];
-                ActiveModel *tuanModel = [[ActiveModel alloc] initWithType:ActiveTypeTuan AndDescription:@"团购"];
-                [((StoreDetailViewActiveCell *)cell) configWithModel:tuanModel];
-            } else {
-                cell = [self createTableCellWithIdentifier:kTuanCellIdentifier forTableView:tableView atIndexPath:indexPath];
-                [((StoreDetailTuanCell *)cell) configWithModel:[self.detailModel.tuanModelsArray objectAtIndex:indexPath.row - 1]];
-            }
-        }
-            break;
-        case StoreDetailViewSectionService:
+        case StoreDetailViewSectionHotRecommend:
         {
             if (indexPath.row == 0) {
                 cell = [self createTableCellWithIdentifier:kTitleCellIdentifier forTableView:tableView atIndexPath:indexPath];
-                [self configTitleCell:(StoreDetailTitleCell *)cell WithSection:StoreDetailViewSectionService];
+                [self configTitleCell:(StoreDetailTitleCell *)cell WithSection:StoreDetailViewSectionHotRecommend];
             } else {
-                cell = [self createTableCellWithIdentifier:kServiceCellIdentifier forTableView:tableView atIndexPath:indexPath];
-                NSUInteger itemIndex = indexPath.row - 1;
-                ServiceListItemModel *leftModel = [self.detailModel.serviceModelsArray objectAtIndex:itemIndex * 2];
-                ServiceListItemModel *rightModel = [self.detailModel.serviceModelsArray objectAtIndex:(itemIndex * 2) + 1];
-                [((StoreDetailViewServiceCell *)cell) configWithLeftModel:leftModel rightModel:rightModel];
-                ((StoreDetailViewServiceCell *)cell).index = itemIndex;
-                ((StoreDetailViewServiceCell *)cell).delegate = self;
+                cell = [self createTableCellWithIdentifier:kHotRecommendCellIdentifier forTableView:tableView atIndexPath:indexPath];
+                [((StoreDetailHotRecommendCell *)cell) configWithModel:[self.detailModel.hotRecommendServiceArray objectAtIndex:indexPath.row - 1]];
             }
         }
             break;
-        case StoreDetailViewSectionDescription:
+        case StoreDetailViewSectionRecommend:
+        {
+            cell = self.recommendCell;
+        }
+            break;
+        case StoreDetailViewSectionBrief:
         {
             if (indexPath.row == 0) {
                 cell = [self createTableCellWithIdentifier:kTitleCellIdentifier forTableView:tableView atIndexPath:indexPath];
-                [self configTitleCell:(StoreDetailTitleCell *)cell WithSection:StoreDetailViewSectionDescription];
+                [self configTitleCell:(StoreDetailTitleCell *)cell WithSection:StoreDetailViewSectionBrief];
             } else {
-                [self.storeBriefLabel setText:self.detailModel.storeBrief];
-                cell = self.descriptionCell;
+                cell = self.briefCell;
+            }
+        }
+            break;
+        case StoreDetailViewSectionComment:
+        {
+            if (indexPath.row == 0) {
+                cell = [self createTableCellWithIdentifier:kTitleCellIdentifier forTableView:tableView atIndexPath:indexPath];
+                [self configTitleCell:(StoreDetailTitleCell *)cell WithSection:StoreDetailViewSectionBrief];
+            } else {
+                cell = [self createTableCellWithIdentifier:kCommentCellIdentifier forTableView:tableView atIndexPath:indexPath];
+                [((StoreDetailCommentCell *)cell) configWithModel:[self.detailModel.hotRecommendServiceArray objectAtIndex:indexPath.row - 1]];
+            }
+        }
+            break;
+        case StoreDetailViewSectionNearby:
+        {
+            if (indexPath.row == 0) {
+                cell = [self createTableCellWithIdentifier:kTitleCellIdentifier forTableView:tableView atIndexPath:indexPath];
+                [self configTitleCell:(StoreDetailTitleCell *)cell WithSection:StoreDetailViewSectionBrief];
+            } else {
+                cell = self.briefCell;
             }
         }
             break;
@@ -300,15 +339,20 @@ static NSString *const kListCellIdentifier = @"kListCellIdentifier";
                 cell = [self createTableCellWithIdentifier:kTitleCellIdentifier forTableView:tableView atIndexPath:indexPath];
                 [self configTitleCell:(StoreDetailTitleCell *)cell WithSection:StoreDetailViewSectionBrother];
             } else {
-                cell = [self createTableCellWithIdentifier:kListCellIdentifier forTableView:tableView atIndexPath:indexPath];
+                cell = [self createTableCellWithIdentifier:kBrotherStoreCellIdentifier forTableView:tableView atIndexPath:indexPath];
                 StoreListItemModel *model = [self.detailModel.brotherStores firstObject];
                 [((StoreListViewCell *)cell) configWithItemModel:model];
             }
         }
             break;
-        case StoreDetailViewSectionReview:
+        case StoreDetailViewSectionService:
         {
-            cell = self.reviewCell;
+            if (indexPath.row == 0) {
+                cell = [self createTableCellWithIdentifier:kTitleCellIdentifier forTableView:tableView atIndexPath:indexPath];
+                [self configTitleCell:(StoreDetailTitleCell *)cell WithSection:StoreDetailViewSectionService];
+            } else {
+                cell = self.serviceLinearCell;
+            }
         }
             break;
         default:
@@ -321,46 +365,66 @@ static NSString *const kListCellIdentifier = @"kListCellIdentifier";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat height = 0;
-    switch (indexPath.section) {
+    StoreDetailViewSection sectionEnum = (StoreDetailViewSection)[[self.sectionIdentifiersArray objectAtIndex:indexPath.section] integerValue];
+    switch (sectionEnum) {
         case StoreDetailViewSectionTop:
         {
-            height = [self heightForBannerScrollView:self.bannerScrollView] + 80;
+            height = [self.detailModel topCellHeight];
         }
             break;
-        case StoreDetailViewSectionContact:
+        case StoreDetailViewSectionPhone:
         {
             height = self.telCell.frame.size.height;
         }
             break;
-        case StoreDetailViewSectionActive:
+        case StoreDetailViewSectionAddress:
+        {
+            height = self.addressCell.frame.size.height;
+        }
+            break;
+        case StoreDetailViewSectionActivity:
         {
             height = [StoreDetailViewActiveCell cellHeight];
         }
             break;
-        case StoreDetailViewSectionTuan:
+        case StoreDetailViewSectionHotRecommend:
         {
             if (indexPath.row == 0) {
                 height = [StoreDetailTitleCell cellHeight];
             } else {
-                height = [StoreDetailTuanCell cellHeight];
+                height = [StoreDetailHotRecommendCell cellHeight];
             }
         }
             break;
-        case StoreDetailViewSectionService:
+        case StoreDetailViewSectionRecommend:
+        {
+            height = [self.detailModel recommendCellHeight];
+        }
+            break;
+        case StoreDetailViewSectionBrief:
         {
             if (indexPath.row == 0) {
                 height = [StoreDetailTitleCell cellHeight];
             } else {
-                height = [StoreDetailViewServiceCell cellHeight];
+                height = [self.detailModel briefCellHeight];
             }
         }
             break;
-        case StoreDetailViewSectionDescription:
+        case StoreDetailViewSectionComment:
         {
             if (indexPath.row == 0) {
                 height = [StoreDetailTitleCell cellHeight];
             } else {
-                height = self.descriptionCell.frame.size.height;
+                height = [self.detailModel briefCellHeight];
+            }
+        }
+            break;
+        case StoreDetailViewSectionNearby:
+        {
+            if (indexPath.row == 0) {
+                height = [StoreDetailTitleCell cellHeight];
+            } else {
+                height = [self.detailModel briefCellHeight];
             }
         }
             break;
@@ -373,9 +437,13 @@ static NSString *const kListCellIdentifier = @"kListCellIdentifier";
             }
         }
             break;
-        case StoreDetailViewSectionReview:
+        case StoreDetailViewSectionService:
         {
-            height = self.reviewCell.frame.size.height;
+            if (indexPath.row == 0) {
+                height = [StoreDetailTitleCell cellHeight];
+            } else {
+                height = [StoreDetailServiceLinearCell cellHeight];
+            }
         }
             break;
         default:
@@ -385,191 +453,83 @@ static NSString *const kListCellIdentifier = @"kListCellIdentifier";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    CGFloat height = 0;
-    switch (section) {
-        case StoreDetailViewSectionTop:
-        {
-            height = 0.01;
-        }
-        case StoreDetailViewSectionActive:
-        {
-            if ([self.detailModel.activeModelsArray count] > 0) {
-                height = 2.5;
-            } else {
-                height = 0.01;
-            }
-        }
-        case StoreDetailViewSectionTuan:
-        {
-            if ([self.detailModel.tuanModelsArray count] > 0) {
-                height = 2.5;
-            } else {
-                height = 0.01;
-            }
-        }
-            break;
-        case StoreDetailViewSectionService:
-        {
-            if ([self.detailModel.serviceModelsArray count] > 0) {
-                height = 2.5;
-            } else {
-                height = 0.01;
-            }
-        }
-            break;
-        default:
-        {
-            height = 2.5;
-        }
-            break;
+    CGFloat height = 0.01;
+    if (section > 0) {
+        height = 2.5;
     }
     
     return height;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    CGFloat height = 0;
-    switch (section) {
-        case StoreDetailViewSectionActive:
-        {
-            if ([self.detailModel.activeModelsArray count] > 0) {
-                height = 2.5;
-            } else {
-                height = 0.01;
-            }
-        }
-        case StoreDetailViewSectionTuan:
-        {
-            if ([self.detailModel.tuanModelsArray count] > 0) {
-                height = 2.5;
-            } else {
-                height = 0.01;
-            }
-        }
-            break;
-        case StoreDetailViewSectionService:
-        {
-            if ([self.detailModel.serviceModelsArray count] > 0) {
-                height = 2.5;
-            } else {
-                height = 0.01;
-            }
-        }
-            break;
-        default:
-        {
-            height = 2.5;
-        }
-            break;
-    }
+    CGFloat height = 2.5;
     
     return height;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (!self.delegate) {
-        [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    }
-    switch (indexPath.section) {
-        case StoreDetailViewSectionTop:
-        {
-            [tableView deselectRowAtIndexPath:indexPath animated:NO];
-            return;
-        }
-            break;
-        case StoreDetailViewSectionContact:
-        {
-            [tableView deselectRowAtIndexPath:indexPath animated:YES];
-            switch (indexPath.row) {
-                case 0:
-                {
-                    if ([self.delegate respondsToSelector:@selector(didClickedTelephoneOnStoreDetailView:)]) {
-                        [self.delegate didClickedTelephoneOnStoreDetailView:self];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    if (self.delegate) {
+        StoreDetailViewSection sectionEnum = (StoreDetailViewSection)[[self.sectionIdentifiersArray objectAtIndex:indexPath.section] integerValue];
+        switch (sectionEnum) {
+            case StoreDetailViewSectionPhone:
+            {
+                if ([self.delegate respondsToSelector:@selector(didClickedTelephoneOnStoreDetailView:)]) {
+                    [self.delegate didClickedTelephoneOnStoreDetailView:self];
+                }
+            }
+                break;
+            case StoreDetailViewSectionAddress:
+            {
+                if ([self.delegate respondsToSelector:@selector(didClickedAddressOnStoreDetailView:)]) {
+                    [self.delegate didClickedAddressOnStoreDetailView:self];
+                }
+            }
+                break;
+            case StoreDetailViewSectionActivity:
+            {
+                if ([self.delegate respondsToSelector:@selector(didClickedActiveOnStoreDetailView:atIndex:)]) {
+                    [self.delegate didClickedActiveOnStoreDetailView:self atIndex:indexPath.row];
+                }
+            }
+                break;
+            case StoreDetailViewSectionHotRecommend:
+            {
+                if (indexPath.row == 0) {
+                    if ([self.delegate respondsToSelector:@selector(didClickedAllHotRecommendOnStoreDetailView:)]) {
+                        [self.delegate didClickedAllHotRecommendOnStoreDetailView:self];
+                    }
+                } else {
+                    if ([self.delegate respondsToSelector:@selector(storeDetailView:didSelectedHotRecommendAtIndex:)]) {
+                        [self.delegate storeDetailView:self didSelectedHotRecommendAtIndex:indexPath.row - 1];
                     }
                 }
-                    break;
-                case 1:
-                {
-                    if ([self.delegate respondsToSelector:@selector(didClickedAddressOnStoreDetailView:)]) {
-                        [self.delegate didClickedAddressOnStoreDetailView:self];
-                    }
-                }
-                    break;
-                default:
-                    break;
             }
-        }
-            break;
-        case StoreDetailViewSectionActive:
-        {
-            [tableView deselectRowAtIndexPath:indexPath animated:NO];
-            return;
-        }
-            break;
-        case StoreDetailViewSectionTuan:
-        {
-            [tableView deselectRowAtIndexPath:indexPath animated:NO];
-            if (indexPath.row == 0) {
-                [tableView deselectRowAtIndexPath:indexPath animated:YES];
-                if ([self.delegate respondsToSelector:@selector(didClickedAllTuanOnStoreDetailView:)]) {
-                    [self.delegate didClickedAllTuanOnStoreDetailView:self];
+                break;
+            case StoreDetailViewSectionBrief:
+            {
+                if (indexPath.row == 0 && [self.delegate respondsToSelector:@selector(didClickedMoreDetailOnStoreDetailView:)]) {
+                    [self.delegate didClickedMoreDetailOnStoreDetailView:self];
                 }
-            } else {
-                [tableView deselectRowAtIndexPath:indexPath animated:NO];
-                if ([self.delegate respondsToSelector:@selector(storeDetailView:didSelectedTuanAtIndex:)]) {
-                    [self.delegate storeDetailView:self didSelectedTuanAtIndex:indexPath.row - 1];
+            }
+                break;
+            case StoreDetailViewSectionComment:
+            {
+                if ([self.delegate respondsToSelector:@selector(didClickedMoreReviewOnStoreDetailView:)]) {
+                    [self.delegate didClickedMoreReviewOnStoreDetailView:self];
                 }
-                return;
             }
-            return;
-        }
-            break;
-        case StoreDetailViewSectionService:
-        {
-            if (indexPath.row == 0) {
-                [tableView deselectRowAtIndexPath:indexPath animated:YES];
-                if ([self.delegate respondsToSelector:@selector(didClickedAllServiceOnStoreDetailView:)]) {
-                    [self.delegate didClickedAllServiceOnStoreDetailView:self];
-                }
-            } else {
-                [tableView deselectRowAtIndexPath:indexPath animated:NO];
-                return;
-            }
-        }
-            break;
-        case StoreDetailViewSectionDescription:
-        {
-            [tableView deselectRowAtIndexPath:indexPath animated:YES];
-            if ([self.delegate respondsToSelector:@selector(didClickedMoreDetailOnStoreDetailView:)]) {
-                [self.delegate didClickedMoreDetailOnStoreDetailView:self];
-            }
-        }
-            break;
-        case StoreDetailViewSectionBrother:
-        {
-            if (indexPath.row == 0) {
-                [tableView deselectRowAtIndexPath:indexPath animated:YES];
+                break;
+            case StoreDetailViewSectionBrother:
+            {
                 if ([self.delegate respondsToSelector:@selector(didClickedMoreBrothersStoreOnStoreDetailView:)]) {
                     [self.delegate didClickedMoreBrothersStoreOnStoreDetailView:self];
                 }
-            } else {
-                [tableView deselectRowAtIndexPath:indexPath animated:YES];
-                if ([self.delegate respondsToSelector:@selector(didClickedBrotherStoreOnStoreDetailView:)]) {
-                    [self.delegate didClickedBrotherStoreOnStoreDetailView:self];
-                }
             }
+                break;
+            default:
+                break;
         }
-            break;
-        case StoreDetailViewSectionReview:
-        {
-            [tableView deselectRowAtIndexPath:indexPath animated:YES];
-            if ([self.delegate respondsToSelector:@selector(didClickedReviewOnStoreDetailView:)]) {
-                [self.delegate didClickedReviewOnStoreDetailView:self];
-            }
-        }
-            break;
-        default:
-            break;
     }
 }
 
@@ -583,24 +543,32 @@ static NSString *const kListCellIdentifier = @"kListCellIdentifier";
     UIImageView *imageView = nil;
     imageView = [[UIImageView alloc] initWithFrame:frame];
     NSURL *imageUrl = [self.detailModel.imageUrls objectAtIndex:index];
-    if (index == 1) {
-        [imageView setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"home4"]];
-    } else {
-        [imageView setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"detail_banner"]];
-    }
+    [imageView setImageWithURL:imageUrl];
     return imageView;
 }
 
 
 - (CGFloat)heightForBannerScrollView:(AUIBannerScrollView *)scrollView {
-    return SCREEN_WIDTH * BannerRatio;
+    return self.detailModel.bannerRatio * SCREEN_WIDTH;
 }
 
+#pragma mark AUISegmentViewDataSource, & AUISegmentViewDelegate
 
-#pragma mark StoreDetailViewServiceCellDelegate
+- (NSUInteger)numberOfCellsForSegmentView:(AUISegmentView *)segmentView {
+    return [self.detailModel.serviceModelsArray count];
+}
 
+- (UITableViewCell *)segmentView:(AUISegmentView *)segmentView cellAtIndex:(NSUInteger)index {
+    StoreDetailServiceLinearCell *cell =  [[[NSBundle mainBundle] loadNibNamed:@"StoreDetailServiceLinearCell" owner:nil options:nil] objectAtIndex:0];
+    [cell configWithModel:[self.detailModel.serviceModelsArray objectAtIndex:index]];
+    return cell;
+}
 
-- (void)storeDetailViewServiceCell:(StoreDetailViewServiceCell *)cell didClickedServiceAtIndex:(NSUInteger)index {
+- (CGFloat)segmentView:(AUISegmentView *)segmentView cellWidthAtIndex:(NSUInteger)index {
+    return 120;
+}
+
+- (void)segmentView:(AUISegmentView *)segmentView didSelectedAtIndex:(NSUInteger)index {
     if (self.delegate && [self.delegate respondsToSelector:@selector(storeDetailView:didClickedServiceAtIndex:)]) {
         [self.delegate storeDetailView:self didClickedServiceAtIndex:index];
     }
@@ -611,19 +579,19 @@ static NSString *const kListCellIdentifier = @"kListCellIdentifier";
 - (UITableViewCell *)createTableCellWithIdentifier:(NSString *)identifier forTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
     if (!cell) {
-        if ([identifier isEqualToString:kActiveCellIdentifier]) {
-            cell =  [[[NSBundle mainBundle] loadNibNamed:@"StoreDetailViewActiveCell" owner:nil options:nil] objectAtIndex:0];
-        }
-        if ([identifier isEqualToString:kTuanCellIdentifier]) {
-            cell =  [[[NSBundle mainBundle] loadNibNamed:@"StoreDetailTuanCell" owner:nil options:nil] objectAtIndex:0];
-        }
-        if ([identifier isEqualToString:kServiceCellIdentifier]) {
-            cell =  [[[NSBundle mainBundle] loadNibNamed:@"StoreDetailViewServiceCell" owner:nil options:nil] objectAtIndex:0];
-        }
         if ([identifier isEqualToString:kTitleCellIdentifier]) {
             cell =  [[[NSBundle mainBundle] loadNibNamed:@"StoreDetailTitleCell" owner:nil options:nil] objectAtIndex:0];
         }
-        if ([identifier isEqualToString:kListCellIdentifier]) {
+        if ([identifier isEqualToString:kActivityCellIdentifier]) {
+            cell =  [[[NSBundle mainBundle] loadNibNamed:@"StoreDetailViewActiveCell" owner:nil options:nil] objectAtIndex:0];
+        }
+        if ([identifier isEqualToString:kHotRecommendCellIdentifier]) {
+            cell =  [[[NSBundle mainBundle] loadNibNamed:@"StoreDetailHotRecommendCell" owner:nil options:nil] objectAtIndex:0];
+        }
+        if ([identifier isEqualToString:kCommentCellIdentifier]) {
+            cell =  [[[NSBundle mainBundle] loadNibNamed:@"StoreDetailHotCommentCell" owner:nil options:nil] objectAtIndex:0];
+        }
+        if ([identifier isEqualToString:kBrotherStoreCellIdentifier]) {
             cell =  [[[NSBundle mainBundle] loadNibNamed:@"StoreListViewCell" owner:nil options:nil] objectAtIndex:0];
         }
     }
@@ -655,14 +623,24 @@ static NSString *const kListCellIdentifier = @"kListCellIdentifier";
 
 - (void)configTitleCell:(StoreDetailTitleCell *)cell WithSection:(StoreDetailViewSection)section {
     switch (section) {
-        case StoreDetailViewSectionService:
+        case StoreDetailViewSectionHotRecommend:
         {
-            [cell resetWithMainTitle:@"门店服务" subTitle:@"全部服务"];
+            [cell resetWithMainTitle:@"门店热推" subTitle:@"查看更多"];
         }
             break;
-        case StoreDetailViewSectionDescription:
+        case StoreDetailViewSectionBrief:
         {
             [cell resetWithMainTitle:@"门店简介" subTitle:@"详细信息"];
+        }
+            break;
+        case StoreDetailViewSectionComment:
+        {
+            [cell resetWithMainTitle:@"用户评论" subTitle:@"查看更多"];
+        }
+            break;
+        case StoreDetailViewSectionNearby:
+        {
+            [cell resetWithMainTitle:@"门店附近" subTitle:nil];
         }
             break;
         case StoreDetailViewSectionBrother:
@@ -670,10 +648,86 @@ static NSString *const kListCellIdentifier = @"kListCellIdentifier";
             [cell resetWithMainTitle:@"兄弟门店" subTitle:@"查看更多"];
         }
             break;
+        case StoreDetailViewSectionService:
+        {
+            [cell resetWithMainTitle:@"门店服务" subTitle:nil];
+        }
+            break;
         default:
             break;
     }
 }
+
+- (void)configRecommendCell {
+    
+    [self.recommenderFaceImageView setImageWithURL:self.detailModel.recommenderFaceImageUrl];
+    
+    NSString *recommderName = self.detailModel.recommenderName;
+    if ([recommderName length] == 0) {
+        recommderName = @"童童推荐";
+    }
+    NSString *wholeString = [NSString stringWithFormat:@"%@：%@", recommderName, self.detailModel.recommendString];
+    NSMutableAttributedString *labelString = [[NSMutableAttributedString alloc] initWithString:wholeString];
+    NSDictionary *attribute = [NSDictionary dictionaryWithObject:[UIFont boldSystemFontOfSize:15] forKey:NSFontAttributeName];
+    [labelString setAttributes:attribute range:NSMakeRange(0, [recommderName length] + 1)];
+    [self.recommendLabel setAttributedText:labelString];
+}
+
+#pragma mark Public methods
+
+- (void)reloadData {
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(detailModelForStoreDetailView:)]) {
+        self.detailModel = [self.dataSource detailModelForStoreDetailView:self];
+        if (self.detailModel) {
+            NSMutableArray *tempSections = [[NSMutableArray alloc] init];
+            [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionTop]];
+            if ([self.detailModel.phoneNumber length] > 0) {
+                [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionPhone]];
+            }
+            if ([self.detailModel.storeAddress length] > 0) {
+                [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionAddress]];
+            }
+            if ([self.detailModel.activeModelsArray count] > 0) {
+                [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionActivity]];
+            }
+            if ([self.detailModel.hotRecommendServiceArray count] > 0) {
+                [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionHotRecommend]];
+            }
+            if ([self.detailModel.recommendString length] > 0) {
+                [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionRecommend]];
+            }
+            if ([self.detailModel.storeBrief length] > 0) {
+                [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionBrief]];
+            }
+            if ([self.detailModel.commentItemsArray count] > 0) {
+                [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionComment]];
+            }
+            if ([self.detailModel.nearbyFacilities count] > 0) {
+                [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionNearby]];
+            }
+            if ([self.detailModel.brotherStores count] > 0) {
+                [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionBrother]];
+            }
+            if ([self.detailModel.serviceModelsArray count] > 0) {
+                [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionService]];
+            }
+            self.sectionIdentifiersArray = [NSArray arrayWithArray:tempSections];
+            
+            
+            [self configTopCell];
+            [self.telephoneLabel setText:self.detailModel.phoneNumber];
+            [self.addressLabel setText:self.detailModel.storeAddress];
+            [self configRecommendCell];
+            [self.storeBriefLabel setText:self.detailModel.storeBrief];
+            [self.serviceLinearView reloadData];
+        } else {
+            self.sectionIdentifiersArray = nil;
+        }
+    }
+    [self.tableView reloadData];
+    [self.bannerScrollView reloadData];
+}
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

@@ -39,28 +39,10 @@
 }
 
 - (void)buildSubviews {
-    self.tableView.backgroundView = nil;
-    [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
     CGRect tableViewRect = CGRectMake(0.0, 0.0, self.frame.size.height, SCREEN_WIDTH);
-    self.tableView = [[UITableView alloc] initWithFrame:tableViewRect style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:tableViewRect style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    
-    // scrollbar 不显示
-    self.tableView.showsVerticalScrollIndicator = NO;
-    self.tableView.showsHorizontalScrollIndicator = NO;
-    
-    [self.tableView setScrollEnabled:NO];
-    
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    
-    
-    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 10, 0, 10)];
-    }
-    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
-        [self.tableView setLayoutMargins:UIEdgeInsetsMake(0, 10, 0, 10)];
-    }
     
     [self addSubview:self.tableView];
 }
@@ -142,10 +124,32 @@
 - (void)reloadData {
     if (!self.hasRotated) {
         [self.tableView setFrame:CGRectMake(0.0, 0.0, self.frame.size.height, SCREEN_WIDTH)];
+        self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.height, 0.01)];
+        self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.height, 0.01)];
         //tableview逆时针旋转90度。
         self.tableView.center = CGPointMake(SCREEN_WIDTH / 2, self.frame.size.height / 2);
         self.tableView.transform = CGAffineTransformMakeRotation(-M_PI / 2);
         self.hasRotated = YES;
+        
+        self.tableView.backgroundView = nil;
+        [self.tableView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+        
+        
+        // scrollbar 不显示
+        self.tableView.showsVerticalScrollIndicator = NO;
+        self.tableView.showsHorizontalScrollIndicator = NO;
+        
+        [self setScrollEnable:self.scrollEnable];
+        
+        [self setShowSeparator:self.showSeparator];
+        
+        
+        if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+            [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 10, 0, 10)];
+        }
+        if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+            [self.tableView setLayoutMargins:UIEdgeInsetsMake(0, 10, 0, 10)];
+        }
     }
     
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(numberOfCellsForSegmentView:)]) {
