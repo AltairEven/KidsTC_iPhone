@@ -220,6 +220,9 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(parentingStrategyDetailView:didSelectedItemAtIndex:)]) {
+        [self.delegate parentingStrategyDetailView:self didSelectedItemAtIndex:indexPath.row];
+    }
 }
 
 #pragma mark ParentingStrategyDetailViewCellDelegate

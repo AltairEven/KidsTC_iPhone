@@ -37,7 +37,7 @@
 #pragma mark HospitalListViewDelegate
 
 - (void)didPullUpToLoadMoreForHospitalListView:(HospitalListView *)listView {
-    [self.viewModel getMoreHouses];
+    [self.viewModel getMoreHospitals];
 }
 
 - (void)hospitalListView:(HospitalListView *)listView didClickedPhoneButtonAtIndex:(NSUInteger)index {

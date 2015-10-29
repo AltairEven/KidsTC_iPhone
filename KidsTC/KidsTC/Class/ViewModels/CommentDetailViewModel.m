@@ -1,63 +1,64 @@
 //
-//  LoveHouseListViewModel.m
+//  CommentDetailViewModel.m
 //  KidsTC
 //
-//  Created by 钱烨 on 10/13/15.
+//  Created by 钱烨 on 10/29/15.
 //  Copyright © 2015 KidsTC. All rights reserved.
 //
 
-#import "LoveHouseListViewModel.h"
+#import "CommentDetailViewModel.h"
 
-#define PageSize (10)
+@interface CommentDetailViewModel () <CommentDetailViewDataSource>
 
-@interface LoveHouseListViewModel () <LoveHouseListViewDataSource>
+@property (nonatomic, weak) CommentDetailView *view;
 
-@property (nonatomic, weak) LoveHouseListView *view;
-
-@property (nonatomic, strong) HttpRequestClient *loadHouseRequest;
+@property (nonatomic, strong) HttpRequestClient *loadReplyRequest;
 
 @property (nonatomic, strong) NSMutableArray *itemModelsArray;
 
 @property (nonatomic, assign) NSUInteger currentPage;
 
-- (void)loadHouseListSucceed:(NSDictionary *)data;
-- (void)loadHouseListFailed:(NSError *)error;
-- (void)loadMoreHouseListSucceed:(NSDictionary *)data;
-- (void)loadMoreHouseListFailed:(NSError *)error;
+- (void)loadReplyListSucceed:(NSDictionary *)data;
+- (void)loadReplyListFailed:(NSError *)error;
+- (void)loadMoreReplyListSucceed:(NSDictionary *)data;
+- (void)loadMoreReplyListFailed:(NSError *)error;
 
 - (void)reloadListViewWithData:(NSDictionary *)data;
 
 @end
 
-@implementation LoveHouseListViewModel
+@implementation CommentDetailViewModel
 
 - (instancetype)initWithView:(UIView *)view {
     self = [super initWithView:view];
     if (self) {
-        self.view = (LoveHouseListView *)view;
+        self.view = (CommentDetailView *)view;
         self.view.dataSource = self;
         self.itemModelsArray = [[NSMutableArray alloc] init];
+        self.detailModel = [[CommentDetailModel alloc] init];
     }
     return self;
 }
 
 - (void)startUpdateDataWithSucceed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
-    if (!self.loadHouseRequest) {
-        self.loadHouseRequest = [HttpRequestClient clientWithUrlAliasName:@"SEARCH_ARTICLE"];
+    if (!self.loadReplyRequest) {
+        self.loadReplyRequest = [HttpRequestClient clientWithUrlAliasName:@"ARTICLE_GET_LIST"];
     }
-    [self.loadHouseRequest cancel];
+    [self.loadReplyRequest cancel];
     self.currentPage = 1;
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
                            [NSNumber numberWithInteger:self.currentPage], @"page",
-                           [NSNumber numberWithInteger:PageSize], @"pagecount", nil];
-    __weak LoveHouseListViewModel *weakSelf = self;
-    [weakSelf.loadHouseRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
-        [weakSelf loadHouseListSucceed:responseData];
+                           [NSNumber numberWithInteger:[self.view pageSize]], @"pageCount",
+                           @"0", @"tagId",
+                           @"", @"authorId", nil];
+    __weak CommentDetailViewModel *weakSelf = self;
+    [weakSelf.loadReplyRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
+        [weakSelf loadReplyListSucceed:responseData];
         if (succeed) {
             succeed(responseData);
         }
     } failure:^(HttpRequestClient *client, NSError *error) {
-        [weakSelf loadHouseListFailed:error];
+        [weakSelf loadReplyListFailed:error];
         if (failure) {
             failure(error);
         }
@@ -66,25 +67,26 @@
 
 
 - (void)stopUpdateData {
-    [self.loadHouseRequest cancel];
+    [self.loadReplyRequest cancel];
     [self.view endLoadMore];
 }
 
 
-#pragma mark HouseListViewDataSource
+#pragma mark CommentDetailViewDataSource
 
-- (NSArray *)itemModelsOfLoveHouseListView:(LoveHouseListView *)listView {
-    return [self resutlItemModels];
+- (CommentDetailModel *)detailModelForCommentDetailView:(CommentDetailView *)detailView {
+    return self.detailModel;
 }
+
 
 #pragma mark Private methods
 
-- (void)loadHouseListSucceed:(NSDictionary *)data {
+- (void)loadReplyListSucceed:(NSDictionary *)data {
     [self.itemModelsArray removeAllObjects];
     [self reloadListViewWithData:data];
 }
 
-- (void)loadHouseListFailed:(NSError *)error {
+- (void)loadReplyListFailed:(NSError *)error {
     [self.itemModelsArray removeAllObjects];
     switch (error.code) {
         case -999:
@@ -105,12 +107,12 @@
     [self reloadListViewWithData:nil];
 }
 
-- (void)loadMoreHouseListSucceed:(NSDictionary *)data {
+- (void)loadMoreReplyListSucceed:(NSDictionary *)data {
     self.currentPage ++;
     [self reloadListViewWithData:data];
 }
 
-- (void)loadMoreHouseListFailed:(NSError *)error {
+- (void)loadMoreReplyListFailed:(NSError *)error {
     switch (error.code) {
         case -999:
         {
@@ -135,13 +137,8 @@
         NSArray *dataArray = [data objectForKey:@"data"];
         if ([dataArray isKindOfClass:[NSArray class]] && [dataArray count] > 0) {
             [self.view hideLoadMoreFooter:NO];
-            for (NSDictionary *singleEle in dataArray) {
-                LoveHouseListItemModel *model = [[LoveHouseListItemModel alloc] initWithRawData:singleEle];
-                if (model) {
-                    [self.itemModelsArray addObject:model];
-                }
-            }
-            if ([dataArray count] < PageSize) {
+            [self.detailModel fillWithReplyRawData:dataArray];
+            if ([dataArray count] < [self.view pageSize]) {
                 [self.view noMoreData:YES];
             }
         } else {
@@ -161,20 +158,22 @@
     return [NSArray arrayWithArray:self.itemModelsArray];
 }
 
-- (void)getMoreHouses {
-    if (!self.loadHouseRequest) {
-        self.loadHouseRequest = [HttpRequestClient clientWithUrlAliasName:@"SEARCH_ARTICLE"];
+- (void)getMoreReplies {
+    if (!self.loadReplyRequest) {
+        self.loadReplyRequest = [HttpRequestClient clientWithUrlAliasName:@"ARTICLE_GET_LIST"];
     }
-    [self.loadHouseRequest cancel];
+    [self.loadReplyRequest cancel];
     NSUInteger nextPage = self.currentPage + 1;
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
                            [NSNumber numberWithInteger:nextPage], @"page",
-                           [NSNumber numberWithInteger:PageSize], @"pagecount", nil];
-    __weak LoveHouseListViewModel *weakSelf = self;
-    [weakSelf.loadHouseRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
-        [weakSelf loadMoreHouseListSucceed:responseData];
+                           [NSNumber numberWithInteger:[self.view pageSize]], @"pageCount",
+                           @"0", @"tagId",
+                           @"", @"authorId", nil];
+    __weak CommentDetailViewModel *weakSelf = self;
+    [weakSelf.loadReplyRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
+        [weakSelf loadMoreReplyListSucceed:responseData];
     } failure:^(HttpRequestClient *client, NSError *error) {
-        [weakSelf loadMoreHouseListFailed:error];
+        [weakSelf loadMoreReplyListFailed:error];
     }];
 }
 

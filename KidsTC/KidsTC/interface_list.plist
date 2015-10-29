@@ -67,12 +67,47 @@
 			<key>url</key>
 			<string>http://api.kidstc.com:8000/json.php?mod=comment&amp;&amp;act=add_comment</string>
 		</dict>
-		<key>COMMENT_QUERY_COMMENT</key>
+		<key>COMMENT_GET_COUNT</key>
 		<dict>
 			<key>method</key>
 			<string>post</string>
 			<key>url</key>
-			<string>http://api.kidstc.com:8000/json.php?mod=comment&amp;&amp;act=query_comment</string>
+			<string>http://api.kidstc.com:8000/json.php?mod=comment&amp;&amp;act=get_comment_count</string>
+		</dict>
+		<key>COMMENT_GET_DETAIL</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com:8000/json.php?mod=comment&amp;&amp;act=get_comment_detail</string>
+		</dict>
+		<key>COMMENT_GET_NEWS</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com:8000/json.php?mod=comment&amp;&amp;act=get_news_comments</string>
+		</dict>
+		<key>COMMENT_GET_REPLIES</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com:8000/json.php?mod=comment&amp;&amp;act=get_comment_replies</string>
+		</dict>
+		<key>COMMENT_GET_SCORE_CFG</key>
+		<dict>
+			<key>method</key>
+			<string>get</string>
+			<key>url</key>
+			<string>http://api.kidstc.com:8000/json.php?mod=comment&amp;&amp;act=get_comment_score_cfg</string>
+		</dict>
+		<key>COMMENT_PRAISE</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com:8000/json.php?mod=comment&amp;&amp;act=praise_comment</string>
 		</dict>
 		<key>COUPON_CHECK</key>
 		<dict>
@@ -249,13 +284,6 @@
 			<key>url</key>
 			<string>http://api.kidstc.com:8000/json.php?mod=search&amp;&amp;act=search</string>
 		</dict>
-		<key>SEARCH_STRATEGY</key>
-		<dict>
-			<key>method</key>
-			<string>post</string>
-			<key>url</key>
-			<string>http://api.kidstc.com:8000/json.php?mod=strategy&amp;&amp;act=search_strategy</string>
-		</dict>
 		<key>SHOPPINGCART_GET</key>
 		<dict>
 			<key>method</key>
@@ -284,10 +312,31 @@
 			<key>url</key>
 			<string>http://api.kidstc.com:8000/json.php?mod=store&amp;&amp;act=get_store_desc</string>
 		</dict>
+		<key>STRATEGY_GET_DETAIL</key>
+		<dict>
+			<key>method</key>
+			<string>get</string>
+			<key>url</key>
+			<string>http://api.kidstc.com:8000/json.php?mod=strategy&amp;&amp;act=get_strategy_detail</string>
+		</dict>
+		<key>STRATEGY_SEARCH</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com:8000/json.php?mod=strategy&amp;&amp;act=search_strategy</string>
+		</dict>
+		<key>WELFARE_GET</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com:8000/json.php?mod=commonweal&amp;&amp;act=get_welfare_store</string>
+		</dict>
 	</dict>
 	<key>errno</key>
 	<string>0</string>
 	<key>version</key>
-	<string>12</string>
+	<string>14</string>
 </dict>
 </plist>

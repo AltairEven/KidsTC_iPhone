@@ -8,6 +8,7 @@
 
 #import "ParentingStrategyDetailViewController.h"
 #import "ParentingStrategyDetailViewModel.h"
+#import "CommentDetailViewController.h"
 
 @interface ParentingStrategyDetailViewController () <ParentingStrategyDetailViewDelegate>
 
@@ -41,11 +42,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self buildRightBarItems];
+    self.detailView.delegate = self;
     self.viewModel = [[ParentingStrategyDetailViewModel alloc] initWithView:self.detailView];
     [self.viewModel startUpdateDataWithStrategyIdentifier:self.strategyId Succeed:nil failure:nil];
 }
 
 #pragma mark ParentingStrategyDetailViewDelegate
+
+- (void)parentingStrategyDetailView:(ParentingStrategyDetailView *)detailView didSelectedItemAtIndex:(NSUInteger)index {
+    ParentingStrategyDetailCellModel *model = [self.viewModel.detailModel.cellModels objectAtIndex:index];
+    CommentDetailViewController *controller = [[CommentDetailViewController alloc] initWithSource:CommentDetailViewSourceStrategy headerModel:model];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
+}
 
 - (void)parentingStrategyDetailView:(ParentingStrategyDetailView *)detailView didClickedLocationButtonAtIndex:(NSUInteger)index {
     

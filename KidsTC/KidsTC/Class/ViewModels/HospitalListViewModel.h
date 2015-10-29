@@ -14,6 +14,6 @@
 
 - (NSArray *)resutlItemModels;
 
--(void)getMoreHouses;
+-(void)getMoreHospitals;
 
 @end

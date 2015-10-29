@@ -58,6 +58,10 @@
 
 @property (nonatomic, copy) NSString *relatedInfoTitle;
 
+@property (nonatomic, assign) BOOL isLiked;
+
+@property (nonatomic, assign) NSUInteger likeNumber;
+
 @property (nonatomic, assign) NSUInteger commentCount;
 
 @property (nonatomic, assign) CGFloat ratio;

@@ -1,17 +1,15 @@
 //
-//  CommentListViewCell.m
+//  CommentDetailViewNormalHeaderCell.m
 //  KidsTC
 //
-//  Created by 钱烨 on 7/29/15.
-//  Copyright (c) 2015 KidsTC. All rights reserved.
+//  Created by 钱烨 on 10/27/15.
+//  Copyright © 2015 KidsTC. All rights reserved.
 //
 
-#import "CommentListViewCell.h"
+#import "CommentDetailViewNormalHeaderCell.h"
 #import "FiveStarsView.h"
-#import "AUIImageGridView.h"
 
-@interface CommentListViewCell () <AUIImageGridViewDelegate>
-
+@interface CommentDetailViewNormalHeaderCell ()
 
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet UIImageView *faceImageView;
@@ -19,19 +17,17 @@
 @property (weak, nonatomic) IBOutlet UILabel *userLevelLabel;
 @property (weak, nonatomic) IBOutlet FiveStarsView *starsView;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
-@property (weak, nonatomic) IBOutlet AUIImageGridView *imageGridView;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (weak, nonatomic) IBOutlet UIButton *commentButton;
 
 @end
 
-@implementation CommentListViewCell
+@implementation CommentDetailViewNormalHeaderCell
 
 - (void)awakeFromNib {
     // Initialization code
-    self.imageGridView.delegate = self;
-    [self.bgView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -40,28 +36,16 @@
     // Configure the view for the selected state
 }
 
-- (void)configWithItemModel:(CommentListItemModel *)model {
-    [self updateConstraintsIfNeeded];
-    [self layoutIfNeeded];
+- (void)configWithModel:(CommentListItemModel *)model {
     if (model) {
         [self.faceImageView setImageWithURL:model.faceImageUrl];
         [self.userNameLabel setText:model.userName];
         [self.userLevelLabel setText:model.userLevelDescription];
         [self.starsView setStarNumber:model.starNumber];
         [self.contentLabel setText:model.comments];
-        [self.imageGridView setImageUrlStringsArray:model.thumbnailPhotoUrlStringsArray];
         [self.timeLabel setText:model.commentTime];
         [self.likeButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)model.likeNumber] forState:UIControlStateNormal];
         [self.commentButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)model.replyNumber] forState:UIControlStateNormal];
-    }
-}
-
-
-#pragma mark SaiDanPhotoViewDelegate
-
-- (void)imageGridView:(AUIImageGridView *)view didClickedImageAtIndex:(NSUInteger)index {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(commentListViewCell:didClickedImageAtIndex:)]) {
-        [self.delegate commentListViewCell:self didClickedImageAtIndex:index];
     }
 }
 

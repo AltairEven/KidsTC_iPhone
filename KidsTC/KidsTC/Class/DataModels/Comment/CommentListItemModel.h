@@ -10,7 +10,11 @@
 
 @interface CommentListItemModel : NSObject
 
+@property (nonatomic, strong) NSURL *faceImageUrl;
+
 @property (nonatomic, copy) NSString *userName;
+
+@property (nonatomic, copy) NSString *userLevelDescription;
 
 @property (nonatomic, copy) NSString *commentTime;
 
@@ -23,6 +27,12 @@
 @property (nonatomic, copy) NSArray *thumbnailPhotoUrlStringsArray; //图片url数组
 
 @property (nonatomic, copy) NSArray *photosArray; //MWPhoto
+
+@property (nonatomic, assign) BOOL isLiked;
+
+@property (nonatomic, assign) NSUInteger likeNumber;
+
+@property (nonatomic, assign) NSUInteger replyNumber;
 
 - (CGFloat)contentHeight;
 

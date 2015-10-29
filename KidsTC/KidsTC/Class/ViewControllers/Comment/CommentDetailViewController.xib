@@ -5,9 +5,9 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9059"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CommentListViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CommentDetailViewController">
             <connections>
-                <outlet property="listView" destination="V6U-Jz-Alm" id="jb4-zG-ogF"/>
+                <outlet property="detailView" destination="HcB-0B-0k1" id="M3P-ak-thx"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,19 +16,19 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V6U-Jz-Alm" customClass="CommentListView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HcB-0B-0k1" customClass="CommentDetailView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="V6U-Jz-Alm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="6Sx-kh-cBL"/>
-                <constraint firstItem="V6U-Jz-Alm" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="C8z-cO-2HR"/>
-                <constraint firstAttribute="bottom" secondItem="V6U-Jz-Alm" secondAttribute="bottom" id="YQu-ML-6iq"/>
-                <constraint firstAttribute="trailing" secondItem="V6U-Jz-Alm" secondAttribute="trailing" id="sPW-Vj-h5o"/>
+                <constraint firstItem="HcB-0B-0k1" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="B9Q-q1-nX0"/>
+                <constraint firstItem="HcB-0B-0k1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="FfK-dn-tnw"/>
+                <constraint firstAttribute="bottom" secondItem="HcB-0B-0k1" secondAttribute="bottom" id="cuZ-pN-R9v"/>
+                <constraint firstAttribute="trailing" secondItem="HcB-0B-0k1" secondAttribute="trailing" id="ebs-GS-ebv"/>
             </constraints>
-            <point key="canvasLocation" x="443" y="321"/>
+            <point key="canvasLocation" x="347" y="362"/>
         </view>
     </objects>
 </document>
