@@ -199,6 +199,7 @@
 		1E15F9B01BE1C784000C74E7 /* CommentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E15F9AE1BE1C784000C74E7 /* CommentDetailViewController.m */; };
 		1E15F9B11BE1C784000C74E7 /* CommentDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E15F9AF1BE1C784000C74E7 /* CommentDetailViewController.xib */; };
 		1E15F9B31BE1FBD9000C74E7 /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E15F9B21BE1FBD9000C74E7 /* interface_list.plist */; };
+		1E15F9B61BE22512000C74E7 /* AUIKeyboardAdhesiveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E15F9B51BE22512000C74E7 /* AUIKeyboardAdhesiveView.m */; };
 		1E1CFA1D1BD4FEE20005653D /* KTCSearchViewCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1CFA1B1BD4FEE20005653D /* KTCSearchViewCategoryCell.m */; };
 		1E1CFA1E1BD4FEE20005653D /* KTCSearchViewCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E1CFA1C1BD4FEE20005653D /* KTCSearchViewCategoryCell.xib */; };
 		1E1CFA211BD72F4C0005653D /* ServiceDetailMoreInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1CFA201BD72F4C0005653D /* ServiceDetailMoreInfoView.m */; };
@@ -1155,6 +1156,8 @@
 		1E15F9AE1BE1C784000C74E7 /* CommentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentDetailViewController.m; sourceTree = "<group>"; };
 		1E15F9AF1BE1C784000C74E7 /* CommentDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentDetailViewController.xib; sourceTree = "<group>"; };
 		1E15F9B21BE1FBD9000C74E7 /* interface_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = interface_list.plist; sourceTree = "<group>"; };
+		1E15F9B41BE22512000C74E7 /* AUIKeyboardAdhesiveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIKeyboardAdhesiveView.h; sourceTree = "<group>"; };
+		1E15F9B51BE22512000C74E7 /* AUIKeyboardAdhesiveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIKeyboardAdhesiveView.m; sourceTree = "<group>"; };
 		1E1CFA1A1BD4FEE20005653D /* KTCSearchViewCategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCSearchViewCategoryCell.h; sourceTree = "<group>"; };
 		1E1CFA1B1BD4FEE20005653D /* KTCSearchViewCategoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCSearchViewCategoryCell.m; sourceTree = "<group>"; };
 		1E1CFA1C1BD4FEE20005653D /* KTCSearchViewCategoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTCSearchViewCategoryCell.xib; sourceTree = "<group>"; };
@@ -2452,6 +2455,8 @@
 				1E7995611BCBCB480099CFF9 /* AddressSelectTableViewCell.h */,
 				1E7995621BCBCB480099CFF9 /* AddressSelectTableViewCell.m */,
 				1E7995631BCBCB480099CFF9 /* AddressSelectTableViewCell.xib */,
+				1E15F9B41BE22512000C74E7 /* AUIKeyboardAdhesiveView.h */,
+				1E15F9B51BE22512000C74E7 /* AUIKeyboardAdhesiveView.m */,
 			);
 			path = SelfDefine;
 			sourceTree = "<group>";
@@ -5411,6 +5416,7 @@
 				1E0B7A971B6F67B800A58AD4 /* GComboBox.m in Sources */,
 				1E7995331BC7BD5D0099CFF9 /* HomeFloorModel.m in Sources */,
 				1E3D8F571B4D1D4D00275C35 /* UserCenterView.m in Sources */,
+				1E15F9B61BE22512000C74E7 /* AUIKeyboardAdhesiveView.m in Sources */,
 				1EC73C591B611289008B39EA /* ParentingStrategyFilterView.m in Sources */,
 				1E3D8CDD1B4BF4A100275C35 /* IcsonProvince.m in Sources */,
 				1E3D8DAC1B4BF4A100275C35 /* RemindManager.m in Sources */,

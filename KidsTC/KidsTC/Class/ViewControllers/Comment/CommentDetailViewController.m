@@ -7,11 +7,14 @@
 //
 
 #import "CommentDetailViewController.h"
+#import "AUIKeyboardAdhesiveView.h"
 
 @interface CommentDetailViewController () <CommentDetailViewDelegate>
 
 @property (weak, nonatomic) IBOutlet CommentDetailView *detailView;
 @property (nonatomic, strong) CommentDetailViewModel *viewModel;
+
+@property (nonatomic, strong) AUIKeyboardAdhesiveView *keyboardAdhesiveView;
 
 @property (nonatomic, strong) id headerModel;
 
@@ -38,12 +41,14 @@
     [self.viewModel.detailModel setModelSource:self.viewSource];
     [self.viewModel.detailModel setHeaderModel:self.headerModel];
     [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
+    
+    self.keyboardAdhesiveView = [[AUIKeyboardAdhesiveView alloc] init];
 }
 
 #pragma mark CommentDetailViewDelegate
 
 - (void)commentDetailView:(CommentDetailView *)detailView didSelectedReplyAtIndex:(NSUInteger)index {
-    
+    [self.keyboardAdhesiveView expand];
 }
 
 - (void)commentDetailViewDidPulledDownToRefresh:(CommentDetailView *)detailView {

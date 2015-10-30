@@ -188,6 +188,11 @@ static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIden
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section > 0) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(commentDetailView:didSelectedReplyAtIndex:)]) {
+            [self.delegate commentDetailView:self didSelectedReplyAtIndex:indexPath.row];
+        }
+    }
 }
 
 #pragma mark Private methods
