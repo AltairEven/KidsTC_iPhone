@@ -7,14 +7,7 @@
 //
 
 #import "AUIKeyboardAdhesiveView.h"
-#import "PlaceHolderTextView.h"
-#import "AUIImageGridView.h"
-
 @interface AUIKeyboardAdhesiveView ()
-
-@property (nonatomic, strong) UIView *headerView;
-
-@property (nonatomic, strong) PlaceHolderTextView *textView;
 
 - (void)buildSubviews;
 
@@ -31,6 +24,8 @@
 - (void)didClickedTextButton;
 
 - (void)didClickedFuntionButton:(UIButton *)button;
+
+- (void)didClickedSendButton;
 
 @end
 
@@ -81,9 +76,9 @@
     [self addSubview:self.headerView];
     
     CGFloat xPosition = 10;
-    CGFloat yPosition = 10;
-    CGFloat width = 20;
-    CGFloat height = 20;
+    CGFloat yPosition = 5;
+    CGFloat width = 30;
+    CGFloat height = 30;
     CGFloat gap = 20;
     
     UIButton *hideButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -92,7 +87,7 @@
     [hideButton addTarget:self action:@selector(shrink) forControlEvents:UIControlEventTouchUpInside];
     [self.headerView addSubview:hideButton];
     
-    xPosition += hideButton.frame.origin.x + hideButton.frame.size.width + gap;
+    xPosition = hideButton.frame.origin.x + hideButton.frame.size.width + gap;
     UIButton *textButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [textButton setFrame:CGRectMake(xPosition, yPosition, width, height)];
     [textButton setImage:[UIImage imageNamed:@"located"] forState:UIControlStateNormal];
@@ -101,7 +96,7 @@
     
     BOOL needHideTextEditButton = YES;
     gap = 10;
-    xPosition += textButton.frame.origin.x + textButton.frame.size.width + gap;
+    xPosition = textButton.frame.origin.x + textButton.frame.size.width + gap;
     for (NSUInteger index = 0; index < [self.availableExtFuntions count]; index ++) {
         AUIKeyboardAdhesiveViewExtensionFunction *function = [self.availableExtFuntions objectAtIndex:index];
         UIButton *functionButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -118,6 +113,13 @@
     }
     [textButton setHidden:needHideTextEditButton];
     
+    width = 60;
+    xPosition = self.headerView.frame.size.width - gap - width;
+    self.sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.sendButton setFrame:CGRectMake(xPosition, yPosition, width, height)];
+    [self.sendButton setTitle:@"发送" forState:UIControlStateNormal];
+    [self.sendButton addTarget:self action:@selector(didClickedSendButton) forControlEvents:UIControlEventTouchUpInside];
+    [self.headerView addSubview:self.sendButton];
     
     //text view
     CGFloat separatorHeight = 0.5;
@@ -135,6 +137,8 @@
     switch (type) {
         case AUIKeyboardAdhesiveViewExtensionFunctionTypeEmotionEdit:
         {
+            self.emotionInputView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT * 0.2)];
+            [self.emotionInputView setBackgroundColor:[UIColor blueColor]];
             
         }
             break;
@@ -190,13 +194,43 @@
 }
 
 - (void)didClickedTextButton {
+    self.textView.inputView = nil;
+    [self.textView reloadInputViews];
     
+    if (![self.textView isFirstResponder]) {
+        [self.textView becomeFirstResponder];
+    }
 }
 
 - (void)didClickedFuntionButton:(UIButton *)button {
     AUIKeyboardAdhesiveViewExtensionFunction *function = [self.availableExtFuntions objectAtIndex:button.tag];
+    switch (function.type) {
+        case AUIKeyboardAdhesiveViewExtensionFunctionTypeEmotionEdit:
+        {
+            self.textView.inputView = self.emotionInputView;
+            [self.textView reloadInputViews];
+        }
+            break;
+        case AUIKeyboardAdhesiveViewExtensionFunctionTypeImageUpload:
+        {
+            
+        }
+            break;
+        default:
+            break;
+    }
+    
+    if (![self.textView isFirstResponder]) {
+        [self.textView becomeFirstResponder];
+    }
     if (self.delegate && [self.delegate respondsToSelector:@selector(keyboardAdhesiveView:didClickedExtensionFunctionButtonWithType:)]) {
         [self.delegate keyboardAdhesiveView:self didClickedExtensionFunctionButtonWithType:function.type];
+    }
+}
+
+- (void)didClickedSendButton {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedSendButtonOnKeyboardAdhesiveView:)]) {
+        [self.delegate didClickedSendButtonOnKeyboardAdhesiveView:self];
     }
 }
 
@@ -215,10 +249,6 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangedFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     }
     return self;
-}
-
-- (void)setHeaderBGColor:(UIColor *)color {
-    [self.headerView setBackgroundColor:color];
 }
 
 - (void)expand {

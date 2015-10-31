@@ -12,12 +12,16 @@
 #import "CommentReplyItemModel.h"
 
 typedef enum {
+    CommentDetailViewSourceUnknow,
     CommentDetailViewSourceStrategy,
+    CommentDetailViewSourceStrategyDetail,
     CommentDetailViewSourceService,
     CommentDetailViewSourceStore
 }CommentDetailSource;
 
 @interface CommentDetailModel : NSObject
+
+@property (nonatomic, copy) NSString *identifier;
 
 @property (nonatomic, strong) id headerModel;
 

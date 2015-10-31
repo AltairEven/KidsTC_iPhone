@@ -40,9 +40,18 @@
     self.viewModel = [[CommentDetailViewModel alloc] initWithView:self.detailView];
     [self.viewModel.detailModel setModelSource:self.viewSource];
     [self.viewModel.detailModel setHeaderModel:self.headerModel];
-    [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
-    
-    self.keyboardAdhesiveView = [[AUIKeyboardAdhesiveView alloc] init];
+    __weak CommentDetailViewController *weakSelf = self;
+    [self.viewModel setNetErrorBlock:^(NSError *error) {
+        [weakSelf showConnectError:YES];
+    }];
+    [self reloadNetworkData];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (!self.keyboardAdhesiveView) {
+        self.keyboardAdhesiveView = [[AUIKeyboardAdhesiveView alloc] init];
+    }
 }
 
 #pragma mark CommentDetailViewDelegate
@@ -52,11 +61,23 @@
 }
 
 - (void)commentDetailViewDidPulledDownToRefresh:(CommentDetailView *)detailView {
-    
+    [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
 }
 
 - (void)commentDetailViewDidPulledUpToloadMore:(CommentDetailView *)detailView {
-    
+    [self.viewModel getMoreReplies];
+}
+
+#pragma mark Super method
+
+- (void)reloadNetworkData {
+    [[GAlertLoadingView sharedAlertLoadingView] show];
+    __weak CommentDetailViewController *weakSelf = self;
+    [weakSelf.viewModel startUpdateDataWithSucceed:^(NSDictionary *data) {
+        [[GAlertLoadingView sharedAlertLoadingView] hide];
+    } failure:^(NSError *error) {
+        [[GAlertLoadingView sharedAlertLoadingView] hide];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

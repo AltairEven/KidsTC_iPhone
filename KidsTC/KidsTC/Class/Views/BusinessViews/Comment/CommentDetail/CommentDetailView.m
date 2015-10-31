@@ -103,11 +103,16 @@ static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIden
     if (enbaleLoadMore) {
         __weak CommentDetailView *weakSelf = self;
         [self.tableView addGifFooterWithRefreshingBlock:^{
+            if (weakSelf.noMoreData) {
+                [weakSelf.tableView.gifFooter noticeNoMoreData];
+                return;
+            }
             [weakSelf pullToLoadMoreData];
         }];
     } else {
         [self.tableView removeFooter];
     }
+    [self.tableView.gifFooter setHidden:YES];
 }
 
 #pragma mark UITableViewDataSource & UITableViewDelegate
@@ -132,6 +137,16 @@ static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIden
     if (indexPath.section == 0) {
         switch (self.detailModel.modelSource) {
             case CommentDetailViewSourceStrategy:
+            {
+                CommentDetailViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kReplyCellIdentifier forIndexPath:indexPath];
+                if (!cell) {
+                    cell =  [[[NSBundle mainBundle] loadNibNamed:@"CommentDetailViewCell" owner:nil options:nil] objectAtIndex:0];
+                }
+                [cell configWithModel:[self.detailModel.replyModels objectAtIndex:indexPath.row]];
+                return cell;
+            }
+                break;
+            case CommentDetailViewSourceStrategyDetail:
             {
                 CommentDetailViewStrategyHeaderCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kStrategyHeaderCellIdentifier forIndexPath:indexPath];
                 if (!cell) {
@@ -216,6 +231,7 @@ static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIden
 - (void)reloadData {
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(detailModelForCommentDetailView:)]) {
         self.detailModel = [self.dataSource detailModelForCommentDetailView:self];
+        [self.tableView.gifFooter setHidden:NO];
     }
     [self.tableView reloadData];
 }

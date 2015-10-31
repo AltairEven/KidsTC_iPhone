@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PlaceHolderTextView.h"
+#import "AUIImageGridView.h"
+
 
 @class AUIKeyboardAdhesiveViewExtensionFunction;
 @class AUIKeyboardAdhesiveView;
@@ -35,6 +38,14 @@ typedef enum {
 
 @interface AUIKeyboardAdhesiveView : UIView
 
+@property (nonatomic, strong) UIView *headerView;
+
+@property (nonatomic, strong) PlaceHolderTextView *textView;
+
+@property (nonatomic, strong) UIView *emotionInputView;
+
+@property (nonatomic, strong) UIButton *sendButton;
+
 @property (nonatomic, assign) id<AUIKeyboardAdhesiveViewDelegate> delegate;
 
 @property (nonatomic, copy) NSString *placeholder; //default nil
@@ -50,8 +61,6 @@ typedef enum {
 @property (nonatomic, strong, readonly) NSArray<AUIKeyboardAdhesiveViewExtensionFunction *> *availableExtFuntions;
 
 - (instancetype)initWithAvailableFuntions:(NSArray<AUIKeyboardAdhesiveViewExtensionFunction *> *)funtions;
-
-- (void)setHeaderBGColor:(UIColor *)color;
 
 - (void)expand;
 

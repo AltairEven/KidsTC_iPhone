@@ -10,10 +10,17 @@
 
 @implementation CommentDetailModel
 
+- (void)setHeaderModel:(id)headerModel {
+    _headerModel = headerModel;
+    if (headerModel) {
+        self.identifier = ((CommentListItemModel *)headerModel).identifier;
+    }
+}
+
 - (CGFloat)headerCellHeight {
     CGFloat height = 0;
     switch (self.modelSource) {
-        case CommentDetailViewSourceStrategy:
+        case CommentDetailViewSourceStrategyDetail:
         {
             height = [((ParentingStrategyDetailCellModel *)self.headerModel) cellHeight] + 40;
         }

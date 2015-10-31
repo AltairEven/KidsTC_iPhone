@@ -33,7 +33,7 @@
 
 @property (nonatomic, strong) NSMutableArray *pictureResultArray;
 
-@property (nonatomic, assign) CommentListViewTag currentTag;
+@property (nonatomic, assign) CommentListType currentTag;
 
 @property (nonatomic, assign) NSUInteger currentAllPage;
 
@@ -47,19 +47,19 @@
 
 @property (nonatomic, strong) NSMutableDictionary *tabNumbersDic;
 
-- (void)clearDataForTag:(CommentListViewTag)tag;
+- (void)clearDataForTag:(CommentListType)tag;
 
-- (void)loadCommentsSucceedWithData:(NSDictionary *)data segmmentTag:(CommentListViewTag)tag;
+- (void)loadCommentsSucceedWithData:(NSDictionary *)data segmmentTag:(CommentListType)tag;
 
-- (void)loadCommentsFailedWithError:(NSError *)error segmmentTag:(CommentListViewTag)tag;
+- (void)loadCommentsFailedWithError:(NSError *)error segmmentTag:(CommentListType)tag;
 
-- (void)loadMoreCommentsSucceedWithData:(NSDictionary *)data segmmentTag:(CommentListViewTag)tag;
+- (void)loadMoreCommentsSucceedWithData:(NSDictionary *)data segmmentTag:(CommentListType)tag;
 
-- (void)loadMoreCommentsFailedWithError:(NSError *)error segmmentTag:(CommentListViewTag)tag;
+- (void)loadMoreCommentsFailedWithError:(NSError *)error segmmentTag:(CommentListType)tag;
 
 - (void)fillTabNumberWithData:(NSDictionary *)data;
 
-- (void)reloadCommentListViewWithData:(NSDictionary *)data forSegmmentTag:(CommentListViewTag)tag;
+- (void)reloadCommentListViewWithData:(NSDictionary *)data forSegmmentTag:(CommentListType)tag;
 
 @end
 
@@ -71,17 +71,17 @@
         self.view = (CommentListView *)view;
         self.view.dataSource = self;
         self.commentManager = [[KTCCommentManager alloc] init];
-        self.currentTag = CommentListViewTagAll;
+        self.currentTag = CommentListTypeAll;
         self.currentAllPage = 1;
         self.currentGoodPage = 1;
         self.currentNormalPage = 1;
         self.currentBadPage = 1;
         self.currentPicturePage = 1;
-        [self.view hideLoadMoreFooter:YES forViewTag:CommentListViewTagAll];
-        [self.view hideLoadMoreFooter:YES forViewTag:CommentListViewTagGood];
-        [self.view hideLoadMoreFooter:YES forViewTag:CommentListViewTagNormal];
-        [self.view hideLoadMoreFooter:YES forViewTag:CommentListViewTagBad];
-        [self.view hideLoadMoreFooter:YES forViewTag:CommentListViewTagPicture];
+        [self.view hideLoadMoreFooter:YES forViewTag:CommentListTypeAll];
+        [self.view hideLoadMoreFooter:YES forViewTag:CommentListTypeGood];
+        [self.view hideLoadMoreFooter:YES forViewTag:CommentListTypeNormal];
+        [self.view hideLoadMoreFooter:YES forViewTag:CommentListTypeBad];
+        [self.view hideLoadMoreFooter:YES forViewTag:CommentListTypePicture];
         self.allResultArray = [[NSMutableArray alloc] init];
         self.goodResultArray = [[NSMutableArray alloc] init];
         self.normalResultArray = [[NSMutableArray alloc] init];
@@ -93,30 +93,30 @@
 
 #pragma mark CommentListViewDataSource
 
-- (NSUInteger)numberOfCommentsOnCommentListView:(CommentListView *)list withTag:(CommentListViewTag)tag {
+- (NSUInteger)numberOfCommentsOnCommentListView:(CommentListView *)list withTag:(CommentListType)tag {
     NSUInteger number = 0;
     switch (tag) {
-        case CommentListViewTagAll:
+        case CommentListTypeAll:
         {
             number = [[self.tabNumbersDic objectForKey:CommentListTabNumberKeyAll] integerValue];
         }
             break;
-        case CommentListViewTagGood:
+        case CommentListTypeGood:
         {
             number = [[self.tabNumbersDic objectForKey:CommentListTabNumberKeyGood] integerValue];
         }
             break;
-        case CommentListViewTagNormal:
+        case CommentListTypeNormal:
         {
             number = [[self.tabNumbersDic objectForKey:CommentListTabNumberKeyNormal] integerValue];
         }
             break;
-        case CommentListViewTagBad:
+        case CommentListTypeBad:
         {
             number = [[self.tabNumbersDic objectForKey:CommentListTabNumberKeyBad] integerValue];
         }
             break;
-        case CommentListViewTagPicture:
+        case CommentListTypePicture:
         {
             number = [[self.tabNumbersDic objectForKey:CommentListTabNumberKeyPicture] integerValue];
         }
@@ -127,29 +127,29 @@
     return number;
 }
 
-- (NSArray *)commentListItemModelsOfCommentListView:(CommentListView *)listView withTag:(CommentListViewTag)tag {
+- (NSArray *)commentListItemModelsOfCommentListView:(CommentListView *)listView withTag:(CommentListType)tag {
     switch (tag) {
-        case CommentListViewTagAll:
+        case CommentListTypeAll:
         {
             return [NSArray arrayWithArray:self.allResultArray];
         }
             break;
-        case CommentListViewTagGood:
+        case CommentListTypeGood:
         {
             return [NSArray arrayWithArray:self.goodResultArray];
         }
             break;
-        case CommentListViewTagNormal:
+        case CommentListTypeNormal:
         {
             return [NSArray arrayWithArray:self.normalResultArray];
         }
             break;
-        case CommentListViewTagBad:
+        case CommentListTypeBad:
         {
             return [NSArray arrayWithArray:self.badResultArray];
         }
             break;
-        case CommentListViewTagPicture:
+        case CommentListTypePicture:
         {
             return [NSArray arrayWithArray:self.pictureResultArray];
         }
@@ -162,29 +162,29 @@
 
 #pragma mark Private methods
 
-- (void)clearDataForTag:(CommentListViewTag)tag {
+- (void)clearDataForTag:(CommentListType)tag {
     switch (tag) {
-        case CommentListViewTagAll:
+        case CommentListTypeAll:
         {
             [self.allResultArray removeAllObjects];
         }
             break;
-        case CommentListViewTagGood:
+        case CommentListTypeGood:
         {
             [self.goodResultArray removeAllObjects];
         }
             break;
-        case CommentListViewTagNormal:
+        case CommentListTypeNormal:
         {
             [self.normalResultArray removeAllObjects];
         }
             break;
-        case CommentListViewTagBad:
+        case CommentListTypeBad:
         {
             [self.badResultArray removeAllObjects];
         }
             break;
-        case CommentListViewTagPicture:
+        case CommentListTypePicture:
         {
             [self.pictureResultArray removeAllObjects];
         }
@@ -194,12 +194,12 @@
     }
 }
 
-- (void)loadCommentsSucceedWithData:(NSDictionary *)data segmmentTag:(CommentListViewTag)tag {
+- (void)loadCommentsSucceedWithData:(NSDictionary *)data segmmentTag:(CommentListType)tag {
     [self clearDataForTag:tag];
     [self reloadCommentListViewWithData:data forSegmmentTag:tag];
 }
 
-- (void)loadCommentsFailedWithError:(NSError *)error segmmentTag:(CommentListViewTag)tag {
+- (void)loadCommentsFailedWithError:(NSError *)error segmmentTag:(CommentListType)tag {
     [self clearDataForTag:tag];
     switch (error.code) {
         case -999:
@@ -221,29 +221,29 @@
     [self.view endRefresh];
 }
 
-- (void)loadMoreCommentsSucceedWithData:(NSDictionary *)data segmmentTag:(CommentListViewTag)tag {
+- (void)loadMoreCommentsSucceedWithData:(NSDictionary *)data segmmentTag:(CommentListType)tag {
     switch (tag) {
-        case CommentListViewTagAll:
+        case CommentListTypeAll:
         {
             self.currentAllPage ++;
         }
             break;
-        case CommentListViewTagGood:
+        case CommentListTypeGood:
         {
             self.currentGoodPage ++;
         }
             break;
-        case CommentListViewTagNormal:
+        case CommentListTypeNormal:
         {
             self.currentNormalPage ++;
         }
             break;
-        case CommentListViewTagBad:
+        case CommentListTypeBad:
         {
             self.currentBadPage ++;
         }
             break;
-        case CommentListViewTagPicture:
+        case CommentListTypePicture:
         {
             self.currentPicturePage ++;
         }
@@ -255,7 +255,7 @@
     [self.view endLoadMore];
 }
 
-- (void)loadMoreCommentsFailedWithError:(NSError *)error segmmentTag:(CommentListViewTag)tag {
+- (void)loadMoreCommentsFailedWithError:(NSError *)error segmmentTag:(CommentListType)tag {
     switch (error.code) {
         case -999:
         {
@@ -305,7 +305,7 @@
     [self.view reloadSegmentHeader];
 }
 
-- (void)reloadCommentListViewWithData:(NSDictionary *)data forSegmmentTag:(CommentListViewTag)tag {
+- (void)reloadCommentListViewWithData:(NSDictionary *)data forSegmmentTag:(CommentListType)tag {
     NSDictionary *dataDic = [data objectForKey:@"data"];
     if ([dataDic isKindOfClass:[NSDictionary class]] && [dataDic count] > 0) {
         [self fillTabNumberWithData:[dataDic objectForKey:@"comment"]];
@@ -317,27 +317,27 @@
                     CommentListItemModel *model = [[CommentListItemModel alloc] initWithRawData:singleItem];
                     if (model) {
                         switch (tag) {
-                            case CommentListViewTagAll:
+                            case CommentListTypeAll:
                             {
                                 [self.allResultArray addObject:model];
                             }
                                 break;
-                            case CommentListViewTagGood:
+                            case CommentListTypeGood:
                             {
                                 [self.goodResultArray addObject:model];
                             }
                                 break;
-                            case CommentListViewTagNormal:
+                            case CommentListTypeNormal:
                             {
                                 [self.normalResultArray addObject:model];
                             }
                                 break;
-                            case CommentListViewTagBad:
+                            case CommentListTypeBad:
                             {
                                 [self.badResultArray addObject:model];
                             }
                                 break;
-                            case CommentListViewTagPicture:
+                            case CommentListTypePicture:
                             {
                                 [self.pictureResultArray addObject:model];
                             }
@@ -462,7 +462,7 @@
 }
 
 - (void)resetResultWithType:(KTCCommentType)type {
-    self.currentTag = (CommentListViewTag)(type - 1);
+    self.currentTag = (CommentListType)(type - 1);
     [self stopUpdateData];
     switch (type) {
         case KTCCommentTypeAll:

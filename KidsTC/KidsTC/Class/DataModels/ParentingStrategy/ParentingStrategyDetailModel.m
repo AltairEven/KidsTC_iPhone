@@ -11,22 +11,19 @@
 @implementation ParentingStrategyDetailModel
 
 - (void)fillWithRawData:(NSDictionary *)data {
-//    if (!data || ![data isKindOfClass:[NSDictionary class]]) {
-//        return;
-//    }
-//    self.isFavourite = [[data objectForKey:@"isFavor"] boolValue];
-//    self.mainImageUrl = [NSURL URLWithString:[data objectForKey:@"imgUrl"]];
-//    self.title = [data objectForKey:@"title"];
-//    self.tagNames = [data objectForKey:@"tag"];
-//    self.strategyDescription = [data objectForKey:@"desc"];
-    
-    self.isFavourite = NO;
-    self.mainImageUrl = [NSURL URLWithString:@"http://img.sqkids.com:7500/v1/img/T1KtETBjVT1RCvBVdK.jpg"];
-    self.title = @"亲子攻略标题";
-    self.tagNames = [NSArray arrayWithObjects:@"小河马", @"小河马爱洗澡", @"河马妈妈", @"打屁", @"哈哈哈哈", @"满地跑", @"捣", nil];
-    self.strategyDescription = @"小河马爱洗澡，萌萌哒满地跑，一不小心摔一跤，呜啊呜啊哭又闹。河马妈妈来看到，二话不说拿棍捣，小河马被打屁了，哈哈哈哈真搞笑。";
-    NSArray *cellDataArray = [data objectForKey:@"step"];
-    cellDataArray = [NSArray arrayWithObjects:@"1", @"2", @"3", @"4", @"5", nil];
+    if (!data || ![data isKindOfClass:[NSDictionary class]]) {
+        return;
+    }
+    self.tagNames = [data objectForKey:@"flag"];
+    NSDictionary *infoDic = [data objectForKey:@"info"];
+    if ([infoDic isKindOfClass:[NSDictionary class]]) {
+        self.isFavourite = [[infoDic objectForKey:@"isCollect"] boolValue];
+        self.mainImageUrl = [NSURL URLWithString:[infoDic objectForKey:@"image"]];
+        self.title = [infoDic objectForKey:@"title"];
+        self.authorName = [infoDic objectForKey:@"authorName"];
+        self.strategyDescription = [infoDic objectForKey:@"simply"];
+    }
+    NSArray *cellDataArray = [data objectForKey:@"items"];
     if ([cellDataArray isKindOfClass:[NSArray class]]) {
         NSMutableArray *tempArray = [[NSMutableArray alloc] init];
         for (NSDictionary *cellData in cellDataArray) {
@@ -98,8 +95,8 @@
         if (rightM > rightLimit) {
             xPosition = leftMargin;
             yPosition += cellVMargin + titleHeight;
-            height = yPosition + titleHeight + topMargin;
         }
+        height = yPosition + titleHeight + topMargin;
     }
     
     return height;
@@ -120,32 +117,30 @@
 @implementation ParentingStrategyDetailCellModel
 
 - (instancetype)initWithRawData:(NSDictionary *)data {
-//    if (!data || ![data isKindOfClass:[NSDictionary class]]) {
-//        return nil;
-//    }
+    if (!data || ![data isKindOfClass:[NSDictionary class]]) {
+        return nil;
+    }
     self = [super init];
     if (self) {
-//        self.title = [data objectForKey:@"title"];
-//        self.imageUrl = [NSURL URLWithString:[data objectForKey:@"imgUrl"]];
-//        self.cellContentString = [data objectForKey:@"content"];
-//        self.timeDescription = [data objectForKey:@"time"];
-//        self.coordinate = [GToolUtil coordinateFromString:[data objectForKey:@"mapAddr"]];
-//        NSDictionary *relatedDic = [data objectForKey:@"serve"];
-//        if ([relatedDic isKindOfClass:[NSDictionary class]]) {
-//            HomeSegueDestination dest = (HomeSegueDestination)[[relatedDic objectForKey:@"type"] integerValue];
-//            self.relatedInfoModel = [[HomeSegueModel alloc] initWithDestination:dest paramRawData:[relatedDic objectForKey:@"params"]];
-//            self.relatedInfoTitle = [relatedDic objectForKey:@"title"];
-//        }
-//        self.commentCount = [[data objectForKey:@"commentCount"] integerValue];
+        if ([data objectForKey:@"id"]) {
+            self.identifier = [NSString stringWithFormat:@"%@", [data objectForKey:@"id"]];
+        }
+        self.title = [data objectForKey:@"title"];
+        self.imageUrl = [NSURL URLWithString:[data objectForKey:@"image"]];
+        self.cellContentString = [data objectForKey:@"desc"];
+        self.timeDescription = [data objectForKey:@"time"];
         
-        self.title = @"小河马爱洗澡，萌萌哒满地跑";
-        self.imageUrl = [NSURL URLWithString:@"http://img.sqkids.com:7500/v1/img/T1KtETBjVT1RCvBVdK.jpg"];
-        self.cellContentString = @"小河马爱洗澡，萌萌哒满地跑，一不小心摔一跤，呜啊呜啊哭又闹。河马妈妈来看到，二话不说拿棍捣，小河马被打屁了，哈哈哈哈真搞笑。";
-        self.timeDescription = @"2015-10-16";
-        self.coordinate = [GToolUtil coordinateFromString:@"34.50000,121.43333"];
-        self.relatedInfoModel = [[HomeSegueModel alloc] initWithDestination:HomeSegueDestinationServiceDetail paramRawData:[NSDictionary dictionaryWithObject:@"1" forKey:@"1"]];
-        self.relatedInfoTitle = @"河马之家";
-        self.commentCount = 10086;
+        CLLocationCoordinate2D coordinate = [GToolUtil coordinateFromString:[data objectForKey:@"mapAddress"]];
+        NSString *address = [data objectForKey:@"address"];
+        if (CLLocationCoordinate2DIsValid(coordinate)) {
+            self.location = [[KTCLocation alloc] initWithLocation:[[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude] locationDescription:address];
+        }
+        
+        HomeSegueDestination dest = (HomeSegueDestination)[[data objectForKey:@"linkType"] integerValue];
+        self.relatedInfoModel = [[HomeSegueModel alloc] initWithDestination:dest paramRawData:[data objectForKey:@"params"]];
+        self.relatedInfoTitle = [data objectForKey:@"linkTitle"];
+        self.commentCount = [[data objectForKey:@"commentCount"] integerValue];
+        
         self.ratio = 0.618;
     }
     return self;

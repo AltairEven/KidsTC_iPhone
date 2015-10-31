@@ -20,10 +20,13 @@ typedef enum {
 @property (nonatomic, copy) NSString *identifier;
 @property (nonatomic, strong) NSURL *imageUrl;
 @property (nonatomic, copy) NSString *title;
+@property (nonatomic, strong) NSURL *editorFaceImageUrl;
 @property (nonatomic, copy) NSString *editorName;
 @property (nonatomic, assign) NSUInteger viewCount;
 @property (nonatomic, assign) NSUInteger commentCount;
 @property (nonatomic, assign) ParentingStrategyListTag listTag;
+@property (nonatomic, assign) NSUInteger likeCount;
+@property (nonatomic, copy) NSString *brief;
 
 @property (nonatomic, assign) CGFloat imageRatio;
 
