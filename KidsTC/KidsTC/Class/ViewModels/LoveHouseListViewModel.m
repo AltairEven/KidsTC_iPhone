@@ -43,11 +43,12 @@
 
 - (void)startUpdateDataWithSucceed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
     if (!self.loadHouseRequest) {
-        self.loadHouseRequest = [HttpRequestClient clientWithUrlAliasName:@"SEARCH_ARTICLE"];
+        self.loadHouseRequest = [HttpRequestClient clientWithUrlAliasName:@"WELFARE_GET"];
     }
     [self.loadHouseRequest cancel];
     self.currentPage = 1;
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
+                           [NSNumber numberWithInteger:2], @"type",
                            [NSNumber numberWithInteger:self.currentPage], @"page",
                            [NSNumber numberWithInteger:PageSize], @"pagecount", nil];
     __weak LoveHouseListViewModel *weakSelf = self;
@@ -163,11 +164,12 @@
 
 - (void)getMoreHouses {
     if (!self.loadHouseRequest) {
-        self.loadHouseRequest = [HttpRequestClient clientWithUrlAliasName:@"SEARCH_ARTICLE"];
+        self.loadHouseRequest = [HttpRequestClient clientWithUrlAliasName:@"WELFARE_GET"];
     }
     [self.loadHouseRequest cancel];
     NSUInteger nextPage = self.currentPage + 1;
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
+                           [NSNumber numberWithInteger:2], @"type",
                            [NSNumber numberWithInteger:nextPage], @"page",
                            [NSNumber numberWithInteger:PageSize], @"pagecount", nil];
     __weak LoveHouseListViewModel *weakSelf = self;

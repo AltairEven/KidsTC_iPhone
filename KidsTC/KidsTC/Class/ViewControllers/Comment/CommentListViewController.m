@@ -54,15 +54,15 @@
 
 #pragma mark CommentListViewDataSource & CommentListViewDelegate
 
-- (void)commentListView:(CommentListView *)listView willShowWithTag:(CommentListViewTag)tag {
+- (void)commentListView:(CommentListView *)listView willShowWithTag:(CommentListType)tag {
     [self.viewModel resetResultWithType:(KTCCommentType)(tag + 1)];
 }
 
-- (void)commentListView:(CommentListView *)listView DidPullDownToRefreshforViewTag:(CommentListViewTag)tag {
+- (void)commentListView:(CommentListView *)listView DidPullDownToRefreshforViewTag:(CommentListType)tag {
     [self.viewModel startUpdateDataWithType:(KTCCommentType)(tag + 1)];
 }
 
-- (void)commentListView:(CommentListView *)listView DidPullUpToLoadMoreforViewTag:(CommentListViewTag)tag {
+- (void)commentListView:(CommentListView *)listView DidPullUpToLoadMoreforViewTag:(CommentListType)tag {
     [self.viewModel getMoreDataWithType:(KTCCommentType)(tag + 1)];
 }
 

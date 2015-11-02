@@ -16,13 +16,16 @@
     }
     self = [super init];
     if (self) {
-        self.faceImageUrl = [NSURL URLWithString:[data objectForKey:@"face"]];
-        self.userName = [data objectForKey:@"user"];
+        if ([data objectForKey:@"id"]) {
+            self.identifier = [NSString stringWithFormat:@"%@", [data objectForKey:@"id"]];
+        }
+        self.faceImageUrl = [NSURL URLWithString:[data objectForKey:@"userImgUrl"]];
+        self.userName = [data objectForKey:@"userName"];
         self.replyContent = [data objectForKey:@"content"];
         self.timeDescription = [data objectForKey:@"time"];
-        self.userName = @"小河马";
-        self.replyContent = @"小河马爱洗澡，萌萌哒满地跑";
-        self.timeDescription = @"2015-10-30";
+        self.replyCount = [[data objectForKey:@"replyCount"] integerValue];
+        self.isLiked = [[data objectForKey:@"isPrasise"] boolValue];
+        self.likeCount = [[data objectForKey:@"praiseCount"] integerValue];
     }
     return self;
 }

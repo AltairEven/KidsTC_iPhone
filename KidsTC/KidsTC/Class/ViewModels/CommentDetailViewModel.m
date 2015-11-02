@@ -18,6 +18,8 @@
 
 @property (nonatomic, assign) NSUInteger currentPage;
 
+- (NSDictionary *)requestParamWithPageIndex:(NSUInteger)index;;
+
 - (void)loadReplyListSucceed:(NSDictionary *)data;
 - (void)loadReplyListFailed:(NSError *)error;
 - (void)loadMoreReplyListSucceed:(NSDictionary *)data;
@@ -42,15 +44,11 @@
 
 - (void)startUpdateDataWithSucceed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
     if (!self.loadReplyRequest) {
-        self.loadReplyRequest = [HttpRequestClient clientWithUrlAliasName:@"ARTICLE_GET_LIST"];
+        self.loadReplyRequest = [HttpRequestClient clientWithUrlAliasName:@"COMMENT_GET_NEWS"];
     }
     [self.loadReplyRequest cancel];
     self.currentPage = 1;
-    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
-                           [NSNumber numberWithInteger:self.currentPage], @"page",
-                           [NSNumber numberWithInteger:[self.view pageSize]], @"pageCount",
-                           @"0", @"tagId",
-                           @"", @"authorId", nil];
+    NSDictionary *param = [self requestParamWithPageIndex:self.currentPage];
     __weak CommentDetailViewModel *weakSelf = self;
     [weakSelf.loadReplyRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [weakSelf loadReplyListSucceed:responseData];
@@ -61,6 +59,9 @@
         [weakSelf loadReplyListFailed:error];
         if (failure) {
             failure(error);
+        }
+        if (weakSelf.netErrorBlock) {
+            weakSelf.netErrorBlock(error);
         }
     }];
 }
@@ -81,9 +82,48 @@
 
 #pragma mark Private methods
 
+- (NSDictionary *)requestParamWithPageIndex:(NSUInteger)index {
+    if (!self.detailModel.identifier) {
+        self.detailModel.identifier = @"";
+    }
+    CommentRelationType relattionType = CommentRelationTypeNone;
+    CommentListType listType = CommentListTypeAll;
+    switch (self.detailModel.modelSource) {
+        case CommentDetailViewSourceStrategy:
+        {
+            relattionType = CommentRelationTypeStrategy;
+        }
+            break;
+        case CommentDetailViewSourceStrategyDetail:
+        {
+            relattionType = CommentRelationTypeStrategyDetail;
+        }
+            break;
+        case CommentDetailViewSourceService:
+        {
+            relattionType = CommentRelationTypeServiceProduct;
+        }
+        case CommentDetailViewSourceStore:
+        {
+            relattionType = CommentRelationTypeStore;
+        }
+        default:
+            break;
+    }
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
+                           self.detailModel.identifier, @"relationSysNo",
+                           [NSNumber numberWithInteger:relattionType], @"relationType",
+                           [NSNumber numberWithInteger:listType], @"commentType",
+                           [NSNumber numberWithInteger:index], @"page",
+                           [NSNumber numberWithInteger:[self.view pageSize]], @"pageCount", nil];
+    return param;
+}
+
 - (void)loadReplyListSucceed:(NSDictionary *)data {
     [self.itemModelsArray removeAllObjects];
+    self.detailModel.replyModels = nil;
     [self reloadListViewWithData:data];
+    [self.view endRefresh];
 }
 
 - (void)loadReplyListFailed:(NSError *)error {
@@ -105,11 +145,13 @@
             break;
     }
     [self reloadListViewWithData:nil];
+    [self.view endRefresh];
 }
 
 - (void)loadMoreReplyListSucceed:(NSDictionary *)data {
     self.currentPage ++;
     [self reloadListViewWithData:data];
+    [self.view endLoadMore];
 }
 
 - (void)loadMoreReplyListFailed:(NSError *)error {
@@ -160,15 +202,11 @@
 
 - (void)getMoreReplies {
     if (!self.loadReplyRequest) {
-        self.loadReplyRequest = [HttpRequestClient clientWithUrlAliasName:@"ARTICLE_GET_LIST"];
+        self.loadReplyRequest = [HttpRequestClient clientWithUrlAliasName:@"COMMENT_GET_NEWS"];
     }
     [self.loadReplyRequest cancel];
     NSUInteger nextPage = self.currentPage + 1;
-    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
-                           [NSNumber numberWithInteger:nextPage], @"page",
-                           [NSNumber numberWithInteger:[self.view pageSize]], @"pageCount",
-                           @"0", @"tagId",
-                           @"", @"authorId", nil];
+    NSDictionary *param = [self requestParamWithPageIndex:nextPage];
     __weak CommentDetailViewModel *weakSelf = self;
     [weakSelf.loadReplyRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [weakSelf loadMoreReplyListSucceed:responseData];

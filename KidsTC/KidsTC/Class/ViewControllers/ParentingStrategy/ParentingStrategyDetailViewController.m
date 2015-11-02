@@ -44,14 +44,18 @@
     [self buildRightBarItems];
     self.detailView.delegate = self;
     self.viewModel = [[ParentingStrategyDetailViewModel alloc] initWithView:self.detailView];
-    [self.viewModel startUpdateDataWithStrategyIdentifier:self.strategyId Succeed:nil failure:nil];
+    __weak ParentingStrategyDetailViewController *weakSelf = self;
+    [self.viewModel setNetErrorBlock:^(NSError *error) {
+        [weakSelf showConnectError:YES];
+    }];
+    [self reloadNetworkData];
 }
 
 #pragma mark ParentingStrategyDetailViewDelegate
 
 - (void)parentingStrategyDetailView:(ParentingStrategyDetailView *)detailView didSelectedItemAtIndex:(NSUInteger)index {
     ParentingStrategyDetailCellModel *model = [self.viewModel.detailModel.cellModels objectAtIndex:index];
-    CommentDetailViewController *controller = [[CommentDetailViewController alloc] initWithSource:CommentDetailViewSourceStrategy headerModel:model];
+    CommentDetailViewController *controller = [[CommentDetailViewController alloc] initWithSource:CommentDetailViewSourceStrategyDetail headerModel:model];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
 }
@@ -123,6 +127,18 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark Super method
+
+- (void)reloadNetworkData {
+    [[GAlertLoadingView sharedAlertLoadingView] show];
+    __weak ParentingStrategyDetailViewController *weakSelf = self;
+    [weakSelf.viewModel startUpdateDataWithStrategyIdentifier:self.strategyId Succeed:^(NSDictionary *data) {
+        [[GAlertLoadingView sharedAlertLoadingView] hide];
+    } failure:^(NSError *error) {
+        [[GAlertLoadingView sharedAlertLoadingView] hide];
+    }];
 }
 
 /*

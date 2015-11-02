@@ -53,16 +53,13 @@
 #pragma mark Public methods
 
 - (void)startUpdateDataWithStrategyIdentifier:(NSString *)identifier Succeed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
-    
-    [self loadDetailSucceed:nil];
-    return;
     if ([identifier length] == 0) {
         return;
     }
     [self.detailModel setIdentifier:identifier];
     
     if (!self.loadServiceDetailRequest) {
-        self.loadServiceDetailRequest = [HttpRequestClient clientWithUrlAliasName:@"PRODUCT_GETDETAIL"];
+        self.loadServiceDetailRequest = [HttpRequestClient clientWithUrlAliasName:@"STRATEGY_GET_DETAIL"];
         [self.loadServiceDetailRequest setErrorBlock:self.netErrorBlock];
     }
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:identifier, @"id", nil];
@@ -77,6 +74,9 @@
         [weakSelf loadDetailFailed:error];
         if (failure) {
             failure(error);
+        }
+        if (weakSelf.netErrorBlock) {
+            weakSelf.netErrorBlock(error);
         }
     }];
 }

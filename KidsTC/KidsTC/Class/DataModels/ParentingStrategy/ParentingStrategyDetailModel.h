@@ -21,6 +21,8 @@
 
 @property (nonatomic, copy) NSString *title;
 
+@property (nonatomic, copy) NSString *authorName;
+
 @property (nonatomic, strong) NSArray *tagNames;
 
 @property (nonatomic, copy) NSString *strategyDescription;
@@ -44,6 +46,8 @@
 
 @interface ParentingStrategyDetailCellModel : NSObject
 
+@property (nonatomic, copy) NSString *identifier;
+
 @property (nonatomic, copy) NSString *title;
 
 @property (nonatomic, strong) NSURL *imageUrl;
@@ -52,15 +56,11 @@
 
 @property (nonatomic, copy) NSString *timeDescription;
 
-@property (nonatomic, assign) CLLocationCoordinate2D coordinate;
+@property (nonatomic, strong) KTCLocation *location;
 
 @property (nonatomic, strong) HomeSegueModel *relatedInfoModel;
 
 @property (nonatomic, copy) NSString *relatedInfoTitle;
-
-@property (nonatomic, assign) BOOL isLiked;
-
-@property (nonatomic, assign) NSUInteger likeNumber;
 
 @property (nonatomic, assign) NSUInteger commentCount;
 

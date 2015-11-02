@@ -77,7 +77,7 @@
             [self.relatedInfoButton setHidden:NO];
             [self.relatedInfoButton setTitle:cellModel.relatedInfoTitle forState:UIControlStateNormal];
         } else {
-            [self.relatedInfoButton setHidden:NO];
+            [self.relatedInfoButton setHidden:YES];
         }
         if ([self.timeLabel isHidden] && [self.relatedInfoButton isHidden]) {
             self.infoHeight.constant = 0;
@@ -85,7 +85,7 @@
             self.infoHeight.constant = 40;
         }
         //loaction
-        if (CLLocationCoordinate2DIsValid(cellModel.coordinate)) {
+        if (cellModel.location) {
             [self.locationAlphaView setHidden:NO];
             [self.locationButton setHidden:NO];
         } else {
@@ -96,7 +96,7 @@
         NSString *commentTitle = @"";
         if (cellModel.commentCount > 99) {
             commentTitle = @" 99+";
-        } else {
+        } else if (cellModel.commentCount > 0) {
             commentTitle = [NSString stringWithFormat:@" %lu", (unsigned long)cellModel.commentCount];
         }
         [self.commentButton setTitle:commentTitle forState:UIControlStateNormal];

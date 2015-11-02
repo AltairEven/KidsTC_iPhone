@@ -94,7 +94,7 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
         self.segmentNib = [UINib nibWithNibName:NSStringFromClass([CommentListViewSegmentCell class]) bundle:nil];
         [self.segmentView registerNib:self.segmentNib forCellReuseIdentifier:kSegmentIdentifier];
     }
-    _currentViewTag = CommentListViewTagAll;
+    _currentViewTag = CommentListTypeAll;
     [self.segmentView setSelectedIndex:self.currentViewTag];
     //data
     self.noMoreDataDic = [[NSMutableDictionary alloc] init];
@@ -119,7 +119,7 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
             [cell.titleLabel setText:@"全部评价"];
             NSUInteger number = 0;
             if (self.dataSource && [self.dataSource respondsToSelector:@selector(numberOfCommentsOnCommentListView:withTag:)]) {
-                number = [self.dataSource numberOfCommentsOnCommentListView:self withTag:CommentListViewTagAll];
+                number = [self.dataSource numberOfCommentsOnCommentListView:self withTag:CommentListTypeAll];
             }
             [cell.countLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)number]];
         }
@@ -129,7 +129,7 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
             [cell.titleLabel setText:@"好评"];
             NSUInteger number = 0;
             if (self.dataSource && [self.dataSource respondsToSelector:@selector(numberOfCommentsOnCommentListView:withTag:)]) {
-                number = [self.dataSource numberOfCommentsOnCommentListView:self withTag:CommentListViewTagGood];
+                number = [self.dataSource numberOfCommentsOnCommentListView:self withTag:CommentListTypeGood];
             }
             [cell.countLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)number]];
         }
@@ -139,7 +139,7 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
             [cell.titleLabel setText:@"中评"];
             NSUInteger number = 0;
             if (self.dataSource && [self.dataSource respondsToSelector:@selector(numberOfCommentsOnCommentListView:withTag:)]) {
-                number = [self.dataSource numberOfCommentsOnCommentListView:self withTag:CommentListViewTagNormal];
+                number = [self.dataSource numberOfCommentsOnCommentListView:self withTag:CommentListTypeNormal];
             }
             [cell.countLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)number]];
         }
@@ -149,7 +149,7 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
             [cell.titleLabel setText:@"差评"];
             NSUInteger number = 0;
             if (self.dataSource && [self.dataSource respondsToSelector:@selector(numberOfCommentsOnCommentListView:withTag:)]) {
-                number = [self.dataSource numberOfCommentsOnCommentListView:self withTag:CommentListViewTagBad];
+                number = [self.dataSource numberOfCommentsOnCommentListView:self withTag:CommentListTypeBad];
             }
             [cell.countLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)number]];
         }
@@ -159,7 +159,7 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
             [cell.titleLabel setText:@"有图"];
             NSUInteger number = 0;
             if (self.dataSource && [self.dataSource respondsToSelector:@selector(numberOfCommentsOnCommentListView:withTag:)]) {
-                number = [self.dataSource numberOfCommentsOnCommentListView:self withTag:CommentListViewTagPicture];
+                number = [self.dataSource numberOfCommentsOnCommentListView:self withTag:CommentListTypePicture];
             }
             [cell.countLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)number]];
         }
@@ -171,9 +171,9 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
 }
 
 - (void)segmentView:(AUISegmentView *)segmentView didSelectedAtIndex:(NSUInteger)index {
-    _currentViewTag = (CommentListViewTag)index;
+    _currentViewTag = (CommentListType)index + 1;
     if (self.delegate && [self.delegate respondsToSelector:@selector(commentListView:willShowWithTag:)]) {
-        [self.delegate commentListView:self willShowWithTag:(CommentListViewTag)index];
+        [self.delegate commentListView:self willShowWithTag:_currentViewTag];
     }
 }
 
@@ -286,9 +286,9 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
     [self.segmentView setSelectedIndex:self.currentViewTag];
 }
 
-- (void)reloadDataforViewTag:(CommentListViewTag)tag {
+- (void)reloadDataforViewTag:(CommentListType)tag {
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(commentListItemModelsOfCommentListView:withTag:)]) {
-        self.listModels = [self.dataSource commentListItemModelsOfCommentListView:self withTag:(CommentListViewTag)self.segmentView.selectedIndex];
+        self.listModels = [self.dataSource commentListItemModelsOfCommentListView:self withTag:(CommentListType)self.segmentView.selectedIndex + 1];
         [self.tableView reloadData];
         if ([self.listModels count] > 0) {
             [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
@@ -310,11 +310,11 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
     [self.tableView.gifFooter endRefreshing];
 }
 
-- (void)noMoreData:(BOOL)noMore forViewTag:(CommentListViewTag)tag {
+- (void)noMoreData:(BOOL)noMore forViewTag:(CommentListType)tag {
     [self.noMoreDataDic setObject:[NSNumber numberWithBool:noMore] forKey:[NSString stringWithFormat:@"%d", tag]];
 }
 
-- (void)hideLoadMoreFooter:(BOOL)hidden forViewTag:(CommentListViewTag)tag {
+- (void)hideLoadMoreFooter:(BOOL)hidden forViewTag:(CommentListType)tag {
     [self.tableView.gifFooter setHidden:hidden];
     [self.hideFooterDic setObject:[NSNumber numberWithBool:hidden] forKey:[NSString stringWithFormat:@"%d", tag]];
 }
