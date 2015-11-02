@@ -21,7 +21,7 @@
 
 //@end
 @interface PlaceHolderTextView : UITextView <UITextViewDelegate>
-@property (nonatomic, strong) NSString *placeHolderStr;
+@property (nonatomic, copy) NSString *placeHolderStr;
 @property (nonatomic, strong) UIFont *placeHolderFont;
 @property (nonatomic, strong) UIColor *placeHolderColor;
 @property (nonatomic, strong) UIFont *contentFont;

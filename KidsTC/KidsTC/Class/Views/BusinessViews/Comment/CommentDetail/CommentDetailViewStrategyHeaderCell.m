@@ -20,11 +20,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *relatedInfoButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *infoHeight;
-@property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (weak, nonatomic) IBOutlet UIButton *commentButton;
 
 - (IBAction)didClickedRelatedInfoButton:(id)sender;
-- (IBAction)didClickedLikeButton:(id)sender;
 - (IBAction)didClickedCommentButton:(id)sender;
 
 @end
@@ -82,14 +80,6 @@
         } else {
             self.infoHeight.constant = 40;
         }
-        //loaction
-        NSString *likeTitle = @"";
-        if (cellModel.commentCount > 99) {
-            likeTitle = @" 99+";
-        } else {
-            likeTitle = [NSString stringWithFormat:@" %lu", (unsigned long)cellModel.commentCount];
-        }
-        [self.likeButton setTitle:likeTitle forState:UIControlStateNormal];
         //comment
         NSString *commentTitle = @"";
         if (cellModel.commentCount > 99) {
@@ -104,12 +94,6 @@
 - (IBAction)didClickedRelatedInfoButton:(id)sender {
     if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedRelatedInfoButtonOnCommentDetailViewStrategyHeaderCell:)]) {
         [self.delegate didClickedRelatedInfoButtonOnCommentDetailViewStrategyHeaderCell:self];
-    }
-}
-
-- (IBAction)didClickedLikeButton:(id)sender {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedLocationButtonOnCommentDetailViewStrategyHeaderCell:)]) {
-        [self.delegate didClickedLocationButtonOnCommentDetailViewStrategyHeaderCell:self];
     }
 }
 

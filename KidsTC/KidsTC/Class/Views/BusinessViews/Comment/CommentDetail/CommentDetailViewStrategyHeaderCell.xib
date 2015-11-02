@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
@@ -112,25 +112,11 @@
                             <constraint firstAttribute="height" constant="20" id="T1p-qC-4QG"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <state key="normal" title="（10086）" image="comment_small_n">
+                        <state key="normal" title="（10086）" image="comment_comment_n">
                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <connections>
                             <action selector="didClickedCommentButton:" destination="u1m-Q8-5ml" eventType="touchUpInside" id="UYl-SC-JnK"/>
-                        </connections>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h4x-hT-F3h">
-                        <rect key="frame" x="140" y="227" width="80" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20" id="4BC-JT-UOT"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <state key="normal" title="（10086）" image="comment_small_n">
-                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <connections>
-                            <action selector="didClickedCommentButton:" destination="u1m-Q8-5ml" eventType="touchUpInside" id="DIg-KW-V6N"/>
-                            <action selector="didClickedLikeButton:" destination="u1m-Q8-5ml" eventType="touchUpInside" id="1j7-OX-qQ8"/>
                         </connections>
                     </button>
                 </subviews>
@@ -140,12 +126,10 @@
                     <constraint firstAttribute="bottom" secondItem="NPT-if-VRX" secondAttribute="bottom" constant="40" id="2jA-g5-JE1"/>
                     <constraint firstItem="JVX-8i-ecJ" firstAttribute="width" secondItem="NPT-if-VRX" secondAttribute="width" id="Neu-Ka-frc"/>
                     <constraint firstItem="NPT-if-VRX" firstAttribute="leading" secondItem="NCc-VX-1kP" secondAttribute="leading" constant="10" id="UXF-i8-4la"/>
-                    <constraint firstItem="a2r-Gc-zNp" firstAttribute="leading" secondItem="h4x-hT-F3h" secondAttribute="trailing" constant="10" id="XHg-dl-Osq"/>
                     <constraint firstItem="JVX-8i-ecJ" firstAttribute="centerY" secondItem="NPT-if-VRX" secondAttribute="centerY" constant="3" id="aAo-Ff-sK3"/>
                     <constraint firstItem="JVX-8i-ecJ" firstAttribute="height" secondItem="NPT-if-VRX" secondAttribute="height" id="g4B-Oi-xZX"/>
                     <constraint firstAttribute="bottom" secondItem="a2r-Gc-zNp" secondAttribute="bottom" constant="10" id="kvz-tA-xli"/>
                     <constraint firstItem="JVX-8i-ecJ" firstAttribute="centerX" secondItem="NPT-if-VRX" secondAttribute="centerX" id="q4e-cs-0jz"/>
-                    <constraint firstItem="h4x-hT-F3h" firstAttribute="centerY" secondItem="a2r-Gc-zNp" secondAttribute="centerY" id="sQW-D4-Kqs"/>
                     <constraint firstAttribute="trailing" secondItem="NPT-if-VRX" secondAttribute="trailing" constant="10" id="wex-aM-qsx"/>
                 </constraints>
             </tableViewCellContentView>
@@ -156,7 +140,6 @@
                 <outlet property="contentLabel" destination="yBB-Ib-acW" id="XCH-mr-ZD0"/>
                 <outlet property="imageHeight" destination="cH7-Ck-oV2" id="UgQ-yP-sbU"/>
                 <outlet property="infoHeight" destination="FPA-dQ-Mxo" id="NT0-8Y-hmK"/>
-                <outlet property="likeButton" destination="h4x-hT-F3h" id="1Rb-US-lPC"/>
                 <outlet property="relatedInfoButton" destination="cBK-ey-yEU" id="Vcu-3t-B2U"/>
                 <outlet property="shadowView" destination="JVX-8i-ecJ" id="mwg-PA-F9D"/>
                 <outlet property="timeLabel" destination="oox-sy-Ol3" id="jFL-1c-qoA"/>
@@ -167,7 +150,7 @@
     </objects>
     <resources>
         <image name="clock" width="15" height="15"/>
-        <image name="comment_small_n" width="15" height="15"/>
+        <image name="comment_comment_n" width="15" height="15"/>
         <image name="relatedInfo" width="15" height="15"/>
     </resources>
 </document>
