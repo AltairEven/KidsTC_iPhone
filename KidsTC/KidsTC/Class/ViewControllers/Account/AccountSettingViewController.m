@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _navigationTitle = @"账户设置";
+    _navigationTitle = @"设置";
     // Do any additional setup after loading the view from its nib.
     self.settingView.delegate = self;
     [self.settingView reloadData];

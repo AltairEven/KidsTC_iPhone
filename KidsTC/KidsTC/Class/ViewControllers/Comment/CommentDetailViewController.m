@@ -46,10 +46,9 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if (!self.keyboardAdhesiveView) {
-        self.keyboardAdhesiveView = [[AUIKeyboardAdhesiveView alloc] init];
+        self.keyboardAdhesiveView = [[AUIKeyboardAdhesiveView alloc] initWithAvailableFuntions:nil];
         [self.keyboardAdhesiveView.headerView setBackgroundColor:[AUITheme theme].globalThemeColor];
         [self.keyboardAdhesiveView setTextLimitLength:100];
-        [self.keyboardAdhesiveView setUploadImageLimitCount:4];
     }
 }
 

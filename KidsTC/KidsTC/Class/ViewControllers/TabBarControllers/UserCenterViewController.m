@@ -12,6 +12,7 @@
 #import "CouponListViewController.h"
 #import "FavourateViewController.h"
 #import "AccountSettingViewController.h"
+#import "SoftwareSettingViewController.h"
 #import "LoginViewController.h"
 #import "AppointmentOrderListViewController.h"
 
@@ -30,7 +31,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    _navigationTitle = @"个人中心";
     self.userCenterView.delegate = self;
     
     self.viewModel = [[UserCenterViewModel alloc] initWithView:self.userCenterView];
@@ -42,11 +42,22 @@
     if ([[KTCUser currentUser] hasLogin]) {
         [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
     }
+    [self setupLeftBarButtonWithFrontImage:@"userCenter_setting" andBackImage:@"userCenter_setting"];
+    //透明
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    self.edgesForExtendedLayout = UIRectEdgeAll;
 }
 
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    //不透明
+    [self.navigationController.navigationBar setBackgroundImage:nil  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = nil;
+    self.navigationController.navigationBar.translucent = NO;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -119,17 +130,22 @@
                 [self.navigationController pushViewController:controller animated:YES];
             }
                 break;
-            case UserCenterTagSetting:
+            case UserCenterTagMessageCenter:
             {
-                AccountSettingViewController *controller = [[AccountSettingViewController alloc] initWithNibName:@"AccountSettingViewController" bundle:nil];
-                controller.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:controller animated:YES];
             }
                 break;
             default:
                 break;
         }
     } target:self];
+}
+
+#pragma mark Super Methods
+
+- (void)goBackController:(id)sender {
+    SoftwareSettingViewController *controller = [[SoftwareSettingViewController alloc] initWithNibName:@"SoftwareSettingViewController" bundle:nil];
+    controller.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 

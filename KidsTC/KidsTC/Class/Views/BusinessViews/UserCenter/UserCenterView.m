@@ -29,9 +29,9 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UITableViewCell *allOrderCell;
-@property (strong, nonatomic) IBOutlet UITableViewCell *couponCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *myFavourateCell;
-@property (strong, nonatomic) IBOutlet UITableViewCell *settingCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *couponCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *messageCenterCell;
 
 @property (nonatomic, strong) UserCenterModel *dataModel;
 
@@ -135,18 +135,18 @@
         }
             break;
         case 1:{
-            [self.couponCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
-            return self.couponCell;
-        }
-            break;
-        case 2:{
             [self.myFavourateCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
             return self.myFavourateCell;
         }
             break;
+        case 2:{
+            [self.couponCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+            return self.couponCell;
+        }
+            break;
         case 3:{
-            [self.settingCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
-            return self.settingCell;
+            [self.messageCenterCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+            return self.messageCenterCell;
         }
             break;
         default:

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -36,7 +36,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0nd-K2-oTl">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="view_small_n" translatesAutoresizingMaskIntoConstraints="NO" id="0nd-K2-oTl">
                                         <rect key="frame" x="205" y="209" width="15" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="15" id="iqq-nh-t4e"/>
@@ -49,7 +49,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kOR-zH-xqu">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="comment_small_n" translatesAutoresizingMaskIntoConstraints="NO" id="kOR-zH-xqu">
                                         <rect key="frame" x="260" y="209" width="15" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="15" id="flD-NC-6HC"/>
@@ -130,4 +130,8 @@
             <point key="canvasLocation" x="346" y="261"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="comment_small_n" width="15" height="15"/>
+        <image name="view_small_n" width="15" height="15"/>
+    </resources>
 </document>

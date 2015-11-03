@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AccountSettingModel.h"
 
 @class AccountSettingView;
 

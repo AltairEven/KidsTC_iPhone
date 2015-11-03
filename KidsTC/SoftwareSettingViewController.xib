@@ -5,9 +5,9 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9059"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountSettingViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SoftwareSettingViewController">
             <connections>
-                <outlet property="settingView" destination="6pw-do-rbI" id="QLU-on-6dw"/>
+                <outlet property="settingView" destination="xh6-J3-E2A" id="OBL-xR-UR8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,19 +16,19 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6pw-do-rbI" customClass="AccountSettingView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xh6-J3-E2A" customClass="SoftwareSettingView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="6pw-do-rbI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="W6A-XA-LSG"/>
-                <constraint firstAttribute="bottom" secondItem="6pw-do-rbI" secondAttribute="bottom" id="if9-qj-wqb"/>
-                <constraint firstAttribute="trailing" secondItem="6pw-do-rbI" secondAttribute="trailing" id="oKx-YZ-Ozs"/>
-                <constraint firstItem="6pw-do-rbI" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="tHq-0V-7cU"/>
+                <constraint firstItem="xh6-J3-E2A" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="4eB-4t-Ba1"/>
+                <constraint firstAttribute="trailing" secondItem="xh6-J3-E2A" secondAttribute="trailing" id="HtY-kc-U4o"/>
+                <constraint firstItem="xh6-J3-E2A" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="kVb-dp-nQb"/>
+                <constraint firstAttribute="bottom" secondItem="xh6-J3-E2A" secondAttribute="bottom" id="v6f-fl-Gvw"/>
             </constraints>
-            <point key="canvasLocation" x="443" y="321"/>
+            <point key="canvasLocation" x="347" y="362"/>
         </view>
     </objects>
 </document>

@@ -28,6 +28,8 @@
 
 #import "AFHTTPRequestOperation.h"
 
+static NSUInteger _cacheLength = 0;
+
 @interface AFImageCache : NSCache <AFImageCache>
 @end
 
@@ -84,6 +86,16 @@
 
 + (void)setSharedImageCache:(id <AFImageCache>)imageCache {
     objc_setAssociatedObject(self, @selector(sharedImageCache), imageCache, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
++ (NSUInteger)getCacheLength {
+    return _cacheLength;
+}
+
++ (void)clearCache {
+    AFImageCache *cache = (AFImageCache *)[UIImageView sharedImageCache];
+    [cache removeAllObjects];
+    _cacheLength = 0;
 }
 
 #pragma mark -
@@ -214,6 +226,15 @@ static inline NSString * AFImageCacheKeyFromURLRequest(NSURLRequest *request) {
 {
     if (image && request) {
         [self setObject:image forKey:AFImageCacheKeyFromURLRequest(request)];
+        
+        //累计内存占用
+        CGImageRef inImage = image.CGImage;
+        size_t pixelsWide = CGImageGetWidth(inImage); //获取横向的像素点的个数
+        size_t pixelsHigh = CGImageGetHeight(inImage);
+        
+        unsigned long bitmapBytesPerRow    = (pixelsWide * 4); //每一行的像素点占用的字节数，每个像素点的ARGB四个通道各占8个bit(0-255)的空间
+        unsigned long bitmapByteCount    = (bitmapBytesPerRow * pixelsHigh); //计算整张图占用的字节数
+        _cacheLength += bitmapByteCount;
     }
 }
 

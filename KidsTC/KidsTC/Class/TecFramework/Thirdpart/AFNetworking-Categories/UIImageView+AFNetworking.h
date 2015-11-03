@@ -51,6 +51,10 @@
  */
 + (void)setSharedImageCache:(id <AFImageCache>)imageCache;
 
++ (NSUInteger)getCacheLength; //add by altair
+
++ (void)clearCache; //add by altair
+
 ///------------------------------------
 /// @name Accessing Response Serializer
 ///------------------------------------

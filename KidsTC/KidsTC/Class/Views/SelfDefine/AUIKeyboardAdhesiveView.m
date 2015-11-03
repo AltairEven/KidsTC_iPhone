@@ -200,7 +200,7 @@
             break;
         case AUIKeyboardAdhesiveViewExtensionFunctionTypeImageUpload:
         {
-            
+            self.uploadImageLimitCount = 10;
         }
             break;
         default:

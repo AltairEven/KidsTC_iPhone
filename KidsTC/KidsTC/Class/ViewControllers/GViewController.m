@@ -259,7 +259,7 @@ typedef enum {
         backButton.frame = CGRectMake(0.0f, 0.0f, 28.0f, 28.0f);
     }
     
-    [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -15.f, 0, 0)];
+    [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
     
     [backButton addTarget:self action:@selector(goBackController:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:backButton];

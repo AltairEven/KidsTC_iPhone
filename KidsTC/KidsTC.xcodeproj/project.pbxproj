@@ -200,6 +200,18 @@
 		1E15F9B11BE1C784000C74E7 /* CommentDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E15F9AF1BE1C784000C74E7 /* CommentDetailViewController.xib */; };
 		1E15F9B31BE1FBD9000C74E7 /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E15F9B21BE1FBD9000C74E7 /* interface_list.plist */; };
 		1E15F9B61BE22512000C74E7 /* AUIKeyboardAdhesiveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E15F9B51BE22512000C74E7 /* AUIKeyboardAdhesiveView.m */; };
+		1E15F9C01BE8953C000C74E7 /* AccountSettingViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E15F9BE1BE8953C000C74E7 /* AccountSettingViewCell.m */; };
+		1E15F9C11BE8953C000C74E7 /* AccountSettingViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E15F9BF1BE8953C000C74E7 /* AccountSettingViewCell.xib */; };
+		1E15F9C51BE89846000C74E7 /* AccountSettingViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E15F9C41BE89846000C74E7 /* AccountSettingViewModel.m */; };
+		1E15F9C81BE899F8000C74E7 /* AccountSettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E15F9C71BE899F8000C74E7 /* AccountSettingModel.m */; };
+		1E15F9CB1BE8A057000C74E7 /* SoftwareSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E15F9CA1BE8A057000C74E7 /* SoftwareSettingView.m */; };
+		1E15F9CD1BE8A075000C74E7 /* SoftwareSettingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E15F9CC1BE8A075000C74E7 /* SoftwareSettingView.xib */; };
+		1E15F9D11BE8A47C000C74E7 /* SoftwareSettingViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E15F9CF1BE8A47C000C74E7 /* SoftwareSettingViewCell.m */; };
+		1E15F9D21BE8A47C000C74E7 /* SoftwareSettingViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E15F9D01BE8A47C000C74E7 /* SoftwareSettingViewCell.xib */; };
+		1E15F9DE1BE8AA56000C74E7 /* SoftwareSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E15F9DC1BE8AA56000C74E7 /* SoftwareSettingViewController.m */; };
+		1E15F9DF1BE8AA56000C74E7 /* SoftwareSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E15F9DD1BE8AA56000C74E7 /* SoftwareSettingViewController.xib */; };
+		1E15F9E21BE8AB3E000C74E7 /* SoftwareSettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E15F9E11BE8AB3E000C74E7 /* SoftwareSettingModel.m */; };
+		1E15F9E51BE8ABF2000C74E7 /* SoftwareSettingViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E15F9E41BE8ABF2000C74E7 /* SoftwareSettingViewModel.m */; };
 		1E1CFA1D1BD4FEE20005653D /* KTCSearchViewCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1CFA1B1BD4FEE20005653D /* KTCSearchViewCategoryCell.m */; };
 		1E1CFA1E1BD4FEE20005653D /* KTCSearchViewCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E1CFA1C1BD4FEE20005653D /* KTCSearchViewCategoryCell.xib */; };
 		1E1CFA211BD72F4C0005653D /* ServiceDetailMoreInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1CFA201BD72F4C0005653D /* ServiceDetailMoreInfoView.m */; };
@@ -1158,6 +1170,26 @@
 		1E15F9B21BE1FBD9000C74E7 /* interface_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = interface_list.plist; sourceTree = "<group>"; };
 		1E15F9B41BE22512000C74E7 /* AUIKeyboardAdhesiveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIKeyboardAdhesiveView.h; sourceTree = "<group>"; };
 		1E15F9B51BE22512000C74E7 /* AUIKeyboardAdhesiveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIKeyboardAdhesiveView.m; sourceTree = "<group>"; };
+		1E15F9BD1BE8953C000C74E7 /* AccountSettingViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountSettingViewCell.h; sourceTree = "<group>"; };
+		1E15F9BE1BE8953C000C74E7 /* AccountSettingViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountSettingViewCell.m; sourceTree = "<group>"; };
+		1E15F9BF1BE8953C000C74E7 /* AccountSettingViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountSettingViewCell.xib; sourceTree = "<group>"; };
+		1E15F9C31BE89846000C74E7 /* AccountSettingViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountSettingViewModel.h; sourceTree = "<group>"; };
+		1E15F9C41BE89846000C74E7 /* AccountSettingViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountSettingViewModel.m; sourceTree = "<group>"; };
+		1E15F9C61BE899F8000C74E7 /* AccountSettingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountSettingModel.h; sourceTree = "<group>"; };
+		1E15F9C71BE899F8000C74E7 /* AccountSettingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountSettingModel.m; sourceTree = "<group>"; };
+		1E15F9C91BE8A057000C74E7 /* SoftwareSettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoftwareSettingView.h; path = Setting/SoftwareSettingView.h; sourceTree = "<group>"; };
+		1E15F9CA1BE8A057000C74E7 /* SoftwareSettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SoftwareSettingView.m; path = Setting/SoftwareSettingView.m; sourceTree = "<group>"; };
+		1E15F9CC1BE8A075000C74E7 /* SoftwareSettingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SoftwareSettingView.xib; sourceTree = "<group>"; };
+		1E15F9CE1BE8A47C000C74E7 /* SoftwareSettingViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoftwareSettingViewCell.h; sourceTree = "<group>"; };
+		1E15F9CF1BE8A47C000C74E7 /* SoftwareSettingViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoftwareSettingViewCell.m; sourceTree = "<group>"; };
+		1E15F9D01BE8A47C000C74E7 /* SoftwareSettingViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SoftwareSettingViewCell.xib; sourceTree = "<group>"; };
+		1E15F9DB1BE8AA56000C74E7 /* SoftwareSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoftwareSettingViewController.h; path = ../../../SoftwareSettingViewController.h; sourceTree = "<group>"; };
+		1E15F9DC1BE8AA56000C74E7 /* SoftwareSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SoftwareSettingViewController.m; path = ../../../SoftwareSettingViewController.m; sourceTree = "<group>"; };
+		1E15F9DD1BE8AA56000C74E7 /* SoftwareSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SoftwareSettingViewController.xib; path = ../../../SoftwareSettingViewController.xib; sourceTree = "<group>"; };
+		1E15F9E01BE8AB3E000C74E7 /* SoftwareSettingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoftwareSettingModel.h; sourceTree = "<group>"; };
+		1E15F9E11BE8AB3E000C74E7 /* SoftwareSettingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoftwareSettingModel.m; sourceTree = "<group>"; };
+		1E15F9E31BE8ABF1000C74E7 /* SoftwareSettingViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoftwareSettingViewModel.h; sourceTree = "<group>"; };
+		1E15F9E41BE8ABF2000C74E7 /* SoftwareSettingViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoftwareSettingViewModel.m; sourceTree = "<group>"; };
 		1E1CFA1A1BD4FEE20005653D /* KTCSearchViewCategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCSearchViewCategoryCell.h; sourceTree = "<group>"; };
 		1E1CFA1B1BD4FEE20005653D /* KTCSearchViewCategoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCSearchViewCategoryCell.m; sourceTree = "<group>"; };
 		1E1CFA1C1BD4FEE20005653D /* KTCSearchViewCategoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTCSearchViewCategoryCell.xib; sourceTree = "<group>"; };
@@ -2753,6 +2785,10 @@
 				1E79957D1BCD32B60099CFF9 /* LoveHouseListViewModel.m */,
 				1E7995911BCE36C20099CFF9 /* HospitalListViewModel.h */,
 				1E7995921BCE36C20099CFF9 /* HospitalListViewModel.m */,
+				1E15F9C31BE89846000C74E7 /* AccountSettingViewModel.h */,
+				1E15F9C41BE89846000C74E7 /* AccountSettingViewModel.m */,
+				1E15F9E31BE8ABF1000C74E7 /* SoftwareSettingViewModel.h */,
+				1E15F9E41BE8ABF2000C74E7 /* SoftwareSettingViewModel.m */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -2774,6 +2810,15 @@
 				1E15F99C1BDF79D3000C74E7 /* CommentDetailViewStrategyHeaderCell.xib */,
 			);
 			path = CommentDetail;
+			sourceTree = "<group>";
+		};
+		1E15F9C21BE897F9000C74E7 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				1E15F9C61BE899F8000C74E7 /* AccountSettingModel.h */,
+				1E15F9C71BE899F8000C74E7 /* AccountSettingModel.m */,
+			);
+			path = Account;
 			sourceTree = "<group>";
 		};
 		1E37D9731B872433004B03BD /* Comment */ = {
@@ -3426,6 +3471,7 @@
 				1E7995771BCD262D0099CFF9 /* Hospital */,
 				1E7994F21BC6832A0099CFF9 /* Activity */,
 				1E827CF01B9D7722008F3F08 /* Promotion */,
+				1E15F9C21BE897F9000C74E7 /* Account */,
 				1E827CB61B9BD90C008F3F08 /* Coupon */,
 				1E827B741B900478008F3F08 /* Map */,
 				1E943E6B1B71E7CD0029FE74 /* GlobalModel */,
@@ -3489,6 +3535,9 @@
 				1EC4A1201B5D248300206BB9 /* KTCSearchResultViewController.h */,
 				1EC4A1211B5D248300206BB9 /* KTCSearchResultViewController.m */,
 				1EC4A1221B5D248300206BB9 /* KTCSearchResultViewController.xib */,
+				1E15F9DB1BE8AA56000C74E7 /* SoftwareSettingViewController.h */,
+				1E15F9DC1BE8AA56000C74E7 /* SoftwareSettingViewController.m */,
+				1E15F9DD1BE8AA56000C74E7 /* SoftwareSettingViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -3589,6 +3638,12 @@
 				1E3D8F511B4D1D4D00275C35 /* UserCenterView.m */,
 				1E3D8F521B4D1D4D00275C35 /* UserCenterView.xib */,
 				1EC4A0EC1B5A4C8600206BB9 /* Favourate */,
+				1E15F9C91BE8A057000C74E7 /* SoftwareSettingView.h */,
+				1E15F9CA1BE8A057000C74E7 /* SoftwareSettingView.m */,
+				1E15F9CC1BE8A075000C74E7 /* SoftwareSettingView.xib */,
+				1E15F9CE1BE8A47C000C74E7 /* SoftwareSettingViewCell.h */,
+				1E15F9CF1BE8A47C000C74E7 /* SoftwareSettingViewCell.m */,
+				1E15F9D01BE8A47C000C74E7 /* SoftwareSettingViewCell.xib */,
 			);
 			path = UserCenter;
 			sourceTree = "<group>";
@@ -3945,6 +4000,8 @@
 			children = (
 				1E827B471B8C5BB5008F3F08 /* UserCenterModel.h */,
 				1E827B481B8C5BB5008F3F08 /* UserCenterModel.m */,
+				1E15F9E01BE8AB3E000C74E7 /* SoftwareSettingModel.h */,
+				1E15F9E11BE8AB3E000C74E7 /* SoftwareSettingModel.m */,
 			);
 			path = UserCenter;
 			sourceTree = "<group>";
@@ -4305,6 +4362,9 @@
 				1E0B779D1B68C33B00A58AD4 /* AccountSettingView.h */,
 				1E0B779E1B68C33B00A58AD4 /* AccountSettingView.m */,
 				1E8EFD1F1B68BBA100D00808 /* AccountSettingView.xib */,
+				1E15F9BD1BE8953C000C74E7 /* AccountSettingViewCell.h */,
+				1E15F9BE1BE8953C000C74E7 /* AccountSettingViewCell.m */,
+				1E15F9BF1BE8953C000C74E7 /* AccountSettingViewCell.xib */,
 				1E0B77A51B68CD1C00A58AD4 /* LoginView.h */,
 				1E0B77A61B68CD1C00A58AD4 /* LoginView.m */,
 				1E0B77A81B68CD3500A58AD4 /* LoginView.xib */,
@@ -4909,6 +4969,7 @@
 				1E0B7AAB1B6F67B800A58AD4 /* GNewCenterCell.xib in Resources */,
 				1E943EBE1B7375F60029FE74 /* Area.plist in Resources */,
 				1EC73BD81B5E4854008B39EA /* HomeViewNormalTitleCell.xib in Resources */,
+				1E15F9DF1BE8AA56000C74E7 /* SoftwareSettingViewController.xib in Resources */,
 				1E15F99E1BDF79D3000C74E7 /* CommentDetailViewStrategyHeaderCell.xib in Resources */,
 				1E8EFCE11B6729A900D00808 /* OrderCommentBottomView.xib in Resources */,
 				1E5CD76F1B53524E00D177CB /* StoreListView.xib in Resources */,
@@ -4938,6 +4999,7 @@
 				1E0B77FF1B6F32D300A58AD4 /* KTCSearchAreaFilterView.xib in Resources */,
 				1E7995581BCB96DF0099CFF9 /* ActivityViewController.xib in Resources */,
 				1E8EFCDC1B67293A00D00808 /* OrderCommentView.xib in Resources */,
+				1E15F9C11BE8953C000C74E7 /* AccountSettingViewCell.xib in Resources */,
 				1E8017091BB006D100B6C352 /* HomeViewWholeImageNewsCell.xib in Resources */,
 				1E8EFD201B68BBA100D00808 /* AccountSettingView.xib in Resources */,
 				1EC73C191B5F992E008B39EA /* home2.png in Resources */,
@@ -4956,6 +5018,7 @@
 				1EA8B6EA1B66253200F90688 /* CategoryViewController.xib in Resources */,
 				1EC4A1241B5D248300206BB9 /* KTCSearchResultViewController.xib in Resources */,
 				1EC4A0F41B5A4C8600206BB9 /* FavourateView.xib in Resources */,
+				1E15F9CD1BE8A075000C74E7 /* SoftwareSettingView.xib in Resources */,
 				1E943F5D1B7DE67B0029FE74 /* logo_640_1136.png in Resources */,
 				1EC73C691B61186E008B39EA /* SettlementPayTypeCell.xib in Resources */,
 				1EC73BE71B5E588A008B39EA /* HomeViewBannerCell.xib in Resources */,
@@ -5007,6 +5070,7 @@
 				1E79950F1BC758560099CFF9 /* NewsListView.xib in Resources */,
 				1E0B7A891B6F67B800A58AD4 /* InsuranceView.xib in Resources */,
 				1E943F511B7DDFDF0029FE74 /* loadingBg_640_960.png in Resources */,
+				1E15F9D21BE8A47C000C74E7 /* SoftwareSettingViewCell.xib in Resources */,
 				1E827BDB1B941337008F3F08 /* ImageSelectedSmallOn@3x.png in Resources */,
 				1E943F011B7B23070029FE74 /* AppointmentOrderListViewController.xib in Resources */,
 				1E827B7C1B9064F0008F3F08 /* KTCAnnotationTipDestinationView.xib in Resources */,
@@ -5128,6 +5192,7 @@
 				1E79950E1BC758560099CFF9 /* NewsListView.m in Sources */,
 				1E79951A1BC758560099CFF9 /* NewsRecommendListViewCell.m in Sources */,
 				1E7995221BC75E580099CFF9 /* ParentingStrategyDetailViewModel.m in Sources */,
+				1E15F9D11BE8A47C000C74E7 /* SoftwareSettingViewCell.m in Sources */,
 				1E3D8D861B4BF4A100275C35 /* ASIFormDataRequest.m in Sources */,
 				1E8EFD0F1B68836600D00808 /* CommentListViewCell.m in Sources */,
 				1E3D8D8C1B4BF4A100275C35 /* ASICloudFilesContainerRequest.m in Sources */,
@@ -5299,6 +5364,7 @@
 				1EA8B69E1B63265500F90688 /* SettlementModel.m in Sources */,
 				1E0B7A861B6F67B800A58AD4 /* CustomBadge.m in Sources */,
 				1E827B241B886317008F3F08 /* StoreMoreDetailViewController.m in Sources */,
+				1E15F9C51BE89846000C74E7 /* AccountSettingViewModel.m in Sources */,
 				1E0B7A8E1B6F67B800A58AD4 /* GAlertLoadingView.m in Sources */,
 				1E0B7A9A1B6F67B800A58AD4 /* GCommonFilterView.m in Sources */,
 				1E3D8DA91B4BF4A100275C35 /* NSString+DetectEmoji.m in Sources */,
@@ -5366,6 +5432,7 @@
 				1E7995641BCBCB480099CFF9 /* AddressSelectTableViewCell.m in Sources */,
 				1E0B7B111B6F6C1400A58AD4 /* WelcomeView.m in Sources */,
 				1EC4A0F31B5A4C8600206BB9 /* FavourateView.m in Sources */,
+				1E15F9E21BE8AB3E000C74E7 /* SoftwareSettingModel.m in Sources */,
 				1E0B7B4E1B6F891100A58AD4 /* GValidator.m in Sources */,
 				1E827BA91B9412C6008F3F08 /* MWZoomingScrollView.m in Sources */,
 				1E0B7A7C1B6F67B800A58AD4 /* AUISegmentView.m in Sources */,
@@ -5425,6 +5492,7 @@
 				1E79955B1BCB976A0099CFF9 /* ActivityViewModel.m in Sources */,
 				1E0B77D11B6A14A200A58AD4 /* PMCalendarView.m in Sources */,
 				1E0B7A961B6F67B800A58AD4 /* GColorsTextCell.m in Sources */,
+				1E15F9C01BE8953C000C74E7 /* AccountSettingViewCell.m in Sources */,
 				1E3D8D5B1B4BF4A100275C35 /* HttpProcessHelper.m in Sources */,
 				1E3D8D881B4BF4A100275C35 /* ASIInputStream.m in Sources */,
 				1E827CA11B94144E008F3F08 /* SDImageCache.m in Sources */,
@@ -5452,6 +5520,7 @@
 				1E8EFCD61B6657E200D00808 /* OrderDetailButtonCell.m in Sources */,
 				1E0B7A8F1B6F67B800A58AD4 /* GBannersView.m in Sources */,
 				1EA8B6B51B637F0F00F90688 /* OrderModel.m in Sources */,
+				1E15F9CB1BE8A057000C74E7 /* SoftwareSettingView.m in Sources */,
 				1EC73BE11B5E4895008B39EA /* HomeViewMoreTitleCell.m in Sources */,
 				1E943F3D1B7D8DAB0029FE74 /* HomeTwoColumnCellModel.m in Sources */,
 				1E0B7A821B6F67B800A58AD4 /* CouponGiftView.m in Sources */,
@@ -5474,6 +5543,7 @@
 				1E0B7AD11B6F67B800A58AD4 /* UnderlineUILabel.m in Sources */,
 				1E943E9C1B71E7CD0029FE74 /* UIColor+GColor.m in Sources */,
 				1E0B7AC81B6F67B800A58AD4 /* ShakingView.m in Sources */,
+				1E15F9DE1BE8AA56000C74E7 /* SoftwareSettingViewController.m in Sources */,
 				1E15F99D1BDF79D3000C74E7 /* CommentDetailViewStrategyHeaderCell.m in Sources */,
 				1E3D8D9C1B4BF4A100275C35 /* UIScrollView+MJExtension.m in Sources */,
 				1E15F9891BDF21D5000C74E7 /* StoreDetailNearbyModel.m in Sources */,
@@ -5604,6 +5674,7 @@
 				1E3D8DA61B4BF4A100275C35 /* GToolUtil.m in Sources */,
 				1E3D8DA11B4BF4A100275C35 /* RegexKitLite.m in Sources */,
 				1E3D8D071B4BF4A100275C35 /* VersionManager.m in Sources */,
+				1E15F9E51BE8ABF2000C74E7 /* SoftwareSettingViewModel.m in Sources */,
 				1E3D8F351B4CE80900275C35 /* UserCenterViewController.m in Sources */,
 				1E3D8D4C1B4BF4A100275C35 /* NSString+ShiftEncode.m in Sources */,
 				1E7600421B5753AE00DF0972 /* ServiceDetailBottomView.m in Sources */,
@@ -5625,6 +5696,7 @@
 				1E0B7B6F1B70BDFA00A58AD4 /* SearchViewModel.m in Sources */,
 				1E943EF71B7AFC9F0029FE74 /* AppointmentListViewHeaderTabCell.m in Sources */,
 				1E943F101B7B5B850029FE74 /* OrderDetailConsumptionCodeCell.m in Sources */,
+				1E15F9C81BE899F8000C74E7 /* AccountSettingModel.m in Sources */,
 				1E943F691B81DF570029FE74 /* StoreDetailModel.m in Sources */,
 				1E943E921B71E7CD0029FE74 /* GCommonFilterOption.m in Sources */,
 				1EC4A0FF1B5A545C00206BB9 /* FavourateViewController.m in Sources */,

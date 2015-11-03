@@ -7,14 +7,17 @@
 //
 
 #import "AccountSettingView.h"
+#import "AccountSettingViewCell.h"
+
+
+static NSString *const kCellIdentifier = @"kCellIdentifier";
 
 @interface AccountSettingView () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UITableViewCell *userNameCell;
-@property (strong, nonatomic) IBOutlet UITableViewCell *passwordCell;
-@property (strong, nonatomic) IBOutlet UITableViewCell *mobilePhoneCell;
-@property (strong, nonatomic) IBOutlet UITableViewCell *emailCell;
+@property (nonatomic, strong) UINib *cellNib;
+
+- (void)configCell:(AccountSettingViewCell *)cell withIndexPath:(NSIndexPath *)indexPath;
 
 - (void)didClickedLogoutButton;
 
@@ -46,6 +49,17 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
+    }
+    
+    if (!self.cellNib) {
+        self.cellNib = [UINib nibWithNibName:NSStringFromClass([AccountSettingViewCell class]) bundle:nil];
+        [self.tableView registerNib:self.cellNib forCellReuseIdentifier:kCellIdentifier];
+    }
 }
 
 
@@ -57,35 +71,13 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.row) {
-        case 0:
-        {
-            [self.userNameCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
-            return self.userNameCell;
-        }
-            break;
-        case 1:
-        {
-            [self.passwordCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
-            return self.passwordCell;
-        }
-            break;
-        case 2:
-        {
-            [self.mobilePhoneCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
-            return self.mobilePhoneCell;
-        }
-            break;
-        case 3:
-        {
-            [self.emailCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
-            return self.emailCell;
-        }
-            break;
-        default:
-            break;
+    AccountSettingViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:indexPath];
+    if (!cell) {
+        cell =  [[[NSBundle mainBundle] loadNibNamed:@"AccountSettingViewCell" owner:nil options:nil] objectAtIndex:0];
     }
-    return nil;
+    [self configCell:cell withIndexPath:indexPath];
+    
+    return cell;
 }
 
 
@@ -125,6 +117,13 @@
 
 
 #pragma mark Private methods
+
+- (void)configCell:(AccountSettingViewCell *)cell withIndexPath:(NSIndexPath *)indexPath {
+    if (!cell) {
+        return;
+    }
+    
+}
 
 - (void)didClickedLogoutButton {
     if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedLogoutButtonOnAccountSettingView:)]) {
