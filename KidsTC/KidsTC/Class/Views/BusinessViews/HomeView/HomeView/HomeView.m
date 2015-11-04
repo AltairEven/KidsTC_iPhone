@@ -588,6 +588,9 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
 
 - (NSUInteger)floorIndexAtCurrentScrollingPoint {
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:CGPointMake(0, self.tableView.contentOffset.y + (SCREEN_HEIGHT - 49 - 64) - 100)];
+    if (!indexPath) {
+        return 0;
+    }
     HomeSectionModel *sectionModel = [self.homeModel.allSectionModels objectAtIndex:indexPath.section];
     return sectionModel.floorIndex;
 }

@@ -7,11 +7,13 @@
 //
 
 #import "AccountSettingViewController.h"
-#import "AccountSettingView.h"
+#import "AccountSettingViewModel.h"
 
 @interface AccountSettingViewController () <AccountSettingViewDelegate>
 
 @property (weak, nonatomic) IBOutlet AccountSettingView *settingView;
+
+@property (nonatomic, strong) AccountSettingViewModel *viewModel;
 
 @end
 
@@ -19,13 +21,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _navigationTitle = @"设置";
+    _navigationTitle = @"账户设置";
     // Do any additional setup after loading the view from its nib.
     self.settingView.delegate = self;
-    [self.settingView reloadData];
+    self.viewModel = [[AccountSettingViewModel alloc] initWithView:self.settingView];
 }
 
 #pragma mark AccountSettingViewDelegate
+
+- (void)accountSettingView:(AccountSettingView *)settingView didClickedWithViewTag:(AccountSettingViewTag)tag {
+    
+}
 
 - (void)didClickedLogoutButtonOnAccountSettingView:(AccountSettingView *)settingView {
     [[KTCUser currentUser] logoutManually:YES withSuccess:nil failure:nil];

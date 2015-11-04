@@ -8,6 +8,38 @@
 
 #import "AccountSettingViewModel.h"
 
+@interface AccountSettingViewModel () <AccountSettingViewDataSource>
+
+@property (nonatomic, weak) AccountSettingView *view;
+
+@end
+
 @implementation AccountSettingViewModel
+
+- (instancetype)initWithView:(UIView *)view {
+    self = [super initWithView:view];
+    if (self) {
+        self.view = (AccountSettingView *)view;
+        self.view.dataSource = self;
+        self.settingModel = [[AccountSettingModel alloc] init];
+    }
+    return self;
+}
+
+#pragma mark SoftwareSettingViewDataSource
+
+- (AccountSettingModel *)modelForAccountSettingView:(AccountSettingView *)view {
+    return self.settingModel;
+}
+
+#pragma mark Super methods
+
+- (void)startUpdateDataWithSucceed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
+    [self.view reloadData];
+}
+
+- (void)stopUpdateData {
+    
+}
 
 @end

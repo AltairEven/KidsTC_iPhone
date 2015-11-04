@@ -10,8 +10,12 @@
 
 @interface AccountSettingViewCell : UITableViewCell
 
-- (void)resetWithMainTitle:(NSString *)mainTitle subTitle:(NSString *)subTitle;
+@property (nonatomic, strong) NSURL *cellImageUrl;
 
-+ (CGFloat)cellHeight;
+- (void)resetWithMainTitle:(NSString *)mainTitle subTitle:(NSString *)subTitle showImage:(BOOL)showImage showArrow:(BOOL)showArrow;
+
++ (CGFloat)normalCellHeight;
+
++ (CGFloat)imageCellHeight;
 
 @end

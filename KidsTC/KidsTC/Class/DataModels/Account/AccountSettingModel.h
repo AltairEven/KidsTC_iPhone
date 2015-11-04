@@ -10,12 +10,12 @@
 
 @interface AccountSettingModel : NSObject
 
-@property (nonatomic, assign) UserRole userRole;
+@property (nonatomic, strong) NSURL *faceImgaeUrl;
+
+@property (nonatomic, copy) NSString *nickName;
 
 @property (nonatomic, copy) NSString *mobilePhoneNumber;
 
-@property (nonatomic, copy) NSString *cacheDescription;
-
-@property (nonatomic, copy) NSString *version;
+@property (nonatomic, assign) UserRole userRole;
 
 @end

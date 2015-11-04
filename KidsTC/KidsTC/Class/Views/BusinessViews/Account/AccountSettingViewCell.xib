@@ -27,6 +27,13 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jnk-cY-n2X">
+                        <rect key="frame" x="225" y="-9" width="60" height="61"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="8ld-8O-Bd3"/>
+                            <constraint firstAttribute="height" constant="60" id="WZA-QB-fRt"/>
+                        </constraints>
+                    </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_r" translatesAutoresizingMaskIntoConstraints="NO" id="qak-a3-myq">
                         <rect key="frame" x="295" y="14" width="15" height="15"/>
                         <constraints>
@@ -38,14 +45,17 @@
                 <constraints>
                     <constraint firstItem="yXE-cp-72W" firstAttribute="leading" secondItem="A1m-cK-SDO" secondAttribute="leadingMargin" constant="10" id="C9W-kQ-QBh"/>
                     <constraint firstAttribute="centerY" secondItem="qak-a3-myq" secondAttribute="centerY" id="Pjz-aL-7qg"/>
+                    <constraint firstItem="jnk-cY-n2X" firstAttribute="centerY" secondItem="A1m-cK-SDO" secondAttribute="centerY" id="RCJ-Tv-a5H"/>
                     <constraint firstItem="qak-a3-myq" firstAttribute="leading" secondItem="cFf-oR-4Oo" secondAttribute="trailing" constant="5" id="aph-hM-q9c"/>
                     <constraint firstAttribute="trailing" secondItem="qak-a3-myq" secondAttribute="trailing" constant="10" id="ilr-fs-lVc"/>
+                    <constraint firstItem="qak-a3-myq" firstAttribute="leading" secondItem="jnk-cY-n2X" secondAttribute="trailing" constant="10" id="k1d-O6-r7v"/>
                     <constraint firstAttribute="centerY" secondItem="yXE-cp-72W" secondAttribute="centerY" id="o8C-9M-MQX"/>
                     <constraint firstAttribute="centerY" secondItem="cFf-oR-4Oo" secondAttribute="centerY" id="uuc-Rl-gth"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="arrowImageView" destination="qak-a3-myq" id="dCs-1j-H9p"/>
+                <outlet property="cellImageView" destination="jnk-cY-n2X" id="skQ-nt-DSL"/>
                 <outlet property="mainTitleLabel" destination="yXE-cp-72W" id="ND2-rV-IXR"/>
                 <outlet property="subTitleLabel" destination="cFf-oR-4Oo" id="Bgz-ql-7zh"/>
             </connections>

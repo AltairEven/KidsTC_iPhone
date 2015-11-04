@@ -11,10 +11,6 @@
 
 @interface AccountSettingViewModel : BaseViewModel
 
-@property (nonatomic, strong, readonly) AccountSettingModel *settingModel;
-
-- (void)setUserRole:(UserRole)role;
-
-- (void)setMobilePhone:(NSString *)number;
+@property (nonatomic, strong) AccountSettingModel *settingModel;
 
 @end

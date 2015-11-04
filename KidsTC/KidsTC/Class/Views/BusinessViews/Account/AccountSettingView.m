@@ -17,7 +17,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UINib *cellNib;
 
-- (void)configCell:(AccountSettingViewCell *)cell withIndexPath:(NSIndexPath *)indexPath;
+@property (nonatomic, strong) AccountSettingModel *settingModel;
 
 - (void)didClickedLogoutButton;
 
@@ -49,6 +49,15 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setFrame:CGRectMake(15, 10, SCREEN_WIDTH - 30, 40)];
+    [button setBackgroundColor:[AUITheme theme].buttonBGColor_Normal];
+    [button setTitle:@"退出账号" forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(didClickedLogoutButton) forControlEvents:UIControlEventTouchUpInside];
+    self.tableView.tableFooterView = bgView;
+    
+    [bgView addSubview:button];
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     }
@@ -65,8 +74,12 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 
 #pragma mark UITableViewDataSource & UITableViewDelegate
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return AccountSettingViewTagRole + 1;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return 1;
 }
 
 
@@ -75,55 +88,79 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     if (!cell) {
         cell =  [[[NSBundle mainBundle] loadNibNamed:@"AccountSettingViewCell" owner:nil options:nil] objectAtIndex:0];
     }
-    [self configCell:cell withIndexPath:indexPath];
+    switch (indexPath.section) {
+        case AccountSettingViewTagFaceImage:
+        {
+            cell.cellImageUrl = nil;
+            [cell resetWithMainTitle:@"头像" subTitle:@"" showImage:YES showArrow:YES];
+        }
+            break;
+        case AccountSettingViewTagNickName:
+        {
+            [cell resetWithMainTitle:@"昵称" subTitle:@"" showImage:NO showArrow:YES];
+        }
+            break;
+        case AccountSettingViewTagPassword:
+        {
+            [cell resetWithMainTitle:@"密码" subTitle:@"" showImage:NO showArrow:YES];
+        }
+            break;
+        case AccountSettingViewTagMobilePhone:
+        {
+            [cell resetWithMainTitle:@"手机号" subTitle:@"" showImage:NO showArrow:YES];
+        }
+            break;
+        case AccountSettingViewTagRole:
+        {
+            [cell resetWithMainTitle:@"状态" subTitle:@"" showImage:NO showArrow:YES];
+        }
+            break;
+        default:
+            break;
+    }
     
     return cell;
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44;
+    CGFloat height = 0;
+    if (indexPath.section == 0) {
+        height = [AccountSettingViewCell imageCellHeight];
+    } else {
+        height = [AccountSettingViewCell normalCellHeight];
+    }
+    return height;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 2.5;
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 60;
-}
-
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
-    
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setFrame:CGRectMake(15, 10, SCREEN_WIDTH - 30, 40)];
-    [button setBackgroundColor:[AUITheme theme].buttonBGColor_Normal];
-    [button setTitle:@"退出账号" forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(didClickedLogoutButton) forControlEvents:UIControlEventTouchUpInside];
-    
-    [bgView addSubview:button];
-    return bgView;
+    return 2.5;
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(accountSettingView:didClickedWithViewTag:)]) {
+        [self.delegate accountSettingView:self didClickedWithViewTag:(AccountSettingViewTag)indexPath.section];
+    }
 }
 
 #pragma mark Public methods
 
 - (void)reloadData {
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(modelForAccountSettingView:)]) {
+        self.settingModel = [self.dataSource modelForAccountSettingView:self];
+    }
     [self.tableView reloadData];
 }
 
 
 #pragma mark Private methods
-
-- (void)configCell:(AccountSettingViewCell *)cell withIndexPath:(NSIndexPath *)indexPath {
-    if (!cell) {
-        return;
-    }
-    
-}
 
 - (void)didClickedLogoutButton {
     if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedLogoutButtonOnAccountSettingView:)]) {
