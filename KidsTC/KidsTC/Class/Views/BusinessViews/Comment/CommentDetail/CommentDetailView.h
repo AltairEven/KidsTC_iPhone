@@ -21,6 +21,8 @@
 
 - (void)commentDetailView:(CommentDetailView *)detailView didSelectedReplyAtIndex:(NSUInteger)index;
 
+- (void)didTappedOnCommentDetailView:(CommentDetailView *)detailView;
+
 @optional
 
 - (void)commentDetailViewDidPulledDownToRefresh:(CommentDetailView *)detailView;

@@ -18,6 +18,7 @@
         [self setText:self.placeHolderStr];
         [self setTextColor:self.placeHolderColor];
         [self setFont:self.placeHolderFont];
+        [self setPlaceHolderColor:PLACEHOLDER_TEXT_COLOR];
     }
     
     return self;
@@ -30,9 +31,18 @@
         [self setText:self.placeHolderStr];
         [self setTextColor:OC_TEXT_COLOR];
         [self setFont:[UIFont systemFontOfSize:15.0f]];
+        [self setPlaceHolderColor:PLACEHOLDER_TEXT_COLOR];
     }
     
     return self;
+}
+
+- (NSString *)text {
+    if (self.isPlaceHolderState) {
+        return @"";
+    } else {
+        return [super text];
+    }
 }
 
 //- (void)setDelegate:(id<UITextViewDelegate>)delegate
@@ -53,20 +63,17 @@
 
 - (void)setIsPlaceHolderState:(BOOL)isPlaceHolderState
 {
-    if (_isPlaceHolderState != isPlaceHolderState)
+    _isPlaceHolderState = isPlaceHolderState;
+    if (isPlaceHolderState)
     {
-        _isPlaceHolderState = isPlaceHolderState;
-        if (isPlaceHolderState)
-        {
-            [self setText:self.placeHolderStr];
-            [self setTextColor:self.placeHolderColor];
-            [self setFont:self.placeHolderFont];
-        }
-        else
-        {
-            [self setTextColor:self.contentColor];
-            [self setFont:self.contentFont];
-        }
+        [self setText:self.placeHolderStr];
+        [self setTextColor:self.placeHolderColor];
+        [self setFont:self.placeHolderFont];
+    }
+    else
+    {
+        [self setTextColor:self.contentColor];
+        [self setFont:self.contentFont];
     }
 }
 

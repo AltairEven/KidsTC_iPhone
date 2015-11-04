@@ -14,7 +14,7 @@
 
 static GInterface *_staticInterface = nil;
 //#define URL_INTERFACE_LIST   @"http://mb.51buy.com/json.php?mod=main&act=getinterface"
-#define URL_INTERFACE_LIST     @"http://api.kidstc.com:8000/json.php?mod=main&&act=getinterface&&app=1"
+#define URL_INTERFACE_LIST     @"http://api.kidstc.com/json.php?mod=main&&act=getinterface&&app=1"
 //cfgver 版本号  deviceid设备id
 @implementation GInterface
 

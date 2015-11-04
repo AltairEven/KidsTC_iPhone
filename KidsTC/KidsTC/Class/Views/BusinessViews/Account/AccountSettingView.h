@@ -7,16 +7,35 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AccountSettingModel.h"
+
+typedef enum {
+    AccountSettingViewTagFaceImage,
+    AccountSettingViewTagNickName,
+    AccountSettingViewTagPassword,
+    AccountSettingViewTagMobilePhone,
+    AccountSettingViewTagRole
+}AccountSettingViewTag;
 
 @class AccountSettingView;
 
+@protocol AccountSettingViewDataSource <NSObject>
+
+- (AccountSettingModel *)modelForAccountSettingView:(AccountSettingView *)view;
+
+@end
+
 @protocol AccountSettingViewDelegate <NSObject>
+
+- (void)accountSettingView:(AccountSettingView *)settingView didClickedWithViewTag:(AccountSettingViewTag)tag;
 
 - (void)didClickedLogoutButtonOnAccountSettingView:(AccountSettingView *)settingView;
 
 @end
 
 @interface AccountSettingView : UIView
+
+@property (nonatomic, assign) id<AccountSettingViewDataSource> dataSource;
 
 @property (nonatomic, assign) id<AccountSettingViewDelegate> delegate;
 

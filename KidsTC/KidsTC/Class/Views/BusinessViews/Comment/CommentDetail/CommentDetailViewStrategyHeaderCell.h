@@ -13,8 +13,6 @@
 
 @protocol CommentDetailViewStrategyHeaderCellDelegate <NSObject>
 
-- (void)didClickedLocationButtonOnCommentDetailViewStrategyHeaderCell:(CommentDetailViewStrategyHeaderCell *)cell;
-
 - (void)didClickedCommentButtonOnCommentDetailViewStrategyHeaderCell:(CommentDetailViewStrategyHeaderCell *)cell;;
 
 - (void)didClickedRelatedInfoButtonOnCommentDetailViewStrategyHeaderCell:(CommentDetailViewStrategyHeaderCell *)cell;;

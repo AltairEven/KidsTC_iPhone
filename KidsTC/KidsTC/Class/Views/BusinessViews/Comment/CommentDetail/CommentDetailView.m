@@ -20,7 +20,9 @@ static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIden
 @interface CommentDetailView () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
 
+//table
 @property (nonatomic, strong) UINib *replyCellNib;
 
 @property (nonatomic, strong) UINib *normalHeaderCellNib;
@@ -31,9 +33,16 @@ static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIden
 
 @property (nonatomic, strong) CommentDetailModel *detailModel;
 
+//bottom
+@property (weak, nonatomic) IBOutlet UIButton *sendButton;
+@property (weak, nonatomic) IBOutlet UITextField *bottomTextField;
+
+
 - (void)pullToRefreshTable;
 
 - (void)pullToLoadMoreData;
+
+- (void)didTappedOnBottomView;
 
 @end
 
@@ -79,6 +88,16 @@ static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIden
     }
     self.enableUpdate = YES;
     self.enbaleLoadMore = YES;
+    
+    //bottom
+    [self.bottomView setBackgroundColor:[AUITheme theme].globalThemeColor];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTappedOnBottomView)];
+    [self.bottomView addGestureRecognizer:tap];
+    
+    self.bottomTextField.layer.cornerRadius = 10;
+    self.bottomTextField.layer.masksToBounds = YES;
+    [self.bottomTextField setLeftView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 10)]];
+    [self.bottomTextField setLeftViewMode:UITextFieldViewModeAlways];
 }
 
 - (NSUInteger)pageSize {
@@ -113,6 +132,7 @@ static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIden
         [self.tableView removeFooter];
     }
     [self.tableView.gifFooter setHidden:YES];
+    [self.tableView.gifFooter setTitle:@"没有更多的评论了" forState:MJRefreshFooterStateNoMoreData];
 }
 
 #pragma mark UITableViewDataSource & UITableViewDelegate
@@ -223,6 +243,13 @@ static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIden
 - (void)pullToLoadMoreData {
     if (self.delegate && [self.delegate respondsToSelector:@selector(commentDetailViewDidPulledUpToloadMore:)]) {
         [self.delegate commentDetailViewDidPulledUpToloadMore:self];
+    }
+}
+
+
+- (void)didTappedOnBottomView {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didTappedOnCommentDetailView:)]) {
+        [self.delegate didTappedOnCommentDetailView:self];
     }
 }
 

@@ -7,7 +7,11 @@
 //
 
 #import "AUIKeyboardAdhesiveView.h"
-@interface AUIKeyboardAdhesiveView ()
+@interface AUIKeyboardAdhesiveView () <UITextViewDelegate>
+
+@property (nonatomic, strong) UILabel *textLimitCountLabel;
+
+@property (nonatomic, assign) NSUInteger leftTextInputCount;
 
 - (void)buildSubviews;
 
@@ -56,7 +60,8 @@
 
 - (void)setTextLimitLength:(NSUInteger)textLimitLength {
     _textLimitLength = textLimitLength;
-    [self hideTextLimit:textLimitLength == INT64_MAX ? YES : NO];
+    [self hideTextLimit:(textLimitLength == INT64_MAX || textLimitLength == 0) ? YES : NO];
+    self.leftTextInputCount = textLimitLength;
 }
 
 - (void)setUploadImageLimitCount:(NSUInteger)uploadImageLimitCount {
@@ -65,6 +70,58 @@
 
 - (void)setUploadImages:(NSArray *)uploadImages {
     _uploadImages = uploadImages;
+}
+
+
+#pragma mark UITextViewDelegate
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+//    if (self.textView.isPlaceHolderState)
+//    {
+//        [self.textView setText:@""];
+//        [self.textView setIsPlaceHolderState:NO];
+//    }
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    if ([textView.text length] > 0) {
+        [self.textView setIsPlaceHolderState:NO];
+    } else {
+        [self.textView setIsPlaceHolderState:YES];
+    }
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    NSInteger number = [text length];
+    if (number > self.textLimitLength) {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"字数不能大于500" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//        [alert show];
+        textView.text = [textView.text substringToIndex:self.textLimitLength];
+    }
+    NSUInteger textNumber = [textView.text length];
+    if (textNumber == 0) {
+        if (number > 0) {
+            self.textView.text = @"";
+            self.textView.isPlaceHolderState = NO;
+            return YES;
+        }
+        return NO;
+    }
+    return YES;
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    NSInteger number = [textView.text length];
+    if (number > self.textLimitLength) {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"字数不能大于500" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//        [alert show];
+        textView.text = [textView.text substringToIndex:self.textLimitLength];
+    } else {
+        self.leftTextInputCount = self.textLimitLength - number;
+    }
+    if (![self.textView isPlaceHolderState] && number == 0) {
+        [self.textView setIsPlaceHolderState:YES];
+    }
 }
 
 #pragma mark Private methods
@@ -83,14 +140,14 @@
     
     UIButton *hideButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [hideButton setFrame:CGRectMake(xPosition, yPosition, width, height)];
-    [hideButton setImage:[UIImage imageNamed:@"located"] forState:UIControlStateNormal];
+    [hideButton setImage:[UIImage imageNamed:@"keyboard_hide_n"] forState:UIControlStateNormal];
     [hideButton addTarget:self action:@selector(shrink) forControlEvents:UIControlEventTouchUpInside];
     [self.headerView addSubview:hideButton];
     
     xPosition = hideButton.frame.origin.x + hideButton.frame.size.width + gap;
     UIButton *textButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [textButton setFrame:CGRectMake(xPosition, yPosition, width, height)];
-    [textButton setImage:[UIImage imageNamed:@"located"] forState:UIControlStateNormal];
+    [textButton setImage:[UIImage imageNamed:@"keyboard_text_n"] forState:UIControlStateNormal];
     [textButton addTarget:self action:@selector(didClickedTextButton) forControlEvents:UIControlEventTouchUpInside];
     [self.headerView addSubview:textButton];
     
@@ -113,24 +170,23 @@
     }
     [textButton setHidden:needHideTextEditButton];
     
-    width = 60;
+    width = 30;
     xPosition = self.headerView.frame.size.width - gap - width;
     self.sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.sendButton setFrame:CGRectMake(xPosition, yPosition, width, height)];
+    [self.sendButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
     [self.sendButton setTitle:@"发送" forState:UIControlStateNormal];
     [self.sendButton addTarget:self action:@selector(didClickedSendButton) forControlEvents:UIControlEventTouchUpInside];
     [self.headerView addSubview:self.sendButton];
     
     //text view
-    CGFloat separatorHeight = 0.5;
     yPosition = self.headerView.frame.size.height;
-    self.textView = [[PlaceHolderTextView alloc] initWithFrame:CGRectMake(0, yPosition, self.frame.size.width, self.frame.size.height - yPosition - separatorHeight)];
+    self.textView = [[PlaceHolderTextView alloc] initWithFrame:CGRectMake(0, yPosition, self.frame.size.width, self.frame.size.height - yPosition)];
+    self.textView.delegate = self;
+    [self.textView setFont:[UIFont systemFontOfSize:15]];
     [self addSubview:self.textView];
     
-    yPosition = self.frame.size.height - separatorHeight;
-    UIView *separatorView = [[UIView alloc] initWithFrame:CGRectMake(0, yPosition, SCREEN_WIDTH, separatorHeight)];
-    [separatorView setBackgroundColor:[UIColor redColor]];
-    [self addSubview:separatorView];
+    self.textLimitLength = INT64_MAX;
 }
 
 - (void)buildExtensionViewWithType:(AUIKeyboardAdhesiveViewExtensionFunctionType)type {
@@ -144,7 +200,7 @@
             break;
         case AUIKeyboardAdhesiveViewExtensionFunctionTypeImageUpload:
         {
-            
+            self.uploadImageLimitCount = 10;
         }
             break;
         default:
@@ -154,7 +210,21 @@
 
 
 - (void)hideTextLimit:(BOOL)hidden {
-    
+    if (!self.textLimitCountLabel && !hidden) {
+        //没有初始化，并且不隐藏
+        self.textLimitCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, self.textView.frame.size.height + self.textView.frame.origin.y, SCREEN_WIDTH - 20, 20)];
+        [self.textLimitCountLabel setTextColor:[UIColor lightGrayColor]];
+        [self.textLimitCountLabel setFont:[UIFont systemFontOfSize:13]];
+        [self.textLimitCountLabel setTextAlignment:NSTextAlignmentRight];
+        [self addSubview:self.textLimitCountLabel];
+        
+        [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y - self.textLimitCountLabel.frame.size.height, self.frame.size.width, self.frame.size.height + self.textLimitCountLabel.frame.size.height)];
+    } else if (self.textLimitCountLabel && hidden) {
+        //已存在，并且隐藏
+        [self.textLimitCountLabel setHidden:YES];
+        
+        [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y + self.textLimitCountLabel.frame.size.height, self.frame.size.width, self.frame.size.height - self.textLimitCountLabel.frame.size.height)];
+    }
 }
 
 - (void)keyboardWillShow:(NSNotification *)notify {
@@ -204,20 +274,9 @@
 
 - (void)didClickedFuntionButton:(UIButton *)button {
     AUIKeyboardAdhesiveViewExtensionFunction *function = [self.availableExtFuntions objectAtIndex:button.tag];
-    switch (function.type) {
-        case AUIKeyboardAdhesiveViewExtensionFunctionTypeEmotionEdit:
-        {
-            self.textView.inputView = self.emotionInputView;
-            [self.textView reloadInputViews];
-        }
-            break;
-        case AUIKeyboardAdhesiveViewExtensionFunctionTypeImageUpload:
-        {
-            
-        }
-            break;
-        default:
-            break;
+    if (function.type == AUIKeyboardAdhesiveViewExtensionFunctionTypeEmotionEdit) {
+        self.textView.inputView = self.emotionInputView;
+        [self.textView reloadInputViews];
     }
     
     if (![self.textView isFirstResponder]) {
@@ -234,12 +293,25 @@
     }
 }
 
+- (void)setLeftTextInputCount:(NSUInteger)leftTextInputCount {
+    _leftTextInputCount = leftTextInputCount;
+    if (self.textLimitCountLabel) {
+        NSString *leftCountText = [NSString stringWithFormat:@"%lu", (unsigned long)leftTextInputCount];
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"还可以输入%@字", leftCountText]];
+        NSDictionary *attribute = [NSDictionary dictionaryWithObject:[UIColor orangeColor] forKey:NSForegroundColorAttributeName];
+        [attributedString setAttributes:attribute range:NSMakeRange(5, [leftCountText length])];
+        [self.textLimitCountLabel setAttributedText:attributedString];
+        
+    }
+}
+
 #pragma mark Public methods
 
 - (instancetype)initWithAvailableFuntions:(NSArray<AUIKeyboardAdhesiveViewExtensionFunction *> *)funtions {
     CGFloat height = SCREEN_HEIGHT * 0.2;
     self = [super initWithFrame:CGRectMake(0, SCREEN_HEIGHT - self.frame.size.height, SCREEN_WIDTH, height)];
     if (self) {
+        [self setBackgroundColor:[UIColor whiteColor]];
         _availableExtFuntions = [funtions copy];
         
         [self buildSubviews];
@@ -252,6 +324,9 @@
 }
 
 - (void)expand {
+    [self.textView setText:@""];
+    [self.textView setIsPlaceHolderState:YES];
+    
     [self setFrame:CGRectMake(0, SCREEN_HEIGHT - self.frame.size.height, self.frame.size.width, self.frame.size.height)];
     [[UIApplication sharedApplication].keyWindow addSubview:self];
     [self.textView becomeFirstResponder];
@@ -261,9 +336,13 @@
 
 - (void)shrink {
     [self.textView resignFirstResponder];
+    [self removeFromSuperview];
 }
 
 - (void)destroy {
+    [self.textView resignFirstResponder];
+    [self removeFromSuperview];
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
@@ -288,13 +367,13 @@
         case AUIKeyboardAdhesiveViewExtensionFunctionTypeEmotionEdit:
         {
             funtion.functionName = @"表情";
-            funtion.icon = [UIImage imageNamed:@"located"];
+            funtion.icon = [UIImage imageNamed:@"keyboard_emotion_n"];
         }
             break;
         case AUIKeyboardAdhesiveViewExtensionFunctionTypeImageUpload:
         {
             funtion.functionName = @"图片";
-            funtion.icon = [UIImage imageNamed:@"located"];
+            funtion.icon = [UIImage imageNamed:@"keyboard_photo_n"];
         }
             break;
         default:

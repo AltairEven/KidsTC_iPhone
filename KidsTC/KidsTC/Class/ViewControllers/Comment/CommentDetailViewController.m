@@ -40,23 +40,35 @@
     self.viewModel = [[CommentDetailViewModel alloc] initWithView:self.detailView];
     [self.viewModel.detailModel setModelSource:self.viewSource];
     [self.viewModel.detailModel setHeaderModel:self.headerModel];
-    __weak CommentDetailViewController *weakSelf = self;
-    [self.viewModel setNetErrorBlock:^(NSError *error) {
-        [weakSelf showConnectError:YES];
-    }];
-    [self reloadNetworkData];
+    [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if (!self.keyboardAdhesiveView) {
-        self.keyboardAdhesiveView = [[AUIKeyboardAdhesiveView alloc] init];
+        self.keyboardAdhesiveView = [[AUIKeyboardAdhesiveView alloc] initWithAvailableFuntions:nil];
+        [self.keyboardAdhesiveView.headerView setBackgroundColor:[AUITheme theme].globalThemeColor];
+        [self.keyboardAdhesiveView setTextLimitLength:100];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    if (self.keyboardAdhesiveView) {
+        [self.keyboardAdhesiveView destroy];
     }
 }
 
 #pragma mark CommentDetailViewDelegate
 
 - (void)commentDetailView:(CommentDetailView *)detailView didSelectedReplyAtIndex:(NSUInteger)index {
+    CommentReplyItemModel *model = [self.viewModel.detailModel.replyModels objectAtIndex:index];
+    [self.keyboardAdhesiveView setPlaceholder:[NSString stringWithFormat:@"回复%@：",model.userName]];
+    [self.keyboardAdhesiveView expand];
+}
+
+- (void)didTappedOnCommentDetailView:(CommentDetailView *)detailView {
+    [self.keyboardAdhesiveView setPlaceholder:@"回复楼主："];
     [self.keyboardAdhesiveView expand];
 }
 
@@ -66,18 +78,6 @@
 
 - (void)commentDetailViewDidPulledUpToloadMore:(CommentDetailView *)detailView {
     [self.viewModel getMoreReplies];
-}
-
-#pragma mark Super method
-
-- (void)reloadNetworkData {
-    [[GAlertLoadingView sharedAlertLoadingView] show];
-    __weak CommentDetailViewController *weakSelf = self;
-    [weakSelf.viewModel startUpdateDataWithSucceed:^(NSDictionary *data) {
-        [[GAlertLoadingView sharedAlertLoadingView] hide];
-    } failure:^(NSError *error) {
-        [[GAlertLoadingView sharedAlertLoadingView] hide];
-    }];
 }
 
 - (void)didReceiveMemoryWarning {

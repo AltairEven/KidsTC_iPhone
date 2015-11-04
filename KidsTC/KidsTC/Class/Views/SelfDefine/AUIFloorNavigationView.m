@@ -277,7 +277,7 @@ typedef enum {
 }
 
 - (void)collapse:(BOOL)animated {
-    if (self.isCollapsed || !self.enableCollapse) {
+    if (self.isCollapsed || !self.enableCollapse || self.itemCount <= 1) {
         return;
     }
     _isCollapsed = YES;
