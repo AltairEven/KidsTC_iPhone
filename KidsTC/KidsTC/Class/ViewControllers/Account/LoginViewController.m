@@ -12,6 +12,7 @@
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/TencentApiInterface.h>
 #import "KTCUser.h"
+#import "WeiboLoginManager.h"
 
 @interface LoginViewController () <LoginViewDelegate>
 
@@ -74,6 +75,28 @@
     }
 }
 
+- (void)loginView:(LoginView *)loginView didClickedThirdPartyLoginButtonWithModel:(LoginItemModel *)model {
+    switch (model.type) {
+        case LoginTypeQQ:
+        {
+            
+        }
+            break;
+        case LoginTypeWechat:
+        {
+            
+        }
+            break;
+        case LoginTypeWeibo:
+        {
+            [[WeiboLoginManager sharedManager] sendLoginRequest];
+        }
+            break;
+        default:
+            break;
+    }
+}
+
 #pragma mark Private methods
 
 - (NSArray *)supportedLoginTypes {
@@ -97,8 +120,8 @@
     if(true)
     {
         LoginItemModel *model = [[LoginItemModel alloc] init];
-        model.type = LoginTypeAli;
-        model.logo = [UIImage imageNamed:@"logo_ali"];
+        model.type = LoginTypeWeibo;
+        model.logo = [UIImage imageNamed:@"login_weibo"];
         [loginArr addObject:model];
     }
     return [NSArray arrayWithArray:loginArr];

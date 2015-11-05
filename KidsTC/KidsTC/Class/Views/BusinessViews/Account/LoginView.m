@@ -24,6 +24,8 @@
 - (IBAction)didClickedFindPasswordButton:(id)sender;
 - (IBAction)didClickedRegisterButton:(id)sender;
 
+- (void)didClickedThirdPartyButton:(id)sender;
+
 - (void)didTapOnView;
 
 @end
@@ -62,7 +64,7 @@
     [self.registerButton setTitleColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
     [self.registerButton setTitleColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
     
-    [self.thirdPartyLoginView setViewGap:20];
+    [self.thirdPartyLoginView setViewGap:30];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnView)];
     [self addGestureRecognizer:tap];
@@ -89,14 +91,13 @@
 
 - (void)resetThirdPartyLoginView {
     NSMutableArray *viewArray = [[NSMutableArray alloc] init];
-    for (LoginItemModel *model in self.supportedLoginItemModels) {
+    for (NSUInteger index = 0; index < [self.supportedLoginItemModels count]; index ++) {
+        LoginItemModel *model = [self.supportedLoginItemModels objectAtIndex:index];
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        if (model.type == LoginTypeAli) {
-            [button setFrame:CGRectMake(0, 0, 28, 28)];
-        } else {
-            [button setFrame:CGRectMake(0, 0, 30, 30)];
-        }
+        [button setFrame:CGRectMake(0, 0, 40, 40)];
+        button.tag = index;
         [button setBackgroundImage:model.logo forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(didClickedThirdPartyButton:) forControlEvents:UIControlEventTouchUpInside];
         [viewArray addObject:button];
     }
     [self.thirdPartyLoginView setSubViews:viewArray];
@@ -115,6 +116,14 @@
 
 - (IBAction)didClickedRegisterButton:(id)sender {
     [self endEditing:YES];
+}
+
+- (void)didClickedThirdPartyButton:(id)sender {
+    UIButton *button = (UIButton *)sender;
+    LoginItemModel *model = [self.supportedLoginItemModels objectAtIndex:button.tag];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(loginView:didClickedThirdPartyLoginButtonWithModel:)]) {
+        [self.delegate loginView:self didClickedThirdPartyLoginButtonWithModel:model];
+    }
 }
 
 - (void)didTapOnView {

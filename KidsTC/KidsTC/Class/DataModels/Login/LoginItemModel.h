@@ -12,7 +12,7 @@ typedef enum {
     LoginTypeKidTC,
     LoginTypeQQ,
     LoginTypeWechat,
-    LoginTypeAli
+    LoginTypeWeibo
 }LoginType;
 
 @interface LoginItemModel : NSObject

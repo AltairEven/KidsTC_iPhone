@@ -32,6 +32,7 @@
 #import "XGSetting.h"
 #import "KTCMapService.h"
 #import "UserRoleSelectViewController.h"
+#import "WeiboLoginManager.h"
 
 static BOOL _alreadyLaunched = NO;
 
@@ -222,6 +223,8 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
     else if ([url.scheme isEqualToString:@"tencent101164963"])
     {
         return [TencentOAuth HandleOpenURL:url];
+    } else if ([url.scheme isEqualToString:@"wb2837514135"]) {
+        [WeiboSDK handleOpenURL:url delegate:[WeiboLoginManager sharedManager]];
     }
     
     return YES;
