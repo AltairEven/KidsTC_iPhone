@@ -31,6 +31,7 @@
 #import "XGPush.h"
 #import "XGSetting.h"
 #import "KTCMapService.h"
+#import "UserRoleSelectViewController.h"
 
 static BOOL _alreadyLaunched = NO;
 
@@ -41,6 +42,7 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
 
 + (void)handleNetworkStatusChange:(IcsonNetworkStatus)status;
 
+- (void)showUserRoleSelectWithFinishController:(UIViewController *)controller;
 - (void)showLoading;
 - (void)showWelcome;
 
@@ -94,8 +96,8 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
     [tabbar  createViewControllers];
     self.window.rootViewController = tabbar;
     [self.window makeKeyAndVisible];
-    //show loading
-    [self showLoading];
+    //show user role select
+    [self showUserRoleSelectWithFinishController:tabbar];
     
     //处理通知
     [self registerXGPushNotificationWithLaunchingOptions:launchOptions];
@@ -920,6 +922,27 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
         BOOL bLoad = ![[[NSUserDefaults standardUserDefaults] objectForKey:kIsDownloadImageOrNotWhenWifi] boolValue];
         [[GConfig sharedConfig] setLoadWebImage:bLoad];
     }
+}
+
+
+- (void)showUserRoleSelectWithFinishController:(UIViewController *)controller {
+    NSNumber *userRoleValue = [[NSUserDefaults standardUserDefaults] objectForKey:UserRoleDefaultKey];
+    if (userRoleValue) {
+        UserRole role = (UserRole)[userRoleValue integerValue];
+        if (role != UserRoleUnknown) {
+            [[KTCUser currentUser] setUserRole:role];
+            //show loading
+            [self showLoading];
+            return;
+        }
+    }
+    //显示选择页面
+    UserRoleSelectViewController *selectVC = [[UserRoleSelectViewController alloc] initWithNibName:@"UserRoleSelectViewController" bundle:nil];
+    self.window.rootViewController = selectVC;
+    [selectVC setCompleteBlock:^(UserRole selectedRole){
+        [[KTCUser currentUser] setUserRole:selectedRole];
+        self.window.rootViewController = controller;
+    }];
 }
 
 

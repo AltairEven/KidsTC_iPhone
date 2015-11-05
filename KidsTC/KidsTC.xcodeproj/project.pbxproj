@@ -802,6 +802,9 @@
 		1EFD19401B4E1F1100767021 /* OrderDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFD193F1B4E1F1100767021 /* OrderDetailView.m */; };
 		1EFD19421B4E1F9B00767021 /* OrderDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EFD19411B4E1F9B00767021 /* OrderDetailView.xib */; };
 		1EFF89001BE9F3200063F717 /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1EFF88FF1BE9F3200063F717 /* interface_list.plist */; };
+		1EFFADF81BEAFA8B001D4245 /* UserRoleSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFFADF71BEAFA8A001D4245 /* UserRoleSelectView.m */; };
+		1EFFADFC1BEAFB02001D4245 /* UserRoleSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFFADFA1BEAFB02001D4245 /* UserRoleSelectViewController.m */; };
+		1EFFADFD1BEAFB02001D4245 /* UserRoleSelectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EFFADFB1BEAFB02001D4245 /* UserRoleSelectViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2187,6 +2190,11 @@
 		1EFD193F1B4E1F1100767021 /* OrderDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailView.m; sourceTree = "<group>"; };
 		1EFD19411B4E1F9B00767021 /* OrderDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderDetailView.xib; sourceTree = "<group>"; };
 		1EFF88FF1BE9F3200063F717 /* interface_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = interface_list.plist; sourceTree = "<group>"; };
+		1EFFADF61BEAFA8A001D4245 /* UserRoleSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserRoleSelectView.h; sourceTree = "<group>"; };
+		1EFFADF71BEAFA8A001D4245 /* UserRoleSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserRoleSelectView.m; sourceTree = "<group>"; };
+		1EFFADF91BEAFB02001D4245 /* UserRoleSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserRoleSelectViewController.h; sourceTree = "<group>"; };
+		1EFFADFA1BEAFB02001D4245 /* UserRoleSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserRoleSelectViewController.m; sourceTree = "<group>"; };
+		1EFFADFB1BEAFB02001D4245 /* UserRoleSelectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserRoleSelectViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3538,6 +3546,9 @@
 				1E15F9DB1BE8AA56000C74E7 /* SoftwareSettingViewController.h */,
 				1E15F9DC1BE8AA56000C74E7 /* SoftwareSettingViewController.m */,
 				1E15F9DD1BE8AA56000C74E7 /* SoftwareSettingViewController.xib */,
+				1EFFADF91BEAFB02001D4245 /* UserRoleSelectViewController.h */,
+				1EFFADFA1BEAFB02001D4245 /* UserRoleSelectViewController.m */,
+				1EFFADFB1BEAFB02001D4245 /* UserRoleSelectViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -3578,6 +3589,7 @@
 		1E3D8F471B4D1D4D00275C35 /* BusinessViews */ = {
 			isa = PBXGroup;
 			children = (
+				1EFFADF51BEAFA56001D4245 /* UserRoleSelect */,
 				1E79956A1BCD25510099CFF9 /* LoveHouse */,
 				1E7995691BCD25510099CFF9 /* Hospital */,
 				1E7994E21BC634020099CFF9 /* Activity */,
@@ -4859,6 +4871,15 @@
 			path = Settlement;
 			sourceTree = "<group>";
 		};
+		1EFFADF51BEAFA56001D4245 /* UserRoleSelect */ = {
+			isa = PBXGroup;
+			children = (
+				1EFFADF61BEAFA8A001D4245 /* UserRoleSelectView.h */,
+				1EFFADF71BEAFA8A001D4245 /* UserRoleSelectView.m */,
+			);
+			path = UserRoleSelect;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -5137,6 +5158,7 @@
 				1E827BD21B941337008F3F08 /* ImageSelectedOff@3x.png in Resources */,
 				1E8017371BB3CDC900B6C352 /* NewsViewController.xib in Resources */,
 				1E827CCE1B9BE9B9008F3F08 /* CouponListViewSegmentCell.xib in Resources */,
+				1EFFADFD1BEAFB02001D4245 /* UserRoleSelectViewController.xib in Resources */,
 				1E0B7B611B70A9A900A58AD4 /* ProjectResources.bundle in Resources */,
 				1E8EFD061B68782300D00808 /* CommentListViewSegmentCell.xib in Resources */,
 				1E79956F1BCD25860099CFF9 /* LoveHouseListView.xib in Resources */,
@@ -5202,6 +5224,7 @@
 				1E7994F01BC651E00099CFF9 /* HorizontalCalendarView.m in Sources */,
 				1E0B7B6C1B70BDB000A58AD4 /* BaseViewModel.m in Sources */,
 				1E0B7AB41B6F67B800A58AD4 /* GSegmentedControl.m in Sources */,
+				1EFFADF81BEAFA8B001D4245 /* UserRoleSelectView.m in Sources */,
 				1E3D8D5E1B4BF4A100275C35 /* IcsonNetworkReachabilityManager.m in Sources */,
 				1E0B7AC31B6F67B800A58AD4 /* RichPriceView.m in Sources */,
 				1E827CA61B94144E008F3F08 /* SDWebImageManager.m in Sources */,
@@ -5512,6 +5535,7 @@
 				1E0B7AA61B6F67B800A58AD4 /* GInfoView.m in Sources */,
 				1E943F861B832FCE0029FE74 /* StoreAppointmentModel.m in Sources */,
 				1E3D8D711B4BF4A100275C35 /* GlobalConfig.m in Sources */,
+				1EFFADFC1BEAFB02001D4245 /* UserRoleSelectViewController.m in Sources */,
 				1E0B7B0A1B6F6C1400A58AD4 /* SaiDanCommitView.m in Sources */,
 				1E943F001B7B23070029FE74 /* AppointmentOrderListViewController.m in Sources */,
 				1E3D8D8A1B4BF4A100275C35 /* ASICloudFilesCDNRequest.m in Sources */,

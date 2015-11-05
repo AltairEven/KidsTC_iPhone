@@ -8,6 +8,7 @@
 
 #import "AccountSettingViewController.h"
 #import "AccountSettingViewModel.h"
+#import "UserRoleSelectViewController.h"
 
 @interface AccountSettingViewController () <AccountSettingViewDelegate>
 
@@ -30,7 +31,37 @@
 #pragma mark AccountSettingViewDelegate
 
 - (void)accountSettingView:(AccountSettingView *)settingView didClickedWithViewTag:(AccountSettingViewTag)tag {
-    
+    switch (tag) {
+        case AccountSettingViewTagFaceImage:
+        {
+            
+        }
+            break;
+        case AccountSettingViewTagNickName:
+        {
+            
+        }
+            break;
+        case AccountSettingViewTagPassword:
+        {
+            
+        }
+            break;
+        case AccountSettingViewTagMobilePhone:
+        {
+            
+        }
+            break;
+        case AccountSettingViewTagRole:
+        {
+            UserRoleSelectViewController *controller = [[UserRoleSelectViewController alloc] initWithNibName:@"UserRoleSelectViewController" bundle:nil];
+            [controller setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)didClickedLogoutButtonOnAccountSettingView:(AccountSettingView *)settingView {

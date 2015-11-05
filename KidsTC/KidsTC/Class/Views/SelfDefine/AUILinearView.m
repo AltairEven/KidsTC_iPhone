@@ -63,6 +63,10 @@ NSString *const kLinearViewCellIdentifier = @"kLinearViewCellIdentifier";
 
 @property (nonatomic, assign) CGFloat marginHorizontal;
 
+@property (nonatomic, assign) CGFloat scale;
+
+@property (nonatomic, assign) CGFloat hGap;
+
 - (CGSize)cellSizeAtIndex:(NSUInteger)index;
 
 - (NSIndexPath *)indexPathOfCenter;
@@ -94,12 +98,12 @@ NSString *const kLinearViewCellIdentifier = @"kLinearViewCellIdentifier";
     for (UICollectionViewLayoutAttributes* attributes in array) {
         if (CGRectIntersectsRect(attributes.frame, rect)) {
             CGFloat distance = CGRectGetMidX(visibleRect) - attributes.center.x;
-            CGFloat activeDistance = attributes.size.width + GAP_HORIZONTAL;
+            CGFloat activeDistance = attributes.size.width + self.hGap;
             CGFloat normalizedDistance = distance / activeDistance;
             if (ABS(distance) <= activeDistance) {
                 CGFloat zoom = 1 - ABS(normalizedDistance);
-                if (zoom <= 1 / SCALE) {
-                    zoom = 1 / SCALE;
+                if (zoom <= 1 / self.scale) {
+                    zoom = 1 / self.scale;
                 }
                 attributes.transform3D = CATransform3DMakeScale(zoom, zoom, 1.0);
                 attributes.zIndex = 1;
@@ -113,10 +117,13 @@ NSString *const kLinearViewCellIdentifier = @"kLinearViewCellIdentifier";
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
     CGSize cellSize = [self cellSizeAtIndex:indexPath.section];
-    CGFloat xOrigin = self.marginHorizontal + indexPath.section * (cellSize.width + GAP_HORIZONTAL);
-    CGFloat yOrigin = MARGIN_VERTICAL;
+    CGFloat xOrigin = self.marginHorizontal + indexPath.section * (cellSize.width + self.hGap);
+    CGFloat yOrigin = (self.collectionView.frame.size.height - [self cellSizeAtIndex:0].height) / 2;
+    if (yOrigin < MARGIN_VERTICAL) {
+        yOrigin = MARGIN_VERTICAL;
+    }
     attributes.frame = CGRectMake(xOrigin, yOrigin, cellSize.width, cellSize.height);
-    CGFloat zoomScale = 1 / SCALE;
+    CGFloat zoomScale = 1 / self.scale;
     attributes.transform3D = CATransform3DMakeScale(zoomScale, zoomScale, 1.0);
     
     return attributes;
@@ -137,7 +144,7 @@ NSString *const kLinearViewCellIdentifier = @"kLinearViewCellIdentifier";
             contentHeight = cellSize.height;
         }
     }
-    contentWidth += (self.sectionNumber + 1) * GAP_HORIZONTAL + 2 * self.marginHorizontal;
+    contentWidth += (self.sectionNumber + 1) * self.hGap + 2 * self.marginHorizontal;
     
     self.collectionViewSize = CGSizeMake(contentWidth, contentHeight + 2 * MARGIN_VERTICAL);
     return self.collectionViewSize;
@@ -231,6 +238,7 @@ NSString *const kLinearViewCellIdentifier = @"kLinearViewCellIdentifier";
 }
 
 - (void)initLinearView {
+    self.backgroundColor = [AUITheme theme].globalBGColor;
     AUILinearViewLayout *linearViewLayout = [[AUILinearViewLayout alloc] init];
     linearViewLayout.linearView = self;
     
@@ -246,6 +254,9 @@ NSString *const kLinearViewCellIdentifier = @"kLinearViewCellIdentifier";
     [self.collectionView setHidden:YES];
     
     [self.collectionView registerClass:[AUILinearViewCell class] forCellWithReuseIdentifier:kLinearViewCellIdentifier];
+    
+    self.selectedCellScale = SCALE;
+    self.horizontalGap = GAP_HORIZONTAL;
 }
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex {
@@ -256,6 +267,21 @@ NSString *const kLinearViewCellIdentifier = @"kLinearViewCellIdentifier";
             [self collectionView:self.collectionView didSelectItemAtIndexPath:indexPath];
         }
     }
+}
+
+- (void)setSelectedCellScale:(CGFloat)selectedCellScale {
+    _selectedCellScale = selectedCellScale;
+    [(AUILinearViewLayout *)self.collectionView.collectionViewLayout setScale:selectedCellScale];
+}
+
+- (void)setPageingEnabled:(BOOL)pageingEnabled {
+    _pageingEnabled = pageingEnabled;
+    [self.collectionView setPagingEnabled:pageingEnabled];
+}
+
+- (void)setHorizontalGap:(CGFloat)horizontalGap {
+    _horizontalGap = horizontalGap;
+    [(AUILinearViewLayout *)self.collectionView.collectionViewLayout setHGap:horizontalGap];
 }
 
 #pragma mark UICollectionViewDataSource & UICollectionViewDelegate
@@ -287,6 +313,12 @@ NSString *const kLinearViewCellIdentifier = @"kLinearViewCellIdentifier";
     [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
     if (self.delegate && [self.delegate respondsToSelector:@selector(auilinearView:didSelectedCellAtIndex:)]) {
         [self.delegate auilinearView:self didSelectedCellAtIndex:indexPath.section];
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(auilinearViewDidScrolled:)]) {
+        [self.delegate auilinearViewDidScrolled:self];
     }
 }
 
@@ -331,6 +363,14 @@ NSString *const kLinearViewCellIdentifier = @"kLinearViewCellIdentifier";
     [self.collectionView.collectionViewLayout invalidateLayout];
     [self.collectionView reloadData];
     [self.collectionView setHidden:NO];
+}
+
+- (void)resetLayout {
+}
+
+- (void)layoutSubviews {
+    [self updateConstraintsIfNeeded];
+    self.collectionView.frame = self.frame;
 }
 
 /*
