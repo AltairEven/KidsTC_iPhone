@@ -11,7 +11,11 @@
 
 @interface ActivityViewModel : BaseViewModel
 
-@property (nonatomic, strong) KTCAreaItem *currentAreaItem;
+@property (nonatomic, strong) ActivityFiltItem *currentCategoryItem;
+
+@property (nonatomic, strong) ActivityFiltItem *currentAreaItem;
+
+- (void)getCategoryDataWithSucceed:(void (^)(NSDictionary *data))succeed failure:(void (^)(NSError *error))failure;
 
 - (NSArray *)currentResultArray;
 

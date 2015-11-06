@@ -249,6 +249,20 @@
 			<key>url</key>
 			<string>http://api.kidstc.com/json.php?mod=order&amp;&amp;act=search_order</string>
 		</dict>
+		<key>PRODUCT_ACTIVITY_FILTER_GET</key>
+		<dict>
+			<key>method</key>
+			<string>get</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=product&amp;&amp;act=get_product_activity_filter</string>
+		</dict>
+		<key>PRODUCT_ACTIVITY_GET_LIST</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=product&amp;&amp;act=get_product_activity_list</string>
+		</dict>
 		<key>PRODUCT_GETDETAIL</key>
 		<dict>
 			<key>method</key>
@@ -337,6 +351,6 @@
 	<key>errno</key>
 	<string>0</string>
 	<key>version</key>
-	<string>15</string>
+	<string>17</string>
 </dict>
 </plist>

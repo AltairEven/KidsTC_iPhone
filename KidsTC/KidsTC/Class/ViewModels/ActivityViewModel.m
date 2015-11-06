@@ -14,7 +14,9 @@
 
 @property (nonatomic, weak) ActivityView *view;
 
-@property (nonatomic, strong) HttpRequestClient *loadStrategriesRequest;
+@property (nonatomic, strong) HttpRequestClient *loadCategoriesRequest;
+
+@property (nonatomic, strong) HttpRequestClient *loadActivitiesRequest;
 
 @property (nonatomic, strong) NSMutableDictionary *totalResultsContainer;
 
@@ -207,10 +209,9 @@
 }
 
 - (void)reloadActivityViewWithData:(NSDictionary *)data calendarIndex:(NSUInteger)index {
-    [self fillDateDescriptionsWithData:data];
-    if ([self.dateDesArray count] > 0) {
+    [self fillDateDescriptionsWithData:data];//[self.dateDesArray count] > 0
+    if (YES) {
         NSArray *dataArray = [data objectForKey:@"data"];
-        dataArray = [[NSArray alloc] initWithObjects:@"0", @"1", nil];
         if ([dataArray isKindOfClass:[NSArray class]] && [dataArray count] > 0) {
             [self.view hideLoadMoreFooter:NO forCalendarIndex:index];
             
@@ -245,13 +246,30 @@
 
 #pragma mark Public methods
 
+- (void)getCategoryDataWithSucceed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
+    if (!self.loadCategoriesRequest) {
+        self.loadCategoriesRequest = [HttpRequestClient clientWithUrlAliasName:@"PRODUCT_ACTIVITY_FILTER_GET"];
+    }
+    
+    __weak ActivityViewModel *weakSelf = self;
+    [weakSelf.loadCategoriesRequest startHttpRequestWithParameter:nil success:^(HttpRequestClient *client, NSDictionary *responseData) {
+        if (succeed) {
+            succeed(responseData);
+        }
+    } failure:^(HttpRequestClient *client, NSError *error) {
+        if (failure) {
+            failure(error);
+        }
+    }];
+}
+
 - (NSArray *)currentResultArray {
     return [NSArray arrayWithArray:[self activityResultAtCalendarIndex:self.currentCalendarIndex]];
 }
 
 - (void)startUpdateDataWithCalendarIndex:(NSUInteger)index {
-    if (!self.loadStrategriesRequest) {
-        self.loadStrategriesRequest = [HttpRequestClient clientWithUrlAliasName:@"SEARCH_STRATEGY"];
+    if (!self.loadActivitiesRequest) {
+        self.loadActivitiesRequest = [HttpRequestClient clientWithUrlAliasName:@"PRODUCT_ACTIVITY_GET_LIST"];
     }
     
     NSString *dateString = @"";
@@ -269,14 +287,14 @@
     if (self.currentAreaItem) {
         areaId = self.currentAreaItem.identifier;
     }
-    
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
-                           dateString, @"time",
+                           @"", @"category",
                            [NSNumber numberWithInteger:pageIndex], @"page",
-                           [NSNumber numberWithInteger:PageSize], @"pagecount",
-                           areaId, @"area", nil];
+                           [NSNumber numberWithInteger:PageSize], @"pageCount",
+                           areaId, @"distinct", nil];
+    
     __weak ActivityViewModel *weakSelf = self;
-    [weakSelf.loadStrategriesRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
+    [weakSelf.loadActivitiesRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [weakSelf loadActivitiesSucceedWithData:responseData calendarIndex:index];
     } failure:^(HttpRequestClient *client, NSError *error) {
         [weakSelf loadActivitiesFailedWithError:error calendarIndex:index];
@@ -284,8 +302,8 @@
 }
 
 - (void)getMoreDataWithCalendarIndex:(NSUInteger)index {
-    if (!self.loadStrategriesRequest) {
-        self.loadStrategriesRequest = [HttpRequestClient clientWithUrlAliasName:@"SEARCH_STRATEGY"];
+    if (!self.loadActivitiesRequest) {
+        self.loadActivitiesRequest = [HttpRequestClient clientWithUrlAliasName:@"PRODUCT_ACTIVITY_GET_LIST"];
     }
     
     NSString *dateString = @"";
@@ -301,14 +319,14 @@
     if (self.currentAreaItem) {
         areaId = self.currentAreaItem.identifier;
     }
-    
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
-                           dateString, @"time",
+                           @"", @"category",
                            [NSNumber numberWithInteger:pageIndex], @"page",
-                           [NSNumber numberWithInteger:PageSize], @"pagecount",
-                           areaId, @"area", nil];
+                           [NSNumber numberWithInteger:PageSize], @"pageCount",
+                           areaId, @"distinct", nil];
+    
     __weak ActivityViewModel *weakSelf = self;
-    [weakSelf.loadStrategriesRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
+    [weakSelf.loadActivitiesRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [weakSelf loadActivitiesSucceedWithData:responseData calendarIndex:index];
     } failure:^(HttpRequestClient *client, NSError *error) {
         [weakSelf loadActivitiesFailedWithError:error calendarIndex:index];
@@ -331,7 +349,7 @@
 #pragma mark Super methods
 
 - (void)stopUpdateData {
-    [self.loadStrategriesRequest cancel];
+    [self.loadActivitiesRequest cancel];
     [self.view endRefresh];
     [self.view endLoadMore];
 }

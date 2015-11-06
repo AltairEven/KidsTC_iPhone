@@ -9,15 +9,21 @@
 #import "ActivityViewController.h"
 #import "ActivityViewModel.h"
 #import "ServiceDetailViewController.h"
-#import "KTCAreaSelectView.h"
+#import "ActivityFilterView.h"
 
-@interface ActivityViewController () <ActivityViewDelegate>
+@interface ActivityViewController () <ActivityViewDelegate, ActivityFilterViewDelegate>
 
 @property (weak, nonatomic) IBOutlet ActivityView *activityView;
 
 @property (nonatomic, strong) ActivityViewModel *viewModel;
 
-@property (nonatomic, strong) KTCAreaSelectView *areaSelectView;
+@property (nonatomic, strong) ActivityFilterView *filterView;
+
+@property (nonatomic, assign) NSInteger currentCategoryIndex;
+
+@property (nonatomic, strong) ActivityFilterModel *filterModel;
+
+@property (nonatomic, assign) NSInteger currentAreaIndex;
 
 - (void)didClickedFilterButton;
 
@@ -30,12 +36,16 @@
     // Do any additional setup after loading the view from its nib.
     _navigationTitle = @"热门活动";
     // Do any additional setup after loading the view from its nib.
+    self.currentCategoryIndex = INVALID_INDEX;
+    self.currentAreaIndex = INVALID_INDEX;
+    
     self.activityView.delegate = self;
+    self.filterView.delegate = self;
     
     self.viewModel = [[ActivityViewModel alloc] initWithView:self.activityView];
     [self.activityView startRefresh];
     
-    [self setupRightBarButton:self.viewModel.currentAreaItem.name target:self action:@selector(didClickedFilterButton) frontImage:@"filter" andBackImage:@"filter"];
+    [self setupRightBarButton:nil target:self action:@selector(didClickedFilterButton) frontImage:@"filter" andBackImage:@"filter"];
 }
 
 #pragma mark ActivityViewDelegate
@@ -58,18 +68,36 @@
     [self.navigationController pushViewController:controller animated:YES];
 }
 
+#pragma mark
+
+- (void)didClickedConfirmButtonOnActivityFilterView:(ActivityFilterView *)filterView withSelectedCategoryIndex:(NSUInteger)categoryIndex selectedAreaIndex:(NSUInteger)areaIndex {
+    NSArray *areaArray = [[KTCArea area] areaItems];
+    if ([areaArray count] > areaIndex) {
+        self.viewModel.currentAreaItem = [areaArray objectAtIndex:areaIndex];
+    }
+}
+
 #pragma mark Private methods
 
 - (void)didClickedFilterButton {
-    if (!self.areaSelectView) {
-        self.areaSelectView = [KTCAreaSelectView areaSelecteView];
+    if (!self.filterView) {
+        self.filterView = [[ActivityFilterView alloc] init];
     }
-    
-    __weak ActivityViewController *weakSelf = self;
-    [weakSelf.areaSelectView showAddressSelectViewWithCurrent:weakSelf.viewModel.currentAreaItem Selection:^(KTCAreaItem *areaItem) {
-        weakSelf.viewModel.currentAreaItem = areaItem;
-        [weakSelf setRightBarButtonTitle:areaItem.name frontImage:@"filter" andBackImage:@"filter"];
-    }];
+    if (!self.filterModel || [self.filterModel needRefresh]) {
+        __weak ActivityViewController *weakSelf = self;
+        [self.filterView showLoading:YES];
+        [weakSelf.viewModel getCategoryDataWithSucceed:^(NSDictionary *data) {
+            weakSelf.filterModel = [[ActivityFilterModel alloc] initWithRawData:[data objectForKey:@"data"]];
+            if (weakSelf.filterModel) {
+                [weakSelf.filterView setCategoryNameArray:[weakSelf.filterModel categotyNames]];
+                [weakSelf.filterView setAreaNameArray:[weakSelf.filterModel areaNames]];
+            }
+            [weakSelf.filterView showLoading:NO];
+        } failure:^(NSError *error) {
+            [weakSelf.filterView showLoading:NO];
+        }];
+    }
+    [self.filterView showWithSelectedCategoryIndex:self.currentAreaIndex selectedAreaIndex:self.currentAreaIndex];
 }
 
 - (void)didReceiveMemoryWarning {

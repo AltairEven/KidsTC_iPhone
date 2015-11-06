@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ActivityListItemModel.h"
+#import "ActivityFilterModel.h"
 
 @class ActivityView;
 

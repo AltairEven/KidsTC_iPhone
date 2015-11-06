@@ -801,7 +801,6 @@
 		1EC73C691B61186E008B39EA /* SettlementPayTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EC73C671B61186E008B39EA /* SettlementPayTypeCell.xib */; };
 		1EFD19401B4E1F1100767021 /* OrderDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFD193F1B4E1F1100767021 /* OrderDetailView.m */; };
 		1EFD19421B4E1F9B00767021 /* OrderDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EFD19411B4E1F9B00767021 /* OrderDetailView.xib */; };
-		1EFF89001BE9F3200063F717 /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1EFF88FF1BE9F3200063F717 /* interface_list.plist */; };
 		1EFFADF81BEAFA8B001D4245 /* UserRoleSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFFADF71BEAFA8A001D4245 /* UserRoleSelectView.m */; };
 		1EFFADFC1BEAFB02001D4245 /* UserRoleSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFFADFA1BEAFB02001D4245 /* UserRoleSelectViewController.m */; };
 		1EFFADFD1BEAFB02001D4245 /* UserRoleSelectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EFFADFB1BEAFB02001D4245 /* UserRoleSelectViewController.xib */; };
@@ -809,6 +808,10 @@
 		1EFFAE0C1BEB7925001D4245 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1EFFAE081BEB7925001D4245 /* WeiboSDK.bundle */; };
 		1EFFAE0E1BEB793E001D4245 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EFFAE0D1BEB793E001D4245 /* ImageIO.framework */; };
 		1EFFAE131BEB79AF001D4245 /* WeiboLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFFAE121BEB79AF001D4245 /* WeiboLoginManager.m */; };
+		1EFFAE171BEC4E50001D4245 /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1EFFAE161BEC4E50001D4245 /* interface_list.plist */; };
+		1EFFAE1A1BEC834B001D4245 /* ActivityFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFFAE191BEC834B001D4245 /* ActivityFilterView.m */; };
+		1EFFAE1C1BEC8364001D4245 /* ActivityFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EFFAE1B1BEC8364001D4245 /* ActivityFilterView.xib */; };
+		1EFFAE221BEC9EE3001D4245 /* ActivityFilterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFFAE211BEC9EE3001D4245 /* ActivityFilterModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2193,7 +2196,6 @@
 		1EFD193E1B4E1F1100767021 /* OrderDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailView.h; sourceTree = "<group>"; };
 		1EFD193F1B4E1F1100767021 /* OrderDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailView.m; sourceTree = "<group>"; };
 		1EFD19411B4E1F9B00767021 /* OrderDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderDetailView.xib; sourceTree = "<group>"; };
-		1EFF88FF1BE9F3200063F717 /* interface_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = interface_list.plist; sourceTree = "<group>"; };
 		1EFFADF61BEAFA8A001D4245 /* UserRoleSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserRoleSelectView.h; sourceTree = "<group>"; };
 		1EFFADF71BEAFA8A001D4245 /* UserRoleSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserRoleSelectView.m; sourceTree = "<group>"; };
 		1EFFADF91BEAFB02001D4245 /* UserRoleSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserRoleSelectViewController.h; sourceTree = "<group>"; };
@@ -2214,6 +2216,12 @@
 		1EFFAE0D1BEB793E001D4245 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		1EFFAE111BEB79AF001D4245 /* WeiboLoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboLoginManager.h; sourceTree = "<group>"; };
 		1EFFAE121BEB79AF001D4245 /* WeiboLoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboLoginManager.m; sourceTree = "<group>"; };
+		1EFFAE161BEC4E50001D4245 /* interface_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = interface_list.plist; sourceTree = "<group>"; };
+		1EFFAE181BEC834B001D4245 /* ActivityFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityFilterView.h; sourceTree = "<group>"; };
+		1EFFAE191BEC834B001D4245 /* ActivityFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityFilterView.m; sourceTree = "<group>"; };
+		1EFFAE1B1BEC8364001D4245 /* ActivityFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityFilterView.xib; sourceTree = "<group>"; };
+		1EFFAE201BEC9EE3001D4245 /* ActivityFilterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityFilterModel.h; sourceTree = "<group>"; };
+		1EFFAE211BEC9EE3001D4245 /* ActivityFilterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityFilterModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2895,7 +2903,7 @@
 		1E3D7E781B4BD83D00275C35 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				1EFF88FF1BE9F3200063F717 /* interface_list.plist */,
+				1EFFAE161BEC4E50001D4245 /* interface_list.plist */,
 				1E943EBD1B7375F60029FE74 /* Area.plist */,
 				1E0B7B591B709A2100A58AD4 /* Category.plist */,
 				1E3D7E791B4BD83D00275C35 /* Info.plist */,
@@ -3887,6 +3895,9 @@
 				1E7994E81BC650B70099CFF9 /* ActivityViewCell.h */,
 				1E7994E91BC650B70099CFF9 /* ActivityViewCell.m */,
 				1E7994EA1BC650B70099CFF9 /* ActivityViewCell.xib */,
+				1EFFAE181BEC834B001D4245 /* ActivityFilterView.h */,
+				1EFFAE191BEC834B001D4245 /* ActivityFilterView.m */,
+				1EFFAE1B1BEC8364001D4245 /* ActivityFilterView.xib */,
 			);
 			path = Activity;
 			sourceTree = "<group>";
@@ -3896,6 +3907,8 @@
 			children = (
 				1E7994F31BC683950099CFF9 /* ActivityListItemModel.h */,
 				1E7994F41BC683950099CFF9 /* ActivityListItemModel.m */,
+				1EFFAE201BEC9EE3001D4245 /* ActivityFilterModel.h */,
+				1EFFAE211BEC9EE3001D4245 /* ActivityFilterModel.m */,
 			);
 			path = Activity;
 			sourceTree = "<group>";
@@ -5055,6 +5068,7 @@
 				1E827BDD1B941337008F3F08 /* PlayButtonOverlayLarge@2x.png in Resources */,
 				1E827B251B886317008F3F08 /* StoreMoreDetailViewController.xib in Resources */,
 				1E3D8F721B4D37D700275C35 /* OrderListView.xib in Resources */,
+				1EFFAE1C1BEC8364001D4245 /* ActivityFilterView.xib in Resources */,
 				1E79958B1BCE2DC20099CFF9 /* HospitalListView.xib in Resources */,
 				1E0B77A41B68C49000A58AD4 /* AccountSettingViewController.xib in Resources */,
 				1E827BCF1B941337008F3F08 /* ImageError@3x.png in Resources */,
@@ -5090,6 +5104,7 @@
 				1E943F4F1B7DDFDF0029FE74 /* loadingBg_828_1472.png in Resources */,
 				1EA8B6EA1B66253200F90688 /* CategoryViewController.xib in Resources */,
 				1EC4A1241B5D248300206BB9 /* KTCSearchResultViewController.xib in Resources */,
+				1EFFAE171BEC4E50001D4245 /* interface_list.plist in Resources */,
 				1EC4A0F41B5A4C8600206BB9 /* FavourateView.xib in Resources */,
 				1E15F9CD1BE8A075000C74E7 /* SoftwareSettingView.xib in Resources */,
 				1E943F5D1B7DE67B0029FE74 /* logo_640_1136.png in Resources */,
@@ -5206,7 +5221,6 @@
 				1E827BE71B941337008F3F08 /* UIBarButtonItemArrowRight@3x.png in Resources */,
 				1E1CFA231BD72F5E0005653D /* ServiceDetailMoreInfoView.xib in Resources */,
 				1EC73C321B5F9D63008B39EA /* home6.png in Resources */,
-				1EFF89001BE9F3200063F717 /* interface_list.plist in Resources */,
 				1E827BD21B941337008F3F08 /* ImageSelectedOff@3x.png in Resources */,
 				1E8017371BB3CDC900B6C352 /* NewsViewController.xib in Resources */,
 				1EFFAE0C1BEB7925001D4245 /* WeiboSDK.bundle in Resources */,
@@ -5570,6 +5584,7 @@
 				1E0B77D11B6A14A200A58AD4 /* PMCalendarView.m in Sources */,
 				1E0B7A961B6F67B800A58AD4 /* GColorsTextCell.m in Sources */,
 				1E15F9C01BE8953C000C74E7 /* AccountSettingViewCell.m in Sources */,
+				1EFFAE1A1BEC834B001D4245 /* ActivityFilterView.m in Sources */,
 				1E3D8D5B1B4BF4A100275C35 /* HttpProcessHelper.m in Sources */,
 				1E3D8D881B4BF4A100275C35 /* ASIInputStream.m in Sources */,
 				1E827CA11B94144E008F3F08 /* SDImageCache.m in Sources */,
@@ -5606,6 +5621,7 @@
 				1E0B7B251B6F6FB100A58AD4 /* GTMBase64.m in Sources */,
 				1E15F9A61BE0B8BA000C74E7 /* CommentDetailModel.m in Sources */,
 				1E827BA41B9412C6008F3F08 /* MWGridViewController.m in Sources */,
+				1EFFAE221BEC9EE3001D4245 /* ActivityFilterModel.m in Sources */,
 				1E3D8DA71B4BF4A100275C35 /* NSData+Json.m in Sources */,
 				1E0B77FD1B6F303D00A58AD4 /* KTCSearchAreaFilterView.m in Sources */,
 				1E3D8D751B4BF4A100275C35 /* AFHTTPRequestOperation.m in Sources */,

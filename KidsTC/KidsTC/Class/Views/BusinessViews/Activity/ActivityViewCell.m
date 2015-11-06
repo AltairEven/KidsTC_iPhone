@@ -60,15 +60,20 @@
         [self.priceView setPrice:itemModel.price];
         [self.progressView setProgress:itemModel.percent / 100 animated:YES];
         //tips
-        NSString *wholeString = [NSString stringWithFormat:@"已售%g%%，剩余%lu", itemModel.percent, (unsigned long)itemModel.leftNumber];
-        NSMutableAttributedString *labelString = [[NSMutableAttributedString alloc] initWithString:wholeString];
-        NSDictionary *attribute = [NSDictionary dictionaryWithObject:[UIColor cyanColor] forKey:NSForegroundColorAttributeName];
-        NSUInteger commaIndex = [wholeString rangeOfString:@"，"].location;
-        NSRange percentRange = NSMakeRange(2, commaIndex - 2);
-        NSRange leftRange = NSMakeRange(commaIndex + 3, [wholeString length] - commaIndex - 3);
-        [labelString setAttributes:attribute range:percentRange];
-        [labelString addAttributes:attribute range:leftRange];
-        [self.tipsLabel setAttributedText:labelString];
+        if (itemModel.leftNumber == 0) {
+            NSString *tip = @"人数已满";
+            [self.tipsLabel setText:tip];
+        } else {
+            NSString *wholeString = [NSString stringWithFormat:@"已售%.f%%，剩余%lu", itemModel.percent, (unsigned long)itemModel.leftNumber];
+            NSMutableAttributedString *labelString = [[NSMutableAttributedString alloc] initWithString:wholeString];
+            NSDictionary *attribute = [NSDictionary dictionaryWithObject:[AUITheme theme].highlightTextColor forKey:NSForegroundColorAttributeName];
+            NSUInteger commaIndex = [wholeString rangeOfString:@"，"].location;
+            NSRange percentRange = NSMakeRange(2, commaIndex - 2);
+            NSRange leftRange = NSMakeRange(commaIndex + 3, [wholeString length] - commaIndex - 3);
+            [labelString setAttributes:attribute range:percentRange];
+            [labelString addAttributes:attribute range:leftRange];
+            [self.tipsLabel setAttributedText:labelString];
+        }
     }
 }
 
