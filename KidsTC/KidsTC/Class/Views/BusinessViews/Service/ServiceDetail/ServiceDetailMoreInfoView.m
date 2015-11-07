@@ -189,7 +189,7 @@ NSString *const kCommentCellIdentifier = @"kCommentCellIdentifier";
         case ServiceDetailMoreInfoViewTagComment:
         {
             CommentListItemModel *model = [self.commentListModels objectAtIndex:indexPath.row];
-            height = [model contentHeight];
+            height = [model cellHeight];
         }
             break;
         default:

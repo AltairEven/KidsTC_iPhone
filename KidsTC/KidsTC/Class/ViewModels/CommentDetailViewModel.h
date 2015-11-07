@@ -8,6 +8,7 @@
 
 #import "BaseViewModel.h"
 #import "CommentDetailView.h"
+#import "KTCCommentManager.h"
 
 @interface CommentDetailViewModel : BaseViewModel
 

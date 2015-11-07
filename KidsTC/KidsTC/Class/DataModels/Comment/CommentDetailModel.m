@@ -28,7 +28,7 @@
         case CommentDetailViewSourceService:
         case CommentDetailViewSourceStore:
         {
-            height = [((CommentListItemModel *)self.headerModel) contentHeight];
+            height = [((CommentListItemModel *)self.headerModel) cellHeight];
         }
             break;
         default:

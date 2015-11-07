@@ -174,23 +174,23 @@
 }
 
 - (IBAction)didClickedConfirmButton:(id)sender {
-    [self dismiss];
     if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedConfirmButtonOnActivityFilterView:withSelectedCategoryIndex:selectedAreaIndex:)]) {
         [self.delegate didClickedConfirmButtonOnActivityFilterView:self withSelectedCategoryIndex:self.currentCategoryIndex selectedAreaIndex:self.currentAreaIndex];
     }
+    [self dismiss];
 }
 
 - (IBAction)didClickedCancelButton:(id)sender {
-    [self dismiss];
     
-    [self selectCategoryAtIndex:self.lastCategoryIndex];
-    if (self.currentAreaIndex != INVALID_INDEX) {
-        [self.areaTable deselectRowAtIndexPath:[NSIndexPath indexPathForRow:self.currentAreaIndex inSection:0] animated:YES];
-    }
-    [self.selectedAreaLabel setText:[self.areaNameArray objectAtIndex:0]];
-    if (self.lastAreaIndex != INVALID_INDEX) {
-        [self selectAreaAtIndex:self.lastAreaIndex];
-    }
+//    [self selectCategoryAtIndex:self.lastCategoryIndex];
+//    if (self.currentAreaIndex != INVALID_INDEX) {
+//        [self.areaTable deselectRowAtIndexPath:[NSIndexPath indexPathForRow:self.currentAreaIndex inSection:0] animated:YES];
+//    }
+//    [self.selectedAreaLabel setText:[self.areaNameArray objectAtIndex:0]];
+//    if (self.lastAreaIndex != INVALID_INDEX) {
+//        [self selectAreaAtIndex:self.lastAreaIndex];
+//    }
+    [self dismiss];
 }
 
 

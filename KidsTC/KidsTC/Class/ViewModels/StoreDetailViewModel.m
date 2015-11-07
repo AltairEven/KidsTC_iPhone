@@ -45,9 +45,11 @@
 
 - (void)loadDetailSucceed:(NSDictionary *)data {
     [self.detailModel fillWithRawData:[data objectForKey:@"data"]];
+    [self.view reloadData];
 }
 
 - (void)loadDetailFailed:(NSError *)error {
+    [self.view reloadData];
 }
 
 #pragma mark Public methods
@@ -63,9 +65,8 @@
         [self.loadStoreDetailRequest setErrorBlock:self.netErrorBlock];
     }
     NSString *coordinateString = [GToolUtil stringFromCoordinate:CLLocationCoordinate2DMake(31.241044, 121.456037)];
-    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:@"2015073301", @"storeId", coordinateString, @"mapaddr", nil];
 //    NSString *coordinateString = [GToolUtil stringFromCoordinate:[[GConfig sharedConfig] currentCoordinate]];
-//    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:storeId, @"storeId", coordinateString, @"mapaddr", nil];
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:storeId, @"storeId", coordinateString, @"mapaddr", nil];
     
     __weak StoreDetailViewModel *weakSelf = self;
     [weakSelf.loadStoreDetailRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {

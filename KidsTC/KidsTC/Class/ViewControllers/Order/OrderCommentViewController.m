@@ -55,7 +55,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _navigationTitle = @"服务评价";
+    _navigationTitle = @"评价";
     // Do any additional setup after loading the view from its nib.
     [self.commentView setCommentModel:self.commentModel];
     self.commentView.delegate = self;
@@ -100,7 +100,7 @@
         [[GAlertLoadingView sharedAlertLoadingView] show];
         [weakSelf getNeedUploadPhotosArray:^(NSArray *photosArray) {
             [[KTCImageUploader sharedInstance] startUploadWithImagesArray:photosArray withSucceed:^(NSArray *locateUrlStrings) {
-                weakSelf.commentModel.uploadPhotoLocationStrings = photosArray;
+                weakSelf.commentModel.uploadPhotoLocationStrings = locateUrlStrings;
                 [weakSelf submitComments];
             } failure:^(NSError *error) {
                 [[GAlertLoadingView sharedAlertLoadingView] hide];
@@ -315,17 +315,23 @@
     [self.submitCommentRequest cancel];
     NSString *uploadLocation = [self.commentModel.uploadPhotoLocationStrings componentsJoinedByString:@","];
     
-    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
-                           [NSNumber numberWithInteger:self.commentModel.qualityStarNumber], @"commentScore",
-                           [NSNumber numberWithInteger:self.commentModel.environmentStarNumber], @"environmentScore",
-                           [NSNumber numberWithInteger:self.commentModel.qualityStarNumber], @"costPerformanceScore",
-                           [NSNumber numberWithInteger:self.commentModel.serviceStarNumber], @"serviceScore",
-                           self.commentModel.commentText, @"comment",
-                           self.commentModel.orderId, @"orderId",
-                           self.commentModel.objectId, @"id",
-                           self.commentModel.objectName, @"name",
-                           [NSNumber numberWithInteger:self.commentModel.type], @"type",
-                           uploadLocation, @"imgstr", nil];
+    NSDictionary *scoreDic = [NSDictionary dictionaryWithObjectsAndKeys:
+                              [NSNumber numberWithInteger:self.commentModel.environmentStarNumber], @"hj",
+                              [NSNumber numberWithInteger:self.commentModel.qualityStarNumber], @"sz",
+                              [NSNumber numberWithInteger:self.commentModel.serviceStarNumber], @"fw", nil];
+    NSString *jsonString = [GToolUtil jsonFromObject:scoreDic];
+    
+    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                           self.commentModel.relationSysNo, @"relationSysNo",
+                           [NSNumber numberWithInteger:self.commentModel.relationType], @"relationType",
+                           [NSNumber numberWithBool:self.commentModel.needHideName], @"isAnonymous",
+                           self.commentModel.commentText, @"content",
+                           [NSNumber numberWithInteger:self.commentModel.qualityStarNumber], @"overallScore",
+                           jsonString, @"scoreDetail",
+                           uploadLocation, @"image", nil];
+    if ([self.commentModel.orderId length] > 0) {
+        [param setObject:self.commentModel.orderId forKey:@"orderId"];
+    }
     
     __weak OrderCommentViewController *weakSelf = self;
     [weakSelf.submitCommentRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
@@ -351,7 +357,12 @@
 }
 
 - (void)submitCommentFailed:(NSError *)error {
-    [[iToast makeText:@"提交评论失败，请重新提交。"] show];
+    NSString *errMsg = @"提交评论失败，请重新提交。";
+    NSString *remoteErrMsg = [error.userInfo objectForKey:@"data"];
+    if ([remoteErrMsg isKindOfClass:[NSString class]] && [remoteErrMsg length] > 0) {
+        errMsg = remoteErrMsg;
+    }
+    [[iToast makeText:errMsg] show];
 }
 /*
 #pragma mark - Navigation

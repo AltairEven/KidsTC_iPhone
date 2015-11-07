@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "OrderModel.h"
 #import "AppointmentOrderModel.h"
+#import "StoreDetailModel.h"
+#import "KTCCommentManager.h"
 
 typedef enum {
     OrderTypeServiceOrder,
@@ -18,6 +20,10 @@ typedef enum {
 @interface OrderCommentModel : NSObject
 
 @property (nonatomic, copy) NSString *orderId;
+
+@property (nonatomic, copy) NSString *relationSysNo;
+
+@property (nonatomic, assign) CommentRelationType relationType;
 
 @property (nonatomic, assign) OrderType type;
 
@@ -44,5 +50,7 @@ typedef enum {
 + (instancetype)modelFromServiceOrderModel:(OrderModel *)orderModel;
 
 + (instancetype)modelFromStoreAppointmentModel:(AppointmentOrderModel *)orderModel;
+
++ (instancetype)modelFromStore:(StoreDetailModel *)detailModel;
 
 @end

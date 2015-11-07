@@ -145,4 +145,7 @@ NSInteger sortImageDictionaryWithIdx(id v1, id v2, void *context);
 
 + (UIView*)duplicate:(UIView*)view;
 
+
++ (NSString *)jsonFromObject:(id)obj;
+
 @end

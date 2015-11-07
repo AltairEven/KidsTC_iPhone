@@ -9,12 +9,6 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
-    KTCCommentObjectNULL = -1,
-    KTCCommentObjectService,
-    KTCCommentObjectStore
-}KTCCommentObject;
-
-typedef enum {
     KTCCommentTypeNone,
     KTCCommentTypeAll,
     KTCCommentTypeGood,
@@ -23,9 +17,20 @@ typedef enum {
     KTCCommentTypePicture
 }KTCCommentType;
 
+typedef enum {
+    CommentRelationTypeNone = 0,
+    CommentRelationTypeServiceProduct = 1,
+    CommentRelationTypeActivityProduct = 2,
+    CommentRelationTypeRealProduct = 3,
+    CommentRelationTypeStore = 10,
+    CommentRelationTypeStrategy = 11,
+    CommentRelationTypeStrategyDetail = 12,
+    CommentRelationTypeNews = 13
+}CommentRelationType;
+
 typedef struct {
-    KTCCommentObject object;
-    KTCCommentType type;
+    CommentRelationType relationType;
+    KTCCommentType commentType;
     NSUInteger pageIndex;
     NSUInteger pageSize;
 }KTCCommentRequestParam;

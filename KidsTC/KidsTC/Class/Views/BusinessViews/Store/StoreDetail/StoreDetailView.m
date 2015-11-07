@@ -48,6 +48,7 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
 @property (strong, nonatomic) IBOutlet UITableViewCell *telCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *addressCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *briefCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *nearbyCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *recommendCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *serviceLinearCell;
 
@@ -68,6 +69,8 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
 @property (weak, nonatomic) IBOutlet UILabel *recommendLabel;
 //description
 @property (weak, nonatomic) IBOutlet UILabel *storeBriefLabel;
+//nearby
+@property (weak, nonatomic) IBOutlet UIView *nearbyBGView;
 //brothers
 //service
 @property (weak, nonatomic) IBOutlet AUISegmentView *serviceLinearView;
@@ -88,6 +91,7 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
 - (void)configTitleCell:(StoreDetailTitleCell *)cell WithSection:(StoreDetailViewSection)section;
 - (void)configTopCell;
 - (void)configRecommendCell;
+- (void)configNearbyCell;
 
 @end
 
@@ -316,10 +320,10 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
         {
             if (indexPath.row == 0) {
                 cell = [self createTableCellWithIdentifier:kTitleCellIdentifier forTableView:tableView atIndexPath:indexPath];
-                [self configTitleCell:(StoreDetailTitleCell *)cell WithSection:StoreDetailViewSectionBrief];
+                [self configTitleCell:(StoreDetailTitleCell *)cell WithSection:StoreDetailViewSectionComment];
             } else {
                 cell = [self createTableCellWithIdentifier:kCommentCellIdentifier forTableView:tableView atIndexPath:indexPath];
-                [((StoreDetailCommentCell *)cell) configWithModel:[self.detailModel.hotRecommendServiceArray objectAtIndex:indexPath.row - 1]];
+                [((StoreDetailCommentCell *)cell) configWithModel:[self.detailModel.commentItemsArray objectAtIndex:indexPath.row - 1]];
             }
         }
             break;
@@ -327,9 +331,9 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
         {
             if (indexPath.row == 0) {
                 cell = [self createTableCellWithIdentifier:kTitleCellIdentifier forTableView:tableView atIndexPath:indexPath];
-                [self configTitleCell:(StoreDetailTitleCell *)cell WithSection:StoreDetailViewSectionBrief];
+                [self configTitleCell:(StoreDetailTitleCell *)cell WithSection:StoreDetailViewSectionNearby];
             } else {
-                cell = self.briefCell;
+                cell = self.nearbyCell;
             }
         }
             break;
@@ -415,7 +419,8 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
             if (indexPath.row == 0) {
                 height = [StoreDetailTitleCell cellHeight];
             } else {
-                height = [self.detailModel briefCellHeight];
+                CommentListItemModel *model = [self.detailModel.commentItemsArray objectAtIndex:indexPath.row - 1];
+                height = [model storeDetailCellHeight];
             }
         }
             break;
@@ -424,7 +429,7 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
             if (indexPath.row == 0) {
                 height = [StoreDetailTitleCell cellHeight];
             } else {
-                height = [self.detailModel briefCellHeight];
+                height = [self.detailModel nearbyCellHeight];
             }
         }
             break;
@@ -673,6 +678,70 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
     [self.recommendLabel setAttributedText:labelString];
 }
 
+- (void)configNearbyCell {
+    [self.nearbyBGView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    
+    CGFloat gap = 0.5;
+    CGFloat singleWidth = (SCREEN_WIDTH - gap * 2) / 3;
+    CGFloat singleHeight = 30;
+    
+    CGFloat xPosition = 0;
+    CGFloat yPosition = 0;
+    
+    CGFloat margin = 5;
+    CGFloat imageSideLenght = singleHeight - margin * 2;
+    CGFloat labelWidth = singleWidth - margin * 3 - imageSideLenght;
+    UIFont *font = [UIFont systemFontOfSize:13];
+    UIColor *gapColor = RGBA(230, 230, 230, 0.7);
+    
+    NSUInteger nearbyCount = [self.detailModel.nearbyFacilities count];
+    
+    for (NSUInteger index = 0; index < nearbyCount; index ++) {
+        StoreDetailNearbyModel *model = [self.detailModel.nearbyFacilities objectAtIndex:index];
+        
+        UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(xPosition, yPosition, singleWidth, singleHeight)];
+        [bgView setBackgroundColor:[UIColor clearColor]];
+        [self.nearbyBGView addSubview:bgView];
+        
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(margin, margin, imageSideLenght, imageSideLenght)];
+        [imageView setBackgroundColor:[UIColor clearColor]];
+        [imageView setImageWithURL:model.imageUrl];
+        [bgView addSubview:imageView];
+        
+        CGFloat labelStart = margin + imageSideLenght + margin;
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(labelStart, margin, labelWidth, imageSideLenght)];
+        [label setBackgroundColor:[UIColor clearColor]];
+        [label setFont:font];
+        [label setTextColor:[UIColor lightGrayColor]];
+        [label setTextAlignment:NSTextAlignmentCenter];
+        [label setText:model.name];
+        [bgView addSubview:label];
+        
+        if (index < nearbyCount - 1) {
+            //非最后一个
+            if (index % 3 >= 2) {
+                //换行
+                xPosition = 0;
+                yPosition += singleHeight;
+                
+                UIView *gapView = [[UIView alloc] initWithFrame:CGRectMake(xPosition + margin, yPosition, SCREEN_WIDTH - margin * 2, gap)];
+                [gapView setBackgroundColor:gapColor];
+                [bgView addSubview:gapView];
+                
+            } else {
+                //行内
+                xPosition += singleWidth;
+                
+                UIView *gapView = [[UIView alloc] initWithFrame:CGRectMake(xPosition, yPosition + margin, gap, imageSideLenght)];
+                [gapView setBackgroundColor:gapColor];
+                [bgView addSubview:gapView];
+                
+                xPosition += gap;
+            }
+        }
+    }
+}
+
 #pragma mark Public methods
 
 - (void)reloadData {
@@ -682,9 +751,11 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
             NSMutableArray *tempSections = [[NSMutableArray alloc] init];
             [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionTop]];
             if ([self.detailModel.phoneNumber length] > 0) {
+                [self.telephoneLabel setText:self.detailModel.phoneNumber];
                 [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionPhone]];
             }
             if ([self.detailModel.storeAddress length] > 0) {
+                [self.addressLabel setText:self.detailModel.storeAddress];
                 [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionAddress]];
             }
             if ([self.detailModel.activeModelsArray count] > 0) {
@@ -694,32 +765,30 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
                 [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionHotRecommend]];
             }
             if ([self.detailModel.recommendString length] > 0) {
+                [self configRecommendCell];
                 [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionRecommend]];
             }
             if ([self.detailModel.storeBrief length] > 0) {
+                [self.storeBriefLabel setText:self.detailModel.storeBrief];
                 [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionBrief]];
             }
             if ([self.detailModel.commentItemsArray count] > 0) {
                 [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionComment]];
             }
             if ([self.detailModel.nearbyFacilities count] > 0) {
+                [self configNearbyCell];
                 [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionNearby]];
             }
             if ([self.detailModel.brotherStores count] > 0) {
                 [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionBrother]];
             }
             if ([self.detailModel.serviceModelsArray count] > 0) {
+                [self.serviceLinearView reloadData];
                 [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionService]];
             }
             self.sectionIdentifiersArray = [NSArray arrayWithArray:tempSections];
             
-            
             [self configTopCell];
-            [self.telephoneLabel setText:self.detailModel.phoneNumber];
-            [self.addressLabel setText:self.detailModel.storeAddress];
-            [self configRecommendCell];
-            [self.storeBriefLabel setText:self.detailModel.storeBrief];
-            [self.serviceLinearView reloadData];
         } else {
             self.sectionIdentifiersArray = nil;
         }

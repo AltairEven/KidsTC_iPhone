@@ -16,7 +16,7 @@
     }
     self = [super init];
     if (self) {
-        self.name = [data objectForKey:@"title"];
+        self.name = [data objectForKey:@"name"];
         self.imageUrl = [NSURL URLWithString:[data objectForKey:@"imgUrl"]];
     }
     return self;

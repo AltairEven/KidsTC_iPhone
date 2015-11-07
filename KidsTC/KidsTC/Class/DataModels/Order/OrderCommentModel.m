@@ -23,11 +23,24 @@
 
 + (instancetype)modelFromStoreAppointmentModel:(AppointmentOrderModel *)orderModel {
     OrderCommentModel *commentModel = [[OrderCommentModel alloc] init];
+    commentModel.relationSysNo = orderModel.storeId;
     commentModel.orderId = orderModel.orderId;
+    commentModel.relationType = CommentRelationTypeStore;
     commentModel.type = OrderTypeStoreAppointmentOrder;
     commentModel.objectId = orderModel.storeId;
     commentModel.objectName = orderModel.storeName;
     commentModel.imageUrl = orderModel.imageUrl;
+    return commentModel;
+}
+
++ (instancetype)modelFromStore:(StoreDetailModel *)detailModel {
+    OrderCommentModel *commentModel = [[OrderCommentModel alloc] init];
+    commentModel.relationSysNo = detailModel.storeId;
+    commentModel.relationType = CommentRelationTypeStore;
+    commentModel.type = OrderTypeStoreAppointmentOrder;
+    commentModel.objectId = detailModel.storeId;
+    commentModel.objectName = detailModel.storeName;
+    commentModel.imageUrl = [detailModel.imageUrls firstObject];
     return commentModel;
 }
 

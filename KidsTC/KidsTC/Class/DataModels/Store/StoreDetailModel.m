@@ -26,9 +26,10 @@
         }
         self.imageUrls = [NSArray arrayWithArray:tempArray];
     }
-    self.bannerRatio = 0.7;
+    self.bannerRatio = 1;
     self.storeName = [data objectForKey:@"storeName"];
     self.starNumber = [[data objectForKey:@"level"] integerValue];
+    self.couponUrlString = [data objectForKey:@"couponLink"];
     self.appointmentNumber = [[data objectForKey:@"bookNum"] integerValue];
     self.commentNumber = [[data objectForKey:@"evaluateNum"] integerValue];
     self.phoneNumber = [data objectForKey:@"phone"];
@@ -80,16 +81,16 @@
         self.hotRecommendServiceArray = [NSArray arrayWithArray:tempArray];
     }
     //recommend
-    self.recommenderFaceImageUrl = [NSURL URLWithString:[data objectForKey:@"recommendImgUrl"]];
-    self.recommenderName = [data objectForKey:@"recommendName"];
-    self.recommendString = [data objectForKey:@"recommendContent"];
-    self.recommenderFaceImageUrl = [self.imageUrls firstObject];
-    self.recommenderName = @"小河马";
-    self.recommendString = @"小河马爱洗澡，萌萌哒满地跑，一不小心摔一跤，呜啊呜啊哭又闹。河马妈妈来看到，二话不说拿棍捣，小河马被打屁了，哈哈哈哈真搞笑。";
+    NSDictionary *recommendDic = [data objectForKey:@"note"];
+    if ([recommendDic isKindOfClass:[NSDictionary class]] && [recommendDic count] > 0) {
+        self.recommenderFaceImageUrl = [NSURL URLWithString:[recommendDic objectForKey:@"imgUrl"]];
+        self.recommenderName = [recommendDic objectForKey:@"name"];
+        self.recommendString = [recommendDic objectForKey:@"note"];
+    }
     //brief
     self.storeBrief = [data objectForKey:@"breif"];
     //comments
-    NSArray *comments = [data objectForKey:@"comment"];
+    NSArray *comments = [data objectForKey:@"commentList"];
     if ([comments isKindOfClass:[NSArray class]]) {
         NSMutableArray *tempArray = [[NSMutableArray alloc] init];
         for (NSDictionary *commentDic in comments) {
@@ -101,7 +102,7 @@
         self.commentItemsArray = [NSArray arrayWithArray:tempArray];
     }
     //nearby
-    NSArray *nearbys = [data objectForKey:@"nearby"];
+    NSArray *nearbys = [data objectForKey:@"factilities"];
     if ([nearbys isKindOfClass:[NSArray class]]) {
         NSMutableArray *tempArray = [[NSMutableArray alloc] init];
         for (NSDictionary *nearbyDic in nearbys) {
@@ -123,14 +124,6 @@
             }
         }
         self.brotherStores = [NSArray arrayWithArray:tempArray];
-    } else {
-        //没有
-        StoreListItemModel *model = [[StoreListItemModel alloc] init];
-        model.identifier = self.storeId;
-        model.imageUrl = [self.imageUrls firstObject];
-        model.storeName = self.storeName;
-        model.activities = self.activeModelsArray;
-        self.brotherStores = [NSArray arrayWithObject:model];
     }
     //services
     NSArray *services = [data objectForKey:@"serve"];
@@ -143,6 +136,15 @@
             }
         }
         self.serviceModelsArray = [NSArray arrayWithArray:tempArray];
+    }
+    //comments number
+    NSDictionary *commentDic = [data objectForKey:@"comment"];
+    if ([commentDic isKindOfClass:[NSDictionary class]] && [commentDic count] > 0) {
+        self.commentAllNumber = [[commentDic objectForKey:@"all"] integerValue];
+        self.commentGoodNumber = [[commentDic objectForKey:@"good"] integerValue];
+        self.commentNormalNumber = [[commentDic objectForKey:@"normal"] integerValue];
+        self.commentBadNumber = [[commentDic objectForKey:@"bad"] integerValue];
+        self.commentPictureNumber = [[commentDic objectForKey:@"pic"] integerValue];
     }
 }
 
@@ -166,5 +168,41 @@
     return [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 10 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:13] topGap:10 bottomGap:10 maxLine:0 andText:self.storeBrief];
 }
 
+- (CGFloat)nearbyCellHeight {
+    CGFloat gap = 0.5;
+    CGFloat singleHeight = 30;
+    
+    NSUInteger itemCount = [self.nearbyFacilities count];
+    CGFloat row = 0;
+    if (itemCount > 0 && itemCount <= 3) {
+        row = 1;
+    } else {
+        row = itemCount / 3;
+        if (itemCount % 3 > 0) {
+            row ++;
+        }
+    }
+    
+    CGFloat gapTotalHeight = 0;
+    if (row > 1) {
+        gapTotalHeight = (row - 1) * gap;
+    }
+    
+    CGFloat cellHeight = row * singleHeight + gapTotalHeight;
+    
+    return cellHeight;
+}
+
+- (BOOL)hasCoupon {
+    return ([self.couponUrlString length] > 0);
+}
+
+- (NSArray<NSString *> *)phoneNumbersArray {
+    if ([self.phoneNumber length] == 0) {
+        return nil;
+    }
+    self.phoneNumber = [self.phoneNumber stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    return [self.phoneNumber componentsSeparatedByString:@","];
+}
 
 @end

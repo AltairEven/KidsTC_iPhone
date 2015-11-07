@@ -11,11 +11,15 @@
 #import "CommentListItemModel.h"
 #import "Insurance.h"
 
+@class ServiceDetailNoticeItem;
+
 @interface ServiceDetailModel : NSObject
 
 @property (nonatomic, copy) NSString *serviceId;
 
 @property (nonatomic, copy) NSString *channelId;
+
+@property (nonatomic, assign) NSUInteger type;
 
 @property (nonatomic, strong) NSArray *imageUrls;
 
@@ -37,9 +41,9 @@
 
 @property (nonatomic, assign) NSArray *supportedInsurances;
 
-@property (nonatomic, assign) BOOL hasCoupon;
+@property (nonatomic, copy) NSString *couponUrlString;
 
-@property (nonatomic, copy) NSString *notice;
+@property (nonatomic, copy) NSArray<ServiceDetailNoticeItem *> *noticeArray;
 
 @property (nonatomic, strong) NSURL *recommenderFaceImageUrl;
 
@@ -53,9 +57,19 @@
 
 @property (nonatomic, copy) NSString *introductionHtmlString;
 
-@property (nonatomic, strong) NSArray *storeItemsArray;
+@property (nonatomic, strong) NSArray<StoreListItemModel *> *storeItemsArray;
 
-@property (nonatomic, strong) NSArray *commentItemsArray;
+@property (nonatomic, strong) NSArray<CommentListItemModel *> *commentItemsArray;
+
+@property (nonatomic, assign) NSUInteger commentAllNumber;
+
+@property (nonatomic, assign) NSUInteger commentGoodNumber;
+
+@property (nonatomic, assign) NSUInteger commentNormalNumber;
+
+@property (nonatomic, assign) NSUInteger commentBadNumber;
+
+@property (nonatomic, assign) NSUInteger commentPictureNumber;
 
 @property (nonatomic, assign) NSUInteger stockNumber;
 
@@ -82,5 +96,19 @@
 - (CGFloat)noticeCellHeight;
 
 - (CGFloat)recommendCellHeight;
+
+- (BOOL)hasCoupon;
+
+@end
+
+@interface ServiceDetailNoticeItem : NSObject
+
+@property (nonatomic, copy) NSString *title;
+
+@property (nonatomic, copy) NSString *content;
+
+- (instancetype)initWithRawData:(NSDictionary *)data;
+
+- (CGFloat)itemHeight;
 
 @end

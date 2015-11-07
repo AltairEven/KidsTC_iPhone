@@ -11,12 +11,6 @@
 
 #define PageSize (10)
 
-#define CommentListTabNumberKeyAll (@"CommentListTabNumberKeyAll")
-#define CommentListTabNumberKeyGood (@"CommentListTabNumberKeyGood")
-#define CommentListTabNumberKeyNormal (@"CommentListTabNumberKeyNormal")
-#define CommentListTabNumberKeyBad (@"CommentListTabNumberKeyBad")
-#define CommentListTabNumberKeyPicture (@"CommentListTabNumberKeyPicture")
-
 @interface CommentListViewModel () <CommentListViewDataSource>
 
 @property (nonatomic, weak) CommentListView *view;
@@ -45,8 +39,6 @@
 
 @property (nonatomic, assign) NSUInteger currentPicturePage;
 
-@property (nonatomic, strong) NSMutableDictionary *tabNumbersDic;
-
 - (void)clearDataForTag:(CommentListType)tag;
 
 - (void)loadCommentsSucceedWithData:(NSDictionary *)data segmmentTag:(CommentListType)tag;
@@ -56,8 +48,6 @@
 - (void)loadMoreCommentsSucceedWithData:(NSDictionary *)data segmmentTag:(CommentListType)tag;
 
 - (void)loadMoreCommentsFailedWithError:(NSError *)error segmmentTag:(CommentListType)tag;
-
-- (void)fillTabNumberWithData:(NSDictionary *)data;
 
 - (void)reloadCommentListViewWithData:(NSDictionary *)data forSegmmentTag:(CommentListType)tag;
 
@@ -87,6 +77,8 @@
         self.normalResultArray = [[NSMutableArray alloc] init];
         self.badResultArray = [[NSMutableArray alloc] init];
         self.pictureResultArray = [[NSMutableArray alloc] init];
+        
+        [self.view reloadSegmentHeader];
     }
     return self;
 }
@@ -98,27 +90,27 @@
     switch (tag) {
         case CommentListTypeAll:
         {
-            number = [[self.tabNumbersDic objectForKey:CommentListTabNumberKeyAll] integerValue];
+            number = [[self.numbersDic objectForKey:CommentListTabNumberKeyAll] integerValue];
         }
             break;
         case CommentListTypeGood:
         {
-            number = [[self.tabNumbersDic objectForKey:CommentListTabNumberKeyGood] integerValue];
+            number = [[self.numbersDic objectForKey:CommentListTabNumberKeyGood] integerValue];
         }
             break;
         case CommentListTypeNormal:
         {
-            number = [[self.tabNumbersDic objectForKey:CommentListTabNumberKeyNormal] integerValue];
+            number = [[self.numbersDic objectForKey:CommentListTabNumberKeyNormal] integerValue];
         }
             break;
         case CommentListTypeBad:
         {
-            number = [[self.tabNumbersDic objectForKey:CommentListTabNumberKeyBad] integerValue];
+            number = [[self.numbersDic objectForKey:CommentListTabNumberKeyBad] integerValue];
         }
             break;
         case CommentListTypePicture:
         {
-            number = [[self.tabNumbersDic objectForKey:CommentListTabNumberKeyPicture] integerValue];
+            number = [[self.numbersDic objectForKey:CommentListTabNumberKeyPicture] integerValue];
         }
             break;
         default:
@@ -276,86 +268,48 @@
     [self.view endLoadMore];
 }
 
-- (void)fillTabNumberWithData:(NSDictionary *)data {
-    if (!self.tabNumbersDic) {
-        self.tabNumbersDic = [[NSMutableDictionary alloc] init];
-    }
-    if ([data isKindOfClass:[NSDictionary class]]) {
-        NSNumber *allCount = [NSNumber numberWithInteger:[[data objectForKey:@"all"] integerValue]];
-        if (allCount) {
-            [self.tabNumbersDic setObject:allCount forKey:CommentListTabNumberKeyAll];
-        }
-        NSNumber *goodCount = [NSNumber numberWithInteger:[[data objectForKey:@"bad"] integerValue]];
-        if (goodCount) {
-            [self.tabNumbersDic setObject:goodCount forKey:CommentListTabNumberKeyGood];
-        }
-        NSNumber *normalCount = [NSNumber numberWithInteger:[[data objectForKey:@"good"] integerValue]];
-        if (normalCount) {
-            [self.tabNumbersDic setObject:normalCount forKey:CommentListTabNumberKeyNormal];
-        }
-        NSNumber *badCount = [NSNumber numberWithInteger:[[data objectForKey:@"bad"] integerValue]];
-        if (badCount) {
-            [self.tabNumbersDic setObject:badCount forKey:CommentListTabNumberKeyBad];
-        }
-        NSNumber *pictureCount = [NSNumber numberWithInteger:[[data objectForKey:@"pic"] integerValue]];
-        if (pictureCount) {
-            [self.tabNumbersDic setObject:pictureCount forKey:CommentListTabNumberKeyPicture];
-        }
-    }
-    [self.view reloadSegmentHeader];
-}
-
 - (void)reloadCommentListViewWithData:(NSDictionary *)data forSegmmentTag:(CommentListType)tag {
-    NSDictionary *dataDic = [data objectForKey:@"data"];
-    if ([dataDic isKindOfClass:[NSDictionary class]] && [dataDic count] > 0) {
-        [self fillTabNumberWithData:[dataDic objectForKey:@"comment"]];
-        if ([[self.tabNumbersDic objectForKey:CommentListTabNumberKeyAll] integerValue] > 0) {
-            NSArray *itemsArray = [dataDic objectForKey:@"item"];
-            if ([itemsArray isKindOfClass:[NSArray class]] ) {
-                [self.view hideLoadMoreFooter:NO forViewTag:tag];
-                for (NSDictionary *singleItem in itemsArray) {
-                    CommentListItemModel *model = [[CommentListItemModel alloc] initWithRawData:singleItem];
-                    if (model) {
-                        switch (tag) {
-                            case CommentListTypeAll:
-                            {
-                                [self.allResultArray addObject:model];
-                            }
-                                break;
-                            case CommentListTypeGood:
-                            {
-                                [self.goodResultArray addObject:model];
-                            }
-                                break;
-                            case CommentListTypeNormal:
-                            {
-                                [self.normalResultArray addObject:model];
-                            }
-                                break;
-                            case CommentListTypeBad:
-                            {
-                                [self.badResultArray addObject:model];
-                            }
-                                break;
-                            case CommentListTypePicture:
-                            {
-                                [self.pictureResultArray addObject:model];
-                            }
-                                break;
-                            default:
-                                break;
-                        }
+    NSArray *dataArray = [data objectForKey:@"data"];
+    if ([dataArray isKindOfClass:[NSArray class]]) {
+        [self.view hideLoadMoreFooter:NO forViewTag:tag];
+        for (NSDictionary *singleItem in dataArray) {
+            CommentListItemModel *model = [[CommentListItemModel alloc] initWithRawData:singleItem];
+            if (model) {
+                switch (tag) {
+                    case CommentListTypeAll:
+                    {
+                        [self.allResultArray addObject:model];
                     }
-                }
-                if ([itemsArray count] < PageSize) {
-                    [self.view noMoreData:YES forViewTag:tag];
-                } else {
-                    [self.view noMoreData:NO forViewTag:tag];
+                        break;
+                    case CommentListTypeGood:
+                    {
+                        [self.goodResultArray addObject:model];
+                    }
+                        break;
+                    case CommentListTypeNormal:
+                    {
+                        [self.normalResultArray addObject:model];
+                    }
+                        break;
+                    case CommentListTypeBad:
+                    {
+                        [self.badResultArray addObject:model];
+                    }
+                        break;
+                    case CommentListTypePicture:
+                    {
+                        [self.pictureResultArray addObject:model];
+                    }
+                        break;
+                    default:
+                        break;
                 }
             }
-        } else {
+        }
+        if ([dataArray count] < PageSize) {
             [self.view noMoreData:YES forViewTag:tag];
-            [self.view hideLoadMoreFooter:YES forViewTag:tag];
+        } else {
+            [self.view noMoreData:NO forViewTag:tag];
         }
     }
     [self.view reloadDataforViewTag:tag];
@@ -367,8 +321,8 @@
 
 - (void)startUpdateDataWithType:(KTCCommentType)type {
     KTCCommentRequestParam param;
-    param.object = self.commentObject;
-    param.type = type;
+    param.relationType = self.relationType;
+    param.commentType = type;
     param.pageSize = PageSize;
     switch (type) {
         case KTCCommentTypeAll:
@@ -399,11 +353,6 @@
         default:
             break;
     }
-    if (self.commentObject == KTCCommentObjectService) {
-        self.identifier = @"2015073303";
-    } else {
-        self.identifier = @"2015087002";
-    }
     
     __weak CommentListViewModel *weakSelf = self;
     [weakSelf.commentManager loadCommentsWithIdentifier:self.identifier RequestParam:param succeed:^(NSDictionary *data) {
@@ -415,8 +364,8 @@
 
 - (void)getMoreDataWithType:(KTCCommentType)type {
     KTCCommentRequestParam param;
-    param.object = self.commentObject;
-    param.type = type;
+    param.relationType = self.relationType;
+    param.commentType = type;
     param.pageSize = PageSize;
     switch (type) {
         case KTCCommentTypeAll:
@@ -446,11 +395,6 @@
             break;
         default:
             break;
-    }
-    if (self.commentObject == KTCCommentObjectService) {
-        self.identifier = @"2015073303";
-    } else {
-        self.identifier = @"2015087002";
     }
     
     __weak CommentListViewModel *weakSelf = self;

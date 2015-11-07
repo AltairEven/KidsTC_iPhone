@@ -99,6 +99,7 @@ typedef enum {
     //keyboard
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillDisappear:) name:UIKeyboardWillHideNotification object:nil];
+    showFirstTime = YES;
 }
 
 
@@ -178,6 +179,8 @@ typedef enum {
     //防止子类切换页面时造成crash
     self.navigationController.interactivePopGestureRecognizer.delegate = nil;
     self.edgesForExtendedLayout = UIRectEdgeAll;
+    
+    showFirstTime = NO;
 }
 
 

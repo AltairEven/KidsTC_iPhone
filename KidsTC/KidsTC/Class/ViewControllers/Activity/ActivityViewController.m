@@ -40,7 +40,6 @@
     self.currentAreaIndex = INVALID_INDEX;
     
     self.activityView.delegate = self;
-    self.filterView.delegate = self;
     
     self.viewModel = [[ActivityViewModel alloc] initWithView:self.activityView];
     [self.activityView startRefresh];
@@ -48,33 +47,48 @@
     [self setupRightBarButton:nil target:self action:@selector(didClickedFilterButton) frontImage:@"filter" andBackImage:@"filter"];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[GAlertLoadingView sharedAlertLoadingView] hide];
+}
+
 #pragma mark ActivityViewDelegate
 
-- (void)activityView:(ActivityView *)view didClickedCalendarButtonAtIndex:(NSUInteger)index {
-    [self.viewModel resetResultWithCalendarIndex:index];
+- (void)didPullDownToRefreshForActivityView:(ActivityView *)view {
+    [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
 }
 
-- (void)activityView:(ActivityView *)view DidPullDownToRefreshForCalendarIndex:(NSUInteger)index {
-    [self.viewModel startUpdateDataWithCalendarIndex:index];
-}
-
-- (void)activityView:(ActivityView *)view DidPullUpToLoadMoreForCalendarIndex:(NSUInteger)index {
-    [self.viewModel getMoreDataWithCalendarIndex:index];
+- (void)didPullUpToLoadMoreForactivityView:(ActivityView *)view {
+    [self.viewModel getMoreDataWithSucceed:nil failure:nil];
 }
 
 - (void)activityView:(ActivityView *)view didSelectedItemAtIndex:(NSUInteger)index {
-    ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithNibName:@"ServiceDetailViewController" bundle:nil];
+    ActivityListItemModel *itemModel = [[self.viewModel resultArray] objectAtIndex:index];
+    
+    ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithServiceId:itemModel.activityId channelId:itemModel.channelId];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
 }
 
-#pragma mark
+#pragma mark ActivityFilterViewDelegate
 
 - (void)didClickedConfirmButtonOnActivityFilterView:(ActivityFilterView *)filterView withSelectedCategoryIndex:(NSUInteger)categoryIndex selectedAreaIndex:(NSUInteger)areaIndex {
-    NSArray *areaArray = [[KTCArea area] areaItems];
-    if ([areaArray count] > areaIndex) {
-        self.viewModel.currentAreaItem = [areaArray objectAtIndex:areaIndex];
+    if (categoryIndex == self.currentCategoryIndex && areaIndex == self.currentAreaIndex) {
+        return;
     }
+    if ([self.filterModel.categoryFiltItems count] > categoryIndex) {
+        self.viewModel.currentCategoryItem = [self.filterModel.categoryFiltItems objectAtIndex:categoryIndex];
+    }
+    if ([self.filterModel.areaFiltItems count] > areaIndex) {
+        self.viewModel.currentAreaItem = [self.filterModel.areaFiltItems objectAtIndex:areaIndex];
+    }
+    
+    [[GAlertLoadingView sharedAlertLoadingView] showInView:self.view];
+    [self.viewModel startUpdateDataWithSucceed:^(NSDictionary *data) {
+        [[GAlertLoadingView sharedAlertLoadingView] hide];
+    } failure:^(NSError *error) {
+        [[GAlertLoadingView sharedAlertLoadingView] hide];
+    }];
 }
 
 #pragma mark Private methods
@@ -82,6 +96,7 @@
 - (void)didClickedFilterButton {
     if (!self.filterView) {
         self.filterView = [[ActivityFilterView alloc] init];
+        self.filterView.delegate = self;
     }
     if (!self.filterModel || [self.filterModel needRefresh]) {
         __weak ActivityViewController *weakSelf = self;

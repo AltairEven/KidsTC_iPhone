@@ -27,12 +27,12 @@
         return;
     }
     if (!self.loadCommentsRequest) {
-        self.loadCommentsRequest = [HttpRequestClient clientWithUrlAliasName:@"COMMENT_QUERY_COMMENT"];
+        self.loadCommentsRequest = [HttpRequestClient clientWithUrlAliasName:@"COMMENT_GET_NEWS"];
     }
     [self.loadCommentsRequest cancel];
     
     NSMutableDictionary *finalParam = [NSMutableDictionary dictionaryWithDictionary:paramDic];
-    [finalParam setObject:identifier forKey:@"number"];
+    [finalParam setObject:identifier forKey:@"relationSysNo"];
     [self.loadCommentsRequest startHttpRequestWithParameter:[NSDictionary dictionaryWithDictionary:finalParam] success:^(HttpRequestClient *client, NSDictionary *responseData) {
         if (succeed) {
             succeed(responseData);
@@ -51,17 +51,17 @@
 
 
 - (NSDictionary *)getParamDicFromCommentRequestParam:(KTCCommentRequestParam)param {
-    if (param.object == KTCCommentObjectNULL || param.type == KTCCommentTypeNone) {
+    if (param.relationType == CommentRelationTypeNone || param.commentType == KTCCommentTypeNone) {
         return nil;
     }
     if (param.pageSize == 0) {
         return nil;
     }
     NSDictionary *retDic = [NSDictionary dictionaryWithObjectsAndKeys:
-                            [NSNumber numberWithInteger:param.object], @"type",
-                            [NSNumber numberWithInteger:param.type], @"evaluateType",
+                            [NSNumber numberWithInteger:param.relationType], @"relationType",
+                            [NSNumber numberWithInteger:param.commentType], @"commentType",
                             [NSNumber numberWithInteger:param.pageIndex], @"page",
-                            [NSNumber numberWithInteger:param.pageSize], @"pagecount", nil];
+                            [NSNumber numberWithInteger:param.pageSize], @"pageCount", nil];
     return retDic;
 }
 

@@ -22,6 +22,8 @@
 
 @protocol ServiceDetailViewDelegate <NSObject>
 
+- (void)didClickedCouponButtonOnServiceDetailView:(ServiceDetailView *)detailView;
+
 - (void)serviceDetailView:(ServiceDetailView *)detailView didChangedMoreInfoViewTag:(ServiceDetailMoreInfoViewTag)viewTag;
 
 @end

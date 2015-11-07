@@ -7,7 +7,6 @@
 //
 
 #import "CommentListViewController.h"
-#import "CommentListViewModel.h"
 #import "MWPhotoBrowser.h"
 
 @interface CommentListViewController () <CommentListViewDelegate>
@@ -18,7 +17,9 @@
 
 @property (nonatomic, copy) NSString *identifier;
 
-@property (nonatomic, assign) KTCCommentObject commentObject;
+@property (nonatomic, assign) CommentRelationType relationType;
+
+@property (nonatomic, strong) NSDictionary *commentNumberDic;
 
 @property (nonatomic, strong) MWPhotoBrowser *photoBrowser;
 
@@ -26,11 +27,12 @@
 
 @implementation CommentListViewController
 
-- (instancetype)initWithIdentifier:(NSString *)identifier object:(KTCCommentObject)object {
+- (instancetype)initWithIdentifier:(NSString *)identifier relationType:(CommentRelationType)type commentNumberDic:(NSDictionary *)numberDic {
     self = [super initWithNibName:@"CommentListViewController" bundle:nil];
     if (self) {
         self.identifier = identifier;
-        self.commentObject = object;
+        self.relationType = type;
+        self.commentNumberDic = numberDic;
     }
     return self;
 }
@@ -42,6 +44,8 @@
     self.listView.delegate = self;
     self.viewModel = [[CommentListViewModel alloc] initWithView:self.listView];
     [self.viewModel setIdentifier:self.identifier];
+    [self.viewModel setRelationType:self.relationType];
+    [self.viewModel setNumbersDic:self.commentNumberDic];
     [self.viewModel startUpdateDataWithType:KTCCommentTypeAll];
 }
 

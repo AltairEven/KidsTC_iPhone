@@ -13,7 +13,7 @@
 #import "AUISegmentView.h"
 #import "ServiceDetailSegmentCell.h"
 
-#define BannerRatio (0.7)
+#define BannerRatio (1)
 #define SectionGap (10)
 #define SegmentViewHeight (40)
 
@@ -40,13 +40,14 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
 //price
 @property (weak, nonatomic) IBOutlet RichPriceView *priceView;
 @property (weak, nonatomic) IBOutlet UILabel *priceDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UIButton *couponButton;
 @property (weak, nonatomic) IBOutlet UILabel *commentNSaleLabel;
 //insurance
 @property (weak, nonatomic) IBOutlet InsuranceView *InsuranceView;
 //notice
 @property (weak, nonatomic) IBOutlet UIView *noticeTitleCellTagView;
 @property (weak, nonatomic) IBOutlet UILabel *noticeTitleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *noticeLabel;
+@property (weak, nonatomic) IBOutlet UIView *noticeBGView;
 
 //recommend
 @property (weak, nonatomic) IBOutlet UIImageView *recommendFaceImageView;
@@ -79,6 +80,8 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
 - (void)configNoticeCell;
 
 - (void)configRecommendCell;
+
+- (IBAction)didClickedCouponButton:(id)sender;
 
 @end
 
@@ -124,6 +127,10 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
     [self.topCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
     
     [self.priceCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.couponButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.couponButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    self.couponButton.layer.cornerRadius = 5;
+    self.couponButton.layer.masksToBounds = YES;
     
     [self.InsuranceCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
     
@@ -430,6 +437,8 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
     } else {
         [self.priceDescriptionLabel setHidden:YES];
     }
+    //coupon
+    [self.couponButton setHidden:![self.detailModel hasCoupon]];
     //count
     NSString *commentCount = [NSString stringWithFormat:@"%lu", (unsigned long)self.detailModel.commentsNumber];
     NSString *saleCount = [NSString stringWithFormat:@"%lu", (unsigned long)self.detailModel.saleCount];
@@ -454,7 +463,42 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
 }
 
 - (void)configNoticeCell {
-    [self.noticeLabel setText:self.detailModel.notice];
+    CGFloat margin = 10;
+    CGFloat xPosition = margin;
+    CGFloat yPosition = margin;
+    UIFont *font = [UIFont systemFontOfSize:13];
+    
+    for (ServiceDetailNoticeItem *item in self.detailModel.noticeArray) {
+        CGFloat labelWidth = SCREEN_WIDTH - margin * 2;
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(xPosition, yPosition, labelWidth, 20)];
+        [titleLabel setTextColor:[UIColor lightGrayColor]];
+        [titleLabel setFont:font];
+        [titleLabel setLineBreakMode:NSLineBreakByCharWrapping];
+        [titleLabel setBackgroundColor:[UIColor clearColor]];
+        [titleLabel setText:item.title];
+        [titleLabel sizeToFitWithMaximumNumberOfLines:0];
+        [self.noticeBGView addSubview:titleLabel];
+        
+        labelWidth = SCREEN_WIDTH - margin * 2 - titleLabel.frame.size.width;
+        if (labelWidth < 100) {
+            labelWidth = SCREEN_WIDTH - margin * 2;
+            xPosition = margin;
+            yPosition += titleLabel.frame.size.height + margin;
+        } else {
+            xPosition += titleLabel.frame.size.width;
+        }
+        UILabel *contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(xPosition, yPosition, labelWidth, 20)];
+        [contentLabel setTextColor:[UIColor lightGrayColor]];
+        [contentLabel setFont:font];
+        [contentLabel setLineBreakMode:NSLineBreakByCharWrapping];
+        [contentLabel setBackgroundColor:[UIColor clearColor]];
+        [contentLabel setText:item.content];
+        [contentLabel sizeToFitWithMaximumNumberOfLines:0];
+        [self.noticeBGView addSubview:contentLabel];
+        
+        xPosition = margin;
+        yPosition += contentLabel.frame.size.height + margin * 2;
+    }
 }
 
 - (void)configRecommendCell {
@@ -470,6 +514,12 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
     [labelString setAttributes:attribute range:NSMakeRange(0, [recommderName length] + 1)];
     [self.recommendLabel setAttributedText:labelString];
     
+}
+
+- (IBAction)didClickedCouponButton:(id)sender {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedCouponButtonOnServiceDetailView:)]) {
+        [self.delegate didClickedCouponButtonOnServiceDetailView:self];
+    }
 }
 
 #pragma mark Public methods
@@ -495,7 +545,7 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
                 self.tableViewHeight += SectionGap;
                 self.tableViewHeight += [self.detailModel couponCellHeight];
             }
-            if ([self.detailModel.notice length] > 0) {
+            if ([self.detailModel.noticeArray count] > 0) {
                 NSArray *section3 = [NSArray arrayWithObjects:self.noticeTitleCell, self.noticeCell, nil];
                 [self.cellArray addObject:section3];
                 self.tableViewHeight += SectionGap;

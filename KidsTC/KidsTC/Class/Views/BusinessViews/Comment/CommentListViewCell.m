@@ -32,6 +32,7 @@
     // Initialization code
     self.imageGridView.delegate = self;
     [self.bgView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.likeButton setHidden:YES];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -51,7 +52,7 @@
         [self.contentLabel setText:model.comments];
         [self.imageGridView setImageUrlStringsArray:model.thumbnailPhotoUrlStringsArray];
         [self.timeLabel setText:model.commentTime];
-        [self.likeButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)model.likeNumber] forState:UIControlStateNormal];
+//        [self.likeButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)model.likeNumber] forState:UIControlStateNormal];
         [self.commentButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)model.replyNumber] forState:UIControlStateNormal];
     }
 }

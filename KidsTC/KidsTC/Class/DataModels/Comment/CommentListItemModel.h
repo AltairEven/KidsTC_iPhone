@@ -16,17 +16,6 @@ typedef enum {
     CommentListTypePicture
 }CommentListType;
 
-typedef enum {
-    CommentRelationTypeNone = 0,
-    CommentRelationTypeServiceProduct = 1,
-    CommentRelationTypeActivityProduct = 2,
-    CommentRelationTypeRealProduct = 3,
-    CommentRelationTypeStore = 10,
-    CommentRelationTypeStrategy = 11,
-    CommentRelationTypeStrategyDetail = 12,
-    CommentRelationTypeNews = 13
-}CommentRelationType;
-
 @interface CommentListItemModel : NSObject
 
 @property (nonatomic, strong) NSString *identifier;
@@ -55,8 +44,10 @@ typedef enum {
 
 @property (nonatomic, assign) NSUInteger replyNumber;
 
-- (CGFloat)contentHeight;
+- (CGFloat)cellHeight;
 
 - (instancetype)initWithRawData:(NSDictionary *)data;
+
+- (CGFloat)storeDetailCellHeight;
 
 @end

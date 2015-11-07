@@ -40,6 +40,8 @@
     [self updateConstraintsIfNeeded];
     [self layoutIfNeeded];
     if (model) {
+        [self.faceImageView setImageWithURL:model.faceImageUrl];
+        [self.nameLabel setText:model.userName];
         [self.starsView setStarNumber:model.starNumber];
         [self.contentLabel setText:model.comments];
         [self.imageGridView setImageUrlStringsArray:model.thumbnailPhotoUrlStringsArray];

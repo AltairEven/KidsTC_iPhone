@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
@@ -27,9 +27,10 @@
                 <outlet property="InsuranceView" destination="U12-Qt-3cp" id="Rrf-Gi-tpt"/>
                 <outlet property="bannerScrollView" destination="7dk-sl-uzs" id="3cm-ie-qP1"/>
                 <outlet property="commentNSaleLabel" destination="8hv-um-5uM" id="HL8-a4-pU3"/>
+                <outlet property="couponButton" destination="S1u-Ag-cOc" id="qI9-FY-1H8"/>
                 <outlet property="couponCell" destination="L8f-WK-1ab" id="tG2-NC-6k4"/>
+                <outlet property="noticeBGView" destination="kGV-yB-1MF" id="JQa-8o-IWP"/>
                 <outlet property="noticeCell" destination="bhY-cA-oMa" id="lmP-UL-dS8"/>
-                <outlet property="noticeLabel" destination="duP-AO-G76" id="YVq-Gm-sCt"/>
                 <outlet property="noticeTitleCell" destination="rrn-HP-8rO" id="Ycb-Zg-EaG"/>
                 <outlet property="noticeTitleCellTagView" destination="UkY-eW-ZSR" id="Pfh-oF-2mQ"/>
                 <outlet property="noticeTitleLabel" destination="Gva-YT-Ti6" id="gmZ-nf-7Pj"/>
@@ -58,20 +59,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="411" height="374"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7dk-sl-uzs" userLabel="imageBGView" customClass="AUIBannerScrollView">
-                                <rect key="frame" x="0.0" y="0.0" width="411" height="288"/>
+                                <rect key="frame" x="0.0" y="0.0" width="411" height="411"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" secondItem="7dk-sl-uzs" secondAttribute="width" multiplier="7:10" id="l6H-1N-t3l"/>
+                                    <constraint firstAttribute="height" secondItem="7dk-sl-uzs" secondAttribute="width" multiplier="1:1" id="l6H-1N-t3l"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BCV欢乐水世界 点“凉”整个夏天  最多两行啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GnX-9g-l0a">
-                                <rect key="frame" x="10" y="298" width="391" height="41"/>
+                                <rect key="frame" x="10" y="421" width="391" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DOn-mU-Dnq" userLabel="ServiceDescriptionLabel">
-                                <rect key="frame" x="10" y="349" width="391" height="16"/>
+                                <rect key="frame" x="10" y="472" width="391" height="16"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -122,6 +123,14 @@
                         <color key="textColor" red="0.80392156859999997" green="0.0039215686269999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S1u-Ag-cOc">
+                        <rect key="frame" x="191" y="7" width="60" height="30"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <state key="normal" title="点击领券"/>
+                        <connections>
+                            <action selector="didClickedCouponButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="VfE-Zz-JzB"/>
+                        </connections>
+                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="54" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8hv-um-5uM">
                         <rect key="frame" x="377" y="14" width="17" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -135,6 +144,8 @@
                     <constraint firstItem="8hv-um-5uM" firstAttribute="centerY" secondItem="sED-lL-BUz" secondAttribute="centerY" id="Dag-ej-Cuq"/>
                     <constraint firstItem="rRJ-I7-DXa" firstAttribute="centerY" secondItem="gOc-Ty-LnP" secondAttribute="centerY" id="ILG-iZ-ilO"/>
                     <constraint firstItem="gOc-Ty-LnP" firstAttribute="leading" secondItem="sED-lL-BUz" secondAttribute="leading" constant="10" id="Uwr-zQ-Wrf"/>
+                    <constraint firstItem="S1u-Ag-cOc" firstAttribute="centerY" secondItem="rRJ-I7-DXa" secondAttribute="centerY" id="g1G-cl-L5N"/>
+                    <constraint firstItem="S1u-Ag-cOc" firstAttribute="leading" secondItem="rRJ-I7-DXa" secondAttribute="trailing" constant="98" id="v5a-sc-cjH"/>
                     <constraint firstAttribute="trailing" secondItem="8hv-um-5uM" secondAttribute="trailing" constant="10" id="zF5-hK-Bdy"/>
                 </constraints>
             </tableViewCellContentView>
@@ -223,20 +234,7 @@
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kGV-yB-1MF" userLabel="bgView">
                         <rect key="frame" x="0.0" y="0.0" width="411" height="35"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="产品简介：" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="duP-AO-G76">
-                                <rect key="frame" x="10" y="10" width="391" height="16"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="duP-AO-G76" secondAttribute="trailing" constant="10" id="3xt-Z9-Do8"/>
-                            <constraint firstItem="duP-AO-G76" firstAttribute="leading" secondItem="kGV-yB-1MF" secondAttribute="leading" constant="10" id="7gf-VM-1Fd"/>
-                            <constraint firstItem="duP-AO-G76" firstAttribute="centerY" secondItem="kGV-yB-1MF" secondAttribute="centerY" id="GJV-9n-3yu"/>
-                        </constraints>
                     </view>
                 </subviews>
                 <constraints>

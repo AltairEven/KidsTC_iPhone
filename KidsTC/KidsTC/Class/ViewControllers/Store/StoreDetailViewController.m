@@ -19,6 +19,7 @@
 #import "ServiceListViewController.h"
 #import "CommentListViewController.h"
 #import "StoreMoreDetailViewController.h"
+#import "OrderCommentViewController.h"
 
 @interface StoreDetailViewController () <StoreDetailViewDelegate, StoreDetailBottomViewDelegate>
 
@@ -56,7 +57,19 @@
     [self.viewModel setNetErrorBlock:^(NSError *error) {
         [weakSelf showConnectError:YES];
     }];
-    [self reloadNetworkData];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[GAlertLoadingView sharedAlertLoadingView] hide];
+    [self.viewModel stopUpdateData];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (showFirstTime) {
+        [self reloadNetworkData];
+    }
 }
 
 #pragma mark StoreDetailViewDelegate
@@ -92,7 +105,14 @@
 }
 
 - (void)didClickedMoreReviewOnStoreDetailView:(StoreDetailView *)detailView {
-    CommentListViewController *controller = [[CommentListViewController alloc] initWithIdentifier:self.storeId object:KTCCommentObjectStore];
+    NSDictionary *commentNumberDic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                      [NSNumber numberWithInteger:self.viewModel.detailModel.commentAllNumber], CommentListTabNumberKeyAll,
+                                      [NSNumber numberWithInteger:self.viewModel.detailModel.commentGoodNumber], CommentListTabNumberKeyGood,
+                                      [NSNumber numberWithInteger:self.viewModel.detailModel.commentNormalNumber], CommentListTabNumberKeyNormal,
+                                      [NSNumber numberWithInteger:self.viewModel.detailModel.commentBadNumber], CommentListTabNumberKeyBad,
+                                      [NSNumber numberWithInteger:self.viewModel.detailModel.commentPictureNumber], CommentListTabNumberKeyPicture, nil];
+    
+    CommentListViewController *controller = [[CommentListViewController alloc] initWithIdentifier:self.storeId relationType:CommentRelationTypeStore commentNumberDic:commentNumberDic];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
 }
@@ -128,13 +148,13 @@
             } target:self];
         }
             break;
-        case StoreDetailBottomSubviewTagCs:
+        case StoreDetailBottomSubviewTagComment:
         {
-            if ([self.viewModel.detailModel.phoneNumber length] > 0) {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@", self.viewModel.detailModel.phoneNumber]]];
-            } else {
-                [[iToast makeText:[NSString stringWithFormat:@"门店电话信息有误，如有疑问，请联系客服:%@", kCustomerServicePhoneNumber]] show];
-            }
+            [GToolUtil checkLogin:^(NSString *uid) {
+                OrderCommentViewController *controller = [[OrderCommentViewController alloc] initWithOrderCommentModel:[OrderCommentModel modelFromStore:self.viewModel.detailModel]];
+                [controller setHidesBottomBarWhenPushed:YES];
+                [self.navigationController pushViewController:controller animated:YES];
+            } target:self];
         }
             break;
         case StoreDetailBottomSubviewTagAppointment:
@@ -164,7 +184,7 @@
 #pragma mark Super methods
 
 - (void)reloadNetworkData {
-    [[GAlertLoadingView sharedAlertLoadingView] show];
+    [[GAlertLoadingView sharedAlertLoadingView] showInView:self.view];
     [self.viewModel startUpdateDataWithStoreId:self.storeId succeed:^(NSDictionary *data) {
         [self.detailView reloadData];
         [[GAlertLoadingView sharedAlertLoadingView] hide];

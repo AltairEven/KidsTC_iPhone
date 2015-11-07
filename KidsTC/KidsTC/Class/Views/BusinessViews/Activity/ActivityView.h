@@ -14,17 +14,15 @@
 
 @protocol ActivityViewDataSource <NSObject>
 
-- (NSArray *)listItemModelsOfActivityView:(ActivityView *)view atCalendarIndex:(NSUInteger)index;
+- (NSArray *)listItemModelsOfActivityView:(ActivityView *)view;
 
 @end
 
 @protocol ActivityViewDelegate <NSObject>
 
-- (void)activityView:(ActivityView *)view didClickedCalendarButtonAtIndex:(NSUInteger)index;
+- (void)didPullDownToRefreshForActivityView:(ActivityView *)view;
 
-- (void)activityView:(ActivityView *)view DidPullDownToRefreshForCalendarIndex:(NSUInteger)index;
-
-- (void)activityView:(ActivityView *)view DidPullUpToLoadMoreForCalendarIndex:(NSUInteger)index;
+- (void)didPullUpToLoadMoreForactivityView:(ActivityView *)view;
 
 - (void)activityView:(ActivityView *)view didSelectedItemAtIndex:(NSUInteger)index;
 
@@ -35,9 +33,6 @@
 @property (nonatomic, assign) id<ActivityViewDataSource> dataSource;
 @property (nonatomic, assign) id<ActivityViewDelegate> delegate;
 
-@property (nonatomic, strong) NSArray *calendarTitles;
-@property (nonatomic, readonly) NSUInteger currentCalendarIndex;
-
 - (void)reloadData;
 
 - (void)startRefresh;
@@ -46,8 +41,8 @@
 
 - (void)endLoadMore;
 
-- (void)noMoreData:(BOOL)noMore forCalendarIndex:(NSUInteger)index;
+- (void)noMoreData:(BOOL)noMore;
 
-- (void)hideLoadMoreFooter:(BOOL)hidden forCalendarIndex:(NSUInteger)index;
+- (void)hideLoadMoreFooter:(BOOL)hidden;
 
 @end

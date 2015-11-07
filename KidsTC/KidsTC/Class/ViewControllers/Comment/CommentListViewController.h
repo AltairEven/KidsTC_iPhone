@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "KTCCommentManager.h"
+#import "CommentListViewModel.h"
 
 @interface CommentListViewController : GViewController
 
-- (instancetype)initWithIdentifier:(NSString *)identifier object:(KTCCommentObject)object;
+- (instancetype)initWithIdentifier:(NSString *)identifier relationType:(CommentRelationType)type commentNumberDic:(NSDictionary *)numberDic;
 
 @end

@@ -10,7 +10,7 @@
 
 typedef enum {
     StoreDetailBottomSubviewTagFavourate = 100,
-    StoreDetailBottomSubviewTagCs,
+    StoreDetailBottomSubviewTagComment,
     StoreDetailBottomSubviewTagAppointment
 }StoreDetailBottomSubviewTag;
 
@@ -26,7 +26,7 @@ typedef enum {
 
 @property (nonatomic, assign) id<StoreDetailBottomViewDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UIButton *favourateButton;
-@property (weak, nonatomic) IBOutlet UIButton *csButton;
+@property (weak, nonatomic) IBOutlet UIButton *commentButton;
 @property (weak, nonatomic) IBOutlet UIButton *appointmentButton;
 
 

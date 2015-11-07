@@ -10,11 +10,19 @@
 #import "KTCCommentManager.h"
 #import "CommentListView.h"
 
+#define CommentListTabNumberKeyAll (@"CommentListTabNumberKeyAll")
+#define CommentListTabNumberKeyGood (@"CommentListTabNumberKeyGood")
+#define CommentListTabNumberKeyNormal (@"CommentListTabNumberKeyNormal")
+#define CommentListTabNumberKeyBad (@"CommentListTabNumberKeyBad")
+#define CommentListTabNumberKeyPicture (@"CommentListTabNumberKeyPicture")
+
 @interface CommentListViewModel : BaseViewModel
 
 @property (nonatomic, copy) NSString *identifier;
 
-@property (nonatomic, assign) KTCCommentObject commentObject;
+@property (nonatomic, assign) CommentRelationType relationType;
+
+@property (nonatomic, strong) NSDictionary *numbersDic;
 
 - (void)startUpdateDataWithType:(KTCCommentType)type;
 

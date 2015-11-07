@@ -17,12 +17,8 @@
 
 - (void)getCategoryDataWithSucceed:(void (^)(NSDictionary *data))succeed failure:(void (^)(NSError *error))failure;
 
-- (NSArray *)currentResultArray;
+- (NSArray *)resultArray;
 
-- (void)startUpdateDataWithCalendarIndex:(NSUInteger)index;
-
-- (void)getMoreDataWithCalendarIndex:(NSUInteger)index;
-
-- (void)resetResultWithCalendarIndex:(NSUInteger)index;
+- (void)getMoreDataWithSucceed:(void (^)(NSDictionary *data))succeed failure:(void (^)(NSError *error))failure;
 
 @end

@@ -15,6 +15,7 @@
 #import "SettlementViewController.h"
 #import "CommentListViewController.h"
 #import "ServiceDetailConfirmView.h"
+#import "KTCWebViewController.h"
 
 
 @interface ServiceDetailViewController () <ServiceDetailViewDelegate, ServiceDetailBottomViewDelegate, ServiceDetailConfirmViewDelegate>
@@ -66,7 +67,6 @@
     [self.viewModel setNetErrorBlock:^(NSError *error) {
         [weakSelf showConnectError:YES];
     }];
-    [self reloadNetworkData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -75,10 +75,14 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    if (showFirstTime) {
+        [self reloadNetworkData];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [[GAlertLoadingView sharedAlertLoadingView] hide];
     [self.viewModel stopUpdateData];
 }
 
@@ -87,6 +91,13 @@
 }
 
 #pragma mark ServiceDetailViewDelegate
+
+- (void)didClickedCouponButtonOnServiceDetailView:(ServiceDetailView *)detailView {
+    KTCWebViewController * controller = [[KTCWebViewController alloc] init];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [controller setWebUrlString:self.viewModel.detailModel.couponUrlString];
+    [self.navigationController pushViewController:controller animated:YES];
+}
 
 - (void)serviceDetailView:(ServiceDetailView *)detailView didChangedMoreInfoViewTag:(ServiceDetailMoreInfoViewTag)viewTag {
     [self.viewModel resetMoreInfoViewWithViewTag:viewTag];
@@ -164,7 +175,7 @@
 #pragma mark Super method
 
 - (void)reloadNetworkData {
-    [[GAlertLoadingView sharedAlertLoadingView] show];
+    [[GAlertLoadingView sharedAlertLoadingView] showInView:self.view];
     __weak ServiceDetailViewController *weakSelf = self;
     [self.viewModel startUpdateDataWithServiceId:self.serviceId channelId:self.channelId Succeed:^(NSDictionary *data) {
         [weakSelf.detailView reloadData];

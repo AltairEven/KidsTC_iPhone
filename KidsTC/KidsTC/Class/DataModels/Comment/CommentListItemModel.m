@@ -17,11 +17,18 @@
     }
     self = [super init];
     if (self) {
-        self.userName = [data objectForKey:@"user"];
+        if ([data objectForKey:@"id"]) {
+            self.identifier = [NSString stringWithFormat:@"%@", [data objectForKey:@"id"]];
+        }
+        self.faceImageUrl = [NSURL URLWithString:[data objectForKey:@"userImgUrl"]];
+        self.userName = [data objectForKey:@"userName"];
         self.commentTime = [data objectForKey:@"time"];
-        self.starNumber = [[data objectForKey:@"level"] integerValue];
+        NSDictionary *scoreData = [data objectForKey:@"score"];
+        if ([scoreData isKindOfClass:[NSDictionary class]]) {
+            self.starNumber = [[scoreData objectForKey:@"OverallScore"] integerValue];
+        }
         self.comments = [data objectForKey:@"content"];
-        NSArray *imgArray = [data objectForKey:@"urls"];
+        NSArray *imgArray = [data objectForKey:@"imageUrl"];
         if ([imgArray isKindOfClass:[NSArray class]]) {
             NSMutableArray *tempOrigin = [[NSMutableArray alloc] init];
             NSMutableArray *tempThumb = [[NSMutableArray alloc] init];
@@ -48,28 +55,70 @@
                 self.photosArray = [NSArray arrayWithArray:tempPhoto];
             }
         }
+        self.isLiked = [[data objectForKey:@"isPraise"] boolValue];
+        self.likeNumber = [[data objectForKey:@"praiseCount"] integerValue];
+        self.replyNumber = [[data objectForKey:@"replyCount"] integerValue];
     }
     return self;
 }
 
-- (CGFloat)contentHeight {
-    CGFloat height = 45;
+- (CGFloat)cellHeight {
+    CGFloat height = 50 + 30;
     //Label
-    UILabel *commentLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 30, 15)];
-    [commentLabel setFont:[UIFont systemFontOfSize:13]];
-    [commentLabel setLineBreakMode:NSLineBreakByCharWrapping];
-    [commentLabel setText:self.comments];
-    height += [commentLabel sizeToFitWithMaximumNumberOfLines:0];
+    CGFloat labelHeight = [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 20 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:13] topGap:10 bottomGap:10 andText:self.comments];
     //phots
     NSUInteger pictureCount = [self.thumbnailPhotoUrlStringsArray count];
-    NSUInteger photoRowCount = pictureCount / 4;
-    if (pictureCount % 4 > 0) {
-        photoRowCount ++;
+    CGFloat row = 0;
+    NSUInteger oneLineCount = 4;
+    if (pictureCount > 0 && pictureCount <= oneLineCount) {
+        row = 1;
+    } else {
+        row = pictureCount / oneLineCount;
+        if (pictureCount % oneLineCount > 0) {
+            row ++;
+        }
     }
     CGFloat pictureGap = 10;
-    CGFloat pictureHeight = (SCREEN_WIDTH - 30 - pictureGap * 3) / 4;
+    CGFloat pictureHeight = (SCREEN_WIDTH - 20 - pictureGap * (oneLineCount - 1)) / oneLineCount + pictureGap;
     
-    height += photoRowCount * pictureHeight + (photoRowCount - 1) * pictureGap + 30;
+    CGFloat gapTotalHeight = 0;
+    if (row > 1) {
+        gapTotalHeight = (row - 1) * pictureGap;
+    }
+    
+    height += labelHeight + gapTotalHeight + pictureHeight * row;
+    
+    return height;
+}
+
+- (CGFloat)storeDetailCellHeight {
+    CGFloat height = 100;
+    //Label
+    CGFloat labelHeight = [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 80 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:13] topGap:10 bottomGap:10 andText:self.comments];
+    //phots
+    NSUInteger pictureCount = [self.thumbnailPhotoUrlStringsArray count];
+    CGFloat row = 0;
+    NSUInteger oneLineCount = 4;
+    if (pictureCount > 0 && pictureCount <= oneLineCount) {
+        row = 1;
+    } else {
+        row = pictureCount / oneLineCount;
+        if (pictureCount % oneLineCount > 0) {
+            row ++;
+        }
+    }
+    CGFloat pictureGap = 10;
+    CGFloat pictureHeight = (SCREEN_WIDTH - 80 - pictureGap * (oneLineCount - 1)) / oneLineCount;
+    
+    CGFloat gapTotalHeight = 0;
+    if (row > 1) {
+        gapTotalHeight = (row - 1) * pictureGap;
+    }
+    
+    CGFloat contentHeight = labelHeight + 40 + gapTotalHeight + pictureHeight * row;
+    if (height < contentHeight) {
+        height = contentHeight;
+    }
     
     return height;
 }

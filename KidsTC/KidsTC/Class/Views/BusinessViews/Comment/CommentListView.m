@@ -9,14 +9,11 @@
 #import "CommentListView.h"
 #import "AUISegmentView.h"
 #import "CommentListViewSegmentCell.h"
-#import "CommentListViewHeaderCell.h"
 #import "CommentListViewCell.h"
 
 static NSString *const kSegmentIdentifier = @"kSegmentIdentifier";
 
-static NSString *const kHeaderCellIdentifier = @"kHeaderCellIdentifier";
-
-static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
+static NSString *const kContentCellIdentifier = @"kCommentCellIdentifier";
 
 @interface CommentListView () <UITableViewDataSource, UITableViewDelegate, AUISegmentViewDataSource, AUISegmentViewDelegate, CommentListViewCellDelegate>
 
@@ -25,8 +22,6 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
 @property (weak, nonatomic) IBOutlet AUISegmentView *segmentView;
 
 @property (nonatomic, strong) UINib *segmentNib;
-
-@property (nonatomic, strong) UINib *headerNib;
 
 @property (nonatomic, strong) UINib *contentNib;
 
@@ -67,10 +62,6 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
-    if (!self.headerNib) {
-        self.headerNib = [UINib nibWithNibName:NSStringFromClass([CommentListViewHeaderCell class]) bundle:nil];
-        [self.tableView registerNib:self.headerNib forCellReuseIdentifier:kHeaderCellIdentifier];
-    }
     if (!self.contentNib) {
         self.contentNib = [UINib nibWithNibName:NSStringFromClass([CommentListViewCell class]) bundle:nil];
         [self.tableView registerNib:self.contentNib forCellReuseIdentifier:kContentCellIdentifier];
@@ -95,7 +86,7 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
         [self.segmentView registerNib:self.segmentNib forCellReuseIdentifier:kSegmentIdentifier];
     }
     _currentViewTag = CommentListTypeAll;
-    [self.segmentView setSelectedIndex:self.currentViewTag];
+    [self.segmentView setSelectedIndex:self.currentViewTag - 1];
     //data
     self.noMoreDataDic = [[NSMutableDictionary alloc] init];
     self.hideFooterDic = [[NSMutableDictionary alloc] init];
@@ -185,39 +176,20 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return 1;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CommentListItemModel *model = [self.listModels objectAtIndex:indexPath.section];
-    switch (indexPath.row) {
-        case 0:
-        {
-            CommentListViewHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:kHeaderCellIdentifier forIndexPath:indexPath];
-            if (!cell) {
-                cell =  [[[NSBundle mainBundle] loadNibNamed:@"CommentListViewHeaderCell" owner:nil options:nil] objectAtIndex:0];
-            }
-            [cell.titleLabel setText:model.userName];
-            [cell.timeLabel setText:model.commentTime];
-            return cell;
-        }
-            break;
-        case 1:
-        {
-            CommentListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kContentCellIdentifier forIndexPath:indexPath];
-            if (!cell) {
-                cell =  [[[NSBundle mainBundle] loadNibNamed:@"CommentListViewCell" owner:nil options:nil] objectAtIndex:0];
-            }
-            [cell configWithItemModel:model];
-            cell.indexPath = indexPath;
-            cell.delegate = self;
-            return cell;
-        }
-            break;
-        default:
-            break;
+    CommentListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kContentCellIdentifier forIndexPath:indexPath];
+    if (!cell) {
+        cell =  [[[NSBundle mainBundle] loadNibNamed:@"CommentListViewCell" owner:nil options:nil] objectAtIndex:0];
     }
+    CommentListItemModel *model = [self.listModels objectAtIndex:indexPath.section];
+    [cell configWithItemModel:model];
+    cell.indexPath = indexPath;
+    cell.delegate = self;
+    return cell;
     return [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
 }
 
@@ -225,20 +197,7 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat height = 0;
     CommentListItemModel *model = [self.listModels objectAtIndex:indexPath.section];
-    switch (indexPath.row) {
-        case 0:
-        {
-            height = [CommentListViewHeaderCell cellHeight];
-        }
-            break;
-        case 1:
-        {
-            height = [model contentHeight];
-        }
-            break;
-        default:
-            break;
-    }
+    height = [model cellHeight];
     return height;
 }
 
@@ -283,7 +242,7 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
 
 - (void)reloadSegmentHeader {
     [self.segmentView reloadData];
-    [self.segmentView setSelectedIndex:self.currentViewTag];
+    [self.segmentView setSelectedIndex:self.currentViewTag - 1];
 }
 
 - (void)reloadDataforViewTag:(CommentListType)tag {

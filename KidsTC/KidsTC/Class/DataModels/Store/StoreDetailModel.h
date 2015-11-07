@@ -24,6 +24,8 @@
 
 @property (nonatomic, copy) NSString *storeName;
 
+@property (nonatomic, copy) NSString *couponUrlString;
+
 @property (nonatomic, assign) NSUInteger starNumber;
 
 @property (nonatomic, assign) NSUInteger appointmentNumber;
@@ -56,6 +58,16 @@
 
 @property (nonatomic, strong) NSArray *serviceModelsArray;
 
+@property (nonatomic, assign) NSUInteger commentAllNumber;
+
+@property (nonatomic, assign) NSUInteger commentGoodNumber;
+
+@property (nonatomic, assign) NSUInteger commentNormalNumber;
+
+@property (nonatomic, assign) NSUInteger commentBadNumber;
+
+@property (nonatomic, assign) NSUInteger commentPictureNumber;
+
 @property (nonatomic, assign) BOOL isFavourate;
 
 @property (nonatomic, strong) NSDate *appointmentStartDate;
@@ -71,5 +83,11 @@
 - (CGFloat)recommendCellHeight;
 
 - (CGFloat)briefCellHeight;
+
+- (CGFloat)nearbyCellHeight;
+
+- (BOOL)hasCoupon;
+
+- (NSArray<NSString *> *)phoneNumbersArray;
 
 @end

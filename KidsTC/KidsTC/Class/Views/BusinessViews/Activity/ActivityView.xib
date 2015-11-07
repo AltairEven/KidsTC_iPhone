@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,30 +11,19 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ZF-N5-fr0" customClass="HorizontalCalendarView">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="50" id="aCG-zq-lwW"/>
-                    </constraints>
-                </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Etc-nl-vHd">
-                    <rect key="frame" x="0.0" y="50" width="320" height="518"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="5ZF-N5-fr0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0ch-iF-FJM"/>
-                <constraint firstItem="Etc-nl-vHd" firstAttribute="top" secondItem="5ZF-N5-fr0" secondAttribute="bottom" id="bHC-p3-lDP"/>
-                <constraint firstItem="5ZF-N5-fr0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="jPs-hq-GHU"/>
+                <constraint firstItem="Etc-nl-vHd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="bUY-T7-n1x"/>
                 <constraint firstAttribute="bottom" secondItem="Etc-nl-vHd" secondAttribute="bottom" id="k6D-a1-ruq"/>
-                <constraint firstAttribute="trailing" secondItem="5ZF-N5-fr0" secondAttribute="trailing" id="klv-yL-oq7"/>
                 <constraint firstItem="Etc-nl-vHd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="olY-sc-9xW"/>
                 <constraint firstAttribute="trailing" secondItem="Etc-nl-vHd" secondAttribute="trailing" id="p3h-VW-6Ra"/>
             </constraints>
             <connections>
-                <outlet property="calendarView" destination="5ZF-N5-fr0" id="vmk-8B-Lez"/>
                 <outlet property="tableView" destination="Etc-nl-vHd" id="yFs-bv-grE"/>
             </connections>
             <point key="canvasLocation" x="313" y="362"/>

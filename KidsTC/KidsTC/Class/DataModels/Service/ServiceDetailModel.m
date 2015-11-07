@@ -8,12 +8,19 @@
 
 #import "ServiceDetailModel.h"
 
+@interface ServiceDetailModel ()
+
+@property (nonatomic, assign) CGFloat noticeHeight;
+
+@end
+
 @implementation ServiceDetailModel
 
 - (void)fillWithRawData:(NSDictionary *)data {
     if (!data || ![data isKindOfClass:[NSDictionary class]]) {
         return;
     }
+    self.type = [[data objectForKey:@"productType"] integerValue];
     NSArray *imageUrlStrings = [data objectForKey:@"imgUrl"];
     if ([imageUrlStrings isKindOfClass:[NSArray class]]) {
         NSMutableArray *tempArray = [[NSMutableArray alloc] init];
@@ -31,19 +38,33 @@
     self.saleCount = [[data objectForKey:@"saleCount"] integerValue];
     self.price = [[data objectForKey:@"price"] floatValue];
     self.priceDescription = [data objectForKey:@"priceSortName"];
-    self.countdownTime = [[data objectForKey:@"countDownTime"] integerValue];
+    self.couponUrlString = [data objectForKey:@"couponLink"];
+    self.countdownTime = [[data objectForKey:@"remainCount"] integerValue];
     self.showCountdown = [[data objectForKey:@"showCountDown"] integerValue];
     self.supportedInsurances = [Insurance InsurancesWithRawData:[data objectForKey:@"insurance"]];
     
-    self.notice = [data objectForKey:@"notice"];
-    self.recommenderFaceImageUrl = [NSURL URLWithString:[data objectForKey:@"recommendImgUrl"]];
-    self.recommenderName = [data objectForKey:@"recommendName"];
-    self.recommendString = [data objectForKey:@"recommendContent"];
+    NSArray *array = [data objectForKey:@"buyNotice"];
+    self.noticeHeight = 0;
+    if ([array isKindOfClass:[NSArray class]]) {
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        for (NSDictionary *singleEle in array) {
+            ServiceDetailNoticeItem *item = [[ServiceDetailNoticeItem alloc] initWithRawData:singleEle];
+            if (item) {
+                [tempArray addObject:item];
+                self.noticeHeight += [item itemHeight] + 10;
+            }
+        }
+        self.noticeArray = [NSArray arrayWithArray:tempArray];
+    }
     
-    self.notice  = @"购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知";
-    self.recommenderFaceImageUrl = [self.imageUrls firstObject];
-    self.recommenderName = @"小河马";
-    self.recommendString = @"小河马爱洗澡，萌萌哒满地跑，一不小心摔一跤，呜啊呜啊哭又闹。河马妈妈来看到，二话不说拿棍捣，小河马被打屁了，哈哈哈哈真搞笑。";
+    NSDictionary *recommendDic = [data objectForKey:@"note"];
+    if ([recommendDic isKindOfClass:[NSDictionary class]] && [recommendDic count] > 0) {
+        self.recommenderFaceImageUrl = [NSURL URLWithString:[recommendDic objectForKey:@"imgUrl"]];
+        self.recommenderName = [recommendDic objectForKey:@"name"];
+        self.recommendString = [recommendDic objectForKey:@"note"];
+    }
+    
+    self.introductionHtmlString = [data objectForKey:@"detailUrl"];
     
     self.isFavourate = [[data objectForKey:@"isFavor"] boolValue];
     self.phoneNumber = [data objectForKey:@"phone"];
@@ -61,12 +82,33 @@
         }
         self.storeItemsArray = [NSArray arrayWithArray:tempArray];
     }
+    
+    
+    NSArray *commentsArray = [data objectForKey:@"commentList"];
+    if ([commentsArray isKindOfClass:[NSArray class]]) {
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        for (NSDictionary *singleDic in commentsArray) {
+            CommentListItemModel *item = [[CommentListItemModel alloc] initWithRawData:singleDic];
+            [tempArray addObject:item];
+        }
+        self.commentItemsArray = [NSArray arrayWithArray:tempArray];
+    }
+    
+    
+    NSDictionary *commentDic = [data objectForKey:@"comment"];
+    if ([commentDic isKindOfClass:[NSDictionary class]] && [commentDic count] > 0) {
+        self.commentAllNumber = [[commentDic objectForKey:@"all"] integerValue];
+        self.commentGoodNumber = [[commentDic objectForKey:@"good"] integerValue];
+        self.commentNormalNumber = [[commentDic objectForKey:@"normal"] integerValue];
+        self.commentBadNumber = [[commentDic objectForKey:@"bad"] integerValue];
+        self.commentPictureNumber = [[commentDic objectForKey:@"pic"] integerValue];
+    }
 }
 
 
 - (CGFloat)topCellHeight {
     //image
-    CGFloat height = SCREEN_WIDTH * 0.7;
+    CGFloat height = SCREEN_WIDTH * 1;
     //service name
     height += [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 10 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:17] topGap:10 bottomGap:10 maxLine:2 andText:self.serviceName];
     //service description
@@ -92,8 +134,7 @@
 }
 
 - (CGFloat)noticeCellHeight {
-    CGFloat height = [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 10 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:13] topGap:10 bottomGap:10 maxLine:0 andText:self.notice];
-    return height;
+    return self.noticeHeight;
 }
 
 - (CGFloat)recommendCellHeight {
@@ -101,6 +142,40 @@
     if (height < 80) {
         height = 80;
     }
+    
+    return height;
+}
+
+- (BOOL)hasCoupon {
+    return ([self.couponUrlString length] > 0);
+}
+
+@end
+
+@implementation ServiceDetailNoticeItem
+
+- (instancetype)initWithRawData:(NSDictionary *)data {
+    if (!data || ![data isKindOfClass:[NSDictionary class]]) {
+        return nil;
+    }
+    self = [super init];
+    if (self) {
+        self.title = [NSString stringWithFormat:@"%@：", [data objectForKey:@"clause"]];
+        self.content = [data objectForKey:@"notice"];
+    }
+    return self;
+}
+
+- (CGFloat)itemHeight {
+    CGFloat wordWidth = 13;
+    CGFloat margin = 10;
+    CGFloat height = 0;
+    CGFloat labelWidth = SCREEN_WIDTH - margin * 2 - ([self.title length] + 1) * wordWidth;
+    if (labelWidth < 100) {
+        height += wordWidth + margin;
+    }
+    
+    height += [GConfig heightForLabelWithWidth:labelWidth LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:wordWidth] topGap:10 bottomGap:10 andText:self.content];
     
     return height;
 }

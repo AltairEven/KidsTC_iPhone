@@ -607,8 +607,6 @@
 		1E8EFD0B1B687D4200D00808 /* CommentListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E8EFD091B687D4200D00808 /* CommentListViewController.xib */; };
 		1E8EFD0F1B68836600D00808 /* CommentListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8EFD0D1B68836600D00808 /* CommentListViewCell.m */; };
 		1E8EFD101B68836600D00808 /* CommentListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E8EFD0E1B68836600D00808 /* CommentListViewCell.xib */; };
-		1E8EFD141B68841F00D00808 /* CommentListViewHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8EFD121B68841F00D00808 /* CommentListViewHeaderCell.m */; };
-		1E8EFD151B68841F00D00808 /* CommentListViewHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E8EFD131B68841F00D00808 /* CommentListViewHeaderCell.xib */; };
 		1E8EFD191B68879100D00808 /* CommentListItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8EFD181B68879100D00808 /* CommentListItemModel.m */; };
 		1E8EFD201B68BBA100D00808 /* AccountSettingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E8EFD1F1B68BBA100D00808 /* AccountSettingView.xib */; };
 		1E943E8F1B71E7CD0029FE74 /* CheckFirstInstalDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E943E6D1B71E7CD0029FE74 /* CheckFirstInstalDataManager.m */; };
@@ -1883,9 +1881,6 @@
 		1E8EFD0C1B68836600D00808 /* CommentListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentListViewCell.h; sourceTree = "<group>"; };
 		1E8EFD0D1B68836600D00808 /* CommentListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentListViewCell.m; sourceTree = "<group>"; };
 		1E8EFD0E1B68836600D00808 /* CommentListViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentListViewCell.xib; sourceTree = "<group>"; };
-		1E8EFD111B68841F00D00808 /* CommentListViewHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentListViewHeaderCell.h; sourceTree = "<group>"; };
-		1E8EFD121B68841F00D00808 /* CommentListViewHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentListViewHeaderCell.m; sourceTree = "<group>"; };
-		1E8EFD131B68841F00D00808 /* CommentListViewHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentListViewHeaderCell.xib; sourceTree = "<group>"; };
 		1E8EFD171B68879100D00808 /* CommentListItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentListItemModel.h; sourceTree = "<group>"; };
 		1E8EFD181B68879100D00808 /* CommentListItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentListItemModel.m; sourceTree = "<group>"; };
 		1E8EFD1F1B68BBA100D00808 /* AccountSettingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountSettingView.xib; sourceTree = "<group>"; };
@@ -4367,9 +4362,6 @@
 				1E8EFD021B68782300D00808 /* CommentListViewSegmentCell.h */,
 				1E8EFD031B68782300D00808 /* CommentListViewSegmentCell.m */,
 				1E8EFD041B68782300D00808 /* CommentListViewSegmentCell.xib */,
-				1E8EFD111B68841F00D00808 /* CommentListViewHeaderCell.h */,
-				1E8EFD121B68841F00D00808 /* CommentListViewHeaderCell.m */,
-				1E8EFD131B68841F00D00808 /* CommentListViewHeaderCell.xib */,
 				1E8EFD0C1B68836600D00808 /* CommentListViewCell.h */,
 				1E8EFD0D1B68836600D00808 /* CommentListViewCell.m */,
 				1E8EFD0E1B68836600D00808 /* CommentListViewCell.xib */,
@@ -5187,7 +5179,6 @@
 				1EC73BA21B5E25A4008B39EA /* HotActivityGroupView.xib in Resources */,
 				1E3D8F581B4D1D4D00275C35 /* UserCenterView.xib in Resources */,
 				1EC4A0C51B5914FB00206BB9 /* StoreDetailViewActiveCell.xib in Resources */,
-				1E8EFD151B68841F00D00808 /* CommentListViewHeaderCell.xib in Resources */,
 				1EC73BA41B5E25A4008B39EA /* HotActivityGroupViewCell.xib in Resources */,
 				1E3D8D0C1B4BF4A100275C35 /* TRViewController.xib in Resources */,
 				1EA8B6C21B638FFE00F90688 /* StoreAppointmentViewController.xib in Resources */,
@@ -5643,7 +5634,6 @@
 				1E15F9891BDF21D5000C74E7 /* StoreDetailNearbyModel.m in Sources */,
 				1E0B7A8C1B6F67B800A58AD4 /* GActivityIndicatorView.m in Sources */,
 				1E0B7A8B1B6F67B800A58AD4 /* FlipView.m in Sources */,
-				1E8EFD141B68841F00D00808 /* CommentListViewHeaderCell.m in Sources */,
 				1E8EFD191B68879100D00808 /* CommentListItemModel.m in Sources */,
 				1E0B7B191B6F6E0200A58AD4 /* StepperView.m in Sources */,
 				1E827CA31B94144E008F3F08 /* SDWebImageDecoder.m in Sources */,
@@ -5958,7 +5948,7 @@
 					"-licucore",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4f140705-39b9-4ca2-be61-0330b0943a05";
+				PROVISIONING_PROFILE = "3aec2105-2c57-40e4-af7b-cf84980bd462";
 			};
 			name = Debug;
 		};
@@ -5993,7 +5983,7 @@
 					"-licucore",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4f140705-39b9-4ca2-be61-0330b0943a05";
+				PROVISIONING_PROFILE = "3aec2105-2c57-40e4-af7b-cf84980bd462";
 			};
 			name = Release;
 		};
