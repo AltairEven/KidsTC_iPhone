@@ -9,23 +9,33 @@
 #import <UIKit/UIKit.h>
 #import "CommentListItemModel.h"
 
+typedef enum {
+    CommentListViewTagAll = 1,
+    CommentListViewTagGood,
+    CommentListViewTagNormal,
+    CommentListViewTagBad,
+    CommentListViewTagPicture
+}CommentListViewTag;
+
 @class CommentListView;
 
 @protocol CommentListViewDataSource <NSObject>
 
-- (NSUInteger)numberOfCommentsOnCommentListView:(CommentListView *)list withTag:(CommentListType)tag;
+- (NSUInteger)numberOfCommentsOnCommentListView:(CommentListView *)list withTag:(CommentListViewTag)tag;
 
-- (NSArray *)commentListItemModelsOfCommentListView:(CommentListView *)listView withTag:(CommentListType)tag;
+- (NSArray *)commentListItemModelsOfCommentListView:(CommentListView *)listView withTag:(CommentListViewTag)tag;
 
 @end
 
 @protocol CommentListViewDelegate <NSObject>
 
-- (void)commentListView:(CommentListView *)listView willShowWithTag:(CommentListType)tag;
+- (void)commentListView:(CommentListView *)listView willShowWithTag:(CommentListViewTag)tag;
 
-- (void)commentListView:(CommentListView *)listView DidPullDownToRefreshforViewTag:(CommentListType)tag;
+- (void)commentListView:(CommentListView *)listView DidPullDownToRefreshforViewTag:(CommentListViewTag)tag;
 
-- (void)commentListView:(CommentListView *)listView DidPullUpToLoadMoreforViewTag:(CommentListType)tag;
+- (void)commentListView:(CommentListView *)listView DidPullUpToLoadMoreforViewTag:(CommentListViewTag)tag;
+
+- (void)commentListView:(CommentListView *)listView didClickedCellAtIndex:(NSUInteger)cellIndex;
 
 @optional
 
@@ -39,18 +49,18 @@
 
 @property (nonatomic, assign) id<CommentListViewDelegate> delegate;
 
-@property (nonatomic, readonly) CommentListType currentViewTag;
+@property (nonatomic, readonly) CommentListViewTag currentViewTag;
 
 - (void)reloadSegmentHeader;
 
-- (void)reloadDataforViewTag:(CommentListType)tag;
+- (void)reloadDataforViewTag:(CommentListViewTag)tag;
 
 - (void)endRefresh;
 
 - (void)endLoadMore;
 
-- (void)noMoreData:(BOOL)noMore forViewTag:(CommentListType)tag;
+- (void)noMoreData:(BOOL)noMore forViewTag:(CommentListViewTag)tag;
 
-- (void)hideLoadMoreFooter:(BOOL)hidden forViewTag:(CommentListType)tag;
+- (void)hideLoadMoreFooter:(BOOL)hidden forViewTag:(CommentListViewTag)tag;
 
 @end

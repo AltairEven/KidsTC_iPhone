@@ -8,6 +8,7 @@
 
 #import "CommentListViewController.h"
 #import "MWPhotoBrowser.h"
+#import "CommentDetailViewController.h"
 
 @interface CommentListViewController () <CommentListViewDelegate>
 
@@ -58,16 +59,23 @@
 
 #pragma mark CommentListViewDataSource & CommentListViewDelegate
 
-- (void)commentListView:(CommentListView *)listView willShowWithTag:(CommentListType)tag {
-    [self.viewModel resetResultWithType:(KTCCommentType)(tag + 1)];
+- (void)commentListView:(CommentListView *)listView willShowWithTag:(CommentListViewTag)tag {
+    [self.viewModel resetResultWithType:(KTCCommentType)tag];
 }
 
-- (void)commentListView:(CommentListView *)listView DidPullDownToRefreshforViewTag:(CommentListType)tag {
-    [self.viewModel startUpdateDataWithType:(KTCCommentType)(tag + 1)];
+- (void)commentListView:(CommentListView *)listView DidPullDownToRefreshforViewTag:(CommentListViewTag)tag {
+    [self.viewModel startUpdateDataWithType:(KTCCommentType)tag];
 }
 
-- (void)commentListView:(CommentListView *)listView DidPullUpToLoadMoreforViewTag:(CommentListType)tag {
-    [self.viewModel getMoreDataWithType:(KTCCommentType)(tag + 1)];
+- (void)commentListView:(CommentListView *)listView DidPullUpToLoadMoreforViewTag:(CommentListViewTag)tag {
+    [self.viewModel getMoreDataWithType:(KTCCommentType)tag];
+}
+
+- (void)commentListView:(CommentListView *)listView didClickedCellAtIndex:(NSUInteger)cellIndex {
+    CommentListItemModel *model = [[self.viewModel resultOfCurrentType] objectAtIndex:cellIndex];
+    CommentDetailViewController *controller = [[CommentDetailViewController alloc] initWithSource:CommentDetailViewSourceService headerModel:model];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)commentListView:(CommentListView *)listView didClickedImageAtCellIndex:(NSUInteger)cellIndex andImageIndex:(NSUInteger)imageIndex {

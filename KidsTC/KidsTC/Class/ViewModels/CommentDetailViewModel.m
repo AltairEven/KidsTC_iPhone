@@ -87,7 +87,7 @@
         self.detailModel.identifier = @"";
     }
     CommentRelationType relattionType = CommentRelationTypeNone;
-    CommentListType listType = CommentListTypeAll;
+    KTCCommentType commentType = KTCCommentTypeAll;
     switch (self.detailModel.modelSource) {
         case CommentDetailViewSourceStrategy:
         {
@@ -113,7 +113,7 @@
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
                            self.detailModel.identifier, @"relationSysNo",
                            [NSNumber numberWithInteger:relattionType], @"relationType",
-                           [NSNumber numberWithInteger:listType], @"commentType",
+                           [NSNumber numberWithInteger:commentType], @"commentType",
                            [NSNumber numberWithInteger:index], @"page",
                            [NSNumber numberWithInteger:[self.view pageSize]], @"pageCount", nil];
     return param;

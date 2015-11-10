@@ -8,14 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum {
-    CommentListTypeAll = 1,
-    CommentListTypeGood,
-    CommentListTypeNormal,
-    CommentListTypeBad,
-    CommentListTypePicture
-}CommentListType;
-
 @interface CommentListItemModel : NSObject
 
 @property (nonatomic, strong) NSString *identifier;
