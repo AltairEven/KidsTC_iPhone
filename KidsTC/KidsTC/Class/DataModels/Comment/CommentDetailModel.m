@@ -14,27 +14,34 @@
     _headerModel = headerModel;
     if (headerModel) {
         self.identifier = ((CommentListItemModel *)headerModel).identifier;
-    }
-}
-
-- (CGFloat)headerCellHeight {
-    CGFloat height = 0;
-    switch (self.modelSource) {
-        case CommentDetailViewSourceStrategyDetail:
-        {
-            height = [((ParentingStrategyDetailCellModel *)self.headerModel) cellHeight] + 40;
+        
+        switch (self.modelSource) {
+            case CommentDetailViewSourceStrategyDetail:
+            {
+                self.headerCellHeight = [((ParentingStrategyDetailCellModel *)self.headerModel) cellHeight] + 40;
+            }
+                break;
+            case CommentDetailViewSourceService:
+            case CommentDetailViewSourceStore:
+            {
+                CGFloat height = 50 + 30;
+                //Label
+                NSString *comments = ((CommentListItemModel *)headerModel).comments;
+                CGFloat labelHeight = [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 20 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:13] topGap:10 bottomGap:10 andText:comments];
+                
+                CGFloat imageHeight = 0;
+                CGFloat imageSlideSize = SCREEN_WIDTH - 20;
+                NSUInteger count = [((CommentListItemModel *)headerModel).originalPhotoUrlStringsArray count];
+                if (count > 0) {
+                    imageHeight = count * imageSlideSize + (count - 1) * 5;
+                }
+                self.headerCellHeight = height + labelHeight + imageHeight;
+            }
+                break;
+            default:
+                break;
         }
-            break;
-        case CommentDetailViewSourceService:
-        case CommentDetailViewSourceStore:
-        {
-            height = [((CommentListItemModel *)self.headerModel) cellHeight];
-        }
-            break;
-        default:
-            break;
     }
-    return height;
 }
 
 - (void)fillWithReplyRawData:(NSArray *)dataArray {

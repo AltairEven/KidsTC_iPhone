@@ -175,19 +175,15 @@
 }
 
 - (void)reloadListViewWithData:(NSDictionary *)data {
-    if ([data count] > 0) {
-        NSArray *dataArray = [data objectForKey:@"data"];
-        if ([dataArray isKindOfClass:[NSArray class]] && [dataArray count] > 0) {
-            [self.view hideLoadMoreFooter:NO];
-            [self.detailModel fillWithReplyRawData:dataArray];
-            if ([dataArray count] < [self.view pageSize]) {
-                [self.view noMoreData:YES];
-            }
-        } else {
+    NSArray *dataArray = [data objectForKey:@"data"];
+    if ([dataArray isKindOfClass:[NSArray class]] && [dataArray count] > 0) {
+        [self.view hideLoadMoreFooter:NO];
+        [self.detailModel fillWithReplyRawData:dataArray];
+        if ([dataArray count] < [self.view pageSize]) {
             [self.view noMoreData:YES];
-            [self.view hideLoadMoreFooter:YES];
         }
     } else {
+        [self.view noMoreData:YES];
         [self.view hideLoadMoreFooter:YES];
     }
     [self.view reloadData];

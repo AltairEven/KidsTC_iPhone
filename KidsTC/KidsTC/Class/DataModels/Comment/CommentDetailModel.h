@@ -29,7 +29,7 @@ typedef enum {
 
 @property (nonatomic, assign) CommentDetailSource modelSource;
 
-- (CGFloat)headerCellHeight;
+@property (nonatomic, assign) CGFloat headerCellHeight;
 
 - (void)fillWithReplyRawData:(NSArray *)dataArray;
 

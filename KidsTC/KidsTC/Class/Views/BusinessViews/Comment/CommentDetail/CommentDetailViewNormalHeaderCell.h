@@ -9,7 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "CommentListItemModel.h"
 
+@class CommentDetailViewNormalHeaderCell;
+
+@protocol CommentDetailViewNormalHeaderCellDelegate <NSObject>
+
+- (void)headerCell:(CommentDetailViewNormalHeaderCell *)cell didChangedBoundsWithNewHeight:(CGFloat)height;
+
+@end
+
 @interface CommentDetailViewNormalHeaderCell : UITableViewCell
+
+@property (nonatomic, assign) id<CommentDetailViewNormalHeaderCellDelegate> delegate;
 
 - (void)configWithModel:(CommentListItemModel *)model;
 

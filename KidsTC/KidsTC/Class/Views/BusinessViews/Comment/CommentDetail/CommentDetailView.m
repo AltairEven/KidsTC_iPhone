@@ -17,7 +17,7 @@ static NSString *const kNormalHeaderCellIdentifier = @"kNormalHeaderCellIdentifi
 
 static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIdentifier";
 
-@interface CommentDetailView () <UITableViewDataSource, UITableViewDelegate>
+@interface CommentDetailView () <UITableViewDataSource, UITableViewDelegate, CommentDetailViewNormalHeaderCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
@@ -183,6 +183,7 @@ static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIden
                 if (!cell) {
                     cell =  [[[NSBundle mainBundle] loadNibNamed:@"CommentDetailViewNormalHeaderCell" owner:nil options:nil] objectAtIndex:0];
                 }
+                cell.delegate = self;
                 [cell configWithModel:self.detailModel.headerModel];
                 return cell;
             }
@@ -228,6 +229,13 @@ static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIden
             [self.delegate commentDetailView:self didSelectedReplyAtIndex:indexPath.row];
         }
     }
+}
+
+#pragma mark CommentDetailViewNormalHeaderCellDelegate
+
+- (void)headerCell:(CommentDetailViewNormalHeaderCell *)cell didChangedBoundsWithNewHeight:(CGFloat)height {
+    self.detailModel.headerCellHeight = height;
+    [self.tableView reloadData];
 }
 
 #pragma mark Private methods
