@@ -72,6 +72,11 @@
     _uploadImages = uploadImages;
 }
 
+- (NSString *)text {
+    _text = self.textView.text;
+    return _text;
+}
+
 
 #pragma mark UITextViewDelegate
 
