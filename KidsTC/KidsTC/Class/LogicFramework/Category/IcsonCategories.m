@@ -153,7 +153,7 @@
         
         NSArray *l2Array = [dic1 objectForKey:@"ScondCategory"];
         NSMutableSet *level2Set = [[NSMutableSet alloc] init];
-        if (l2Array) {
+        if (l2Array && [l2Array isKindOfClass:[NSArray class]]) {
             //遍历二级类目
             for (int n = 0; n < [l2Array count]; n++) {
                 NSDictionary *dic2 = [l2Array objectAtIndex:n];
@@ -177,7 +177,7 @@
                 
                 NSArray *l3Array = [dic2 objectForKey:@"ScondCategory"];
                 NSMutableSet *level3Set = [[NSMutableSet alloc] init];
-                if (l3Array) {
+                if (l3Array && [l3Array isKindOfClass:[NSArray class]]) {
                     //遍历三级类目
                     for (int n = 0; n < [l3Array count]; n++) {
                         NSDictionary *dic3 = [l3Array objectAtIndex:n];

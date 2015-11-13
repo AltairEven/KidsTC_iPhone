@@ -125,7 +125,7 @@
     [cell.textLabel setFont:[UIFont systemFontOfSize:15]];
     [cell.textLabel setText:[self.areaNameArray objectAtIndex:indexPath.row]];
     UIView *bgView = [[UIView alloc] initWithFrame:cell.frame];
-    [bgView setBackgroundColor:RGBA(230, 200, 200, 1)];
+    [bgView setBackgroundColor:[AUITheme theme].globalThemeColor];
     [cell setSelectedBackgroundView:bgView];
     
     return cell;
@@ -152,8 +152,12 @@
             UIButton *button = [self.categoryButtonsArray objectAtIndex:buttonIndex];
             if (buttonIndex == index) {
                 [button setSelected:YES];
+                [button.layer setBorderColor:[AUITheme theme].globalThemeColor.CGColor];
+                [button.layer setBorderWidth:1];
             } else {
                 [button setSelected:NO];
+                [button.layer setBorderColor:[AUITheme theme].lightTextColor.CGColor];
+                [button.layer setBorderWidth:0.5];
             }
         }
     }
@@ -241,11 +245,11 @@
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setFrame:CGRectMake(xPosition, yPosition, 10, 10)];
         [button.titleLabel setFont:[UIFont systemFontOfSize:15]];
-        [button setTitleColor:[AUITheme theme].globalThemeColor forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+        [button setTitleColor:[AUITheme theme].darkTextColor forState:UIControlStateNormal];
+        [button setTitleColor:[AUITheme theme].globalThemeColor forState:UIControlStateSelected];
         [button setTitle:title forState:UIControlStateNormal];
         [button setBackgroundColor:[UIColor clearColor] forState:UIControlStateNormal];
-        [button setBackgroundColor:[AUITheme theme].globalThemeColor forState:UIControlStateSelected];
+        [button setBackgroundColor:[UIColor clearColor] forState:UIControlStateSelected];
         [button sizeToFit];
         [self.categoryBGView addSubview:button];
         
@@ -255,9 +259,9 @@
         //加点边距
         [button setFrame:CGRectMake(xPosition, yPosition, button.frame.size.width + 20, buttonHeight)];
         
-        [button.layer setCornerRadius:5];
-        [button.layer setBorderWidth:1];
-        [button.layer setBorderColor:[AUITheme theme].globalThemeColor.CGColor];
+        [button.layer setCornerRadius:buttonHeight / 2];
+        [button.layer setBorderWidth:0.5];
+        [button.layer setBorderColor:[AUITheme theme].lightTextColor.CGColor];
         [button.layer setMasksToBounds:YES];
         
         [self.categoryButtonsArray addObject:button];

@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define LoveHouseLoadType (2)
+
 @interface LoveHouseListItemModel : NSObject
 
 @property (nonatomic, copy) NSString *name;

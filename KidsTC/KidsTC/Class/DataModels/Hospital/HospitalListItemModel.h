@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define HospitalLoadType (1)
+
 @interface HospitalListItemModel : NSObject
 
 @property (nonatomic, copy) NSString *name;
