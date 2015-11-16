@@ -35,7 +35,7 @@ static KTCUser *_sharedInstance = nil;
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.userRole = UserRolePrepregnancy;
+        self.userRole = [KTCUserRole instanceWithRole:UserRolePrepregnancy sex:KTCSexUnknown];
     }
     return self;
 }
@@ -48,10 +48,10 @@ static KTCUser *_sharedInstance = nil;
     return _sharedInstance;
 }
 
-- (void)setUserRole:(UserRole)userRole {
-    if (_userRole != userRole) {
+- (void)setUserRole:(KTCUserRole *)userRole {
+    if (_userRole.role != userRole.role) {
         _userRole = userRole;
-        [[NSNotificationCenter defaultCenter] postNotificationName:UserRoleHasChangedNotification object:[NSNumber numberWithInteger:_userRole]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:UserRoleHasChangedNotification object:userRole];
     }
 }
 

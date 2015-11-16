@@ -75,7 +75,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 #pragma mark UITableViewDataSource & UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return AccountSettingViewTagRole + 1;
+    return AccountSettingViewTagPassword + 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -91,28 +91,34 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     switch (indexPath.section) {
         case AccountSettingViewTagFaceImage:
         {
-            cell.cellImageUrl = nil;
+            cell.cellImageUrl = self.settingModel.faceImageUrl;
+            cell.cellImage = self.settingModel.faceImage;
             [cell resetWithMainTitle:@"头像" subTitle:@"" showImage:YES showArrow:YES];
-        }
-            break;
-        case AccountSettingViewTagNickName:
-        {
-            [cell resetWithMainTitle:@"昵称" subTitle:@"" showImage:NO showArrow:YES];
-        }
-            break;
-        case AccountSettingViewTagPassword:
-        {
-            [cell resetWithMainTitle:@"密码" subTitle:@"" showImage:NO showArrow:YES];
-        }
-            break;
-        case AccountSettingViewTagMobilePhone:
-        {
-            [cell resetWithMainTitle:@"手机号" subTitle:@"" showImage:NO showArrow:YES];
         }
             break;
         case AccountSettingViewTagRole:
         {
-            [cell resetWithMainTitle:@"状态" subTitle:@"" showImage:NO showArrow:YES];
+            [cell resetWithMainTitle:@"状态" subTitle:self.settingModel.userRole.roleName showImage:NO showArrow:YES];
+        }
+            break;
+        case AccountSettingViewTagNickName:
+        {
+            [cell resetWithMainTitle:@"昵称" subTitle:self.settingModel.userName showImage:NO showArrow:YES];
+        }
+            break;
+        case AccountSettingViewTagMobilePhone:
+        {
+            NSString *phone = self.settingModel.phone;
+            NSString *phoneDes = @"未绑定手机";
+            if ([phone length] > 0) {
+                phoneDes = [phone stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
+            }
+            [cell resetWithMainTitle:@"手机号" subTitle:phoneDes showImage:NO showArrow:NO];
+        }
+            break;
+        case AccountSettingViewTagPassword:
+        {
+            [cell resetWithMainTitle:@"修改密码" subTitle:@"" showImage:NO showArrow:YES];
         }
             break;
         default:

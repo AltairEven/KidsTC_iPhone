@@ -9,10 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "KTCArea.h"
 #import "KTCAgeScope.h"
+#import "KTCUserRole.h"
 
 @interface KTCUser : NSObject
 
-@property (nonatomic, assign) UserRole userRole;
+@property (nonatomic, strong) KTCUserRole *userRole;
 
 @property (nonatomic, copy) NSString *userName;
 

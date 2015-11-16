@@ -16,7 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIView *userInfoContainerView;
 @property (weak, nonatomic) IBOutlet UIView *userInfoBGView;
 @property (weak, nonatomic) IBOutlet UIImageView *BGImageView;
-@property (strong, nonatomic) UIButton *faceButton;
+@property (strong, nonatomic) UIImageView *faceImageView;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *levelTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
@@ -39,7 +39,7 @@
 
 - (void)reloadTopView;
 
-- (void)didClickedFaceButton;
+- (void)didClickedfaceImageView;
 
 - (void)didTappedOnView:(id)sender;
 
@@ -67,17 +67,18 @@
 
 - (void)buildSubviews {
     [self.bottomView setBackgroundColor:[AUITheme theme].globalBGColor];
-    self.faceButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.faceButton setFrame:CGRectMake(0, 0, 80, 80)];
-    self.faceButton.tag = 0;
-    [self.faceButton setImage:[UIImage imageNamed:@"userCenter_noLoginFace"] forState:UIControlStateNormal];
-    [self.faceButton addTarget:self action:@selector(didClickedFaceButton) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:self.faceButton];
+    self.faceImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
+    self.faceImageView.tag = 0;
+    [self.faceImageView setImage:[UIImage imageNamed:@"userCenter_noLoginFace"]];
+    [self.faceImageView setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickedfaceImageView)];
+    [self.faceImageView addGestureRecognizer:gesture];
+    [self addSubview:self.faceImageView];
     
-    self.faceButton.layer.cornerRadius = self.faceButton.frame.size.width / 2;
-    self.faceButton.layer.borderWidth = 4;
-    self.faceButton.layer.borderColor = RGBA(200, 100, 100, 1).CGColor;
-    self.faceButton.layer.masksToBounds = YES;
+    self.faceImageView.layer.cornerRadius = self.faceImageView.frame.size.width / 2;
+    self.faceImageView.layer.borderWidth = 4;
+    self.faceImageView.layer.borderColor = RGBA(200, 100, 100, 1).CGColor;
+    self.faceImageView.layer.masksToBounds = YES;
     
     UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTappedOnView:)];
     [self.myAppointmentTapView addGestureRecognizer:tap1];
@@ -175,8 +176,8 @@
     if (self.dataModel) {
         CGFloat xPosition = SCREEN_WIDTH / 2 - 50;
         [UIView animateWithDuration:0.5 animations:^{
-            [self.faceButton setCenter:CGPointMake(xPosition, yPosition)];
-            [self.faceButton setImage:[UIImage imageNamed:@"userCenter_defaultFace"] forState:UIControlStateNormal];
+            [self.faceImageView setCenter:CGPointMake(xPosition, yPosition)];
+            [self.faceImageView setImageWithURL:self.dataModel.faceImageUrl placeholderImage:[UIImage imageNamed:@"userCenter_defaultFace"]];
             [self.userInfoBGView setHidden:NO];
         }];
         
@@ -219,8 +220,8 @@
         
     } else {
         CGFloat xPosition = SCREEN_WIDTH * UserInfoRatio;
-        [self.faceButton setCenter:CGPointMake(xPosition, yPosition)];
-        [self.faceButton setImage:[UIImage imageNamed:@"userCenter_noLoginFace"] forState:UIControlStateNormal];
+        [self.faceImageView setCenter:CGPointMake(xPosition, yPosition)];
+        [self.faceImageView setImage:[UIImage imageNamed:@"userCenter_noLoginFace"]];
         
         [self.userInfoBGView setHidden:YES];
         
@@ -230,7 +231,7 @@
     }
 }
 
-- (void)didClickedFaceButton {
+- (void)didClickedfaceImageView {
     if (self.delegate && [self.delegate respondsToSelector:@selector(userCenterView:didClickedWithTag:)]) {
         [self.delegate userCenterView:self didClickedWithTag:UserCenterTagFace];
     }

@@ -19,6 +19,7 @@
 
 #define Hook_Prefix (@"hook::")
 #define Hook_ProductDetail (@"productdetail::")
+#define Hook_login (@"login::")
 
 @interface KTCWebViewController () <UIWebViewDelegate,UIActionSheetDelegate>
 
@@ -174,6 +175,11 @@
     } else if ([urlString hasPrefix:Hook_Prefix]) {
         NSString *hookString = [urlString substringFromIndex:[Hook_Prefix length]];
         NSString *jumpString = nil;
+        if ([hookString hasPrefix:Hook_login]) {
+            [GToolUtil checkLogin:^(NSString *uid) {
+                [self.webView reload];
+            } target:self];
+        }
         if ([hookString hasPrefix:Hook_ProductDetail]) {
             jumpString = [hookString substringFromIndex:[Hook_ProductDetail length]];
         }
@@ -339,6 +345,7 @@
         return;
     }
     ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithServiceId:serviceId channelId:channelId];
+    [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
 }
 

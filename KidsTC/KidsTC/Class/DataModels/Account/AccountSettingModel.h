@@ -10,12 +10,14 @@
 
 @interface AccountSettingModel : NSObject
 
-@property (nonatomic, strong) NSURL *faceImgaeUrl;
+@property (nonatomic, strong) NSURL *faceImageUrl; //头像
 
-@property (nonatomic, copy) NSString *nickName;
+@property (nonatomic, strong) UIImage *faceImage; //本地头像
 
-@property (nonatomic, copy) NSString *mobilePhoneNumber;
+@property (nonatomic, copy) NSString *userName; //用户名
 
-@property (nonatomic, assign) UserRole userRole;
+@property (nonatomic, strong) KTCUserRole *userRole; //角色
+
+@property (nonatomic, copy) NSString *phone; //电话
 
 @end

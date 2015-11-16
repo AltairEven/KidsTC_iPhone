@@ -241,14 +241,14 @@ typedef enum {
     if (self.ageTag == AgeSelectTagPrepregnancy || self.ageTag == AgeSelectTagPregnancy) {
         role = self.ageTag + 1;
     } else {
-        role = self.ageTag + 1 + self.sexTag;
+        role = self.ageTag + 1;
     }
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:role] forKey:UserRoleDefaultKey];
     
     __weak UserRoleSelectViewController *weakSelf = self;
     if (weakSelf.completeBlock) {
-        weakSelf.completeBlock(role);
+        weakSelf.completeBlock(role, weakSelf.sexTag + 1);
     }
 }
 

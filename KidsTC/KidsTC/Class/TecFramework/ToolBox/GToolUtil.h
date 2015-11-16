@@ -148,4 +148,6 @@ NSInteger sortImageDictionaryWithIdx(id v1, id v2, void *context);
 
 + (NSString *)jsonFromObject:(id)obj;
 
++ (UIImage *)takeSnapshotForView:(UIView *)view;
+
 @end

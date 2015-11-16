@@ -921,7 +921,6 @@ typedef NS_ENUM(NSInteger, ChosenTag){
 
 -(void)getMediaFromSource:(UIImagePickerControllerSourceType)sourceType
 {
-    
     NSArray *mediatypes=[UIImagePickerController availableMediaTypesForSourceType:sourceType];
     if([UIImagePickerController isSourceTypeAvailable:sourceType] &&[mediatypes count]>0){
         NSArray *mediatypes=[UIImagePickerController availableMediaTypesForSourceType:sourceType];

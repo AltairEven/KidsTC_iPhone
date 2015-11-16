@@ -10,21 +10,31 @@
 
 @interface UserCenterModel : NSObject
 
-@property (nonatomic, copy) NSString *userName;
+@property (nonatomic, copy) NSString *userName; //用户名
 
-@property (nonatomic, assign) NSInteger level;
+@property (nonatomic, assign) NSInteger level; //用户级别
 
-@property (nonatomic, copy) NSString *levelTitle;
+@property (nonatomic, copy) NSString *levelTitle; //用户级别描述
 
-@property (nonatomic, assign) NSUInteger score;
+@property (nonatomic, assign) NSUInteger score; //积分
 
-@property (nonatomic, assign) BOOL hasUnreadMessage;
+@property (nonatomic, assign) NSUInteger age; //年龄
 
-@property (nonatomic, assign) NSUInteger appointmentOrderCount;
+@property (nonatomic, strong) KTCUserRole *userRole; //角色
 
-@property (nonatomic, assign) NSUInteger waitingPaymentOrderCount;
+@property (nonatomic, copy) NSString *birthday; //生日
 
-@property (nonatomic, assign) NSUInteger waitingCommentOrderCount;
+@property (nonatomic, strong) NSURL *faceImageUrl; //头像
+
+@property (nonatomic, copy) NSString *phone; //电话
+
+@property (nonatomic, assign) BOOL hasUnreadMessage; //是否有未读信息
+
+@property (nonatomic, assign) NSUInteger appointmentOrderCount; // 预约订单数
+
+@property (nonatomic, assign) NSUInteger waitingPaymentOrderCount; // 待付款订单数
+
+@property (nonatomic, assign) NSUInteger waitingCommentOrderCount; // 待评论订单数
 
 - (instancetype)initWithRawData:(NSDictionary *)data;
 

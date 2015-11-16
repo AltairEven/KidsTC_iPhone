@@ -73,7 +73,7 @@
     
     CGFloat widthAdjustment = 0;
     
-    if (IS_IOS9SYSTEM) {
+    if (IS_GREATER_THAN_IOS9) {
         widthAdjustment = self.unitLabel.font.pointSize;
     } else {
         widthAdjustment = self.unitLabel.frame.size.width;
@@ -98,7 +98,7 @@
     CGFloat margin = (self.unitLabelVerticalMargin > self.priceLabelVerticalMargin ? self.unitLabelVerticalMargin : self.priceLabelVerticalMargin);
     
     CGFloat width = unitFitSize.width + priceFitSize.width;
-    if (IS_IOS9SYSTEM) {
+    if (IS_GREATER_THAN_IOS9) {
         width = self.unitLabel.font.pointSize + priceFitSize.width;
     }
     CGFloat unitHeight = self.unitLabel.font.pointSize;

@@ -79,7 +79,7 @@ NSString *const kHttpIcsonCookieKeyUserRole = @"population_type";
     NSDictionary *app = [NSDictionary dictionaryWithObject:@"1" forKey:kHttpIcsonCookieKeyApp];
     [cookieArray addObject:app];
     
-    NSDictionary *userRole = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%d", [KTCUser currentUser].userRole] forKey:kHttpIcsonCookieKeyUserRole];
+    NSDictionary *userRole = [NSDictionary dictionaryWithObject:[[KTCUser currentUser].userRole userRoleIdentifierString] forKey:kHttpIcsonCookieKeyUserRole];
     [cookieArray addObject:userRole];
     
     //设置cookie

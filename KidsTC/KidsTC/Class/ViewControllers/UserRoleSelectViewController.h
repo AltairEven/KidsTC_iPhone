@@ -11,7 +11,7 @@
 #define UserRoleDefaultKey (@"UserRoleDefaultKey")
 
 
-typedef void(^select_complete)(UserRole role);
+typedef void(^select_complete)(UserRole role, KTCSex sex);
 
 @interface UserRoleSelectViewController : GViewController
 

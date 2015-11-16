@@ -83,7 +83,13 @@
         switch (tag) {
             case UserCenterTagFace:
             {
-                AccountSettingViewController *controller = [[AccountSettingViewController alloc] initWithNibName:@"AccountSettingViewController" bundle:nil];
+                AccountSettingModel *model = [[AccountSettingModel alloc] init];
+                model.faceImageUrl = self.viewModel.dataModel.faceImageUrl;
+                model.userName = self.viewModel.dataModel.userName;
+                model.userRole = self.viewModel.dataModel.userRole;
+                model.phone = self.viewModel.dataModel.phone;
+                
+                AccountSettingViewController *controller = [[AccountSettingViewController alloc] initWithAccountSettingModel:model];
                 controller.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:controller animated:YES];
             }

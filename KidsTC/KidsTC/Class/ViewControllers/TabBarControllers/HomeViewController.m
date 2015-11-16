@@ -92,7 +92,10 @@
 }
 
 - (void)homeViewDidPulledDownToRefresh:(HomeView *)homeView {
-    [self.viewModel refreshHomeData];
+    [self.viewModel refreshHomeDataWithSucceed:^(NSDictionary *data) {
+        [self.floorNavigationView reloadData];
+        [self.floorNavigationView setSelectedIndex:0];
+    } failure:nil];
 }
 
 - (void)homeViewDidPulledUpToloadMore:(HomeView *)homeView {
@@ -244,7 +247,10 @@
 #pragma mark Private method
 
 - (void)userRoleHasChanged:(id)info {
-    
+    [self.viewModel refreshHomeDataWithSucceed:^(NSDictionary *data) {
+        [self.floorNavigationView reloadData];
+        [self.floorNavigationView setSelectedIndex:0];
+    } failure:nil];
 }
 
 

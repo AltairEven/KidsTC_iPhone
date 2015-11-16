@@ -27,6 +27,8 @@
     
     self.cellImageView.layer.cornerRadius = self.cellImageView.frame.size.width / 2;
     self.cellImageView.layer.masksToBounds = YES;
+    
+    [self.cellImageView setBackgroundColor:[UIColor lightGrayColor]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -37,13 +39,24 @@
 
 - (void)resetWithMainTitle:(NSString *)mainTitle subTitle:(NSString *)subTitle showImage:(BOOL)showImage showArrow:(BOOL)showArrow {
     [self.mainTitleLabel setText:mainTitle];
-    [self.arrowImageView setHidden:!showArrow];
+    if (showArrow) {
+        [self.arrowImageView setHidden:NO];
+        [self.subTitleLabel setTextColor:[UIColor darkGrayColor]];
+    } else {
+        [self.arrowImageView setHidden:YES];
+        [self.subTitleLabel setTextColor:[UIColor lightGrayColor]];
+    }
     if (showImage) {
         [self.cellImageView setHidden:NO];
         [self.subTitleLabel setHidden:YES];
-        if (self.cellImageUrl) {
+        if (self.cellImage) {
+            //优先使用本地头像
+            [self.cellImageView setImage:self.cellImage];
+        } else if (self.cellImageUrl) {
+            //其次使用网络头像
             [self.cellImageView setImageWithURL:self.cellImageUrl placeholderImage:[UIImage imageNamed:@"userCenter_defaultFace"]];
         } else {
+            //默认头像
             [self.cellImageView setImage:[UIImage imageNamed:@"userCenter_defaultFace"]];
         }
         return;

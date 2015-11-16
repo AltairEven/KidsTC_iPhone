@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AccountSettingModel.h"
 
 @interface AccountSettingViewController : GViewController
+
+- (instancetype)initWithAccountSettingModel:(AccountSettingModel *)model;
 
 @end

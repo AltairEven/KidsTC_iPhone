@@ -11,10 +11,10 @@
 
 typedef enum {
     AccountSettingViewTagFaceImage,
+    AccountSettingViewTagRole,
     AccountSettingViewTagNickName,
-    AccountSettingViewTagPassword,
     AccountSettingViewTagMobilePhone,
-    AccountSettingViewTagRole
+    AccountSettingViewTagPassword
 }AccountSettingViewTag;
 
 @class AccountSettingView;

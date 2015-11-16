@@ -12,6 +12,8 @@
 
 @property (nonatomic, strong) NSURL *cellImageUrl;
 
+@property (nonatomic, strong) UIImage *cellImage;
+
 - (void)resetWithMainTitle:(NSString *)mainTitle subTitle:(NSString *)subTitle showImage:(BOOL)showImage showArrow:(BOOL)showArrow;
 
 + (CGFloat)normalCellHeight;

@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong) AccountSettingModel *settingModel;
 
+- (void)resetFaceImage:(UIImage *)image;
+
 @end

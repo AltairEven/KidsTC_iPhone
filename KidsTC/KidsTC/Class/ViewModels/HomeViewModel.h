@@ -15,7 +15,7 @@ extern NSString *const kHomeViewDataFinishLoadingNotification;
 
 @property (nonatomic, strong) HomeModel *homeModel;
 
-- (void)refreshHomeData;
+- (void)refreshHomeDataWithSucceed:(void(^)(NSDictionary *data))succeed failure:(void(^)(NSError *error))failure;
 
 - (void)getCustomerRecommendWithSucceed:(void(^)(NSDictionary *data))succeed failure:(void(^)(NSError *error))failure;
 

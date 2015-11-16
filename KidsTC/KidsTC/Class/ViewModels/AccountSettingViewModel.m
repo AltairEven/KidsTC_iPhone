@@ -21,7 +21,6 @@
     if (self) {
         self.view = (AccountSettingView *)view;
         self.view.dataSource = self;
-        self.settingModel = [[AccountSettingModel alloc] init];
     }
     return self;
 }
@@ -40,6 +39,13 @@
 
 - (void)stopUpdateData {
     
+}
+
+#pragma mark Public methods
+
+- (void)resetFaceImage:(UIImage *)image {
+    self.settingModel.faceImage = image;
+    [self.view reloadData];
 }
 
 @end

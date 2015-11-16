@@ -30,6 +30,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>qq2kidstc</string>
 				<string>wb2837514135</string>
 			</array>
 			<key>CFBundleURLName</key>

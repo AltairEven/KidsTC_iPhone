@@ -29,7 +29,7 @@ static NSString * const kAppIDInAppStore = @"557825088";
 //#if WX_DEBUG
 //static NSString * const kWeChatAppID = @"wxf8b4f85f3a794e77";
 //#else
-static NSString * const kWeChatAppID = @"wx6964eb0b10aa369b";
+static NSString * const kWeChatAppID = @"wx75fa1a06d38fde4e";
 //#endif //WX_DEBUG
 
 static NSString *const kWeChatSourceKey = @"comefrom";
@@ -39,23 +39,8 @@ static NSString *const kCustomerServicePhoneNumber = @"15000168321";
 
 static NSString *const UserRoleHasChangedNotification = @"UserRoleHasChangedNotification";
 
-typedef enum {
-    UserRoleUnknown = 0, //未知
-    UserRolePrepregnancy = 1, //备孕
-    UserRolePregnancy = 2, //孕期
-    UserRoleBirthMale = 3, //新生儿（男），0~6月
-    UserRoleBirthFemale = 4, //新生儿（女），0~6月
-    UserRoleBabyInOneMale = 5, //一岁以内（男），7~12月
-    UserRoleBabyInOneFemale = 6, //一岁以内（女），7~12月
-    UserRoleBabyOneToThreemale = 7, //一到三岁（男），0~6月
-    UserRoleBabyOneToThreeFemale = 8, //一到三岁（女），0~6月
-    UserRoleBabyFourToSixmale = 9, //四到六岁（男）
-    UserRoleBabyFourToSixFemale = 10 //四到六岁（女）
-}UserRole;
-
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
-#define IS_IOS8SYSTEM ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)//add by MichaelXiao 2014/10/1 iOS8 以上系统
-#define IS_IOS9SYSTEM ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0)//add by MichaelXiao 2014/10/1 iOS8 以上系统
+#define IS_GREATER_THAN_IOS9 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0) //ios9.0 以上系统
 
 #define PRODUCT_TAB_HEIGHT 39.0
 #define PRODUCT_TAB_MARGIN 5.0

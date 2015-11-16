@@ -1108,4 +1108,41 @@ NSInteger sortImageDictionaryWithIdx(id v1, id v2, void *context)
     return jsonString;
 }
 
++ (UIImage *)takeSnapshotForView:(UIView *)view {
+//    CGSize imageSize = view.frame.size;
+//    
+//    UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
+//    //    if (IOS_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+//    //        UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
+//    //    } else {
+//    //        UIGraphicsBeginImageContextWithOptions(imageSize, NO, 1);
+//    //    }
+//    
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    
+//    CGContextSaveGState(context);
+//    CGContextTranslateCTM(context, view.center.x, view.center.y);
+//    CGContextConcatCTM(context, view.transform);
+//    CGContextTranslateCTM(context, -view.bounds.size.width * view.layer.anchorPoint.x, -view.bounds.size.height * view.layer.anchorPoint.y);
+//    if ([view respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)]) {
+//        [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:YES];
+//    } else {
+//        [view.layer renderInContext:context];
+//    }
+//    CGContextRestoreGState(context);
+//    
+//    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//    return image;
+    UIGraphicsBeginImageContext(view.bounds.size);
+    
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    
+    UIImage*image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
 @end

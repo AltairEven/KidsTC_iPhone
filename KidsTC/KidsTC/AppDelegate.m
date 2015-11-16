@@ -175,55 +175,19 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
     _ifWakeupFromAli = NO;
-    if([url.scheme isEqualToString:@"icson"])
-    {
-        [self internalParseURL:url application:application];
-    }
-    else if([url.scheme isEqualToString:kAliPaySchema])
+    if ([url.scheme isEqualToString:kAliPaySchema])
     {
         _ifWakeupFromAli = YES;
         [self ALIParseURL:url application:application];
-    }
-    else if([url.scheme isEqualToString:@"wap2app"])
-    {
-        [self internalParseURL:url application:application];
-    }
-    else if([url.scheme isEqualToString:@"http"] && ([url.host isEqualToString:@"app.51buy.com"]))
-    {
-        [self internalParseURL:url application:application];
     }
     else if ([url.scheme isEqualToString:kWeChatAppID])
     {
         return [WeChatModel handleWeChatOpenURL:url appDelegate:self];
     }
-    else if([url.scheme hasPrefix:@"ali2icson"]) //表明是从ali支付宝中启动我们的客户端。
-    {
-        //        _ifWakeupFromAli = YES;
-        //        //if ([UserWrapper shareMasterUser].loginUserType != LoginYiXunUser) {
-        //        self.yid = KEY_ALI_YID;
-        //        self.loginSource = KEY_ALI_SOURCE;
-        //
-        //        if (_ali2AppLoginParser == nil) {
-        //            _ali2AppLoginParser = [[Ali2IcsonAppLoginParser alloc] init];
-        //        }
-        //        [_ali2AppLoginParser ali2IcsonAppLogin:[url queryComponents]  sourceID:self.yid];
-        //        _ali2AppLoginParser = nil;
-        //        //}
-        
-    }
-    else if ([url.scheme hasPrefix:@"qq2icson"])
-    {
-        // 手q登陆返回
-        //[[UserWrapper shareMasterUser] handleQQQuickLoginResult:url];
-    }
-    else if ([url.scheme hasPrefix:@"yixunapp"])
-    {
-        //Safari跳转回来，显示原有界面。
-    }
-    else if ([url.scheme isEqualToString:@"tencent101164963"])
+    else if ([url.scheme isEqualToString:@"tencent101265844"])
     {
         return [TencentOAuth HandleOpenURL:url];
-    } else if ([url.scheme isEqualToString:@"wb2837514135"]) {
+    } else if ([url.scheme isEqualToString:kWeiboUrlScheme]) {
         [WeiboSDK handleOpenURL:url delegate:[WeiboLoginManager sharedManager]];
     }
     
@@ -736,45 +700,36 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
 
 - (void)registerNotification
 {
-    // Register RemoteNotification
-    if (IS_IOS8SYSTEM) {
-        //Types
-        UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
-        
-        //Actions
-        UIMutableUserNotificationAction *acceptAction = [[UIMutableUserNotificationAction alloc] init];
-        acceptAction.identifier = @"ACCEPT_IDENTIFIER";
-        acceptAction.title = @"Accept";
-        
-        acceptAction.activationMode = UIUserNotificationActivationModeForeground;
-        acceptAction.destructive = NO;
-        acceptAction.authenticationRequired = NO;
-        
-        //Categories
-        UIMutableUserNotificationCategory *inviteCategory = [[UIMutableUserNotificationCategory alloc] init];
-        
-        inviteCategory.identifier = @"INVITE_CATEGORY";
-        
-        [inviteCategory setActions:@[acceptAction] forContext:UIUserNotificationActionContextDefault];
-        
-        [inviteCategory setActions:@[acceptAction] forContext:UIUserNotificationActionContextMinimal];
-        
-        NSSet *categories = [NSSet setWithObjects:inviteCategory, nil];
-        
-        
-        UIUserNotificationSettings *mySettings = [UIUserNotificationSettings settingsForTypes:types categories:categories];
-        
-        [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
-        
-        
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
-    }
-    else
-    {
-        //register to receive notifications
-        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:myTypes];
-    }
+    //Types
+    UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+    
+    //Actions
+    UIMutableUserNotificationAction *acceptAction = [[UIMutableUserNotificationAction alloc] init];
+    acceptAction.identifier = @"ACCEPT_IDENTIFIER";
+    acceptAction.title = @"Accept";
+    
+    acceptAction.activationMode = UIUserNotificationActivationModeForeground;
+    acceptAction.destructive = NO;
+    acceptAction.authenticationRequired = NO;
+    
+    //Categories
+    UIMutableUserNotificationCategory *inviteCategory = [[UIMutableUserNotificationCategory alloc] init];
+    
+    inviteCategory.identifier = @"INVITE_CATEGORY";
+    
+    [inviteCategory setActions:@[acceptAction] forContext:UIUserNotificationActionContextDefault];
+    
+    [inviteCategory setActions:@[acceptAction] forContext:UIUserNotificationActionContextMinimal];
+    
+    NSSet *categories = [NSSet setWithObjects:inviteCategory, nil];
+    
+    
+    UIUserNotificationSettings *mySettings = [UIUserNotificationSettings settingsForTypes:types categories:categories];
+    
+    [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
+    
+    
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
 }
 
 #ifdef __IPHONE_8_0
@@ -933,7 +888,7 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
     if (userRoleValue) {
         UserRole role = (UserRole)[userRoleValue integerValue];
         if (role != UserRoleUnknown) {
-            [[KTCUser currentUser] setUserRole:role];
+            [[KTCUser currentUser] setUserRole:[KTCUserRole instanceWithRole:role sex:KTCSexUnknown]];
             //show loading
             [self showLoading];
             return;
@@ -942,8 +897,8 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
     //显示选择页面
     UserRoleSelectViewController *selectVC = [[UserRoleSelectViewController alloc] initWithNibName:@"UserRoleSelectViewController" bundle:nil];
     self.window.rootViewController = selectVC;
-    [selectVC setCompleteBlock:^(UserRole selectedRole){
-        [[KTCUser currentUser] setUserRole:selectedRole];
+    [selectVC setCompleteBlock:^(UserRole selectedRole, KTCSex selectedSex){
+        [[KTCUser currentUser] setUserRole:[KTCUserRole instanceWithRole:selectedRole sex:selectedSex]];
         self.window.rootViewController = controller;
     }];
 }
