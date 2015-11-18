@@ -63,7 +63,7 @@ return NO;\
 		GINVOICE_CHECK_LENGTHTOOLONG(invoice, @"address", 50, @"公司地址不能超过50个字符");
 		GINVOICE_CHECK_EMPTY(invoice, @"phone", @"电话号码不能为空");
 
-		if (![self checkTel: [invoice objectForKey: @"phone"]]) {
+		if (![GValidator checkTel: [invoice objectForKey: @"phone"]]) {
 			[self setError: ERROR_WITH_TYPE_AND_CODE_AND_MESSAGE(ERR_INVOICE, ERRCODE_DATA_INVALID, @"电话号码填写有误，格式：021-83161107")];
 			return NO;
 		}

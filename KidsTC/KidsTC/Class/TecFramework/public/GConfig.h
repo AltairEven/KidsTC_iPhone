@@ -29,15 +29,17 @@ static NSString * const kAppIDInAppStore = @"557825088";
 //#if WX_DEBUG
 //static NSString * const kWeChatAppID = @"wxf8b4f85f3a794e77";
 //#else
-static NSString * const kWeChatAppID = @"wx75fa1a06d38fde4e";
+//static NSString * const kWeChatAppID = @"wx75fa1a06d38fde4e";
 //#endif //WX_DEBUG
 
-static NSString *const kWeChatSourceKey = @"comefrom";
-static NSString *const kWeChatSourceValue = @"weixin";
+//static NSString *const kWeChatSourceKey = @"comefrom";
+//static NSString *const kWeChatSourceValue = @"weixin";
 
 static NSString *const kCustomerServicePhoneNumber = @"15000168321";
 
 static NSString *const UserRoleHasChangedNotification = @"UserRoleHasChangedNotification";
+
+static NSString *const kErrMsgKey = @"kErrMsgKey";
 
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 #define IS_GREATER_THAN_IOS9 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0) //ios9.0 以上系统
@@ -553,6 +555,7 @@ typedef enum {
 static const int kInvalidShowPrice = 99999900;
 
 @class GConfig;
+@class ATCountDown;
 
 @interface GConfig : NSObject
 {
@@ -561,6 +564,7 @@ static const int kInvalidShowPrice = 99999900;
 @property (nonatomic, strong) NSString *      envInfo;
 @property (nonatomic, strong) NSLock   *      lock;
 @property (nonatomic, strong) KTCLocation *currentLocation;
+@property (nonatomic, strong) ATCountDown *smsCodeCountDown;
 
 + (GConfig *)sharedConfig;
 - (void)load;
@@ -573,6 +577,8 @@ static const int kInvalidShowPrice = 99999900;
 - (void)setLoadWebImage:(BOOL)bLoad;
 
 - (NSString *)currentLocationCoordinateString;
+
+- (void)startSMSCodeCountDownWithLeftTime:(void(^)(NSTimeInterval currentTimeLeft))left  completion:(void(^)())completion;
 
 
 + (NSString *)getInvoiceTypeName:(INVOICE_TYPE)invoiceType;
@@ -614,5 +620,7 @@ static const int kInvalidShowPrice = 99999900;
 + (CGFloat)heightForLabelWithWidth:(CGFloat)width LineBreakMode:(NSLineBreakMode)mode Font:(UIFont *)font topGap:(CGFloat)tGap bottomGap:(CGFloat)bGap maxLine:(NSUInteger)line andText:(NSString *)text;
 
 + (void)resetLineView:(UIView *)view withLayoutAttribute:(NSLayoutAttribute)attribute;
+
++ (NSString *)currentSMSCodeKey;
 
 @end

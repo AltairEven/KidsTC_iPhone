@@ -4,6 +4,20 @@
 <dict>
 	<key>data</key>
 	<dict>
+		<key>APP_DOWNLOAD</key>
+		<dict>
+			<key>method</key>
+			<string>get</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=main&amp;&amp;act=download</string>
+		</dict>
+		<key>APP_UPDATE_VERSION</key>
+		<dict>
+			<key>method</key>
+			<string>get</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=main&amp;&amp;act=app_update_version</string>
+		</dict>
 		<key>ARTICLE_GET_HOT_TAG</key>
 		<dict>
 			<key>method</key>
@@ -249,6 +263,13 @@
 			<key>url</key>
 			<string>http://api.kidstc.com/json.php?mod=order&amp;&amp;act=search_order</string>
 		</dict>
+		<key>PAY_ALIPAY_NOTIFY</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=pay&amp;&amp;act=alipay_notify</string>
+		</dict>
 		<key>PRODUCT_ACTIVITY_FILTER_GET</key>
 		<dict>
 			<key>method</key>
@@ -276,6 +297,34 @@
 			<string>get</string>
 			<key>url</key>
 			<string>http://api.kidstc.com/json.php?mod=product&amp;&amp;act=get_product_desc</string>
+		</dict>
+		<key>PUSH_IS_UN_READ_MESSAGE</key>
+		<dict>
+			<key>method</key>
+			<string>get</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=push&amp;&amp;act=is_un_read_message</string>
+		</dict>
+		<key>PUSH_REGISTER_DEVICE</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=push&amp;&amp;act=register_device</string>
+		</dict>
+		<key>PUSH_SEARCH_USER_MESSAGE</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=push&amp;&amp;act=search_user_message</string>
+		</dict>
+		<key>PUSH_USER_READ_MESSAGE</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=push&amp;&amp;act=user_read_message</string>
 		</dict>
 		<key>SCORE_FLOW_QUERY</key>
 		<dict>
@@ -340,6 +389,62 @@
 			<key>url</key>
 			<string>http://api.kidstc.com/json.php?mod=strategy&amp;&amp;act=search_strategy</string>
 		</dict>
+		<key>THIRD_LOGIN</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=login&amp;&amp;act=third_Login</string>
+		</dict>
+		<key>THIRD_USER_PHONE_REGISTER</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=login&amp;&amp;act=third_user_phone_register</string>
+		</dict>
+		<key>TOOL_SEND_REGISTER_SMS</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=tool&amp;&amp;act=send_register_sms</string>
+		</dict>
+		<key>TOOL_SEND_SMS</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=tool&amp;&amp;act=send_sms</string>
+		</dict>
+		<key>USER_FIND_PASSWORD</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=login&amp;&amp;act=find_password</string>
+		</dict>
+		<key>USER_MODIFY_PASSWORD</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=userCenter&amp;&amp;act=modify_password</string>
+		</dict>
+		<key>USER_REGISTER_LOGIN</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=login&amp;&amp;act=register_login</string>
+		</dict>
+		<key>USER_UPDATE_INFO</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=userCenter&amp;&amp;act=update_user_info</string>
+		</dict>
 		<key>WELFARE_GET</key>
 		<dict>
 			<key>method</key>
@@ -351,6 +456,6 @@
 	<key>errno</key>
 	<string>0</string>
 	<key>version</key>
-	<string>17</string>
+	<string>20</string>
 </dict>
 </plist>

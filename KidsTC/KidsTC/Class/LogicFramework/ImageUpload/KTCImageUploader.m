@@ -68,7 +68,7 @@ static KTCImageUploader *sharedInstance = nil;
                 } else {
                     [weakSelf stopUpload];
                     if (failure) {
-                        NSError *error = [NSError errorWithDomain:@"Image upload" code:-100001 userInfo:[NSDictionary dictionaryWithObject:@"Response not valid." forKey:@"errMsg"]];
+                        NSError *error = [NSError errorWithDomain:@"Image upload" code:-100001 userInfo:[NSDictionary dictionaryWithObject:@"Response not valid." forKey:kErrMsgKey]];
                         failure(error);
                     }
                 }

@@ -32,8 +32,6 @@
 
 @property (nonatomic, strong) HttpRequestClient *submitOrderRequest;
 
-@property (nonatomic, strong) GValidator *validator;
-
 - (void)setupAppointTimes;
 
 - (BOOL)allFieldsValid;
@@ -75,8 +73,6 @@
     
     self.timePickerView = [[AUIPickerView alloc] initWithDataSource:self delegate:self];
     [self.appointmentView reloadData];
-    
-    self.validator = [[GValidator alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -187,7 +183,7 @@
         return NO;
     }
     
-    if (![self.validator checkMobilePhone:phone]) {
+    if (![GValidator checkMobilePhone:phone]) {
         [[iToast makeText:@"请填写正确的手机号"] show];
         return NO;
     }

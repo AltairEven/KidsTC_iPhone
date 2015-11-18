@@ -12,7 +12,8 @@
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/TencentApiInterface.h>
 #import "KTCUser.h"
-#import "WeiboLoginManager.h"
+#import "ThirdPartyLoginService.h"
+#import "BindPhoneViewController.h"
 
 @interface LoginViewController () <LoginViewDelegate>
 
@@ -25,6 +26,10 @@
 - (void)handleKTCLoginSuccessWithUid:(NSString *)uid skey:(NSString *)skey;
 
 - (void)handleKTCLoginFailedWithError:(NSError *)error;
+
+- (void)handleThirdPartyLoginSucceed:(NSDictionary *)data;
+
+- (void)handleThirdPartyLoginFailure:(NSError *)error;
 
 @end
 
@@ -51,6 +56,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.loginView endEditing:YES];
+    [[GAlertLoadingView sharedAlertLoadingView] hide];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -76,20 +82,33 @@
 }
 
 - (void)loginView:(LoginView *)loginView didClickedThirdPartyLoginButtonWithModel:(LoginItemModel *)model {
+    [[GAlertLoadingView sharedAlertLoadingView] show];
     switch (model.type) {
         case LoginTypeQQ:
         {
-            
+            [[ThirdPartyLoginService sharedService] startThirdPartyLoginWithType:ThirdPartyLoginTypeQQ succeed:^(NSDictionary *respData) {
+                [self handleThirdPartyLoginSucceed:respData];
+            } failure:^(NSError *error) {
+                [self handleThirdPartyLoginFailure:error];
+            }];
         }
             break;
         case LoginTypeWechat:
         {
-            
+            [[ThirdPartyLoginService sharedService] startThirdPartyLoginWithType:ThirdPartyLoginTypeWechat succeed:^(NSDictionary *respData) {
+                [self handleThirdPartyLoginSucceed:respData];
+            } failure:^(NSError *error) {
+                [self handleThirdPartyLoginFailure:error];
+            }];
         }
             break;
         case LoginTypeWeibo:
         {
-            [[WeiboLoginManager sharedManager] sendLoginRequest];
+            [[ThirdPartyLoginService sharedService] startThirdPartyLoginWithType:ThirdPartyLoginTypeWeibo succeed:^(NSDictionary *respData) {
+                [self handleThirdPartyLoginSucceed:respData];
+            } failure:^(NSError *error) {
+                [self handleThirdPartyLoginFailure:error];
+            }];
         }
             break;
         default:
@@ -102,22 +121,22 @@
 - (NSArray *)supportedLoginTypes {
     NSMutableArray * loginArr = [[NSMutableArray alloc] init];
     //qq登录按钮
-    if ([TencentOAuth iphoneQQInstalled]) {
+    if ([ThirdPartyLoginService isOnline:ThirdPartyLoginTypeQQ]) {
         LoginItemModel *model = [[LoginItemModel alloc] init];
         model.type = LoginTypeQQ;
         model.logo = [UIImage imageNamed:@"logo_qq"];
         [loginArr addObject:model];
     }
     //微信按钮
-    if ([WXApi isWXAppInstalled] && [WXApi isWXAppSupportApi]) {
+    if ([ThirdPartyLoginService isOnline:ThirdPartyLoginTypeWechat]) {
         LoginItemModel *model = [[LoginItemModel alloc] init];
         model.type = LoginTypeWechat;
         model.logo = [UIImage imageNamed:@"logo_wechat"];
         [loginArr addObject:model];
     }
     
-    //支付宝按钮-目前支付宝是必然要添加的
-    if(true)
+    //微博按钮
+    if([ThirdPartyLoginService isOnline:ThirdPartyLoginTypeWeibo])
     {
         LoginItemModel *model = [[LoginItemModel alloc] init];
         model.type = LoginTypeWeibo;
@@ -125,6 +144,26 @@
         [loginArr addObject:model];
     }
     return [NSArray arrayWithArray:loginArr];
+}
+
+- (void)handleThirdPartyLoginSucceed:(NSDictionary *)data {
+    
+    [[GAlertLoadingView sharedAlertLoadingView] hide];
+}
+
+- (void)handleThirdPartyLoginFailure:(NSError *)error {
+    if (error.userInfo) {
+        NSInteger errNo = [[error.userInfo objectForKey:@"errno"] integerValue];
+        NSString *errMsg = [error.userInfo objectForKey:kErrMsgKey];
+        if (errNo == -2003) {
+            BindPhoneViewController *controller = [[BindPhoneViewController alloc] initWithNibName:@"BindPhoneViewController" bundle:nil];
+            [controller setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:controller animated:YES];
+        } else {
+            [[iToast makeText:errMsg] show];
+        }
+    }
+    [[GAlertLoadingView sharedAlertLoadingView] hide];
 }
 
 #pragma mark KTC login

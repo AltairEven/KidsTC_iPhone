@@ -71,7 +71,8 @@ static NSString             *_lockForQueue = @"";
 {
     // set content text
 	UIFont *font = [UIFont systemFontOfSize:16];
-	CGSize textSize = [_text sizeWithFont:font constrainedToSize:CGSizeMake(200, 100)];
+//	CGSize textSize = [_text sizeWithFont:font constrainedToSize:CGSizeMake(200, 100)];
+    CGSize textSize = CGSizeMake(SCREEN_WIDTH / 2, [GConfig heightForLabelWithWidth:SCREEN_WIDTH / 2 LineBreakMode:NSLineBreakByCharWrapping Font:font topGap:0 bottomGap:0 andText:_text]);
 	
     CGRect rcText = CGRectMake(0, 0, textSize.width, textSize.height);
 	UILabel *label = [[UILabel alloc] initWithFrame:rcText];
@@ -81,21 +82,22 @@ static NSString             *_lockForQueue = @"";
 	label.font = font;
 	label.text = _text;
 	label.numberOfLines = 0;
-	label.shadowColor = [UIColor darkGrayColor];
+//	label.shadowColor = [UIColor darkGrayColor];
 //	label.shadowOffset = CGSizeMake(1, 1);
 	
     // set title
     UILabel *titleLabel = nil;
     if (_title){
-        UIFont *font = [UIFont systemFontOfSize:19];
-        CGSize titleTextSize = [_title sizeWithFont:font constrainedToSize:TEXT_MAX_SIZE];
+        UIFont *titleFont = [UIFont systemFontOfSize:19];
+//        CGSize titleTextSize = [_title sizeWithFont:font constrainedToSize:TEXT_MAX_SIZE];
+        CGSize titleTextSize = CGSizeMake(SCREEN_WIDTH / 2, [GConfig heightForLabelWithWidth:SCREEN_WIDTH / 2 LineBreakMode:NSLineBreakByCharWrapping Font:titleFont topGap:10 bottomGap:10 andText:_text]);
         titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, TITLE_MARGIN, textSize.width, titleTextSize.height)];
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.textColor = [UIColor whiteColor];
-        titleLabel.font = font;
+        titleLabel.font = titleFont;
         titleLabel.text = _title;
         titleLabel.numberOfLines = 1;
-        titleLabel.shadowColor = [UIColor darkGrayColor];
+//        titleLabel.shadowColor = [UIColor darkGrayColor];
 //        titleLabel.shadowOffset = CGSizeMake(1, 1);
         titleLabel.textAlignment = NSTextAlignmentCenter;
     }
@@ -107,6 +109,7 @@ static NSString             *_lockForQueue = @"";
         rcContent.size.height += TEXT_MARGIN*2;
     }
     UIView *contentView = [[UIView alloc] initWithFrame:rcContent];
+    
     CGPoint center = contentView.center;
     if (titleLabel){
         center.y += TITLE_MARGIN;
@@ -139,8 +142,10 @@ static NSString             *_lockForQueue = @"";
         button.backgroundColor = [UIColor clearColor];
     }
 	button.layer.cornerRadius = 5;
+    button.layer.masksToBounds = YES;
 	
 	UIWindow *window = [iToast sharedToastWindow];
+    [window setBackgroundColor:[UIColor clearColor]];
     CGRect rcScreen = [[UIScreen mainScreen] bounds];
     CGRect rcWindow = window.frame;
     rcWindow.size = button.frame.size;

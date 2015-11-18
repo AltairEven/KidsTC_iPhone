@@ -8,6 +8,7 @@
 
 #import "GConfig.h"
 #import "InterfaceManager.h"
+#import "UIDevice+IdentifierAddition.h"
 //#import "GArea.h"
 
 #define DefaultLongitude (121.43333)
@@ -82,6 +83,27 @@ static BOOL bLoadWebImage = YES;
 
 - (NSString *)currentLocationCoordinateString {
     return [GToolUtil stringFromCoordinate:self.currentLocation.location.coordinate];
+}
+
+- (void)startSMSCodeCountDownWithLeftTime:(void (^)(NSTimeInterval))left completion:(void (^)())completion {
+    if (self.smsCodeCountDown.leftTime > 0) {
+        return;
+    }
+    if (!self.smsCodeCountDown) {
+        self.smsCodeCountDown = [[ATCountDown alloc] initWithLeftTimeInterval:60];
+    }
+    __weak GConfig *weakSelf = self;
+    [weakSelf.smsCodeCountDown startCountDownWithCurrentTimeLeft:^(NSTimeInterval currentTimeLeft) {
+        if (left) {
+            left(currentTimeLeft);
+        }
+    } completion:^{
+        if (completion) {
+            completion();
+        }
+        weakSelf.smsCodeCountDown = nil;
+    }];
+    
 }
 
 - (void)load
@@ -509,6 +531,13 @@ static BOOL bLoadWebImage = YES;
             break;
         }
     }
+}
+
++ (NSString *)currentSMSCodeKey {
+    NSString *deviceId = [[UIDevice currentDevice] uniqueDeviceIdentifier];
+    NSTimeInterval timeStamp = [NSDate timeIntervalSinceReferenceDate];
+    NSString *codeKey = [NSString stringWithFormat:@"%@%f", deviceId, timeStamp];
+    return codeKey;
 }
 
 @end

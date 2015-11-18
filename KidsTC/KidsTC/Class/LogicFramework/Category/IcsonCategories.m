@@ -110,14 +110,14 @@
 {
     if (!dataDic || [dataDic count] == 0) {
         //没有数据可供解析
-        *error = [NSError errorWithDomain:@"Parse server data" code:-1 userInfo:[NSDictionary dictionaryWithObject:@"No response data." forKey:@"errMsg"]];
+        *error = [NSError errorWithDomain:@"Parse server data" code:-1 userInfo:[NSDictionary dictionaryWithObject:@"No response data." forKey:kErrMsgKey]];
         return;
     }
     
     NSArray *categoryData = [dataDic objectForKey:@"data"];
     if (!categoryData || [categoryData count] == 0 || ![categoryData isKindOfClass:[NSArray class]]) {
         //没有类目数据
-        *error = [NSError errorWithDomain:@"Parse server data" code:-1 userInfo:[NSDictionary dictionaryWithObject:@"No category data." forKey:@"errMsg"]];
+        *error = [NSError errorWithDomain:@"Parse server data" code:-1 userInfo:[NSDictionary dictionaryWithObject:@"No category data." forKey:kErrMsgKey]];
         return;
     }
     

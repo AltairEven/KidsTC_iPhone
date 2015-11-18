@@ -30,7 +30,8 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>qq2kidstc</string>
+				<string>wx75fa1a06d38fde4e</string>
+				<string>tencent101265844</string>
 				<string>wb2837514135</string>
 			</array>
 			<key>CFBundleURLName</key>
@@ -71,6 +72,8 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIFileSharingEnabled</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

@@ -45,7 +45,7 @@ return NO;\
     GADDRESS_CHECK_LENGTHTOOLONG(address, @"name", 10, @"收货人不能超过10个字符");
     // NOTE:和PC不一样
     GADDRESS_CHECK_EMPTY(address, @"mobile", @"手机号码不能为空");
-    if (![self checkMobilePhone: [address objectForKey: @"mobile"]]) {
+    if (![GValidator checkMobilePhone: [address objectForKey: @"mobile"]]) {
         [self setError: ERROR_WITH_TYPE_AND_CODE_AND_MESSAGE(ERR_ADDRESS, ERRCODE_MOBILE_INVALID, @"手机号码填写有误，格式：13612345678")];
         return NO;
     }
@@ -61,7 +61,7 @@ return NO;\
     GADDRESS_CHECK_EMPTY(address, @"address", @"详细地址不能为空");
     GADDRESS_CHECK_LENGTHTOOLONG(address, @"address", 50, @"详细地址不能超过50个字符");
 
-    if (![GToolUtil isEmpty: [address objectForKey: @"zipcode"]] && ![self checkZip: [address objectForKey: @"zipcode"]]) {
+    if (![GToolUtil isEmpty: [address objectForKey: @"zipcode"]] && ![GValidator checkZip: [address objectForKey: @"zipcode"]]) {
         [self setError: ERROR_WITH_TYPE_AND_CODE_AND_MESSAGE(ERR_ADDRESS, ERRCODE_ZIP_INVALID, @"邮政编码填写有误，格式：200000")];
         return NO;
     }

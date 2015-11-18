@@ -32,7 +32,9 @@
 #import "XGSetting.h"
 #import "KTCMapService.h"
 #import "UserRoleSelectViewController.h"
-#import "WeiboLoginManager.h"
+#import "WeChatManager.h"
+#import "TencentManager.h"
+#import "WeiboManager.h"
 
 static BOOL _alreadyLaunched = NO;
 
@@ -77,7 +79,7 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
     [[HttpIcsonCookieManager sharedManager] setupCookies];
     
     // regist WeChat AppID
-    [WXApi registerApp:kWeChatAppID];
+    [[WeChatManager sharedManager] getOnline];
     
     [[KTCUser currentUser] checkLoginStatusFromServer];     // 这句话执行前的统计log，uid字段都为空
     
@@ -180,15 +182,15 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
         _ifWakeupFromAli = YES;
         [self ALIParseURL:url application:application];
     }
-    else if ([url.scheme isEqualToString:kWeChatAppID])
+    else if ([url.scheme isEqualToString:kWeChatUrlScheme])
     {
-        return [WeChatModel handleWeChatOpenURL:url appDelegate:self];
+        return [[WeChatManager sharedManager] handleOpenURL:url];
     }
-    else if ([url.scheme isEqualToString:@"tencent101265844"])
+    else if ([url.scheme isEqualToString:kTencentUrlScheme])
     {
-        return [TencentOAuth HandleOpenURL:url];
+        return [[TencentManager sharedManager] handleOpenURL:url];
     } else if ([url.scheme isEqualToString:kWeiboUrlScheme]) {
-        [WeiboSDK handleOpenURL:url delegate:[WeiboLoginManager sharedManager]];
+        return [[WeiboManager sharedManager] handleOpenURL:url];
     }
     
     return YES;

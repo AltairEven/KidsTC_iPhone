@@ -43,7 +43,6 @@ static InterfaceManager *_sharedInstance = nil;
 
 - (void)updateInterface {
     if (!self.downloadClient) {
-        //self.downloadClient = [HttpRequestClient clientWithUrlAliasName:@"MAIN_GETINTERFACE"];
         if (!self.downloadClient) {
             self.downloadClient = [HttpRequestClient clientWithUrlString:MAIN_GETINTERFACE];
         }
@@ -74,6 +73,7 @@ static InterfaceManager *_sharedInstance = nil;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(){
         
         BOOL res = [self.interfaceData writeToFile:FILE_CACHE_PATH(@"interface_list.plist") atomically:NO];
+//        BOOL res = [self.interfaceData writeToFile:FILE_FULL_PATH(@"interface_list.plist") atomically:NO];
         if (!res)
         {
             _interfaceData = [self loadBundle];

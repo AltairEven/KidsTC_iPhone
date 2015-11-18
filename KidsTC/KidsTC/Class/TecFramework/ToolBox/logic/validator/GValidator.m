@@ -11,7 +11,7 @@
 
 @implementation GValidator
 
-- (BOOL)checkZip:(NSString *)zip
++ (BOOL)checkZip:(NSString *)zip
 {
     if (!zip) {
         return YES;
@@ -23,7 +23,7 @@
 
     return YES;
 }
-- (BOOL)checkMobilePhone:(NSString *)mobile
++ (BOOL)checkMobilePhone:(NSString *)mobile
 {
     if (!mobile) {
         return YES;
@@ -36,7 +36,7 @@
     return YES;
 }
 
-- (BOOL)checkTel:(NSString *)tel
++ (BOOL)checkTel:(NSString *)tel
 {
 	if (!tel) {
 		return YES;
@@ -49,7 +49,7 @@
 	return YES;
 }
 
-- (BOOL)checkChars:(NSString *)string charType:(NSInteger)charType
++ (BOOL)checkChars:(NSString *)string charType:(NSInteger)charType
 {
 	if (!string) {
 		return YES;

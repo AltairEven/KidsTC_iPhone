@@ -14,8 +14,9 @@
 
 - (instancetype)initWithLeftTimeInterval:(NSTimeInterval)timeLeft;
 
-
 - (void)startCountDownWithCurrentTimeLeft:(void(^)(NSTimeInterval currentTimeLeft))currentBlock;
+
+- (void)startCountDownWithCurrentTimeLeft:(void(^)(NSTimeInterval currentTimeLeft))currentBlock completion:(void(^)())completion;
 
 - (void)stopCountDown;
 

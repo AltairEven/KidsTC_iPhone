@@ -23,8 +23,8 @@ typedef enum {
 
 @interface GValidator : NSObject
 
-- (BOOL)checkZip:(NSString *)zip;
-- (BOOL)checkMobilePhone:(NSString *)mobile;
-- (BOOL)checkTel:(NSString *)tel;
-- (BOOL)checkChars:(NSString *)string charType:(NSInteger)_charType;
++ (BOOL)checkZip:(NSString *)zip;
++ (BOOL)checkMobilePhone:(NSString *)mobile;
++ (BOOL)checkTel:(NSString *)tel;
++ (BOOL)checkChars:(NSString *)string charType:(NSInteger)_charType;
 @end

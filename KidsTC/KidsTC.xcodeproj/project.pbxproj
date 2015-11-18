@@ -804,17 +804,24 @@
 		1EFFAE0B1BEB7925001D4245 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EFFADFF1BEB7925001D4245 /* libWeiboSDK.a */; };
 		1EFFAE0C1BEB7925001D4245 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1EFFAE081BEB7925001D4245 /* WeiboSDK.bundle */; };
 		1EFFAE0E1BEB793E001D4245 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EFFAE0D1BEB793E001D4245 /* ImageIO.framework */; };
-		1EFFAE171BEC4E50001D4245 /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1EFFAE161BEC4E50001D4245 /* interface_list.plist */; };
 		1EFFAE1A1BEC834B001D4245 /* ActivityFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFFAE191BEC834B001D4245 /* ActivityFilterView.m */; };
 		1EFFAE1C1BEC8364001D4245 /* ActivityFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EFFAE1B1BEC8364001D4245 /* ActivityFilterView.xib */; };
 		1EFFAE221BEC9EE3001D4245 /* ActivityFilterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFFAE211BEC9EE3001D4245 /* ActivityFilterModel.m */; };
+		8F6513961BFC96B9003BE006 /* KTCActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6513951BFC96B9003BE006 /* KTCActionView.m */; };
+		8F8A08CE1BF9DE5000134A9A /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F8A08CD1BF9DE5000134A9A /* interface_list.plist */; };
+		8F8A08D21BF9E31300134A9A /* BindPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8A08D01BF9E31300134A9A /* BindPhoneViewController.m */; };
+		8F8A08D31BF9E31300134A9A /* BindPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F8A08D11BF9E31300134A9A /* BindPhoneViewController.xib */; };
 		8F9996041BF5A6740055F016 /* WeChatModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9996011BF5A6740055F016 /* WeChatModel.m */; };
-		8F9996051BF5A6740055F016 /* WeiboLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9996031BF5A6740055F016 /* WeiboLoginManager.m */; };
 		8F9996081BF5BE590055F016 /* KTCUserRole.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9996071BF5BE590055F016 /* KTCUserRole.m */; };
 		8F9996151BF5E6560055F016 /* ChangeNickNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9996131BF5E6560055F016 /* ChangeNickNameViewController.m */; };
 		8F9996161BF5E6560055F016 /* ChangeNickNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F9996141BF5E6560055F016 /* ChangeNickNameViewController.xib */; };
 		8F99961A1BF5E66C0055F016 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9996181BF5E66C0055F016 /* ChangePasswordViewController.m */; };
 		8F99961B1BF5E66C0055F016 /* ChangePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F9996191BF5E66C0055F016 /* ChangePasswordViewController.xib */; };
+		8F9EA6B01BF9A6B400062E91 /* WeiboManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9EA6AF1BF9A6B400062E91 /* WeiboManager.m */; };
+		8F9EA6B31BF9A72B00062E91 /* ThirdPartyLoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9EA6B21BF9A72B00062E91 /* ThirdPartyLoginService.m */; };
+		8F9EA6B61BF9AE7100062E91 /* WeChatManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9EA6B51BF9AE7100062E91 /* WeChatManager.m */; };
+		8F9EA6B91BF9B7C500062E91 /* TencentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9EA6B81BF9B7C500062E91 /* TencentManager.m */; };
+		8FEFF4F81BFCC54F001C098F /* KTCActionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FEFF4F71BFCC54F001C098F /* KTCActionView.xib */; };
 		8FF57C0F1BF5EE56006867D2 /* ImageTrimViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF57C0D1BF5EE56006867D2 /* ImageTrimViewController.m */; };
 		8FF57C101BF5EE56006867D2 /* ImageTrimViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FF57C0E1BF5EE56006867D2 /* ImageTrimViewController.xib */; };
 /* End PBXBuildFile section */
@@ -2214,16 +2221,19 @@
 		1EFFAE091BEB7925001D4245 /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
 		1EFFAE0A1BEB7925001D4245 /* WeiboUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboUser.h; sourceTree = "<group>"; };
 		1EFFAE0D1BEB793E001D4245 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
-		1EFFAE161BEC4E50001D4245 /* interface_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = interface_list.plist; sourceTree = "<group>"; };
 		1EFFAE181BEC834B001D4245 /* ActivityFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityFilterView.h; sourceTree = "<group>"; };
 		1EFFAE191BEC834B001D4245 /* ActivityFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityFilterView.m; sourceTree = "<group>"; };
 		1EFFAE1B1BEC8364001D4245 /* ActivityFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityFilterView.xib; sourceTree = "<group>"; };
 		1EFFAE201BEC9EE3001D4245 /* ActivityFilterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityFilterModel.h; sourceTree = "<group>"; };
 		1EFFAE211BEC9EE3001D4245 /* ActivityFilterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityFilterModel.m; sourceTree = "<group>"; };
+		8F6513941BFC96B9003BE006 /* KTCActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCActionView.h; sourceTree = "<group>"; };
+		8F6513951BFC96B9003BE006 /* KTCActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCActionView.m; sourceTree = "<group>"; };
+		8F8A08CD1BF9DE5000134A9A /* interface_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = interface_list.plist; sourceTree = "<group>"; };
+		8F8A08CF1BF9E31300134A9A /* BindPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindPhoneViewController.h; sourceTree = "<group>"; };
+		8F8A08D01BF9E31300134A9A /* BindPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindPhoneViewController.m; sourceTree = "<group>"; };
+		8F8A08D11BF9E31300134A9A /* BindPhoneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindPhoneViewController.xib; sourceTree = "<group>"; };
 		8F9996001BF5A6740055F016 /* WeChatModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeChatModel.h; sourceTree = "<group>"; };
 		8F9996011BF5A6740055F016 /* WeChatModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeChatModel.m; sourceTree = "<group>"; };
-		8F9996021BF5A6740055F016 /* WeiboLoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboLoginManager.h; sourceTree = "<group>"; };
-		8F9996031BF5A6740055F016 /* WeiboLoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboLoginManager.m; sourceTree = "<group>"; };
 		8F9996061BF5BE590055F016 /* KTCUserRole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCUserRole.h; sourceTree = "<group>"; };
 		8F9996071BF5BE590055F016 /* KTCUserRole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCUserRole.m; sourceTree = "<group>"; };
 		8F9996121BF5E6560055F016 /* ChangeNickNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeNickNameViewController.h; sourceTree = "<group>"; };
@@ -2232,6 +2242,15 @@
 		8F9996171BF5E66C0055F016 /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
 		8F9996181BF5E66C0055F016 /* ChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewController.m; sourceTree = "<group>"; };
 		8F9996191BF5E66C0055F016 /* ChangePasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangePasswordViewController.xib; sourceTree = "<group>"; };
+		8F9EA6AE1BF9A6B400062E91 /* WeiboManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboManager.h; sourceTree = "<group>"; };
+		8F9EA6AF1BF9A6B400062E91 /* WeiboManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboManager.m; sourceTree = "<group>"; };
+		8F9EA6B11BF9A72B00062E91 /* ThirdPartyLoginService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdPartyLoginService.h; sourceTree = "<group>"; };
+		8F9EA6B21BF9A72B00062E91 /* ThirdPartyLoginService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdPartyLoginService.m; sourceTree = "<group>"; };
+		8F9EA6B41BF9AE7100062E91 /* WeChatManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeChatManager.h; sourceTree = "<group>"; };
+		8F9EA6B51BF9AE7100062E91 /* WeChatManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeChatManager.m; sourceTree = "<group>"; };
+		8F9EA6B71BF9B7C500062E91 /* TencentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TencentManager.h; sourceTree = "<group>"; };
+		8F9EA6B81BF9B7C500062E91 /* TencentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TencentManager.m; sourceTree = "<group>"; };
+		8FEFF4F71BFCC54F001C098F /* KTCActionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTCActionView.xib; sourceTree = "<group>"; };
 		8FF57C0C1BF5EE56006867D2 /* ImageTrimViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTrimViewController.h; sourceTree = "<group>"; };
 		8FF57C0D1BF5EE56006867D2 /* ImageTrimViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageTrimViewController.m; sourceTree = "<group>"; };
 		8FF57C0E1BF5EE56006867D2 /* ImageTrimViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageTrimViewController.xib; sourceTree = "<group>"; };
@@ -2539,6 +2558,9 @@
 				1E7995631BCBCB480099CFF9 /* AddressSelectTableViewCell.xib */,
 				1E15F9B41BE22512000C74E7 /* AUIKeyboardAdhesiveView.h */,
 				1E15F9B51BE22512000C74E7 /* AUIKeyboardAdhesiveView.m */,
+				8F6513941BFC96B9003BE006 /* KTCActionView.h */,
+				8F6513951BFC96B9003BE006 /* KTCActionView.m */,
+				8FEFF4F71BFCC54F001C098F /* KTCActionView.xib */,
 			);
 			path = SelfDefine;
 			sourceTree = "<group>";
@@ -2916,7 +2938,7 @@
 		1E3D7E781B4BD83D00275C35 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				1EFFAE161BEC4E50001D4245 /* interface_list.plist */,
+				8F8A08CD1BF9DE5000134A9A /* interface_list.plist */,
 				1E943EBD1B7375F60029FE74 /* Area.plist */,
 				1E0B7B591B709A2100A58AD4 /* Category.plist */,
 				1E3D7E791B4BD83D00275C35 /* Info.plist */,
@@ -2959,6 +2981,7 @@
 		1E3D87FA1B4BF49F00275C35 /* LogicFramework */ = {
 			isa = PBXGroup;
 			children = (
+				8F9EA6AD1BF9A60C00062E91 /* Login */,
 				8F9995FF1BF5A6740055F016 /* Social */,
 				1E827CB01B9457D8008F3F08 /* ImageUpload */,
 				1E827B571B8DD612008F3F08 /* Map */,
@@ -4449,6 +4472,9 @@
 				1E0B77AA1B68D60B00A58AD4 /* LoginViewController.h */,
 				1E0B77AB1B68D60B00A58AD4 /* LoginViewController.m */,
 				1E0B77AC1B68D60B00A58AD4 /* LoginViewController.xib */,
+				8F8A08CF1BF9E31300134A9A /* BindPhoneViewController.h */,
+				8F8A08D01BF9E31300134A9A /* BindPhoneViewController.m */,
+				8F8A08D11BF9E31300134A9A /* BindPhoneViewController.xib */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -4960,10 +4986,23 @@
 			children = (
 				8F9996001BF5A6740055F016 /* WeChatModel.h */,
 				8F9996011BF5A6740055F016 /* WeChatModel.m */,
-				8F9996021BF5A6740055F016 /* WeiboLoginManager.h */,
-				8F9996031BF5A6740055F016 /* WeiboLoginManager.m */,
+				8F9EA6B71BF9B7C500062E91 /* TencentManager.h */,
+				8F9EA6B81BF9B7C500062E91 /* TencentManager.m */,
+				8F9EA6AE1BF9A6B400062E91 /* WeiboManager.h */,
+				8F9EA6AF1BF9A6B400062E91 /* WeiboManager.m */,
+				8F9EA6B41BF9AE7100062E91 /* WeChatManager.h */,
+				8F9EA6B51BF9AE7100062E91 /* WeChatManager.m */,
 			);
 			path = Social;
+			sourceTree = "<group>";
+		};
+		8F9EA6AD1BF9A60C00062E91 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				8F9EA6B11BF9A72B00062E91 /* ThirdPartyLoginService.h */,
+				8F9EA6B21BF9A72B00062E91 /* ThirdPartyLoginService.m */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -5121,11 +5160,11 @@
 				1E3D8DA31B4BF4A100275C35 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				1E0B77AE1B68D60B00A58AD4 /* LoginViewController.xib in Resources */,
 				1E943F7B1B831AB60029FE74 /* StoreListViewController.xib in Resources */,
+				8F8A08CE1BF9DE5000134A9A /* interface_list.plist in Resources */,
 				1EC73C0F1B5F6168008B39EA /* HomeViewTwinklingElfCell.xib in Resources */,
 				1E943F4F1B7DDFDF0029FE74 /* loadingBg_828_1472.png in Resources */,
 				1EA8B6EA1B66253200F90688 /* CategoryViewController.xib in Resources */,
 				1EC4A1241B5D248300206BB9 /* KTCSearchResultViewController.xib in Resources */,
-				1EFFAE171BEC4E50001D4245 /* interface_list.plist in Resources */,
 				1EC4A0F41B5A4C8600206BB9 /* FavourateView.xib in Resources */,
 				1E15F9CD1BE8A075000C74E7 /* SoftwareSettingView.xib in Resources */,
 				1E943F5D1B7DE67B0029FE74 /* logo_640_1136.png in Resources */,
@@ -5172,6 +5211,7 @@
 				1E827BE81B941337008F3F08 /* UIBarButtonItemGrid.png in Resources */,
 				1E827BD71B941337008F3F08 /* ImageSelectedSmallOff@2x.png in Resources */,
 				1EA8B6A31B63367D00F90688 /* SettlementBottomView.xib in Resources */,
+				8F8A08D31BF9E31300134A9A /* BindPhoneViewController.xib in Resources */,
 				1EC73C641B61164A008B39EA /* SettlementView.xib in Resources */,
 				1E15F98E1BDF2B32000C74E7 /* StoreDetailServiceLinearCell.xib in Resources */,
 				1E827BE41B941337008F3F08 /* UIBarButtonItemArrowLeft@3x.png in Resources */,
@@ -5277,6 +5317,7 @@
 				1EC4A11F1B5D039000206BB9 /* KTCSearchResultView.xib in Resources */,
 				1E827BDE1B941337008F3F08 /* PlayButtonOverlayLarge@3x.png in Resources */,
 				1E827BE61B941337008F3F08 /* UIBarButtonItemArrowRight@2x.png in Resources */,
+				8FEFF4F81BFCC54F001C098F /* KTCActionView.xib in Resources */,
 				1E943F111B7B5B850029FE74 /* OrderDetailConsumptionCodeCell.xib in Resources */,
 				1E3D8F311B4CD3EC00275C35 /* ParentingStrategyViewController.xib in Resources */,
 			);
@@ -5382,6 +5423,7 @@
 				1E0B7AB11B6F67B800A58AD4 /* GScrollPageView.m in Sources */,
 				1E0B7AEB1B6F693000A58AD4 /* ZoomViewController.m in Sources */,
 				1E3D8D501B4BF4A100275C35 /* GPageCache.m in Sources */,
+				8F9EA6B01BF9A6B400062E91 /* WeiboManager.m in Sources */,
 				1E3D8CE01B4BF4A100275C35 /* IcsonCategories.m in Sources */,
 				1E3D8D7C1B4BF4A100275C35 /* AFURLResponseSerialization.m in Sources */,
 				1E1CFA211BD72F4C0005653D /* ServiceDetailMoreInfoView.m in Sources */,
@@ -5422,6 +5464,7 @@
 				1E98D36A1B84912C00EDD81D /* SettlementViewModel.m in Sources */,
 				1E0B7ACD1B6F67B800A58AD4 /* UIAlertView+Blocks.m in Sources */,
 				1E3D8D841B4BF4A100275C35 /* ASIDataDecompressor.m in Sources */,
+				8F6513961BFC96B9003BE006 /* KTCActionView.m in Sources */,
 				1E79954C1BC8F2BB0099CFF9 /* HomeImageNewsCellModel.m in Sources */,
 				1E3D8DAA1B4BF4A100275C35 /* NSString+MD5Addition.m in Sources */,
 				1EA8B6D61B660BBF00F90688 /* CategoryViewCellLayout.m in Sources */,
@@ -5599,6 +5642,7 @@
 				1E7995331BC7BD5D0099CFF9 /* HomeFloorModel.m in Sources */,
 				1E3D8F571B4D1D4D00275C35 /* UserCenterView.m in Sources */,
 				1E15F9B61BE22512000C74E7 /* AUIKeyboardAdhesiveView.m in Sources */,
+				8F9EA6B91BF9B7C500062E91 /* TencentManager.m in Sources */,
 				1EC73C591B611289008B39EA /* ParentingStrategyFilterView.m in Sources */,
 				1E3D8CDD1B4BF4A100275C35 /* IcsonProvince.m in Sources */,
 				1E3D8DAC1B4BF4A100275C35 /* RemindManager.m in Sources */,
@@ -5648,6 +5692,7 @@
 				1E827BA41B9412C6008F3F08 /* MWGridViewController.m in Sources */,
 				1EFFAE221BEC9EE3001D4245 /* ActivityFilterModel.m in Sources */,
 				1E3D8DA71B4BF4A100275C35 /* NSData+Json.m in Sources */,
+				8F8A08D21BF9E31300134A9A /* BindPhoneViewController.m in Sources */,
 				1E0B77FD1B6F303D00A58AD4 /* KTCSearchAreaFilterView.m in Sources */,
 				1E3D8D751B4BF4A100275C35 /* AFHTTPRequestOperation.m in Sources */,
 				1E3D8DA81B4BF4A100275C35 /* NSDate+HttpDate.m in Sources */,
@@ -5728,11 +5773,11 @@
 				1E0B7AD01B6F67B800A58AD4 /* UIView+GViewExtension.m in Sources */,
 				1E7995B11BCF6BB50099CFF9 /* NewsTagItemModel.m in Sources */,
 				1E8EFD0A1B687D4200D00808 /* CommentListViewController.m in Sources */,
+				8F9EA6B61BF9AE7100062E91 /* WeChatManager.m in Sources */,
 				1E0B7B3D1B6F849600A58AD4 /* FeedbackImgUploadManager.m in Sources */,
 				1E0B7A941B6F67B800A58AD4 /* GCheckCell.m in Sources */,
 				8F9996151BF5E6560055F016 /* ChangeNickNameViewController.m in Sources */,
 				1E3D8D4A1B4BF4A100275C35 /* DDMultiFormatter.m in Sources */,
-				8F9996051BF5A6740055F016 /* WeiboLoginManager.m in Sources */,
 				1EC4A10D1B5CCCFF00206BB9 /* KTCSearchHistoryView.m in Sources */,
 				1E3D8CDC1B4BF4A100275C35 /* IcsonCounty.m in Sources */,
 				1E80170D1BB006EF00B6C352 /* HomeViewNewsCell.m in Sources */,
@@ -5812,6 +5857,7 @@
 				1EC73C681B61186E008B39EA /* SettlementPayTypeCell.m in Sources */,
 				1E3D8D971B4BF4A100275C35 /* MJRefreshGifFooter.m in Sources */,
 				1E3D8D831B4BF4A100275C35 /* ASIDataCompressor.m in Sources */,
+				8F9EA6B31BF9A72B00062E91 /* ThirdPartyLoginService.m in Sources */,
 				1E943E951B71E7CD0029FE74 /* GVisitCategory.m in Sources */,
 				1E3D8F621B4D1DFE00275C35 /* OrderListViewController.m in Sources */,
 				1E0B7B6F1B70BDFA00A58AD4 /* SearchViewModel.m in Sources */,

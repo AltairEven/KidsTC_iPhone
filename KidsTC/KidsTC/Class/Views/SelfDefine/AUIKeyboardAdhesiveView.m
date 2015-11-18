@@ -7,6 +7,9 @@
 //
 
 #import "AUIKeyboardAdhesiveView.h"
+
+#define MaxLength (1000)
+
 @interface AUIKeyboardAdhesiveView () <UITextViewDelegate>
 
 @property (nonatomic, strong) UILabel *textLimitCountLabel;
@@ -60,7 +63,7 @@
 
 - (void)setTextLimitLength:(NSUInteger)textLimitLength {
     _textLimitLength = textLimitLength;
-    [self hideTextLimit:(textLimitLength == INT64_MAX || textLimitLength == 0) ? YES : NO];
+    [self hideTextLimit:(textLimitLength == MaxLength || textLimitLength == 0) ? YES : NO];
     self.leftTextInputCount = textLimitLength;
 }
 
@@ -191,7 +194,7 @@
     [self.textView setFont:[UIFont systemFontOfSize:15]];
     [self addSubview:self.textView];
     
-    self.textLimitLength = INT64_MAX;
+    self.textLimitLength = MaxLength;
 }
 
 - (void)buildExtensionViewWithType:(AUIKeyboardAdhesiveViewExtensionFunctionType)type {

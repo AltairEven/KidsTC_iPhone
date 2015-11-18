@@ -584,7 +584,7 @@ NSInteger sortImageDictionaryWithIdx(id v1, id v2, void *context)
         }
         else if([[[error userInfo] objectForKey: @"returnData"] isKindOfClass:[NSDictionary class]])
         {
-            msgStr = [[[error userInfo] objectForKey: @"returnData"] objectForKey:@"errMsg"];
+            msgStr = [[[error userInfo] objectForKey: @"returnData"] objectForKey:kErrMsgKey];
         }
 		return msgStr;
 	}

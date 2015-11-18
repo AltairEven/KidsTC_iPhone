@@ -246,12 +246,12 @@
         }
         /*
         if([responseObject objectForKey:@"data"] == nil){
-            NSError *error = [NSError errorWithDomain:@"Http request client." code:-303 userInfo:@{@"errMsg":@"responseObject data nil."}];
+            NSError *error = [NSError errorWithDomain:@"Http request client." code:-303 userInfo:@{kErrMsgKey:@"responseObject data nil."}];
             failure(weakSelf, error);
             return ;
         }
         if([responseObject objectForKey:@"data"] == NULL){
-            NSError *error = [NSError errorWithDomain:@"Http request client." code:-304 userInfo:@{@"errMsg":@"responseObject data NULL."}];
+            NSError *error = [NSError errorWithDomain:@"Http request client." code:-304 userInfo:@{kErrMsgKey:@"responseObject data NULL."}];
             failure(weakSelf, error);
             return ;
         }
@@ -413,12 +413,12 @@
         }
         /*
          if([responseObject objectForKey:@"data"] == nil){
-         NSError *error = [NSError errorWithDomain:@"Http request client." code:-303 userInfo:@{@"errMsg":@"responseObject data nil."}];
+         NSError *error = [NSError errorWithDomain:@"Http request client." code:-303 userInfo:@{kErrMsgKey:@"responseObject data nil."}];
          failure(weakSelf, error);
          return ;
          }
          if([responseObject objectForKey:@"data"] == NULL){
-         NSError *error = [NSError errorWithDomain:@"Http request client." code:-304 userInfo:@{@"errMsg":@"responseObject data NULL."}];
+         NSError *error = [NSError errorWithDomain:@"Http request client." code:-304 userInfo:@{kErrMsgKey:@"responseObject data NULL."}];
          failure(weakSelf, error);
          return ;
          }

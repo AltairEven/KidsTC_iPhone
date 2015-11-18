@@ -323,7 +323,7 @@
 }
 + (NSString *)appID
 {
-    return kWeChatAppID;
+    return @"";
 }
 + (NSString *)appKey
 {

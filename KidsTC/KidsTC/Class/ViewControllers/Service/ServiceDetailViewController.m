@@ -16,9 +16,11 @@
 #import "CommentListViewController.h"
 #import "ServiceDetailConfirmView.h"
 #import "KTCWebViewController.h"
+#import "KTCActionView.h"
+#import "WeiboManager.h"
 
 
-@interface ServiceDetailViewController () <ServiceDetailViewDelegate, ServiceDetailBottomViewDelegate, ServiceDetailConfirmViewDelegate>
+@interface ServiceDetailViewController () <ServiceDetailViewDelegate, ServiceDetailBottomViewDelegate, ServiceDetailConfirmViewDelegate, KTCActionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *detailBGView;
 @property (weak, nonatomic) IBOutlet ServiceDetailView *detailView;
@@ -36,6 +38,8 @@
 - (void)setupBottomView;
 
 - (void)goSettlement;
+
+- (void)showActionView;
 
 @end
 
@@ -67,6 +71,8 @@
     [self.viewModel setNetErrorBlock:^(NSError *error) {
         [weakSelf showConnectError:YES];
     }];
+    
+    [self setupRightBarButton:@"。。。" target:self action:@selector(showActionView) frontImage:nil andBackImage:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -84,6 +90,7 @@
     [super viewWillDisappear:animated];
     [[GAlertLoadingView sharedAlertLoadingView] hide];
     [self.viewModel stopUpdateData];
+    [[KTCActionView actionView] hide];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -148,6 +155,34 @@
     } target:self];
 }
 
+#pragma mark KTCActionViewDelegate
+
+- (void)actionViewDidClickedWithTag:(KTCActionViewTag)tag {
+    switch (tag) {
+        case KTCActionViewTagHome:
+        {
+            
+        }
+            break;
+        case KTCActionViewTagSearch:
+        {
+            
+        }
+            break;
+        case KTCActionViewTagShare:
+        {
+            [[WeiboManager sharedManager] sendShareRequestWithContentTag:@"测试分享" imgae:[UIImage imageNamed:@"shared_n"] linkUrlString:nil succeed:^(NSString *token) {
+                
+            } failure:^(NSError *error) {
+                
+            }];
+        }
+            break;
+        default:
+            break;
+    }
+}
+
 #pragma mark Private methods
 
 - (void)loadConfirmView {
@@ -170,6 +205,16 @@
         [controller setHidesBottomBarWhenPushed:YES];
         [self.navigationController pushViewController:controller animated:YES];
     } target:self];
+}
+
+- (void)showActionView {
+    if ([[KTCActionView actionView] isShowing]) {
+        [[KTCActionView actionView] hide];
+        [[KTCActionView actionView] setDelegate:nil];
+    } else {
+        [[KTCActionView actionView] showInViewController:self];
+        [[KTCActionView actionView] setDelegate:self];
+    }
 }
 
 #pragma mark Super method

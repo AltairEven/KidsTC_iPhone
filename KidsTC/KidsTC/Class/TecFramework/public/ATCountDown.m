@@ -9,12 +9,15 @@
 #import "ATCountDown.h"
 
 typedef void (^ currentLeftTimeBlock) (NSTimeInterval);
+typedef void (^ completionBlock) ();
 
 @interface ATCountDown ()
 
 @property (nonatomic, strong) dispatch_source_t countdownTimer;
 
 @property (nonatomic, strong) currentLeftTimeBlock currentBlock;
+
+@property (nonatomic, strong) completionBlock completionBlock;
 
 - (void)startCountDownTimer;
 
@@ -36,6 +39,13 @@ typedef void (^ currentLeftTimeBlock) (NSTimeInterval);
 
 - (void)startCountDownWithCurrentTimeLeft:(void (^)(NSTimeInterval))currentBlock {
     self.currentBlock = currentBlock;
+    [self stopCountDown];
+    [self startCountDownTimer];
+}
+
+- (void)startCountDownWithCurrentTimeLeft:(void (^)(NSTimeInterval))currentBlock completion:(void (^)())completion {
+    self.currentBlock = currentBlock;
+    self.completionBlock = completion;
     [self stopCountDown];
     [self startCountDownTimer];
 }
@@ -66,6 +76,13 @@ typedef void (^ currentLeftTimeBlock) (NSTimeInterval);
         time --;
         if (time <= 0) {
             [weakSelf stopCountDown];
+            if (weakSelf.completionBlock) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    weakSelf.completionBlock();
+                    weakSelf.completionBlock = nil;
+                });
+                weakSelf.currentBlock = nil;
+            }
         }
         _leftTime = time;
         if (weakSelf.currentBlock) {
