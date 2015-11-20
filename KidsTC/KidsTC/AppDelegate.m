@@ -79,7 +79,7 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
     [[HttpIcsonCookieManager sharedManager] setupCookies];
     
     // regist WeChat AppID
-    [[WeChatManager sharedManager] getOnline];
+    [WeChatManager sharedManager];
     
     [[KTCUser currentUser] checkLoginStatusFromServer];     // 这句话执行前的统计log，uid字段都为空
     

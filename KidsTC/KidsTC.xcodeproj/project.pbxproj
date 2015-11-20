@@ -807,6 +807,7 @@
 		1EFFAE1A1BEC834B001D4245 /* ActivityFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFFAE191BEC834B001D4245 /* ActivityFilterView.m */; };
 		1EFFAE1C1BEC8364001D4245 /* ActivityFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EFFAE1B1BEC8364001D4245 /* ActivityFilterView.xib */; };
 		1EFFAE221BEC9EE3001D4245 /* ActivityFilterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFFAE211BEC9EE3001D4245 /* ActivityFilterModel.m */; };
+		8F2C55BB1BFF167B00C2B6BF /* CommonShareService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2C55BA1BFF167B00C2B6BF /* CommonShareService.m */; };
 		8F6513961BFC96B9003BE006 /* KTCActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6513951BFC96B9003BE006 /* KTCActionView.m */; };
 		8F8A08CE1BF9DE5000134A9A /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F8A08CD1BF9DE5000134A9A /* interface_list.plist */; };
 		8F8A08D21BF9E31300134A9A /* BindPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8A08D01BF9E31300134A9A /* BindPhoneViewController.m */; };
@@ -821,6 +822,9 @@
 		8F9EA6B31BF9A72B00062E91 /* ThirdPartyLoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9EA6B21BF9A72B00062E91 /* ThirdPartyLoginService.m */; };
 		8F9EA6B61BF9AE7100062E91 /* WeChatManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9EA6B51BF9AE7100062E91 /* WeChatManager.m */; };
 		8F9EA6B91BF9B7C500062E91 /* TencentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9EA6B81BF9B7C500062E91 /* TencentManager.m */; };
+		8FAFABAB1BFF1EC600082F20 /* CommonShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FAFABA91BFF1EC600082F20 /* CommonShareViewController.m */; };
+		8FAFABAC1BFF1EC600082F20 /* CommonShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FAFABAA1BFF1EC600082F20 /* CommonShareViewController.xib */; };
+		8FAFABAF1BFF1F3200082F20 /* CommonShareObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FAFABAE1BFF1F3200082F20 /* CommonShareObject.m */; };
 		8FEFF4F81BFCC54F001C098F /* KTCActionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FEFF4F71BFCC54F001C098F /* KTCActionView.xib */; };
 		8FF57C0F1BF5EE56006867D2 /* ImageTrimViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF57C0D1BF5EE56006867D2 /* ImageTrimViewController.m */; };
 		8FF57C101BF5EE56006867D2 /* ImageTrimViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FF57C0E1BF5EE56006867D2 /* ImageTrimViewController.xib */; };
@@ -2226,6 +2230,8 @@
 		1EFFAE1B1BEC8364001D4245 /* ActivityFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityFilterView.xib; sourceTree = "<group>"; };
 		1EFFAE201BEC9EE3001D4245 /* ActivityFilterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityFilterModel.h; sourceTree = "<group>"; };
 		1EFFAE211BEC9EE3001D4245 /* ActivityFilterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityFilterModel.m; sourceTree = "<group>"; };
+		8F2C55B91BFF167B00C2B6BF /* CommonShareService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonShareService.h; sourceTree = "<group>"; };
+		8F2C55BA1BFF167B00C2B6BF /* CommonShareService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonShareService.m; sourceTree = "<group>"; };
 		8F6513941BFC96B9003BE006 /* KTCActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCActionView.h; sourceTree = "<group>"; };
 		8F6513951BFC96B9003BE006 /* KTCActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCActionView.m; sourceTree = "<group>"; };
 		8F8A08CD1BF9DE5000134A9A /* interface_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = interface_list.plist; sourceTree = "<group>"; };
@@ -2250,6 +2256,11 @@
 		8F9EA6B51BF9AE7100062E91 /* WeChatManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeChatManager.m; sourceTree = "<group>"; };
 		8F9EA6B71BF9B7C500062E91 /* TencentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TencentManager.h; sourceTree = "<group>"; };
 		8F9EA6B81BF9B7C500062E91 /* TencentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TencentManager.m; sourceTree = "<group>"; };
+		8FAFABA81BFF1EC600082F20 /* CommonShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonShareViewController.h; sourceTree = "<group>"; };
+		8FAFABA91BFF1EC600082F20 /* CommonShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonShareViewController.m; sourceTree = "<group>"; };
+		8FAFABAA1BFF1EC600082F20 /* CommonShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonShareViewController.xib; sourceTree = "<group>"; };
+		8FAFABAD1BFF1F3200082F20 /* CommonShareObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonShareObject.h; sourceTree = "<group>"; };
+		8FAFABAE1BFF1F3200082F20 /* CommonShareObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonShareObject.m; sourceTree = "<group>"; };
 		8FEFF4F71BFCC54F001C098F /* KTCActionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTCActionView.xib; sourceTree = "<group>"; };
 		8FF57C0C1BF5EE56006867D2 /* ImageTrimViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTrimViewController.h; sourceTree = "<group>"; };
 		8FF57C0D1BF5EE56006867D2 /* ImageTrimViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageTrimViewController.m; sourceTree = "<group>"; };
@@ -2981,6 +2992,7 @@
 		1E3D87FA1B4BF49F00275C35 /* LogicFramework */ = {
 			isa = PBXGroup;
 			children = (
+				8F2C55B81BFF163A00C2B6BF /* Share */,
 				8F9EA6AD1BF9A60C00062E91 /* Login */,
 				8F9995FF1BF5A6740055F016 /* Social */,
 				1E827CB01B9457D8008F3F08 /* ImageUpload */,
@@ -3617,6 +3629,9 @@
 				1EFFADF91BEAFB02001D4245 /* UserRoleSelectViewController.h */,
 				1EFFADFA1BEAFB02001D4245 /* UserRoleSelectViewController.m */,
 				1EFFADFB1BEAFB02001D4245 /* UserRoleSelectViewController.xib */,
+				8FAFABA81BFF1EC600082F20 /* CommonShareViewController.h */,
+				8FAFABA91BFF1EC600082F20 /* CommonShareViewController.m */,
+				8FAFABAA1BFF1EC600082F20 /* CommonShareViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -4981,6 +4996,17 @@
 			path = libWeiboSDK;
 			sourceTree = "<group>";
 		};
+		8F2C55B81BFF163A00C2B6BF /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				8F2C55B91BFF167B00C2B6BF /* CommonShareService.h */,
+				8F2C55BA1BFF167B00C2B6BF /* CommonShareService.m */,
+				8FAFABAD1BFF1F3200082F20 /* CommonShareObject.h */,
+				8FAFABAE1BFF1F3200082F20 /* CommonShareObject.m */,
+			);
+			path = Share;
+			sourceTree = "<group>";
+		};
 		8F9995FF1BF5A6740055F016 /* Social */ = {
 			isa = PBXGroup;
 			children = (
@@ -5142,6 +5168,7 @@
 				1E827BE01B941337008F3F08 /* PlayButtonOverlayLargeTap@2x.png in Resources */,
 				1E827BDC1B941337008F3F08 /* PlayButtonOverlayLarge.png in Resources */,
 				1EC73BEC1B5E5FF3008B39EA /* HomeViewThreeCell.xib in Resources */,
+				8FAFABAC1BFF1EC600082F20 /* CommonShareViewController.xib in Resources */,
 				1EC73C181B5F992E008B39EA /* home1.png in Resources */,
 				1E0B77FF1B6F32D300A58AD4 /* KTCSearchAreaFilterView.xib in Resources */,
 				1E7995581BCB96DF0099CFF9 /* ActivityViewController.xib in Resources */,
@@ -5516,6 +5543,7 @@
 				1E3D8CDB1B4BF4A100275C35 /* IcsonCountryAD.m in Sources */,
 				1E943E911B71E7CD0029FE74 /* GCommonFilterAttr.m in Sources */,
 				1EC73BD71B5E4854008B39EA /* HomeViewNormalTitleCell.m in Sources */,
+				8FAFABAF1BFF1F3200082F20 /* CommonShareObject.m in Sources */,
 				1EC73C0E1B5F6168008B39EA /* HomeViewTwinklingElfCell.m in Sources */,
 				1EA8B69E1B63265500F90688 /* SettlementModel.m in Sources */,
 				1E0B7A861B6F67B800A58AD4 /* CustomBadge.m in Sources */,
@@ -5829,6 +5857,7 @@
 				1E7995821BCDFCC70099CFF9 /* LoveHouseListViewController.m in Sources */,
 				1E3D8D901B4BF4A100275C35 /* ASICloudFilesRequest.m in Sources */,
 				1E15F9801BDE166B000C74E7 /* StoreDetailHotRecommendModel.m in Sources */,
+				8F2C55BB1BFF167B00C2B6BF /* CommonShareService.m in Sources */,
 				1E0B7AE91B6F693000A58AD4 /* PhotoItem.m in Sources */,
 				1E3D8D521B4BF4A100275C35 /* FMDatabase.m in Sources */,
 				1E15F9AC1BE1C16E000C74E7 /* CommentDetailViewModel.m in Sources */,
@@ -5878,6 +5907,7 @@
 				1E3D8F301B4CD3EC00275C35 /* ParentingStrategyViewController.m in Sources */,
 				1E827C9D1B94144E008F3F08 /* README.mdown in Sources */,
 				1E3D8D721B4BF4A100275C35 /* NSAttributedString+Attributes.m in Sources */,
+				8FAFABAB1BFF1EC600082F20 /* CommonShareViewController.m in Sources */,
 				1E7994E51BC634200099CFF9 /* ActivityView.m in Sources */,
 				1E15F9921BDF7777000C74E7 /* CommentDetailView.m in Sources */,
 				1E7995421BC8E52F0099CFF9 /* HomeViewCountDownMoreTitleCell.m in Sources */,

@@ -150,4 +150,6 @@ NSInteger sortImageDictionaryWithIdx(id v1, id v2, void *context);
 
 + (UIImage *)takeSnapshotForView:(UIView *)view;
 
++ (NSUInteger)byteCountOfImage:(UIImage *)image;
+
 @end

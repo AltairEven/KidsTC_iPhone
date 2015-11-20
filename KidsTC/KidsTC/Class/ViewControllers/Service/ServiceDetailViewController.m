@@ -17,7 +17,7 @@
 #import "ServiceDetailConfirmView.h"
 #import "KTCWebViewController.h"
 #import "KTCActionView.h"
-#import "WeiboManager.h"
+#import "CommonShareViewController.h"
 
 
 @interface ServiceDetailViewController () <ServiceDetailViewDelegate, ServiceDetailBottomViewDelegate, ServiceDetailConfirmViewDelegate, KTCActionViewDelegate>
@@ -161,21 +161,57 @@
     switch (tag) {
         case KTCActionViewTagHome:
         {
-            
+//            TencentImageShareObject *obj = [TencentImageShareObject imageShareObjectWithTitle:self.viewModel.detailModel.serviceName shareDescription:[NSString stringWithFormat:@"【童成网】推荐：%@", self.viewModel.detailModel.serviceName] shareImage:[UIImage imageNamed:@"placeholder_200_200"] thumbImage:[UIImage imageNamed:@"placeholder_200_200"]];
+////            TencentWebPageShareObject *obj = [TencentWebPageShareObject webPageShareObjectWithTitle:self.viewModel.detailModel.serviceName shareDescription:[NSString stringWithFormat:@"【童成网】推荐：%@", self.viewModel.detailModel.serviceName] pageUrlString:@"www.baidu.com" thumbImage:[UIImage imageNamed:@"userCenter_defaultFace"] thumbImageUrlString:nil];
+//            
+//            [[TencentManager sharedManager] sendShareRequestToScene:TencentShareSceneQZone WithObject:obj succeed:^{
+//                [[iToast makeText:@"分享成功"] show];
+//            } failure:^(NSError *error) {
+//                NSString *errMsg = [error.userInfo objectForKey:kErrMsgKey];
+//                if ([errMsg length] == 0) {
+//                    errMsg = @"分享失败";
+//                }
+//                [[iToast makeText:errMsg] show];
+//            }];
         }
             break;
         case KTCActionViewTagSearch:
         {
-            
+////            WeChatImageShareObject *obj = [WeChatImageShareObject imageShareObjectWithTitle:self.viewModel.detailModel.serviceName description:[NSString stringWithFormat:@"【童成网】推荐：%@", self.viewModel.detailModel.serviceName] thumbImage:[UIImage imageNamed:@"placeholder_200_200"] shareImage:nil shareImageUrlString:[(NSURL *)[self.viewModel.detailModel.imageUrls firstObject] absoluteString]];
+//            
+//            WeChatWebPageShareObject *obj = [WeChatWebPageShareObject webPageShareObjectWithTitle:self.viewModel.detailModel.serviceName description:[NSString stringWithFormat:@"【童成网】推荐：%@", self.viewModel.detailModel.serviceName] thumbImage:[UIImage imageNamed:@"userCenter_defaultFace"] webPageUrlString:@"www.baidu.com"];
+//            
+//            [[WeChatManager sharedManager] sendShareRequestToScene:WechatShareSceneSession WithObject:obj succeed:^{
+//                [[iToast makeText:@"分享成功"] show];
+//            } failure:^(NSError *error) {
+//                NSString *errMsg = [error.userInfo objectForKey:kErrMsgKey];
+//                if ([errMsg length] == 0) {
+//                    errMsg = @"分享失败";
+//                }
+//                [[iToast makeText:errMsg] show];
+//            }];
         }
             break;
         case KTCActionViewTagShare:
         {
-            [[WeiboManager sharedManager] sendShareRequestWithContentTag:@"测试分享" imgae:[UIImage imageNamed:@"shared_n"] linkUrlString:nil succeed:^(NSString *token) {
-                
-            } failure:^(NSError *error) {
-                
-            }];
+//            WeiboImageShareObject *obj = [WeiboImageShareObject imageShareObjectWithFollowingContent:@"【童成网】" image:[UIImage imageNamed:@"userCenter_bg"]];
+////            WeiboWebPageShareObject *obj = [WeiboWebPageShareObject webPageShareObjectWithFollowingContent:@"【童成网】" identifier:self.serviceId title:self.viewModel.detailModel.serviceName urlString:@"www.baidu.com" ];
+////            obj.thumbnailImage = [UIImage imageNamed:@"userCenter_defaultFace"];
+////            obj.pageDescription = @"页面描述";
+//            
+//            [[WeiboManager sharedManager] sendShareRequestWithObject:obj succeed:^{
+//                [[iToast makeText:@"分享成功"] show];
+//            } failure:^(NSError *error) {
+//                NSString *errMsg = [error.userInfo objectForKey:kErrMsgKey];
+//                if ([errMsg length] == 0) {
+//                    errMsg = @"分享失败";
+//                }
+//                [[iToast makeText:errMsg] show];
+//            }];
+            
+            CommonShareViewController *controller = [CommonShareViewController instanceWithShareObject:nil];
+            
+            [self presentViewController:controller animated:YES completion:nil] ;
         }
             break;
         default:

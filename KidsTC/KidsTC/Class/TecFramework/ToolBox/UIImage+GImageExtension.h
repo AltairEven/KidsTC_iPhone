@@ -19,5 +19,6 @@ CGFloat RadiansToDegrees(CGFloat radians);
 - (UIImage *)imageRotatedByRadians:(CGFloat)radians;
 - (UIImage *)imageRotatedByDegrees:(CGFloat)degrees;
 + (UIImage *)imageWithColor:(UIColor *)color;
+- (UIImage *)grayImage;
 
 @end

@@ -303,162 +303,167 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     HomeSectionModel *model = [self.totalSectionModels objectAtIndex:indexPath.section];
-    if (model.hasTitle && indexPath.row == 0) {
-        switch (model.titleModel.type) {
-            case HomeTitleCellTypeNormalTitle:
-            {
-                HomeViewNormalTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:kNormalTitleCellIdentifier];
-                if (!cell) {
-                    cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewNormalTitleCell" owner:nil options:nil] objectAtIndex:0];
+    NSUInteger itemIndex = 0;
+    if (model.hasTitle) {
+        if (indexPath.row == 0) {
+            switch (model.titleModel.type) {
+                case HomeTitleCellTypeNormalTitle:
+                {
+                    HomeViewNormalTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:kNormalTitleCellIdentifier];
+                    if (!cell) {
+                        cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewNormalTitleCell" owner:nil options:nil] objectAtIndex:0];
+                    }
+                    [cell configWithModel:(HomeNormalTitleCellModel *)model.titleModel];
+                    return cell;
                 }
-                [cell configWithModel:(HomeNormalTitleCellModel *)model.titleModel];
-                return cell;
-            }
-                break;
-            case HomeTitleCellTypeCountDownTitle:
-            {
-                HomeViewCountDownTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:kCountDownTitleCellIdentifier];
-                if (!cell) {
-                    cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewCountDownTitleCell" owner:nil options:nil] objectAtIndex:0];
+                    break;
+                case HomeTitleCellTypeCountDownTitle:
+                {
+                    HomeViewCountDownTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:kCountDownTitleCellIdentifier];
+                    if (!cell) {
+                        cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewCountDownTitleCell" owner:nil options:nil] objectAtIndex:0];
+                    }
+                    [cell configWithModel:(HomeCountDownTitleCellModel *)model.titleModel];
+                    return cell;
                 }
-                [cell configWithModel:(HomeCountDownTitleCellModel *)model.titleModel];
-                return cell;
-            }
-                break;
-            case HomeTitleCellTypeMoreTitle:
-            {
-                HomeViewMoreTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:kMoreTitleCellIdentifier];
-                if (!cell) {
-                    cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewMoreTitleCell" owner:nil options:nil] objectAtIndex:0];
+                    break;
+                case HomeTitleCellTypeMoreTitle:
+                {
+                    HomeViewMoreTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:kMoreTitleCellIdentifier];
+                    if (!cell) {
+                        cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewMoreTitleCell" owner:nil options:nil] objectAtIndex:0];
+                    }
+                    [cell configWithModel:(HomeMoreTitleCellModel *)model.titleModel];
+                    return cell;
                 }
-                [cell configWithModel:(HomeMoreTitleCellModel *)model.titleModel];
-                return cell;
-            }
-                break;
-            case HomeTitleCellTypeCountDownMoreTitle:
-            {
-                HomeViewCountDownMoreTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:kMoreTitleCellIdentifier];
-                if (!cell) {
-                    cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewCountDownMoreTitleCell" owner:nil options:nil] objectAtIndex:0];
+                    break;
+                case HomeTitleCellTypeCountDownMoreTitle:
+                {
+                    HomeViewCountDownMoreTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:kMoreTitleCellIdentifier];
+                    if (!cell) {
+                        cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewCountDownMoreTitleCell" owner:nil options:nil] objectAtIndex:0];
+                    }
+                    [cell configWithModel:(HomeCountDownMoreTitleCellModel *)model.titleModel];
+                    return cell;
                 }
-                [cell configWithModel:(HomeCountDownMoreTitleCellModel *)model.titleModel];
-                return cell;
+                    break;
+                default:
+                    break;
             }
-                break;
-            default:
-                break;
+        } else {
+            itemIndex = indexPath.row - 1;
         }
-    } else {
-        HomeContentCellModel *contentModel = model.contentModel;
-        switch (contentModel.type) {
-            case HomeContentCellTypeBanner:
-            {
-                HomeViewBannerCell *cell = [tableView dequeueReusableCellWithIdentifier:kBannerCellIdentifier];
-                if (!cell) {
-                    cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewBannerCell" owner:nil options:nil] objectAtIndex:0];
-                }
-                [cell configWithModel:(HomeBannerCellModel *)contentModel];
-                cell.indexPath = indexPath;
-                cell.delegate = self;
-                return cell;
+    }
+    
+    HomeContentCellModel *contentModel = model.contentModel;
+    switch (contentModel.type) {
+        case HomeContentCellTypeBanner:
+        {
+            HomeViewBannerCell *cell = [tableView dequeueReusableCellWithIdentifier:kBannerCellIdentifier];
+            if (!cell) {
+                cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewBannerCell" owner:nil options:nil] objectAtIndex:0];
             }
-                break;
-            case HomeContentCellTypeTwinklingElf:
-            {
-                HomeViewTwinklingElfCell *cell = [tableView dequeueReusableCellWithIdentifier:kTwinklingElfCellIdentifier];
-                if (!cell) {
-                    cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewTwinklingElfCell" owner:nil options:nil] objectAtIndex:0];
-                }
-                
-                [cell configWithModel:(HomeTwinklingElfCellModel *)contentModel];
-                cell.indexPath = indexPath;
-                cell.delegate = self;
-                return cell;
-            }
-                break;
-            case HomeContentCellTypeHorizontalList:
-            {
-                HomeViewHorizontalListCell *cell = [tableView dequeueReusableCellWithIdentifier:kHorizontalListCellIdentifier];
-                if (!cell) {
-                    cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewHorizontalListCell" owner:nil options:nil] objectAtIndex:0];
-                }
-                [cell configWithModel:(HomeHorizontalListCellModel *)contentModel];
-                cell.indexPath = indexPath;
-                cell.delegate = self;
-                return cell;
-            }
-                break;
-            case HomeContentCellTypeThree:
-            {
-                HomeViewThreeCell *cell = [tableView dequeueReusableCellWithIdentifier:kThreeCellIdentifier];
-                if (!cell) {
-                    cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewThreeCell" owner:nil options:nil] objectAtIndex:0];
-                }
-                [cell configWithModel:(HomeThreeCellModel *)contentModel];
-                cell.indexPath = indexPath;
-                cell.delegate = self;
-                return cell;
-            }
-                break;
-            case HomeContentCellTypeTwoColumn:
-            {
-                HomeViewThemeCell *cell = [tableView dequeueReusableCellWithIdentifier:kThemeCellIdentifier];
-                if (!cell) {
-                    cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewThemeCell" owner:nil options:nil] objectAtIndex:0];
-                }
-                [cell configWithModel:(HomeTwoColumnCellModel *)contentModel];
-                cell.indexPath = indexPath;
-                cell.delegate = self;
-                return cell;
-            }
-                break;
-            case HomeContentCellTypeNews:
-            {
-                HomeViewNewsCell *cell = [tableView dequeueReusableCellWithIdentifier:kNewsCellIdentifier];
-                if (!cell) {
-                    cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewNewsCell" owner:nil options:nil] objectAtIndex:0];
-                }
-                [cell configWithModel:[((HomeNewsCellModel *)contentModel).elementsArray objectAtIndex:indexPath.row]];
-                cell.indexPath = indexPath;
-                return cell;
-            }
-                break;
-            case HomeContentCellTypeImageNews:
-            {
-                HomeViewImageNewsCell *cell = [tableView dequeueReusableCellWithIdentifier:kImageNewsCellIdentifier];
-                if (!cell) {
-                    cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewImageNewsCell" owner:nil options:nil] objectAtIndex:0];
-                }
-                [cell configWithModel:[((HomeImageNewsCellModel *)contentModel).elementsArray objectAtIndex:indexPath.row]];
-                cell.indexPath = indexPath;
-                return cell;
-            }
-                break;
-            case HomeContentCellTypeThreeImageNews:
-            {
-                HomeViewThreeImageNewsCell *cell = [tableView dequeueReusableCellWithIdentifier:kThreeImageNewsCellIdentifier];
-                if (!cell) {
-                    cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewThreeImageNewsCell" owner:nil options:nil] objectAtIndex:0];
-                }
-                [cell configWithModel:(HomeThreeImageNewsCellModel *)contentModel];
-                cell.indexPath = indexPath;
-                return cell;
-            }
-                break;
-            case HomeContentCellTypeWholeImageNews:
-            {
-                HomeViewWholeImageNewsCell *cell = [tableView dequeueReusableCellWithIdentifier:kWholeImageNewsCellIdentifier];
-                if (!cell) {
-                    cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewWholeImageNewsCell" owner:nil options:nil] objectAtIndex:0];
-                }
-                [cell configWithModel:(HomeWholeImageNewsCellModel *)contentModel];
-                cell.indexPath = indexPath;
-                return cell;
-            }
-                break;
-            default:
-                break;
+            [cell configWithModel:(HomeBannerCellModel *)contentModel];
+            cell.indexPath = indexPath;
+            cell.delegate = self;
+            return cell;
         }
+            break;
+        case HomeContentCellTypeTwinklingElf:
+        {
+            HomeViewTwinklingElfCell *cell = [tableView dequeueReusableCellWithIdentifier:kTwinklingElfCellIdentifier];
+            if (!cell) {
+                cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewTwinklingElfCell" owner:nil options:nil] objectAtIndex:0];
+            }
+            
+            [cell configWithModel:(HomeTwinklingElfCellModel *)contentModel];
+            cell.indexPath = indexPath;
+            cell.delegate = self;
+            return cell;
+        }
+            break;
+        case HomeContentCellTypeHorizontalList:
+        {
+            HomeViewHorizontalListCell *cell = [tableView dequeueReusableCellWithIdentifier:kHorizontalListCellIdentifier];
+            if (!cell) {
+                cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewHorizontalListCell" owner:nil options:nil] objectAtIndex:0];
+            }
+            [cell configWithModel:(HomeHorizontalListCellModel *)contentModel];
+            cell.indexPath = indexPath;
+            cell.delegate = self;
+            return cell;
+        }
+            break;
+        case HomeContentCellTypeThree:
+        {
+            HomeViewThreeCell *cell = [tableView dequeueReusableCellWithIdentifier:kThreeCellIdentifier];
+            if (!cell) {
+                cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewThreeCell" owner:nil options:nil] objectAtIndex:0];
+            }
+            [cell configWithModel:(HomeThreeCellModel *)contentModel];
+            cell.indexPath = indexPath;
+            cell.delegate = self;
+            return cell;
+        }
+            break;
+        case HomeContentCellTypeTwoColumn:
+        {
+            HomeViewThemeCell *cell = [tableView dequeueReusableCellWithIdentifier:kThemeCellIdentifier];
+            if (!cell) {
+                cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewThemeCell" owner:nil options:nil] objectAtIndex:0];
+            }
+            [cell configWithModel:(HomeTwoColumnCellModel *)contentModel];
+            cell.indexPath = indexPath;
+            cell.delegate = self;
+            return cell;
+        }
+            break;
+        case HomeContentCellTypeNews:
+        {
+            HomeViewNewsCell *cell = [tableView dequeueReusableCellWithIdentifier:kNewsCellIdentifier];
+            if (!cell) {
+                cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewNewsCell" owner:nil options:nil] objectAtIndex:0];
+            }
+            [cell configWithModel:[((HomeNewsCellModel *)contentModel).elementsArray objectAtIndex:itemIndex]];
+            cell.indexPath = indexPath;
+            return cell;
+        }
+            break;
+        case HomeContentCellTypeImageNews:
+        {
+            HomeViewImageNewsCell *cell = [tableView dequeueReusableCellWithIdentifier:kImageNewsCellIdentifier];
+            if (!cell) {
+                cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewImageNewsCell" owner:nil options:nil] objectAtIndex:0];
+            }
+            [cell configWithModel:[((HomeImageNewsCellModel *)contentModel).elementsArray objectAtIndex:itemIndex]];
+            cell.indexPath = indexPath;
+            return cell;
+        }
+            break;
+        case HomeContentCellTypeThreeImageNews:
+        {
+            HomeViewThreeImageNewsCell *cell = [tableView dequeueReusableCellWithIdentifier:kThreeImageNewsCellIdentifier];
+            if (!cell) {
+                cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewThreeImageNewsCell" owner:nil options:nil] objectAtIndex:0];
+            }
+            [cell configWithModel:(HomeThreeImageNewsCellModel *)contentModel];
+            cell.indexPath = indexPath;
+            return cell;
+        }
+            break;
+        case HomeContentCellTypeWholeImageNews:
+        {
+            HomeViewWholeImageNewsCell *cell = [tableView dequeueReusableCellWithIdentifier:kWholeImageNewsCellIdentifier];
+            if (!cell) {
+                cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewWholeImageNewsCell" owner:nil options:nil] objectAtIndex:0];
+            }
+            [cell configWithModel:(HomeWholeImageNewsCellModel *)contentModel];
+            cell.indexPath = indexPath;
+            return cell;
+        }
+            break;
+        default:
+            break;
     }
 
     return [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];

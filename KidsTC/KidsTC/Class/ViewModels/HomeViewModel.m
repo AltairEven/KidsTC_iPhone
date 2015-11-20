@@ -84,11 +84,13 @@ NSString *const kHomeViewDataFinishLoadingNotification = @"kHomeViewDataFinishLo
         [self.view reloadData];
     }
     [self.view endRefresh];
+    [self.view noMoreData:NO];
     [self.view hideLoadMoreFooter:NO];
 }
 
 - (void)loadHomeDataFailed:(NSError *)error {
     [self.view endRefresh];
+    [self.view noMoreData:YES];
     [self.view hideLoadMoreFooter:YES];
 }
 
@@ -153,10 +155,12 @@ NSString *const kHomeViewDataFinishLoadingNotification = @"kHomeViewDataFinishLo
     if (self.homeModel) {
         [self.view reloadData];
     }
+    [self.view noMoreData:NO];
     [self.view endLoadMore];
 }
 
 - (void)loadCustomerRecommendFailed:(NSError *)error {
+    [self.view noMoreData:YES];
     [self.view endLoadMore];
 }
 

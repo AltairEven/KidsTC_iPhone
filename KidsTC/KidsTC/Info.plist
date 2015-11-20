@@ -58,6 +58,7 @@
 		<string>mqqwpa</string>
 		<string>mqqOpensdkSSoLogin</string>
 		<string>mqzone</string>
+		<string>mqqapi</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

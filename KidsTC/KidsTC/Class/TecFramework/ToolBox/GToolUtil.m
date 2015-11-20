@@ -1145,4 +1145,19 @@ NSInteger sortImageDictionaryWithIdx(id v1, id v2, void *context)
     return image;
 }
 
++ (NSUInteger)byteCountOfImage:(UIImage *)image {
+    if (!image) {
+        return 0;
+    }
+    //累计内存占用
+    CGImageRef inImage = image.CGImage;
+    size_t pixelsWide = CGImageGetWidth(inImage); //获取横向的像素点的个数
+    size_t pixelsHigh = CGImageGetHeight(inImage);
+    
+    NSUInteger bitmapBytesPerRow    = (pixelsWide * 4); //每一行的像素点占用的字节数，每个像素点的ARGB四个通道各占8个bit(0-255)的空间
+    NSUInteger bitmapByteCount    = (bitmapBytesPerRow * pixelsHigh); //计算整张图占用的字节数
+    
+    return bitmapByteCount;
+}
+
 @end

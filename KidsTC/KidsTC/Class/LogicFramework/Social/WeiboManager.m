@@ -14,6 +14,7 @@ NSString *const kWeiboUrlScheme = @"wb2837514135";
 NSString *const kWeiboAppKey = @"2837514135";
 NSString *const kWeiboRedirectURL = @"https://api.weibo.com/oauth2/default.html";
 
+
 typedef void (^WeiboLoginSuccessBlock)(NSString *);
 typedef void (^WeiboLoginFailureBlock)(NSError *);
 
@@ -33,6 +34,8 @@ static WeiboManager *_sharedInstance = nil;
 @property (nonatomic, strong) WeiboShareFailureBlock shareFailureBlock;
 
 @property (nonatomic, strong) NSString *token;
+
++ (WBMessageObject *)messageObjectFromWeiboShareObject:(WeiboShareObject *)shareObject;
 
 + (WBAuthorizeRequest *)weiboAuthRequest;
 
@@ -83,6 +86,60 @@ static WeiboManager *_sharedInstance = nil;
 }
 
 #pragma mark Private methods
+
+
++ (WBMessageObject *)messageObjectFromWeiboShareObject:(WeiboShareObject *)shareObject {
+    if (!shareObject || [shareObject.followingContent length] >= 140) {
+        return nil;
+    }
+    WBMessageObject *messageObj = [WBMessageObject message];
+    
+    switch (shareObject.type) {
+        case WeiboShareObjectTypeDefault:
+        {
+            [messageObj setText:shareObject.followingContent];
+        }
+            break;
+        case WeiboShareObjectTypeImage:
+        {
+            WeiboImageShareObject *imageShareObj = (WeiboImageShareObject *)shareObject;
+            messageObj.text = imageShareObj.followingContent;
+            
+            if (imageShareObj.image) {
+                NSUInteger byteCount = [GToolUtil byteCountOfImage:imageShareObj.image];
+                if (byteCount >= 32 * 1024 * 8) {
+                    return nil;
+                }
+                
+                WBImageObject *imageObj = [WBImageObject object];
+                [imageObj setImageData:UIImageJPEGRepresentation(imageShareObj.image, 0)];
+                [messageObj setImageObject:imageObj];
+            }
+        }
+            break;
+        case WeiboShareObjectTypeWebPage:
+        {
+            WeiboWebPageShareObject *webShareObj = (WeiboWebPageShareObject *)shareObject;
+            messageObj.text = webShareObj.followingContent;
+            
+            WBWebpageObject *webPageObj = [WBWebpageObject object];
+            webPageObj.objectID = webShareObj.identifier;
+            webPageObj.title = webShareObj.title;
+            webPageObj.description = webShareObj.pageDescription;
+            if (webShareObj.thumbnailImage) {
+                webPageObj.thumbnailData = UIImageJPEGRepresentation(webShareObj.thumbnailImage, 0);
+            }
+            webPageObj.scheme = webShareObj.scheme;
+            webPageObj.webpageUrl = webShareObj.webPageUrlString;
+            
+            messageObj.mediaObject = webPageObj;
+        }
+            break;
+        default:
+            break;
+    }
+    return messageObj;
+}
 
 + (WBAuthorizeRequest *)weiboAuthRequest {
     WBAuthorizeRequest *request = [WBAuthorizeRequest request];
@@ -177,6 +234,10 @@ static WeiboManager *_sharedInstance = nil;
 
 #pragma mark Public methods
 
++ (BOOL)canShare {
+    return YES;
+}
+
 - (BOOL)handleOpenURL:(NSURL *)url {
     return [WeiboSDK handleOpenURL:url delegate:self];
 }
@@ -191,11 +252,7 @@ static WeiboManager *_sharedInstance = nil;
     return [WeiboSDK sendRequest:request];
 }
 
-- (BOOL)sendShareRequestWithContentTag:(NSString *)tag
-                                 imgae:(UIImage *)image
-                         linkUrlString:(NSString *)urlString
-                               succeed:(void (^)(NSString *))succeed
-                               failure:(void (^)(NSError *))failure {
+- (BOOL)sendShareRequestWithObject:(WeiboShareObject *)object succeed:(void (^)())succeed failure:(void (^)(NSError *))failure {
     //WBSendMessageToWeiboRequest 说明
     //当用户安装了可以支持微博客户端內分享的微博客户端时,会自动唤起微博并分享
     //当用户没有安装微博客户端或微博客户端过低无法支持通过客户端內分享的时候会自动唤起SDK內微博发布器
@@ -204,26 +261,94 @@ static WeiboManager *_sharedInstance = nil;
     self.shareSuccessBlock = succeed;
     self.shareFailureBlock = failure;
     
-    WBMessageObject *messageObj = [WBMessageObject message];
+    WBMessageObject *messageObject = [WeiboManager messageObjectFromWeiboShareObject:object];
     
-    if (tag && [tag isKindOfClass:[NSString class]]) {
-        [messageObj setText:tag];
+    if (!messageObject) {
+        NSError *error = [NSError errorWithDomain:@"Weibo Share" code:-1 userInfo:[NSDictionary dictionaryWithObject:@"无效的分享内容" forKey:kErrMsgKey]];
+        if (failure) {
+            failure(error);
+        }
+        return NO;
     }
     
-    if (image && [image isKindOfClass:[UIImage class]]) {
-        WBImageObject *imageObj = [WBImageObject object];
-        [imageObj setImageData:UIImageJPEGRepresentation(image, 0)];
-        [messageObj setImageObject:imageObj];
-    }
-    if (urlString && [urlString isKindOfClass:[NSString class]]) {
-        WBWebpageObject *webPageObj = [WBWebpageObject object];
-        [webPageObj setWebpageUrl:urlString];
-        [messageObj setMediaObject:webPageObj];
-    }
-    
-    WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:messageObj authInfo:[WeiboManager weiboAuthRequest] access_token:self.token];
+    WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:messageObject authInfo:[WeiboManager weiboAuthRequest] access_token:self.token];
     
     return [WeiboSDK sendRequest:request];
+}
+
+@end
+
+
+
+@implementation WeiboShareObject
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.type = WeiboShareObjectTypeDefault;
+    }
+    return self;
+}
+
++ (instancetype)shareObjectWithFollowingContent:(NSString *)content {
+    if (![content isKindOfClass:[NSString class]] || [content length] == 0) {
+        return nil;
+    }
+    WeiboShareObject *obj = [[WeiboShareObject alloc] init];
+    obj.followingContent = content;
+    return obj;
+}
+
+@end
+
+
+@implementation WeiboImageShareObject
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.type = WeiboShareObjectTypeImage;
+    }
+    return self;
+}
+
++ (instancetype)imageShareObjectWithFollowingContent:(NSString *)content image:(UIImage *)image {
+    if ([content length] == 0 && !image) {
+        return nil;
+    }
+    
+    WeiboImageShareObject *obj = [[WeiboImageShareObject alloc] init];
+    obj.followingContent = content;
+    obj.image = image;
+    return obj;
+}
+
+@end
+
+@implementation WeiboWebPageShareObject
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.type = WeiboShareObjectTypeWebPage;
+    }
+    return self;
+}
+
++ (instancetype)webPageShareObjectWithFollowingContent:(NSString *)content
+                                            identifier:(NSString *)identifier
+                                                 title:(NSString *)title
+                                             urlString:(NSString *)urlString {
+    if ([content length] == 0 && ([identifier length] == 0 || [title length] == 0 || [urlString length] == 0)) {
+        return nil;
+    }
+    
+    WeiboWebPageShareObject *obj = [[WeiboWebPageShareObject alloc] init];
+    obj.followingContent = content;
+    obj.identifier = identifier;
+    obj.title = title;
+    obj.webPageUrlString = urlString;
+    return obj;
 }
 
 @end
