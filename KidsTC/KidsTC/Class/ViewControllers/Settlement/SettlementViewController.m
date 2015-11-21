@@ -11,6 +11,8 @@
 #import "SettlementBottomView.h"
 #import "OrderDetailViewController.h"
 #import "CouponUsableListViewController.h"
+#import "OrderDetailViewController.h"
+#import "KTCPaymentService.h"
 
 @interface SettlementViewController () <SettlementViewDelegate, SettlementBottomViewDelegate>
 
@@ -20,6 +22,8 @@
 @property (nonatomic, strong) SettlementViewModel *viewModel;
 
 - (void)submitOrderSucceed;
+
+- (void)goToOrderDetailViewController;
 
 @end
 
@@ -99,8 +103,39 @@
 #pragma mark Private methods
 
 - (void)submitOrderSucceed {
-    [[iToast makeText:@"下单成功"] show];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"下单成功" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *goToOrderDetailAction = [UIAlertAction actionWithTitle:@"查看订单" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self goToOrderDetailViewController];
+    }];
+    [alertController addAction:goToOrderDetailAction];
+    if (self.viewModel.paymentInfo.paymentType == KTCPaymentTypeNone) {
+        UIAlertAction *goToPay = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }];
+        [alertController addAction:goToPay];
+    } else {
+        UIAlertAction *goToPay = [UIAlertAction actionWithTitle:@"去支付" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [KTCPaymentService startPaymentWithInfo:self.viewModel.paymentInfo succeed:^{
+                [self goToOrderDetailViewController];
+            } failure:^(NSError *error) {
+                NSString *errMsg = @"支付失败";
+                NSString *text = [[error userInfo] objectForKey:kErrMsgKey];
+                if ([text isKindOfClass:[NSString class]] && [text length] > 0) {
+                    errMsg = text;
+                }
+                [[iToast makeText:errMsg] show];
+                [self goToOrderDetailViewController];
+            }];
+        }];
+        [alertController addAction:goToPay];
+    }
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+- (void)goToOrderDetailViewController {
+    OrderDetailViewController *controller = [[OrderDetailViewController alloc] initWithOrderId:self.viewModel.orderId pushSource:OrderDetailPushSourceSettlement];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark Super methods

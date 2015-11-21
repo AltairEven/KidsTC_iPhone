@@ -307,7 +307,7 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(orderDetailModelForOrderDetailView:)]) {
         self.detailModel = [self.dataSource orderDetailModelForOrderDetailView:self];
         [self.tableView reloadData];
-        [self.getCodeButton setHidden:[self.detailModel canGetCode]];
+        [self.getCodeButton setHidden:![self.detailModel canGetCode]];
     }
 }
 

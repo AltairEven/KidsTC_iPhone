@@ -12,8 +12,8 @@ typedef enum {
     KTCSearchResultServiceSortTypeSmart = 1, //智能排序
     KTCSearchResultServiceSortTypeTimeDescending, //更新时间（降序）
     KTCSearchResultServiceSortTypeTimeAscending, //更新时间（升序）
-    KTCSearchResultServiceSortTypePriceDescending, //价格（降序）
     KTCSearchResultServiceSortTypePriceAscending, //价格（升序）
+    KTCSearchResultServiceSortTypePriceDescending, //价格（降序）
     KTCSearchResultServiceSortTypeCommentCount, //总评价数量（降序）
     KTCSearchResultServiceSortTypeGoodRate, //好评率（降序）
     KTCSearchResultServiceSortTypeSaleCount, //销量（降序）

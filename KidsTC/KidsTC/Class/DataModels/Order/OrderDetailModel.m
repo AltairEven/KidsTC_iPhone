@@ -52,7 +52,7 @@
 
 - (BOOL)canGetCode {
     BOOL retValue = NO;
-    if (self.status == OrderStatusHasCanceled || self.status == OrderStatusRefunding || self.status == OrderStatusRefundSucceed) {
+    if (self.status == OrderStatusHasPayed || self.status == OrderStatusPartialUsed) {
         retValue = YES;
     }
     return retValue;

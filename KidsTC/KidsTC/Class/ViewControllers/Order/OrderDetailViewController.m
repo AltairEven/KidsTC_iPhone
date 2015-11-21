@@ -20,14 +20,17 @@
 
 @property (nonatomic, copy) NSString *orderId;
 
+@property (nonatomic, assign) OrderDetailPushSource pushSource;
+
 @end
 
 @implementation OrderDetailViewController
 
-- (instancetype)initWithOrderId:(NSString *)orderId {
+- (instancetype)initWithOrderId:(NSString *)orderId pushSource:(OrderDetailPushSource)source {
     self = [super initWithNibName:@"OrderDetailViewController" bundle:nil];
     if (self) {
         self.orderId = orderId;
+        self.pushSource = source;
     }
     return self;
 }
@@ -90,6 +93,28 @@
 
 - (void)orderCommentVCDidFinishSubmitComment:(OrderCommentViewController *)vc {
     [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
+}
+
+#pragma mark Super methods
+
+- (void)goBackController:(id)sender {
+    switch (self.pushSource) {
+        case OrderDetailPushSourceOrderList:
+        {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+            break;
+        case OrderDetailPushSourceSettlement:
+        {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+            break;
+        default:
+        {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+            break;
+    }
 }
 /*
 #pragma mark - Navigation

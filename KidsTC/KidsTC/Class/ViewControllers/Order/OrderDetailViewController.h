@@ -8,8 +8,13 @@
 
 #import "GViewController.h"
 
+typedef enum {
+    OrderDetailPushSourceOrderList,
+    OrderDetailPushSourceSettlement
+}OrderDetailPushSource;
+
 @interface OrderDetailViewController : GViewController
 
-- (instancetype)initWithOrderId:(NSString *)orderId;
+- (instancetype)initWithOrderId:(NSString *)orderId pushSource:(OrderDetailPushSource)source;
 
 @end

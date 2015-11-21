@@ -12,7 +12,7 @@ extern NSString *const kWeChatUrlScheme;
 extern NSString *const kWeChatAppKey;
 
 @class WeChatShareObject;
-
+@class KTCWeChatPaymentInfo;
 
 typedef enum {
     WechatShareSceneSession = 0,
@@ -38,6 +38,10 @@ typedef enum {
                      WithObject:(WeChatShareObject *)object
                         succeed:(void(^)())succeed
                         failure:(void(^)(NSError *error))failure;
+
+- (BOOL)sendPayRequestWithInfo:(KTCWeChatPaymentInfo *)info
+                       succeed:(void(^)())succeed
+                       failure:(void(^)(NSError *error))failure;
 
 @end
 

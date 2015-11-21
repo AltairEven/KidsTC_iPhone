@@ -35,6 +35,7 @@
 #import "WeChatManager.h"
 #import "TencentManager.h"
 #import "WeiboManager.h"
+#import "AlipayManager.h"
 
 static BOOL _alreadyLaunched = NO;
 
@@ -176,11 +177,9 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    _ifWakeupFromAli = NO;
-    if ([url.scheme isEqualToString:kAliPaySchema])
+    if ([url.scheme isEqualToString:kAlipayFromScheme])
     {
-        _ifWakeupFromAli = YES;
-        [self ALIParseURL:url application:application];
+        return [[AlipayManager sharedManager] handleOpenUrl:url];
     }
     else if ([url.scheme isEqualToString:kWeChatUrlScheme])
     {

@@ -56,7 +56,8 @@
     NSArray *modelArray = [self.viewModel orderModels];
     if ([modelArray count] > index) {
         OrderListModel *model = [modelArray objectAtIndex:index];
-        OrderDetailViewController *controller = [[OrderDetailViewController alloc] initWithOrderId:model.orderId];
+        OrderDetailViewController *controller = [[OrderDetailViewController alloc] initWithOrderId:model.orderId pushSource:OrderDetailPushSourceOrderList];
+        [controller setHidesBottomBarWhenPushed:YES];
         [self.navigationController pushViewController:controller animated:YES];
     }
 }

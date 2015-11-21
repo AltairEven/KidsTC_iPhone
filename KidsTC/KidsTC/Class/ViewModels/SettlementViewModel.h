@@ -8,12 +8,15 @@
 
 #import "BaseViewModel.h"
 #import "SettlementView.h"
+#import "KTCPaymentService.h"
 
 @interface SettlementViewModel : BaseViewModel
 
 @property (nonatomic, strong, readonly) SettlementModel *dataModel;
 
 @property (nonatomic, strong, readonly) NSString *orderId;
+
+@property (nonatomic, strong, readonly) KTCPaymentInfo *paymentInfo;
 
 - (void)resetWithUsedCoupon:(CouponBaseModel *)coupon;
 
@@ -22,5 +25,7 @@
 - (void)resetWithSelectedPaymentIndex:(NSUInteger)index;
 
 - (void)submitOrderWithSucceed:(void (^)(NSDictionary *data))succeed failure:(void (^)(NSError *error))failure;
+
+- (void)goToPay;
 
 @end

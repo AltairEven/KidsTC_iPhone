@@ -70,7 +70,8 @@
 
 
 - (void)submitOrderSucceed:(NSDictionary *)data {
-    
+    NSDictionary *payInfo = [data objectForKey:@"payInfo"];
+    _paymentInfo = [KTCPaymentInfo instanceWithRawData:payInfo];
 }
 
 #pragma mark Public methods
@@ -141,9 +142,20 @@
     
     __weak SettlementViewModel *weakSelf = self;
     [weakSelf.submitOrderRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
-        [weakSelf submitOrderSucceed:responseData];
-        if (succeed) {
-            succeed(responseData);
+        NSDictionary *dataDic = [responseData objectForKey:@"data"];
+        if (dataDic && [dataDic isKindOfClass:[NSDictionary class]]) {
+            _orderId = [dataDic objectForKey:@"orderNo"];
+        }
+        if ([weakSelf.orderId length] > 0) {
+            [weakSelf submitOrderSucceed:dataDic];
+            if (succeed) {
+                succeed(responseData);
+            }
+        } else {
+            if (failure) {
+                NSError *error = [NSError errorWithDomain:@"Submit Order" code:-1 userInfo:[NSDictionary dictionaryWithObject:@"下单失败" forKey:kErrMsgKey]];
+                failure(error);
+            }
         }
     } failure:^(HttpRequestClient *client, NSError *error) {
         if (failure) {

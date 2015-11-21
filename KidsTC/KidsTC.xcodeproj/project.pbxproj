@@ -808,13 +808,16 @@
 		1EFFAE1C1BEC8364001D4245 /* ActivityFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EFFAE1B1BEC8364001D4245 /* ActivityFilterView.xib */; };
 		1EFFAE221BEC9EE3001D4245 /* ActivityFilterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFFAE211BEC9EE3001D4245 /* ActivityFilterModel.m */; };
 		8F2C55BB1BFF167B00C2B6BF /* CommonShareService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2C55BA1BFF167B00C2B6BF /* CommonShareService.m */; };
+		8F5E56BC1C004F7500365ED4 /* KTCPaymentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5E56BB1C004F7500365ED4 /* KTCPaymentInfo.m */; };
 		8F6513961BFC96B9003BE006 /* KTCActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6513951BFC96B9003BE006 /* KTCActionView.m */; };
+		8F70F9F01C00749600A175F0 /* AlipayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F70F9EF1C00749600A175F0 /* AlipayManager.m */; };
 		8F8A08CE1BF9DE5000134A9A /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F8A08CD1BF9DE5000134A9A /* interface_list.plist */; };
 		8F8A08D21BF9E31300134A9A /* BindPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8A08D01BF9E31300134A9A /* BindPhoneViewController.m */; };
 		8F8A08D31BF9E31300134A9A /* BindPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F8A08D11BF9E31300134A9A /* BindPhoneViewController.xib */; };
 		8F98D2541C000EF900C1388A /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8F98D2521C000EF900C1388A /* AlipaySDK.bundle */; };
 		8F98D2551C000EF900C1388A /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F98D2531C000EF900C1388A /* AlipaySDK.framework */; };
 		8F98D2571C0010B500C1388A /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F98D2561C0010B500C1388A /* CoreMotion.framework */; };
+		8F98D25B1C002CB700C1388A /* KTCPaymentService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F98D25A1C002CB700C1388A /* KTCPaymentService.m */; };
 		8F9996041BF5A6740055F016 /* WeChatModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9996011BF5A6740055F016 /* WeChatModel.m */; };
 		8F9996081BF5BE590055F016 /* KTCUserRole.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9996071BF5BE590055F016 /* KTCUserRole.m */; };
 		8F9996151BF5E6560055F016 /* ChangeNickNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9996131BF5E6560055F016 /* ChangeNickNameViewController.m */; };
@@ -2235,8 +2238,12 @@
 		1EFFAE211BEC9EE3001D4245 /* ActivityFilterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityFilterModel.m; sourceTree = "<group>"; };
 		8F2C55B91BFF167B00C2B6BF /* CommonShareService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonShareService.h; sourceTree = "<group>"; };
 		8F2C55BA1BFF167B00C2B6BF /* CommonShareService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonShareService.m; sourceTree = "<group>"; };
+		8F5E56BA1C004F7500365ED4 /* KTCPaymentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCPaymentInfo.h; sourceTree = "<group>"; };
+		8F5E56BB1C004F7500365ED4 /* KTCPaymentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCPaymentInfo.m; sourceTree = "<group>"; };
 		8F6513941BFC96B9003BE006 /* KTCActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCActionView.h; sourceTree = "<group>"; };
 		8F6513951BFC96B9003BE006 /* KTCActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCActionView.m; sourceTree = "<group>"; };
+		8F70F9EE1C00749600A175F0 /* AlipayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlipayManager.h; sourceTree = "<group>"; };
+		8F70F9EF1C00749600A175F0 /* AlipayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlipayManager.m; sourceTree = "<group>"; };
 		8F8A08CD1BF9DE5000134A9A /* interface_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = interface_list.plist; sourceTree = "<group>"; };
 		8F8A08CF1BF9E31300134A9A /* BindPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindPhoneViewController.h; sourceTree = "<group>"; };
 		8F8A08D01BF9E31300134A9A /* BindPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindPhoneViewController.m; sourceTree = "<group>"; };
@@ -2244,6 +2251,8 @@
 		8F98D2521C000EF900C1388A /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		8F98D2531C000EF900C1388A /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		8F98D2561C0010B500C1388A /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		8F98D2591C002CB700C1388A /* KTCPaymentService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCPaymentService.h; sourceTree = "<group>"; };
+		8F98D25A1C002CB700C1388A /* KTCPaymentService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCPaymentService.m; sourceTree = "<group>"; };
 		8F9996001BF5A6740055F016 /* WeChatModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeChatModel.h; sourceTree = "<group>"; };
 		8F9996011BF5A6740055F016 /* WeChatModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeChatModel.m; sourceTree = "<group>"; };
 		8F9996061BF5BE590055F016 /* KTCUserRole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCUserRole.h; sourceTree = "<group>"; };
@@ -3000,6 +3009,7 @@
 		1E3D87FA1B4BF49F00275C35 /* LogicFramework */ = {
 			isa = PBXGroup;
 			children = (
+				8F98D2581C002CA200C1388A /* Payment */,
 				8F2C55B81BFF163A00C2B6BF /* Share */,
 				8F9EA6AD1BF9A60C00062E91 /* Login */,
 				8F9995FF1BF5A6740055F016 /* Social */,
@@ -5018,6 +5028,19 @@
 			path = Share;
 			sourceTree = "<group>";
 		};
+		8F98D2581C002CA200C1388A /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				8F98D2591C002CB700C1388A /* KTCPaymentService.h */,
+				8F98D25A1C002CB700C1388A /* KTCPaymentService.m */,
+				8F5E56BA1C004F7500365ED4 /* KTCPaymentInfo.h */,
+				8F5E56BB1C004F7500365ED4 /* KTCPaymentInfo.m */,
+				8F70F9EE1C00749600A175F0 /* AlipayManager.h */,
+				8F70F9EF1C00749600A175F0 /* AlipayManager.m */,
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
 		8F9995FF1BF5A6740055F016 /* Social */ = {
 			isa = PBXGroup;
 			children = (
@@ -5463,6 +5486,7 @@
 				1E0B7AEB1B6F693000A58AD4 /* ZoomViewController.m in Sources */,
 				1E3D8D501B4BF4A100275C35 /* GPageCache.m in Sources */,
 				8F9EA6B01BF9A6B400062E91 /* WeiboManager.m in Sources */,
+				8F5E56BC1C004F7500365ED4 /* KTCPaymentInfo.m in Sources */,
 				1E3D8CE01B4BF4A100275C35 /* IcsonCategories.m in Sources */,
 				1E3D8D7C1B4BF4A100275C35 /* AFURLResponseSerialization.m in Sources */,
 				1E1CFA211BD72F4C0005653D /* ServiceDetailMoreInfoView.m in Sources */,
@@ -5524,6 +5548,7 @@
 				1E3D8F201B4CD12E00275C35 /* KTCTabBarController.m in Sources */,
 				1E0B7A921B6F67B800A58AD4 /* GButton.m in Sources */,
 				1E0B7AE81B6F693000A58AD4 /* BrowserToolbar.m in Sources */,
+				8F98D25B1C002CB700C1388A /* KTCPaymentService.m in Sources */,
 				1EC4A11D1B5D038000206BB9 /* KTCSearchResultView.m in Sources */,
 				1EC73BF81B5F4F96008B39EA /* HomeNormalTitleCellModel.m in Sources */,
 				1EA5C9181BA84439001E599D /* KTCWebViewController.m in Sources */,
@@ -5773,6 +5798,7 @@
 				1E827CF61B9D7860008F3F08 /* PromotionFullCutModel.m in Sources */,
 				1E0B77CE1B6A14A200A58AD4 /* NSDate+Helpers.m in Sources */,
 				1E827CF31B9D7739008F3F08 /* PromotionBaseModel.m in Sources */,
+				8F70F9F01C00749600A175F0 /* AlipayManager.m in Sources */,
 				1E0B7AAF1B6F67B800A58AD4 /* GProductTableViewCell.m in Sources */,
 				1E3D8D531B4BF4A100275C35 /* FMDatabaseAdditions.m in Sources */,
 				1E2D39DD1B54C316003BABE1 /* AUIStairsController.m in Sources */,

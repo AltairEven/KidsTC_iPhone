@@ -9,6 +9,7 @@
 #import "WeChatManager.h"
 #import "WXApi.h"
 #import "WXApiObject.h"
+#import "KTCPaymentInfo.h"
 
 NSString *const kWeChatUrlScheme = @"wx75fa1a06d38fde4e";
 NSString *const kWeChatAppKey = @"wx75fa1a06d38fde4e";
@@ -20,6 +21,9 @@ typedef void (^WeChatLoginFailureBlock)(NSError *);
 
 typedef void (^WeChatShareSuccessBlock)();
 typedef void (^WeChatShareFailureBlock)(NSError *);
+
+typedef void (^WeChatPaySuccessBlock)();
+typedef void (^WeChatPayFailureBlock)(NSError *);
 
 static WeChatManager *_sharedInstance = nil;
 
@@ -33,11 +37,19 @@ static WeChatManager *_sharedInstance = nil;
 
 @property (nonatomic, strong) WeChatShareFailureBlock shareFailureBlock;
 
+@property (nonatomic, strong) WeChatPaySuccessBlock paySuccessBlock;
+
+@property (nonatomic, strong) WeChatPayFailureBlock payFailureBlock;
+
 + (WXMediaMessage *)messageFromShareObject:(WeChatShareObject *)object;
+
++ (PayReq *)payRequestFromInfo:(KTCWeChatPaymentInfo *)info;
 
 - (void)handleAuthResp:(SendAuthResp *)resp;
 
 - (void)handleShareResp:(SendMessageToWXResp *)resp;
+
+- (void)handlePayResp:(PayResp *)resp;
 
 @end
 
@@ -67,6 +79,9 @@ static WeChatManager *_sharedInstance = nil;
     } else if ([resp isKindOfClass:[SendMessageToWXResp class]]) {
         //分享
         [self handleShareResp:(SendMessageToWXResp *)resp];
+    } else if ([resp isKindOfClass:[PayResp class]]) {
+        //支付
+        [self handlePayResp:(PayResp *)resp];
     }
 }
 
@@ -126,20 +141,35 @@ static WeChatManager *_sharedInstance = nil;
     return message;
 }
 
++ (PayReq *)payRequestFromInfo:(KTCWeChatPaymentInfo *)info {
+    if (info.paymentType != KTCPaymentTypeWechat) {
+        return nil;
+    }
+    PayReq *request = [[PayReq alloc] init];
+    request.openID = kWeChatAppKey;
+    request.partnerId = info.partnerId;
+    request.prepayId = info.prepayId;
+    request.nonceStr = info.nonceString;
+    request.timeStamp = info.timeStamp;
+    request.package = info.packageValue;
+    request.sign = info.sign;
+    return request;
+}
+
 - (void)handleAuthResp:(SendAuthResp *)resp {
     if (resp.errCode == 0) {
         if ([resp.state isEqualToString:kWeChatLoginIdentifier] && [resp.code length] > 0) {
             if (self.loginSuccessBlock) {
-                self.loginSuccessBlock(nil, resp.code);
+                self.loginSuccessBlock(resp.code, nil);
             }
         } else {
-            NSError *error = [NSError errorWithDomain:@"WeChat Auth" code:-1 userInfo:[NSDictionary dictionaryWithObject:@"微信授权失败" forKey:kErrMsgKey]];
+            NSError *error = [NSError errorWithDomain:@"WeChat Auth" code:-10 userInfo:[NSDictionary dictionaryWithObject:@"微信授权失败" forKey:kErrMsgKey]];
             if (self.loginFailureBlock) {
                 self.loginFailureBlock(error);
             }
         }
     } else {
-        NSError *error = [NSError errorWithDomain:@"WeChat Auth" code:-1 userInfo:[NSDictionary dictionaryWithObject:@"微信授权失败" forKey:kErrMsgKey]];
+        NSError *error = [NSError errorWithDomain:@"WeChat Auth" code:resp.errCode userInfo:[NSDictionary dictionaryWithObject:@"微信授权失败" forKey:kErrMsgKey]];
         if (self.loginFailureBlock) {
             self.loginFailureBlock(error);
         }
@@ -152,9 +182,22 @@ static WeChatManager *_sharedInstance = nil;
             self.shareSuccessBlock();
         }
     } else {
-        NSError *error = [NSError errorWithDomain:@"WeChat Share" code:-1 userInfo:[NSDictionary dictionaryWithObject:@"分享失败" forKey:kErrMsgKey]];
+        NSError *error = [NSError errorWithDomain:@"WeChat Share" code:resp.errCode userInfo:[NSDictionary dictionaryWithObject:@"分享失败" forKey:kErrMsgKey]];
         if (self.shareFailureBlock) {
             self.shareFailureBlock(error);
+        }
+    }
+}
+
+- (void)handlePayResp:(PayResp *)resp {
+    if (resp.errCode == 0) {
+        if (self.paySuccessBlock) {
+            self.paySuccessBlock();
+        }
+    } else {
+        NSError *error = [NSError errorWithDomain:@"WeChat Pay" code:resp.errCode userInfo:[NSDictionary dictionaryWithObject:@"支付失败" forKey:kErrMsgKey]];
+        if (self.payFailureBlock) {
+            self.payFailureBlock(error);
         }
     }
 }
@@ -228,6 +271,28 @@ static WeChatManager *_sharedInstance = nil;
     SendMessageToWXReq *request = [[SendMessageToWXReq alloc] init];
     request.message = message;
     request.scene = scene;
+    return [WXApi sendReq:request];
+}
+
+- (BOOL)sendPayRequestWithInfo:(KTCWeChatPaymentInfo *)info succeed:(void (^)())succeed failure:(void (^)(NSError *))failure {
+    self.paySuccessBlock = succeed;
+    self.payFailureBlock = failure;
+    //判断是否支持支付
+    if (![WXApi isWXAppInstalled]) {
+        NSError *error = [NSError errorWithDomain:@"WeChat Pay" code:-1 userInfo:[NSDictionary dictionaryWithObject:@"请先安装微信客户端" forKey:kErrMsgKey]];
+        if (failure) {
+            failure(error);
+        }
+        return NO;
+    }
+    if (![WXApi isWXAppSupportApi]) {
+        NSError *error = [NSError errorWithDomain:@"WeChat Pay" code:-1 userInfo:[NSDictionary dictionaryWithObject:@"当前微信版本不支持" forKey:kErrMsgKey]];
+        if (failure) {
+            failure(error);
+        }
+        return NO;
+    }
+    PayReq *request = [WeChatManager payRequestFromInfo:info];
     return [WXApi sendReq:request];
 }
 

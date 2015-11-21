@@ -169,6 +169,7 @@ static NSString *const kStoreCellIdentifier = @"kStoreCellIdentifier";
         if (self.displayingFilter) {
             [self dismissFilterView];
         }
+        self.currentAreaName = nil;
         [self.sortView reloadData];
     }
 }
@@ -179,6 +180,7 @@ static NSString *const kStoreCellIdentifier = @"kStoreCellIdentifier";
         if (self.displayingFilter) {
             [self dismissFilterView];
         }
+        self.currentSortString = nil;
         [self.sortView reloadData];
     }
 }

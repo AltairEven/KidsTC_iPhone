@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>zh_CN</string>
 	<key>CFBundleDisplayName</key>
-	<string>巴拉巴拉</string>
+	<string>童成</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -28,14 +28,15 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleURLName</key>
+			<string>iPhoneKidsTC</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>wx75fa1a06d38fde4e</string>
 				<string>tencent101265844</string>
 				<string>wb2837514135</string>
+				<string>alipayfromscheme</string>
 			</array>
-			<key>CFBundleURLName</key>
-			<string>iPhoneKidsTC</string>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
@@ -69,12 +70,12 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>UIFileSharingEnabled</key>
+	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
 	</array>
-	<key>UIFileSharingEnabled</key>
-	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
