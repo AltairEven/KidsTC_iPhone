@@ -36,7 +36,7 @@ typedef enum {
 
 + (instancetype)instanceWithIdentifier:(NSUInteger)identifier;
 
-- (NSUInteger)userRoleIdentifier;
++ (NSUInteger)userRoleIdentifierWithRole:(UserRole)role sex:(KTCSex)sex;
 
 - (NSString *)userRoleIdentifierString;
 

@@ -22,6 +22,8 @@
 
 - (void)auilinearViewDidScrolled:(AUILinearView *)linearView;
 
+- (void)auilinearViewDidEndScroll:(AUILinearView *)linearView;
+
 - (void)auilinearView:(AUILinearView *)linearView didSelectedCellAtIndex:(NSUInteger)index;
 
 - (void)auilinearView:(AUILinearView *)linearView didDeselectCellAtIndex:(NSUInteger)index;
@@ -39,9 +41,11 @@
 
 @property (nonatomic, assign) NSUInteger selectedIndex;
 
-@property (nonatomic, assign) CGFloat selectedCellScale; //未选中状态CELL的比例，默认
+@property (nonatomic, assign) CGFloat selectedCellScale; //选中状态CELL的比例，默认1
 
 @property (nonatomic, assign) CGFloat horizontalGap;
+
+@property (nonatomic, assign) CGFloat hMargin;
 
 @property (nonatomic, assign) BOOL pageingEnabled;
 

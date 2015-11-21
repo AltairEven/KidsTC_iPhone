@@ -85,8 +85,8 @@
             {
                 AccountSettingModel *model = [[AccountSettingModel alloc] init];
                 model.faceImageUrl = self.viewModel.dataModel.faceImageUrl;
+                model.userRole = [KTCUser currentUser].userRole;
                 model.userName = self.viewModel.dataModel.userName;
-                model.userRole = self.viewModel.dataModel.userRole;
                 model.phone = self.viewModel.dataModel.phone;
                 
                 AccountSettingViewController *controller = [[AccountSettingViewController alloc] initWithAccountSettingModel:model];

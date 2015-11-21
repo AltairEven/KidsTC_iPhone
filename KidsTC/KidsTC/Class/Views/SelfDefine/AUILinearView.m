@@ -77,7 +77,7 @@ NSString *const kLinearViewCellIdentifier = @"kLinearViewCellIdentifier";
 
 
 - (void)prepareLayout {
-    self.marginHorizontal = (SCREEN_WIDTH / 2) - [self cellSizeAtIndex:0].width / 2;
+    self.marginHorizontal = (SCREEN_WIDTH - [self cellSizeAtIndex:0].width) / 2;
 }
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
@@ -102,8 +102,9 @@ NSString *const kLinearViewCellIdentifier = @"kLinearViewCellIdentifier";
             CGFloat normalizedDistance = distance / activeDistance;
             if (ABS(distance) <= activeDistance) {
                 CGFloat zoom = 1 - ABS(normalizedDistance);
-                if (zoom <= 1 / self.scale) {
-                    zoom = 1 / self.scale;
+                zoom = self.scale * zoom;
+                if (zoom <= 1) {
+                    zoom = 1;
                 }
                 attributes.transform3D = CATransform3DMakeScale(zoom, zoom, 1.0);
                 attributes.zIndex = 1;
@@ -123,8 +124,8 @@ NSString *const kLinearViewCellIdentifier = @"kLinearViewCellIdentifier";
         yOrigin = MARGIN_VERTICAL;
     }
     attributes.frame = CGRectMake(xOrigin, yOrigin, cellSize.width, cellSize.height);
-    CGFloat zoomScale = 1 / self.scale;
-    attributes.transform3D = CATransform3DMakeScale(zoomScale, zoomScale, 1.0);
+//    CGFloat zoomScale = 1;
+//    attributes.transform3D = CATransform3DMakeScale(zoomScale, zoomScale, 1.0);
     
     return attributes;
 }
@@ -282,6 +283,10 @@ NSString *const kLinearViewCellIdentifier = @"kLinearViewCellIdentifier";
 - (void)setHorizontalGap:(CGFloat)horizontalGap {
     _horizontalGap = horizontalGap;
     [(AUILinearViewLayout *)self.collectionView.collectionViewLayout setHGap:horizontalGap];
+}
+
+- (void)setHMargin:(CGFloat)hMargin {
+    _hMargin = hMargin;
 }
 
 #pragma mark UICollectionViewDataSource & UICollectionViewDelegate

@@ -18,40 +18,61 @@
 
 + (instancetype)instanceWithRole:(UserRole)role sex:(KTCSex)sex {
     NSString *name = @"未知";
-    switch (role) {
-        case UserRoleUnknown:
+    NSUInteger identifier = [KTCUserRole userRoleIdentifierWithRole:role sex:sex];
+    switch (identifier) {
+        case 0:
         {
             name = @"未知";
         }
             break;
-        case UserRolePrepregnancy:
+        case 1:
         {
             name = @"备孕";
         }
             break;
-        case UserRolePregnancy:
+        case 2:
         {
             name = @"孕期";
         }
             break;
-        case UserRoleBirth:
+        case 3:
         {
-            name = @"新生儿";
+            name = @"新生儿(男)";
         }
             break;
-        case UserRoleBabyInOne:
+        case 4:
         {
-            name = @"婴儿";
+            name = @"新生儿(女)";
         }
             break;
-        case UserRoleBabyOneToThree:
+        case 5:
         {
-            name = @"幼儿";
+            name = @"婴儿(男)";
         }
             break;
-        case UserRoleBabyFourToSix:
+        case 6:
         {
-            name = @"学前";
+            name = @"婴儿(女)";
+        }
+            break;
+        case 7:
+        {
+            name = @"幼儿(男)";
+        }
+            break;
+        case 8:
+        {
+            name = @"幼儿(女)";
+        }
+            break;
+        case 9:
+        {
+            name = @"学前(男)";
+        }
+            break;
+        case 10:
+        {
+            name = @"学前(女)";
         }
             break;
         default:
@@ -90,18 +111,18 @@
     return [KTCUserRole instanceWithRole:role sex:sex];
 }
 
-- (NSUInteger)userRoleIdentifier {
++ (NSUInteger)userRoleIdentifierWithRole:(UserRole)role sex:(KTCSex)sex {
     NSUInteger identifier = 0;
-    if (self.sex == 0) {
-        identifier = self.role;
+    if (sex == 0) {
+        identifier = role;
     } else {
-        identifier = self.role + self.sex - 1;
+        identifier = role + sex - 1;
     }
     return identifier;
 }
 
 - (NSString *)userRoleIdentifierString {
-    return [NSString stringWithFormat:@"%lu", (unsigned long)[self userRoleIdentifier]];
+    return [NSString stringWithFormat:@"%lu", (unsigned long)[KTCUserRole userRoleIdentifierWithRole:self.role sex:self.sex]];
 }
 
 @end

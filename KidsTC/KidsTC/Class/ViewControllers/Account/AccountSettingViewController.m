@@ -76,6 +76,15 @@
         case AccountSettingViewTagRole:
         {
             UserRoleSelectViewController *controller = [[UserRoleSelectViewController alloc] initWithNibName:@"UserRoleSelectViewController" bundle:nil];
+            
+            __weak UserRoleSelectViewController *weakController = controller;
+            [controller setCompleteBlock:^(UserRole selectedRole, KTCSex selectedSex){
+                KTCUserRole *role = [KTCUserRole instanceWithRole:selectedRole sex:selectedSex];
+                [[KTCUser currentUser] setUserRole:role];
+                [weakController.navigationController popViewControllerAnimated:YES];
+                self.viewModel.settingModel.userRole = role;
+                [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
+            }];
             [controller setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:controller animated:YES];
         }

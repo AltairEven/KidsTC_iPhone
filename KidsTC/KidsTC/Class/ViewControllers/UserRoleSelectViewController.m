@@ -23,6 +23,8 @@ typedef enum {
     SexSelectTagGirl
 }SexSelectTag;
 
+#define SCALE (1.5)
+
 @interface UserRoleSelectViewController () <AUILinearViewDataSource, AUILinearViewDelegate>
 
 @property (nonatomic, assign) AgeSelectTag ageTag;
@@ -54,6 +56,8 @@ typedef enum {
 
 - (void)finishedUserRoleSelecting;
 
+- (void)didClickedSexImage:(id)sender;
+
 @end
 
 @implementation UserRoleSelectViewController
@@ -80,11 +84,11 @@ typedef enum {
 
 - (UIView *)auilinearView:(AUILinearView *)linearView viewForCellAtIndex:(NSUInteger)index withMaxHeight:(CGFloat)height {
     CGFloat diameter = self.elementWidth;
-    CGFloat hGap = (self.elementWidth - self.elementWidth / 1.5) / 2;
-    if (hGap < 0) {
-        self.linearView.horizontalGap = 0;
+    CGFloat hGap = (SCREEN_WIDTH - self.elementWidth * SCALE) / 2;
+    if (hGap < 20) {
+        self.linearView.horizontalGap = 20;
     } else {
-        self.linearView.horizontalGap = 0 - hGap + 20;
+        self.linearView.horizontalGap = hGap - 20;
     }
     if (diameter > height) {
         diameter = height;
@@ -176,6 +180,10 @@ typedef enum {
     [self.ageSelectDoneButton setEnabled:NO];
 }
 
+- (void)auilinearViewDidEndScroll:(AUILinearView *)linearView {
+    [self.ageSelectDoneButton setEnabled:YES];
+}
+
 #pragma mark Private methods
 
 - (IBAction)didClickedAgeSelectedDoneButton:(id)sender {
@@ -197,7 +205,7 @@ typedef enum {
 }
 
 - (void)buildFirstAndSecondView {
-    self.elementWidth = SCREEN_HEIGHT * 0.5 * 0.8;
+    self.elementWidth = SCREEN_HEIGHT * 0.6 * 0.4;
     
     self.ageSelectDoneButton.layer.cornerRadius = 25;
     self.ageSelectDoneButton.layer.masksToBounds = YES;
@@ -207,7 +215,7 @@ typedef enum {
     
     self.linearView.dataSource = self;
     self.linearView.delegate = self;
-    self.linearView.selectedCellScale = 1.5;
+    self.linearView.selectedCellScale = SCALE;
     
     //second
     self.backButton.layer.cornerRadius = 25;
@@ -218,12 +226,45 @@ typedef enum {
     self.doneButton.layer.masksToBounds = YES;
     [self.doneButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
     [self.doneButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    
+    [self.leftImageView setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickedSexImage:)];
+    [self.leftImageView addGestureRecognizer:tap1];
+    
+    [self.rightImageView setUserInteractionEnabled:YES];
+    UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickedSexImage:)];
+    [self.rightImageView addGestureRecognizer:tap2];
 }
 
 - (void)resetSecondView {
-    [self.leftImageView setImage:[UIImage imageNamed:@"roleselect_newbirth"]];
-    [self.rightImageView setImage:[UIImage imageNamed:@"roleselect_babyinone"]];
-    
+    switch (self.ageTag) {
+        case AgeSelectTagNewBirth:
+        {
+            [self.leftImageView setImage:[UIImage imageNamed:@"sexselect_boy_1"]];
+            [self.rightImageView setImage:[UIImage imageNamed:@"sexselect_girl_1"]];
+        }
+            break;
+        case AgeSelectTagInOne:
+        {
+            [self.leftImageView setImage:[UIImage imageNamed:@"sexselect_boy_1"]];
+            [self.rightImageView setImage:[UIImage imageNamed:@"sexselect_girl_1"]];
+        }
+            break;
+        case AgeSelectTagTwo2Three:
+        {
+            [self.leftImageView setImage:[UIImage imageNamed:@"sexselect_boy_223"]];
+            [self.rightImageView setImage:[UIImage imageNamed:@"sexselect_girl_223"]];
+        }
+            break;
+        case AgeSelectTagFour2Six:
+        {
+            [self.leftImageView setImage:[UIImage imageNamed:@"sexselect_boy_426"]];
+            [self.rightImageView setImage:[UIImage imageNamed:@"sexselect_girl_426"]];
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)moveToSecondView {
@@ -249,6 +290,15 @@ typedef enum {
     __weak UserRoleSelectViewController *weakSelf = self;
     if (weakSelf.completeBlock) {
         weakSelf.completeBlock(role, weakSelf.sexTag + 1);
+    }
+}
+
+- (void)didClickedSexImage:(id)sender {
+    UITapGestureRecognizer *tap = (UITapGestureRecognizer *)sender;
+    if (tap.view == self.leftImageView) {
+        self.sexTag = SexSelectTagBoy;
+    } else if (tap.view == self.rightImageView) {
+        self.sexTag = SexSelectTagGirl;
     }
 }
 

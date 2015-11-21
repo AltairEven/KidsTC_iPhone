@@ -89,6 +89,7 @@ NSString *const kHomeViewDataFinishLoadingNotification = @"kHomeViewDataFinishLo
 }
 
 - (void)loadHomeDataFailed:(NSError *)error {
+    self.homeModel = nil;
     [self.view endRefresh];
     [self.view noMoreData:YES];
     [self.view hideLoadMoreFooter:YES];

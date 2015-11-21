@@ -274,16 +274,16 @@
                             <rect key="frame" x="0.0" y="0.0" width="160" height="341"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sRp-qd-rqs">
-                                    <rect key="frame" x="20" y="106" width="130" height="130"/>
+                                    <rect key="frame" x="10" y="98.5" width="145" height="145"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" secondItem="sRp-qd-rqs" secondAttribute="height" multiplier="1:1" id="xzM-Zs-GPx"/>
+                                        <constraint firstAttribute="height" secondItem="sRp-qd-rqs" secondAttribute="width" multiplier="1:1" id="xzM-Zs-GPx"/>
                                     </constraints>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="sRp-qd-rqs" secondAttribute="trailing" constant="10" id="LMh-fS-ALd"/>
-                                <constraint firstItem="sRp-qd-rqs" firstAttribute="leading" secondItem="DMX-NW-Nh6" secondAttribute="leading" constant="20" id="QdU-pi-Osn"/>
+                                <constraint firstAttribute="trailing" secondItem="sRp-qd-rqs" secondAttribute="trailing" constant="5" id="LMh-fS-ALd"/>
+                                <constraint firstItem="sRp-qd-rqs" firstAttribute="leading" secondItem="DMX-NW-Nh6" secondAttribute="leading" constant="10" id="QdU-pi-Osn"/>
                                 <constraint firstItem="sRp-qd-rqs" firstAttribute="centerY" secondItem="DMX-NW-Nh6" secondAttribute="centerY" id="gb1-i9-po3"/>
                             </constraints>
                         </view>
@@ -291,16 +291,16 @@
                             <rect key="frame" x="160" y="0.0" width="160" height="341"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zt9-cU-iv0">
-                                    <rect key="frame" x="10" y="106" width="130" height="130"/>
+                                    <rect key="frame" x="5" y="98.5" width="145" height="145"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" secondItem="zt9-cU-iv0" secondAttribute="height" multiplier="1:1" id="Ic5-j7-BU7"/>
+                                        <constraint firstAttribute="height" secondItem="zt9-cU-iv0" secondAttribute="width" multiplier="1:1" id="Ic5-j7-BU7"/>
                                     </constraints>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstItem="zt9-cU-iv0" firstAttribute="leading" secondItem="Ai7-q9-fY2" secondAttribute="leading" constant="10" id="DiU-Ft-46e"/>
-                                <constraint firstAttribute="trailing" secondItem="zt9-cU-iv0" secondAttribute="trailing" constant="20" id="S7R-bu-6mD"/>
+                                <constraint firstItem="zt9-cU-iv0" firstAttribute="leading" secondItem="Ai7-q9-fY2" secondAttribute="leading" constant="5" id="DiU-Ft-46e"/>
+                                <constraint firstAttribute="trailing" secondItem="zt9-cU-iv0" secondAttribute="trailing" constant="10" id="S7R-bu-6mD"/>
                                 <constraint firstItem="zt9-cU-iv0" firstAttribute="centerY" secondItem="Ai7-q9-fY2" secondAttribute="centerY" id="tVR-SX-O0S"/>
                             </constraints>
                         </view>
@@ -327,13 +327,13 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请及时更改状态" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYX-pj-58O">
-                            <rect key="frame" x="97" y="36" width="126" height="22"/>
+                            <rect key="frame" x="97" y="36" width="126" height="21.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <color key="textColor" red="1" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lTa-MZ-mlF">
-                            <rect key="frame" x="0.0" y="68" width="160" height="159"/>
+                            <rect key="frame" x="0.0" y="67.5" width="160" height="159.5"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QR9-EO-Rpd">
                                     <rect key="frame" x="43" y="20" width="107" height="50"/>
@@ -355,7 +355,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7DO-gp-rpP">
-                            <rect key="frame" x="160" y="68" width="160" height="159"/>
+                            <rect key="frame" x="160" y="67.5" width="160" height="159.5"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tMs-jh-zh6">
                                     <rect key="frame" x="10" y="20" width="107" height="50"/>
