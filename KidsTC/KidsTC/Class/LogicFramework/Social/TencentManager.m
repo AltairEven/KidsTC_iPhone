@@ -17,7 +17,7 @@
 NSString *const kTencentUrlScheme = @"tencent101265844";
 NSString *const kTencentAppKey = @"101265844";
 
-typedef void (^TencentLoginSuccessBlock)(NSString *);
+typedef void (^TencentLoginSuccessBlock)(NSString *, NSString *);
 typedef void (^TencentLoginFailureBlock)(NSError *);
 
 typedef void (^TencentShareSuccessBlock)();
@@ -88,7 +88,7 @@ static TencentManager *_sharedInstance = nil;
 
 - (void)tencentDidLogin {
     if (self.loginSuccessBlock) {
-        self.loginSuccessBlock(self.tcOAuth.accessToken);
+        self.loginSuccessBlock(self.tcOAuth.openId, self.tcOAuth.accessToken);
     }
 }
 
@@ -252,7 +252,7 @@ static TencentManager *_sharedInstance = nil;
     return YES;
 }
 
-- (BOOL)sendLoginRequestWithSucceed:(void (^)(NSString *))succeed failure:(void (^)(NSError *))failure {
+- (BOOL)sendLoginRequestWithSucceed:(void (^)(NSString *, NSString *))succeed failure:(void (^)(NSError *))failure {
     if (!self.isOnline) {
         return NO;
     }

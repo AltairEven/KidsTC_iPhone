@@ -32,7 +32,7 @@ typedef enum {
 
 - (BOOL)handleOpenURL:(NSURL *)url;
 
-- (BOOL)sendLoginRequestWithSucceed:(void(^)(NSString *token))succeed failure:(void(^)(NSError *error))failure;
+- (BOOL)sendLoginRequestWithSucceed:(void(^)(NSString *openId, NSString *accessToken))succeed failure:(void(^)(NSError *error))failure;
 
 - (BOOL)sendShareRequestToScene:(WechatShareScene)scene
                      WithObject:(WeChatShareObject *)object

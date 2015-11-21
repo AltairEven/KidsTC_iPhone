@@ -17,9 +17,9 @@
 
 @property (nonatomic, copy) NSString *userName;
 
-@property (nonatomic, copy) NSString *uid;
+@property (nonatomic, strong, readonly) NSString *uid;
 
-@property (nonatomic, copy) NSString *skey;
+@property (nonatomic, strong, readonly) NSString *skey;
 
 @property (nonatomic, readonly) BOOL hasLogin;
 

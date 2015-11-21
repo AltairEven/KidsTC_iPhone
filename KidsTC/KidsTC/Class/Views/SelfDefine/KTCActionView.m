@@ -57,7 +57,6 @@ static KTCActionView *_sharedInstance = nil;
     if (self.delegate && [self.delegate respondsToSelector:@selector(actionViewDidClickedWithTag:)]) {
         [self.delegate actionViewDidClickedWithTag:(KTCActionViewTag)button.tag];
     }
-    [self hide];
 }
 
 

@@ -31,6 +31,7 @@ static KTCUser *_sharedInstance = nil;
 @end
 
 @implementation KTCUser
+@synthesize uid = _uid, skey = _skey;
 
 - (instancetype)init {
     self = [super init];
@@ -83,8 +84,8 @@ static KTCUser *_sharedInstance = nil;
 - (void)updateUid:(NSString *)uid skey:(NSString *)skey {
     if ([uid length] > 0 && [skey length] > 0) {
         _hasLogin = YES;
-        self.uid = uid;
-        self.skey = skey;
+        _uid = uid;
+        _skey = skey;
         [self localSave];
         [XGPush setAccount:self.uid];
     }
@@ -148,9 +149,9 @@ static KTCUser *_sharedInstance = nil;
 }
 
 - (void)getLocalSave {
-    self.uid = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_UID_KEY];
+    _uid = [[NSUserDefaults standardUserDefaults] objectForKey:USERDEFAULT_UID_KEY];
     if ([self.uid length] > 0) {
-        self.skey = [SFHFKeychainUtils getPasswordForUsername:self.uid andServiceName:KEYCHAIN_SERVICE_UIDSKEY error:nil];
+        _skey = [SFHFKeychainUtils getPasswordForUsername:self.uid andServiceName:KEYCHAIN_SERVICE_UIDSKEY error:nil];
     }
     [[HttpIcsonCookieManager sharedManager] setupCookies]; //设置cookie
 }
@@ -158,8 +159,8 @@ static KTCUser *_sharedInstance = nil;
 - (void)clearLoginInfo {
     [SFHFKeychainUtils deleteItemForUsername:self.uid andServiceName:KEYCHAIN_SERVICE_UIDSKEY error:nil];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:USERDEFAULT_UID_KEY];
-    self.uid = nil;
-    self.skey = nil;
+    _uid = nil;
+    _skey = nil;
     _hasLogin = NO;
     [[HttpIcsonCookieManager sharedManager] setupCookies]; //设置cookie
 }

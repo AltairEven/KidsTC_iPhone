@@ -8,6 +8,7 @@
 
 #import "BindPhoneViewController.h"
 #import "GValidator.h"
+#import "ThirdPartyLoginService.h"
 
 @interface BindPhoneViewController ()
 
@@ -23,6 +24,8 @@
 
 @property (nonatomic, strong) HttpRequestClient *getCodeRequest;
 
+@property (nonatomic, strong) HttpRequestClient *bindPhoneRequest;
+
 @property (nonatomic, strong) ATCountDown *localCountDown;
 
 - (void)setupSubviews;
@@ -36,6 +39,8 @@
 - (void)autoResetCodeButtonIfStartNewCountDown:(BOOL)needStartNew;
 
 - (void)setCodeButtonEnableState:(BOOL)enabled;
+
+- (void)bindPhoneSucceedWithRespData:(NSDictionary *)data;
 
 @end
 
@@ -117,7 +122,8 @@
         self.getCodeRequest = [HttpRequestClient clientWithUrlAliasName:@"TOOL_SEND_REGISTER_SMS"];
     }
     
-    NSString *codeKey = [GConfig currentSMSCodeKey];
+    NSString *codeKey = [GConfig generateSMSCodeKey];
+    [[GConfig sharedConfig] setCurrentSMSCodeKey:codeKey];
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
                            codeKey, @"codeKey",
                            self.phoneField.text, @"mobile",
@@ -141,10 +147,33 @@
         [[iToast makeText:@"请输入正确的手机号"] show];
         return;
     }
-    if ([self.codeLabel.text length] == 0) {
+    if ([self.verifyField.text length] == 0) {
         [[iToast makeText:@"请输入验证码"] show];
         return;
     }
+    
+    if (!self.bindPhoneRequest) {
+        self.bindPhoneRequest = [HttpRequestClient clientWithUrlAliasName:@"THIRD_USER_PHONE_REGISTER"];
+    }
+    
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
+                           [NSNumber numberWithInteger:[[ThirdPartyLoginService sharedService] currentLoginType]], @"thirdType",
+                           self.phoneField.text, @"mobile",
+                           self.verifyField.text, @"code",
+                           [[GConfig sharedConfig] currentSMSCodeKey], @"codeKey",
+                           [[ThirdPartyLoginService sharedService] currentOpenId], @"openId",
+                           [[ThirdPartyLoginService sharedService] currentAccessToken], @"accessToken", nil];
+    
+    __weak BindPhoneViewController *weakSelf = self;
+    [weakSelf.bindPhoneRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
+        [weakSelf bindPhoneSucceedWithRespData:responseData];
+    } failure:^(HttpRequestClient *client, NSError *error) {
+        NSString *errMsg = [error.userInfo objectForKey:kErrMsgKey];
+        if ([errMsg length] == 0) {
+            errMsg = @"绑定失败";
+        }
+        [[iToast makeText:errMsg] show];
+    }];
 }
 
 - (BOOL)isValidPhoneNumber {
@@ -191,6 +220,18 @@
     } else {
         self.codeButton.layer.borderColor = [AUITheme theme].lightTextColor.CGColor;
     }
+}
+
+- (void)bindPhoneSucceedWithRespData:(NSDictionary *)data {
+    NSDictionary *userData = [data objectForKey:@"data"];
+    if (userData && [userData isKindOfClass:[NSDictionary class]]) {
+        NSString *uid = [NSString stringWithFormat:@"%@", [userData objectForKey:@"uid"]];
+        NSString *skey = [userData objectForKey:@"skey"];
+        [[KTCUser currentUser] updateUid:uid skey:skey];
+    } else {
+        [[iToast makeText:@"获取用户信息失败, 请重新登录"] show];
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark Super methods

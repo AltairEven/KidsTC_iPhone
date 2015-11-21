@@ -15,7 +15,7 @@ NSString *const kWeiboAppKey = @"2837514135";
 NSString *const kWeiboRedirectURL = @"https://api.weibo.com/oauth2/default.html";
 
 
-typedef void (^WeiboLoginSuccessBlock)(NSString *);
+typedef void (^WeiboLoginSuccessBlock)(NSString *, NSString *);
 typedef void (^WeiboLoginFailureBlock)(NSError *);
 
 typedef void (^WeiboShareSuccessBlock)();
@@ -209,7 +209,7 @@ static WeiboManager *_sharedInstance = nil;
     if (resp.statusCode == WeiboSDKResponseStatusCodeSuccess && [resp.accessToken length] > 0) {
         self.token = resp.accessToken;
         if (self.loginSuccessBlock) {
-            self.loginSuccessBlock(resp.accessToken);
+            self.loginSuccessBlock(resp.userID, resp.accessToken);
         }
     } else {
         NSError *error = [NSError errorWithDomain:@"Weibo Auth" code:resp.statusCode userInfo:[NSDictionary dictionaryWithObject:[WeiboManager errorMessageWithStatusCode:resp.statusCode] forKey:kErrMsgKey]];
@@ -226,8 +226,8 @@ static WeiboManager *_sharedInstance = nil;
         }
     } else {
         NSError *error = [NSError errorWithDomain:@"Weibo Share" code:resp.statusCode userInfo:[NSDictionary dictionaryWithObject:[WeiboManager errorMessageWithStatusCode:resp.statusCode] forKey:kErrMsgKey]];
-        if (self.shareSuccessBlock) {
-            self.shareSuccessBlock(error);
+        if (self.shareFailureBlock) {
+            self.shareFailureBlock(error);
         }
     }
 }
@@ -242,7 +242,7 @@ static WeiboManager *_sharedInstance = nil;
     return [WeiboSDK handleOpenURL:url delegate:self];
 }
 
-- (BOOL)sendLoginRequestWithSucceed:(void (^)(NSString *))succeed failure:(void (^)(NSError *))failure {
+- (BOOL)sendLoginRequestWithSucceed:(void (^)(NSString *, NSString *))succeed failure:(void (^)(NSError *))failure {
     if (!self.isOnline) {
         return NO;
     }

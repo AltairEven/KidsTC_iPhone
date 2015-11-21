@@ -23,7 +23,7 @@ extern NSString *const kWeiboAppKey;
 
 - (BOOL)handleOpenURL:(NSURL *)url;
 
-- (BOOL)sendLoginRequestWithSucceed:(void(^)(NSString *token))succeed failure:(void(^)(NSError *error))failure;
+- (BOOL)sendLoginRequestWithSucceed:(void(^)(NSString *openId, NSString *accessToken))succeed failure:(void(^)(NSError *error))failure;
 
 - (BOOL)sendShareRequestWithObject:(WeiboShareObject *)object succeed:(void(^)())succeed failure:(void(^)(NSError *error))failure;
 

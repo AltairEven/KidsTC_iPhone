@@ -16,6 +16,12 @@ typedef enum {
 
 @interface ThirdPartyLoginService : NSObject
 
+@property (nonatomic, readonly) ThirdPartyLoginType currentLoginType;
+
+@property (nonatomic, strong, readonly) NSString *currentOpenId;
+
+@property (nonatomic, strong, readonly) NSString *currentAccessToken;
+
 + (instancetype)sharedService;
 
 + (BOOL)isOnline:(ThirdPartyLoginType)type;

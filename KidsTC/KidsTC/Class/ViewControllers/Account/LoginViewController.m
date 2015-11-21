@@ -147,8 +147,16 @@
 }
 
 - (void)handleThirdPartyLoginSucceed:(NSDictionary *)data {
-    
     [[GAlertLoadingView sharedAlertLoadingView] hide];
+    NSDictionary *userData = [data objectForKey:@"data"];
+    if (userData && [userData isKindOfClass:[NSDictionary class]]) {
+        NSString *uid = [NSString stringWithFormat:@"%@", [userData objectForKey:@"uid"]];
+        NSString *skey = [userData objectForKey:@"skey"];
+        [[KTCUser currentUser] updateUid:uid skey:skey];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        [[iToast makeText:@"登录失败"] show];
+    }
 }
 
 - (void)handleThirdPartyLoginFailure:(NSError *)error {
@@ -159,8 +167,10 @@
             BindPhoneViewController *controller = [[BindPhoneViewController alloc] initWithNibName:@"BindPhoneViewController" bundle:nil];
             [controller setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:controller animated:YES];
-        } else {
+        } else if ([errMsg length] > 0) {
             [[iToast makeText:errMsg] show];
+        } else {
+            [[iToast makeText:[error localizedDescription]] show];
         }
     }
     [[GAlertLoadingView sharedAlertLoadingView] hide];

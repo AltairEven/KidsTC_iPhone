@@ -565,6 +565,7 @@ static const int kInvalidShowPrice = 99999900;
 @property (nonatomic, strong) NSLock   *      lock;
 @property (nonatomic, strong) KTCLocation *currentLocation;
 @property (nonatomic, strong) ATCountDown *smsCodeCountDown;
+@property (nonatomic, copy) NSString *currentSMSCodeKey;
 
 + (GConfig *)sharedConfig;
 - (void)load;
@@ -621,6 +622,6 @@ static const int kInvalidShowPrice = 99999900;
 
 + (void)resetLineView:(UIView *)view withLayoutAttribute:(NSLayoutAttribute)attribute;
 
-+ (NSString *)currentSMSCodeKey;
++ (NSString *)generateSMSCodeKey;
 
 @end

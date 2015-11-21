@@ -15,7 +15,7 @@ NSString *const kWeChatAppKey = @"wx75fa1a06d38fde4e";
 
 NSString *const kWeChatLoginIdentifier = @"kWeChatLoginIdentifier";
 
-typedef void (^WeChatLoginSuccessBlock)(NSString *);
+typedef void (^WeChatLoginSuccessBlock)(NSString *, NSString *);
 typedef void (^WeChatLoginFailureBlock)(NSError *);
 
 typedef void (^WeChatShareSuccessBlock)();
@@ -130,7 +130,7 @@ static WeChatManager *_sharedInstance = nil;
     if (resp.errCode == 0) {
         if ([resp.state isEqualToString:kWeChatLoginIdentifier] && [resp.code length] > 0) {
             if (self.loginSuccessBlock) {
-                self.loginSuccessBlock(resp.code);
+                self.loginSuccessBlock(nil, resp.code);
             }
         } else {
             NSError *error = [NSError errorWithDomain:@"WeChat Auth" code:-1 userInfo:[NSDictionary dictionaryWithObject:@"微信授权失败" forKey:kErrMsgKey]];
@@ -181,7 +181,7 @@ static WeChatManager *_sharedInstance = nil;
     return [WXApi handleOpenURL:url delegate:self];
 }
 
-- (BOOL)sendLoginRequestWithSucceed:(void (^)(NSString *))succeed failure:(void (^)(NSError *))failure {
+- (BOOL)sendLoginRequestWithSucceed:(void (^)(NSString *, NSString *))succeed failure:(void (^)(NSError *))failure {
     if (!_isOnline) {
         return NO;
     }

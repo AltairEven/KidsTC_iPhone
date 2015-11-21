@@ -20,6 +20,7 @@
     if (!data || ![data isKindOfClass:[NSDictionary class]]) {
         return;
     }
+    self.channelId = [NSString stringWithFormat:@"%@", [data objectForKey:@"chId"]];
     self.type = [[data objectForKey:@"productType"] integerValue];
     NSArray *imageUrlStrings = [data objectForKey:@"imgUrl"];
     if ([imageUrlStrings isKindOfClass:[NSArray class]]) {

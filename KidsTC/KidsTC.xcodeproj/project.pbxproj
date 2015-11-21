@@ -812,6 +812,9 @@
 		8F8A08CE1BF9DE5000134A9A /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F8A08CD1BF9DE5000134A9A /* interface_list.plist */; };
 		8F8A08D21BF9E31300134A9A /* BindPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8A08D01BF9E31300134A9A /* BindPhoneViewController.m */; };
 		8F8A08D31BF9E31300134A9A /* BindPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F8A08D11BF9E31300134A9A /* BindPhoneViewController.xib */; };
+		8F98D2541C000EF900C1388A /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8F98D2521C000EF900C1388A /* AlipaySDK.bundle */; };
+		8F98D2551C000EF900C1388A /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F98D2531C000EF900C1388A /* AlipaySDK.framework */; };
+		8F98D2571C0010B500C1388A /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F98D2561C0010B500C1388A /* CoreMotion.framework */; };
 		8F9996041BF5A6740055F016 /* WeChatModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9996011BF5A6740055F016 /* WeChatModel.m */; };
 		8F9996081BF5BE590055F016 /* KTCUserRole.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9996071BF5BE590055F016 /* KTCUserRole.m */; };
 		8F9996151BF5E6560055F016 /* ChangeNickNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9996131BF5E6560055F016 /* ChangeNickNameViewController.m */; };
@@ -2238,6 +2241,9 @@
 		8F8A08CF1BF9E31300134A9A /* BindPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindPhoneViewController.h; sourceTree = "<group>"; };
 		8F8A08D01BF9E31300134A9A /* BindPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindPhoneViewController.m; sourceTree = "<group>"; };
 		8F8A08D11BF9E31300134A9A /* BindPhoneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindPhoneViewController.xib; sourceTree = "<group>"; };
+		8F98D2521C000EF900C1388A /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		8F98D2531C000EF900C1388A /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		8F98D2561C0010B500C1388A /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		8F9996001BF5A6740055F016 /* WeChatModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeChatModel.h; sourceTree = "<group>"; };
 		8F9996011BF5A6740055F016 /* WeChatModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeChatModel.m; sourceTree = "<group>"; };
 		8F9996061BF5BE590055F016 /* KTCUserRole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCUserRole.h; sourceTree = "<group>"; };
@@ -2272,6 +2278,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F98D2571C0010B500C1388A /* CoreMotion.framework in Frameworks */,
 				1EFFAE0E1BEB793E001D4245 /* ImageIO.framework in Frameworks */,
 				1E8CBBBD1BDA366900F78828 /* libsqlite3.0.tbd in Frameworks */,
 				1E8CBBBB1BDA365000F78828 /* libstdc++.6.0.9.tbd in Frameworks */,
@@ -2280,6 +2287,7 @@
 				1E943F631B7F1F520029FE74 /* CoreLocation.framework in Frameworks */,
 				1E3D8EF91B4C021600275C35 /* SystemConfiguration.framework in Frameworks */,
 				1E3D8EF71B4C020A00275C35 /* MobileCoreServices.framework in Frameworks */,
+				8F98D2551C000EF900C1388A /* AlipaySDK.framework in Frameworks */,
 				1E8CBBAD1BDA2F0100F78828 /* BaiduMapAPI_Location.framework in Frameworks */,
 				1E3D8EF51B4C01FF00275C35 /* CFNetwork.framework in Frameworks */,
 				1E8CBBAF1BDA2F0100F78828 /* BaiduMapAPI_Radar.framework in Frameworks */,
@@ -3338,6 +3346,8 @@
 		1E3D89891B4BF4A000275C35 /* alipay */ = {
 			isa = PBXGroup;
 			children = (
+				8F98D2521C000EF900C1388A /* AlipaySDK.bundle */,
+				8F98D2531C000EF900C1388A /* AlipaySDK.framework */,
 				1E3D898A1B4BF4A000275C35 /* AlixPay.h */,
 				1E3D898B1B4BF4A000275C35 /* AlixPay.m */,
 				1E3D898C1B4BF4A000275C35 /* AlixPayOrder.h */,
@@ -3532,6 +3542,7 @@
 		1E3D8EE11B4C016300275C35 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8F98D2561C0010B500C1388A /* CoreMotion.framework */,
 				1EFFAE0D1BEB793E001D4245 /* ImageIO.framework */,
 				1E8CBBBC1BDA366900F78828 /* libsqlite3.0.tbd */,
 				1E8CBBBA1BDA365000F78828 /* libstdc++.6.0.9.tbd */,
@@ -5147,6 +5158,7 @@
 				1E5CD76F1B53524E00D177CB /* StoreListView.xib in Resources */,
 				1EC4A0D81B5A001C00206BB9 /* StoreDetailViewController.xib in Resources */,
 				1E827BD01B941337008F3F08 /* ImageSelectedOff.png in Resources */,
+				8F98D2541C000EF900C1388A /* AlipaySDK.bundle in Resources */,
 				1EA8B6C71B63909200F90688 /* DiscoverViewController.xib in Resources */,
 				1E827CEF1B9D3E9F008F3F08 /* coupon_cellBG_h.png in Resources */,
 				1E7995741BCD25B80099CFF9 /* LoveHouseListViewCell.xib in Resources */,
@@ -6041,6 +6053,7 @@
 					"$(PROJECT_DIR)/KidsTC/Class/TecFramework/Thirdpart/TencentOpenAPI",
 					"$(PROJECT_DIR)/KidsTC",
 					"$(PROJECT_DIR)/KidsTC/Class/TecFramework/Thirdpart/BMapKit",
+					"$(PROJECT_DIR)/KidsTC/Class/TecFramework/Thirdpart/alipay",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/KidsTC/KidsTC.pch";
@@ -6077,6 +6090,7 @@
 					"$(PROJECT_DIR)/KidsTC/Class/TecFramework/Thirdpart/TencentOpenAPI",
 					"$(PROJECT_DIR)/KidsTC",
 					"$(PROJECT_DIR)/KidsTC/Class/TecFramework/Thirdpart/BMapKit",
+					"$(PROJECT_DIR)/KidsTC/Class/TecFramework/Thirdpart/alipay",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = KidsTC/Info.plist;

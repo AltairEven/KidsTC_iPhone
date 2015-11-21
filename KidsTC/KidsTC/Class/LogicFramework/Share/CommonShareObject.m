@@ -31,6 +31,7 @@
     object.title = title;
     object.shareDescription = description;
     object.thumbImage = thumb;
+    object.webPageUrlString = urlString;
     return object;
 }
 

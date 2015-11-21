@@ -25,7 +25,7 @@ static ThirdPartyLoginService *_sharedInstance = nil;
 
 @property (nonatomic, strong) ThirdPartyLoginFailureBlock failureBlock;
 
-- (void)handleLoginSucceed:(NSString *)token loginType:(ThirdPartyLoginType)type;
+- (void)handleLoginSucceedWithOpenId:(NSString *)openId accessToken:(NSString *)token loginType:(ThirdPartyLoginType)type;
 
 - (void)handleLoginFailure:(NSError *)error;
 
@@ -75,8 +75,8 @@ static ThirdPartyLoginService *_sharedInstance = nil;
     switch (type) {
         case ThirdPartyLoginTypeWechat:
         {
-            [[WeChatManager sharedManager] sendLoginRequestWithSucceed:^(NSString *token) {
-                [self handleLoginSucceed:token loginType:type];
+            [[WeChatManager sharedManager] sendLoginRequestWithSucceed:^(NSString *openId, NSString *accessToken) {
+                [self handleLoginSucceedWithOpenId:openId accessToken:accessToken loginType:type];
             } failure:^(NSError *error) {
                 [self handleLoginFailure:error];
             }];
@@ -84,8 +84,8 @@ static ThirdPartyLoginService *_sharedInstance = nil;
             break;
         case ThirdPartyLoginTypeQQ:
         {
-            [[TencentManager sharedManager] sendLoginRequestWithSucceed:^(NSString *token) {
-                [self handleLoginSucceed:token loginType:type];
+            [[TencentManager sharedManager] sendLoginRequestWithSucceed:^(NSString *openId, NSString *accessToken) {
+                [self handleLoginSucceedWithOpenId:openId accessToken:accessToken loginType:type];
             } failure:^(NSError *error) {
                 [self handleLoginFailure:error];
             }];
@@ -93,8 +93,8 @@ static ThirdPartyLoginService *_sharedInstance = nil;
             break;
         case ThirdPartyLoginTypeWeibo:
         {
-            ret = [[WeiboManager sharedManager] sendLoginRequestWithSucceed:^(NSString *token) {
-                [self handleLoginSucceed:token loginType:type];
+            ret = [[WeiboManager sharedManager] sendLoginRequestWithSucceed:^(NSString *openId, NSString *accessToken) {
+                [self handleLoginSucceedWithOpenId:openId accessToken:accessToken loginType:type];
             } failure:^(NSError *error) {
                 [self handleLoginFailure:error];
             }];
@@ -113,12 +113,15 @@ static ThirdPartyLoginService *_sharedInstance = nil;
 
 #pragma mark Private methods
 
-- (void)handleLoginSucceed:(NSString *)token loginType:(ThirdPartyLoginType)type {
+- (void)handleLoginSucceedWithOpenId:(NSString *)openId accessToken:(NSString *)token loginType:(ThirdPartyLoginType)type {
+    _currentLoginType = type;
+    _currentOpenId = openId;
+    _currentAccessToken = token;
     if (!self.authorizationExchangeRequest) {
         self.authorizationExchangeRequest = [HttpRequestClient clientWithUrlAliasName:@"THIRD_LOGIN"];
     }
     if ([token length] > 0) {
-        NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:token, @"openId", [NSNumber numberWithInteger:type], @"type", nil];
+        NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:openId, @"code", [NSNumber numberWithInteger:type], @"type", nil];
         
         __weak ThirdPartyLoginService *weakSelf = self;
         [weakSelf.authorizationExchangeRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
@@ -137,6 +140,8 @@ static ThirdPartyLoginService *_sharedInstance = nil;
 }
 
 - (void)handleLoginFailure:(NSError *)error {
+    _currentOpenId = nil;
+    _currentAccessToken = nil;
     if (self.failureBlock) {
         self.failureBlock(error);
     }

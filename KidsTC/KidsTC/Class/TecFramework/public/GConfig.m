@@ -533,7 +533,7 @@ static BOOL bLoadWebImage = YES;
     }
 }
 
-+ (NSString *)currentSMSCodeKey {
++ (NSString *)generateSMSCodeKey {
     NSString *deviceId = [[UIDevice currentDevice] uniqueDeviceIdentifier];
     NSTimeInterval timeStamp = [NSDate timeIntervalSinceReferenceDate];
     NSString *codeKey = [NSString stringWithFormat:@"%@%f", deviceId, timeStamp];

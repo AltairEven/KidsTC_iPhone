@@ -125,6 +125,18 @@
 }
 
 - (IBAction)didClickedShareButton:(id)sender {
+    UIButton *button = (UIButton *)sender;
+    CommonShareType type = (CommonShareType)button.tag;
+    [[CommonShareService sharedService] startThirdPartyLoginWithShareType:type object:self.shareObject Succeed:^{
+        [[iToast makeText:@"分享成功"] show];
+    } failure:^(NSError *error) {
+        NSString *errMsg = [error.userInfo objectForKey:kErrMsgKey];
+        if ([errMsg length] == 0) {
+            errMsg = @"分享失败";
+        }
+        [[iToast makeText:errMsg] show];
+    }];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)didClickedCancelButton:(id)sender {
