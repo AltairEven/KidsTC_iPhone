@@ -122,10 +122,10 @@ NSString *const kCommentCellIdentifier = @"kCommentCellIdentifier";
     }
 }
 
-- (void)setIntroductionHtmlString:(NSString *)introductionHtmlString {
-    _introductionHtmlString = introductionHtmlString;
+- (void)setIntroductionUrlString:(NSString *)introductionUrlString {
+    _introductionUrlString = introductionUrlString;
     [self.webView stopLoading];
-    [self.webView loadHTMLString:introductionHtmlString baseURL:nil];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:introductionUrlString]]];
 }
 
 #pragma mark UITableViewDataSource & UITableViewDelegate

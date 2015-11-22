@@ -8,6 +8,7 @@
 
 #import "KTCSearchCondition.h"
 #import "IcsonBaseCategory.h"
+#import "IcsonCategoryCondition.h"
 
 @implementation KTCSearchCondition
 
@@ -58,21 +59,26 @@
     }
     NSArray *conditions = [category.conditions allObjects];
     KTCSearchServiceCondition *serviceCondition = [[KTCSearchServiceCondition alloc] init];
-    for (NSDictionary *conditionDic in conditions) {
-        if ([[[conditionDic allKeys] firstObject] isEqualToString:@"a"]) {
-            serviceCondition.age = [[conditionDic allValues] firstObject];
+    for (IcsonCategoryCondition *condition in conditions) {
+        if ([condition.key isEqualToString:@"a"]) {
+            serviceCondition.age = [KTCAgeItem ageItemWithName:@"" identifier:condition.conditionItem];
+            continue;
         }
-        if ([[[conditionDic allKeys] firstObject] isEqualToString:@"c"]) {
-            serviceCondition.categoryIdentifier = [[conditionDic allValues] firstObject];
+        if ([condition.key isEqualToString:@"c"]) {
+            serviceCondition.categoryIdentifier = condition.conditionItem;
+            continue;
         }
-        if ([[[conditionDic allKeys] firstObject] isEqualToString:@"k"]) {
-            serviceCondition.keyWord = [[conditionDic allValues] firstObject];
+        if ([condition.key isEqualToString:@"k"]) {
+            serviceCondition.keyWord = condition.conditionItem;
+            continue;
         }
-        if ([[[conditionDic allKeys] firstObject] isEqualToString:@"s"]) {
-            serviceCondition.area = [[conditionDic allValues] firstObject];
+        if ([condition.key isEqualToString:@"s"]) {
+            serviceCondition.area = [KTCAreaItem areaItemWithName:@"" identifier:condition.conditionItem];
+            continue;
         }
-        if ([[[conditionDic allKeys] firstObject] isEqualToString:@"st"]) {
-            serviceCondition.sortType = (KTCSearchResultServiceSortType)[[[conditionDic allValues] firstObject] integerValue];
+        if ([condition.key isEqualToString:@"st"]) {
+            serviceCondition.sortType = (KTCSearchResultServiceSortType)[condition.conditionItem integerValue];
+            continue;
         }
     }
     
@@ -92,21 +98,26 @@
     }
     NSArray *conditions = [category.conditions allObjects];
     KTCSearchStoreCondition *storeCondition = [[KTCSearchStoreCondition alloc] init];
-    for (NSDictionary *conditionDic in conditions) {
-        if ([[[conditionDic allKeys] firstObject] isEqualToString:@"a"]) {
-            storeCondition.age = [[conditionDic allValues] firstObject];
+    for (IcsonCategoryCondition *condition in conditions) {
+        if ([condition.key isEqualToString:@"a"]) {
+            storeCondition.age = [KTCAgeItem ageItemWithName:@"" identifier:condition.conditionItem];
+            continue;
         }
-        if ([[[conditionDic allKeys] firstObject] isEqualToString:@"c"]) {
-            storeCondition.categoryIdentifier = [[conditionDic allValues] firstObject];
+        if ([condition.key isEqualToString:@"c"]) {
+            storeCondition.categoryIdentifier = condition.conditionItem;
+            continue;
         }
-        if ([[[conditionDic allKeys] firstObject] isEqualToString:@"k"]) {
-            storeCondition.keyWord = [[conditionDic allValues] firstObject];
+        if ([condition.key isEqualToString:@"k"]) {
+            storeCondition.keyWord = condition.conditionItem;
+            continue;
         }
-        if ([[[conditionDic allKeys] firstObject] isEqualToString:@"s"]) {
-            storeCondition.area = [[conditionDic allValues] firstObject];
+        if ([condition.key isEqualToString:@"s"]) {
+            storeCondition.area = [KTCAreaItem areaItemWithName:@"" identifier:condition.conditionItem];
+            continue;
         }
-        if ([[[conditionDic allKeys] firstObject] isEqualToString:@"st"]) {
-            storeCondition.sortType = (KTCSearchResultStoreSortType)[[[conditionDic allValues] firstObject] integerValue];
+        if ([condition.key isEqualToString:@"st"]) {
+            storeCondition.sortType = (KTCSearchResultStoreSortType)[condition.conditionItem integerValue];
+            continue;
         }
     }
     

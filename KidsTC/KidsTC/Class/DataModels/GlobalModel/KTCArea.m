@@ -154,5 +154,17 @@ static NSUInteger retryCount = 0;
 
 @implementation KTCAreaItem
 
++ (instancetype)areaItemWithName:(NSString *)name identifier:(NSString *)identifier {
+    if (name && ![name isKindOfClass:[NSString class]]) {
+        return nil;
+    }
+    if (identifier && ![identifier isKindOfClass:[NSString class]]) {
+        return nil;
+    }
+    KTCAreaItem *item = [[KTCAreaItem alloc] init];
+    item.name = name;
+    item.identifier = identifier;
+    return item;
+}
 
 @end

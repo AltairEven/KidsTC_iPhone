@@ -61,7 +61,7 @@ static KTCTabBarController* _shareTabBarController = nil;
     
     self.newsListVC = [[NewsViewController alloc]initWithNibName:@"NewsViewController" bundle:nil];
     self.newsTab = [[GNavController alloc] initWithRootViewController:self.newsListVC];
-    self.newsTab.tabBarItem.title = @"资讯";
+    self.newsTab.tabBarItem.title = @"知识库";
     [self.newsTab.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObject:[AUITheme theme].tabbarTitleColor_Normal forKey:NSForegroundColorAttributeName] forState:UIControlStateNormal];
     [self.newsTab.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObject:[AUITheme theme].tabbarTitleColor_Highlight forKey:NSForegroundColorAttributeName] forState:UIControlStateHighlighted];
     self.newsTab.tabBarItem.image = [[AUITheme theme].tabbar2Image_Normal imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];

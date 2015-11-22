@@ -8,6 +8,12 @@
 
 #import "GViewController.h"
 
+typedef void(^ChangeNickNameComplete)(NSString *newName);
+
 @interface ChangeNickNameViewController : GViewController
+
+@property (nonatomic, strong) ChangeNickNameComplete completeBlock;
+
+- (instancetype)initWithNickName:(NSString *)name;
 
 @end

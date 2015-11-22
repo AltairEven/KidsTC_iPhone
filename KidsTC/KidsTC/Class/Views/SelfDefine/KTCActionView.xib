@@ -28,7 +28,7 @@
                                         <constraint firstAttribute="width" constant="30" id="RJn-Oa-tJp"/>
                                         <constraint firstAttribute="height" constant="30" id="w1M-nc-jXc"/>
                                     </constraints>
-                                    <state key="normal" title="Button" image="selected"/>
+                                    <state key="normal" image="actionview_home"/>
                                     <connections>
                                         <action selector="didClickedButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="FQf-ND-cL1"/>
                                     </connections>
@@ -50,7 +50,7 @@
                                         <constraint firstAttribute="width" constant="30" id="U7r-zd-LBu"/>
                                         <constraint firstAttribute="height" constant="30" id="eff-kj-xqg"/>
                                     </constraints>
-                                    <state key="normal" title="Button" image="navigation_search"/>
+                                    <state key="normal" title="Button" image="actionview_search"/>
                                     <connections>
                                         <action selector="didClickedButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="1xX-OS-CaG"/>
                                     </connections>
@@ -72,7 +72,7 @@
                                         <constraint firstAttribute="height" constant="30" id="GXY-CT-nPE"/>
                                         <constraint firstAttribute="width" constant="30" id="vXL-8Y-agx"/>
                                     </constraints>
-                                    <state key="normal" title="Button" image="unselected"/>
+                                    <state key="normal" title="Button" image="actionview_share"/>
                                     <connections>
                                         <action selector="didClickedButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="AmA-MU-WxM"/>
                                     </connections>
@@ -132,8 +132,8 @@
         </view>
     </objects>
     <resources>
-        <image name="navigation_search" width="28" height="28"/>
-        <image name="selected" width="30" height="30"/>
-        <image name="unselected" width="30" height="30"/>
+        <image name="actionview_home" width="28" height="28"/>
+        <image name="actionview_search" width="28" height="28"/>
+        <image name="actionview_share" width="28" height="28"/>
     </resources>
 </document>

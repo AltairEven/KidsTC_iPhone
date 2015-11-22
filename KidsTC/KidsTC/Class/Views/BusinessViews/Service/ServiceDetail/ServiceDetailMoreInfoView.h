@@ -32,7 +32,7 @@ typedef  enum {
 
 @property (nonatomic, assign) ServiceDetailMoreInfoViewTag viewTag;
 
-@property (nonatomic, copy) NSString *introductionHtmlString;
+@property (nonatomic, copy) NSString *introductionUrlString;
 
 @property (nonatomic, strong) NSArray *storeListModels;
 

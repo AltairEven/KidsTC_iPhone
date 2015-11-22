@@ -415,7 +415,7 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
     [self.moreInfoView setFrame:standardFrame];
     [self.moreInfoView setStandardViewSize:standardFrame.size];
     [self.moreInfoView setViewTag:(ServiceDetailMoreInfoViewTag)self.segmentView.selectedIndex];
-    [self.moreInfoView setIntroductionHtmlString:self.detailModel.introductionHtmlString];
+    [self.moreInfoView setIntroductionUrlString:self.detailModel.introductionUrlString];
     [self.moreInfoView setStoreListModels:self.detailModel.storeItemsArray];
     [self.moreInfoView setCommentListModels:self.detailModel.commentItemsArray];
 }
@@ -524,9 +524,9 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
 
 #pragma mark Public methods
 
-- (void)setIntroductionHtmlString:(NSString *)htmlString {
-    self.detailModel.introductionHtmlString = htmlString;
-    [self.moreInfoView setIntroductionHtmlString:htmlString];
+- (void)setIntroductionUrlString:(NSString *)urlString {
+    self.detailModel.introductionUrlString = urlString;
+    [self.moreInfoView setIntroductionUrlString:urlString];
 }
 
 - (void)reloadData {

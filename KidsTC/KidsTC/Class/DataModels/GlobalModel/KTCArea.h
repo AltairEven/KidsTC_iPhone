@@ -33,4 +33,6 @@
 
 @property (nonatomic, copy) NSString *identifier;
 
++ (instancetype)areaItemWithName:(NSString *)name identifier:(NSString *)identifier;
+
 @end

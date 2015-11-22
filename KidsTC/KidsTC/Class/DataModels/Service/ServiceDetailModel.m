@@ -65,7 +65,7 @@
         self.recommendString = [recommendDic objectForKey:@"note"];
     }
     
-    self.introductionHtmlString = [data objectForKey:@"detailUrl"];
+    self.introductionUrlString = [data objectForKey:@"detailUrl"];
     
     self.isFavourate = [[data objectForKey:@"isFavor"] boolValue];
     self.phoneNumber = [data objectForKey:@"phone"];

@@ -37,4 +37,17 @@ static KTCAgeScope *_sharedInstance = nil;
 
 @implementation KTCAgeItem
 
++ (instancetype)ageItemWithName:(NSString *)name identifier:(NSString *)identifier {
+    if (name && ![name isKindOfClass:[NSString class]]) {
+        return nil;
+    }
+    if (identifier && ![identifier isKindOfClass:[NSString class]]) {
+        return nil;
+    }
+    KTCAgeItem *item = [[KTCAgeItem alloc] init];
+    item.name = name;
+    item.identifier = identifier;
+    return item;
+}
+
 @end

@@ -45,7 +45,7 @@
     [self.starsView setStarNumber:model.starNumber];
     NSMutableArray *activityViewArray = [[NSMutableArray alloc] init];
     for (ActiveModel *actM in model.activities) {
-        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 15, 15)];
         [imgView setImage:actM.image];
         [activityViewArray addObject:imgView];
     }

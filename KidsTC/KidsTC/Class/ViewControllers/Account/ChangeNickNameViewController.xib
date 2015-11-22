@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChangeNickNameViewController">
             <connections>
+                <outlet property="nickNameFiled" destination="vfV-gy-irp" id="l9c-AG-tla"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -14,7 +15,33 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="vfV-gy-irp">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="40"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="rKB-O3-GTK"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4-20个字符，可由中英文、数字、“_”、“-”组成" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tu1-Qj-da2">
+                    <rect key="frame" x="10" y="50" width="580" height="16"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="tu1-Qj-da2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="DJ5-2R-nbx"/>
+                <constraint firstAttribute="trailing" secondItem="vfV-gy-irp" secondAttribute="trailing" id="FL1-Mw-aiB"/>
+                <constraint firstItem="vfV-gy-irp" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="LJU-Nb-LfM"/>
+                <constraint firstItem="vfV-gy-irp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ayx-ca-eLR"/>
+                <constraint firstItem="tu1-Qj-da2" firstAttribute="top" secondItem="vfV-gy-irp" secondAttribute="bottom" constant="10" id="hpC-nf-3pK"/>
+                <constraint firstAttribute="trailing" secondItem="tu1-Qj-da2" secondAttribute="trailing" constant="10" id="txy-pK-kWI"/>
+            </constraints>
         </view>
     </objects>
 </document>

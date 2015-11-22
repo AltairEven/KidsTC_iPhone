@@ -59,23 +59,23 @@
 }
 
 - (void)loadIntroduction {
-    if (!self.loadIntroductionRequest) {
-        self.loadIntroductionRequest = [HttpRequestClient clientWithUrlAliasName:@"PRODUCT_GET_DESC"];
-    }
-    __weak ServiceDetailViewModel *weakSelf = self;
-    [weakSelf.loadIntroductionRequest startHttpRequestWithParameter:[NSDictionary dictionaryWithObject:self.detailModel.serviceId forKey:@"pid"] success:^(HttpRequestClient *client, NSDictionary *responseData) {
-        [weakSelf loadIntroductionSucceed:responseData];
-    } failure:^(HttpRequestClient *client, NSError *error) {
-        [weakSelf loadIntroductionFailed:error];
-    }];
+    
+    [self.view setIntroductionUrlString:self.detailModel.introductionUrlString];
+//    if (!self.loadIntroductionRequest) {
+//        self.loadIntroductionRequest = [HttpRequestClient clientWithUrlAliasName:@"PRODUCT_GET_DESC"];
+//    }
+//    __weak ServiceDetailViewModel *weakSelf = self;
+//    [weakSelf.loadIntroductionRequest startHttpRequestWithParameter:[NSDictionary dictionaryWithObject:self.detailModel.serviceId forKey:@"pid"] success:^(HttpRequestClient *client, NSDictionary *responseData) {
+//        [weakSelf loadIntroductionSucceed:responseData];
+//    } failure:^(HttpRequestClient *client, NSError *error) {
+//        [weakSelf loadIntroductionFailed:error];
+//    }];
 }
 
 - (void)loadIntroductionSucceed:(NSDictionary *)data {
     NSString *htmlString = [data objectForKey:@"data"];
     if ([htmlString isKindOfClass:[NSString class]]) {
         if ([htmlString length] > 0) {
-            self.detailModel.introductionHtmlString = htmlString;
-            [self.view setIntroductionHtmlString:htmlString];
         }
     }
 }
@@ -174,7 +174,7 @@
 
 
 - (void)resetMoreInfoViewWithViewTag:(ServiceDetailMoreInfoViewTag)viewTag {
-    if (viewTag == ServiceDetailMoreInfoViewTagIntroduction && [self.detailModel.introductionHtmlString length] == 0) {
+    if (viewTag == ServiceDetailMoreInfoViewTagIntroduction) {
         [self loadIntroduction];
     }
 }

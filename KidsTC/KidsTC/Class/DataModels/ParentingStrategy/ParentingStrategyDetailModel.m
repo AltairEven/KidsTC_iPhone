@@ -18,7 +18,9 @@
     NSDictionary *infoDic = [data objectForKey:@"info"];
     if ([infoDic isKindOfClass:[NSDictionary class]]) {
         self.isFavourite = [[infoDic objectForKey:@"isCollect"] boolValue];
-        self.mainImageUrl = [NSURL URLWithString:[infoDic objectForKey:@"image"]];
+//        self.mainImageUrl = [NSURL URLWithString:[infoDic objectForKey:@"image"]];
+        NSArray *array = [data objectForKey:@"image"];
+        self.mainImageUrl = [NSURL URLWithString:[array lastObject]];
         self.title = [infoDic objectForKey:@"title"];
         self.authorName = [infoDic objectForKey:@"authorName"];
         self.strategyDescription = [infoDic objectForKey:@"simply"];
@@ -126,7 +128,9 @@
             self.identifier = [NSString stringWithFormat:@"%@", [data objectForKey:@"id"]];
         }
         self.title = [data objectForKey:@"title"];
-        self.imageUrl = [NSURL URLWithString:[data objectForKey:@"image"]];
+//        self.imageUrl = [NSURL URLWithString:[data objectForKey:@"image"]];
+        NSArray *array = [data objectForKey:@"image"];
+        self.imageUrl = [NSURL URLWithString:[array lastObject]];
         self.cellContentString = [data objectForKey:@"desc"];
         self.timeDescription = [data objectForKey:@"time"];
         

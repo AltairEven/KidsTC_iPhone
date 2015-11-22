@@ -8,7 +8,7 @@
 
 #import "UserCenterView.h"
 
-#define UserInfoRatio (0.5)
+#define UserInfoRatio (0.6)
 
 @interface UserCenterView () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
@@ -172,12 +172,16 @@
 
 
 - (void)reloadTopView {
-    CGFloat yPosition = (SCREEN_WIDTH * UserInfoRatio - 60) / 2;
+    CGFloat yPosition = (SCREEN_WIDTH * UserInfoRatio - 40) / 2;
     if (self.dataModel) {
         CGFloat xPosition = SCREEN_WIDTH / 2 - 50;
+        UIImage *placeHolder = [UIImage imageNamed:@"userCenter_defaultFace_boy"];
+        if ([KTCUser currentUser].userRole.sex == KTCSexFemale) {
+            placeHolder = [UIImage imageNamed:@"userCenter_defaultFace_girl"];
+        }
         [UIView animateWithDuration:0.5 animations:^{
             [self.faceImageView setCenter:CGPointMake(xPosition, yPosition)];
-            [self.faceImageView setImageWithURL:self.dataModel.faceImageUrl placeholderImage:[UIImage imageNamed:@"userCenter_defaultFace"]];
+            [self.faceImageView setImageWithURL:self.dataModel.faceImageUrl placeholderImage:placeHolder];
             [self.userInfoBGView setHidden:NO];
         }];
         
@@ -219,7 +223,7 @@
         }
         
     } else {
-        CGFloat xPosition = SCREEN_WIDTH * UserInfoRatio;
+        CGFloat xPosition = SCREEN_WIDTH / 2;
         [self.faceImageView setCenter:CGPointMake(xPosition, yPosition)];
         [self.faceImageView setImage:[UIImage imageNamed:@"userCenter_noLoginFace"]];
         

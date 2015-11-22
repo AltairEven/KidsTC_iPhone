@@ -91,7 +91,11 @@
             break;
         case AccountSettingViewTagNickName:
         {
-            ChangeNickNameViewController *controller = [[ChangeNickNameViewController alloc] initWithNibName:@"ChangeNickNameViewController" bundle:nil];
+            ChangeNickNameViewController *controller = [[ChangeNickNameViewController alloc] initWithNickName:self.viewModel.settingModel.userName];
+            [controller setCompleteBlock:^(NSString *nickName){
+                self.viewModel.settingModel.userName = nickName;
+                [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
+            }];
             [controller setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:controller animated:YES];
         }

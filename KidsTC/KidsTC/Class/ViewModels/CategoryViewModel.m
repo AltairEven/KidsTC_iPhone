@@ -59,7 +59,8 @@ NSString *const kSearchParamKey = @"kSearchParamKey";
     if ([level1Array count] > 0) {
         IcsonLevel1Category *level1Category = [level1Array objectAtIndex:lvl1Index];
         IcsonLevel2Category *level2Category = [[level1Category nextLevel] objectAtIndex:lvl2Index];
-        NSDictionary *retData = [NSDictionary dictionaryWithObjectsAndKeys:level2Category.url, kSearchUrlKey, level2Category.conditions, kSearchParamKey, nil];
+        KTCSearchServiceCondition *condition = [KTCSearchServiceCondition conditionFromCategory:level2Category];
+        NSDictionary *retData = [NSDictionary dictionaryWithObjectsAndKeys:level2Category.url, kSearchUrlKey, condition, kSearchParamKey, nil];
         return retData;
     }
     return nil;

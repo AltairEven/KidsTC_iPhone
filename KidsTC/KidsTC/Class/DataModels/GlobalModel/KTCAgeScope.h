@@ -26,4 +26,6 @@
 
 @property (nonatomic, copy) NSString *identifier;
 
++ (instancetype)ageItemWithName:(NSString *)name identifier:(NSString *)identifier;
+
 @end

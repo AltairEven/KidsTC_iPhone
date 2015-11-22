@@ -33,7 +33,7 @@
 @property (nonatomic, assign) id<ServiceDetailViewDataSource> dataSource;
 @property (nonatomic, assign) id<ServiceDetailViewDelegate> delegate;
 
-- (void)setIntroductionHtmlString:(NSString *)htmlString;
+- (void)setIntroductionUrlString:(NSString *)urlString;
 
 - (void)reloadData;
 

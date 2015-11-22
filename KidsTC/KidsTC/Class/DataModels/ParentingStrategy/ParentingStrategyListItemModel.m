@@ -20,7 +20,9 @@
         if ([data objectForKey:@"id"]) {
             self.identifier = [NSString stringWithFormat:@"%@", [data objectForKey:@"id"]];
         }
-        self.imageUrl = [NSURL URLWithString:[data objectForKey:@"image"]];
+//        self.imageUrl = [NSURL URLWithString:[data objectForKey:@"image"]];
+        NSArray *array = [data objectForKey:@"image"];
+        self.imageUrl = [NSURL URLWithString:[array lastObject]];
         self.title = [data objectForKey:@"title"];
         self.editorFaceImageUrl = [NSURL URLWithString:[data objectForKey:@"authorImgUrl"]];
         self.editorName = [data objectForKey:@"authorName"];

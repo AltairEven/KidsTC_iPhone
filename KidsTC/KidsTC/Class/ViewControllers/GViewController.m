@@ -125,16 +125,16 @@ typedef enum {
 		
 		if (!self.isNavShowType)
 		{
-			backButton.frame = CGRectMake(0.0f, 0.0f, 30.0f, 30.0f);
+			backButton.frame = CGRectMake(0.0f, 0.0f, 28.0f, 28.0f);
 		}
         else
 		{
 			[backButton setImage:imageNormal forState:UIControlStateNormal];
 			[backButton setImage:imageHighlight forState:UIControlStateHighlighted];
-			backButton.frame = CGRectMake(0.0f, 0.0f, 30.f, 30.0f);
+			backButton.frame = CGRectMake(0.0f, 0.0f, 28.f, 28.0f);
 		}
 
-        [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -15.f, 0, 0)];
+        [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, 4, 0, -4)];
         
 		[backButton addTarget:self action:@selector(goBackController:) forControlEvents:UIControlEventTouchUpInside];
 		UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:backButton];
@@ -236,7 +236,7 @@ typedef enum {
         backButton.frame = CGRectMake(0.0f, 0.0f, 28.0f, 28.0f);
     }
     
-    [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -15.f, 0, 0)];
+    [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, 4, 0, -4)];
     
     [backButton addTarget:self action:@selector(goBackController:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:backButton];
@@ -262,7 +262,7 @@ typedef enum {
         backButton.frame = CGRectMake(0.0f, 0.0f, 28.0f, 28.0f);
     }
     
-    [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, 4, 0, -4)];
     
     [backButton addTarget:self action:@selector(goBackController:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:backButton];

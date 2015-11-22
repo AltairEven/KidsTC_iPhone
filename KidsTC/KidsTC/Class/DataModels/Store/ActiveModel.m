@@ -35,7 +35,12 @@
             break;
         case ActiveTypeTuan:
         {
-            retImage = [UIImage imageNamed:@"store_tuan"];
+            retImage = [UIImage imageNamed:@"service_tuan"];
+        }
+            break;
+        case ActiveTypeMiao:
+        {
+            retImage = [UIImage imageNamed:@"service_miao"];
         }
             break;
         default:

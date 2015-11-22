@@ -20,8 +20,11 @@
 #import "CommentListViewController.h"
 #import "StoreMoreDetailViewController.h"
 #import "OrderCommentViewController.h"
+#import "KTCActionView.h"
+#import "KTCSearchViewController.h"
+#import "CommonShareViewController.h"
 
-@interface StoreDetailViewController () <StoreDetailViewDelegate, StoreDetailBottomViewDelegate>
+@interface StoreDetailViewController () <StoreDetailViewDelegate, StoreDetailBottomViewDelegate, KTCActionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet StoreDetailView *detailView;
 @property (weak, nonatomic) IBOutlet StoreDetailBottomView *bottomView;
@@ -30,6 +33,8 @@
 @property (nonatomic, strong) StoreDetailViewModel *viewModel;
 
 - (void)setupBottomView;
+
+- (void)showActionView;
 
 @end
 
@@ -57,6 +62,9 @@
     [self.viewModel setNetErrorBlock:^(NSError *error) {
         [weakSelf showConnectError:YES];
     }];
+    
+    
+    [self setupRightBarButton:nil target:self action:@selector(showActionView) frontImage:@"navigation_more" andBackImage:@"navigation_more"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -171,12 +179,55 @@
     }
 }
 
+#pragma mark KTCActionViewDelegate
+
+- (void)actionViewDidClickedWithTag:(KTCActionViewTag)tag {
+    [[KTCActionView actionView] hide];
+    switch (tag) {
+        case KTCActionViewTagHome:
+        {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            [[KTCTabBarController shareTabBarController] setSelectedIndex:KTCTabHome];
+        }
+            break;
+        case KTCActionViewTagSearch:
+        {
+            KTCSearchViewController *controller = [[KTCSearchViewController alloc] initWithNibName:@"KTCSearchViewController" bundle:nil];
+            [controller setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+            break;
+        case KTCActionViewTagShare:
+        {
+            CommonShareObject *shareObject = [CommonShareObject shareObjectWithTitle:self.viewModel.detailModel.storeName description:[NSString stringWithFormat:@"【童成网】推荐：%@", self.viewModel.detailModel.storeName] thumbImage:[UIImage imageNamed:@"userCenter_defaultFace_boy"] urlString:@"www.kidstc.com"];
+            shareObject.identifier = self.storeId;
+            shareObject.followingContent = @"【童成网】";
+            CommonShareViewController *controller = [CommonShareViewController instanceWithShareObject:shareObject];
+            
+            [self presentViewController:controller animated:YES completion:nil] ;
+        }
+            break;
+        default:
+            break;
+    }
+}
+
 #pragma mark Privated methods
 
 
 - (void)setupBottomView {
     if ([[KTCUser currentUser] hasLogin]) {
         [self.bottomView setFavourite:self.viewModel.detailModel.isFavourate];
+    }
+}
+
+- (void)showActionView {
+    if ([[KTCActionView actionView] isShowing]) {
+        [[KTCActionView actionView] hide];
+        [[KTCActionView actionView] setDelegate:nil];
+    } else {
+        [[KTCActionView actionView] showInViewController:self];
+        [[KTCActionView actionView] setDelegate:self];
     }
 }
 

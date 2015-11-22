@@ -41,7 +41,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <inset key="titleEdgeInsets" minX="0.0" minY="35" maxX="20" maxY="0.0"/>
                     <inset key="imageEdgeInsets" minX="25" minY="0.0" maxX="0.0" maxY="15"/>
-                    <state key="normal" title="评价" image="phone2">
+                    <state key="normal" title="评价" image="storedetail_comment">
                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -96,6 +96,6 @@
     </objects>
     <resources>
         <image name="favourate_n" width="30" height="30"/>
-        <image name="phone2" width="30" height="30"/>
+        <image name="storedetail_comment" width="28" height="28"/>
     </resources>
 </document>

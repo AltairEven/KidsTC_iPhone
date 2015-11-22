@@ -54,10 +54,18 @@
             [self.cellImageView setImage:self.cellImage];
         } else if (self.cellImageUrl) {
             //其次使用网络头像
-            [self.cellImageView setImageWithURL:self.cellImageUrl placeholderImage:[UIImage imageNamed:@"userCenter_defaultFace"]];
+            UIImage *placeHolder = [UIImage imageNamed:@"userCenter_defaultFace_boy"];
+            if ([KTCUser currentUser].userRole.sex == KTCSexFemale) {
+                placeHolder = [UIImage imageNamed:@"userCenter_defaultFace_girl"];
+            }
+            [self.cellImageView setImageWithURL:self.cellImageUrl placeholderImage:placeHolder];
         } else {
             //默认头像
-            [self.cellImageView setImage:[UIImage imageNamed:@"userCenter_defaultFace"]];
+            UIImage *defaultImage = [UIImage imageNamed:@"userCenter_defaultFace_boy"];
+            if ([KTCUser currentUser].userRole.sex == KTCSexFemale) {
+                defaultImage = [UIImage imageNamed:@"userCenter_defaultFace_girl"];
+            }
+            [self.cellImageView setImage:defaultImage];
         }
         return;
     }  else {

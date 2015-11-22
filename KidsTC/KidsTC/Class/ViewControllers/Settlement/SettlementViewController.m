@@ -103,33 +103,45 @@
 #pragma mark Private methods
 
 - (void)submitOrderSucceed {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"下单成功" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *goToOrderDetailAction = [UIAlertAction actionWithTitle:@"查看订单" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"下单成功" preferredStyle:UIAlertControllerStyleAlert];
+//    UIAlertAction *goToOrderDetailAction = [UIAlertAction actionWithTitle:@"查看订单" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        [self goToOrderDetailViewController];
+//    }];
+//    [alertController addAction:goToOrderDetailAction];
+//    if (self.viewModel.paymentInfo.paymentType == KTCPaymentTypeNone) {
+//        UIAlertAction *goToPay = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//            [self.navigationController popToRootViewControllerAnimated:YES];
+//        }];
+//        [alertController addAction:goToPay];
+//    } else {
+//        UIAlertAction *goToPay = [UIAlertAction actionWithTitle:@"去支付" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//            [KTCPaymentService startPaymentWithInfo:self.viewModel.paymentInfo succeed:^{
+//                [self goToOrderDetailViewController];
+//            } failure:^(NSError *error) {
+//                NSString *errMsg = @"支付失败";
+//                NSString *text = [[error userInfo] objectForKey:kErrMsgKey];
+//                if ([text isKindOfClass:[NSString class]] && [text length] > 0) {
+//                    errMsg = text;
+//                }
+//                [[iToast makeText:errMsg] show];
+//                [self goToOrderDetailViewController];
+//            }];
+//        }];
+//        [alertController addAction:goToPay];
+//    }
+//    [self presentViewController:alertController animated:YES completion:nil];
+    
+    [KTCPaymentService startPaymentWithInfo:self.viewModel.paymentInfo succeed:^{
+        [self goToOrderDetailViewController];
+    } failure:^(NSError *error) {
+        NSString *errMsg = @"支付失败";
+        NSString *text = [[error userInfo] objectForKey:kErrMsgKey];
+        if ([text isKindOfClass:[NSString class]] && [text length] > 0) {
+            errMsg = text;
+        }
+        [[iToast makeText:errMsg] show];
         [self goToOrderDetailViewController];
     }];
-    [alertController addAction:goToOrderDetailAction];
-    if (self.viewModel.paymentInfo.paymentType == KTCPaymentTypeNone) {
-        UIAlertAction *goToPay = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }];
-        [alertController addAction:goToPay];
-    } else {
-        UIAlertAction *goToPay = [UIAlertAction actionWithTitle:@"去支付" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [KTCPaymentService startPaymentWithInfo:self.viewModel.paymentInfo succeed:^{
-                [self goToOrderDetailViewController];
-            } failure:^(NSError *error) {
-                NSString *errMsg = @"支付失败";
-                NSString *text = [[error userInfo] objectForKey:kErrMsgKey];
-                if ([text isKindOfClass:[NSString class]] && [text length] > 0) {
-                    errMsg = text;
-                }
-                [[iToast makeText:errMsg] show];
-                [self goToOrderDetailViewController];
-            }];
-        }];
-        [alertController addAction:goToPay];
-    }
-    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)goToOrderDetailViewController {

@@ -11,7 +11,8 @@
 typedef enum {
     ActiveTypeGift = 1,
     ActiveTypePreferential,
-    ActiveTypeTuan
+    ActiveTypeTuan,
+    ActiveTypeMiao
 }ActiveType;
 
 @interface ActiveModel : NSObject

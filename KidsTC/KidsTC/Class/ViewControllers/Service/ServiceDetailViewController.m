@@ -73,7 +73,7 @@
         [weakSelf showConnectError:YES];
     }];
     
-    [self setupRightBarButton:@"。。。" target:self action:@selector(showActionView) frontImage:nil andBackImage:nil];
+    [self setupRightBarButton:nil target:self action:@selector(showActionView) frontImage:@"navigation_more" andBackImage:@"navigation_more"];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -176,7 +176,7 @@
             break;
         case KTCActionViewTagShare:
         {
-            CommonShareObject *shareObject = [CommonShareObject shareObjectWithTitle:self.viewModel.detailModel.serviceName description:[NSString stringWithFormat:@"【童成网】推荐：%@", self.viewModel.detailModel.serviceName] thumbImage:[UIImage imageNamed:@"userCenter_defaultFace"] urlString:@"www.baidu.com"];
+            CommonShareObject *shareObject = [CommonShareObject shareObjectWithTitle:self.viewModel.detailModel.serviceName description:[NSString stringWithFormat:@"【童成网】推荐：%@", self.viewModel.detailModel.serviceName] thumbImage:[UIImage imageNamed:@"userCenter_defaultFace_boy"] urlString:@"www.kidstc.com"];
             shareObject.identifier = self.serviceId;
             shareObject.followingContent = @"【童成网】";
             CommonShareViewController *controller = [CommonShareViewController instanceWithShareObject:shareObject];

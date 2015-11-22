@@ -27,10 +27,17 @@
     {
         bLoad = YES;
         StoreDetailBottomView *view = [GConfig getObjectFromNibWithView:self];
+        [self buildSubviews];
         return view;
     }
     bLoad = NO;
     return self;
+}
+
+
+- (void)buildSubviews {
+    [self.favourateButton setBackgroundColor:[AUITheme theme].globalBGColor forState:UIControlStateNormal];
+    [self.commentButton setBackgroundColor:[AUITheme theme].globalBGColor forState:UIControlStateNormal];
 }
 
 - (void)setFavourite:(BOOL)isFavourite {

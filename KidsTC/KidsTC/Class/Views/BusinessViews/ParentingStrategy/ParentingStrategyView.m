@@ -53,7 +53,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 5)];
+    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 5)];
     if (!self.cellNib) {
         self.cellNib = [UINib nibWithNibName:NSStringFromClass([ParentingStrategyViewCell class]) bundle:nil];
@@ -97,6 +97,14 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     ParentingStrategyListItemModel *model = [self.listModels objectAtIndex:indexPath.row];
     return [model cellHeight];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 2.5;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 2.5;
 }
 
 

@@ -55,7 +55,7 @@
 
 @property (nonatomic, copy) NSString *phoneNumber;
 
-@property (nonatomic, copy) NSString *introductionHtmlString;
+@property (nonatomic, copy) NSString *introductionUrlString;
 
 @property (nonatomic, strong) NSArray<StoreListItemModel *> *storeItemsArray;
 
