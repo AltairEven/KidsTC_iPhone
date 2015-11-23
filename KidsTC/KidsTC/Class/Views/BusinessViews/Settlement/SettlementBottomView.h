@@ -20,6 +20,8 @@
 
 @property (nonatomic, assign) id<SettlementBottomViewDelegate> delegate;
 
+@property (weak, nonatomic) IBOutlet UIButton *confirmButton;
+
 @property (nonatomic, assign) CGFloat price;
 
 - (void)setSubmitEnable:(BOOL)enabled;

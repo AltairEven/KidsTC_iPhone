@@ -104,9 +104,10 @@ static KTCSearchService *_sharedInstance;
             [requestParam setObject:[NSString stringWithFormat:@"%d", condition.sortType] forKey:@"st"];
         }
     }
+    [requestParam setObject:[[GConfig sharedConfig] currentLocationCoordinateString] forKey:@"mapAddr"];
     
     __weak KTCSearchService *weakSelf = self;
-    [weakSelf.storeSearchRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
+    [weakSelf.storeSearchRequest startHttpRequestWithParameter:requestParam success:^(HttpRequestClient *client, NSDictionary *responseData) {
         if (success) {
             success(responseData);
         }

@@ -27,14 +27,14 @@
             if ([key isEqualToString:@"refund_anytime"]) {
                 BOOL bSupport = [[singleInsurance objectForKey:key] boolValue];
                 if (bSupport) {
-                    Insurance *insReparation = [[Insurance alloc] initWithType:InsuranceTypeReturnAnyTime description:@"随时退"];
+                    Insurance *insReparation = [[Insurance alloc] initWithType:InsuranceTypeRefundAnyTime description:@"随时退"];
                     [tempInsArray addObject:insReparation];
                 }
             }
             if ([key isEqualToString:@"refund_outdate"]) {
                 BOOL bSupport = [[singleInsurance objectForKey:key] boolValue];
                 if (bSupport) {
-                    Insurance *insReturn = [[Insurance alloc] initWithType:InsuranceTypeReturnOutOfDate description:@"过期退"];
+                    Insurance *insReturn = [[Insurance alloc] initWithType:InsuranceTypeRefundOutOfDate description:@"过期退"];
                     [tempInsArray addObject:insReturn];
                 }
             }

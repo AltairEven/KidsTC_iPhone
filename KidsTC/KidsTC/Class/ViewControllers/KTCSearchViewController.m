@@ -87,9 +87,24 @@
             break;
     }
     condition.keyWord = kw;
-    KTCSearchResultViewController *controller = [[KTCSearchResultViewController alloc] initWithSearchType:self.searchView.type condition:condition];
-    [controller setHidesBottomBarWhenPushed:YES];
-    [self.navigationController pushViewController:controller animated:YES];
+    
+    BOOL needPush = YES;
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[KTCSearchResultViewController class]]) {
+            needPush = NO;
+            KTCSearchResultViewController *resultVC = (KTCSearchResultViewController *)controller;
+            resultVC.searchType = self.searchView.type;
+            resultVC.searchCondition = condition;
+            resultVC.needRefresh = YES;
+            [self.navigationController popToViewController:controller animated:YES];
+            break;
+        }
+    }
+    if (needPush) {
+        KTCSearchResultViewController *controller = [[KTCSearchResultViewController alloc] initWithSearchType:self.searchView.type condition:condition];
+        [controller setHidesBottomBarWhenPushed:YES];
+        [self.navigationController pushViewController:controller animated:YES];
+    }
 }
 
 - (void)searchView:(KTCSearchView *)searchView didSelectedHotKeyAtIndex:(NSUInteger)index {

@@ -50,7 +50,8 @@
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
                            [NSNumber numberWithInteger:LoveHouseLoadType], @"type",
                            [NSNumber numberWithInteger:self.currentPage], @"page",
-                           [NSNumber numberWithInteger:PageSize], @"pageCount", nil];
+                           [NSNumber numberWithInteger:PageSize], @"pageCount",
+                           [[GConfig sharedConfig] currentLocationCoordinateString], @"mapAddr", nil];
     __weak LoveHouseListViewModel *weakSelf = self;
     [weakSelf.loadHouseRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [weakSelf loadHouseListSucceed:responseData];
@@ -171,7 +172,8 @@
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
                            [NSNumber numberWithInteger:LoveHouseLoadType], @"type",
                            [NSNumber numberWithInteger:nextPage], @"page",
-                           [NSNumber numberWithInteger:PageSize], @"pageCount", nil];
+                           [NSNumber numberWithInteger:PageSize], @"pageCount",
+                           [[GConfig sharedConfig] currentLocationCoordinateString], @"mapAddr", nil];
     __weak LoveHouseListViewModel *weakSelf = self;
     [weakSelf.loadHouseRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [weakSelf loadMoreHouseListSucceed:responseData];

@@ -155,8 +155,15 @@
 - (void)reloadNetworkData {
     __weak SettlementViewController *weakSelf = self;
     [[GAlertLoadingView sharedAlertLoadingView] show];
+    [self.bottomView.confirmButton setEnabled:NO];
     [weakSelf.viewModel startUpdateDataWithSucceed:^(NSDictionary *data) {
         [weakSelf.bottomView setPrice:weakSelf.viewModel.dataModel.totalPrice];
+        [weakSelf.bottomView.confirmButton setEnabled:YES];
+        if (weakSelf.viewModel.dataModel.needPay) {
+            [weakSelf.bottomView.confirmButton setTitle:@"确认支付" forState:UIControlStateNormal];
+        } else {
+            [weakSelf.bottomView.confirmButton setTitle:@"提交订单" forState:UIControlStateNormal];
+        }
         [[GAlertLoadingView sharedAlertLoadingView] hide];
         [weakSelf.bottomView setSubmitEnable:YES];
     } failure:^(NSError *error) {

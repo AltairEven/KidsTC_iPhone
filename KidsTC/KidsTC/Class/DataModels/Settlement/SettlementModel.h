@@ -47,6 +47,8 @@
 
 @property (nonatomic, readonly) CGFloat totalPrice;
 
+@property (nonatomic, readonly) BOOL needPay;
+
 - (instancetype)initWithRawData:(NSDictionary *)data;
 
 @end

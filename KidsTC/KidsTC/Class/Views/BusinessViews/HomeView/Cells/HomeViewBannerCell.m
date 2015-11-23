@@ -52,11 +52,7 @@
     UIImageView *imageView = nil;
     imageView = [[UIImageView alloc] initWithFrame:frame];
     NSURL *imageUrl = [self.imageUrlsArray objectAtIndex:index];
-    if (index == 1) {
-        [imageView setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"detail_banner"]];
-    } else {
-        [imageView setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"home4"]];
-    }
+    [imageView setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"placeholder_400_400"]];
     return imageView;
 }
 

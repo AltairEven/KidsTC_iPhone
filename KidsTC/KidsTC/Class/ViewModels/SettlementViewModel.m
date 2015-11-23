@@ -144,7 +144,7 @@
     [weakSelf.submitOrderRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         NSDictionary *dataDic = [responseData objectForKey:@"data"];
         if (dataDic && [dataDic isKindOfClass:[NSDictionary class]]) {
-            _orderId = [dataDic objectForKey:@"orderNo"];
+            _orderId = [NSString stringWithFormat:@"%@", [dataDic objectForKey:@"orderNo"]];
         }
         if ([weakSelf.orderId length] > 0) {
             [weakSelf submitOrderSucceed:dataDic];

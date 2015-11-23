@@ -76,7 +76,7 @@ static BOOL bLoadWebImage = YES;
 - (KTCLocation *)currentLocation {
     if (!_currentLocation) {
         CLLocation *location = [[CLLocation alloc] initWithLatitude:DefailtLatitude longitude:DefaultLongitude];
-        _currentLocation = [[KTCLocation alloc] initWithLocation:location locationDescription:@"正在定位"];
+        _currentLocation = [[KTCLocation alloc] initWithLocation:location locationDescription:@"正在定位···"];
     }
     return _currentLocation;
 }

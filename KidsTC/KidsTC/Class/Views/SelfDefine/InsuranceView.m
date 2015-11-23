@@ -76,11 +76,11 @@
     
     //reset
     for (Insurance *ens in self.supportedInsurance) {
-        if (ens.type == InsuranceTypeReturnAnyTime) {
+        if (ens.type == InsuranceTypeRefundAnyTime) {
             [self.firstButton setTitleColor:RGBA(129, 25, 31, 1) forState:UIControlStateNormal];
             [self.firstButton setImage:[UIImage imageNamed:@"yes"] forState:UIControlStateNormal];
         }
-        if (ens.type == InsuranceTypeReturnOutOfDate) {
+        if (ens.type == InsuranceTypeRefundOutOfDate) {
             [self.secondButton setTitleColor:RGBA(129, 25, 31, 1) forState:UIControlStateNormal];
             [self.secondButton setImage:[UIImage imageNamed:@"yes"] forState:UIControlStateNormal];
         }

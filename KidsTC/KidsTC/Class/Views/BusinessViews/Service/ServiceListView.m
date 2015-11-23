@@ -16,6 +16,8 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UINib *cellNib;
 
+@property (nonatomic, strong) NSArray *listModels;
+
 @property (nonatomic, assign) BOOL noMoreData;
 
 - (void)pullToRefreshTable;
@@ -92,11 +94,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 #pragma mark UITableViewDataSource & UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSInteger number = 0;
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(numberOfServiceInListView:)]) {
-        number = [self.dataSource numberOfServiceInListView:self];
-    }
-    return number;
+    return [self.listModels count];
 }
 
 
@@ -105,16 +103,15 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     if (!cell) {
         cell =  [[[NSBundle mainBundle] loadNibNamed:@"ServiceListViewCell" owner:nil options:nil] objectAtIndex:0];
     }
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(itemModelForServiceListView:atIndex:)]) {
-        ServiceListItemModel *model = [self.dataSource itemModelForServiceListView:self atIndex:indexPath.row];
-        [cell configWithItemModel:model];
-    }
+    ServiceListItemModel *model = [self.listModels objectAtIndex:indexPath.row];
+    [cell configWithItemModel:model];
     return cell;
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [ServiceListViewCell cellHeight];
+    ServiceListItemModel *model = [self.listModels objectAtIndex:indexPath.row];
+    return [model cellHeight];
 }
 
 
@@ -144,9 +141,10 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 #pragma mark Public methods
 
 - (void)reloadData {
-    if (self.dataSource) {
-        [self.tableView reloadData];
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(itemModelsForServiceListView:)]) {
+        self.listModels = [self.dataSource itemModelsForServiceListView:self];
     }
+    [self.tableView reloadData];
 }
 
 - (void)startRefresh {

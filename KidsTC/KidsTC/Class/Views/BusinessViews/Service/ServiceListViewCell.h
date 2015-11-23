@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ServiceListItemModel.h"
 #import "FiveStarsView.h"
 #import "RichPriceView.h"
-
-@class ServiceListItemModel;
 
 @interface ServiceListViewCell : UITableViewCell
 

@@ -1047,10 +1047,10 @@ NSInteger sortImageDictionaryWithIdx(id v1, id v2, void *context)
 
 + (BOOL)copyFileFormBundlePath:(NSString *)bundlePath toFilePath:(NSString *)filePath {
     NSFileManager *manager = [NSFileManager defaultManager];
-    if ([manager fileExistsAtPath:filePath isDirectory:NO]) {
+    if ([manager fileExistsAtPath:filePath isDirectory:NULL]) {
         return YES;
     }
-    if (![manager fileExistsAtPath:bundlePath isDirectory:NO]) {
+    if (![manager fileExistsAtPath:bundlePath isDirectory:NULL]) {
         return NO;
     }
     BOOL checkCopyValidData = YES;//判断是否拷贝成功

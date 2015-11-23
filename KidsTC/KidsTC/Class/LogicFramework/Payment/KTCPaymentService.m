@@ -16,7 +16,7 @@
     switch (info.paymentType) {
         case KTCPaymentTypeNone:
         {
-            
+            succeed();
         }
             break;
         case KTCPaymentTypeAlipay:

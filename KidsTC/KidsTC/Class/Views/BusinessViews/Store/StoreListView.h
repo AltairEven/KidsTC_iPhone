@@ -13,9 +13,7 @@
 
 @protocol StoreListViewDataSource <NSObject>
 
-- (NSUInteger)numberOfStoresInListView:(StoreListView *)listView;
-
-- (StoreListItemModel *)itemModelForStoreListView:(StoreListView *)listView atIndex:(NSUInteger)index;
+- (NSArray *)itemModelsForStoreListView:(StoreListView *)listView;
 
 @end
 

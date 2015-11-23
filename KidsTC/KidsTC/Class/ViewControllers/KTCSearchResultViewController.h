@@ -10,6 +10,12 @@
 
 @interface KTCSearchResultViewController : GViewController
 
+@property (nonatomic, strong) KTCSearchCondition *searchCondition;
+
+@property (nonatomic, assign) KTCSearchType searchType;
+
+@property (nonatomic, assign) BOOL needRefresh;
+
 - (instancetype)initWithSearchType:(KTCSearchType)type condition:(KTCSearchCondition *)condition;
 
 @end

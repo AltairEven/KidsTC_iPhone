@@ -48,6 +48,8 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 
 @property (nonatomic, strong) SettlementModel *model;
 
+- (void)setCell:(UITableViewCell *)cell enabled:(BOOL)enabled;
+
 @end
 
 @implementation SettlementView
@@ -154,7 +156,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
                     [self.couponDescriptionLabel setTextColor:[UIColor darkGrayColor]];
                     [self.couponDescriptionLabel setText:@"未使用"];
                 }
-                [self.couponCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+                [self setCell:self.couponCell enabled:self.model.needPay];
                 return self.couponCell;
             } else {
                 NSString *scoreText = [NSString stringWithFormat:@"%lu", (unsigned long)self.model.score];
@@ -162,7 +164,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
                 NSMutableAttributedString *attrText = [[NSMutableAttributedString alloc] initWithString:text];
                 [attrText addAttribute:NSForegroundColorAttributeName value:[UIColor orangeColor] range:NSMakeRange(2,[scoreText length])];
                 [self.totalScoreLabel setAttributedText:attrText];
-                [self.scoreCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+                [self setCell:self.scoreCell enabled:self.model.needPay];
                 return self.scoreCell;
             }
         }
@@ -176,7 +178,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
             PaymentTypeModel *paymentModel = [self.model.supportedPaymentTypes objectAtIndex:indexPath.row];
             [cell setLogo:paymentModel.logo];
             [cell setPaymentName:paymentModel.name];
-            [cell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+            [self setCell:cell enabled:self.model.needPay];
             return cell;
         }
             break;
@@ -410,7 +412,18 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
                 index = arrayIndex;
             }
         }
-        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:SettlementViewSectionPayment] animated:NO scrollPosition:UITableViewScrollPositionNone];
+        if (self.model.needPay) {
+            [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:SettlementViewSectionPayment] animated:NO scrollPosition:UITableViewScrollPositionNone];
+        }
+    }
+}
+
+- (void)setCell:(UITableViewCell *)cell enabled:(BOOL)enabled {
+    [cell setUserInteractionEnabled:enabled];
+    if (enabled) {
+        [cell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    } else {
+        [cell.contentView setBackgroundColor:RGBA(250, 250, 250, 1)];
     }
 }
 

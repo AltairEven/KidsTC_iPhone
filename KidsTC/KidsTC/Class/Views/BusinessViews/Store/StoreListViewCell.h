@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "FiveStarsView.h"
-
-@class StoreListItemModel;
+#import "StoreListItemModel.h"
 
 @interface StoreListViewCell : UITableViewCell
 

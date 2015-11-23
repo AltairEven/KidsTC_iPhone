@@ -21,12 +21,6 @@
 
 @property (nonatomic, strong) KTCSearchResultHeaderView *headerView;
 
-@property (nonatomic, strong) KTCSearchCondition *searchCondition;
-
-@property (nonatomic, assign) KTCSearchType searchType;
-
-@property (nonatomic, assign) BOOL isFirstAppear;
-
 @end
 
 @implementation KTCSearchResultViewController
@@ -36,7 +30,7 @@
     if (self) {
         self.searchType = type;
         self.searchCondition = condition;
-        self.isFirstAppear = YES;
+        self.needRefresh = YES;
     }
     return self;
 }
@@ -45,8 +39,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.resultView.delegate = self;
-    [self.resultView setCurrentSearchType:self.searchType];
     self.viewModel = [[KTCSearchResultViewModel alloc] initWithView:self.resultView];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    [self.resultView setLocation:[GConfig sharedConfig].currentLocation.locationDescription];
+    [self.resultView setCurrentSearchType:self.searchType];
     self.viewModel.searchType = self.searchType;
     switch (self.searchType) {
         case KTCSearchTypeService:
@@ -64,16 +64,11 @@
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
-}
-
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if (self.isFirstAppear) {
+    if (self.needRefresh) {
         [self.viewModel startUpdateDataWithSearchType:self.viewModel.searchType];
-        self.isFirstAppear = NO;
+        self.needRefresh = NO;
     }
 }
 

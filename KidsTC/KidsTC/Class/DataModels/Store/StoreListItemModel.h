@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ActiveModel.h"
+#import "ActivityLogoItem.h"
 
 @interface StoreListItemModel : NSObject
 
@@ -19,10 +20,18 @@
 
 @property (nonatomic, assign) NSUInteger starNumber;
 
-@property (nonatomic, strong) NSArray *activities;
+@property (nonatomic, assign) NSUInteger commentCount;
 
 @property (nonatomic, copy) NSString *distanceDescription;
 
+@property (nonatomic, copy) NSString *feature;
+
+@property (nonatomic, copy) NSString *businessZone;
+
+@property (nonatomic, strong) NSArray <ActivityLogoItem *> *activityLogoItems;
+
 - (instancetype)initWithRawData:(NSDictionary *)data;
+
+- (CGFloat)cellHeight;
 
 @end

@@ -26,6 +26,4 @@
 
 - (void)submitOrderWithSucceed:(void (^)(NSDictionary *data))succeed failure:(void (^)(NSError *error))failure;
 
-- (void)goToPay;
-
 @end

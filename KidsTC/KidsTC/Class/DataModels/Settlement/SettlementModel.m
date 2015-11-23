@@ -73,6 +73,12 @@
         self.score = [[data objectForKey:@"scorenum"] integerValue];
         
         _totalPrice = (self.price * self.count) - self.promotionModel.cutAmount - (self.usedScore * ScoreCoefficient);
+        
+        if (self.totalPrice <= 0) {
+            _needPay = NO;
+        } else {
+            _needPay = YES;
+        }
     }
     return self;
 }

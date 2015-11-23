@@ -13,9 +13,7 @@
 
 @protocol ServiceListViewDataSource <NSObject>
 
-- (NSUInteger)numberOfServiceInListView:(ServiceListView *)listView;
-
-- (ServiceListItemModel *)itemModelForServiceListView:(ServiceListView *)listView atIndex:(NSUInteger)index;
+- (NSArray *)itemModelsForServiceListView:(ServiceListView *)listView;
 
 @end
 

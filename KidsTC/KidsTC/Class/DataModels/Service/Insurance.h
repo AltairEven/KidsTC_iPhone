@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
-    InsuranceTypeReturnAnyTime,
-    InsuranceTypeReturnOutOfDate
+    InsuranceTypeRefundAnyTime,
+    InsuranceTypeRefundOutOfDate,
+    InsuranceTypeRefundPartially
 }InsuranceType;
 
 @interface Insurance : NSObject

@@ -310,12 +310,8 @@ static NSString *const kStoreCellIdentifier = @"kStoreCellIdentifier";
 
 #pragma mark ServiceListViewDataSource & ServiceListViewDelegate
 
-- (NSUInteger)numberOfServiceInListView:(ServiceListView *)listView {
-    return [self.serviceItemModelArray count];
-}
-
-- (ServiceListItemModel *)itemModelForServiceListView:(ServiceListView *)listView atIndex:(NSUInteger)index {
-    return [self.serviceItemModelArray objectAtIndex:index];
+- (NSArray *)itemModelsForServiceListView:(ServiceListView *)listView {
+    return self.serviceItemModelArray;
 }
 
 - (void)serviceListView:(ServiceListView *)listView didSelectedItemAtIndex:(NSUInteger)index {
@@ -338,12 +334,8 @@ static NSString *const kStoreCellIdentifier = @"kStoreCellIdentifier";
 
 #pragma mark StoreListViewDataSource & StoreListViewDelegate
 
-- (NSUInteger)numberOfStoresInListView:(StoreListView *)listView {
-    return [self.storeItemModelArray count];
-}
-
-- (StoreListItemModel *)itemModelForStoreListView:(StoreListView *)listView atIndex:(NSUInteger)index {
-    return [self.storeItemModelArray objectAtIndex:index];
+- (NSArray *)itemModelsForStoreListView:(StoreListView *)listView {
+    return self.storeItemModelArray;
 }
 
 - (void)storeListView:(StoreListView *)listView didSelectedItemAtIndex:(NSUInteger)index {

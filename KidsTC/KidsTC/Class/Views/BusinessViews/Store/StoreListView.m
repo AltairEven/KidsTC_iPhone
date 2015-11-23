@@ -17,6 +17,8 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 
 @property (nonatomic, strong) UINib *cellNib;
 
+@property (nonatomic, strong) NSArray *listModels;
+
 @property (nonatomic, assign) BOOL noMoreData;
 
 - (void)pullToRefreshTable;
@@ -93,11 +95,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 #pragma mark UITableViewDataSource & UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSInteger number = 0;
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(numberOfStoresInListView:)]) {
-        number = [self.dataSource numberOfStoresInListView:self];
-    }
-    return number;
+    return [self.listModels count];
 }
 
 
@@ -106,16 +104,15 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     if (!cell) {
         cell =  [[[NSBundle mainBundle] loadNibNamed:@"StoreListViewCell" owner:nil options:nil] objectAtIndex:0];
     }
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(itemModelForStoreListView:atIndex:)]) {
-        StoreListItemModel *model = [self.dataSource itemModelForStoreListView:self atIndex:indexPath.row];
-        [cell configWithItemModel:model];
-    }
+    StoreListItemModel *model = [self.listModels objectAtIndex:indexPath.row];
+    [cell configWithItemModel:model];
     return cell;
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [StoreListViewCell cellHeight];
+    StoreListItemModel *model = [self.listModels objectAtIndex:indexPath.row];
+    return [model cellHeight];
 }
 
 
@@ -146,9 +143,10 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 #pragma mark Public methods
 
 - (void)reloadData {
-    if (self.dataSource) {
-        [self.tableView reloadData];
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(itemModelsForStoreListView:)]) {
+        self.listModels = [self.dataSource itemModelsForStoreListView:self];
     }
+    [self.tableView reloadData];
 }
 
 - (void)startRefresh {

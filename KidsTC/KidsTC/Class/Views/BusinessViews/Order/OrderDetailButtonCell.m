@@ -63,7 +63,7 @@
             [self.rightButton setTitle:@"退款" forState:UIControlStateNormal];
             [self.cancelButton setHidden:YES];
             [self.descriptionLabel setHidden:NO];
-            [self.descriptionLabel setText:@"付款成功，快去使用吧!"];
+            [self.descriptionLabel setText:@"下单成功，快去使用吧!"];
             [self.rightButton setEnabled:self.supportRefund];
         }
             break;

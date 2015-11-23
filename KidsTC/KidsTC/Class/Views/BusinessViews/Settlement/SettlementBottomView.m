@@ -11,7 +11,6 @@
 
 @interface SettlementBottomView ()
 
-@property (weak, nonatomic) IBOutlet UIButton *confirmButton;
 @property (weak, nonatomic) IBOutlet RichPriceView *priceView;
 
 - (IBAction)didClickedButton:(id)sender;
