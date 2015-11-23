@@ -39,12 +39,47 @@
 }
 
 - (void)buildSubviews {
+    [self setBackgroundColor:[UIColor clearColor]];
+    
     CGRect tableViewRect = CGRectMake(0.0, 0.0, self.frame.size.height, SCREEN_WIDTH);
     self.tableView = [[UITableView alloc] initWithFrame:tableViewRect style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
     [self addSubview:self.tableView];
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    if (!self.hasRotated) {
+        [self.tableView setFrame:CGRectMake(0.0, 0.0, self.frame.size.height, SCREEN_WIDTH)];
+        self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.height, 0.01)];
+        self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.height, 0.01)];
+        self.tableView.backgroundView = nil;
+        self.tableView.backgroundColor = [UIColor clearColor];
+        //tableview逆时针旋转90度。
+        self.tableView.center = CGPointMake(SCREEN_WIDTH / 2, self.frame.size.height / 2);
+        self.tableView.transform = CGAffineTransformMakeRotation(-M_PI / 2);
+        self.hasRotated = YES;
+        
+        
+        // scrollbar 不显示
+        self.tableView.showsVerticalScrollIndicator = NO;
+        self.tableView.showsHorizontalScrollIndicator = NO;
+        
+        [self setScrollEnable:self.scrollEnable];
+        
+        [self setShowSeparator:self.showSeparator];
+        
+        
+        if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+            [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 10, 0, 10)];
+        }
+        if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+            [self.tableView setLayoutMargins:UIEdgeInsetsMake(0, 10, 0, 10)];
+        }
+        [self setHasRotated:YES];
+    }
 }
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex {
@@ -111,6 +146,14 @@
     return height;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 0.01;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 0.01;
+}
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     _selectedIndex = indexPath.row;
@@ -122,36 +165,6 @@
 #pragma mark Public method
 
 - (void)reloadData {
-    if (!self.hasRotated) {
-        [self.tableView setFrame:CGRectMake(0.0, 0.0, self.frame.size.height, SCREEN_WIDTH)];
-        self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.height, 0.01)];
-        self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.height, 0.01)];
-        //tableview逆时针旋转90度。
-        self.tableView.center = CGPointMake(SCREEN_WIDTH / 2, self.frame.size.height / 2);
-        self.tableView.transform = CGAffineTransformMakeRotation(-M_PI / 2);
-        self.hasRotated = YES;
-        
-        self.tableView.backgroundView = nil;
-        [self.tableView setBackgroundColor:[AUITheme theme].globalCellBGColor];
-        
-        
-        // scrollbar 不显示
-        self.tableView.showsVerticalScrollIndicator = NO;
-        self.tableView.showsHorizontalScrollIndicator = NO;
-        
-        [self setScrollEnable:self.scrollEnable];
-        
-        [self setShowSeparator:self.showSeparator];
-        
-        
-        if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-            [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 10, 0, 10)];
-        }
-        if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
-            [self.tableView setLayoutMargins:UIEdgeInsetsMake(0, 10, 0, 10)];
-        }
-    }
-    
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(numberOfCellsForSegmentView:)]) {
         _segmentCellCount = [self.dataSource numberOfCellsForSegmentView:self];
         [self.tableView reloadData];

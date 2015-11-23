@@ -125,4 +125,48 @@
     return [NSString stringWithFormat:@"%lu", (unsigned long)[KTCUserRole userRoleIdentifierWithRole:self.role sex:self.sex]];
 }
 
++ (UIImage *)smallImageWithUserRole:(KTCUserRole *)role {
+    UserRole userRole = role.role;
+    UIImage *image = nil;
+    switch (userRole) {
+        case UserRoleUnknown:
+        {
+        }
+            break;
+        case UserRolePrepregnancy:
+        {
+            image = [UIImage imageNamed:@"roleselect_prepregnancy_small"];
+        }
+            break;
+        case UserRolePregnancy:
+        {
+            image = [UIImage imageNamed:@"roleselect_pregnancy_small"];
+        }
+            break;
+        case UserRoleBirth:
+        {
+            image = [UIImage imageNamed:@"roleselect_newbirth_small"];
+        }
+            break;
+        case UserRoleBabyInOne:
+        {
+            image = [UIImage imageNamed:@"roleselect_babyinone_small"];
+        }
+            break;
+        case UserRoleBabyOneToThree:
+        {
+            image = [UIImage imageNamed:@"roleselect_223_small"];
+        }
+            break;
+        case UserRoleBabyFourToSix:
+        {
+            image = [UIImage imageNamed:@"roleselect_426_small"];
+        }
+            break;
+        default:
+            break;
+    }
+    return image;
+}
+
 @end

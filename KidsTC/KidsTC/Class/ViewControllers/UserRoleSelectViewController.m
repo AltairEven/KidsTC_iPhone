@@ -279,10 +279,39 @@ typedef enum {
 
 - (void)finishedUserRoleSelecting {
     UserRole role = UserRoleUnknown;
-    if (self.ageTag == AgeSelectTagPrepregnancy || self.ageTag == AgeSelectTagPregnancy) {
-        role = self.ageTag + 1;
-    } else {
-        role = self.ageTag + 1;
+    switch (self.ageTag) {
+        case AgeSelectTagPrepregnancy:
+        {
+            role = UserRolePrepregnancy;
+        }
+            break;
+        case AgeSelectTagPregnancy:
+        {
+            role = UserRolePregnancy;
+        }
+            break;
+        case AgeSelectTagNewBirth:
+        {
+            role = UserRoleBirth;
+        }
+            break;
+        case AgeSelectTagInOne:
+        {
+            role = UserRoleBabyInOne;
+        }
+            break;
+        case AgeSelectTagTwo2Three:
+        {
+            role = UserRoleBabyOneToThree;
+        }
+            break;
+        case AgeSelectTagFour2Six:
+        {
+            role = UserRoleBabyFourToSix;
+        }
+            break;
+        default:
+            break;
     }
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:role] forKey:UserRoleDefaultKey];

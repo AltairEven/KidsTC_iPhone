@@ -54,6 +54,7 @@
         httpClient.requestSerializer.timeoutInterval = self.timeoutSeconds;
         httpClient.requestSerializer.stringEncoding = self.stringEncoding;
         httpClient.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/xml", @"text/html", @"text/plain",nil];
+        [(AFJSONResponseSerializer *)httpClient.responseSerializer setRemovesKeysWithNullValues:YES];
 
         if (httpMethod == kHTTPReqMethodTypeGET) {
             
@@ -103,6 +104,7 @@
         httpClient.requestSerializer.timeoutInterval = weakSelf.timeoutSeconds;
         httpClient.requestSerializer.stringEncoding = weakSelf.stringEncoding;
         httpClient.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/xml", @"text/html", @"text/plain",nil];
+        [(AFJSONResponseSerializer *)httpClient.responseSerializer setRemovesKeysWithNullValues:YES];
 
         if (httpMethod == kHTTPReqMethodTypeGET) {
             
@@ -175,6 +177,7 @@
     }else{
         AFHTTPSessionManager   *httpClient = [[AFHTTPSessionManager alloc] initWithBaseURL:nil];
         httpClient.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/xml", @"text/html", @"text/plain",nil];
+        [(AFJSONResponseSerializer *)httpClient.responseSerializer setRemovesKeysWithNullValues:YES];
 
         _currentSessionTask = [httpClient POST:URLString parameters:parameters constructingBodyWithBlock:block success:^(NSURLSessionDataTask *task, id responseObject) {
             if (success) {

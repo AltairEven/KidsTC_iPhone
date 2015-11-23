@@ -22,11 +22,19 @@
 }
 
 - (void)parseRawData:(NSDictionary *)data {
-    self.mainTitle = [data objectForKey:@"name"];
-    
-    HomeSegueDestination destination = (HomeSegueDestination)[[data objectForKey:@"linkType"] integerValue];
-    
-    self.segueModel = [[HomeSegueModel alloc] initWithDestination:destination paramRawData:[data objectForKey:@"params"]];
+    @try {
+        self.mainTitle = [data objectForKey:@"name"];
+        
+        HomeSegueDestination destination = (HomeSegueDestination)[[data objectForKey:@"linkType"] integerValue];
+        
+        self.segueModel = [[HomeSegueModel alloc] initWithDestination:destination paramRawData:[data objectForKey:@"params"]];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@", exception);
+    }
+    @finally {
+        
+    }
 }
 
 - (CGFloat)cellHeight {

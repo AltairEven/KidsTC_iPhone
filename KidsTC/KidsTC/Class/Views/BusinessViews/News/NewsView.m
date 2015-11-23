@@ -39,6 +39,7 @@
 }
 
 - (void)buildSubviews {
+    [self setBackgroundColor:[AUITheme theme].globalBGColor];
     //top
     self.topView.backgroundColor = [AUITheme theme].navibarBGColor;
     [self.listBG setBackgroundColor:[AUITheme theme].navibarBGColor];

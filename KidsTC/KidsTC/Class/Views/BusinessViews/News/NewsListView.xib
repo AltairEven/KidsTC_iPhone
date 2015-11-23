@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,7 +13,7 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4f3-9n-cU7" customClass="AUISegmentView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="nX8-7Q-NKH"/>
                     </constraints>
@@ -22,54 +22,22 @@
                     <rect key="frame" x="0.0" y="40" width="320" height="528"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </tableView>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NCa-pB-6oS" userLabel="newsTagView">
-                    <rect key="frame" x="0.0" y="40" width="320" height="528"/>
-                </scrollView>
             </subviews>
-            <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="NCa-pB-6oS" firstAttribute="top" secondItem="4f3-9n-cU7" secondAttribute="bottom" id="A8N-nQ-Txk"/>
                 <constraint firstItem="WDc-c8-unh" firstAttribute="top" secondItem="4f3-9n-cU7" secondAttribute="bottom" id="EbS-fC-obA"/>
-                <constraint firstAttribute="bottom" secondItem="NCa-pB-6oS" secondAttribute="bottom" id="Ejw-qI-cFl"/>
                 <constraint firstAttribute="trailing" secondItem="WDc-c8-unh" secondAttribute="trailing" id="JMA-oX-Rm7"/>
                 <constraint firstAttribute="trailing" secondItem="4f3-9n-cU7" secondAttribute="trailing" id="MdQ-gs-sTu"/>
                 <constraint firstItem="WDc-c8-unh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="XyA-76-a4o"/>
-                <constraint firstItem="NCa-pB-6oS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="YQb-l1-qvz"/>
                 <constraint firstItem="4f3-9n-cU7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="vki-ID-ARg"/>
                 <constraint firstAttribute="bottom" secondItem="WDc-c8-unh" secondAttribute="bottom" id="vui-L4-xNl"/>
                 <constraint firstItem="4f3-9n-cU7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="wbt-ks-g3Z"/>
-                <constraint firstAttribute="trailing" secondItem="NCa-pB-6oS" secondAttribute="trailing" id="yGV-Yd-K6L"/>
             </constraints>
             <connections>
-                <outlet property="moreTagCell" destination="EjM-0F-5xV" id="bMe-vh-wuh"/>
-                <outlet property="newsTagView" destination="NCa-pB-6oS" id="PbX-3h-AOF"/>
                 <outlet property="segmentView" destination="4f3-9n-cU7" id="8h7-eK-67h"/>
                 <outlet property="tableView" destination="WDc-c8-unh" id="u01-ce-gvx"/>
             </connections>
             <point key="canvasLocation" x="392" y="354"/>
         </view>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="32" id="EjM-0F-5xV">
-            <rect key="frame" x="0.0" y="0.0" width="45" height="32"/>
-            <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EjM-0F-5xV" id="gdN-zI-WMc">
-                <rect key="frame" x="0.0" y="0.0" width="45" height="31"/>
-                <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="triangle_down_n" translatesAutoresizingMaskIntoConstraints="NO" id="bLE-lv-xLG">
-                        <rect key="frame" x="0.0" y="0.0" width="45" height="31"/>
-                    </imageView>
-                </subviews>
-                <constraints>
-                    <constraint firstItem="bLE-lv-xLG" firstAttribute="top" secondItem="gdN-zI-WMc" secondAttribute="top" id="0Qm-d9-l53"/>
-                    <constraint firstAttribute="bottom" secondItem="bLE-lv-xLG" secondAttribute="bottom" id="agi-c1-7GC"/>
-                    <constraint firstItem="bLE-lv-xLG" firstAttribute="leading" secondItem="gdN-zI-WMc" secondAttribute="leading" id="mzV-kr-tE4"/>
-                    <constraint firstAttribute="trailing" secondItem="bLE-lv-xLG" secondAttribute="trailing" id="oWD-DU-PfJ"/>
-                </constraints>
-            </tableViewCellContentView>
-            <point key="canvasLocation" x="113.5" y="723"/>
-        </tableViewCell>
     </objects>
-    <resources>
-        <image name="triangle_down_n" width="15" height="15"/>
-    </resources>
 </document>

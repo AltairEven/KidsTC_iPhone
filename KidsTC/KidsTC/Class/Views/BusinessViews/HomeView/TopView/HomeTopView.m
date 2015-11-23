@@ -12,11 +12,10 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *categoryButton;
 @property (weak, nonatomic) IBOutlet UITextField *inputField;
-@property (weak, nonatomic) IBOutlet UIButton *messageButton;
-@property (weak, nonatomic) IBOutlet UIView *redDot;
+@property (weak, nonatomic) IBOutlet UIButton *roleButton;
 
 - (IBAction)didClickedCategoryButton:(id)sender;
-- (IBAction)didClickedMessageButton:(id)sender;
+- (IBAction)didClickedRoleButton:(id)sender;
 
 @end
 
@@ -44,7 +43,23 @@
     self.inputField.delegate = self;
     
     self.backgroundColor = [AUITheme theme].navibarBGColor;
+    
+    self.roleButton.layer.cornerRadius = 14;
+    self.roleButton.layer.masksToBounds = YES;
+    self.roleButton.layer.borderColor = [AUITheme theme].navibarTitleColor_Normal.CGColor;
+    self.roleButton.layer.borderWidth = 1;
 }
+
+#pragma mark UITextFieldDelegate
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didTouchedInputFieldOnHomeTopView:)]) {
+        [self.delegate didTouchedInputFieldOnHomeTopView:self];
+    }
+    return NO;
+}
+
+#pragma mark Private methods
 
 - (IBAction)didClickedCategoryButton:(id)sender {
     if (self.delegate && [self.delegate respondsToSelector:@selector(didTouchedCategoryButtonOnHomeTopView:)]) {
@@ -52,18 +67,15 @@
     }
 }
 
-- (IBAction)didClickedMessageButton:(id)sender {
+- (IBAction)didClickedRoleButton:(id)sender {
     
-    if (self.delegate && [self.delegate respondsToSelector:@selector(didTouchedMessageButtonOnHomeTopView:)]) {
-        [self.delegate didTouchedMessageButtonOnHomeTopView:self];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didTouchedRoleButtonOnHomeTopView:)]) {
+        [self.delegate didTouchedRoleButtonOnHomeTopView:self];
     }
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(didTouchedInputFieldOnHomeTopView:)]) {
-        [self.delegate didTouchedInputFieldOnHomeTopView:self];
-    }
-    return NO;
+- (void)setRoleWithImage:(UIImage *)image {
+    [self.roleButton setImage:image forState:UIControlStateNormal];
 }
 
 /*

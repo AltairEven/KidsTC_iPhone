@@ -25,7 +25,7 @@
 
 - (void)didClickedInputFieldOnHomeView:(HomeView *)homeView;
 
-- (void)didClickedMessageButtonOnHomeView:(HomeView *)homeView;
+- (void)didClickedRoleButtonOnHomeView:(HomeView *)homeView;
 
 - (void)homeViewDidPulledDownToRefresh:(HomeView *)homeView;
 
@@ -63,5 +63,7 @@
 - (void)hideLoadMoreFooter:(BOOL)hidden;
 
 - (void)scrollHomeViewToFloorIndex:(NSUInteger)index;
+
+- (void)resetTopRoleWithImage:(UIImage *)image;
 
 @end

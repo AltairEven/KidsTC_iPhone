@@ -16,29 +16,37 @@
     }
     self = [super init];
     if (self) {
-        NSArray *floorArray = [data objectForKey:@"data"];
-        if ([floorArray isKindOfClass:[NSArray class]]) {
-            NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-            _naviControlledFloorCount = 0;
-            NSMutableArray *tempSections = [[NSMutableArray alloc] init];
-            NSMutableArray *tempNaviedFloors = [[NSMutableArray alloc] init];
-            for (NSUInteger index = 0; index < [floorArray count]; index ++) {
-                NSDictionary *dic = [floorArray objectAtIndex:index];
-                HomeFloorModel *model = [[HomeFloorModel alloc] initWithRawData:dic floorIndex:index];
-                if (model) {
-                    [tempArray addObject:model];
-                    [tempSections addObjectsFromArray:model.sectionModels];
-                    if (model.floorType == HomeFloorTypeHasNavi) {
-                        _naviControlledFloorCount ++;
-                        [tempNaviedFloors addObject:model];
+        @try {
+            NSArray *floorArray = [data objectForKey:@"data"];
+            if ([floorArray isKindOfClass:[NSArray class]]) {
+                NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+                _naviControlledFloorCount = 0;
+                NSMutableArray *tempSections = [[NSMutableArray alloc] init];
+                NSMutableArray *tempNaviedFloors = [[NSMutableArray alloc] init];
+                for (NSUInteger index = 0; index < [floorArray count]; index ++) {
+                    NSDictionary *dic = [floorArray objectAtIndex:index];
+                    HomeFloorModel *model = [[HomeFloorModel alloc] initWithRawData:dic floorIndex:index];
+                    if (model) {
+                        [tempArray addObject:model];
+                        [tempSections addObjectsFromArray:model.sectionModels];
+                        if (model.floorType == HomeFloorTypeHasNavi) {
+                            _naviControlledFloorCount ++;
+                            [tempNaviedFloors addObject:model];
+                        }
                     }
                 }
+                _floorModels = [NSArray arrayWithArray:tempArray];
+                _allSectionModels = [NSArray arrayWithArray:tempSections];
+                _allNaviControlledFloors = [NSArray arrayWithArray:tempNaviedFloors];
             }
-            _floorModels = [NSArray arrayWithArray:tempArray];
-            _allSectionModels = [NSArray arrayWithArray:tempSections];
-            _allNaviControlledFloors = [NSArray arrayWithArray:tempNaviedFloors];
+            _floorCount = [self.floorModels count];
         }
-        _floorCount = [self.floorModels count];
+        @catch (NSException *exception) {
+            NSLog(@"%@", exception);
+        }
+        @finally {
+            
+        }
     }
     return self;
 }

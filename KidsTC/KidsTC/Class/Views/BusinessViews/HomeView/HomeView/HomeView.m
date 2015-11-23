@@ -212,9 +212,9 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
     }
 }
 
-- (void)didTouchedMessageButtonOnHomeTopView:(HomeTopView *)topView {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedMessageButtonOnHomeView:)]) {
-        [self.delegate didClickedMessageButtonOnHomeView:self];
+- (void)didTouchedRoleButtonOnHomeTopView:(HomeTopView *)topView {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedRoleButtonOnHomeView:)]) {
+        [self.delegate didClickedRoleButtonOnHomeView:self];
     }
 }
 
@@ -666,6 +666,10 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
 - (void)scrollHomeViewToFloorIndex:(NSUInteger)index {
     CGPoint offset = [self offsetFromFloorIndex:index];
     [self.tableView setContentOffset:offset animated:YES];
+}
+
+- (void)resetTopRoleWithImage:(UIImage *)image {
+    [self.topView setRoleWithImage:image];
 }
 
 

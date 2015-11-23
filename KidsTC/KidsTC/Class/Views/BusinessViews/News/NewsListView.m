@@ -19,8 +19,6 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 
 @property (weak, nonatomic) IBOutlet AUISegmentView *segmentView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UIScrollView *newsTagView;
-@property (strong, nonatomic) IBOutlet UITableViewCell *moreTagCell;
 
 @property (nonatomic, strong) UINib *segmentNib;
 @property (nonatomic, strong) UINib *cellNib;
@@ -31,15 +29,9 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 @property (nonatomic, strong) NSMutableDictionary *noMoreDataDic;
 @property (nonatomic, strong) NSMutableDictionary *hideFooterDic;
 
-@property (nonatomic, assign) BOOL newsTagViewIsHidden;
-
 - (void)pullToRefreshTable;
 
 - (void)pullToLoadMoreData;
-
-- (void)buildNewsTagView;
-
-- (void)hideNewsTagView:(BOOL)hidden;
 
 - (void)didClickedButton:(id)sender;
 
@@ -66,6 +58,8 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 }
 
 - (void)buildSubviews {
+    [self setBackgroundColor:[AUITheme theme].globalBGColor];
+    
     [self.segmentView setScrollEnable:YES];
     self.segmentView.dataSource = self;
     self.segmentView.delegate = self;
@@ -81,7 +75,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
     if (!self.cellNib) {
         self.cellNib = [UINib nibWithNibName:NSStringFromClass([NewsListViewCell class]) bundle:nil];
@@ -102,10 +96,6 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     //data
     self.noMoreDataDic = [[NSMutableDictionary alloc] init];
     self.hideFooterDic = [[NSMutableDictionary alloc] init];
-    
-    //news tag view
-    [self.newsTagView setBackgroundColor:[AUITheme theme].globalBGColor];
-    [self hideNewsTagView:YES];
 }
 
 - (NSUInteger)pageSize {
@@ -115,45 +105,27 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 #pragma mark AUISegmentViewDataSource & AUISegmentViewDelegate
 
 - (NSUInteger)numberOfCellsForSegmentView:(AUISegmentView *)segmentView {
-    return [self.tagModels count] + 1;
+    return [self.tagModels count];
 }
 
 - (UITableViewCell *)segmentView:(AUISegmentView *)segmentView cellAtIndex:(NSUInteger)index {
-    if (index < [self.tagModels count]) {
-        NewsListViewTagCell *cell = [segmentView dequeueReusableCellWithIdentifier:kSegmentIdentifier forIndex:index];
-        if (!cell) {
-            cell =  [[[NSBundle mainBundle] loadNibNamed:@"NewsListViewTagCell" owner:nil options:nil] objectAtIndex:0];
-        }
-        NewsTagItemModel *model = [self.tagModels objectAtIndex:index];
-        [cell.titleLabel setText:model.name];
-        return cell;
-    } else {
-        return self.moreTagCell;
+    NewsListViewTagCell *cell = [segmentView dequeueReusableCellWithIdentifier:kSegmentIdentifier forIndex:index];
+    if (!cell) {
+        cell =  [[[NSBundle mainBundle] loadNibNamed:@"NewsListViewTagCell" owner:nil options:nil] objectAtIndex:0];
     }
+    NewsTagItemModel *model = [self.tagModels objectAtIndex:index];
+    [cell.titleLabel setText:model.name];
+    return cell;
 }
 
 - (CGFloat)segmentView:(AUISegmentView *)segmentView cellWidthAtIndex:(NSUInteger)index {
-    CGFloat width = 0;
-    if (index < [self.tagModels count]) {
-        width = 100;
-    } else {
-        width = 40;
-    }
-    return width;
+    return 100;
 }
 
 - (void)segmentView:(AUISegmentView *)segmentView didSelectedAtIndex:(NSUInteger)index {
     _currentNewsTagIndex = index;
-    if (index == [self.tagModels count]) {
-        [self hideNewsTagView:!self.newsTagViewIsHidden];
-        if (self.newsTagViewIsHidden) {
-            [self.segmentView deselectIndex:index];
-        }
-    } else {
-        [self hideNewsTagView:YES];
-        if (self.delegate && [self.delegate respondsToSelector:@selector(newsListView:didSelectedNewsTagIndex:)]) {
-            [self.delegate newsListView:self didSelectedNewsTagIndex:index];
-        }
+    if (self.delegate && [self.delegate respondsToSelector:@selector(newsListView:didSelectedNewsTagIndex:)]) {
+        [self.delegate newsListView:self didSelectedNewsTagIndex:index];
     }
 }
 
@@ -202,79 +174,78 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     }
 }
 
-- (void)buildNewsTagView {
-    for (UIView *subview in self.newsTagView.subviews) {
-        [subview removeFromSuperview];
-    }
-    CGFloat leftMargin = 20;
-    CGFloat rightMargin = 20;
-    CGFloat cellHMargin = 10;
-    CGFloat cellVMargin = 10;
-    CGFloat topMargin = 20;
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(leftMargin, topMargin, 100, 30)];
-    [label setTextColor:[UIColor darkGrayColor]];
-    [label setFont:[UIFont systemFontOfSize:17]];
-    [label setText:@"热门："];
-    [self.newsTagView addSubview:label];
-    
-    CGFloat xPosition = leftMargin;
-    CGFloat yPosition = label.frame.origin.y + label.frame.size.height + topMargin;
-    CGFloat buttonHeight = 30;
-    CGFloat height = 0;
-    for (NSUInteger index = 0; index < [self.tagModels count]; index ++) {
-        NewsTagItemModel *model = [self.tagModels objectAtIndex:index];
-        NSString *title = model.name;
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setFrame:CGRectMake(xPosition, yPosition, 10, 10)];
-        [button.titleLabel setFont:[UIFont systemFontOfSize:15]];
-        [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-        [button setTitle:title forState:UIControlStateNormal];
-        [button setBackgroundColor:[UIColor whiteColor]];
-        button.tag = index;
-        [button addTarget:self action:@selector(didClickedButton:) forControlEvents:UIControlEventTouchUpInside];
-        [button sizeToFit];
-        [self.newsTagView addSubview:button];
-        
-        //加点边距
-        [button setFrame:CGRectMake(xPosition, yPosition, button.frame.size.width + 10, buttonHeight)];
-        
-        [button.layer setCornerRadius:5];
-        [button.layer setBorderWidth:0.5];
-        [button.layer setBorderColor:[UIColor lightGrayColor].CGColor];
-        [button.layer setMasksToBounds:YES];
-        
-        CGFloat nextCellWidth = 0;
-        if (index + 1 < [self.tagModels count]) {
-            NewsTagItemModel *nextModel = [self.tagModels objectAtIndex:index + 1];
-            NSString *nextTitle = nextModel.name;
-            nextCellWidth = 15 * [nextTitle length] + 10;
-            //下一个按钮位置调整
-            xPosition += button.frame.size.width + cellHMargin;
-        }
-        CGFloat rightM = button.frame.origin.x + button.frame.size.width + cellHMargin + nextCellWidth;
-        CGFloat rightLimit = SCREEN_WIDTH - 80 - rightMargin;
-        if (rightM > rightLimit) {
-            xPosition = leftMargin;
-            yPosition += cellVMargin + buttonHeight;
-            height = yPosition + buttonHeight + topMargin;
-        }
-    }
-    [self.newsTagView setContentSize:CGSizeMake(0, height)];
-}
+//- (void)buildNewsTagView {
+//    for (UIView *subview in self.newsTagView.subviews) {
+//        [subview removeFromSuperview];
+//    }
+//    CGFloat leftMargin = 20;
+//    CGFloat rightMargin = 20;
+//    CGFloat cellHMargin = 10;
+//    CGFloat cellVMargin = 10;
+//    CGFloat topMargin = 20;
+//    
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(leftMargin, topMargin, 100, 30)];
+//    [label setTextColor:[UIColor darkGrayColor]];
+//    [label setFont:[UIFont systemFontOfSize:17]];
+//    [label setText:@"热门："];
+//    [self.newsTagView addSubview:label];
+//    
+//    CGFloat xPosition = leftMargin;
+//    CGFloat yPosition = label.frame.origin.y + label.frame.size.height + topMargin;
+//    CGFloat buttonHeight = 30;
+//    CGFloat height = 0;
+//    for (NSUInteger index = 0; index < [self.tagModels count]; index ++) {
+//        NewsTagItemModel *model = [self.tagModels objectAtIndex:index];
+//        NSString *title = model.name;
+//        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [button setFrame:CGRectMake(xPosition, yPosition, 10, 10)];
+//        [button.titleLabel setFont:[UIFont systemFontOfSize:15]];
+//        [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+//        [button setTitle:title forState:UIControlStateNormal];
+//        [button setBackgroundColor:[UIColor whiteColor]];
+//        button.tag = index;
+//        [button addTarget:self action:@selector(didClickedButton:) forControlEvents:UIControlEventTouchUpInside];
+//        [button sizeToFit];
+//        [self.newsTagView addSubview:button];
+//        
+//        //加点边距
+//        [button setFrame:CGRectMake(xPosition, yPosition, button.frame.size.width + 10, buttonHeight)];
+//        
+//        [button.layer setCornerRadius:5];
+//        [button.layer setBorderWidth:0.5];
+//        [button.layer setBorderColor:[UIColor lightGrayColor].CGColor];
+//        [button.layer setMasksToBounds:YES];
+//        
+//        CGFloat nextCellWidth = 0;
+//        if (index + 1 < [self.tagModels count]) {
+//            NewsTagItemModel *nextModel = [self.tagModels objectAtIndex:index + 1];
+//            NSString *nextTitle = nextModel.name;
+//            nextCellWidth = 15 * [nextTitle length] + 10;
+//            //下一个按钮位置调整
+//            xPosition += button.frame.size.width + cellHMargin;
+//        }
+//        CGFloat rightM = button.frame.origin.x + button.frame.size.width + cellHMargin + nextCellWidth;
+//        CGFloat rightLimit = SCREEN_WIDTH - 80 - rightMargin;
+//        if (rightM > rightLimit) {
+//            xPosition = leftMargin;
+//            yPosition += cellVMargin + buttonHeight;
+//            height = yPosition + buttonHeight + topMargin;
+//        }
+//    }
+//    [self.newsTagView setContentSize:CGSizeMake(0, height)];
+//}
 
-- (void)hideNewsTagView:(BOOL)hidden {
-    if (hidden) {
-        [self sendSubviewToBack:self.newsTagView];
-    } else {
-        [self bringSubviewToFront:self.newsTagView];
-    }
-    
-    self.newsTagViewIsHidden = hidden;
-}
+//- (void)hideNewsTagView:(BOOL)hidden {
+//    if (hidden) {
+//        [self sendSubviewToBack:self.newsTagView];
+//    } else {
+//        [self bringSubviewToFront:self.newsTagView];
+//    }
+//    
+//    self.newsTagViewIsHidden = hidden;
+//}
 
 - (void)didClickedButton:(id)sender {
-    [self hideNewsTagView:YES];
     NSUInteger tag = ((UIButton *)sender).tag;
     [self.segmentView setSelectedIndex:tag];
     _currentNewsTagIndex = tag;
@@ -292,7 +263,6 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     }
     [self.segmentView reloadData];
     [self.segmentView setSelectedIndex:self.currentNewsTagIndex];
-    [self buildNewsTagView];
 }
 
 - (void)reloadData {
@@ -300,9 +270,9 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
         self.listModels = [self.dataSource newsListItemModelsForNewsListView:self ofNewsTagIndex:self.currentNewsTagIndex];
         _itemCount = [self.listModels count];
         [self.tableView reloadData];
-        if ([self.listModels count] > 0) {
-            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
-        }
+//        if ([self.listModels count] > 0) {
+//            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+//        }
         if ([[self.noMoreDataDic objectForKey:[NSString stringWithFormat:@"%lu", (unsigned long)self.currentNewsTagIndex]] boolValue]) {
             [self.tableView.gifFooter noticeNoMoreData];
         } else {

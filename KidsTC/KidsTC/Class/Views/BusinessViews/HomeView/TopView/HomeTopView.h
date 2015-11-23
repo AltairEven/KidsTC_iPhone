@@ -14,11 +14,13 @@
 
 - (void)didTouchedCategoryButtonOnHomeTopView:(HomeTopView *)topView;
 - (void)didTouchedInputFieldOnHomeTopView:(HomeTopView *)topView;
-- (void)didTouchedMessageButtonOnHomeTopView:(HomeTopView *)topView;
+- (void)didTouchedRoleButtonOnHomeTopView:(HomeTopView *)topView;
 @end
 
 @interface HomeTopView : UIView
 
 @property (nonatomic, assign) id<HomeTopViewDelegate> delegate;
+
+- (void)setRoleWithImage:(UIImage *)image;
 
 @end

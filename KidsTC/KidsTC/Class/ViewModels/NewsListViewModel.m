@@ -64,7 +64,7 @@
 }
 
 - (NSArray *)newsListItemModelsForNewsListView:(NewsListView *)listView ofNewsTagIndex:(NSUInteger)index {
-    return [NSArray arrayWithArray:[self.totalResultsContainer objectForKey:[NSNumber numberWithInteger:index]]];
+    return [NSArray arrayWithArray:[self.totalResultsContainer objectForKey:[NSString stringWithFormat:@"%lu", (unsigned long)index]]];
 }
 
 #pragma mark Private methods
@@ -87,12 +87,13 @@
             }
         }
         [weakSelf.view reloadNewsTag];
+        [weakSelf startUpdateDataWithNewsTagIndex:weakSelf.currentTagIndex];
     } failure:nil];
 }
 
 - (NSMutableArray *)newsResultAtTagIndex:(NSUInteger)index {
     if ([self.totalResultsContainer count] > index) {
-        NSMutableArray *dataArray = [self.totalResultsContainer objectForKey:[NSNumber numberWithInteger:index]];
+        NSMutableArray *dataArray = [self.totalResultsContainer objectForKey:[NSString stringWithFormat:@"%lu", (unsigned long)index]];
         if (dataArray) {
             return dataArray;
         }
@@ -180,7 +181,7 @@
             if (resultArray) {
                 [resultArray addObjectsFromArray:tempContainer];
             } else {
-                [self.totalResultsContainer setObject:tempContainer forKey:[NSNumber numberWithInteger:index]];
+                [self.totalResultsContainer setObject:tempContainer forKey:[NSString stringWithFormat:@"%lu", (unsigned long)index]];
             }
             
             if ([dataArray count] < PageSize) {
@@ -220,9 +221,10 @@
         tagId = model.identifier;
     }
     
-    NSUInteger pageIndex = [[self.currentPageIndexs objectForKey:[NSNumber numberWithInteger:index]] integerValue];
+    NSUInteger pageIndex = [[self.currentPageIndexs objectForKey:[NSString stringWithFormat:@"%lu", (unsigned long)index]] integerValue];
     if (pageIndex <= 0) {
         pageIndex = 1;
+        [self.currentPageIndexs setObject:[NSNumber numberWithInteger:1] forKey:[NSString stringWithFormat:@"%lu", (unsigned long)index]];
     }
     NewsTagItemModel *model = [self.newsTagItemModels objectAtIndex:self.currentTagIndex];
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -250,7 +252,7 @@
         tagId = model.identifier;
     }
     
-    NSUInteger pageIndex = [[self.currentPageIndexs objectForKey:[NSNumber numberWithInteger:index]] integerValue];
+    NSUInteger pageIndex = [[self.currentPageIndexs objectForKey:[NSString stringWithFormat:@"%lu", (unsigned long)index]] integerValue];
     pageIndex ++;
     NewsTagItemModel *model = [self.newsTagItemModels objectAtIndex:self.currentTagIndex];
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -260,9 +262,9 @@
                            @"", @"authorId", nil];
     __weak NewsListViewModel *weakSelf = self;
     [weakSelf.loadNewsRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
-        [weakSelf loadNewsSucceedWithData:responseData tagIndex:index];
+        [weakSelf loadMoreNewsSucceedWithData:responseData tagIndex:index];
     } failure:^(HttpRequestClient *client, NSError *error) {
-        [weakSelf loadNewsFailedWithError:error tagIndex:index];
+        [weakSelf loadMoreNewsFailedWithError:error tagIndex:index];
     }];
 }
 

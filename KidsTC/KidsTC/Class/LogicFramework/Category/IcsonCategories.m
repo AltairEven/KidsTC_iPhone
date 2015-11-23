@@ -133,9 +133,9 @@
     for (int n = 0; n < [categoryData count]; n++) {
         //遍历一级类目
         NSDictionary *dic1 = [categoryData objectAtIndex:n];
-        NSString *identifier1 = [dic1 objectForKey:@"SysNo"];
+        NSString *identifier1 = [NSString stringWithFormat:@"%@", [dic1 objectForKey:@"SysNo"]];
         NSString *name1 = [dic1 objectForKey:@"Name"];
-        NSString *parent1 = [dic1 objectForKey:@"PSysNo"];
+        NSString *parent1 = [NSString stringWithFormat:@"%@", [dic1 objectForKey:@"PSysNo"]];
         NSString *url1 = [dic1 objectForKey:@"SearchUrl"];
 //        NSString *type1 = [NSString stringWithFormat:@"%@", [dic1 objectForKey:@"type"]];
         
@@ -157,9 +157,9 @@
             //遍历二级类目
             for (int n = 0; n < [l2Array count]; n++) {
                 NSDictionary *dic2 = [l2Array objectAtIndex:n];
-                NSString *identifier2 = [dic2 objectForKey:@"SysNo"];
+                NSString *identifier2 = [NSString stringWithFormat:@"%@", [dic2 objectForKey:@"SysNo"]];
                 NSString *name2 = [dic2 objectForKey:@"Name"];
-                NSString *parent2 = [dic2 objectForKey:@"PSysNo"];
+                NSString *parent2 = [NSString stringWithFormat:@"%@", [dic2 objectForKey:@"PSysNo"]];
                 NSString *url2 = [dic2 objectForKey:@"SearchUrl"];
 //                NSString *type2 = [NSString stringWithFormat:@"%@", [dic1 objectForKey:@"type"]];
                 
@@ -181,9 +181,9 @@
                     //遍历三级类目
                     for (int n = 0; n < [l3Array count]; n++) {
                         NSDictionary *dic3 = [l3Array objectAtIndex:n];
-                        NSString *identifier3 = [dic3 objectForKey:@"SysNo"];
+                        NSString *identifier3 = [NSString stringWithFormat:@"%@", [dic3 objectForKey:@"SysNo"]];
                         NSString *name3 = [dic3 objectForKey:@"Name"];
-                        NSString *parent3 = [dic3 objectForKey:@"PSysNo"];
+                        NSString *parent3 = [NSString stringWithFormat:@"%@", [dic3 objectForKey:@"PSysNo"]];
                         NSString *url3 = [dic3 objectForKey:@"SearchUrl"];
 //                        NSString *type3 = [NSString stringWithFormat:@"%@", [dic1 objectForKey:@"type"]];
                         

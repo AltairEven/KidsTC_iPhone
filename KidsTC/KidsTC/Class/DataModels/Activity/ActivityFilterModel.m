@@ -55,7 +55,6 @@
         }
         _areaFiltItems = [NSArray arrayWithArray:tempArray];
         self.aNames = [NSArray arrayWithArray:nameArray];
-        
         //date
         _lastUpdateDate = [NSDate date];
     }

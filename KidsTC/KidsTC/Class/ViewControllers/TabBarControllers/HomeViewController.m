@@ -15,6 +15,7 @@
 #import "ActivityViewController.h"
 #import "LoveHouseListViewController.h"
 #import "HospitalListViewController.h"
+#import "UserRoleSelectViewController.h"
 
 
 @interface HomeViewController () <HomeViewDelegate, AUIFloorNavigationViewDataSource, AUIFloorNavigationViewDelegate>
@@ -87,8 +88,18 @@
     [self.navigationController pushViewController:controller animated:NO];
 }
 
-- (void)didClickedMessageButtonOnHomeView:(HomeView *)homeView {
+- (void)didClickedRoleButtonOnHomeView:(HomeView *)homeView {
+    UserRoleSelectViewController *controller = [[UserRoleSelectViewController alloc] initWithNibName:@"UserRoleSelectViewController" bundle:nil];
     
+    __weak UserRoleSelectViewController *weakController = controller;
+    [controller setCompleteBlock:^(UserRole selectedRole, KTCSex selectedSex){
+        KTCUserRole *role = [KTCUserRole instanceWithRole:selectedRole sex:selectedSex];
+        [[KTCUser currentUser] setUserRole:role];
+        [weakController.navigationController popViewControllerAnimated:YES];
+        [self.homeView resetTopRoleWithImage:[KTCUserRole smallImageWithUserRole:role]];
+    }];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)homeViewDidPulledDownToRefresh:(HomeView *)homeView {

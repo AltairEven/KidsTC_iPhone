@@ -1080,7 +1080,7 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
             if (!_alreadyLaunched) {
                 return;
             }
-            [[[iToast makeText:@"当前为WIFI网络，祝您购物愉快"] setDuration:1500] show];
+            [[[iToast makeText:@"当前为WIFI网络，祝您使用愉快"] setDuration:1500] show];
         }
             break;
         default:
