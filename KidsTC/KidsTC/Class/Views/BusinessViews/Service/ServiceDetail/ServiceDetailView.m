@@ -132,6 +132,7 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
     self.couponButton.layer.cornerRadius = 5;
     self.couponButton.layer.masksToBounds = YES;
     
+    [self.InsuranceView setFontSize:13];
     [self.InsuranceCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
     
     [self.couponCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
@@ -535,9 +536,13 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(detailModelForServiceDetailView:)]) {
         self.detailModel = [self.dataSource detailModelForServiceDetailView:self];
         if (self.detailModel) {
-            NSArray *section1 = [NSArray arrayWithObjects:self.topCell, self.priceCell, self.InsuranceCell, nil];
+            NSMutableArray *section1 = [NSMutableArray arrayWithObjects:self.topCell, self.priceCell, nil];
+            self.tableViewHeight = [self.detailModel topCellHeight] + [self.detailModel priceCellHeight];
+            if ([self.detailModel.supportedInsurances count] > 0) {
+                [section1 addObject:self.InsuranceCell];
+                self.tableViewHeight += [self.detailModel insuranceCellHeight];
+            }
             [self.cellArray addObject:[NSArray arrayWithArray:section1]];
-            self.tableViewHeight = [self.detailModel topCellHeight] + [self.detailModel priceCellHeight] + [self.detailModel insuranceCellHeight];;
             
             if (self.detailModel.hasCoupon) {
                 NSArray *section2 = [NSArray arrayWithObject:self.couponCell];

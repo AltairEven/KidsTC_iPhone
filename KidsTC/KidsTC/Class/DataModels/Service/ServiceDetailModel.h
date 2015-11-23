@@ -39,7 +39,7 @@
 
 @property (nonatomic, assign) BOOL showCountdown;
 
-@property (nonatomic, assign) NSArray *supportedInsurances;
+@property (nonatomic, strong) NSArray *supportedInsurances;
 
 @property (nonatomic, copy) NSString *couponUrlString;
 

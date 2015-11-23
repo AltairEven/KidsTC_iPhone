@@ -61,7 +61,6 @@
 		1E0B7A861B6F67B800A58AD4 /* CustomBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B79D81B6F67B800A58AD4 /* CustomBadge.m */; };
 		1E0B7A871B6F67B800A58AD4 /* DelayTipsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B79DA1B6F67B800A58AD4 /* DelayTipsView.m */; };
 		1E0B7A881B6F67B800A58AD4 /* InsuranceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B79DC1B6F67B800A58AD4 /* InsuranceView.m */; };
-		1E0B7A891B6F67B800A58AD4 /* InsuranceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E0B79DD1B6F67B800A58AD4 /* InsuranceView.xib */; };
 		1E0B7A8A1B6F67B800A58AD4 /* FiveStarsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B79DF1B6F67B800A58AD4 /* FiveStarsView.m */; };
 		1E0B7A8B1B6F67B800A58AD4 /* FlipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B79E21B6F67B800A58AD4 /* FlipView.m */; };
 		1E0B7A8C1B6F67B800A58AD4 /* GActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B79E41B6F67B800A58AD4 /* GActivityIndicatorView.m */; };
@@ -936,7 +935,6 @@
 		1E0B79DA1B6F67B800A58AD4 /* DelayTipsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelayTipsView.m; sourceTree = "<group>"; };
 		1E0B79DB1B6F67B800A58AD4 /* InsuranceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InsuranceView.h; sourceTree = "<group>"; };
 		1E0B79DC1B6F67B800A58AD4 /* InsuranceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InsuranceView.m; sourceTree = "<group>"; };
-		1E0B79DD1B6F67B800A58AD4 /* InsuranceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InsuranceView.xib; sourceTree = "<group>"; };
 		1E0B79DE1B6F67B800A58AD4 /* FiveStarsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiveStarsView.h; sourceTree = "<group>"; };
 		1E0B79DF1B6F67B800A58AD4 /* FiveStarsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiveStarsView.m; sourceTree = "<group>"; };
 		1E0B79E11B6F67B800A58AD4 /* FlipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlipView.h; sourceTree = "<group>"; };
@@ -2422,7 +2420,6 @@
 				1E0B79DA1B6F67B800A58AD4 /* DelayTipsView.m */,
 				1E0B79DB1B6F67B800A58AD4 /* InsuranceView.h */,
 				1E0B79DC1B6F67B800A58AD4 /* InsuranceView.m */,
-				1E0B79DD1B6F67B800A58AD4 /* InsuranceView.xib */,
 				1E0B79DE1B6F67B800A58AD4 /* FiveStarsView.h */,
 				1E0B79DF1B6F67B800A58AD4 /* FiveStarsView.m */,
 				1E0B79E01B6F67B800A58AD4 /* FlipView */,
@@ -5268,7 +5265,6 @@
 				1E7995191BC758560099CFF9 /* NewsRecommendListView.xib in Resources */,
 				1E827BDA1B941337008F3F08 /* ImageSelectedSmallOn@2x.png in Resources */,
 				1E79950F1BC758560099CFF9 /* NewsListView.xib in Resources */,
-				1E0B7A891B6F67B800A58AD4 /* InsuranceView.xib in Resources */,
 				1E943F511B7DDFDF0029FE74 /* loadingBg_640_960.png in Resources */,
 				1E15F9D21BE8A47C000C74E7 /* SoftwareSettingViewCell.xib in Resources */,
 				1E827BDB1B941337008F3F08 /* ImageSelectedSmallOn@3x.png in Resources */,

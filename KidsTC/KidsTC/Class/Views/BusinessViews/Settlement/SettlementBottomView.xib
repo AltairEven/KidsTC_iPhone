@@ -44,7 +44,7 @@
                     <rect key="frame" x="160" y="0.0" width="160" height="568"/>
                     <color key="backgroundColor" red="1" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                    <state key="normal" title="提交订单">
+                    <state key="normal" title="确认提交">
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>

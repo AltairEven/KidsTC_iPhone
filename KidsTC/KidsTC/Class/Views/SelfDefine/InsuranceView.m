@@ -9,17 +9,9 @@
 #import "InsuranceView.h"
 #import "Insurance.h"
 
-#define InsuranceVIEW_WIDTH (102)
-#define InsuranceVIEW_HEIGHT (15)
-
 @interface InsuranceView ()
 
-@property (weak, nonatomic) IBOutlet UIView *gapView;
-
-@property (weak, nonatomic) IBOutlet UIButton *firstButton;
-@property (weak, nonatomic) IBOutlet UIButton *secondButton;
-
-- (void)resetSubViews;
+- (void)resetSubviews;
 
 @end
 
@@ -31,61 +23,50 @@
 - (id)awakeAfterUsingCoder:(NSCoder *)aDecoder
 {
     self = [super awakeAfterUsingCoder:aDecoder];
-    static BOOL bLoad;
-    if (!bLoad)
-    {
-        bLoad = YES;
-        InsuranceView *view = [GConfig getObjectFromNibWithView:self];
-        [self buildSubviews];
-        return view;
-    }
-    bLoad = NO;
+    self.viewGap = 5;
     return self;
 }
 
-
-- (void)buildSubviews {
-    [GConfig resetLineView:self.gapView withLayoutAttribute:NSLayoutAttributeWidth];
-    [self bringSubviewToFront:self.gapView];
-}
-
 - (void)setSupportedInsurance:(NSArray *)supportedInsurance {
+    _supportedInsurance = supportedInsurance;
     if (!supportedInsurance) {
-        _supportedInsurance = nil;
-        [self setHidden:YES];
+        [self setSubViews:nil];
         return;
+    } else {
+        [self resetSubviews];
     }
-    [self setHidden:NO];
-    _supportedInsurance = [NSArray arrayWithArray:supportedInsurance];
-    [self resetSubViews];
 }
 
 
 - (void)setFontSize:(CGFloat)fontSize {
+    CGFloat lastSize = _fontSize;
     _fontSize = fontSize;
-    [self.firstButton.titleLabel setFont:[UIFont systemFontOfSize:fontSize]];
-    [self.secondButton.titleLabel setFont:[UIFont systemFontOfSize:fontSize]];
+    if (fontSize != lastSize) {
+        [self resetSubviews];
+    }
 }
 
-- (void)resetSubViews {
-    //clear
-    [self.firstButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-    [self.firstButton setImage:[UIImage imageNamed:@"no"] forState:UIControlStateNormal];
-    [self.secondButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-    [self.secondButton setImage:[UIImage imageNamed:@"no"] forState:UIControlStateNormal];
-    
-    //reset
-    for (Insurance *ens in self.supportedInsurance) {
-        if (ens.type == InsuranceTypeRefundAnyTime) {
-            [self.firstButton setTitleColor:RGBA(129, 25, 31, 1) forState:UIControlStateNormal];
-            [self.firstButton setImage:[UIImage imageNamed:@"yes"] forState:UIControlStateNormal];
-        }
-        if (ens.type == InsuranceTypeRefundOutOfDate) {
-            [self.secondButton setTitleColor:RGBA(129, 25, 31, 1) forState:UIControlStateNormal];
-            [self.secondButton setImage:[UIImage imageNamed:@"yes"] forState:UIControlStateNormal];
-        }
+- (void)resetSubviews {
+    NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+    for (Insurance *ins in self.supportedInsurance) {
+        UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, self.fontSize)];
+        
+        UIImageView *checkImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.fontSize, self.fontSize)];
+        [checkImageView setImage:[UIImage imageNamed:@"insurance_checked"]];
+        [bgView addSubview:checkImageView];
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(checkImageView.frame.size.width + 1, 0, SCREEN_WIDTH, self.fontSize)];
+        [label setTextColor:RGBA(89, 209, 160, 1)];
+        [label setFont:[UIFont systemFontOfSize:self.fontSize]];
+        [label setText:ins.InsuranceDescription];
+        [label sizeToFitWithMaximumNumberOfLines:1];
+        [label setCenter:CGPointMake(label.center.x, checkImageView.center.y)];
+        [bgView addSubview:label];
+        
+        [bgView setFrame:CGRectMake(0, 0, checkImageView.frame.size.width + label.frame.size.width, bgView.frame.size.height)];
+        [tempArray addObject:bgView];
     }
-    [self bringSubviewToFront:self.gapView];
+    [self setSubViews:[NSArray arrayWithArray:tempArray]];
 }
 
 /*

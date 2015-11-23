@@ -22,6 +22,6 @@ typedef enum {
 
 - (instancetype)initWithType:(InsuranceType)ensType description:(NSString *)description;
 
-+ (NSArray *)InsurancesWithRawData:(NSArray *)dataArray;
++ (NSArray *)InsurancesWithRawData:(NSDictionary *)data;
 
 @end

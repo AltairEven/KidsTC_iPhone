@@ -162,7 +162,7 @@
         if (weakSelf.viewModel.dataModel.needPay) {
             [weakSelf.bottomView.confirmButton setTitle:@"确认支付" forState:UIControlStateNormal];
         } else {
-            [weakSelf.bottomView.confirmButton setTitle:@"提交订单" forState:UIControlStateNormal];
+            [weakSelf.bottomView.confirmButton setTitle:@"确认提交" forState:UIControlStateNormal];
         }
         [[GAlertLoadingView sharedAlertLoadingView] hide];
         [weakSelf.bottomView setSubmitEnable:YES];

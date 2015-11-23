@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AUIStackView.h"
 
-@interface InsuranceView : UIView
+@interface InsuranceView : AUIStackView
 
 @property (nonatomic, strong) NSArray *supportedInsurance;
 

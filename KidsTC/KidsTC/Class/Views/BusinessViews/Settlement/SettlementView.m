@@ -161,6 +161,9 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
             } else {
                 NSString *scoreText = [NSString stringWithFormat:@"%lu", (unsigned long)self.model.score];
                 NSString *text = [NSString stringWithFormat:@"共有%@积分可使用", scoreText];
+                if (!self.model.needPay) {
+                    text = @"不可使用积分";
+                }
                 NSMutableAttributedString *attrText = [[NSMutableAttributedString alloc] initWithString:text];
                 [attrText addAttribute:NSForegroundColorAttributeName value:[UIColor orangeColor] range:NSMakeRange(2,[scoreText length])];
                 [self.totalScoreLabel setAttributedText:attrText];
@@ -301,13 +304,17 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
         case SettlementViewSectionPayment:
         {
             view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
-            [view setBackgroundColor:[UIColor whiteColor]];
             
             UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 24)];
             [titleLabel setFont:[UIFont systemFontOfSize:15]];
             [titleLabel setTextColor:[UIColor lightGrayColor]];
             [titleLabel setText:@"选择支付方式"];
             [view addSubview:titleLabel];
+            if (self.model.needPay) {
+                [view setBackgroundColor:[UIColor whiteColor]];
+            } else {
+                [view setBackgroundColor:RGBA(250, 250, 250, 1)];
+            }
         }
             break;
         case SettlementViewSectionSettlement:

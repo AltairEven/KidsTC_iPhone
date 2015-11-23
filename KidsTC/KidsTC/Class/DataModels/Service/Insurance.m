@@ -19,25 +19,23 @@
     return self;
 }
 
-+ (NSArray *)InsurancesWithRawData:(NSArray *)dataArray {
++ (NSArray *)InsurancesWithRawData:(NSDictionary *)data {
     NSMutableArray *tempInsArray = [[NSMutableArray alloc] init];
-    if (dataArray && [dataArray isKindOfClass:[NSArray class]]) {
-        for (NSDictionary *singleInsurance in dataArray) {
-            NSString *key = [[singleInsurance allKeys] firstObject];
-            if ([key isEqualToString:@"refund_anytime"]) {
-                BOOL bSupport = [[singleInsurance objectForKey:key] boolValue];
-                if (bSupport) {
-                    Insurance *insReparation = [[Insurance alloc] initWithType:InsuranceTypeRefundAnyTime description:@"随时退"];
-                    [tempInsArray addObject:insReparation];
-                }
-            }
-            if ([key isEqualToString:@"refund_outdate"]) {
-                BOOL bSupport = [[singleInsurance objectForKey:key] boolValue];
-                if (bSupport) {
-                    Insurance *insReturn = [[Insurance alloc] initWithType:InsuranceTypeRefundOutOfDate description:@"过期退"];
-                    [tempInsArray addObject:insReturn];
-                }
-            }
+    if (data && [data isKindOfClass:[NSDictionary class]]) {
+        BOOL bSupport = [[data objectForKey:@"refund_anytime"] boolValue];
+        if (bSupport) {
+            Insurance *insReparation = [[Insurance alloc] initWithType:InsuranceTypeRefundAnyTime description:@"随时退"];
+            [tempInsArray addObject:insReparation];
+        }
+        bSupport = [[data objectForKey:@"refund_outdate"] boolValue];
+        if (bSupport) {
+            Insurance *insReturn = [[Insurance alloc] initWithType:InsuranceTypeRefundOutOfDate description:@"过期退"];
+            [tempInsArray addObject:insReturn];
+        }
+        bSupport = [[data objectForKey:@"refund_part"] boolValue];
+        if (bSupport) {
+            Insurance *insReturn = [[Insurance alloc] initWithType:InsuranceTypeRefundPartially description:@"部分退"];
+            [tempInsArray addObject:insReturn];
         }
     }
     return [NSArray arrayWithArray:tempInsArray];
