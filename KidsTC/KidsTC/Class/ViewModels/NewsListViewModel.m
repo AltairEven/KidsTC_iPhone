@@ -21,11 +21,13 @@
 
 @property (nonatomic, strong) NSMutableDictionary *totalResultsContainer;
 
-@property (nonatomic, strong) NSMutableArray *newsTagItemModels;
-
 @property (nonatomic, strong) NSMutableDictionary *currentPageIndexs;
 
+@property (nonatomic, assign) BOOL gettingNewsTag;
+
 - (void)getNewsTags;
+
+- (void)parseTagsWithData:(NSDictionary *)data;
 
 - (NSMutableArray *)newsResultAtTagIndex:(NSUInteger)index;
 
@@ -71,28 +73,45 @@
 
 - (void)getNewsTags {
     if (!self.loadNewsTagRequest) {
-        self.loadNewsTagRequest = [HttpRequestClient clientWithUrlAliasName:@"ARTICLE_GET_HOT_TAG"];
+        self.loadNewsTagRequest = [HttpRequestClient clientWithUrlAliasName:@"ARTICLE_GET_KNOWLEDGE"];
     }
     [self.loadNewsTagRequest cancel];
+    self.gettingNewsTag = YES;
     __weak NewsListViewModel *weakSelf = self;
     [weakSelf.loadNewsTagRequest startHttpRequestWithParameter:nil success:^(HttpRequestClient *client, NSDictionary *responseData) {
-        NSArray *array = [responseData objectForKey:@"data"];
-        [weakSelf.newsTagItemModels removeAllObjects];
-        if ([array isKindOfClass:[NSArray class]]) {
-            for (NSDictionary *dic in array) {
-                NewsTagItemModel *model = [[NewsTagItemModel alloc] initWithRawData:dic];
-                if (model) {
-                    [weakSelf.newsTagItemModels addObject:model];
+        [weakSelf parseTagsWithData:responseData];
+        [weakSelf.view reloadNewsTag];
+        [weakSelf startUpdateDataWithNewsTagIndex:weakSelf.currentTagIndex];
+        weakSelf.gettingNewsTag = NO;
+    } failure:^(HttpRequestClient *client, NSError *error) {
+        weakSelf.gettingNewsTag = NO;
+    }];
+}
+
+- (void)parseTagsWithData:(NSDictionary *)data {
+    _newsTagTypeModels = nil;
+    [self.newsTagItemModels removeAllObjects];
+    
+    NSArray *array = [data objectForKey:@"data"];
+    if ([array isKindOfClass:[NSArray class]]) {
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        for (NSDictionary *singleTypeElem in array) {
+            NewsTagTypeModel *typeModel = [[NewsTagTypeModel alloc] initWithRawData:singleTypeElem];
+            if (typeModel) {
+                [tempArray addObject:typeModel];
+                for (NewsTagItemModel *itemModel in typeModel.tagItems) {
+                    if (itemModel.isHot) {
+                        [self.newsTagItemModels addObject:itemModel];
+                    }
                 }
             }
         }
-        [weakSelf.view reloadNewsTag];
-        [weakSelf startUpdateDataWithNewsTagIndex:weakSelf.currentTagIndex];
-    } failure:nil];
+        _newsTagTypeModels = [NSArray arrayWithArray:tempArray];
+    }
 }
 
 - (NSMutableArray *)newsResultAtTagIndex:(NSUInteger)index {
-    if ([self.totalResultsContainer count] > index) {
+    if ([self.totalResultsContainer count] > 0) {
         NSMutableArray *dataArray = [self.totalResultsContainer objectForKey:[NSString stringWithFormat:@"%lu", (unsigned long)index]];
         if (dataArray) {
             return dataArray;
@@ -114,7 +133,7 @@
 }
 
 - (void)loadNewsFailedWithError:(NSError *)error tagIndex:(NSUInteger)index {
-    [self clearDataForTagIndex:index];
+    [self.view endRefresh];
     switch (error.code) {
         case -999:
         {
@@ -131,8 +150,8 @@
         default:
             break;
     }
+    [self clearDataForTagIndex:index];
     [self reloadNewsListViewWithData:nil tagIndex:index];
-    [self.view endRefresh];
 }
 
 - (void)loadMoreNewsSucceedWithData:(NSDictionary *)data tagIndex:(NSUInteger)index {
@@ -193,9 +212,11 @@
             [self.view noMoreData:YES forNewsTagIndex:index];
             [self.view hideLoadMoreFooter:YES forNewsTagIndex:index];
         }
-        [self.view reloadData];
-        [self.view endRefresh];
-        [self.view endLoadMore];
+        if (self.currentTagIndex == index) {
+            [self.view reloadData];
+            [self.view endRefresh];
+            [self.view endLoadMore];
+        }
     }
 }
 
@@ -206,7 +227,7 @@
 }
 
 - (void)startUpdateDataWithNewsTagIndex:(NSUInteger)index {
-    if ([self.newsTagItemModels count] == 0) {
+    if ([self.newsTagItemModels count] == 0 && self.gettingNewsTag == NO) {
         [self getNewsTags];
         return;
     }
@@ -269,14 +290,34 @@
 }
 
 - (void)resetResultWithNewsTagIndex:(NSUInteger)index{
+    [self.view endRefresh];
+    [self.view endLoadMore];
     self.currentTagIndex = index;
-    [self stopUpdateData];
     NSMutableArray *dataArray = [self newsResultAtTagIndex:index];
     
     if ([dataArray count] > 0) {
         [self.view reloadData];
     } else {
         [self.view startRefresh];
+    }
+}
+
+- (void)setTagItemModel:(NewsTagItemModel *)model {
+    BOOL isExisting = NO;
+    NSUInteger index = 0;
+    for (; index < [self.newsTagItemModels count]; index ++) {
+        NewsTagItemModel *existModel = [self.newsTagItemModels objectAtIndex:index];
+        if ([existModel.identifier isEqualToString:model.identifier]) {
+            isExisting = YES;
+            break;
+        }
+    }
+    if (isExisting) {
+        [self.view selectNewsTagAtIndex:index];
+    } else {
+        [self.newsTagItemModels addObject:model];
+        [self.view reloadNewsTag];
+        [self.view selectNewsTagAtIndex:[self.newsTagItemModels count] - 1];
     }
 }
 

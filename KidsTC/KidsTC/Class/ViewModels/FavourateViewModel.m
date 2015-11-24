@@ -140,7 +140,7 @@
 }
 
 - (void)loadFavourateFailedWithError:(NSError *)error segmmentTag:(FavourateViewSegmentTag)tag {
-    [self clearDataForTag:tag];
+    [self.view endRefresh];
     switch (error.code) {
         case -999:
         {
@@ -157,8 +157,8 @@
         default:
             break;
     }
+    [self clearDataForTag:tag];
     [self reloadFavourateViewWithData:nil forSegmmentTag:tag];
-    [self.view endRefresh];
 }
 
 - (void)loadMoreFavourateSucceedWithData:(NSDictionary *)data segmmentTag:(FavourateViewSegmentTag)tag {
@@ -291,9 +291,11 @@
         [self.view noMoreData:YES forTag:tag];
         [self.view hideLoadMoreFooter:YES ForTag:tag];
     }
-    [self.view reloadDataForTag:tag];
-    [self.view endRefresh];
-    [self.view endLoadMore];
+    if (self.currentTag == tag) {
+        [self.view reloadDataForTag:tag];
+        [self.view endRefresh];
+        [self.view endLoadMore];
+    }
 }
 
 #pragma mark Public methods
@@ -391,8 +393,8 @@
 }
 
 - (void)resetResultWithFavouratedTag:(FavourateViewSegmentTag)tag {
+    [self.view endRefresh];
     self.currentTag = tag;
-    [self stopUpdateData];
     switch (tag) {
         case FavourateViewSegmentTagService:
         {
@@ -443,6 +445,7 @@
 
 - (void)deleteFavourateDataForTag:(FavourateViewSegmentTag)tag atInde:(NSUInteger)index {
     [self stopUpdateData];
+    [self.view endLoadMore];
     KTCFavouriteType type = KTCFavouriteTypeService;
     NSString *identifier = @"0";
     switch (tag) {

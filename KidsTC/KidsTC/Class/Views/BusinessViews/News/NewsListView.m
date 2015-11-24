@@ -257,6 +257,12 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 
 #pragma mark Public methods
 
+- (void)selectNewsTagAtIndex:(NSUInteger)index {
+    [self.segmentView setSelectedIndex:index];
+    [self segmentView:self.segmentView didSelectedAtIndex:index];
+    [self.segmentView scrollToIndex:index position:UITableViewScrollPositionMiddle animated:YES];
+}
+
 - (void)reloadNewsTag {
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(newsTagItemModelsForNewsListView:)]) {
         self.tagModels = [self.dataSource newsTagItemModelsForNewsListView:self];

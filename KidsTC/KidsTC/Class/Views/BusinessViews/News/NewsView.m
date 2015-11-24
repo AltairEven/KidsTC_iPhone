@@ -12,9 +12,11 @@
 
 @property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *tabControl;
+@property (weak, nonatomic) IBOutlet UIButton *roleSelectButton;
 @property (weak, nonatomic) IBOutlet UIView *listBG;
 
 - (void)tabControlDidChangedSelectedIndex:(id)sender;
+- (IBAction)didClickedRoleSelectButton:(id)sender;
 
 @end
 
@@ -39,10 +41,9 @@
 }
 
 - (void)buildSubviews {
-    [self setBackgroundColor:[AUITheme theme].globalBGColor];
     //top
     self.topView.backgroundColor = [AUITheme theme].navibarBGColor;
-    [self.listBG setBackgroundColor:[AUITheme theme].navibarBGColor];
+    
     //header
     [self.tabControl addTarget:self action:@selector(tabControlDidChangedSelectedIndex:) forControlEvents:UIControlEventValueChanged];
     [self.tabControl setSelectedSegmentIndex:0];
@@ -52,6 +53,12 @@
     [self.tabControl setTitleTextAttributes:attributes forState:UIControlStateNormal];
     NSDictionary *highlightedAttributes = [NSDictionary dictionaryWithObject:[AUITheme theme].buttonBGColor_Normal forKey:NSForegroundColorAttributeName];
     [self.tabControl setTitleTextAttributes:highlightedAttributes forState:UIControlStateHighlighted];
+    
+    self.roleSelectButton.layer.cornerRadius = 14;
+    self.roleSelectButton.layer.masksToBounds = YES;
+    self.roleSelectButton.layer.borderColor = [AUITheme theme].navibarTitleColor_Normal.CGColor;
+    self.roleSelectButton.layer.borderWidth = 1;
+    [self.roleSelectButton setHidden:YES];
     //list
     [self.listBG setBackgroundColor:[AUITheme theme].globalBGColor];
     self.recommendListView.delegate = self;
@@ -113,6 +120,7 @@
             if (self.recommendListView.itemCount == 0) {
                 [self.recommendListView startLoadMore];
             }
+            [self.roleSelectButton setHidden:YES];
         }
             break;
         case NewsViewTagMore:
@@ -121,6 +129,7 @@
             if (self.newsListView.itemCount == 0) {
                 [self.newsListView startRefresh];
             }
+            [self.roleSelectButton setHidden:NO];
         }
             break;
         default:
@@ -128,6 +137,12 @@
     }
     if (self.delegate && [self.delegate respondsToSelector:@selector(newsView:didClickedSegmentControlWithNewsViewTag:)]) {
         [self.delegate newsView:self didClickedSegmentControlWithNewsViewTag:viewTag];
+    }
+}
+
+- (IBAction)didClickedRoleSelectButton:(id)sender {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedUserRoleButton)]) {
+        [self.delegate didClickedUserRoleButton];
     }
 }
 

@@ -120,7 +120,7 @@ static ThirdPartyLoginService *_sharedInstance = nil;
     if (!self.authorizationExchangeRequest) {
         self.authorizationExchangeRequest = [HttpRequestClient clientWithUrlAliasName:@"THIRD_LOGIN"];
     }
-    if ([token length] > 0) {
+    if ([openId length] > 0 && [token length] > 0) {
         NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:openId, @"code", [NSNumber numberWithInteger:type], @"type", nil];
         
         __weak ThirdPartyLoginService *weakSelf = self;

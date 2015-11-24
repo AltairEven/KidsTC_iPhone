@@ -9,6 +9,7 @@
 #import "NewsViewController.h"
 #import "NewsViewModel.h"
 #import "KTCWebViewController.h"
+#import "NewsListTagFilterViewController.h"
 
 @interface NewsViewController () <NewsViewDelegate>
 
@@ -74,6 +75,15 @@
 
 - (void)newsView:(NewsView *)newsView needLoadMoreWithNewsViewTag:(NewsViewTag)viewTag tagIndex:(NSUInteger)index {
     [self.newsViewModel getMoreNewsWithViewTag:viewTag newsTagIndex:index];
+}
+
+- (void)didClickedUserRoleButton {
+    NewsListTagFilterViewController *controller = [[NewsListTagFilterViewController alloc] initWithNewsTagTypeModels:[self.newsViewModel tagTypeModels]];
+    [controller setCompletionBlock:^(NewsTagItemModel *itemModel) {
+        [self.newsViewModel setTagItemModelsWithModel:itemModel];
+    }];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

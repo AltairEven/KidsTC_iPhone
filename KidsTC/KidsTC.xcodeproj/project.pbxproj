@@ -801,10 +801,16 @@
 		8F06234B1C02EE7600A8AF6C /* PromotionLogoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F06234A1C02EE7600A8AF6C /* PromotionLogoItem.m */; };
 		8F06234E1C02EE8A00A8AF6C /* ActivityLogoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F06234D1C02EE8A00A8AF6C /* ActivityLogoItem.m */; };
 		8F2C55BB1BFF167B00C2B6BF /* CommonShareService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2C55BA1BFF167B00C2B6BF /* CommonShareService.m */; };
+		8F5D8E381C0456D500632390 /* NewsListTagFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5D8E371C0456D500632390 /* NewsListTagFilterView.m */; };
+		8F5D8E3A1C0456FA00632390 /* NewsListTagFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F5D8E391C0456FA00632390 /* NewsListTagFilterView.xib */; };
+		8F5D8E3E1C045D1000632390 /* NewsListTagFilterViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5D8E3C1C045D1000632390 /* NewsListTagFilterViewCell.m */; };
+		8F5D8E3F1C045D1000632390 /* NewsListTagFilterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F5D8E3D1C045D1000632390 /* NewsListTagFilterViewCell.xib */; };
+		8F5D8E431C047BCB00632390 /* NewsListTagFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5D8E411C047BCB00632390 /* NewsListTagFilterViewController.m */; };
+		8F5D8E441C047BCB00632390 /* NewsListTagFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F5D8E421C047BCB00632390 /* NewsListTagFilterViewController.xib */; };
+		8F5D8E491C04862600632390 /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F5D8E481C04862600632390 /* interface_list.plist */; };
 		8F5E56BC1C004F7500365ED4 /* KTCPaymentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5E56BB1C004F7500365ED4 /* KTCPaymentInfo.m */; };
 		8F6513961BFC96B9003BE006 /* KTCActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6513951BFC96B9003BE006 /* KTCActionView.m */; };
 		8F70F9F01C00749600A175F0 /* AlipayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F70F9EF1C00749600A175F0 /* AlipayManager.m */; };
-		8F8A08CE1BF9DE5000134A9A /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F8A08CD1BF9DE5000134A9A /* interface_list.plist */; };
 		8F8A08D21BF9E31300134A9A /* BindPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8A08D01BF9E31300134A9A /* BindPhoneViewController.m */; };
 		8F8A08D31BF9E31300134A9A /* BindPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F8A08D11BF9E31300134A9A /* BindPhoneViewController.xib */; };
 		8F98D2541C000EF900C1388A /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8F98D2521C000EF900C1388A /* AlipaySDK.bundle */; };
@@ -2226,13 +2232,22 @@
 		8F06234D1C02EE8A00A8AF6C /* ActivityLogoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityLogoItem.m; sourceTree = "<group>"; };
 		8F2C55B91BFF167B00C2B6BF /* CommonShareService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonShareService.h; sourceTree = "<group>"; };
 		8F2C55BA1BFF167B00C2B6BF /* CommonShareService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonShareService.m; sourceTree = "<group>"; };
+		8F5D8E361C0456D500632390 /* NewsListTagFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsListTagFilterView.h; sourceTree = "<group>"; };
+		8F5D8E371C0456D500632390 /* NewsListTagFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsListTagFilterView.m; sourceTree = "<group>"; };
+		8F5D8E391C0456FA00632390 /* NewsListTagFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsListTagFilterView.xib; sourceTree = "<group>"; };
+		8F5D8E3B1C045D1000632390 /* NewsListTagFilterViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsListTagFilterViewCell.h; sourceTree = "<group>"; };
+		8F5D8E3C1C045D1000632390 /* NewsListTagFilterViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsListTagFilterViewCell.m; sourceTree = "<group>"; };
+		8F5D8E3D1C045D1000632390 /* NewsListTagFilterViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsListTagFilterViewCell.xib; sourceTree = "<group>"; };
+		8F5D8E401C047BCB00632390 /* NewsListTagFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsListTagFilterViewController.h; sourceTree = "<group>"; };
+		8F5D8E411C047BCB00632390 /* NewsListTagFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsListTagFilterViewController.m; sourceTree = "<group>"; };
+		8F5D8E421C047BCB00632390 /* NewsListTagFilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsListTagFilterViewController.xib; sourceTree = "<group>"; };
+		8F5D8E481C04862600632390 /* interface_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = interface_list.plist; sourceTree = "<group>"; };
 		8F5E56BA1C004F7500365ED4 /* KTCPaymentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCPaymentInfo.h; sourceTree = "<group>"; };
 		8F5E56BB1C004F7500365ED4 /* KTCPaymentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCPaymentInfo.m; sourceTree = "<group>"; };
 		8F6513941BFC96B9003BE006 /* KTCActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCActionView.h; sourceTree = "<group>"; };
 		8F6513951BFC96B9003BE006 /* KTCActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCActionView.m; sourceTree = "<group>"; };
 		8F70F9EE1C00749600A175F0 /* AlipayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlipayManager.h; sourceTree = "<group>"; };
 		8F70F9EF1C00749600A175F0 /* AlipayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlipayManager.m; sourceTree = "<group>"; };
-		8F8A08CD1BF9DE5000134A9A /* interface_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = interface_list.plist; sourceTree = "<group>"; };
 		8F8A08CF1BF9E31300134A9A /* BindPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindPhoneViewController.h; sourceTree = "<group>"; };
 		8F8A08D01BF9E31300134A9A /* BindPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindPhoneViewController.m; sourceTree = "<group>"; };
 		8F8A08D11BF9E31300134A9A /* BindPhoneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindPhoneViewController.xib; sourceTree = "<group>"; };
@@ -2953,7 +2968,7 @@
 		1E3D7E781B4BD83D00275C35 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8F8A08CD1BF9DE5000134A9A /* interface_list.plist */,
+				8F5D8E481C04862600632390 /* interface_list.plist */,
 				1E943EBD1B7375F60029FE74 /* Area.plist */,
 				1E0B7B591B709A2100A58AD4 /* Category.plist */,
 				1E3D7E791B4BD83D00275C35 /* Info.plist */,
@@ -3641,6 +3656,9 @@
 				8FAFABA81BFF1EC600082F20 /* CommonShareViewController.h */,
 				8FAFABA91BFF1EC600082F20 /* CommonShareViewController.m */,
 				8FAFABAA1BFF1EC600082F20 /* CommonShareViewController.xib */,
+				8F5D8E401C047BCB00632390 /* NewsListTagFilterViewController.h */,
+				8F5D8E411C047BCB00632390 /* NewsListTagFilterViewController.m */,
+				8F5D8E421C047BCB00632390 /* NewsListTagFilterViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -4070,6 +4088,12 @@
 				1E7994F91BC758560099CFF9 /* NewsListViewCell.h */,
 				1E7994FA1BC758560099CFF9 /* NewsListViewCell.m */,
 				1E7994FB1BC758560099CFF9 /* NewsListViewCell.xib */,
+				8F5D8E361C0456D500632390 /* NewsListTagFilterView.h */,
+				8F5D8E371C0456D500632390 /* NewsListTagFilterView.m */,
+				8F5D8E391C0456FA00632390 /* NewsListTagFilterView.xib */,
+				8F5D8E3B1C045D1000632390 /* NewsListTagFilterViewCell.h */,
+				8F5D8E3C1C045D1000632390 /* NewsListTagFilterViewCell.m */,
+				8F5D8E3D1C045D1000632390 /* NewsListTagFilterViewCell.xib */,
 				1E7994FC1BC758560099CFF9 /* NewsRecommendCellView.h */,
 				1E7994FD1BC758560099CFF9 /* NewsRecommendCellView.m */,
 				1E7994FE1BC758560099CFF9 /* NewsRecommendCellView.xib */,
@@ -5205,14 +5229,15 @@
 				1E943F801B831DAF0029FE74 /* ServiceListViewController.xib in Resources */,
 				1E827BD41B941337008F3F08 /* ImageSelectedOn@2x.png in Resources */,
 				1E827CD61B9C145B008F3F08 /* CouponListViewController.xib in Resources */,
+				8F5D8E3A1C0456FA00632390 /* NewsListTagFilterView.xib in Resources */,
 				1E3D8D0A1B4BF4A100275C35 /* GuideViewController1.xib in Resources */,
 				1E3D8DA31B4BF4A100275C35 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				1E0B77AE1B68D60B00A58AD4 /* LoginViewController.xib in Resources */,
 				1E943F7B1B831AB60029FE74 /* StoreListViewController.xib in Resources */,
-				8F8A08CE1BF9DE5000134A9A /* interface_list.plist in Resources */,
 				1EC73C0F1B5F6168008B39EA /* HomeViewTwinklingElfCell.xib in Resources */,
 				1E943F4F1B7DDFDF0029FE74 /* loadingBg_828_1472.png in Resources */,
 				1EA8B6EA1B66253200F90688 /* CategoryViewController.xib in Resources */,
+				8F5D8E3F1C045D1000632390 /* NewsListTagFilterViewCell.xib in Resources */,
 				1EC4A1241B5D248300206BB9 /* KTCSearchResultViewController.xib in Resources */,
 				1EC4A0F41B5A4C8600206BB9 /* FavourateView.xib in Resources */,
 				1E15F9CD1BE8A075000C74E7 /* SoftwareSettingView.xib in Resources */,
@@ -5236,6 +5261,7 @@
 				1E827C9B1B94144E008F3F08 /* LICENSE in Resources */,
 				1E827BDF1B941337008F3F08 /* PlayButtonOverlayLargeTap.png in Resources */,
 				1E943F581B7DE05E0029FE74 /* LoadingViewController.xib in Resources */,
+				8F5D8E491C04862600632390 /* interface_list.plist in Resources */,
 				1E3D8DA51B4BF4A100275C35 /* read_me.txt in Resources */,
 				1E0B7A771B6F67B800A58AD4 /* SmsConfirmView.xib in Resources */,
 				1E1CFA1E1BD4FEE20005653D /* KTCSearchViewCategoryCell.xib in Resources */,
@@ -5312,6 +5338,7 @@
 				1E15F97D1BDDD194000C74E7 /* StoreDetailCommentCell.xib in Resources */,
 				1E827BD11B941337008F3F08 /* ImageSelectedOff@2x.png in Resources */,
 				1E943F5E1B7DE67B0029FE74 /* logo_750_1334.png in Resources */,
+				8F5D8E441C047BCB00632390 /* NewsListTagFilterViewController.xib in Resources */,
 				1E827BD91B941337008F3F08 /* ImageSelectedSmallOn.png in Resources */,
 				1E827B8B1B93E7B3008F3F08 /* AUIPhotoBrowserViewController.xib in Resources */,
 				1E943EF81B7AFC9F0029FE74 /* AppointmentListViewHeaderTabCell.xib in Resources */,
@@ -5441,6 +5468,7 @@
 				1E79953B1BC8C4230099CFF9 /* HomeSegueModel.m in Sources */,
 				1E8EFCDF1B6729A000D00808 /* OrderCommentBottomView.m in Sources */,
 				1E943EC21B7457240029FE74 /* KTCSearchService.m in Sources */,
+				8F5D8E381C0456D500632390 /* NewsListTagFilterView.m in Sources */,
 				1E0B7A9B1B6F67B800A58AD4 /* GConnectUselessView.m in Sources */,
 				1E827C711B94144E008F3F08 /* DALabeledCircularProgressView.m in Sources */,
 				1E827CF91BA02592008F3F08 /* AUIFloorNavigationView.m in Sources */,
@@ -5524,6 +5552,7 @@
 				1EC73C041B5F4FF1008B39EA /* HomeThreeCellModel.m in Sources */,
 				1E0B7A781B6F67B800A58AD4 /* AnimedBtn.m in Sources */,
 				1E0B7AAE1B6F67B800A58AD4 /* GPreviewSetViewPageCell.m in Sources */,
+				8F5D8E431C047BCB00632390 /* NewsListTagFilterViewController.m in Sources */,
 				1E0B7ACC1B6F67B800A58AD4 /* TuanHeaderNumberLabel.m in Sources */,
 				1E3D8D591B4BF4A100275C35 /* HttpCookieWrapper.m in Sources */,
 				1E827CAC1B94144E008F3F08 /* UIImageView+WebCache.m in Sources */,
@@ -5887,6 +5916,7 @@
 				1E3D8D481B4BF4A100275C35 /* DDContextFilterLogFormatter.m in Sources */,
 				1E827CDE1B9D280D008F3F08 /* CouponUsableListView.m in Sources */,
 				1E943F411B7DC74B0029FE74 /* HomeViewHorizontalListCell.m in Sources */,
+				8F5D8E3E1C045D1000632390 /* NewsListTagFilterViewCell.m in Sources */,
 				1E3D8D761B4BF4A100275C35 /* AFHTTPRequestOperationManager.m in Sources */,
 				1E3D8DA61B4BF4A100275C35 /* GToolUtil.m in Sources */,
 				1E3D8DA11B4BF4A100275C35 /* RegexKitLite.m in Sources */,
@@ -6083,7 +6113,7 @@
 					"-licucore",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4db590c5-515d-4527-8725-6d12e81a9ee4";
+				PROVISIONING_PROFILE = "9dee74e9-8f77-4d8d-a578-0d1ba1362a14";
 			};
 			name = Debug;
 		};
@@ -6119,7 +6149,7 @@
 					"-licucore",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4db590c5-515d-4527-8725-6d12e81a9ee4";
+				PROVISIONING_PROFILE = "9dee74e9-8f77-4d8d-a578-0d1ba1362a14";
 			};
 			name = Release;
 		};

@@ -29,6 +29,8 @@ typedef enum {
 
 - (void)newsView:(NewsView *)newsView needLoadMoreWithNewsViewTag:(NewsViewTag)viewTag tagIndex:(NSUInteger)index;
 
+- (void)didClickedUserRoleButton;
+
 @end
 
 @interface NewsView : UIView

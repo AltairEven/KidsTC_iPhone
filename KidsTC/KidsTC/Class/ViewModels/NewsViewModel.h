@@ -9,6 +9,9 @@
 #import "BaseViewModel.h"
 #import "NewsView.h"
 
+@class NewsTagItemModel;
+@class NewsTagTypeModel;
+
 @interface NewsViewModel : BaseViewModel
 
 @property (nonatomic, assign) NewsViewTag currentViewTag;
@@ -22,5 +25,9 @@
 - (void)resetNewsViewWithViewTag:(NewsViewTag)viewTag newsTagIndex:(NSUInteger)index;
 
 - (NSArray *)resultListItemsWithViewTag:(NewsViewTag)viewTag;
+
+- (NSArray<NewsTagTypeModel *> *)tagTypeModels;
+
+- (void)setTagItemModelsWithModel:(NewsTagItemModel *)model;
 
 @end

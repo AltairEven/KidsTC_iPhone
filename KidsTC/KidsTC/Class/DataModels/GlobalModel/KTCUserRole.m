@@ -155,7 +155,7 @@
             break;
         case UserRoleBabyOneToThree:
         {
-            image = [UIImage imageNamed:@"roleselect_223_small"];
+            image = [UIImage imageNamed:@"roleselect_123_small"];
         }
             break;
         case UserRoleBabyFourToSix:
@@ -167,6 +167,124 @@
             break;
     }
     return image;
+}
+
++ (UIImage *)middleImageWithUserRole:(KTCUserRole *)role {
+    UserRole userRole = role.role;
+    UIImage *image = nil;
+    switch (userRole) {
+        case UserRoleUnknown:
+        {
+        }
+            break;
+        case UserRolePrepregnancy:
+        {
+            image = [UIImage imageNamed:@"roleselect_prepregnancy_middle"];
+        }
+            break;
+        case UserRolePregnancy:
+        {
+            image = [UIImage imageNamed:@"roleselect_pregnancy_middle"];
+        }
+            break;
+        case UserRoleBirth:
+        {
+            image = [UIImage imageNamed:@"roleselect_newbirth_middle"];
+        }
+            break;
+        case UserRoleBabyInOne:
+        {
+            image = [UIImage imageNamed:@"roleselect_babyinone_middle"];
+        }
+            break;
+        case UserRoleBabyOneToThree:
+        {
+            image = [UIImage imageNamed:@"roleselect_123_middle"];
+        }
+            break;
+        case UserRoleBabyFourToSix:
+        {
+            image = [UIImage imageNamed:@"roleselect_426_middle"];
+        }
+            break;
+        default:
+            break;
+    }
+    return image;
+}
+
++ (NSString *)mainDescriptionWithUserRole:(KTCUserRole *)role {
+    UserRole userRole = role.role;
+    NSString *description = nil;
+    switch (userRole) {
+        case UserRoleUnknown:
+        {
+        }
+            break;
+        case UserRolePrepregnancy:
+        {
+            description = @"备孕";
+        }
+            break;
+        case UserRolePregnancy:
+        {
+            description = @"孕期";
+        }
+            break;
+        case UserRoleBirth:
+        {
+            description = @"新生儿";
+        }
+            break;
+        case UserRoleBabyInOne:
+        {
+            description = @"婴儿";
+        }
+            break;
+        case UserRoleBabyOneToThree:
+        {
+            description = @"幼儿";
+        }
+            break;
+        case UserRoleBabyFourToSix:
+        {
+            description = @"学前";
+        }
+            break;
+        default:
+            break;
+    }
+    return description;
+}
+
++ (NSString *)subDescriptionWithUserRole:(KTCUserRole *)role {
+    UserRole userRole = role.role;
+    NSString *description = nil;
+    switch (userRole) {
+        case UserRoleBirth:
+        {
+            description = @"0~6个月";
+        }
+            break;
+        case UserRoleBabyInOne:
+        {
+            description = @"7~12个月";
+        }
+            break;
+        case UserRoleBabyOneToThree:
+        {
+            description = @"2~3岁";
+        }
+            break;
+        case UserRoleBabyFourToSix:
+        {
+            description = @"4~6岁";
+        }
+            break;
+        default:
+            break;
+    }
+    return description;
 }
 
 @end

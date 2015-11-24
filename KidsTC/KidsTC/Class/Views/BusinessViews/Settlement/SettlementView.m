@@ -162,7 +162,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
                 NSString *scoreText = [NSString stringWithFormat:@"%lu", (unsigned long)self.model.score];
                 NSString *text = [NSString stringWithFormat:@"共有%@积分可使用", scoreText];
                 if (!self.model.needPay) {
-                    text = @"不可使用积分";
+                    text = @"没有可使用的积分";
                 }
                 NSMutableAttributedString *attrText = [[NSMutableAttributedString alloc] initWithString:text];
                 [attrText addAttribute:NSForegroundColorAttributeName value:[UIColor orangeColor] range:NSMakeRange(2,[scoreText length])];
@@ -181,7 +181,11 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
             PaymentTypeModel *paymentModel = [self.model.supportedPaymentTypes objectAtIndex:indexPath.row];
             [cell setLogo:paymentModel.logo];
             [cell setPaymentName:paymentModel.name];
-            [self setCell:cell enabled:self.model.needPay];
+            if (self.model.needPay && self.model.totalPrice > 0) {
+                [self setCell:cell enabled:YES];
+            } else {
+                [self setCell:cell enabled:NO];
+            }
             return cell;
         }
             break;
@@ -310,7 +314,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
             [titleLabel setTextColor:[UIColor lightGrayColor]];
             [titleLabel setText:@"选择支付方式"];
             [view addSubview:titleLabel];
-            if (self.model.needPay) {
+            if (self.model.needPay && self.model.totalPrice > 0) {
                 [view setBackgroundColor:[UIColor whiteColor]];
             } else {
                 [view setBackgroundColor:RGBA(250, 250, 250, 1)];

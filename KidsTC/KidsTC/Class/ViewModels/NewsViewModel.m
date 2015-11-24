@@ -73,11 +73,11 @@
 }
 
 - (void)resetNewsViewWithViewTag:(NewsViewTag)viewTag newsTagIndex:(NSUInteger)index {
-    [self stopUpdateData];
     self.currentViewTag = viewTag;
     switch (viewTag) {
         case NewsViewTagRecommend:
         {
+            [self.recommendListViewModel stopUpdateData];
             if ([self.recommendListViewModel.resultListItems count] == 0) {
                 [self.recommendListViewModel startUpdateDataWithSucceed:nil failure:nil];
             }
@@ -109,6 +109,14 @@
             break;
     }
     return nil;
+}
+
+- (NSArray *)tagTypeModels {
+    return self.listViewModel.newsTagTypeModels;
+}
+
+- (void)setTagItemModelsWithModel:(NewsTagItemModel *)model {
+    [self.listViewModel setTagItemModel:model];
 }
 
 - (void)stopUpdateData {

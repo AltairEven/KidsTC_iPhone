@@ -170,7 +170,8 @@
         } else if ([errMsg length] > 0) {
             [[iToast makeText:errMsg] show];
         } else {
-            [[iToast makeText:[error localizedDescription]] show];
+            errMsg = @"登录失败";
+            [[iToast makeText:errMsg] show];
         }
     }
     [[GAlertLoadingView sharedAlertLoadingView] hide];

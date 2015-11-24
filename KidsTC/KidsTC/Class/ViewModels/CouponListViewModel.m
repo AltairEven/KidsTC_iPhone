@@ -129,7 +129,7 @@
 }
 
 - (void)loadCouponsFailedWithError:(NSError *)error segmmentTag:(CouponListViewTag)tag {
-    [self clearDataForTag:tag];
+    [self.view endRefresh];
     switch (error.code) {
         case -999:
         {
@@ -146,8 +146,8 @@
         default:
             break;
     }
+    [self clearDataForTag:tag];
     [self reloadCouponListViewWithData:nil forSegmmentTag:tag];
-    [self.view endRefresh];
 }
 
 - (void)loadMoreCouponsSucceedWithData:(NSDictionary *)data segmmentTag:(CouponListViewTag)tag {
@@ -250,9 +250,11 @@
             [self.view noMoreData:NO forViewTag:tag];
         }
     }
-    [self.view reloadDataforViewTag:tag];
-    [self.view endRefresh];
-    [self.view endLoadMore];
+    if (self.currentTag == tag) {
+        [self.view reloadDataforViewTag:tag];
+        [self.view endRefresh];
+        [self.view endLoadMore];
+    }
 }
 
 #pragma mark Public methods
@@ -345,7 +347,8 @@
 }
 
 - (void)resetResultWithViewTag:(CouponListViewTag)tag {
-    [self stopUpdateData];
+    [self.view endRefresh];
+    [self.view endLoadMore];
     self.currentTag = tag;
     switch (tag) {
         case CouponListViewTagUnused:

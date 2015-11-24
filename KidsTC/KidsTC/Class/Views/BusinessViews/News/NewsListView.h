@@ -40,6 +40,8 @@
 @property (nonatomic, readonly) NSUInteger itemCount;
 @property (nonatomic, readonly) NSUInteger currentNewsTagIndex;
 
+- (void)selectNewsTagAtIndex:(NSUInteger)index;
+
 - (void)reloadNewsTag;
 
 - (void)reloadData;

@@ -25,6 +25,13 @@
 			<key>url</key>
 			<string>http://api.kidstc.com/json.php?mod=article&amp;&amp;act=get_hot_tag</string>
 		</dict>
+		<key>ARTICLE_GET_KNOWLEDGE</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=article&amp;&amp;act=get_knowledge</string>
+		</dict>
 		<key>ARTICLE_GET_LIST</key>
 		<dict>
 			<key>method</key>
@@ -144,6 +151,13 @@
 			<key>url</key>
 			<string>http://api.kidstc.com/json.php?mod=coupon&amp;&amp;act=query_user_coupon</string>
 		</dict>
+		<key>GET_BROWSE_RECORD</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=BrowseRecord&amp;&amp;act=get_browse_record</string>
+		</dict>
 		<key>GET_CENTER_COUNT</key>
 		<dict>
 			<key>method</key>
@@ -242,6 +256,13 @@
 			<key>url</key>
 			<string>http://api.kidstc.com/json.php?mod=order&amp;&amp;act=get_order_detail</string>
 		</dict>
+		<key>ORDER_GET_REFUND_TYPE</key>
+		<dict>
+			<key>method</key>
+			<string>get</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=order&amp;&amp;act=get_refund_type</string>
+		</dict>
 		<key>ORDER_PLACE_ORDER</key>
 		<dict>
 			<key>method</key>
@@ -263,12 +284,26 @@
 			<key>url</key>
 			<string>http://api.kidstc.com/json.php?mod=order&amp;&amp;act=search_order</string>
 		</dict>
+		<key>ORDER_SEND_CONSUME_CODE</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=order&amp;&amp;act=send_consume_code</string>
+		</dict>
 		<key>PAY_ALIPAY_NOTIFY</key>
 		<dict>
 			<key>method</key>
 			<string>post</string>
 			<key>url</key>
 			<string>http://api.kidstc.com/json.php?mod=pay&amp;&amp;act=alipay_notify</string>
+		</dict>
+		<key>PAY_GET_NOTICE</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=pay&amp;&amp;act=get_pay_notice</string>
 		</dict>
 		<key>PRODUCT_ACTIVITY_FILTER_GET</key>
 		<dict>
@@ -454,8 +489,8 @@
 		</dict>
 	</dict>
 	<key>errno</key>
-	<string>0</string>
+	<integer>0</integer>
 	<key>version</key>
-	<string>20</string>
+	<string>24</string>
 </dict>
 </plist>

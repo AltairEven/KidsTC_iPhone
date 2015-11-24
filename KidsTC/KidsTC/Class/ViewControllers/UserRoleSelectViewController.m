@@ -118,7 +118,7 @@ typedef enum {
             break;
         case AgeSelectTagTwo2Three:
         {
-            image = [UIImage imageNamed:@"roleselect_223"];
+            image = [UIImage imageNamed:@"roleselect_123"];
         }
             break;
         case AgeSelectTagFour2Six:
@@ -252,8 +252,8 @@ typedef enum {
             break;
         case AgeSelectTagTwo2Three:
         {
-            [self.leftImageView setImage:[UIImage imageNamed:@"sexselect_boy_223"]];
-            [self.rightImageView setImage:[UIImage imageNamed:@"sexselect_girl_223"]];
+            [self.leftImageView setImage:[UIImage imageNamed:@"sexselect_boy_123"]];
+            [self.rightImageView setImage:[UIImage imageNamed:@"sexselect_girl_123"]];
         }
             break;
         case AgeSelectTagFour2Six:

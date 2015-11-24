@@ -137,6 +137,9 @@
         [weakSelf setCodeButtonEnableState:YES];
         if (error.userInfo) {
             NSString *errMsg = [error.userInfo objectForKey:@"data"];
+            if ([errMsg length] == 0) {
+                errMsg = @"获取验证码失败";
+            }
             [[iToast makeText:errMsg] show];
         }
     }];

@@ -10,7 +10,13 @@
 #import "NewsListView.h"
 #import "NewsListItemModel.h"
 
+@class NewsTagItemModel;
+
 @interface NewsListViewModel : BaseViewModel
+
+@property (nonatomic, strong, readonly) NSArray *newsTagTypeModels;
+
+@property (nonatomic, strong) NSMutableArray *newsTagItemModels;
 
 @property (nonatomic, assign) NSUInteger currentTagIndex;
 
@@ -21,5 +27,7 @@
 - (void)getMoreDataWithNewsTagIndex:(NSUInteger)index;
 
 - (void)resetResultWithNewsTagIndex:(NSUInteger)index;
+
+- (void)setTagItemModel:(NewsTagItemModel *)model;
 
 @end

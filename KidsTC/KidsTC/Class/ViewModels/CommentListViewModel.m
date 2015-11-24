@@ -192,7 +192,7 @@
 }
 
 - (void)loadCommentsFailedWithError:(NSError *)error segmmentTag:(CommentListViewTag)tag {
-    [self clearDataForTag:tag];
+    [self.view endRefresh];
     switch (error.code) {
         case -999:
         {
@@ -209,8 +209,8 @@
         default:
             break;
     }
+    [self clearDataForTag:tag];
     [self reloadCommentListViewWithData:nil forSegmmentTag:tag];
-    [self.view endRefresh];
 }
 
 - (void)loadMoreCommentsSucceedWithData:(NSDictionary *)data segmmentTag:(CommentListViewTag)tag {
@@ -312,9 +312,11 @@
             [self.view noMoreData:NO forViewTag:tag];
         }
     }
-    [self.view reloadDataforViewTag:tag];
-    [self.view endRefresh];
-    [self.view endLoadMore];
+    if (self.currentTag == tag) {
+        [self.view reloadDataforViewTag:tag];
+        [self.view endRefresh];
+        [self.view endLoadMore];
+    }
 }
 
 #pragma mark Public methods
@@ -406,8 +408,9 @@
 }
 
 - (void)resetResultWithType:(KTCCommentType)type {
+    [self.view endRefresh];
+    [self.view endLoadMore];
     self.currentTag = (CommentListViewTag)type;
-    [self stopUpdateData];
     switch (type) {
         case KTCCommentTypeAll:
         {

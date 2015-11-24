@@ -15,7 +15,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                     <subviews>
                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0Ja-Oi-iqr">
-                            <rect key="frame" x="60" y="25" width="200" height="29"/>
+                            <rect key="frame" x="60" y="28" width="200" height="29"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="200" id="EBR-N4-u1H"/>
                             </constraints>
@@ -24,12 +24,25 @@
                                 <segment title="知识库"/>
                             </segments>
                         </segmentedControl>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4FB-lk-czY">
+                            <rect key="frame" x="282" y="28" width="28" height="28"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="28" id="C44-w6-5em"/>
+                                <constraint firstAttribute="height" constant="28" id="Mc5-5N-m8D"/>
+                            </constraints>
+                            <state key="normal" image="roleselect_prepregnancy_small"/>
+                            <connections>
+                                <action selector="didClickedRoleSelectButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="KcN-nK-1eQ"/>
+                            </connections>
+                        </button>
                     </subviews>
-                    <color key="backgroundColor" red="1" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="0Ja-Oi-iqr" firstAttribute="top" secondItem="ejO-Z5-Zgo" secondAttribute="top" constant="25" id="TlI-w5-CEX"/>
+                        <constraint firstItem="0Ja-Oi-iqr" firstAttribute="centerY" secondItem="ejO-Z5-Zgo" secondAttribute="centerY" constant="10" id="5H0-4C-Kmx"/>
+                        <constraint firstAttribute="trailing" secondItem="4FB-lk-czY" secondAttribute="trailing" constant="10" id="WRG-s0-7tL"/>
                         <constraint firstItem="0Ja-Oi-iqr" firstAttribute="centerX" secondItem="ejO-Z5-Zgo" secondAttribute="centerX" id="eJq-io-TdC"/>
                         <constraint firstAttribute="height" constant="64" id="iS1-dZ-a2x"/>
+                        <constraint firstItem="4FB-lk-czY" firstAttribute="centerY" secondItem="0Ja-Oi-iqr" secondAttribute="centerY" id="owB-7A-IrY"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mu1-vC-iMW" userLabel="listBG">
@@ -57,7 +70,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="ejO-Z5-Zgo" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="0B9-lG-k2k"/>
                 <constraint firstItem="ejO-Z5-Zgo" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="1GO-xz-su3"/>
@@ -71,10 +84,14 @@
                 <outlet property="listBG" destination="mu1-vC-iMW" id="rzZ-Eo-tEi"/>
                 <outlet property="newsListView" destination="M75-9n-qkx" id="GMN-tN-XDd"/>
                 <outlet property="recommendListView" destination="bke-75-5pp" id="g27-Wb-4ah"/>
+                <outlet property="roleSelectButton" destination="4FB-lk-czY" id="gw1-rK-crA"/>
                 <outlet property="tabControl" destination="0Ja-Oi-iqr" id="SBX-mo-jKe"/>
                 <outlet property="topView" destination="ejO-Z5-Zgo" id="q8E-MP-o43"/>
             </connections>
             <point key="canvasLocation" x="392" y="362"/>
         </view>
     </objects>
+    <resources>
+        <image name="roleselect_prepregnancy_small" width="28" height="28"/>
+    </resources>
 </document>

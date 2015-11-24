@@ -139,7 +139,7 @@
 }
 
 - (void)loadOrderFailedWithError:(NSError *)error orderListStatus:(AppointmentOrderListStatus)status {
-    [self clearDataForOrderListStatus:status];
+    [self.view endRefresh];
     switch (error.code) {
         case -999:
         {
@@ -156,8 +156,8 @@
         default:
             break;
     }
+    [self clearDataForOrderListStatus:status];
     [self reloadOrderViewWithData:nil fororderListStatus:status];
-    [self.view endRefresh];
 }
 
 - (void)loadMoreOrderSucceedWithData:(NSDictionary *)data orderListStatus:(AppointmentOrderListStatus)status {
@@ -252,9 +252,11 @@
         [self.view noMoreData:YES forListStatus:status];
         [self.view hideLoadMoreFooter:YES forListStatus:status];
     }
-    [self.view reloadDataforListStatus:status];
-    [self.view endRefresh];
-    [self.view endLoadMore];
+    if (self.currentListStatus == status) {
+        [self.view reloadDataforListStatus:status];
+        [self.view endRefresh];
+        [self.view endLoadMore];
+    }
 }
 
 #pragma mark Public methods
@@ -398,8 +400,9 @@
 }
 
 - (void)resetResultWithOrderListStatus:(AppointmentOrderListStatus)status {
+    [self.view endRefresh];
+    [self.view endLoadMore];
     self.currentListStatus = status;
-    [self stopUpdateData];
     switch (status) {
         case AppointmentOrderListStatusAll:
         {

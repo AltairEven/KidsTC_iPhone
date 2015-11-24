@@ -71,10 +71,13 @@
             self.promotionModel = [[PromotionFullCutModel alloc] initWithRawData:promotionDic];
         }
         self.score = [[data objectForKey:@"scorenum"] integerValue];
+        if (self.price * self.count < self.score * ScoreCoefficient) {
+            self.score = self.price * self.count / ScoreCoefficient;
+        }
         
         _totalPrice = (self.price * self.count) - self.promotionModel.cutAmount - (self.usedScore * ScoreCoefficient);
         
-        if (self.totalPrice <= 0) {
+        if (self.price <= 0) {
             _needPay = NO;
         } else {
             _needPay = YES;

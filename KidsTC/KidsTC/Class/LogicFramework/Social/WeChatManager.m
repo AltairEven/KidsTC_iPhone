@@ -29,6 +29,8 @@ static WeChatManager *_sharedInstance = nil;
 
 @interface WeChatManager () <WXApiDelegate>
 
+@property (nonatomic, strong) HttpRequestClient *loadOpenIdAndAccessTokenRequest;
+
 @property (nonatomic, strong) WeChatLoginSuccessBlock loginSuccessBlock;
 
 @property (nonatomic, strong) WeChatLoginFailureBlock loginFailureBlock;
@@ -160,7 +162,7 @@ static WeChatManager *_sharedInstance = nil;
     if (resp.errCode == 0) {
         if ([resp.state isEqualToString:kWeChatLoginIdentifier] && [resp.code length] > 0) {
             if (self.loginSuccessBlock) {
-                self.loginSuccessBlock(resp.code, nil);
+                self.loginSuccessBlock(resp.code, resp.code);
             }
         } else {
             NSError *error = [NSError errorWithDomain:@"WeChat Auth" code:-10 userInfo:[NSDictionary dictionaryWithObject:@"微信授权失败" forKey:kErrMsgKey]];
