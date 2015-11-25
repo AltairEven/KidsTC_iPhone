@@ -43,7 +43,6 @@
 - (instancetype)initWithShareObject:(CommonShareObject *)object {
     self = [super initWithNibName:@"CommonShareViewController" bundle:nil];
     if (self) {
-        self.modalPresentationStyle = UIModalPresentationFullScreen;
         self.shareObject = object;
     }
     return self;
@@ -60,6 +59,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self.displayBGView setBackgroundColor:[AUITheme theme].globalBGColor];
+    [self.tapView setHidden:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -70,10 +70,12 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [self.tapView setHidden:NO];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [self.tapView setHidden:YES];
     self.shareObject = nil;
 }
 

@@ -10,7 +10,7 @@
 #import "StoreDetailViewModel.h"
 #import "StoreDetailBottomView.h"
 #import "Insurance.h"
-#import "ActiveModel.h"
+#import "ActivityLogoItem.h"
 #import "ServiceListItemModel.h"
 #import "StoreListItemModel.h"
 #import "StoreAppointmentViewController.h"
@@ -23,6 +23,7 @@
 #import "KTCActionView.h"
 #import "KTCSearchViewController.h"
 #import "CommonShareViewController.h"
+#import "KTCWebViewController.h"
 
 @interface StoreDetailViewController () <StoreDetailViewDelegate, StoreDetailBottomViewDelegate, KTCActionViewDelegate>
 
@@ -82,9 +83,32 @@
 
 #pragma mark StoreDetailViewDelegate
 
+- (void)didClickedCouponButtonOnStoreDetailView:(StoreDetailView *)detailView {
+    KTCWebViewController * controller = [[KTCWebViewController alloc] init];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [controller setWebUrlString:self.viewModel.detailModel.couponUrlString];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
 - (void)didClickedTelephoneOnStoreDetailView:(StoreDetailView *)detailView {
-    NSString *telString = [NSString stringWithFormat:@"telprompt://%@",[self.viewModel.detailModel phoneNumber]];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telString]];
+    NSArray *numbers = [self.viewModel.detailModel phoneNumbersArray];
+    if ([numbers count] <= 1) {
+        NSString *telString = [NSString stringWithFormat:@"telprompt://%@",[self.viewModel.detailModel phoneNumber]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telString]];
+    } else {
+        UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"请选择需要拨打的号码" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+        for (NSString *phoneNumber in numbers) {
+            UIAlertAction *action = [UIAlertAction actionWithTitle:phoneNumber style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                NSString *telString = [NSString stringWithFormat:@"telprompt://%@", phoneNumber];
+                NSLog(@"%@", [NSURL URLWithString:telString]);
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telString]];
+            }];
+            [controller addAction:action];
+        }
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        [controller addAction:action];
+        [self presentViewController:controller animated:YES completion:nil];
+    }
 }
 
 - (void)didClickedAddressOnStoreDetailView:(StoreDetailView *)detailView {
@@ -92,7 +116,11 @@
 }
 
 - (void)didClickedActiveOnStoreDetailView:(StoreDetailView *)detailView atIndex:(NSUInteger)index {
-    
+//    ActivityLogoItem *item = [self.viewModel.detailModel.activeModelsArray objectAtIndex:index];
+//    UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"" message:item.itemDescription preferredStyle:UIAlertControllerStyleAlert];
+//    UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+//    [controller addAction:action];
+//    [self presentViewController:controller animated:YES completion:nil];
 }
 
 - (void)didClickedAllHotRecommendOnStoreDetailView:(StoreDetailView *)detailView {
@@ -107,7 +135,12 @@
 }
 
 - (void)didClickedMoreDetailOnStoreDetailView:(StoreDetailView *)detailView {
-    StoreMoreDetailViewController *controller = [[StoreMoreDetailViewController alloc] initWithStoreId:self.storeId];
+//    StoreMoreDetailViewController *controller = [[StoreMoreDetailViewController alloc] initWithStoreId:self.storeId];
+//    [controller setHidesBottomBarWhenPushed:YES];
+//    [self.navigationController pushViewController:controller animated:YES];
+    
+    KTCWebViewController *controller = [[KTCWebViewController alloc] init];
+    [controller setWebUrlString:self.viewModel.detailModel.detailUrlString];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
 }
@@ -168,9 +201,8 @@
         case StoreDetailBottomSubviewTagAppointment:
         {
             [GToolUtil checkLogin:^(NSString *uid) {
-                StoreAppointmentViewController *controller = [[StoreAppointmentViewController alloc] initWithStoreDetailModel:self.viewModel.detailModel];
-                [controller setHidesBottomBarWhenPushed:YES];
-                [self.navigationController pushViewController:controller animated:YES];
+                StoreAppointmentViewController *controller = [StoreAppointmentViewController instanceWithStoreDetailModel:self.viewModel.detailModel];
+                [self presentViewController:controller animated:YES completion:nil];
             } target:self];
         }
             break;

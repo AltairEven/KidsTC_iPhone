@@ -65,6 +65,17 @@ NSString *const kCommentCellIdentifier = @"kCommentCellIdentifier";
     [self.webView.scrollView setShowsVerticalScrollIndicator:NO];
     [self.webView.scrollView setShowsHorizontalScrollIndicator:NO];
     self.webView.delegate = self;
+    NSString *userAgent = [self.webView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString *appVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    NSString *extInfo = [NSString stringWithFormat:@"KidsTC/Iphone/%@", appVersion];
+    if ([userAgent rangeOfString:extInfo].location == NSNotFound)
+    {
+        NSString *newUserAgent = [NSString stringWithFormat:@"%@ %@", userAgent, extInfo];
+        // Set user agent (the only problem is that we can't modify the User-Agent later in the program)
+        NSDictionary *dictionnary = [[NSDictionary alloc] initWithObjectsAndKeys:newUserAgent, @"UserAgent", nil];
+        [[NSUserDefaults standardUserDefaults] registerDefaults:dictionnary];
+    }
     
     self.tableView.backgroundView = nil;
     [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
@@ -183,7 +194,8 @@ NSString *const kCommentCellIdentifier = @"kCommentCellIdentifier";
     switch (self.viewTag) {
         case ServiceDetailMoreInfoViewTagStore:
         {
-            height = [StoreListViewCell cellHeight];
+            StoreListItemModel *model = [self.storeListModels objectAtIndex:indexPath.row];
+            height = [model cellHeight];
         }
             break;
         case ServiceDetailMoreInfoViewTagComment:

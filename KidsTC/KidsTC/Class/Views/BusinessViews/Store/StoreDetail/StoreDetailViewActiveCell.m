@@ -21,14 +21,9 @@
     // Configure the view for the selected state
 }
 
-- (void)configWithModel:(ActiveModel *)model {
+- (void)configWithModel:(ActivityLogoItem *)model {
     [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     [self.activeImageView setImage:model.image];
-    [self.descriptionLabel setText:model.activeDescription];
+    [self.descriptionLabel setText:model.itemDescription];
 }
-
-+ (CGFloat)cellHeight {
-    return 44;
-}
-
 @end

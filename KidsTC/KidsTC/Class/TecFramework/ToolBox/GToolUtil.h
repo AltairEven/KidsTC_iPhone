@@ -152,4 +152,6 @@ NSInteger sortImageDictionaryWithIdx(id v1, id v2, void *context);
 
 + (NSUInteger)byteCountOfImage:(UIImage *)image;
 
++ (void)drawLineOnView:(UIView *)view withStartPoint:(CGPoint)start endPoint:(CGPoint)end lineWidth:(CGFloat)width gap:(CGFloat)gap sectionLength:(CGFloat)length color:(UIColor *)color isVirtual:(BOOL)isVirtual;
+
 @end

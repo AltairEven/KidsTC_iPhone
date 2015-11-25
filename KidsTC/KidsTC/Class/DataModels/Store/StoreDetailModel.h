@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ActiveModel.h"
+#import "ActivityLogoItem.h"
+#import "PromotionLogoItem.h"
 #import "StoreDetailHotRecommendModel.h"
 #import "StoreOwnedServiceModel.h"
 #import "StoreListItemModel.h"
@@ -38,7 +39,7 @@
 
 @property (nonatomic, copy) NSString *storeAddress;
 
-@property (nonatomic, strong) NSArray *activeModelsArray;
+@property (nonatomic, strong) NSArray<ActivityLogoItem *> *activeModelsArray;
 
 @property (nonatomic, strong) NSArray *hotRecommendServiceArray;
 
@@ -49,6 +50,8 @@
 @property (nonatomic, copy) NSString *recommendString;
 
 @property (nonatomic, copy) NSString *storeBrief;
+
+@property (nonatomic, copy) NSString *detailUrlString;
 
 @property (nonatomic, strong) NSArray *commentItemsArray;
 
@@ -89,5 +92,7 @@
 - (BOOL)hasCoupon;
 
 - (NSArray<NSString *> *)phoneNumbersArray;
+
+- (CGFloat)activityCellHeightAtIndex:(NSUInteger)index;
 
 @end

@@ -47,42 +47,23 @@
             [tempArray addObject:bft];
         }
         self.supportedInsurance = [NSArray arrayWithArray:tempArray];
-        //活动
-        [tempArray removeAllObjects];
-        NSArray *fullCut = [data objectForKey:@"fullCut"];
-        if ([fullCut isKindOfClass:[NSArray class]] && [fullCut count] > 0) {
-            ActivityLogoItem *item = [[ActivityLogoItem alloc] initWithType:ActivityLogoItemTypePreferential description:[fullCut firstObject]];
-            if (item) {
-                [tempArray addObject:item];
-            }
-        }
-        
+        //promotion
         BOOL hasCoupon = [[data objectForKey:@"isHaveCoupon"] boolValue];
         if (hasCoupon) {
-            ActivityLogoItem *item = [[ActivityLogoItem alloc] initWithType:ActivityLogoItemTypeCoupon description:nil];
+            PromotionLogoItem *item = [[PromotionLogoItem alloc] initWithType:PromotionLogoItemTypeCoupon description:nil];
             if (item) {
-                [tempArray addObject:item];
+                self.promotionLogoItems = [NSArray arrayWithObject:item];
             }
         }
-        self.activityLogoItems = [NSArray arrayWithArray:tempArray];
-        //价格优惠
-        [tempArray removeAllObjects];
-        BOOL miao = [[data objectForKey:@"isMiao"] boolValue];
-        if (miao) {
-            PromotionLogoItem *item = [[PromotionLogoItem alloc] initWithType:PromotionLogoItemTypeMiao description:nil];
+        //activity
+        NSArray *fullCut = [data objectForKey:@"fullCut"];
+        if ([fullCut isKindOfClass:[NSArray class]] && [fullCut count] > 0) {
+            ActivityLogoItem *item = [[ActivityLogoItem alloc] initWithType:ActivityLogoItemTypeDiscount description:[fullCut firstObject]];
             if (item) {
-                [tempArray addObject:item];
+                self.activityLogoItems = [NSArray arrayWithObject:item];
             }
         }
         
-        BOOL tuan = [[data objectForKey:@"isTuan"] boolValue];
-        if (tuan) {
-            PromotionLogoItem *item = [[PromotionLogoItem alloc] initWithType:PromotionLogoItemTypeTuan description:nil];
-            if (item) {
-                [tempArray addObject:item];
-            }
-        }
-        self.promotionLogoItems = [NSArray arrayWithArray:tempArray];
     }
     return self;
 }

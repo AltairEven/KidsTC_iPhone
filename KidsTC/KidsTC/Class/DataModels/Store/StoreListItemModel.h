@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ActiveModel.h"
 #import "ActivityLogoItem.h"
+#import "PromotionLogoItem.h"
 
 @interface StoreListItemModel : NSObject
 
@@ -27,6 +27,8 @@
 @property (nonatomic, copy) NSString *feature;
 
 @property (nonatomic, copy) NSString *businessZone;
+
+@property (nonatomic, strong) NSArray <PromotionLogoItem *> *promotionLogoItems;
 
 @property (nonatomic, strong) NSArray <ActivityLogoItem *> *activityLogoItems;
 

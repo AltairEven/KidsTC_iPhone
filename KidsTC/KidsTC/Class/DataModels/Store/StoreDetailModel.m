@@ -32,7 +32,11 @@
     self.couponUrlString = [data objectForKey:@"couponLink"];
     self.appointmentNumber = [[data objectForKey:@"bookNum"] integerValue];
     self.commentNumber = [[data objectForKey:@"evaluateNum"] integerValue];
-    self.phoneNumber = [data objectForKey:@"phone"];
+    if ([data objectForKey:@"phone"]) {
+        self.phoneNumber = [data objectForKey:@"phone"];
+        self.phoneNumber = [self.phoneNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
+        self.phoneNumber = [self.phoneNumber stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    }
     self.isFavourate = [[data objectForKey:@"favor"] boolValue];
     //appoint times
     NSDictionary *appointTime = [data objectForKey:@"appointTime"];
@@ -55,19 +59,27 @@
         self.storeAddress = [location objectForKey:@"addr"];
         self.storeCoordinate = [GToolUtil coordinateFromString:[location objectForKey:@"mapAddr"]];
     }
-    //active
-    NSArray *activies = [data objectForKey:@"event"];
-    if ([activies isKindOfClass:[NSArray class]]) {
-        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-        for (NSDictionary *activeDic in activies) {
-            ActiveModel *model = [[ActiveModel alloc] init];
-            model.type = (ActiveType)[[activeDic objectForKey:@"type"] integerValue];
-            model.name = [activeDic objectForKey:@"name"];
-            model.activeDescription = [activeDic objectForKey:@"des"];
-            [tempArray addObject:model];
+    //activity
+    NSArray *eventsArray = [data objectForKey:@"event"];
+    NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+    if ([eventsArray isKindOfClass:[NSArray class]]) {
+        for (NSDictionary *singleElem in eventsArray) {
+            NSInteger type = [[singleElem objectForKey:@"type"] integerValue];
+            NSString *des = [NSString stringWithFormat:@"%@", [singleElem objectForKey:@"des"]];
+            ActivityLogoItemType itemType = ActivityLogoItemTypeUnknow;
+            if (type == 1) {
+                itemType = ActivityLogoItemTypeGift;
+            } else if (type == 2) {
+                itemType = ActivityLogoItemTypePreferential;
+            }
+            ActivityLogoItem *item = [[ActivityLogoItem alloc] initWithType:itemType description:des];
+            if (item) {
+                item.name = [NSString stringWithFormat:@"%@", [singleElem objectForKey:@"name"]];
+                [tempArray addObject:item];
+            }
         }
-        self.activeModelsArray = [NSArray arrayWithArray:tempArray];
     }
+    self.activeModelsArray = [NSArray arrayWithArray:tempArray];
     //hot recommend
     NSArray *tuans = [data objectForKey:@"tuan"];
     if ([tuans isKindOfClass:[NSArray class]]) {
@@ -89,6 +101,7 @@
     }
     //brief
     self.storeBrief = [data objectForKey:@"breif"];
+    self.detailUrlString = [data objectForKey:@"detailUrl"];
     //comments
     NSArray *comments = [data objectForKey:@"commentList"];
     if ([comments isKindOfClass:[NSArray class]]) {
@@ -201,8 +214,20 @@
     if ([self.phoneNumber length] == 0) {
         return nil;
     }
-    self.phoneNumber = [self.phoneNumber stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    return [self.phoneNumber componentsSeparatedByString:@","];
+    return [self.phoneNumber componentsSeparatedByString:@";"];
+}
+
+- (CGFloat)activityCellHeightAtIndex:(NSUInteger)index {
+    if ([self.activeModelsArray count] > index) {
+        CGFloat maxWidth = SCREEN_WIDTH - 60;
+        ActivityLogoItem *item = [self.activeModelsArray objectAtIndex:index];
+        CGFloat height = [GConfig heightForLabelWithWidth:maxWidth LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:15] topGap:13 bottomGap:13 andText:item.itemDescription];
+        if (height < 44) {
+            height = 44;
+        }
+        return height;
+    }
+    return 44;
 }
 
 @end

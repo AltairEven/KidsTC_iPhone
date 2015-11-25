@@ -21,6 +21,4 @@
 
 - (void)configWithItemModel:(ServiceListItemModel *)model;
 
-+ (CGFloat)cellHeight;
-
 @end

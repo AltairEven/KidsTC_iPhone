@@ -10,5 +10,15 @@
 
 @implementation StoreAppointmentModel
 
++ (instancetype)appointmentModelFromStroeDetailModel:(StoreDetailModel *)model {
+    if (!model) {
+        return nil;
+    }
+    StoreAppointmentModel *appointmentModel = [[StoreAppointmentModel alloc] init];
+    appointmentModel.storeId = model.storeId;
+    appointmentModel.activities = model.activeModelsArray;
+    appointmentModel.appointmentTimeString = @"";
+    return appointmentModel;
+}
 
 @end

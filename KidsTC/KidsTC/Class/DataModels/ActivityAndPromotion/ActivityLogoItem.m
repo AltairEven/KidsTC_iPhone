@@ -11,6 +11,9 @@
 @implementation ActivityLogoItem
 
 - (instancetype)initWithType:(ActivityLogoItemType)type description:(NSString *)description {
+    if (type == ActivityLogoItemTypeUnknow) {
+        return nil;
+    }
     self = [super init];
     if (self) {
         self.type = type;
@@ -28,22 +31,16 @@
             retImage = [UIImage imageNamed:@"activitylogo_gift"];
         }
             break;
+        case ActivityLogoItemTypeDiscount:
+        {
+            retImage = [UIImage imageNamed:@"activitylogo_discount"];
+        }
+            break;
         case ActivityLogoItemTypePreferential:
         {
             retImage = [UIImage imageNamed:@"activitylogo_preferential"];
         }
-            break;
-        case ActivityLogoItemTypeCoupon:
-        {
-            retImage = [UIImage imageNamed:@"activitylogo_coupon"];
-        }
-            break;
-        case ActivityLogoItemTypeTuan:
-        {
-            retImage = [UIImage imageNamed:@"activitylogo_tuan"];
-        }
-            break;
-        default:
+            break;        default:
             break;
     }
     

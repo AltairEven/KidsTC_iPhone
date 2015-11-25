@@ -9,8 +9,7 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
-    PromotionLogoItemTypeTuan = 3,
-    PromotionLogoItemTypeMiao
+    PromotionLogoItemTypeCoupon //优惠券
 }PromotionLogoItemType;
 
 @interface PromotionLogoItem : NSObject

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dHK-Fj-rzh" id="iJ4-5l-qDG">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="CJy-tE-e7L">
@@ -21,7 +21,7 @@
                             <constraint firstAttribute="width" constant="30" id="kHj-dB-F0J"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="到店有礼" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DIu-LA-21y">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="到店有礼" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DIu-LA-21y">
                         <rect key="frame" x="50" y="13" width="260" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -29,12 +29,25 @@
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="CJy-tE-e7L" firstAttribute="top" secondItem="iJ4-5l-qDG" secondAttribute="top" constant="7" id="3wK-LE-xtv"/>
                     <constraint firstAttribute="centerY" secondItem="CJy-tE-e7L" secondAttribute="centerY" id="FXm-S8-LaH"/>
+                    <constraint firstItem="DIu-LA-21y" firstAttribute="top" secondItem="iJ4-5l-qDG" secondAttribute="top" constant="13" id="YH3-Vs-Ub8"/>
+                    <constraint firstItem="CJy-tE-e7L" firstAttribute="centerY" secondItem="DIu-LA-21y" secondAttribute="centerY" id="dBm-sT-Etz"/>
                     <constraint firstAttribute="trailing" secondItem="DIu-LA-21y" secondAttribute="trailing" constant="10" id="gAt-nF-3Mg"/>
                     <constraint firstItem="CJy-tE-e7L" firstAttribute="leading" secondItem="iJ4-5l-qDG" secondAttribute="leading" constant="10" id="kuk-81-kdd"/>
+                    <constraint firstItem="DIu-LA-21y" firstAttribute="top" secondItem="CJy-tE-e7L" secondAttribute="top" constant="6" id="pcs-hz-Z2h"/>
+                    <constraint firstItem="CJy-tE-e7L" firstAttribute="leading" secondItem="iJ4-5l-qDG" secondAttribute="leading" constant="10" id="sto-Gj-66l"/>
                     <constraint firstItem="CJy-tE-e7L" firstAttribute="centerY" secondItem="DIu-LA-21y" secondAttribute="centerY" id="vva-wE-ZSA"/>
                     <constraint firstItem="DIu-LA-21y" firstAttribute="leading" secondItem="CJy-tE-e7L" secondAttribute="trailing" constant="10" id="yOz-qa-Fs7"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="3wK-LE-xtv"/>
+                        <exclude reference="FXm-S8-LaH"/>
+                        <exclude reference="vva-wE-ZSA"/>
+                        <exclude reference="pcs-hz-Z2h"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="activeImageView" destination="CJy-tE-e7L" id="gH5-L6-lXu"/>

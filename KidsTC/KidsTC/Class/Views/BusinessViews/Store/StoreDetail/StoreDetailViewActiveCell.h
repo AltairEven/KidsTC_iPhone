@@ -7,15 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ActiveModel.h"
+#import "ActivityLogoItem.h"
 
 @interface StoreDetailViewActiveCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *activeImageView;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 
-- (void)configWithModel:(ActiveModel *)model;
-
-+ (CGFloat)cellHeight;
+- (void)configWithModel:(ActivityLogoItem *)model;
 
 @end

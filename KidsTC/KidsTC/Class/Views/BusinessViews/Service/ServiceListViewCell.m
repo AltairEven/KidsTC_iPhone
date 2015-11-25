@@ -130,8 +130,4 @@
     [self buildActivitysViewWithActivityLogoItems:model.activityLogoItems];
 }
 
-+ (CGFloat)cellHeight {
-    return 130;
-}
-
 @end

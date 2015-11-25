@@ -20,6 +20,8 @@
 
 @protocol StoreDetailViewDelegate <NSObject>
 
+- (void)didClickedCouponButtonOnStoreDetailView:(StoreDetailView *)detailView;
+
 - (void)didClickedTelephoneOnStoreDetailView:(StoreDetailView *)detailView;
 
 - (void)didClickedAddressOnStoreDetailView:(StoreDetailView *)detailView;

@@ -22,7 +22,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="宝贝创意谷（店名最多2行...啊啊啊啊啊 啊啊 啊啊啊啊啊啊啊   啊 啊 啊啊啊啊啊啊啊啊啊啊啊啊啊）" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9oi-P8-j4f">
-                        <rect key="frame" x="100" y="15" width="290" height="18"/>
+                        <rect key="frame" x="100" y="15" width="275" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -70,6 +70,14 @@
                         <rect key="frame" x="100" y="100" width="300" height="29.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nOg-Mu-yJ5" customClass="AUIStackView">
+                        <rect key="frame" x="380" y="19" width="10" height="10"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="10" id="WVe-qb-oiQ"/>
+                            <constraint firstAttribute="height" constant="10" id="foS-Mi-fjn"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="5gw-pk-JQt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="0e4-bD-Qck"/>
@@ -77,6 +85,7 @@
                     <constraint firstItem="9oi-P8-j4f" firstAttribute="leading" secondItem="5gw-pk-JQt" secondAttribute="trailing" constant="10" id="4eH-Mx-Ifu"/>
                     <constraint firstAttribute="trailing" secondItem="F8E-Tg-D5d" secondAttribute="trailing" constant="10" id="6MI-3x-dAB"/>
                     <constraint firstAttribute="trailing" secondItem="F9l-0c-ZGC" secondAttribute="trailing" id="7Vq-27-H48"/>
+                    <constraint firstItem="nOg-Mu-yJ5" firstAttribute="centerY" secondItem="9oi-P8-j4f" secondAttribute="centerY" id="CX3-zV-QbO"/>
                     <constraint firstItem="gh6-oQ-pA1" firstAttribute="bottom" secondItem="5gw-pk-JQt" secondAttribute="bottom" id="Ddw-r9-exm"/>
                     <constraint firstItem="BWA-Sz-c07" firstAttribute="leading" secondItem="QD3-A0-3yC" secondAttribute="trailing" constant="10" id="FA3-Mv-Zr7"/>
                     <constraint firstItem="QD3-A0-3yC" firstAttribute="bottom" secondItem="xbu-uj-DL1" secondAttribute="bottom" id="GDY-kD-3az"/>
@@ -91,9 +100,10 @@
                     <constraint firstAttribute="trailing" secondItem="xbu-uj-DL1" secondAttribute="trailing" constant="10" id="WRx-dK-2w0"/>
                     <constraint firstAttribute="trailing" secondItem="gh6-oQ-pA1" secondAttribute="trailing" id="Zkw-Uz-qKH"/>
                     <constraint firstItem="QD3-A0-3yC" firstAttribute="leading" secondItem="9oi-P8-j4f" secondAttribute="leading" id="dXJ-fb-ePZ"/>
-                    <constraint firstAttribute="trailing" secondItem="9oi-P8-j4f" secondAttribute="trailing" constant="10" id="dwe-uF-5Pw"/>
+                    <constraint firstAttribute="trailing" secondItem="nOg-Mu-yJ5" secondAttribute="trailing" constant="10" id="f4c-Id-jNZ"/>
                     <constraint firstItem="BWA-Sz-c07" firstAttribute="bottom" secondItem="QD3-A0-3yC" secondAttribute="bottom" id="j0J-Eu-LZP"/>
                     <constraint firstItem="gZF-Nd-7yw" firstAttribute="leading" secondItem="9oi-P8-j4f" secondAttribute="leading" id="laL-XQ-K9d"/>
+                    <constraint firstItem="nOg-Mu-yJ5" firstAttribute="leading" secondItem="9oi-P8-j4f" secondAttribute="trailing" constant="5" id="rzi-sk-Ixi"/>
                     <constraint firstItem="gh6-oQ-pA1" firstAttribute="leading" secondItem="9oi-P8-j4f" secondAttribute="leading" id="sXd-za-GNY"/>
                 </constraints>
             </tableViewCellContentView>
@@ -103,6 +113,7 @@
                 <outlet property="commentCountLabel" destination="F8E-Tg-D5d" id="zj5-lJ-2Gr"/>
                 <outlet property="distanceLabel" destination="xbu-uj-DL1" id="oN5-Ff-vIL"/>
                 <outlet property="featureLable" destination="BWA-Sz-c07" id="LFh-u7-2Vn"/>
+                <outlet property="promotionLogoView" destination="nOg-Mu-yJ5" id="oWR-Qt-Ddc"/>
                 <outlet property="separateView" destination="gh6-oQ-pA1" id="ue3-Ql-05h"/>
                 <outlet property="starsView" destination="gZF-Nd-7yw" id="X2T-Hf-7xn"/>
                 <outlet property="storeName" destination="9oi-P8-j4f" id="Gcm-VF-oGl"/>

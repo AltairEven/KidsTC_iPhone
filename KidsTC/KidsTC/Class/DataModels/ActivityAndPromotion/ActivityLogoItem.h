@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
-    ActivityLogoItemTypeGift = 1,
-    ActivityLogoItemTypePreferential,
-    ActivityLogoItemTypeCoupon,
-    ActivityLogoItemTypeTuan
+    ActivityLogoItemTypeUnknow = 0,
+    ActivityLogoItemTypeGift = 1,  //"礼"
+    ActivityLogoItemTypeDiscount, //"减"
+    ActivityLogoItemTypePreferential  //"惠"
 }ActivityLogoItemType;
 
 @interface ActivityLogoItem : NSObject

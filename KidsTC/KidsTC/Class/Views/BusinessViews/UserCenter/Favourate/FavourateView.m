@@ -242,12 +242,14 @@ static NSString *const kNewsCellIdentifier = @"kNewsCellIdentifier";
     switch (self.currentTag) {
         case FavourateViewSegmentTagService:
         {
-            height = [ServiceListViewCell cellHeight];
+            ServiceListItemModel *model = [self.ItemModelArray objectAtIndex:indexPath.row];
+            height = [model cellHeight];
         }
             break;
         case FavourateViewSegmentTagStore:
         {
-            height = [StoreListViewCell cellHeight];
+            StoreListItemModel *model = [self.ItemModelArray objectAtIndex:indexPath.row];
+            height = [model cellHeight];
         }
             break;
         case FavourateViewSegmentTagStrategy:

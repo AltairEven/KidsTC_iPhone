@@ -35,7 +35,8 @@
 }
 
 - (void)buildSubviews {
-    
+    [self.buyButton setTitle:@"已售完" forState:UIControlStateDisabled];
+    [self.buyButton setTitle:@"立即购买" forState:UIControlStateDisabled];
 }
 
 /*

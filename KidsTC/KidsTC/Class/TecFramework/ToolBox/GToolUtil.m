@@ -1160,4 +1160,36 @@ NSInteger sortImageDictionaryWithIdx(id v1, id v2, void *context)
     return bitmapByteCount;
 }
 
++ (void)drawLineOnView:(UIView *)view
+        withStartPoint:(CGPoint)start
+              endPoint:(CGPoint)end
+             lineWidth:(CGFloat)width
+                   gap:(CGFloat)gap
+         sectionLength:(CGFloat)length
+                 color:(UIColor *)color
+             isVirtual:(BOOL)isVirtual {
+    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+    [shapeLayer setBounds:view.bounds];
+    [shapeLayer setPosition:view.center];
+    [shapeLayer setFillColor:[[UIColor clearColor] CGColor]];
+    // 设置虚线颜色
+    [shapeLayer setStrokeColor:color.CGColor];
+    // 设置虚线的宽度
+    [shapeLayer setLineWidth:width];
+    [shapeLayer setLineJoin:kCALineJoinRound];
+    if (isVirtual) {
+        // 线段的长度和每条线的间距
+        [shapeLayer setLineDashPattern: [NSArray arrayWithObjects:[NSNumber numberWithFloat:length], [NSNumber numberWithFloat:gap], nil]];
+    }
+    // Setup the path
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathMoveToPoint(path, NULL, start.x, start.y);
+    CGPathAddLineToPoint(path, NULL, end.x, end.y);
+    
+    [shapeLayer setPath:path]; 
+    CGPathRelease(path);
+    
+    [view.layer addSublayer:shapeLayer];
+}
+
 @end

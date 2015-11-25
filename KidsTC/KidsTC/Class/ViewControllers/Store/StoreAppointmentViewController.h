@@ -12,6 +12,6 @@
 
 @interface StoreAppointmentViewController : GViewController
 
-- (instancetype)initWithStoreDetailModel:(StoreDetailModel *)model;
++ (instancetype)instanceWithStoreDetailModel:(StoreDetailModel *)model;
 
 @end

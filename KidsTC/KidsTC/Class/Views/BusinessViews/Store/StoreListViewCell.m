@@ -7,11 +7,13 @@
 //
 
 #import "StoreListViewCell.h"
+#import "AUIStackView.h"
 
 @interface StoreListViewCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *stroeImageView;
 @property (weak, nonatomic) IBOutlet UILabel *storeName;
+@property (weak, nonatomic) IBOutlet AUIStackView *promotionLogoView;
 @property (weak, nonatomic) IBOutlet FiveStarsView *starsView;
 @property (weak, nonatomic) IBOutlet UILabel *commentCountLabel;
 @property (weak, nonatomic) IBOutlet UIView *activityBGView;
@@ -92,16 +94,19 @@
     } else {
         [self.commentCountLabel setText:@""];
     }
+    NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+    for (PromotionLogoItem *item in model.promotionLogoItems) {
+        UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 13, 13)];
+        [logoView setImage:item.image];
+        [tempArray addObject:logoView];
+    }
+    [self.promotionLogoView setSubViews:[NSArray arrayWithArray:tempArray]];
     if ([model.activityLogoItems count] > 0) {
         [self.separateView setHidden:NO];
     } else {
         [self.separateView setHidden:YES];
     }
     [self buildActivitysViewWithActivityLogoItems:model.activityLogoItems];
-}
-
-+ (CGFloat)cellHeight {
-    return 130;
 }
 
 @end

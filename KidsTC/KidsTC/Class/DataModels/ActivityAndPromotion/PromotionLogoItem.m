@@ -23,14 +23,9 @@
 - (UIImage *)image {
     UIImage *retImage = nil;
     switch (self.type) {
-        case PromotionLogoItemTypeTuan:
+        case PromotionLogoItemTypeCoupon:
         {
-            retImage = [UIImage imageNamed:@"promotionlogo_tuan"];
-        }
-            break;
-        case PromotionLogoItemTypeMiao:
-        {
-            retImage = [UIImage imageNamed:@"promotionlogo_miao"];
+            retImage = [UIImage imageNamed:@"promotionlogo_coupon"];
         }
             break;
         default:

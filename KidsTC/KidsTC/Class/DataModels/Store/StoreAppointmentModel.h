@@ -7,15 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "StoreDetailModel.h"
+#import "ActivityLogoItem.h"
 
 @interface StoreAppointmentModel : NSObject
 
 @property (nonatomic, copy) NSString *storeId;
 
-@property (nonatomic, copy) NSString *appointmentName;
+@property (nonatomic, strong) NSArray<ActivityLogoItem *> *activities;
 
 @property (nonatomic, copy) NSString *appointmentTimeString;
 
 @property (nonatomic, copy) NSString *appointmentPhoneNumber;
+
++ (instancetype)appointmentModelFromStroeDetailModel:(StoreDetailModel *)model;
 
 @end

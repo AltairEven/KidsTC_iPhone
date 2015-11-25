@@ -23,52 +23,52 @@
         self.storeName = [data objectForKey:@"storeName"];
         self.starNumber = [[data objectForKey:@"level"] integerValue];
         self.distanceDescription = [data objectForKey:@"distance"];
-        NSDictionary *eventsDic = [data objectForKey:@"event"];
-        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-        if ([eventsDic isKindOfClass:[NSDictionary class]]) {
-            for (NSString *key in [eventsDic allKeys]) {
-                if ([key isEqualToString:@"gift"]) {
-                    BOOL has = [[eventsDic objectForKey:key] boolValue];
-                    if (has) {
-                        NSArray *gifts = [data objectForKey:@"storeGift"];
-                        NSString *giftName = @"到店有礼";
-                        if ([gifts isKindOfClass:[NSArray class]]) {
-                            giftName = [gifts firstObject];
-                        }
-                        ActivityLogoItem *item = [[ActivityLogoItem alloc] initWithType:ActivityLogoItemTypeGift description:giftName];
-                        [tempArray addObject:item];
-                    }
-                }
-                if ([key isEqualToString:@"tuan"]) {
-                    BOOL has = [[eventsDic objectForKey:key] boolValue];
-                    if (has) {
-                        ActivityLogoItem *item = [[ActivityLogoItem alloc] initWithType:ActivityLogoItemTypeGift description:@"团购"];
-                        [tempArray addObject:item];
-                    }
-                }
-            }
-        }
+        //promotion
         BOOL hasCoupon = [[data objectForKey:@"isHaveCoupon"] boolValue];
         if (hasCoupon) {
-            ActivityLogoItem *item = [[ActivityLogoItem alloc] initWithType:ActivityLogoItemTypeCoupon description:nil];
+            PromotionLogoItem *item = [[PromotionLogoItem alloc] initWithType:PromotionLogoItemTypeCoupon description:nil];
+            if (item) {
+                self.promotionLogoItems = [NSArray arrayWithObject:item];
+            }
+        }
+        
+        //activity
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        NSArray *gifts = [data objectForKey:@"storeGift"];
+        NSString *giftName = @"";
+        if ([gifts isKindOfClass:[NSArray class]]) {
+            giftName = [gifts firstObject];
+        }
+        if ([giftName length] > 0) {
+            ActivityLogoItem *item = [[ActivityLogoItem alloc] initWithType:ActivityLogoItemTypeGift description:giftName];
             [tempArray addObject:item];
         }
         NSArray *fullCut = [data objectForKey:@"fullCut"];
         if ([fullCut isKindOfClass:[NSArray class]] && [fullCut count] > 0) {
-            ActivityLogoItem *item = [[ActivityLogoItem alloc] initWithType:ActivityLogoItemTypePreferential description:[fullCut firstObject]];
+            ActivityLogoItem *item = [[ActivityLogoItem alloc] initWithType:ActivityLogoItemTypeDiscount description:[fullCut firstObject]];
             if (item) {
                 [tempArray addObject:item];
             }
         }
+        NSArray *discount = [data objectForKey:@"storeDiscount"];
+        if ([discount isKindOfClass:[NSArray class]] && [discount count] > 0) {
+            ActivityLogoItem *item = [[ActivityLogoItem alloc] initWithType:ActivityLogoItemTypePreferential description:[discount firstObject]];
+            if (item) {
+                [tempArray addObject:item];
+            }
+        }
+        
         self.activityLogoItems = [NSArray arrayWithArray:tempArray];
         
+        //comment
         self.commentCount = [[data objectForKey:@"commentCount"] integerValue];
         
-        self.feature = [NSString stringWithFormat:@"%@", [data objectForKey:@"feature"]];
-        self.feature = @"儿童摄影";
-        
-        self.businessZone = [NSString stringWithFormat:@"%@", [data objectForKey:@"businessZone"]];
-        self.businessZone = @"徐家汇商圈";
+        if ([data objectForKey:@"feature"]) {
+            self.feature = [NSString stringWithFormat:@"%@", [data objectForKey:@"feature"]];
+        }
+        if ([data objectForKey:@"businessZone"]) {
+            self.businessZone = [NSString stringWithFormat:@"%@", [data objectForKey:@"businessZone"]];
+        }
     }
     return self;
 }

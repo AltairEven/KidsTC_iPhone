@@ -7,36 +7,35 @@
 //
 
 #import "StoreAppointmentViewController.h"
-#import "StoreAppointmentView.h"
-#import "StoreDetailModel.h"
-#import "PMCalendar.h"
-#import "AUIPickerView.h"
 #import "StoreAppointmentModel.h"
 #import "GValidator.h"
 
-@interface StoreAppointmentViewController () <StoreAppointmentViewDelegate, PMCalendarControllerDelegate, AUIPickerViewDataSource, AUIPickerViewDelegate>
+#define StandardBGHeight (150)
 
-@property (weak, nonatomic) IBOutlet StoreAppointmentView *appointmentView;
+@interface StoreAppointmentViewController () <UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UIView *calendarAnchorView;
-@property (nonatomic, strong) PMCalendarController *pmCC;
-@property (nonatomic, strong) AUIPickerView *timePickerView;
+@property (weak, nonatomic) IBOutlet UIView *tapView;
+@property (weak, nonatomic) IBOutlet UIView *appointmentBGView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *appointmentBGHeight;
+@property (weak, nonatomic) IBOutlet UIView *businessTimeBGView;
+@property (weak, nonatomic) IBOutlet UILabel *businessTimeLabel;
+@property (weak, nonatomic) IBOutlet UIView *phoneBGView;
+@property (weak, nonatomic) IBOutlet UITextField *phoneFiled;
+@property (weak, nonatomic) IBOutlet UIButton *appointmentButton;
 
-@property (nonatomic, strong) NSArray *appointTimesArray;
-
-@property (nonatomic, strong) StoreDetailModel *detailModel;
-
-@property (nonatomic, strong) NSDate *selectedDate;
-
-@property (nonatomic, copy) NSString *selectedTimeString;
+@property (nonatomic, strong) StoreAppointmentModel *appointmentModel;
 
 @property (nonatomic, strong) HttpRequestClient *submitOrderRequest;
 
-- (void)setupAppointTimes;
+- (void)buidlSubViews;
+
+- (void)buildActivitysViewWithActivityLogoItems:(NSArray *)items;
+
+- (void)didClickedOnTapView;
+
+- (IBAction)didClickedAppointmentButton:(id)sender;
 
 - (BOOL)allFieldsValid;
-
-- (StoreAppointmentModel *)getStoreAppointmentModel;
 
 - (void)submitOrderSucceed:(NSDictionary *)data;
 
@@ -52,67 +51,144 @@
     }
     self = [super initWithNibName:@"StoreAppointmentViewController" bundle:nil];
     if (self) {
-        self.detailModel = model;
+        self.appointmentModel = [StoreAppointmentModel appointmentModelFromStroeDetailModel:model];
     }
     return self;
+}
+
++ (instancetype)instanceWithStoreDetailModel:(StoreDetailModel *)model {
+    StoreAppointmentViewController *controller = [[StoreAppointmentViewController alloc] initWithStoreDetailModel:model];
+    controller.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    return controller;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     _navigationTitle = @"门店预约";
     // Do any additional setup after loading the view from its nib.
-    self.selectedDate = self.detailModel.appointmentStartDate;
-    [self setupAppointTimes];
-    self.selectedTimeString = [self.appointTimesArray firstObject];
-    
-    [self.appointmentView setStoreName:self.detailModel.storeName];
-    [self.appointmentView setStoreAddress:self.detailModel.storeAddress];
-    [self.appointmentView setAppointDateString:[self.selectedDate dateStringWithFormat:@"yyyy-MM-dd"]];
-    [self.appointmentView setAppointTimeString:[self.appointTimesArray firstObject]];
-    self.appointmentView.delegate = self;
-    
-    self.timePickerView = [[AUIPickerView alloc] initWithDataSource:self delegate:self];
-    [self.appointmentView reloadData];
+    [self buidlSubViews];
+    [self.tapView setHidden:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self.view.superview setBackgroundColor:[UIColor clearColor]];
 }
 
-#pragma mark StoreAppointmentViewDelegate
-
-
-- (void)didClickedDateButtonOnStoreAppointmentView:(StoreAppointmentView *)appointmentView {
-    self.pmCC = [[PMCalendarController alloc] init];
-    self.pmCC.delegate = self;
-    self.pmCC.mondayFirstDayOfWeek = YES;
-    self.pmCC.showArrow = NO;
-    self.pmCC.allowsPeriodSelection = NO;
-    
-    self.pmCC.allowedPeriod = [PMPeriod periodWithStartDate:self.detailModel.appointmentStartDate endDate:self.detailModel.appointmentEndDate];
-    
-    [self.pmCC setPeriod:[PMPeriod periodWithStartDate:self.selectedDate endDate:self.selectedDate]];
-    
-    [self.pmCC presentCalendarFromView:self.calendarAnchorView
-         permittedArrowDirections:PMCalendarArrowDirectionUnknown
-                         animated:YES];
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.tapView setHidden:NO];
 }
 
-- (void)didClickedTimeButtonOnStoreAppointmentView:(StoreAppointmentView *)appointmentView {
-    [self.timePickerView show];
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.tapView setHidden:YES];
+    [[GAlertLoadingView sharedAlertLoadingView] hide];
+    [self.submitOrderRequest cancel];
+    [self.phoneFiled resignFirstResponder];
 }
 
-- (void)didClickedSubmitButtonOnStoreAppointmentView:(StoreAppointmentView *)appointmentView {
+#pragma mark Private methods
+
+- (void)buidlSubViews {
+    //tap
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickedOnTapView)];
+    [self.tapView addGestureRecognizer:tap];
+    //activity
+    BOOL hasActivities = NO;
+    if ([self.appointmentModel.activities count] > 0) {
+        [self buildActivitysViewWithActivityLogoItems:self.appointmentModel.activities];
+        hasActivities = YES;
+    } else {
+        self.appointmentBGHeight.constant = StandardBGHeight;
+    }
+    //lines
+    CGPoint start = CGPointMake(0, 0);
+    CGPoint end = CGPointMake(SCREEN_WIDTH, 0);
+    CGFloat lineWidth = 0.5;
+    CGFloat gap = 2;
+    CGFloat sectionLength = 2;
+    UIColor *color = RGBA(245, 245, 245, 1);
+    if (hasActivities) {
+        [GToolUtil drawLineOnView:self.businessTimeBGView withStartPoint:start endPoint:end lineWidth:lineWidth gap:gap sectionLength:sectionLength color:color isVirtual:YES];
+    }
+    start = CGPointMake(0, self.businessTimeBGView.bounds.size.height);
+    end = CGPointMake(SCREEN_WIDTH, self.businessTimeBGView.bounds.size.height);
+    [GToolUtil drawLineOnView:self.businessTimeBGView withStartPoint:start endPoint:end lineWidth:lineWidth gap:gap sectionLength:sectionLength color:color isVirtual:YES];
+    //button
+    self.appointmentButton.layer.cornerRadius = 5;
+    self.appointmentButton.layer.masksToBounds = YES;
+    [self.appointmentButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.appointmentButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+}
+
+- (void)buildActivitysViewWithActivityLogoItems:(NSArray *)items {
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 90)];
+    [bgView setBackgroundColor:[UIColor clearColor]];
+    
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 20)];
+    [titleLabel setFont:[UIFont systemFontOfSize:14]];
+    [titleLabel setTextColor:[UIColor darkGrayColor]];
+    [titleLabel setText:@"童成为您谋福利，预约即可享受"];
+    [bgView addSubview:titleLabel];
+    
+    UIScrollView *activityBGView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 30, SCREEN_WIDTH, 60)];
+    [activityBGView setBackgroundColor:[UIColor clearColor]];
+    [activityBGView setShowsHorizontalScrollIndicator:NO];
+    [activityBGView setShowsVerticalScrollIndicator:NO];
+    [bgView addSubview:activityBGView];
+    
+    CGFloat xPosition = 10;
+    CGFloat yPosition = 5;
+    for (ActivityLogoItem *item in items) {
+        UIView *singleBGView = [[UIView alloc] initWithFrame:CGRectMake(xPosition, yPosition, activityBGView.frame.size.width, 20)];
+        UIImageView *checkImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 2.5, 15, 15)];
+        [checkImageView setImage:item.image];
+        [singleBGView addSubview:checkImageView];
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(18, 0, singleBGView.frame.size.width - 20, 20)];
+        [label setTextColor:[UIColor orangeColor]];
+        [label setFont:[UIFont systemFontOfSize:13]];
+        [label setText:item.itemDescription];
+        [singleBGView addSubview:label];
+        
+        [activityBGView addSubview:singleBGView];
+        
+        yPosition += singleBGView.frame.size.height + 5;
+    }
+    CGFloat bgHeight = yPosition;
+    [activityBGView setContentSize:CGSizeMake(0, bgHeight)];
+    if (bgHeight > 60) {
+        bgHeight = 60;
+    }
+    [activityBGView setFrame:CGRectMake(activityBGView.frame.origin.x, activityBGView.frame.origin.y, activityBGView.frame.size.width, bgHeight)];
+    [bgView setFrame:CGRectMake(bgView.frame.origin.x, bgView.frame.origin.y, bgView.frame.size.width, activityBGView.frame.origin.y + activityBGView.frame.size.height)];
+    
+    [GToolUtil drawLineOnView:bgView withStartPoint:CGPointMake(5, 30) endPoint:CGPointMake(SCREEN_WIDTH - 5, 30) lineWidth:0.5 gap:0 sectionLength:0 color:RGBA(245, 245, 245, 1) isVirtual:NO];
+    
+    CGFloat height = self.appointmentBGHeight.constant;
+    self.appointmentBGHeight.constant = height + bgView.frame.size.height;
+    [self.appointmentBGView addSubview:bgView];
+}
+
+- (void)didClickedOnTapView {
+    if ([self.phoneFiled isFirstResponder]) {
+        [self.phoneFiled resignFirstResponder];
+    } else {
+        [self goBackController:nil];
+    }
+}
+
+- (IBAction)didClickedAppointmentButton:(id)sender {
     if (![self allFieldsValid]) {
         return;
     }
     if (!self.submitOrderRequest) {
         self.submitOrderRequest = [HttpRequestClient clientWithUrlAliasName:@"ORDER_CREATE_APPOINTMENTORDER"];
     }
-    StoreAppointmentModel *model = [self getStoreAppointmentModel];
-    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:model.storeId, @"storeno", model.appointmentName, @"name", model.appointmentTimeString, @"time", model.appointmentPhoneNumber, @"mobile", nil];
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:self.appointmentModel.storeId, @"storeno", self.appointmentModel.appointmentPhoneNumber, @"mobile", nil];
     __weak StoreAppointmentViewController *weakSelf = self;
-    [[GAlertLoadingView sharedAlertLoadingView] show];
+    [[GAlertLoadingView sharedAlertLoadingView] showInView:self.view];
     [weakSelf.submitOrderRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [[GAlertLoadingView sharedAlertLoadingView] hide];
         [weakSelf submitOrderSucceed:responseData];
@@ -120,64 +196,11 @@
         [[GAlertLoadingView sharedAlertLoadingView] hide];
         [weakSelf submitOrderFailed:error];
     }];
+
 }
-
-#pragma mark PMCalendarControllerDelegate
-
-- (void)calendarController:(PMCalendarController *)calendarController didChangePeriod:(PMPeriod *)newPeriod {
-    [self.pmCC dismissCalendarAnimated:YES];
-    NSDate *selectedDate = [newPeriod.startDate dateWithoutTime];
-    NSString *dateString = [selectedDate dateStringWithFormat:@"yyyy-MM-dd"];
-    [self.appointmentView setAppointDateString:dateString];
-    self.selectedDate = selectedDate;
-}
-
-#pragma mark UIPickerViewDataSource & UIPickerViewDelegate
-
-- (NSInteger)numberOfComponentsInPickerView:(AUIPickerView *)pickerView {
-    return 1;
-}
-
-- (NSInteger)pickerView:(AUIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return [self.appointTimesArray count];
-}
-
-- (NSString *)pickerView:(AUIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return [self.appointTimesArray objectAtIndex:row];
-}
-
-- (void)didCanceledPickerView:(AUIPickerView *)pickerView {
-    
-}
-
-- (void)pickerView:(AUIPickerView *)pickerView didConfirmedWithSelectedIndexArrayOfAllComponent:(NSArray *)indexArray {
-    NSString *string = [self.appointTimesArray objectAtIndex:[[indexArray firstObject] integerValue]];
-    [self.appointmentView setAppointTimeString:string];
-    self.selectedTimeString = string;
-}
-
-#pragma mark Private methods
-
-- (void)setupAppointTimes {
-    //times
-    NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-    for (NSString *time in self.detailModel.appointmentTimes) {
-        NSString *appointmentTime = [NSString stringWithFormat:@"%@:00:00", time];
-        [tempArray addObject:appointmentTime];
-    }
-    self.appointTimesArray = [NSArray arrayWithArray:tempArray];
-}
-
 
 - (BOOL)allFieldsValid {
-    NSString *name = [self.appointmentView.appointName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    if ([name length] == 0) {
-        [[iToast makeText:@"请填写预约人姓名"] show];
-        
-        return NO;
-    }
-    
-    NSString *phone = [self.appointmentView.appointPhone stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *phone = [self.phoneFiled.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     if ([phone length] == 0) {
         [[iToast makeText:@"请填写预约手机号"] show];
         return NO;
@@ -188,23 +211,16 @@
         return NO;
     }
     
+    self.appointmentModel.appointmentPhoneNumber = phone;
     return YES;
-}
-
-- (StoreAppointmentModel *)getStoreAppointmentModel {
-    StoreAppointmentModel *model = [[StoreAppointmentModel alloc] init];
-    model.storeId = self.detailModel.storeId;
-    model.appointmentName = self.appointmentView.appointName;
-    NSString *timeString = [NSString stringWithFormat:@"%@ %@.000",[self.selectedDate dateStringWithFormat:@"yyyy-MM-dd"], self.selectedTimeString];
-    model.appointmentTimeString = timeString;
-    model.appointmentPhoneNumber = self.appointmentView.appointPhone;
-    return model;
 }
 
 - (void)submitOrderSucceed:(NSDictionary *)data {
     NSString *resp = [data objectForKey:@"data"];
     if (resp && [resp isKindOfClass:[NSString class]]) {
         [[iToast makeText:resp] show];
+    } else {
+        [[iToast makeText:@"恭喜您，预约成功！"] show];
     }
     [self goBackController:nil];
 }
@@ -213,6 +229,8 @@
     if ([[error userInfo] count] > 0) {
         NSString *errMsg = [[error userInfo] objectForKey:@"data"];
         [[iToast makeText:errMsg] show];
+    } else {
+        [[iToast makeText:@"预约失败"] show];
     }
 }
 
@@ -220,13 +238,13 @@
 
 - (void)keyboardWillShow:(NSNotification *)notification {
     [super keyboardWillShow:notification];
-    [self.appointmentView resetViewWithKeyboardShowing:YES height:self.keyboardHeight];
+    [self.view setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - self.keyboardHeight, self.view.frame.size.width, self.view.frame.size.height)];
 }
 
 
 - (void)keyboardWillDisappear:(NSNotification *)notification {
     [super keyboardWillDisappear:notification];
-    [self.appointmentView resetViewWithKeyboardShowing:NO height:self.keyboardHeight];
+    [self.view setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + self.keyboardHeight, self.view.frame.size.width, self.view.frame.size.height)];
 }
 
 

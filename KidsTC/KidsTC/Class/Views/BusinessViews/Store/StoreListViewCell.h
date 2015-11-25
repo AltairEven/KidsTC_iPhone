@@ -14,6 +14,4 @@
 
 - (void)configWithItemModel:(StoreListItemModel *)model;
 
-+ (CGFloat)cellHeight;
-
 @end

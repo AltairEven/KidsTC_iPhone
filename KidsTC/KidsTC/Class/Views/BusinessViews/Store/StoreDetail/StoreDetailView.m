@@ -57,6 +57,7 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
 //top
 @property (weak, nonatomic) IBOutlet UILabel *storeName;
 @property (weak, nonatomic) IBOutlet FiveStarsView *starView;
+@property (weak, nonatomic) IBOutlet UIButton *couponButton;
 @property (weak, nonatomic) IBOutlet UILabel *appointmentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *reviewLabel;
 //tel
@@ -92,6 +93,7 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
 - (void)configTopCell;
 - (void)configRecommendCell;
 - (void)configNearbyCell;
+- (IBAction)didClickedCouponButton:(id)sender;
 
 @end
 
@@ -388,7 +390,7 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
             break;
         case StoreDetailViewSectionActivity:
         {
-            height = [StoreDetailViewActiveCell cellHeight];
+            height = [self.detailModel activityCellHeightAtIndex:indexPath.row];
         }
             break;
         case StoreDetailViewSectionHotRecommend:
@@ -438,7 +440,8 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
             if (indexPath.row == 0) {
                 height = [StoreDetailTitleCell cellHeight];
             } else {
-                height = [StoreListViewCell cellHeight];
+                StoreListItemModel *model = [self.detailModel.brotherStores objectAtIndex:indexPath.row - 1];
+                height = [model cellHeight];
             }
         }
             break;
@@ -607,6 +610,13 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
     [self.storeName setText:self.detailModel.storeName];
     
     [self.starView setStarNumber:self.detailModel.starNumber];
+    [self.couponButton setHidden:![self.detailModel hasCoupon]];
+    if (![self.couponButton isHidden]) {
+        [self.couponButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
+        [self.couponButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+        self.couponButton.layer.cornerRadius = 5;
+        self.couponButton.layer.masksToBounds = YES;
+    }
     
     NSString *appointmentCount = [NSString stringWithFormat:@"%lu", (unsigned long)self.detailModel.appointmentNumber];
     NSString *wholeString = [NSString stringWithFormat:@"%@预约", appointmentCount];
@@ -739,6 +749,12 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
                 xPosition += gap;
             }
         }
+    }
+}
+
+- (IBAction)didClickedCouponButton:(id)sender {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedCouponButtonOnStoreDetailView:)]) {
+        [self.delegate didClickedCouponButtonOnStoreDetailView:self];
     }
 }
 

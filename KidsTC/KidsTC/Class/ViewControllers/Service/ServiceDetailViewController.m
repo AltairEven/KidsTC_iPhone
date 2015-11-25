@@ -202,6 +202,11 @@
     if ([[KTCUser currentUser] hasLogin]) {
         [self.bottomView setFavourite:self.viewModel.detailModel.isFavourate];
     }
+    if (self.viewModel.detailModel.stockNumber == 0) {
+        [self.bottomView.buyButton setEnabled:NO];
+    } else {
+        [self.bottomView.buyButton setEnabled:YES];
+    }
 }
 
 
