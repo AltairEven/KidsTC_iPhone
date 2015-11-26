@@ -23,6 +23,8 @@
 
 @property (nonatomic, strong) id headerModel;
 
+@property (nonatomic, copy) NSString *identifier;
+
 @property (nonatomic, strong) HttpRequestClient *submitCommentRequest;
 
 @property (strong, nonatomic)  NSArray *photoArray;
@@ -56,6 +58,15 @@
     return self;
 }
 
+- (instancetype)initWithSource:(CommentDetailSource)source identifier:(NSString *)identifier {
+    self = [super initWithNibName:@"CommentDetailViewController" bundle:nil];
+    if (self) {
+        _viewSource = source;
+        self.identifier = identifier;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -64,6 +75,7 @@
     self.detailView.delegate = self;
     self.viewModel = [[CommentDetailViewModel alloc] initWithView:self.detailView];
     [self.viewModel.detailModel setModelSource:self.viewSource];
+    [self.viewModel.detailModel setIdentifier:self.identifier];
     [self.viewModel.detailModel setHeaderModel:self.headerModel];
     [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
 }

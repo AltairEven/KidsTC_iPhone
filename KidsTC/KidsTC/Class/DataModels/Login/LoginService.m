@@ -46,8 +46,8 @@ static LoginService *_sharedInstance = nil;
     [weakSelf.KTCLoginRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         NSDictionary *data = [responseData objectForKey:@"data"];
         if (data) {
-            NSString *uid = [data objectForKey:@"uid"];
-            NSString *skey = [data objectForKey:@"skey"];
+            NSString *uid = [NSString stringWithFormat:@"%@", [data objectForKey:@"uid"]];
+            NSString *skey = [NSString stringWithFormat:@"%@", [data objectForKey:@"skey"]];
             if (sucess) {
                 sucess(uid, skey);
             }

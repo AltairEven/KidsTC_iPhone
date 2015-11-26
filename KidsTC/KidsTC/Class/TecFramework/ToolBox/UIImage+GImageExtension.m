@@ -250,4 +250,36 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
     return grayImage;
 }
 
+- (UIImage *)imageByCompressToMemorySize:(NSUInteger)byteCount {
+    CGFloat currentMemorySize = [GToolUtil byteCountOfImage:self];
+    if (currentMemorySize <= byteCount) {
+        return self;
+    }
+    CGFloat sizeTotal = byteCount / 4;
+
+    CGSize newSize = [UIImage sizeOfMemorySize:sizeTotal withCurrentSize:self.size];
+    return [self imageByScalingToSize:newSize];
+}
+
+
++ (CGSize)sizeOfMemorySize:(NSUInteger)byteCount withCurrentSize:(CGSize)size {
+    CGFloat whRatio = size.width / size.height;
+    CGFloat currentByteCount = size.width * size.height;
+    
+    CGSize newSize = size;
+    if (currentByteCount > byteCount) {
+        while (newSize.width * newSize.height <= byteCount) {
+            newSize.height -= 1;
+            newSize.width = newSize.height * whRatio;
+        }
+    } else if (currentByteCount < byteCount) {
+        while (newSize.width * newSize.height <= byteCount) {
+            newSize.height += 1;
+            newSize.width = newSize.height * whRatio;
+        }
+    }
+    return newSize;
+}
+
+
 @end

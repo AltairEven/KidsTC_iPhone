@@ -15,4 +15,6 @@
 
 - (instancetype)initWithSource:(CommentDetailSource)source headerModel:(id)model;
 
+- (instancetype)initWithSource:(CommentDetailSource)source identifier:(NSString *)identifier;
+
 @end

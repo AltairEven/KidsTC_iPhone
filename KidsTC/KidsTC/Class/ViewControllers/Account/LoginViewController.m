@@ -70,8 +70,6 @@
 #pragma mark LoginViewDelegate
 
 - (void)loginView:(LoginView *)loginView didClickedLoginButtonWithAccount:(NSString *)account password:(NSString *)password {
-    account = @"15000168321";
-    password = @"123456";
     if ([self validAccount:account andPassword:password]) {
         [[LoginService sharedService] KTCLoginWithAccount:account password:password success:^(NSString *uid, NSString *sky) {
             [self handleKTCLoginSuccessWithUid:uid skey:sky];

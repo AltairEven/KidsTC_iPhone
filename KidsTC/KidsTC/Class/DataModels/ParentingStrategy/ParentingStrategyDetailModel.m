@@ -24,6 +24,19 @@
         self.title = [infoDic objectForKey:@"title"];
         self.authorName = [infoDic objectForKey:@"authorName"];
         self.strategyDescription = [infoDic objectForKey:@"simply"];
+        NSDictionary *share = [infoDic objectForKey:@"share"];
+        if (share && [share isKindOfClass:[NSDictionary class]]) {
+            NSString *title = [NSString stringWithFormat:@"%@", [share objectForKey:@"title"]];
+            NSString *desc = [NSString stringWithFormat:@"%@", [share objectForKey:@"desc"]];
+            NSString *imgUrlString = [NSString stringWithFormat:@"%@", [share objectForKey:@"imgUrl"]];
+            NSString *linkUrlString = [NSString stringWithFormat:@"%@", [share objectForKey:@"linkUrl"]];
+            CommonShareObject *shareObj = [CommonShareObject shareObjectWithTitle:title description:desc thumbImageUrl:[NSURL URLWithString:imgUrlString] urlString:linkUrlString];
+            if (shareObj) {
+                shareObj.identifier = self.identifier;
+                shareObj.followingContent = @"【童成】";
+            }
+            self.shareObject = shareObj;
+        }
     }
     NSArray *cellDataArray = [data objectForKey:@"items"];
     if ([cellDataArray isKindOfClass:[NSArray class]]) {
@@ -36,6 +49,7 @@
         }
         self.cellModels = [NSArray arrayWithArray:tempArray];
     }
+    
     self.mainImageRatio = 0.618;
 }
 

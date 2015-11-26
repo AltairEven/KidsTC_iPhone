@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "HomeSegueModel.h"
+#import "CommonShareObject.h"
 
 @class ParentingStrategyDetailCellModel;
 
@@ -30,6 +31,8 @@
 @property (nonatomic, assign) CGFloat mainImageRatio;
 
 @property (nonatomic, strong) NSArray<ParentingStrategyDetailCellModel *> *cellModels;
+
+@property (nonatomic, strong) CommonShareObject *shareObject;
 
 - (void)fillWithRawData:(NSDictionary *)data;
 

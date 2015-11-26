@@ -200,6 +200,23 @@
     [self requestWithBaseURLStr:URLString parameters:parameters userInfo:nil constructingBodyWithBlock:block success:success failure:failure];
 }
 
+- (void)downloadImageWithURLStr:(NSString *)URLString success:(void (^)(AFHTTPClientV2 *, id))success failure:(void (^)(AFHTTPClientV2 *, NSError *))failure {
+    __weak AFHTTPClientV2 *weakSelf = self;
+    AFHTTPSessionManager   *httpClient = [[AFHTTPSessionManager alloc] initWithBaseURL:nil];
+    httpClient.responseSerializer = [AFImageResponseSerializer serializer];
+    
+    _currentSessionTask = [httpClient GET:URLString parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        if (success) {
+            success(weakSelf, responseObject);
+        }
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        if (failure) {
+            failure(weakSelf, error);
+        }
+    }];
+}
+
 #pragma mark - NSCopying
 - (id)copyWithZone:(NSZone *)zone
 {

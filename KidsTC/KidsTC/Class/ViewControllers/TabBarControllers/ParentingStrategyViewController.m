@@ -32,7 +32,7 @@
     // Do any additional setup after loading the view from its nib.
     self.strategyView.delegate = self;
     
-    [self setupRightBarButton:nil target:self action:@selector(didClickedFilterButton) frontImage:@"filter" andBackImage:@"filter"];
+    [self setupRightBarButton:nil target:self action:@selector(didClickedFilterButton) frontImage:@"navigation_sort" andBackImage:@"navigation_sort"];
     
     self.filterView = [[ParentingStrategyFilterView alloc] init];
     self.filterView.delegate = self;

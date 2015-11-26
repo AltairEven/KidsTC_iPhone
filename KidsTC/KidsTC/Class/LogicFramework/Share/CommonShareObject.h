@@ -27,6 +27,10 @@
  * @note 大小不能超过32K
  */
 @property (nonatomic, strong) UIImage *thumbImage;
+/** 缩略图下载链接
+ * @note 非QQ分享下载后须压缩至大小不超过32K
+ */
+@property (nonatomic, strong) NSURL *thumbImageUrl;
 /** 网页地址
  * @note 长度不能超过512字节
  */
@@ -40,5 +44,12 @@
                          description:(NSString *)description
                           thumbImage:(UIImage *)thumb
                            urlString:(NSString *)urlString;
+
++ (instancetype)shareObjectWithTitle:(NSString *)title
+                         description:(NSString *)description
+                       thumbImageUrl:(NSURL *)thumbUrl
+                           urlString:(NSString *)urlString;
+
+- (CommonShareObject *)copyObject;
 
 @end

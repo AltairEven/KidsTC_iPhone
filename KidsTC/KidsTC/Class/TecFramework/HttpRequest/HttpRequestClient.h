@@ -92,6 +92,9 @@ typedef void(^ NetworkErrorBlcok) (NSError *error);
                        success:(void (^)(HttpRequestClient *client, NSDictionary *responseData))success
                        failure:(void (^)(HttpRequestClient *client, NSError *error))failure;
 
+- (void)downloadImageWithSuccess:(void (^)(HttpRequestClient *client, UIImage *image))success
+                         failure:(void (^)(HttpRequestClient *client, NSError *error))failure;
+
 - (void)cancel;
 
 @end

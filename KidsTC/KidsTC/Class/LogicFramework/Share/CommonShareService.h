@@ -33,9 +33,9 @@ extern NSString *const kCommonShareTypeQZoneKey;
 
 + (NSDictionary *)shareTypeAvailablities;
 
-- (BOOL)startThirdPartyLoginWithShareType:(CommonShareType)type
-                                   object:(CommonShareObject *)object
-                                  Succeed:(void(^)())succeed
-                                  failure:(void(^)(NSError *error))failure;
+- (BOOL)startThirdPartyShareWithType:(CommonShareType)type
+                              object:(CommonShareObject *)object
+                             succeed:(void(^)())succeed
+                             failure:(void(^)(NSError *error))failure;
 
 @end

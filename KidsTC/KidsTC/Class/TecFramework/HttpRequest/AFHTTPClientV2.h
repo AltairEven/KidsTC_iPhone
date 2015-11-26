@@ -59,6 +59,10 @@ typedef NS_ENUM(NSInteger, HTTPReqMethodTypeE) {
                                   success:(void (^)(AFHTTPClientV2 *request, id responseObject))success
                                   failure:(void (^)(AFHTTPClientV2 *request, NSError *error))failure;
 
+- (void)downloadImageWithURLStr:(NSString *)URLString
+                        success:(void (^)(AFHTTPClientV2 *request, id responseObject))success
+                        failure:(void (^)(AFHTTPClientV2 *request, NSError *error))failure;
+
 
 - (void)cancel;
 

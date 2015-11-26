@@ -7,6 +7,7 @@
 //
 
 #import "ParentingStrategyDetailViewModel.h"
+#import "KTCFavouriteManager.h"
 
 @interface ParentingStrategyDetailViewModel () <ParentingStrategyDetailViewDataSource>
 
@@ -79,6 +80,34 @@
             weakSelf.netErrorBlock(error);
         }
     }];
+}
+- (void)addOrRemoveFavouriteWithSucceed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
+    NSString *identifier = self.detailModel.identifier;
+    KTCFavouriteType type = KTCFavouriteTypeStrategy;
+    __weak ParentingStrategyDetailViewModel *weakSelf = self;
+    if (self.detailModel.isFavourite) {
+        [[KTCFavouriteManager sharedManager] deleteFavouriteWithIdentifier:identifier type:type succeed:^(NSDictionary *data) {
+            [weakSelf.detailModel setIsFavourite:NO];
+            if (succeed) {
+                succeed(data);
+            }
+        } failure:^(NSError *error) {
+            if (failure) {
+                failure(error);
+            }
+        }];
+    } else {
+        [[KTCFavouriteManager sharedManager] addFavouriteWithIdentifier:identifier type:type succeed:^(NSDictionary *data) {
+            [weakSelf.detailModel setIsFavourite:YES];
+            if (succeed) {
+                succeed(data);
+            }
+        } failure:^(NSError *error) {
+            if (failure) {
+                failure(error);
+            }
+        }];
+    }
 }
 
 @end

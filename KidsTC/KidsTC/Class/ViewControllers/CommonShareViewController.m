@@ -129,7 +129,7 @@
 - (IBAction)didClickedShareButton:(id)sender {
     UIButton *button = (UIButton *)sender;
     CommonShareType type = (CommonShareType)button.tag;
-    [[CommonShareService sharedService] startThirdPartyLoginWithShareType:type object:self.shareObject Succeed:^{
+    [[CommonShareService sharedService] startThirdPartyShareWithType:type object:self.shareObject succeed:^{
         [[iToast makeText:@"分享成功"] show];
     } failure:^(NSError *error) {
         NSString *errMsg = [error.userInfo objectForKey:kErrMsgKey];

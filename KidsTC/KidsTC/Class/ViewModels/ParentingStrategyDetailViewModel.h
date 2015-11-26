@@ -15,4 +15,6 @@
 
 - (void)startUpdateDataWithStrategyIdentifier:(NSString *)identifier Succeed:(void (^)(NSDictionary *data))succeed failure:(void (^)(NSError *error))failure;
 
+- (void)addOrRemoveFavouriteWithSucceed:(void (^)(NSDictionary *data))succeed failure:(void (^)(NSError *error))failure;
+
 @end

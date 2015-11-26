@@ -20,5 +20,7 @@ CGFloat RadiansToDegrees(CGFloat radians);
 - (UIImage *)imageRotatedByDegrees:(CGFloat)degrees;
 + (UIImage *)imageWithColor:(UIColor *)color;
 - (UIImage *)grayImage;
+- (UIImage *)imageByCompressToMemorySize:(NSUInteger)byteCount;
++ (CGSize)sizeOfMemorySize:(NSUInteger)byteCount withCurrentSize:(CGSize)size;
 
 @end

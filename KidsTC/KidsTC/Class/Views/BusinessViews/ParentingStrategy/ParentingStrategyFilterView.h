@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 typedef enum {
-    ParentingStrategySortTypeTime,
-    ParentingStrategySortTypeHot
+    ParentingStrategySortTypeHot,
+    ParentingStrategySortTypeTime
 }ParentingStrategySortType;
 
 @class ParentingStrategyFilterView;

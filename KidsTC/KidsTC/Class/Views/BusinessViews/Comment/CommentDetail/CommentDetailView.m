@@ -144,7 +144,9 @@ static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIden
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSInteger number = 0;
     if (section == 0) {
-        number = 1;
+        if (self.detailModel.headerModel) {
+            number = 1;
+        }
     } else {
         number = [self.detailModel.replyModels count];
     }

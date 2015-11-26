@@ -434,6 +434,38 @@
     }];
 }
 
+- (void)downloadImageWithSuccess:(void (^)(HttpRequestClient *, UIImage *))success failure:(void (^)(HttpRequestClient *, NSError *))failure {
+    __weak HttpRequestClient *weakSelf = self;
+    
+    if (![[IcsonNetworkReachabilityManager sharedManager] isNetworkStatusOK]) {
+        NSError *error = [NSError errorWithDomain:@"Http request client. Network status not ok." code:-1 userInfo:nil];
+        failure(weakSelf, error);
+        if (weakSelf.errorBlock) {
+            weakSelf.errorBlock(error);
+        }
+        return;
+    }
+    if (!self.urlString || [self.urlString isEqualToString:@""]) {
+        NSError *error = [NSError errorWithDomain:@"Http request client. Request content not valid" code:-2 userInfo:nil];
+        failure(weakSelf, error);
+        if (weakSelf.errorBlock) {
+            weakSelf.errorBlock(error);
+        }
+        return;
+    }
+    
+    self.startTime = [NSDate date];
+    [_httpClient downloadImageWithURLStr:self.urlString success:^(AFHTTPClientV2 *request, id responseObject) {
+        if (success) {
+            success(weakSelf, responseObject);
+        }
+    } failure:^(AFHTTPClientV2 *request, NSError *error) {
+        if (failure) {
+            failure(weakSelf, error);
+        }
+    }];
+}
+
 
 - (void)cancel {
     if (_httpClient) {

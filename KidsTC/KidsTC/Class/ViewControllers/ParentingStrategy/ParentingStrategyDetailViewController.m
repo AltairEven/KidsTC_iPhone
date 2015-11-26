@@ -9,6 +9,7 @@
 #import "ParentingStrategyDetailViewController.h"
 #import "ParentingStrategyDetailViewModel.h"
 #import "CommentDetailViewController.h"
+#import "CommonShareViewController.h"
 
 @interface ParentingStrategyDetailViewController () <ParentingStrategyDetailViewDelegate>
 
@@ -17,6 +18,8 @@
 @property (nonatomic, strong) ParentingStrategyDetailViewModel *viewModel;
 
 @property (nonatomic, copy) NSString *strategyId;
+
+@property (nonatomic, strong) UIButton *likeButton;
 
 - (void)buildRightBarItems;
 
@@ -76,9 +79,9 @@
 #pragma mark Private methods
 
 - (void)buildRightBarItems {
-    CGFloat buttonWidth = 30;
-    CGFloat buttonHeight = 30;
-    CGFloat buttonGap = 10;
+    CGFloat buttonWidth = 28;
+    CGFloat buttonHeight = 28;
+    CGFloat buttonGap = 15;
     
     UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, buttonWidth * 3 + buttonGap * 2, buttonHeight)];
     [bgView setBackgroundColor:[UIColor clearColor]];
@@ -93,19 +96,20 @@
     [bgView addSubview:commentButton];
     //like
     xPosition += buttonWidth + buttonGap;
-    UIButton *likeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [likeButton setFrame:CGRectMake(xPosition, 0, buttonWidth, buttonHeight)];
-    [likeButton setBackgroundColor:[UIColor clearColor]];
-    [likeButton setImage:[UIImage imageNamed:@"like_n"] forState:UIControlStateNormal];
-    [commentButton addTarget:self action:@selector(didClickedLikeButton) forControlEvents:UIControlEventTouchUpInside];
-    [bgView addSubview:likeButton];
+    self.likeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.likeButton setFrame:CGRectMake(xPosition, 0, buttonWidth, buttonHeight)];
+    [self.likeButton setBackgroundColor:[UIColor clearColor]];
+    [self.likeButton setImage:[UIImage imageNamed:@"like_n"] forState:UIControlStateNormal];
+    [self.likeButton setImage:[UIImage imageNamed:@"like_h"] forState:UIControlStateHighlighted];
+    [self.likeButton addTarget:self action:@selector(didClickedLikeButton) forControlEvents:UIControlEventTouchUpInside];
+    [bgView addSubview:self.likeButton];
     //share
     xPosition += buttonWidth + buttonGap;
     UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [shareButton setFrame:CGRectMake(xPosition, 0, buttonWidth, buttonHeight)];
     [shareButton setBackgroundColor:[UIColor clearColor]];
     [shareButton setImage:[UIImage imageNamed:@"share_n"] forState:UIControlStateNormal];
-    [commentButton addTarget:self action:@selector(didClickedShareButton) forControlEvents:UIControlEventTouchUpInside];
+    [shareButton addTarget:self action:@selector(didClickedShareButton) forControlEvents:UIControlEventTouchUpInside];
     [bgView addSubview:shareButton];
     
     UIBarButtonItem *rItem = [[UIBarButtonItem alloc] initWithCustomView:bgView];
@@ -113,15 +117,27 @@
 }
 
 - (void)didClickedCommentButton {
-    
+    CommentDetailViewController *controller = [[CommentDetailViewController alloc] initWithSource:CommentDetailViewSourceStrategy identifier:self.viewModel.detailModel.identifier];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)didClickedLikeButton {
-    
+    [GToolUtil checkLogin:^(NSString *uid) {
+        __weak ParentingStrategyDetailViewController *weakSelf = self;
+        [weakSelf.viewModel addOrRemoveFavouriteWithSucceed:^(NSDictionary *data) {
+            [weakSelf.likeButton setHighlighted:weakSelf.viewModel.detailModel.isFavourite];
+        } failure:^(NSError *error) {
+            if ([[error userInfo] count] > 0) {
+                [[iToast makeText:[[error userInfo] objectForKey:@"data"]] show];
+            }
+        }];
+    } target:self];
 }
 
 - (void)didClickedShareButton {
-    
+    CommonShareViewController *controller = [CommonShareViewController instanceWithShareObject:self.viewModel.detailModel.shareObject];
+    [self presentViewController:controller animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

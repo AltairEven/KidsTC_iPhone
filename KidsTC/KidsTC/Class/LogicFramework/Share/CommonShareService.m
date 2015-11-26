@@ -11,6 +11,7 @@
 #import "TencentManager.h"
 #import "WeChatManager.h"
 #import "WeiboManager.h"
+#import "UIImage+GImageExtension.h"
 
 
 NSString *const kCommonShareTypeWechatSessionKey = @"kCommonShareTypeWechatSessionKey";
@@ -20,6 +21,17 @@ NSString *const kCommonShareTypeQQKey = @"kCommonShareTypeQQKey";
 NSString *const kCommonShareTypeQZoneKey = @"kCommonShareTypeQZoneKey";
 
 static CommonShareService *_sharedInstance = nil;
+
+@interface CommonShareService ()
+
+@property (nonatomic, strong) HttpRequestClient *loadImageRequest;
+
+- (BOOL)shareWithType:(CommonShareType)type
+               object:(CommonShareObject *)object
+              succeed:(void(^)())succeed
+              failure:(void(^)(NSError *error))failure;
+
+@end
 
 @implementation CommonShareService
 
@@ -69,10 +81,10 @@ static CommonShareService *_sharedInstance = nil;
     return [NSDictionary dictionaryWithDictionary:availableDic];
 }
 
-- (BOOL)startThirdPartyLoginWithShareType:(CommonShareType)type
-                                   object:(CommonShareObject *)object
-                                  Succeed:(void (^)())succeed
-                                  failure:(void (^)(NSError *))failure {
+- (BOOL)startThirdPartyShareWithType:(CommonShareType)type
+                              object:(CommonShareObject *)object
+                             succeed:(void (^)())succeed
+                             failure:(void (^)(NSError *))failure {
     if (!object) {
         NSError *error = [NSError errorWithDomain:@"Common Share" code:-1 userInfo:[NSDictionary dictionaryWithObject:@"无效的分享内容" forKey:kErrMsgKey]];
         if (failure) {
@@ -80,6 +92,32 @@ static CommonShareService *_sharedInstance = nil;
         }
         return NO;
     }
+    if (!object.thumbImage && object.thumbImageUrl) {
+        if (!self.loadImageRequest) {
+            self.loadImageRequest = [HttpRequestClient clientWithUrlString:[object.thumbImageUrl absoluteString]];
+            [self.loadImageRequest setTimeoutSeconds:5];
+        } else {
+            [self.loadImageRequest setUrlString:[object.thumbImageUrl absoluteString]];
+        }
+        __weak CommonShareService *weakSelf = self;
+        [weakSelf.loadImageRequest downloadImageWithSuccess:^(HttpRequestClient *client, UIImage *image) {
+            UIImage *compressedImage = [image imageByCompressToMemorySize:31 * 1024 * 8];
+            CommonShareObject *refreshedObject = [object copyObject];
+            refreshedObject.thumbImage = compressedImage;
+            [weakSelf shareWithType:type object:refreshedObject succeed:succeed failure:failure];
+        } failure:^(HttpRequestClient *client, NSError *error) {
+            NSLog(@"Download share thumb image failed.");
+        }];
+    } else {
+        return [self shareWithType:type object:object succeed:succeed failure:failure];
+    }
+    return NO;
+}
+
+- (BOOL)shareWithType:(CommonShareType)type
+               object:(CommonShareObject *)object
+              succeed:(void (^)())succeed
+              failure:(void (^)(NSError *))failure {
     BOOL retValue = NO;
     switch (type) {
         case CommonShareTypeWechatSession:
