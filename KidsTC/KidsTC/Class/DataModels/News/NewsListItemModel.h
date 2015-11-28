@@ -8,9 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum {
+    NewsTypeNews = 1,
+    NewsTypeTopic
+}NewsType;
+
 @interface NewsListItemModel : NSObject
 
 @property (nonatomic, copy) NSString *identifier;
+
+@property (nonatomic, assign) NewsType type;
 
 @property (nonatomic, copy) NSString *title;
 

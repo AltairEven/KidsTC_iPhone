@@ -19,6 +19,7 @@
         if ([data objectForKey:@"id"]) {
             self.identifier = [NSString stringWithFormat:@"%@", [data objectForKey:@"id"]];
         }
+        self.type = (NewsType)[[data objectForKey:@"articleKind"] integerValue];
         self.title = [data objectForKey:@"title"];
         self.author = [data objectForKey:@"author"];
         self.imageUrl = [NSURL URLWithString:[data objectForKey:@"imgUrl"]];

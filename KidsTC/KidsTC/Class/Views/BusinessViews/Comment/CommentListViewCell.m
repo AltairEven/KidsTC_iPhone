@@ -50,7 +50,11 @@
         [self.contentLabel setText:model.comments];
         [self.imageGridView setImageUrlStringsArray:model.thumbnailPhotoUrlStringsArray];
         [self.timeLabel setText:model.commentTime];
-        [self.commentButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)model.replyNumber] forState:UIControlStateNormal];
+        NSString *replyNum = @"";
+        if (model.replyNumber > 0) {
+            replyNum = [NSString stringWithFormat:@" %lu", (unsigned long)model.replyNumber];
+        }
+        [self.commentButton setTitle:replyNum forState:UIControlStateNormal];
     }
 }
 

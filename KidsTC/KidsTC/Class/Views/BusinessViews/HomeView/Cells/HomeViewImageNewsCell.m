@@ -12,9 +12,13 @@
 
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tagLabel;
 @property (weak, nonatomic) IBOutlet UILabel *viewNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentNumberLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *cellImageView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftMargin;
+
+- (void)configTagLabelWithModel:(HomeImageNewsElement *)model;
 
 @end
 
@@ -34,9 +38,29 @@
 - (void)configWithModel:(HomeImageNewsElement *)model {
     if (model) {
         [self.titleLabel setText:model.title];
+        [self configTagLabelWithModel:model];
         [self.viewNumberLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)model.viewCount]];
         [self.commentNumberLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)model.commentCount]];
         [self.cellImageView setImageWithURL:model.imageUrl];
+    }
+}
+
+- (void)configTagLabelWithModel:(HomeImageNewsElement *)model {
+    if (model.isHot) {
+        [self.tagLabel setHidden:NO];
+        self.leftMargin.constant = 10;
+        self.tagLabel.layer.borderColor = [AUITheme theme].globalThemeColor.CGColor;
+        [self.tagLabel setTextColor:[AUITheme theme].globalThemeColor];
+        [self.tagLabel setText:@"热"];
+    } else if (model.isRecommend) {
+        [self.tagLabel setHidden:NO];
+        self.leftMargin.constant = 10;
+        self.tagLabel.layer.borderColor = [AUITheme theme].highlightTextColor.CGColor;
+        [self.tagLabel setTextColor:[AUITheme theme].highlightTextColor];
+        [self.tagLabel setText:@"推荐"];
+    } else {
+        [self.tagLabel setHidden:YES];
+        self.leftMargin.constant = 0;
     }
 }
 
