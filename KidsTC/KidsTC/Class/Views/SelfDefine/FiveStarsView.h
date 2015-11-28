@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class FiveStarsView;
+
+@protocol FiveStarsViewDelegate <NSObject>
+
+- (void)fiveStarsView:(FiveStarsView *)starsView didChangedStarNumberFromValue:(CGFloat)fromVal toValue:(CGFloat)toVal;
+
+@end
+
 @interface FiveStarsView : UIView
 
 @property (nonatomic, assign) CGFloat starNumber;
@@ -16,6 +24,8 @@
 @property (nonatomic, strong) UIImage *starImageFull;
 @property (nonatomic, strong) UIImage *starImageHalf;
 @property (nonatomic, strong) UIImage *starImageEmpty;
+
+@property (nonatomic, assign) id<FiveStarsViewDelegate> delegate;
 
 @property (nonatomic, assign) BOOL editable;
 

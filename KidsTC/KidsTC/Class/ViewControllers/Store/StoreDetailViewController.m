@@ -19,7 +19,7 @@
 #import "ServiceListViewController.h"
 #import "CommentListViewController.h"
 #import "StoreMoreDetailViewController.h"
-#import "OrderCommentViewController.h"
+#import "CommentFoundingViewController.h"
 #import "KTCActionView.h"
 #import "KTCSearchViewController.h"
 #import "CommonShareViewController.h"
@@ -192,7 +192,7 @@
         case StoreDetailBottomSubviewTagComment:
         {
             [GToolUtil checkLogin:^(NSString *uid) {
-                OrderCommentViewController *controller = [[OrderCommentViewController alloc] initWithOrderCommentModel:[OrderCommentModel modelFromStore:self.viewModel.detailModel]];
+                CommentFoundingViewController *controller = [[CommentFoundingViewController alloc] initWithCommentFoundingModel:[CommentFoundingModel modelFromStore:self.viewModel.detailModel]];
                 [controller setHidesBottomBarWhenPushed:YES];
                 [self.navigationController pushViewController:controller animated:YES];
             } target:self];

@@ -31,6 +31,8 @@ typedef enum {
 
 @property (nonatomic, copy) NSString *orderName;
 
+@property (nonatomic, assign) NSUInteger productType;
+
 @property (nonatomic, assign) CGFloat price;
 
 @property (nonatomic, copy) NSString *orderDate;

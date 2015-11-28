@@ -19,6 +19,7 @@
 #import "KTCActionView.h"
 #import "CommonShareViewController.h"
 #import "KTCSearchViewController.h"
+#import "StoreDetailViewController.h"
 
 
 @interface ServiceDetailViewController () <ServiceDetailViewDelegate, ServiceDetailBottomViewDelegate, ServiceDetailConfirmViewDelegate, KTCActionViewDelegate>
@@ -109,6 +110,26 @@
 
 - (void)serviceDetailView:(ServiceDetailView *)detailView didChangedMoreInfoViewTag:(ServiceDetailMoreInfoViewTag)viewTag {
     [self.viewModel resetMoreInfoViewWithViewTag:viewTag];
+}
+
+- (void)serviceDetailView:(ServiceDetailView *)detailView didClickedStoreCellAtIndex:(NSUInteger)index {
+    StoreListItemModel *model = [self.viewModel.detailModel.storeItemsArray objectAtIndex:index];
+    StoreDetailViewController *controller = [[StoreDetailViewController alloc] initWithStoreId:model.identifier];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)serviceDetailView:(ServiceDetailView *)detailView didClickedCommentCellAtIndex:(NSUInteger)index {
+    NSDictionary *commentNumberDic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                      [NSNumber numberWithInteger:self.viewModel.detailModel.commentAllNumber], CommentListTabNumberKeyAll,
+                                      [NSNumber numberWithInteger:self.viewModel.detailModel.commentGoodNumber], CommentListTabNumberKeyGood,
+                                      [NSNumber numberWithInteger:self.viewModel.detailModel.commentNormalNumber], CommentListTabNumberKeyNormal,
+                                      [NSNumber numberWithInteger:self.viewModel.detailModel.commentBadNumber], CommentListTabNumberKeyBad,
+                                      [NSNumber numberWithInteger:self.viewModel.detailModel.commentPictureNumber], CommentListTabNumberKeyPicture, nil];
+    
+    CommentListViewController *controller = [[CommentListViewController alloc] initWithIdentifier:self.serviceId relationType:(CommentRelationType)self.viewModel.detailModel.type commentNumberDic:commentNumberDic];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark ServiceDetailBottomViewDelegate

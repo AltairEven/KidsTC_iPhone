@@ -587,13 +587,8 @@
 		1E8CBBBD1BDA366900F78828 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8CBBBC1BDA366900F78828 /* libsqlite3.0.tbd */; };
 		1E8EFCD61B6657E200D00808 /* OrderDetailButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8EFCD41B6657E200D00808 /* OrderDetailButtonCell.m */; };
 		1E8EFCD71B6657E200D00808 /* OrderDetailButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E8EFCD51B6657E200D00808 /* OrderDetailButtonCell.xib */; };
-		1E8EFCDA1B67292D00D00808 /* OrderCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8EFCD91B67292D00D00808 /* OrderCommentView.m */; };
-		1E8EFCDC1B67293A00D00808 /* OrderCommentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E8EFCDB1B67293A00D00808 /* OrderCommentView.xib */; };
 		1E8EFCDF1B6729A000D00808 /* OrderCommentBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8EFCDE1B6729A000D00808 /* OrderCommentBottomView.m */; };
 		1E8EFCE11B6729A900D00808 /* OrderCommentBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E8EFCE01B6729A900D00808 /* OrderCommentBottomView.xib */; };
-		1E8EFCE51B674A3100D00808 /* OrderCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8EFCE31B674A3100D00808 /* OrderCommentViewController.m */; };
-		1E8EFCE61B674A3100D00808 /* OrderCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E8EFCE41B674A3100D00808 /* OrderCommentViewController.xib */; };
-		1E8EFCE91B675D3B00D00808 /* OrderCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8EFCE81B675D3B00D00808 /* OrderCommentModel.m */; };
 		1E8EFCF71B68697700D00808 /* ServiceCommentListViewHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8EFCF51B68697700D00808 /* ServiceCommentListViewHeaderCell.m */; };
 		1E8EFCF81B68697700D00808 /* ServiceCommentListViewHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E8EFCF61B68697700D00808 /* ServiceCommentListViewHeaderCell.xib */; };
 		1E8EFCFF1B6876F800D00808 /* CommentListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8EFCFE1B6876F800D00808 /* CommentListView.m */; };
@@ -798,6 +793,9 @@
 		8F06234B1C02EE7600A8AF6C /* PromotionLogoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F06234A1C02EE7600A8AF6C /* PromotionLogoItem.m */; };
 		8F06234E1C02EE8A00A8AF6C /* ActivityLogoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F06234D1C02EE8A00A8AF6C /* ActivityLogoItem.m */; };
 		8F2C55BB1BFF167B00C2B6BF /* CommonShareService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2C55BA1BFF167B00C2B6BF /* CommonShareService.m */; };
+		8F38D1E91C085F080061C329 /* CommentFoundingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F38D1E81C085F080061C329 /* CommentFoundingView.m */; };
+		8F38D1EB1C085F1E0061C329 /* CommentFoundingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F38D1EA1C085F1E0061C329 /* CommentFoundingView.xib */; };
+		8F38D1EE1C089AB70061C329 /* CommentFoundingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F38D1ED1C089AB70061C329 /* CommentFoundingModel.m */; };
 		8F5D8E381C0456D500632390 /* NewsListTagFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5D8E371C0456D500632390 /* NewsListTagFilterView.m */; };
 		8F5D8E3A1C0456FA00632390 /* NewsListTagFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F5D8E391C0456FA00632390 /* NewsListTagFilterView.xib */; };
 		8F5D8E3E1C045D1000632390 /* NewsListTagFilterViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5D8E3C1C045D1000632390 /* NewsListTagFilterViewCell.m */; };
@@ -827,6 +825,9 @@
 		8FAFABAB1BFF1EC600082F20 /* CommonShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FAFABA91BFF1EC600082F20 /* CommonShareViewController.m */; };
 		8FAFABAC1BFF1EC600082F20 /* CommonShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FAFABAA1BFF1EC600082F20 /* CommonShareViewController.xib */; };
 		8FAFABAF1BFF1F3200082F20 /* CommonShareObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FAFABAE1BFF1F3200082F20 /* CommonShareObject.m */; };
+		8FD213C21C08A29B0073F2CA /* CommentFoundingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FD213C01C08A29B0073F2CA /* CommentFoundingViewController.m */; };
+		8FD213C31C08A29B0073F2CA /* CommentFoundingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FD213C11C08A29B0073F2CA /* CommentFoundingViewController.xib */; };
+		8FD213C61C0949E60073F2CA /* CommentScoreConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FD213C51C0949E60073F2CA /* CommentScoreConfigModel.m */; };
 		8FEFF4F81BFCC54F001C098F /* KTCActionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FEFF4F71BFCC54F001C098F /* KTCActionView.xib */; };
 		8FF57C0F1BF5EE56006867D2 /* ImageTrimViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF57C0D1BF5EE56006867D2 /* ImageTrimViewController.m */; };
 		8FF57C101BF5EE56006867D2 /* ImageTrimViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FF57C0E1BF5EE56006867D2 /* ImageTrimViewController.xib */; };
@@ -1871,17 +1872,9 @@
 		1E8EFCD31B6657E200D00808 /* OrderDetailButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailButtonCell.h; sourceTree = "<group>"; };
 		1E8EFCD41B6657E200D00808 /* OrderDetailButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailButtonCell.m; sourceTree = "<group>"; };
 		1E8EFCD51B6657E200D00808 /* OrderDetailButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderDetailButtonCell.xib; sourceTree = "<group>"; };
-		1E8EFCD81B67292D00D00808 /* OrderCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderCommentView.h; sourceTree = "<group>"; };
-		1E8EFCD91B67292D00D00808 /* OrderCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderCommentView.m; sourceTree = "<group>"; };
-		1E8EFCDB1B67293A00D00808 /* OrderCommentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderCommentView.xib; sourceTree = "<group>"; };
 		1E8EFCDD1B6729A000D00808 /* OrderCommentBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderCommentBottomView.h; sourceTree = "<group>"; };
 		1E8EFCDE1B6729A000D00808 /* OrderCommentBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderCommentBottomView.m; sourceTree = "<group>"; };
 		1E8EFCE01B6729A900D00808 /* OrderCommentBottomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderCommentBottomView.xib; sourceTree = "<group>"; };
-		1E8EFCE21B674A3100D00808 /* OrderCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderCommentViewController.h; sourceTree = "<group>"; };
-		1E8EFCE31B674A3100D00808 /* OrderCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderCommentViewController.m; sourceTree = "<group>"; };
-		1E8EFCE41B674A3100D00808 /* OrderCommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderCommentViewController.xib; sourceTree = "<group>"; };
-		1E8EFCE71B675D3B00D00808 /* OrderCommentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderCommentModel.h; sourceTree = "<group>"; };
-		1E8EFCE81B675D3B00D00808 /* OrderCommentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderCommentModel.m; sourceTree = "<group>"; };
 		1E8EFCF41B68697700D00808 /* ServiceCommentListViewHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceCommentListViewHeaderCell.h; sourceTree = "<group>"; };
 		1E8EFCF51B68697700D00808 /* ServiceCommentListViewHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceCommentListViewHeaderCell.m; sourceTree = "<group>"; };
 		1E8EFCF61B68697700D00808 /* ServiceCommentListViewHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceCommentListViewHeaderCell.xib; sourceTree = "<group>"; };
@@ -2224,6 +2217,11 @@
 		8F06234D1C02EE8A00A8AF6C /* ActivityLogoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityLogoItem.m; sourceTree = "<group>"; };
 		8F2C55B91BFF167B00C2B6BF /* CommonShareService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonShareService.h; sourceTree = "<group>"; };
 		8F2C55BA1BFF167B00C2B6BF /* CommonShareService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonShareService.m; sourceTree = "<group>"; };
+		8F38D1E71C085F080061C329 /* CommentFoundingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentFoundingView.h; sourceTree = "<group>"; };
+		8F38D1E81C085F080061C329 /* CommentFoundingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentFoundingView.m; sourceTree = "<group>"; };
+		8F38D1EA1C085F1E0061C329 /* CommentFoundingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentFoundingView.xib; sourceTree = "<group>"; };
+		8F38D1EC1C089AB70061C329 /* CommentFoundingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentFoundingModel.h; sourceTree = "<group>"; };
+		8F38D1ED1C089AB70061C329 /* CommentFoundingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentFoundingModel.m; sourceTree = "<group>"; };
 		8F5D8E361C0456D500632390 /* NewsListTagFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsListTagFilterView.h; sourceTree = "<group>"; };
 		8F5D8E371C0456D500632390 /* NewsListTagFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsListTagFilterView.m; sourceTree = "<group>"; };
 		8F5D8E391C0456FA00632390 /* NewsListTagFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsListTagFilterView.xib; sourceTree = "<group>"; };
@@ -2271,6 +2269,11 @@
 		8FAFABAA1BFF1EC600082F20 /* CommonShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonShareViewController.xib; sourceTree = "<group>"; };
 		8FAFABAD1BFF1F3200082F20 /* CommonShareObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonShareObject.h; sourceTree = "<group>"; };
 		8FAFABAE1BFF1F3200082F20 /* CommonShareObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonShareObject.m; sourceTree = "<group>"; };
+		8FD213BF1C08A29B0073F2CA /* CommentFoundingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentFoundingViewController.h; sourceTree = "<group>"; };
+		8FD213C01C08A29B0073F2CA /* CommentFoundingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentFoundingViewController.m; sourceTree = "<group>"; };
+		8FD213C11C08A29B0073F2CA /* CommentFoundingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentFoundingViewController.xib; sourceTree = "<group>"; };
+		8FD213C41C0949E60073F2CA /* CommentScoreConfigModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentScoreConfigModel.h; sourceTree = "<group>"; };
+		8FD213C51C0949E60073F2CA /* CommentScoreConfigModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentScoreConfigModel.m; sourceTree = "<group>"; };
 		8FEFF4F71BFCC54F001C098F /* KTCActionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTCActionView.xib; sourceTree = "<group>"; };
 		8FF57C0C1BF5EE56006867D2 /* ImageTrimViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTrimViewController.h; sourceTree = "<group>"; };
 		8FF57C0D1BF5EE56006867D2 /* ImageTrimViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageTrimViewController.m; sourceTree = "<group>"; };
@@ -3734,9 +3737,6 @@
 				1E943F0D1B7B5B850029FE74 /* OrderDetailConsumptionCodeCell.h */,
 				1E943F0E1B7B5B850029FE74 /* OrderDetailConsumptionCodeCell.m */,
 				1E943F0F1B7B5B850029FE74 /* OrderDetailConsumptionCodeCell.xib */,
-				1E8EFCD81B67292D00D00808 /* OrderCommentView.h */,
-				1E8EFCD91B67292D00D00808 /* OrderCommentView.m */,
-				1E8EFCDB1B67293A00D00808 /* OrderCommentView.xib */,
 				1E8EFCDD1B6729A000D00808 /* OrderCommentBottomView.h */,
 				1E8EFCDE1B6729A000D00808 /* OrderCommentBottomView.m */,
 				1E8EFCE01B6729A900D00808 /* OrderCommentBottomView.xib */,
@@ -3771,9 +3771,6 @@
 				1E3D8F5F1B4D1DFE00275C35 /* OrderListViewController.h */,
 				1E3D8F601B4D1DFE00275C35 /* OrderListViewController.m */,
 				1E3D8F611B4D1DFE00275C35 /* OrderListViewController.xib */,
-				1E8EFCE21B674A3100D00808 /* OrderCommentViewController.h */,
-				1E8EFCE31B674A3100D00808 /* OrderCommentViewController.m */,
-				1E8EFCE41B674A3100D00808 /* OrderCommentViewController.xib */,
 				1E943EFC1B7B22E40029FE74 /* AppointmentOrder */,
 			);
 			path = Order;
@@ -4441,6 +4438,9 @@
 				1E8EFD0C1B68836600D00808 /* CommentListViewCell.h */,
 				1E8EFD0D1B68836600D00808 /* CommentListViewCell.m */,
 				1E8EFD0E1B68836600D00808 /* CommentListViewCell.xib */,
+				8F38D1E71C085F080061C329 /* CommentFoundingView.h */,
+				8F38D1E81C085F080061C329 /* CommentFoundingView.m */,
+				8F38D1EA1C085F1E0061C329 /* CommentFoundingView.xib */,
 			);
 			path = Comment;
 			sourceTree = "<group>";
@@ -4454,6 +4454,9 @@
 				1E15F9AD1BE1C784000C74E7 /* CommentDetailViewController.h */,
 				1E15F9AE1BE1C784000C74E7 /* CommentDetailViewController.m */,
 				1E15F9AF1BE1C784000C74E7 /* CommentDetailViewController.xib */,
+				8FD213BF1C08A29B0073F2CA /* CommentFoundingViewController.h */,
+				8FD213C01C08A29B0073F2CA /* CommentFoundingViewController.m */,
+				8FD213C11C08A29B0073F2CA /* CommentFoundingViewController.xib */,
 			);
 			path = Comment;
 			sourceTree = "<group>";
@@ -4469,6 +4472,10 @@
 				1E15F9A51BE0B8BA000C74E7 /* CommentDetailModel.m */,
 				1E15F9A71BE0B9C7000C74E7 /* CommentReplyItemModel.h */,
 				1E15F9A81BE0B9C7000C74E7 /* CommentReplyItemModel.m */,
+				8F38D1EC1C089AB70061C329 /* CommentFoundingModel.h */,
+				8F38D1ED1C089AB70061C329 /* CommentFoundingModel.m */,
+				8FD213C41C0949E60073F2CA /* CommentScoreConfigModel.h */,
+				8FD213C51C0949E60073F2CA /* CommentScoreConfigModel.m */,
 			);
 			path = Comment;
 			sourceTree = "<group>";
@@ -4679,8 +4686,6 @@
 				1EA8B6BA1B637FC000F90688 /* OrderListModel.m */,
 				1EA8B6B61B637F3200F90688 /* OrderDetailModel.h */,
 				1EA8B6B71B637F3200F90688 /* OrderDetailModel.m */,
-				1E8EFCE71B675D3B00D00808 /* OrderCommentModel.h */,
-				1E8EFCE81B675D3B00D00808 /* OrderCommentModel.m */,
 				1E943EF01B7AE7610029FE74 /* AppointmentOrder */,
 			);
 			path = Order;
@@ -5206,7 +5211,6 @@
 				8FAFABAC1BFF1EC600082F20 /* CommonShareViewController.xib in Resources */,
 				1E0B77FF1B6F32D300A58AD4 /* KTCSearchAreaFilterView.xib in Resources */,
 				1E7995581BCB96DF0099CFF9 /* ActivityViewController.xib in Resources */,
-				1E8EFCDC1B67293A00D00808 /* OrderCommentView.xib in Resources */,
 				1E15F9C11BE8953C000C74E7 /* AccountSettingViewCell.xib in Resources */,
 				1E8017091BB006D100B6C352 /* HomeViewWholeImageNewsCell.xib in Resources */,
 				1E8EFD201B68BBA100D00808 /* AccountSettingView.xib in Resources */,
@@ -5238,7 +5242,6 @@
 				1E943EEF1B7A1A090029FE74 /* AppointmentOrderDetailView.xib in Resources */,
 				1E827BEB1B941337008F3F08 /* VideoOverlay.png in Resources */,
 				1E827BE51B941337008F3F08 /* UIBarButtonItemArrowRight.png in Resources */,
-				1E8EFCE61B674A3100D00808 /* OrderCommentViewController.xib in Resources */,
 				1E827B541B8DC059008F3F08 /* NotificationCenterView.xib in Resources */,
 				1E827B731B8F0937008F3F08 /* KTCAnnotationTipConfirmLocationView.xib in Resources */,
 				1EC73C451B6099F8008B39EA /* ParentingStrategyView.xib in Resources */,
@@ -5311,6 +5314,7 @@
 				1E3D8F581B4D1D4D00275C35 /* UserCenterView.xib in Resources */,
 				1EC4A0C51B5914FB00206BB9 /* StoreDetailViewActiveCell.xib in Resources */,
 				1EC73BA41B5E25A4008B39EA /* HotActivityGroupViewCell.xib in Resources */,
+				8F38D1EB1C085F1E0061C329 /* CommentFoundingView.xib in Resources */,
 				1E3D8D0C1B4BF4A100275C35 /* TRViewController.xib in Resources */,
 				1EA8B6C21B638FFE00F90688 /* StoreAppointmentViewController.xib in Resources */,
 				1EC4A1151B5CCD4200206BB9 /* KTCSearchHistoryView.xib in Resources */,
@@ -5364,6 +5368,7 @@
 				1E943EEA1B7A19D50029FE74 /* AppointmentOrderListCell.xib in Resources */,
 				1EC73BB41B5E25D9008B39EA /* HomeViewController.xib in Resources */,
 				1E79951B1BC758560099CFF9 /* NewsRecommendListViewCell.xib in Resources */,
+				8FD213C31C08A29B0073F2CA /* CommentFoundingViewController.xib in Resources */,
 				1E827CED1B9D318F008F3F08 /* CouponUsableListViewController.xib in Resources */,
 				1E0B7A851B6F67B800A58AD4 /* CouponPrizeShowView.xib in Resources */,
 				1E827BEC1B941337008F3F08 /* VideoOverlay@2x.png in Resources */,
@@ -5576,6 +5581,7 @@
 				1E7995891BCE2C7C0099CFF9 /* HospitalListItemModel.m in Sources */,
 				1E3D8CDB1B4BF4A100275C35 /* IcsonCountryAD.m in Sources */,
 				1E943E911B71E7CD0029FE74 /* GCommonFilterAttr.m in Sources */,
+				8F38D1E91C085F080061C329 /* CommentFoundingView.m in Sources */,
 				1EC73BD71B5E4854008B39EA /* HomeViewNormalTitleCell.m in Sources */,
 				8FAFABAF1BFF1F3200082F20 /* CommonShareObject.m in Sources */,
 				1EC73C0E1B5F6168008B39EA /* HomeViewTwinklingElfCell.m in Sources */,
@@ -5642,7 +5648,6 @@
 				1E827BAA1B9412C6008F3F08 /* UIImage+MWPhotoBrowser.m in Sources */,
 				1E827B281B8B0568008F3F08 /* ParentingStrategyViewModel.m in Sources */,
 				1E943E941B71E7CD0029FE74 /* GEventHome.m in Sources */,
-				1E8EFCE51B674A3100D00808 /* OrderCommentViewController.m in Sources */,
 				1E943F191B7C9A2C0029FE74 /* HomeViewModel.m in Sources */,
 				1E3D8CE61B4BF4A100275C35 /* IcsonLevel3Category.m in Sources */,
 				1EA8B6A81B633CE100F90688 /* SettlementViewController.m in Sources */,
@@ -5688,6 +5693,7 @@
 				1E943EA91B7212660029FE74 /* SFHFKeychainUtils.m in Sources */,
 				1E3D8D871B4BF4A100275C35 /* ASIHTTPRequest.m in Sources */,
 				1E76003E1B56496100DF0972 /* ServiceDetailViewController.m in Sources */,
+				8F38D1EE1C089AB70061C329 /* CommentFoundingModel.m in Sources */,
 				1E943ED51B78A4760029FE74 /* FavourateViewModel.m in Sources */,
 				1E0B7A931B6F67B800A58AD4 /* GCheckBox.m in Sources */,
 				1E943F0C1B7B57E40029FE74 /* OrderDetailViewModel.m in Sources */,
@@ -5739,6 +5745,7 @@
 				1E943F001B7B23070029FE74 /* AppointmentOrderListViewController.m in Sources */,
 				1E3D8D8A1B4BF4A100275C35 /* ASICloudFilesCDNRequest.m in Sources */,
 				1EC4A0D71B5A001C00206BB9 /* StoreDetailViewController.m in Sources */,
+				8FD213C61C0949E60073F2CA /* CommentScoreConfigModel.m in Sources */,
 				1E3D8CD91B4BF4A100275C35 /* IcsonADList.xcdatamodeld in Sources */,
 				1E8EFCD61B6657E200D00808 /* OrderDetailButtonCell.m in Sources */,
 				1E0B7A8F1B6F67B800A58AD4 /* GBannersView.m in Sources */,
@@ -5818,7 +5825,6 @@
 				1E943ECD1B75A6EC0029FE74 /* ServiceDetailModel.m in Sources */,
 				1E5CD75E1B51155600D177CB /* ServiceListItemModel.m in Sources */,
 				1E0B7ACF1B6F67B800A58AD4 /* UITextField+HideKeyboard.m in Sources */,
-				1E8EFCE91B675D3B00D00808 /* OrderCommentModel.m in Sources */,
 				1EFD19401B4E1F1100767021 /* OrderDetailView.m in Sources */,
 				1E827CA41B94144E008F3F08 /* SDWebImageDownloader.m in Sources */,
 				1E0B78021B6F429100A58AD4 /* KTCSearchSortFilterView.m in Sources */,
@@ -5866,7 +5872,6 @@
 				1E7995681BCCD7BA0099CFF9 /* AUITheme.m in Sources */,
 				1E827CD11B9BF0E3008F3F08 /* CouponListViewModel.m in Sources */,
 				1EC73BEB1B5E5FF3008B39EA /* HomeViewThreeCell.m in Sources */,
-				1E8EFCDA1B67292D00D00808 /* OrderCommentView.m in Sources */,
 				8F9996041BF5A6740055F016 /* WeChatModel.m in Sources */,
 				1E7600351B55FFF300DF0972 /* ServiceMoreDetailHotSalesItemModel.m in Sources */,
 				1E827B3A1B8C426C008F3F08 /* NewsListItemModel.m in Sources */,
@@ -5925,6 +5930,7 @@
 				8F9EA6B31BF9A72B00062E91 /* ThirdPartyLoginService.m in Sources */,
 				1E943E951B71E7CD0029FE74 /* GVisitCategory.m in Sources */,
 				1E3D8F621B4D1DFE00275C35 /* OrderListViewController.m in Sources */,
+				8FD213C21C08A29B0073F2CA /* CommentFoundingViewController.m in Sources */,
 				1E0B7B6F1B70BDFA00A58AD4 /* SearchViewModel.m in Sources */,
 				1E943EF71B7AFC9F0029FE74 /* AppointmentListViewHeaderTabCell.m in Sources */,
 				1E943F101B7B5B850029FE74 /* OrderDetailConsumptionCodeCell.m in Sources */,

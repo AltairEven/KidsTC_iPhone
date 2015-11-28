@@ -92,6 +92,14 @@
     if (![self validateName]) {
         return;
     }
+    __weak ChangeNickNameViewController *weakSelf = self;
+    if ([self.originName isEqualToString:self.nickNameFiled.text]) {
+        if (weakSelf.completeBlock) {
+            weakSelf.completeBlock(weakSelf.originName);
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }
     
     if (!self.changeNickNameRequest) {
         self.changeNickNameRequest = [HttpRequestClient clientWithUrlAliasName:@"USER_UPDATE_INFO"];
@@ -99,7 +107,6 @@
     NSString *nickName = self.nickNameFiled.text;
     NSDictionary *param = [NSDictionary dictionaryWithObject:nickName forKey:@"userName"];
     
-    __weak ChangeNickNameViewController *weakSelf = self;
     [[GAlertLoadingView sharedAlertLoadingView] showInView:self.view];
     [weakSelf.changeNickNameRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [[GAlertLoadingView sharedAlertLoadingView] hide];

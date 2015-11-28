@@ -213,6 +213,14 @@ NSString *const kCommentCellIdentifier = @"kCommentCellIdentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (self.delegate) {
+        if (self.viewTag == ServiceDetailMoreInfoViewTagStore && [self.delegate respondsToSelector:@selector(serviceDetailMoreInfoView:didClickedStoreAtIndex:)]) {
+            [self.delegate serviceDetailMoreInfoView:self didClickedStoreAtIndex:indexPath.row];
+        }
+        if (self.viewTag == ServiceDetailMoreInfoViewTagComment && [self.delegate respondsToSelector:@selector(serviceDetailMoreInfoView:didClickedCommentAtIndex:)]) {
+            [self.delegate serviceDetailMoreInfoView:self didClickedCommentAtIndex:indexPath.row];
+        }
+    }
 }
 
 #pragma mark UIWebViewDelegate

@@ -8,9 +8,9 @@
 
 #import "OrderListViewController.h"
 #import "OrderDetailViewController.h"
-#import "OrderCommentViewController.h"
+#import "CommentFoundingViewController.h"
 
-@interface OrderListViewController () <OrderListViewDelegate, OrderCommentViewControllerDelegate>
+@interface OrderListViewController () <OrderListViewDelegate, CommentFoundingViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet OrderListView *orderListView;
 
@@ -68,7 +68,7 @@
 
 - (void)orderListView:(OrderListView *)listView didClickedCommentButtonAtIndex:(NSUInteger)index {
     OrderListModel *model = [self.viewModel.orderModels objectAtIndex:index];
-    OrderCommentViewController *controller = [[OrderCommentViewController alloc] initWithOrderCommentModel:[OrderCommentModel modelFromServiceOrderModel:model]];
+    CommentFoundingViewController *controller = [[CommentFoundingViewController alloc] initWithCommentFoundingModel:[CommentFoundingModel modelFromServiceOrderModel:model]];
     controller.delegate = self;
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
@@ -80,7 +80,7 @@
 
 #pragma mark OrderCommentViewControllerDelegate
 
-- (void)orderCommentVCDidFinishSubmitComment:(OrderCommentViewController *)vc {
+- (void)commentFoundingViewControllerDidFinishSubmitComment:(CommentFoundingViewController *)vc {
     [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
 }
 

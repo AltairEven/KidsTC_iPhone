@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kgE-yb-47u">
@@ -37,12 +37,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WOi-xy-Rvd">
-                                <rect key="frame" x="261" y="48" width="41" height="16"/>
+                                <rect key="frame" x="260" y="48" width="50" height="16"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="pt2-Q7-c5L"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title="回复" image="comment_small_n">
-                                    <color key="titleColor" red="1" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
+                                <state key="normal" title="回复" image="comment_small_n"/>
                                 <connections>
                                     <action selector="didClickedReplyButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Htf-HF-gz3"/>
                                 </connections>
@@ -56,7 +57,7 @@
                             <constraint firstItem="N5g-su-iQr" firstAttribute="top" secondItem="kgE-yb-47u" secondAttribute="top" constant="10" id="H75-jo-Mho"/>
                             <constraint firstItem="zaM-1C-Cie" firstAttribute="top" secondItem="3iK-au-Qsd" secondAttribute="bottom" constant="15" id="Pko-Dl-0Yt"/>
                             <constraint firstAttribute="trailing" secondItem="3iK-au-Qsd" secondAttribute="trailing" constant="10" id="XxG-Ld-d7E"/>
-                            <constraint firstAttribute="trailing" secondItem="WOi-xy-Rvd" secondAttribute="trailing" constant="18" id="gKd-jN-k0i"/>
+                            <constraint firstAttribute="trailing" secondItem="WOi-xy-Rvd" secondAttribute="trailing" constant="10" id="gKd-jN-k0i"/>
                             <constraint firstItem="N5g-su-iQr" firstAttribute="leading" secondItem="kgE-yb-47u" secondAttribute="leading" constant="10" id="jvZ-cg-Zjf"/>
                             <constraint firstItem="zaM-1C-Cie" firstAttribute="leading" secondItem="3iK-au-Qsd" secondAttribute="leading" id="nq7-ab-3BA"/>
                         </constraints>

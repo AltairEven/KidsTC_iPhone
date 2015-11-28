@@ -16,6 +16,8 @@
 
 @property (nonatomic, assign) NSUInteger leftTextInputCount;
 
+@property (nonatomic, assign) BOOL needHide;
+
 - (void)buildSubviews;
 
 - (void)buildExtensionViewWithType:(AUIKeyboardAdhesiveViewExtensionFunctionType)type;
@@ -263,7 +265,9 @@
     [UIView animateWithDuration:duration delay:0 options:curveInfo animations:^{
         self.frame = CGRectMake(0, endRect.origin.y - self.frame.size.height, self.frame.size.width, self.frame.size.height);
     } completion:^(BOOL finished) {
-        [self removeFromSuperview];
+        if (self.needHide) {
+            [self removeFromSuperview];
+        }
     }];
 }
 
@@ -296,6 +300,8 @@
 }
 
 - (void)didClickedSendButton {
+    self.needHide = NO;
+    [self.textView resignFirstResponder];
     if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedSendButtonOnKeyboardAdhesiveView:)]) {
         [self.delegate didClickedSendButtonOnKeyboardAdhesiveView:self];
     }
@@ -343,6 +349,7 @@
 }
 
 - (void)shrink {
+    self.needHide = YES;
     [self.textView resignFirstResponder];
     [self removeFromSuperview];
 }

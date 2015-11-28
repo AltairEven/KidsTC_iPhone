@@ -59,9 +59,18 @@
     return self;
 }
 
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self initStars];
+    }
+    return self;
+}
+
 - (instancetype)initWithStarGap:(CGFloat)gap andStarSize:(CGSize)size {
     self = [super init];
     if (self) {
+        [self initStars];
         self.starGap = gap;
         self.starSize = size;
     }
@@ -186,6 +195,8 @@
 #pragma mark Private Methods
 
 - (void)resetStarsWithNumber:(CGFloat)number {
+    CGFloat fromValue = self.starNumber;
+    CGFloat toValue = number;
     _starNumber = number;
     NSArray *starArray = [NSArray arrayWithObjects:self.star0, self.star1, self.star2, self.star3, self.star4, nil];
     NSUInteger needPaintIndex = 0;
@@ -205,6 +216,9 @@
         UIButton *star = [starArray objectAtIndex:noNeedPaintStartIndex];
         [star setBackgroundImage:self.starImageEmpty forState:UIControlStateNormal];
         noNeedPaintStartIndex ++;
+    }
+    if (fromValue != toValue && self.delegate && [self.delegate respondsToSelector:@selector(fiveStarsView:didChangedStarNumberFromValue:toValue:)]) {
+        [self.delegate fiveStarsView:self didChangedStarNumberFromValue:fromValue toValue:toValue];
     }
 }
 

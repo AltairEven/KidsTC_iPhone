@@ -8,11 +8,11 @@
 
 #import "OrderDetailViewController.h"
 #import "OrderDetailModel.h"
-#import "OrderCommentViewController.h"
+#import "CommentFoundingViewController.h"
 #import "OrderDetailViewModel.h"
 #import "ServiceDetailViewController.h"
 
-@interface OrderDetailViewController () <OrderDetailViewDelegate, OrderCommentViewControllerDelegate>
+@interface OrderDetailViewController () <OrderDetailViewDelegate, CommentFoundingViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet OrderDetailView *detailView;
 
@@ -61,7 +61,7 @@
             break;
         case OrderDetailActionTagComment:
         {
-            OrderCommentViewController *controller = [[OrderCommentViewController alloc] initWithOrderCommentModel:[OrderCommentModel modelFromServiceOrderModel:self.viewModel.detailModel]];
+            CommentFoundingViewController *controller = [[CommentFoundingViewController alloc] initWithCommentFoundingModel:[CommentFoundingModel modelFromServiceOrderModel:self.viewModel.detailModel]];
             controller.delegate = self;
             [controller setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:controller animated:YES];
@@ -91,7 +91,7 @@
 
 #pragma mark OrderCommentViewControllerDelegate
 
-- (void)orderCommentVCDidFinishSubmitComment:(OrderCommentViewController *)vc {
+- (void)commentFoundingViewControllerDidFinishSubmitComment:(CommentFoundingViewController *)vc {
     [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
 }
 

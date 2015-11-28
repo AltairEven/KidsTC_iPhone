@@ -178,8 +178,7 @@ static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIden
                 return cell;
             }
                 break;
-            case CommentDetailViewSourceService:
-            case CommentDetailViewSourceStore:
+            case CommentDetailViewSourceServiceOrStore:
             {
                 CommentDetailViewNormalHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:kNormalHeaderCellIdentifier forIndexPath:indexPath];
                 if (!cell) {

@@ -10,24 +10,28 @@
 #import "CommentListItemModel.h"
 #import "ParentingStrategyDetailModel.h"
 #import "CommentReplyItemModel.h"
+#import "KTCCommentManager.h"
 
 typedef enum {
     CommentDetailViewSourceUnknow,
     CommentDetailViewSourceStrategy,
     CommentDetailViewSourceStrategyDetail,
-    CommentDetailViewSourceService,
-    CommentDetailViewSourceStore
+    CommentDetailViewSourceServiceOrStore
 }CommentDetailSource;
 
 @interface CommentDetailModel : NSObject
 
 @property (nonatomic, copy) NSString *identifier;
 
+@property (nonatomic, copy) NSString *relationIdentifier;
+
 @property (nonatomic, strong) id headerModel;
 
 @property (nonatomic, strong) NSArray<CommentReplyItemModel *> *replyModels;
 
 @property (nonatomic, assign) CommentDetailSource modelSource;
+
+@property (nonatomic, assign) CommentRelationType relationType;
 
 @property (nonatomic, assign) CGFloat headerCellHeight;
 

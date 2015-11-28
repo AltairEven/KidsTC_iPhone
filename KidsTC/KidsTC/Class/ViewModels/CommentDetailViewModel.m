@@ -44,7 +44,11 @@
 
 - (void)startUpdateDataWithSucceed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
     if (!self.loadReplyRequest) {
-        self.loadReplyRequest = [HttpRequestClient clientWithUrlAliasName:@"COMMENT_GET_NEWS"];
+        if (self.detailModel.modelSource == CommentDetailViewSourceStrategy || self.detailModel.modelSource == CommentDetailViewSourceStrategyDetail) {
+            self.loadReplyRequest = [HttpRequestClient clientWithUrlAliasName:@"COMMENT_GET_NEWS"];
+        } else {
+            self.loadReplyRequest = [HttpRequestClient clientWithUrlAliasName:@"COMMENT_GET_REPLIES"];
+        }
     }
     [self.loadReplyRequest cancel];
     self.currentPage = 1;
@@ -86,36 +90,22 @@
     if (!self.detailModel.identifier) {
         self.detailModel.identifier = @"";
     }
-    CommentRelationType relattionType = CommentRelationTypeNone;
-    KTCCommentType commentType = KTCCommentTypeAll;
-    switch (self.detailModel.modelSource) {
-        case CommentDetailViewSourceStrategy:
-        {
-            relattionType = CommentRelationTypeStrategy;
-        }
-            break;
-        case CommentDetailViewSourceStrategyDetail:
-        {
-            relattionType = CommentRelationTypeStrategyDetail;
-        }
-            break;
-        case CommentDetailViewSourceService:
-        {
-            relattionType = CommentRelationTypeServiceProduct;
-        }
-        case CommentDetailViewSourceStore:
-        {
-            relattionType = CommentRelationTypeStore;
-        }
-        default:
-            break;
+    NSDictionary *param = nil;
+    if (self.detailModel.modelSource == CommentDetailViewSourceServiceOrStore) {
+        param = [NSDictionary dictionaryWithObjectsAndKeys:
+                 self.detailModel.relationIdentifier, @"relationSysNo",
+                 [NSNumber numberWithInteger:self.detailModel.relationType], @"relationType",
+                 self.detailModel.identifier, @"commentSysNo",
+                 [NSNumber numberWithInteger:index], @"page",
+                 [NSNumber numberWithInteger:[self.view pageSize]], @"pageCount", nil];
+    } else if (self.detailModel.modelSource == CommentDetailViewSourceStrategy || self.detailModel.modelSource == CommentDetailViewSourceStrategyDetail) {
+        param = [NSDictionary dictionaryWithObjectsAndKeys:
+                 self.detailModel.relationIdentifier, @"relationSysNo",
+                 [NSNumber numberWithInteger:self.detailModel.relationType], @"relationType",
+                 [NSNumber numberWithInteger:KTCCommentTypeAll], @"commentType",
+                 [NSNumber numberWithInteger:index], @"page",
+                 [NSNumber numberWithInteger:[self.view pageSize]], @"pageCount", nil];
     }
-    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
-                           self.detailModel.identifier, @"relationSysNo",
-                           [NSNumber numberWithInteger:relattionType], @"relationType",
-                           [NSNumber numberWithInteger:commentType], @"commentType",
-                           [NSNumber numberWithInteger:index], @"page",
-                           [NSNumber numberWithInteger:[self.view pageSize]], @"pageCount", nil];
     return param;
 }
 

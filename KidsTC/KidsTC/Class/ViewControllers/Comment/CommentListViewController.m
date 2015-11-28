@@ -73,7 +73,9 @@
 
 - (void)commentListView:(CommentListView *)listView didClickedCellAtIndex:(NSUInteger)cellIndex {
     CommentListItemModel *model = [[self.viewModel resultOfCurrentType] objectAtIndex:cellIndex];
-    CommentDetailViewController *controller = [[CommentDetailViewController alloc] initWithSource:CommentDetailViewSourceService headerModel:model];
+    CommentDetailViewController *controller = [[CommentDetailViewController alloc] initWithSource:CommentDetailViewSourceServiceOrStore relationType:self.relationType headerModel:model];
+    [controller setRelationIdentifier:self.identifier];
+    [controller setCommentIdentifier:model.identifier];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
 }

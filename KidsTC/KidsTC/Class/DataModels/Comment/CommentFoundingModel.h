@@ -1,9 +1,9 @@
 //
-//  OrderCommentModel.h
+//  CommentFoundingModel.h
 //  KidsTC
 //
-//  Created by 钱烨 on 7/28/15.
-//  Copyright (c) 2015 KidsTC. All rights reserved.
+//  Created by Altair on 11/27/15.
+//  Copyright © 2015 KidsTC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -11,13 +11,9 @@
 #import "AppointmentOrderModel.h"
 #import "StoreDetailModel.h"
 #import "KTCCommentManager.h"
+#import "CommentScoreConfigModel.h"
 
-typedef enum {
-    OrderTypeServiceOrder,
-    OrderTypeStoreAppointmentOrder
-}OrderType;
-
-@interface OrderCommentModel : NSObject
+@interface CommentFoundingModel : NSObject
 
 @property (nonatomic, copy) NSString *orderId;
 
@@ -25,7 +21,7 @@ typedef enum {
 
 @property (nonatomic, assign) CommentRelationType relationType;
 
-@property (nonatomic, assign) OrderType type;
+@property (nonatomic, assign) CommentFoundingSourceType sourceType;
 
 @property (nonatomic, strong) NSURL *imageUrl;
 
@@ -37,13 +33,7 @@ typedef enum {
 
 @property (nonatomic, strong) NSArray *uploadPhotoLocationStrings;
 
-@property (nonatomic, assign) NSUInteger environmentStarNumber;
-
-@property (nonatomic, assign) NSUInteger serviceStarNumber;
-
-@property (nonatomic, assign) NSUInteger qualityStarNumber;
-
-//@property (nonatomic, assign) NSUInteger totalStarNumber;
+@property (nonatomic, strong) CommentScoreConfigModel *scoreConfigModel;
 
 @property (nonatomic, assign) BOOL needHideName;
 

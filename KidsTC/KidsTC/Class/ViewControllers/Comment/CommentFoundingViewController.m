@@ -1,25 +1,25 @@
 //
-//  OrderCommentViewController.m
+//  CommentFoundingViewController.m
 //  KidsTC
 //
-//  Created by 钱烨 on 7/28/15.
-//  Copyright (c) 2015 KidsTC. All rights reserved.
+//  Created by Altair on 11/27/15.
+//  Copyright © 2015 KidsTC. All rights reserved.
 //
 
-#import "OrderCommentViewController.h"
-#import "OrderCommentView.h"
-#import "OrderCommentBottomView.h"
+#import "CommentFoundingViewController.h"
+#import "CommentFoundingView.h"
 #import "MC_ImagePickerViewController.h"
 #import "MWPhotoBrowser.h"
 #import "ServiceDetailViewController.h"
 #import "KTCImageUploader.h"
 
-@interface OrderCommentViewController () <OrderCommentViewDelegate, OrderCommentBottomViewDelegate, MC_ImagePickerViewControllerDelegate, MWPhotoBrowserDelegate>
+@interface CommentFoundingViewController () <CommentFoundingViewDelegate, MC_ImagePickerViewControllerDelegate, MWPhotoBrowserDelegate>
 
-@property (weak, nonatomic) IBOutlet OrderCommentView *commentView;
-//@property (weak, nonatomic) IBOutlet OrderCommentBottomView *bottomView;
+@property (weak, nonatomic) IBOutlet CommentFoundingView *commentView;
 
-@property (nonatomic, strong) OrderCommentModel *commentModel;
+@property (nonatomic, strong) CommentFoundingModel *commentModel;
+
+@property (nonatomic, strong) HttpRequestClient *loadScoreSettingRequest;
 
 @property (nonatomic, strong) HttpRequestClient *submitCommentRequest;
 
@@ -28,6 +28,8 @@
 @property (nonatomic, strong) NSDictionary *produceInfo;
 
 @property (nonatomic, strong) NSArray *mwPhotosArray;
+
+@property (nonatomic, strong) KTCCommentManager *commentManager;
 
 - (void)makeMWPhotoFromImageUrlArray:(NSArray *)urlArray;
 
@@ -43,12 +45,13 @@
 
 @end
 
-@implementation OrderCommentViewController
+@implementation CommentFoundingViewController
 
-- (instancetype)initWithOrderCommentModel:(OrderCommentModel *)model {
-    self = [super initWithNibName:@"OrderCommentViewController" bundle:nil];
+- (instancetype)initWithCommentFoundingModel:(CommentFoundingModel *)model {
+    self = [super initWithNibName:@"CommentFoundingViewController" bundle:nil];
     if (self) {
         self.commentModel = model;
+        self.commentManager = [[KTCCommentManager alloc] init];
     }
     return self;
 }
@@ -59,9 +62,13 @@
     // Do any additional setup after loading the view from its nib.
     [self.commentView setCommentModel:self.commentModel];
     self.commentView.delegate = self;
-    [self.commentView reloadData];
-    
-//    self.bottomView.delegate = self;
+    __weak CommentFoundingViewController *weakSelf = self;
+    [weakSelf.commentManager getScoreConfigWithSourceType:weakSelf.commentModel.sourceType succeed:^(NSDictionary *data) {
+        weakSelf.commentModel.scoreConfigModel = [[CommentScoreConfigModel alloc] initWithRawData:[data objectForKey:@"data"]];
+        [weakSelf.commentView setCommentModel:weakSelf.commentModel];
+    } failure:^(NSError *error) {
+        NSLog(@"%@", error);
+    }];
 }
 
 
@@ -74,16 +81,16 @@
     [self.commentView endEditing];
 }
 
-#pragma mark OrderCommentViewDelegate
+#pragma mark CommentFoundingViewDelegate
 
-- (void)didClickedAddPhotoButtonOnOrderCommentView:(OrderCommentView *)commentView {
+- (void)didClickedAddPhotoButtonOnCommentFoundingView:(CommentFoundingView *)commentView {
     MC_ImagePickerViewController *mc_PhotoAlbumViewController = [[MC_ImagePickerViewController alloc]initWithMaxCount:10 andPhotoDictionary:self.photoDictionary];
     mc_PhotoAlbumViewController.hidesBottomBarWhenPushed = YES;
     mc_PhotoAlbumViewController.delegate = self;
     [self.navigationController presentViewController:mc_PhotoAlbumViewController animated:YES completion:nil];
 }
 
-- (void)orderCommentView:(OrderCommentView *)commentView didClickedThumbImageAtIndex:(NSUInteger)index {
+- (void)commentFoundingView:(CommentFoundingView *)commentView didClickedThumbImageAtIndex:(NSUInteger)index {
     MWPhotoBrowser *photoBrowser = [[MWPhotoBrowser alloc] initWithPhotos:self.mwPhotosArray];
     [photoBrowser setCurrentPhotoIndex:index];
     [photoBrowser setShowDeleteButton:YES];
@@ -91,45 +98,30 @@
     [self presentViewController:photoBrowser animated:YES completion:nil];
 }
 
-- (void)didClickedSubmitButtonOnOrderCommentView:(OrderCommentView *)commentView {
+- (void)didClickedSubmitButtonOnCommentFoundingView:(CommentFoundingView *)commentView {
     if (![self isValidateComment]) {
         return;
     }
     if (self.photoDictionary) {
-        __weak OrderCommentViewController *weakSelf = self;
+        __weak CommentFoundingViewController *weakSelf = self;
         [[GAlertLoadingView sharedAlertLoadingView] show];
         [weakSelf getNeedUploadPhotosArray:^(NSArray *photosArray) {
-            [[KTCImageUploader sharedInstance] startUploadWithImagesArray:photosArray withSucceed:^(NSArray *locateUrlStrings) {
+            [[KTCImageUploader sharedInstance]  startUploadWithImagesArray:photosArray splitCount:2 withSucceed:^(NSArray *locateUrlStrings) {
                 weakSelf.commentModel.uploadPhotoLocationStrings = locateUrlStrings;
                 [weakSelf submitComments];
             } failure:^(NSError *error) {
                 [[GAlertLoadingView sharedAlertLoadingView] hide];
-                [[iToast makeText:@"照片上传失败，请重新提交"] show];
-            }];
-        }];
-    } else {
-        [[GAlertLoadingView sharedAlertLoadingView] show];
-        [self submitComments];
-    }
-}
-
-
-#pragma mark OrderCommentBottomViewDelegate
-
-- (void)didClickedSubmitButtonOnOrderCommentBottomView:(OrderCommentBottomView *)bottomView {
-    if (![self isValidateComment]) {
-        return;
-    }
-    if (self.photoDictionary) {
-        __weak OrderCommentViewController *weakSelf = self;
-        [[GAlertLoadingView sharedAlertLoadingView] show];
-        [weakSelf getNeedUploadPhotosArray:^(NSArray *photosArray) {
-            [[KTCImageUploader sharedInstance] startUploadWithImagesArray:photosArray withSucceed:^(NSArray *locateUrlStrings) {
-                weakSelf.commentModel.uploadPhotoLocationStrings = photosArray;
-                [weakSelf submitComments];
-            } failure:^(NSError *error) {
-                [[GAlertLoadingView sharedAlertLoadingView] hide];
-                [[iToast makeText:@"照片上传失败，请重新提交"] show];
+                if (error.userInfo) {
+                    NSString *errMsg = [error.userInfo objectForKey:@"data"];
+                    if ([errMsg isKindOfClass:[NSString class]] && [errMsg length] > 0) {
+                        
+                        [[iToast makeText:errMsg] show];
+                    } else {
+                        [[iToast makeText:@"照片上传失败，请重新提交"] show];
+                    }
+                } else {
+                    [[iToast makeText:@"照片上传失败，请重新提交"] show];
+                }
             }];
         }];
     } else {
@@ -266,9 +258,11 @@
         return NO;
     }
     
-    if (self.commentModel.environmentStarNumber == 0 || self.commentModel.serviceStarNumber == 0 || self.commentModel.qualityStarNumber == 0) {
-        [[iToast makeText:@"请给商品评分(1~5)"] show];
-        return NO;
+    for (CommentScoreItem *item in [self.commentModel.scoreConfigModel allShowingScoreItems]) {
+        if (item.score == 0) {
+            [[iToast makeText:@"请给商品评分(1~5)"] show];
+            return NO;
+        }
     }
     
     return YES;
@@ -309,35 +303,31 @@
 }
 
 - (void)submitComments {
-    if (!self.submitCommentRequest) {
-        self.submitCommentRequest = [HttpRequestClient clientWithUrlAliasName:@"COMMENT_ADD"];
-    }
-    [self.submitCommentRequest cancel];
-    NSString *uploadLocation = [self.commentModel.uploadPhotoLocationStrings componentsJoinedByString:@","];
-    
-    NSDictionary *scoreDic = [NSDictionary dictionaryWithObjectsAndKeys:
-                              [NSNumber numberWithInteger:self.commentModel.environmentStarNumber], @"hj",
-                              [NSNumber numberWithInteger:self.commentModel.qualityStarNumber], @"sz",
-                              [NSNumber numberWithInteger:self.commentModel.serviceStarNumber], @"fw", nil];
-    NSString *jsonString = [GToolUtil jsonFromObject:scoreDic];
-    
-    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                           self.commentModel.relationSysNo, @"relationSysNo",
-                           [NSNumber numberWithInteger:self.commentModel.relationType], @"relationType",
-                           [NSNumber numberWithBool:self.commentModel.needHideName], @"isAnonymous",
-                           self.commentModel.commentText, @"content",
-                           [NSNumber numberWithInteger:self.commentModel.qualityStarNumber], @"overallScore",
-                           jsonString, @"scoreDetail",
-                           uploadLocation, @"image", nil];
-    if ([self.commentModel.orderId length] > 0) {
-        [param setObject:self.commentModel.orderId forKey:@"orderId"];
+    KTCCommentObject *object = [[KTCCommentObject alloc] init];
+    object.identifier = self.commentModel.relationSysNo;
+    object.relationType = self.commentModel.relationType;
+    object.isAnonymous = NO;
+    object.isComment = YES;
+    object.content = self.commentModel.commentText;
+    object.uploadImageStrings = self.commentModel.uploadPhotoLocationStrings;
+    object.orderId = self.commentModel.orderId;
+    if ([[self.commentModel.scoreConfigModel allShowingScoreItems] count] > 0) {
+        object.totalScore = self.commentModel.scoreConfigModel.totalScoreItem.score;
+        NSMutableDictionary *tempDic = [[NSMutableDictionary alloc] init];
+        for (CommentScoreItem *item in self.commentModel.scoreConfigModel.otherScoreItems) {
+            [tempDic setObject:[NSNumber numberWithInteger:item.score] forKey:item.key];
+        }
+        object.scoresDetail = [[NSDictionary alloc] initWithDictionary:tempDic copyItems:YES];
     }
     
-    __weak OrderCommentViewController *weakSelf = self;
-    [weakSelf.submitCommentRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
+    if (!self.commentManager) {
+        self.commentManager = [[KTCCommentManager alloc] init];
+    }
+    __weak CommentFoundingViewController *weakSelf = self;
+    [weakSelf.commentManager addCommentWithObject:object succeed:^(NSDictionary *data) {
         [[GAlertLoadingView sharedAlertLoadingView] hide];
-        [weakSelf submitCommentSucceed:responseData];
-    } failure:^(HttpRequestClient *client, NSError *error) {
+        [weakSelf submitCommentSucceed:data];
+    } failure:^(NSError *error) {
         [[GAlertLoadingView sharedAlertLoadingView] hide];
         [weakSelf submitCommentFailed:error];
     }];
@@ -350,8 +340,8 @@
     } else {
         [[iToast makeText:@"评论成功"] show];
     }
-    if (self.delegate && [self.delegate respondsToSelector:@selector(orderCommentVCDidFinishSubmitComment:)]) {
-        [self.delegate orderCommentVCDidFinishSubmitComment:self];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(commentFoundingViewControllerDidFinishSubmitComment:)]) {
+        [self.delegate commentFoundingViewControllerDidFinishSubmitComment:self];
     }
     [self goBackController:nil];
 }
@@ -364,6 +354,12 @@
     }
     [[iToast makeText:errMsg] show];
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 /*
 #pragma mark - Navigation
 
@@ -372,11 +368,6 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
- */
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+*/
 
 @end

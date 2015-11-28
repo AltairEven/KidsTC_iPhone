@@ -11,10 +11,14 @@
 
 @interface CommentDetailViewController : GViewController
 
-@property (nonatomic, readonly) CommentDetailSource viewSource;
+@property (nonatomic, assign) CommentDetailSource viewSource;
 
-- (instancetype)initWithSource:(CommentDetailSource)source headerModel:(id)model;
+@property (nonatomic, assign) CommentRelationType relationType;
 
-- (instancetype)initWithSource:(CommentDetailSource)source identifier:(NSString *)identifier;
+@property (nonatomic, copy) NSString *relationIdentifier;
+
+@property (nonatomic, strong) NSString *commentIdentifier;
+
+- (instancetype)initWithSource:(CommentDetailSource)source relationType:(CommentRelationType)type headerModel:(id)model;
 
 @end

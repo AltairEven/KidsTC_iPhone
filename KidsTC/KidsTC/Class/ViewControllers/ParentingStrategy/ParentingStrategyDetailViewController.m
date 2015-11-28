@@ -58,7 +58,8 @@
 
 - (void)parentingStrategyDetailView:(ParentingStrategyDetailView *)detailView didSelectedItemAtIndex:(NSUInteger)index {
     ParentingStrategyDetailCellModel *model = [self.viewModel.detailModel.cellModels objectAtIndex:index];
-    CommentDetailViewController *controller = [[CommentDetailViewController alloc] initWithSource:CommentDetailViewSourceStrategyDetail headerModel:model];
+    CommentDetailViewController *controller = [[CommentDetailViewController alloc] initWithSource:CommentDetailViewSourceStrategyDetail relationType:CommentRelationTypeStrategyDetail headerModel:model];
+    [controller setRelationIdentifier:model.identifier];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
 }
@@ -117,7 +118,8 @@
 }
 
 - (void)didClickedCommentButton {
-    CommentDetailViewController *controller = [[CommentDetailViewController alloc] initWithSource:CommentDetailViewSourceStrategy identifier:self.viewModel.detailModel.identifier];
+    CommentDetailViewController *controller = [[CommentDetailViewController alloc] initWithSource:CommentDetailViewSourceStrategy relationType:CommentRelationTypeStrategy headerModel:nil];
+    [controller setRelationIdentifier:self.viewModel.detailModel.identifier];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
 }

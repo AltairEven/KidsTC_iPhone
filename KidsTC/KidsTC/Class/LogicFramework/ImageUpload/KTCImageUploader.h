@@ -12,7 +12,7 @@
 
 + (instancetype)sharedInstance;
 
-- (void)startUploadWithImagesArray:(NSArray *)imagesArray withSucceed:(void(^)(NSArray *locateUrlStrings))succeed failure:(void(^)(NSError *error))failure;
+- (void)startUploadWithImagesArray:(NSArray *)imagesArray splitCount:(NSUInteger)count withSucceed:(void(^)(NSArray *locateUrlStrings))succeed failure:(void(^)(NSError *error))failure;
 
 - (void)stopUpload;
 

@@ -23,8 +23,6 @@
 
 @property (nonatomic, strong) id headerModel;
 
-@property (nonatomic, copy) NSString *identifier;
-
 @property (nonatomic, strong) HttpRequestClient *submitCommentRequest;
 
 @property (strong, nonatomic)  NSArray *photoArray;
@@ -32,6 +30,14 @@
 @property (nonatomic, strong) NSDictionary *produceInfo;
 
 @property (nonatomic, strong) NSArray *mwPhotosArray;
+
+@property (nonatomic, assign) BOOL isComment;
+
+@property (nonatomic, copy) NSString *commentIdetifier;
+
+@property (nonatomic, copy) NSString *currentReplyedName;
+
+@property (nonatomic, strong) KTCCommentManager *commentManager;
 
 - (void)makeMWPhotoFromImageUrlArray:(NSArray *)urlArray;
 
@@ -49,20 +55,12 @@
 
 @implementation CommentDetailViewController
 
-- (instancetype)initWithSource:(CommentDetailSource)source headerModel:(id)model {
+- (instancetype)initWithSource:(CommentDetailSource)source relationType:(CommentRelationType)type headerModel:(id)model {
     self = [super initWithNibName:@"CommentDetailViewController" bundle:nil];
     if (self) {
         _viewSource = source;
+        _relationType = type;
         self.headerModel = model;
-    }
-    return self;
-}
-
-- (instancetype)initWithSource:(CommentDetailSource)source identifier:(NSString *)identifier {
-    self = [super initWithNibName:@"CommentDetailViewController" bundle:nil];
-    if (self) {
-        _viewSource = source;
-        self.identifier = identifier;
     }
     return self;
 }
@@ -75,7 +73,9 @@
     self.detailView.delegate = self;
     self.viewModel = [[CommentDetailViewModel alloc] initWithView:self.detailView];
     [self.viewModel.detailModel setModelSource:self.viewSource];
-    [self.viewModel.detailModel setIdentifier:self.identifier];
+    [self.viewModel.detailModel setRelationType:self.relationType];
+    [self.viewModel.detailModel setIdentifier:self.commentIdetifier];
+    [self.viewModel.detailModel setRelationIdentifier:self.relationIdentifier];
     [self.viewModel.detailModel setHeaderModel:self.headerModel];
     [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
 }
@@ -92,6 +92,11 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [self.commentManager stopAdding];
+    [[GAlertLoadingView sharedAlertLoadingView] hide];
+}
+
+- (void)dealloc {
     if (self.keyboardAdhesiveView) {
         [self.keyboardAdhesiveView destroy];
     }
@@ -100,14 +105,31 @@
 #pragma mark CommentDetailViewDelegate
 
 - (void)commentDetailView:(CommentDetailView *)detailView didSelectedReplyAtIndex:(NSUInteger)index {
-    CommentReplyItemModel *model = [self.viewModel.detailModel.replyModels objectAtIndex:index];
-    [self.keyboardAdhesiveView setPlaceholder:[NSString stringWithFormat:@"回复%@：",model.userName]];
-    [self.keyboardAdhesiveView expand];
+    [GToolUtil checkLogin:^(NSString *uid) {
+        CommentReplyItemModel *model = [self.viewModel.detailModel.replyModels objectAtIndex:index];
+        [self.keyboardAdhesiveView setPlaceholder:[NSString stringWithFormat:@"回复%@：",model.userName]];
+        [self.keyboardAdhesiveView expand];
+        if (self.viewSource == CommentDetailViewSourceStrategy || self.viewSource == CommentDetailViewSourceStrategyDetail) {
+            self.isComment = YES;
+            self.commentIdetifier = model.identifier;
+        } else {
+            self.isComment = NO;
+        }
+        self.currentReplyedName = model.userName;
+    } target:self];
 }
 
 - (void)didTappedOnCommentDetailView:(CommentDetailView *)detailView {
-    [self.keyboardAdhesiveView setPlaceholder:@"回复楼主："];
-    [self.keyboardAdhesiveView expand];
+    [GToolUtil checkLogin:^(NSString *uid) {
+        [self.keyboardAdhesiveView setPlaceholder:@"回复楼主："];
+        [self.keyboardAdhesiveView expand];
+        if (self.viewSource == CommentDetailViewSourceStrategy || self.viewSource == CommentDetailViewSourceStrategyDetail) {
+            self.isComment = YES;
+            self.commentIdetifier = self.viewModel.detailModel.identifier;
+        } else {
+            self.isComment = NO;
+        }
+    } target:self];
 }
 
 - (void)commentDetailViewDidPulledDownToRefresh:(CommentDetailView *)detailView {
@@ -128,11 +150,21 @@
     if (self.photoDictionary) {
         __weak CommentDetailViewController *weakSelf = self;
         [weakSelf getNeedUploadPhotosArray:^(NSArray *photosArray) {
-            [[KTCImageUploader sharedInstance] startUploadWithImagesArray:photosArray withSucceed:^(NSArray *locateUrlStrings) {
+            [[KTCImageUploader sharedInstance] startUploadWithImagesArray:photosArray splitCount:2 withSucceed:^(NSArray *locateUrlStrings) {
                 [weakSelf submitCommentsWithUploadLocations:locateUrlStrings];
             } failure:^(NSError *error) {
                 [[GAlertLoadingView sharedAlertLoadingView] hide];
-                [[iToast makeText:@"照片上传失败，请重新提交"] show];
+                if (error.userInfo) {
+                    NSString *errMsg = [error.userInfo objectForKey:@"data"];
+                    if ([errMsg isKindOfClass:[NSString class]] && [errMsg length] > 0) {
+                        
+                        [[iToast makeText:errMsg] show];
+                    } else {
+                        [[iToast makeText:@"照片上传失败，请重新提交"] show];
+                    }
+                } else {
+                    [[iToast makeText:@"照片上传失败，请重新提交"] show];
+                }
             }];
         }];
     } else {
@@ -319,29 +351,27 @@
 }
 
 - (void)submitCommentsWithUploadLocations:(NSArray *)locationUrls {
-    if (!self.submitCommentRequest) {
-        self.submitCommentRequest = [HttpRequestClient clientWithUrlAliasName:@"COMMENT_ADD"];
+    KTCCommentObject *object = [[KTCCommentObject alloc] init];
+    object.identifier = self.relationIdentifier;
+    object.relationType = self.relationType;
+    object.isAnonymous = NO;
+    object.isComment = self.isComment;
+    object.commentIdentifier = self.commentIdetifier;
+    if (self.viewSource == CommentDetailViewSourceStrategy || self.viewSource == CommentDetailViewSourceStrategyDetail) {
+        object.content = [NSString stringWithFormat:@"回复%@:%@", self.currentReplyedName, self.keyboardAdhesiveView.text];
+    } else {
+        object.content = self.keyboardAdhesiveView.text;
     }
-    [self.submitCommentRequest cancel];
-    NSString *uploadLocation = @"";
-    if ([locationUrls count] > 0) {
-       uploadLocation = [locationUrls componentsJoinedByString:@","];
+    object.uploadImageStrings = locationUrls;
+    
+    if (!self.commentManager) {
+        self.commentManager = [[KTCCommentManager alloc] init];
     }
-    
-    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                  self.viewModel.detailModel.identifier, @"relationSysNo",
-                                  [NSNumber numberWithInteger:CommentRelationTypeStrategyDetail], @"relationType",
-                                  [NSNumber numberWithBool:NO], @"isAnonymous",
-                                  self.keyboardAdhesiveView.text, @"content",
-                                  @"", @"overallScore",
-                                  @"", @"scoreDetail",
-                                  uploadLocation, @"image", nil];
-    
     __weak CommentDetailViewController *weakSelf = self;
-    [weakSelf.submitCommentRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
+    [weakSelf.commentManager addCommentWithObject:object succeed:^(NSDictionary *data) {
         [[GAlertLoadingView sharedAlertLoadingView] hide];
-        [weakSelf submitCommentSucceed:responseData];
-    } failure:^(HttpRequestClient *client, NSError *error) {
+        [weakSelf submitCommentSucceed:data];
+    } failure:^(NSError *error) {
         [[GAlertLoadingView sharedAlertLoadingView] hide];
         [weakSelf submitCommentFailed:error];
     }];
@@ -349,6 +379,7 @@
 
 - (void)submitCommentSucceed:(NSDictionary *)data {
     [self.keyboardAdhesiveView shrink];
+    [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
 }
 
 - (void)submitCommentFailed:(NSError *)error {

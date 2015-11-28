@@ -1,12 +1,12 @@
 //
-//  OrderCommentView.m
+//  CommentFoundingView.m
 //  KidsTC
 //
-//  Created by 钱烨 on 7/28/15.
-//  Copyright (c) 2015 KidsTC. All rights reserved.
+//  Created by Altair on 11/27/15.
+//  Copyright © 2015 KidsTC. All rights reserved.
 //
 
-#import "OrderCommentView.h"
+#import "CommentFoundingView.h"
 #import "RichPriceView.h"
 #import "PlaceHolderTextView.h"
 #import "AUIImageGridView.h"
@@ -15,7 +15,7 @@
 #define PLACEHOLDRERTEXT (@"环境如何，宝宝玩得开心吗？您的意见对其他家长有很大帮助！")
 #define MAXCOMMENTLENGTH (500)
 
-@interface OrderCommentView () <UITableViewDataSource, UITableViewDelegate, AUIImageGridViewDelegate, UITextViewDelegate>
+@interface CommentFoundingView ()<UITableViewDataSource, UITableViewDelegate, AUIImageGridViewDelegate, UITextViewDelegate, FiveStarsViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UITableViewCell *commentCell;
@@ -30,21 +30,19 @@
 @property (weak, nonatomic) IBOutlet UILabel *commentLengthLabel;
 @property (weak, nonatomic) IBOutlet AUIImageGridView *takePhotoView;
 
-//star cell
-//@property (weak, nonatomic) IBOutlet FiveStarsView *totalStarView;
-@property (weak, nonatomic) IBOutlet FiveStarsView *environmentStarView;
-@property (weak, nonatomic) IBOutlet FiveStarsView *serviceStarView;
-@property (weak, nonatomic) IBOutlet FiveStarsView *qualityStarView;
-
-
 @property (nonatomic, strong) UIButton *submitButton;
+
+@property (nonatomic, strong) NSArray<CommentScoreItem *> *scoreItems;
+
+- (void)configScoreCell;
 
 - (void)didClickedSubmitButton;
 
 
 @end
 
-@implementation OrderCommentView
+@implementation CommentFoundingView
+@synthesize commentModel = _commentModel;
 
 #pragma mark Initialization
 
@@ -56,7 +54,7 @@
     if (!bLoad)
     {
         bLoad = YES;
-        OrderCommentView *view = [GConfig getObjectFromNibWithView:self];
+        CommentFoundingView *view = [GConfig getObjectFromNibWithView:self];
         [view buildSubviews];
         return view;
     }
@@ -102,49 +100,30 @@
     self.takePhotoView.delegate = self;
     [self.takePhotoView setShowAddButton:YES];
     [self.takePhotoView setMaxLimit:10];
-    
-    //star views
-    CGSize starSize = CGSizeMake(30, 30);
-    
-    CGFloat tempGap = (SCREEN_WIDTH - 250) / 4;
-    CGFloat starGap = tempGap;
-    if (tempGap > starSize.width) {
-        starGap = starSize.width;
-    }
-    
-//    [self.totalStarView setStarSize:starSize];
-//    [self.totalStarView setStarGap:starGap];
-//    [self.totalStarView setEditable:YES];
-    
-    [self.environmentStarView setStarSize:starSize];
-    [self.environmentStarView setStarGap:starGap];
-    [self.environmentStarView setEditable:YES];
-    
-    [self.serviceStarView setStarSize:starSize];
-    [self.serviceStarView setStarGap:starGap];
-    [self.serviceStarView setEditable:YES];
-    
-    [self.qualityStarView setStarSize:starSize];
-    [self.qualityStarView setStarGap:starGap];
-    [self.qualityStarView setEditable:YES];
 }
 
-- (OrderCommentModel *)commentModel {
+- (CommentFoundingModel *)commentModel {
     if (![self.textField.text isEqualToString:PLACEHOLDRERTEXT]) {
         _commentModel.commentText = self.textField.text;
     } else {
         _commentModel.commentText = nil;
     }
-    _commentModel.environmentStarNumber = [self.environmentStarView starNumber];
-    _commentModel.serviceStarNumber = [self.serviceStarView starNumber];
-    _commentModel.qualityStarNumber = [self.qualityStarView starNumber];
     return _commentModel;
+}
+
+
+- (void)setCommentModel:(CommentFoundingModel *)commentModel {
+    _commentModel = commentModel;
+    [self reloadData];
 }
 
 #pragma mark UITableViewDataSource & UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    if ([self.scoreItems count] > 0) {
+        return 2;
+    }
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -183,10 +162,7 @@
             if (indexPath.row == 0) {
                 cell = self.starHeaderCell;
             } else {
-                [self.environmentStarView setStarNumber:self.commentModel.environmentStarNumber];
-                [self.serviceStarView setStarNumber:self.commentModel.serviceStarNumber];
-                [self.qualityStarView setStarNumber:self.commentModel.qualityStarNumber];
-//                [self.totalStarView setStarNumber:self.commentModel.totalStarNumber];
+                [self configScoreCell];
                 cell = self.starCell;
             }
         }
@@ -223,7 +199,7 @@
             if (indexPath.row == 0) {
                 height = self.starHeaderCell.frame.size.height;
             } else {
-                height = self.starCell.frame.size.height;
+                height = [self.scoreItems count] * 40;
             }
         }
             break;
@@ -257,15 +233,15 @@
 
 - (void)didClickedAddButtonOnImageGridView:(AUIImageGridView *)view {
     [self endEditing];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedAddPhotoButtonOnOrderCommentView:)]) {
-        [self.delegate didClickedAddPhotoButtonOnOrderCommentView:self];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedAddPhotoButtonOnCommentFoundingView:)]) {
+        [self.delegate didClickedAddPhotoButtonOnCommentFoundingView:self];
     }
 }
 
 - (void)imageGridView:(AUIImageGridView *)view didClickedImageAtIndex:(NSUInteger)index {
     [self endEditing];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(orderCommentView:didClickedThumbImageAtIndex:)]) {
-        [self.delegate orderCommentView:self didClickedThumbImageAtIndex:index];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(commentFoundingView:didClickedThumbImageAtIndex:)]) {
+        [self.delegate commentFoundingView:self didClickedThumbImageAtIndex:index];
     }
 }
 
@@ -309,20 +285,76 @@
     self.commentLengthLabel.text = [NSString stringWithFormat:@"%ld",(long)number];
 }
 
+#pragma mark FiveStarsViewDelegate
+
+- (void)fiveStarsView:(FiveStarsView *)starsView didChangedStarNumberFromValue:(CGFloat)fromVal toValue:(CGFloat)toVal {
+    for (NSUInteger index = 0; index < [self.scoreItems count]; index ++) {
+        if (index == starsView.tag) {
+            CommentScoreItem *item = [self.scoreItems objectAtIndex:index];
+            [item setScore:toVal];
+        }
+    }
+}
+
 #pragma mark Private methods
 
+- (void)configScoreCell {
+    for (UIView *subView in self.starCell.contentView.subviews) {
+        [subView removeFromSuperview];
+    }
+    
+    CGFloat xPosition = 0;
+    CGFloat yPosition = 0;
+    CGFloat singleWidth = SCREEN_WIDTH;
+    CGFloat singleHeight = 40;
+    
+    for (NSUInteger index = 0; index < [self.scoreItems count]; index ++) {
+        UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(xPosition, yPosition, singleWidth, singleHeight)];
+        [bgView setBackgroundColor:[UIColor clearColor]];
+        
+        CommentScoreItem *item = [self.scoreItems objectAtIndex:index];
+        
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 60, 20)];
+        [titleLabel setBackgroundColor:[UIColor clearColor]];
+        [titleLabel setTextColor:[UIColor darkGrayColor]];
+        [titleLabel setFont:[UIFont systemFontOfSize:13]];
+        [titleLabel setTextAlignment:NSTextAlignmentCenter];
+        [titleLabel setText:item.title];
+        [bgView addSubview:titleLabel];
+        
+        CGSize starSize = CGSizeMake(30, 30);
+        CGFloat tempGap = (singleWidth - 70 - (starSize.width * 5)) / 6;
+        CGFloat starGap = tempGap;
+        if (tempGap > starSize.width) {
+            starGap = starSize.width;
+        }
+        FiveStarsView *starsView = [[FiveStarsView alloc] initWithFrame:CGRectMake(70 + starGap, 5, starSize.width, starSize.height)];
+        [starsView setStarSize:starSize];
+        [starsView setStarGap:starGap];
+        [starsView setEditable:YES];
+        [starsView setStarNumber:item.score];
+        starsView.tag = index;
+        starsView.delegate = self;
+        [bgView addSubview:starsView];
+        [starsView setCenter:CGPointMake(starsView.center.x, titleLabel.center.y)];
+        
+        [self.starCell.contentView addSubview:bgView];
+        
+        yPosition += singleHeight;
+    }
+}
+
 - (void)didClickedSubmitButton {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedSubmitButtonOnOrderCommentView:)]) {
-        [self.delegate didClickedSubmitButtonOnOrderCommentView:self];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedSubmitButtonOnCommentFoundingView:)]) {
+        [self.delegate didClickedSubmitButtonOnCommentFoundingView:self];
     }
 }
 
 #pragma mark Public methods
 
 - (void)reloadData {
-    if (self.commentModel) {
-        [self.tableView reloadData];
-    }
+    self.scoreItems = [self.commentModel.scoreConfigModel allShowingScoreItems];
+    [self.tableView reloadData];
 }
 
 - (void)resetPhotoViewWithImagesArray:(NSArray *)imagesArray {

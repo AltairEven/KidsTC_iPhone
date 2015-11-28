@@ -22,6 +22,10 @@ typedef  enum {
 
 - (void)serviceDetailMoreInfoView:(ServiceDetailMoreInfoView *)infoView didChangedViewContentSize:(CGSize)size;
 
+- (void)serviceDetailMoreInfoView:(ServiceDetailMoreInfoView *)infoView didClickedStoreAtIndex:(NSUInteger)index;
+
+- (void)serviceDetailMoreInfoView:(ServiceDetailMoreInfoView *)infoView didClickedCommentAtIndex:(NSUInteger)index;
+
 @end
 
 @interface ServiceDetailMoreInfoView : UIView

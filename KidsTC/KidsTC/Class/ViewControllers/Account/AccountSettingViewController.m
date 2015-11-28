@@ -12,6 +12,7 @@
 #import "ChangeNickNameViewController.h"
 #import "ChangePasswordViewController.h"
 #import "ImageTrimViewController.h"
+#import "KTCImageUploader.h"
 
 @interface AccountSettingViewController () <AccountSettingViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ImageTrimViewControllerDelegate>
 
@@ -21,7 +22,9 @@
 
 @property (nonatomic, strong) AccountSettingModel *settingModel;
 
--(void)getMediaFromSource:(UIImagePickerControllerSourceType)sourceType;
+- (void)uploadFaceImage:(UIImage *)image succeed:(void(^)(NSArray *urlStrings))succeed failure:(void(^)(NSError *error))failure;
+
+- (void)getMediaFromSource:(UIImagePickerControllerSourceType)sourceType;
 
 @end
 
@@ -47,6 +50,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[GAlertLoadingView sharedAlertLoadingView] hide];
 }
 
 #pragma mark AccountSettingViewDelegate
@@ -146,13 +154,42 @@
 - (void)imageTrimViewController:(ImageTrimViewController *)controller didFinishedTrimmingWithNewImage:(UIImage *)image {
     if (image) {
         UIImage *trimmedImage = [image imageByScalingToSize:CGSizeMake(100, 100)];
-        [self.viewModel resetFaceImage:trimmedImage];
+        __weak AccountSettingViewController *weakSelf = self;
+        [[GAlertLoadingView sharedAlertLoadingView] show];
+        [weakSelf uploadFaceImage:trimmedImage succeed:^(NSArray *urlStrings) {
+            [weakSelf.viewModel resetFaceImage:trimmedImage];
+            [[GAlertLoadingView sharedAlertLoadingView] hide];
+        } failure:^(NSError *error) {
+            [[GAlertLoadingView sharedAlertLoadingView] hide];
+            if (error.userInfo) {
+                NSString *errMsg = [error.userInfo objectForKey:@"data"];
+                if ([errMsg isKindOfClass:[NSString class]]) {
+                    [[iToast makeText:errMsg] show];
+                } else {
+                    [[iToast makeText:@"头像上传失败，请重新尝试"] show];
+                }
+            } else {
+                [[iToast makeText:@"头像上传失败，请重新尝试"] show];
+            }
+        }];
     } else {
         [[iToast makeText:@"获取图片失败"] show];
     }
 }
 
 #pragma mark Private methods
+
+- (void)uploadFaceImage:(UIImage *)image succeed:(void (^)(NSArray *))succeed failure:(void (^)(NSError *))failure {
+    [[KTCImageUploader sharedInstance] startUploadWithImagesArray:[NSArray arrayWithObject:image] splitCount:1 withSucceed:^(NSArray *locateUrlStrings) {
+        if (succeed) {
+            succeed(locateUrlStrings);
+        }
+    } failure:^(NSError *error) {
+        if (failure) {
+            failure(error);
+        }
+    }];
+}
 
 -(void)getMediaFromSource:(UIImagePickerControllerSourceType)sourceType
 {

@@ -21,8 +21,7 @@
                 self.headerCellHeight = [((ParentingStrategyDetailCellModel *)self.headerModel) cellHeight] + 40;
             }
                 break;
-            case CommentDetailViewSourceService:
-            case CommentDetailViewSourceStore:
+            case CommentDetailViewSourceServiceOrStore:
             {
                 CGFloat height = 50 + 30;
                 //Label

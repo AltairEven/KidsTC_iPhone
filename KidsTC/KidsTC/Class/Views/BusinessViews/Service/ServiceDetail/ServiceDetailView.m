@@ -366,6 +366,18 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
     [self.scrollView setContentSize:CGSizeMake(0, self.viewHeight)];
 }
 
+- (void)serviceDetailMoreInfoView:(ServiceDetailMoreInfoView *)infoView didClickedStoreAtIndex:(NSUInteger)index {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(serviceDetailMoreInfoView:didClickedStoreAtIndex:)]) {
+        [self.delegate serviceDetailView:self didClickedStoreCellAtIndex:index];
+    }
+}
+
+- (void)serviceDetailMoreInfoView:(ServiceDetailMoreInfoView *)infoView didClickedCommentAtIndex:(NSUInteger)index {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(serviceDetailMoreInfoView:didClickedCommentAtIndex:)]) {
+        [self.delegate serviceDetailView:self didClickedCommentCellAtIndex:index];
+    }
+}
+
 #pragma mark Private methods
 
 - (void)initTableView {

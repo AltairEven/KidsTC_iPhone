@@ -18,7 +18,7 @@ static KTCImageUploader *sharedInstance = nil;
 
 @property (nonatomic, strong) NSMutableDictionary *uploadResultDic;
 
-- (void)startUploadWithImage:(UIImage *)image viaHttpRequestClient:(HttpRequestClient *)client succeed:(void(^)(NSString *locateUrlString))succeed failure:(void(^)(NSError *error))failure;
+- (void)startUploadWithImage:(UIImage *)image splitCount:(NSUInteger)count viaHttpRequestClient:(HttpRequestClient *)client succeed:(void(^)(NSString *locateUrlString))succeed failure:(void(^)(NSError *error))failure;
 
 - (NSString *)getUploadLocationWithResponse:(NSDictionary *)respData;
 
@@ -45,7 +45,7 @@ static KTCImageUploader *sharedInstance = nil;
     return sharedInstance;
 }
 
-- (void)startUploadWithImagesArray:(NSArray *)imagesArray withSucceed:(void (^)(NSArray *))succeed failure:(void (^)(NSError *))failure {
+- (void)startUploadWithImagesArray:(NSArray *)imagesArray splitCount:(NSUInteger)count withSucceed:(void (^)(NSArray *))succeed failure:(void (^)(NSError *))failure {
     [self stopUpload];
     [self.uploadClients removeAllObjects];
     [self.uploadResultDic removeAllObjects];
@@ -58,7 +58,7 @@ static KTCImageUploader *sharedInstance = nil;
         if (client) {
             [self.uploadClients addObject:client];
             __weak KTCImageUploader *weakSelf = self;
-            [weakSelf startUploadWithImage:image viaHttpRequestClient:client succeed:^(NSString *locateUrlString) {
+            [weakSelf startUploadWithImage:image splitCount:count viaHttpRequestClient:client succeed:^(NSString *locateUrlString) {
                 if ([locateUrlString length] > 0) {
                     [weakSelf.uploadResultDic setObject:locateUrlString forKey:[NSNumber numberWithInteger:index]];
                     if ([weakSelf.uploadResultDic count] == imageCount && succeed) {
@@ -91,15 +91,15 @@ static KTCImageUploader *sharedInstance = nil;
 
 #pragma mark Private methods
 
-- (void)startUploadWithImage:(UIImage *)image viaHttpRequestClient:(HttpRequestClient *)client succeed:(void (^)(NSString *))succeed failure:(void (^)(NSError *))failure {
-    NSData *data = UIImageJPEGRepresentation(image, 0.1);
+- (void)startUploadWithImage:(UIImage *)image splitCount:(NSUInteger)count viaHttpRequestClient:(HttpRequestClient *)client succeed:(void (^)(NSString *))succeed failure:(void (^)(NSError *))failure {
+    NSData *data = UIImageJPEGRepresentation(image, 0.0);
     
     if (!data) {
         return;
     }
     
     NSString *dataString = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:dataString, @"fileStr", @"JPEG", @"suffix", nil];
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:dataString, @"fileStr", @"JPEG", @"suffix", [NSNumber numberWithInteger:count], @"count", nil];
     __weak KTCImageUploader *weakSelf = self;
     [client startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         NSString *location = [weakSelf getUploadLocationWithResponse:responseData];
