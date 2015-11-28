@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="OrderRefundView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="退款金额:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uhF-aG-lgN">
+                    <rect key="frame" x="20" y="20" width="64.5" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yjs-e7-LYC" customClass="RichPriceView">
+                    <rect key="frame" x="550" y="19" width="30" height="20"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="0W4-zl-lNt"/>
+                        <constraint firstAttribute="width" constant="30" id="7Lx-Ef-UwP"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="回退积分：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dIb-Wr-1o7">
+                    <rect key="frame" x="20" y="48" width="75" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORb-6c-ePo">
+                    <rect key="frame" x="570.5" y="48" width="9.5" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2qs-Ia-7Sd">
+                    <rect key="frame" x="20" y="76" width="560" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="PTS-1l-ZwJ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="退款原因">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="didClickedReasonButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="f1f-yB-gF7"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mhI-dU-p5X" customClass="PlaceHolderTextView">
+                    <rect key="frame" x="20" y="136" width="560" height="100"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="5Ce-dR-brJ"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/200" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PrG-GN-qnC">
+                    <rect key="frame" x="548" y="246" width="32" height="13.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IGw-gC-V8c">
+                    <rect key="frame" x="20" y="540" width="560" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Qf9-9b-p8D"/>
+                    </constraints>
+                    <state key="normal" title="申请退款"/>
+                    <connections>
+                        <action selector="didClickedSubmitButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="495-6d-6OV"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="dIb-Wr-1o7" firstAttribute="top" secondItem="uhF-aG-lgN" secondAttribute="bottom" constant="10" id="1i0-Rn-7eP"/>
+                <constraint firstAttribute="trailing" secondItem="yjs-e7-LYC" secondAttribute="trailing" constant="20" id="7xZ-mN-jPb"/>
+                <constraint firstItem="ORb-6c-ePo" firstAttribute="centerY" secondItem="dIb-Wr-1o7" secondAttribute="centerY" id="BgO-Pq-lvf"/>
+                <constraint firstAttribute="trailing" secondItem="mhI-dU-p5X" secondAttribute="trailing" constant="20" id="HTC-cH-y20"/>
+                <constraint firstAttribute="trailing" secondItem="ORb-6c-ePo" secondAttribute="trailing" constant="20" id="L36-8j-NHR"/>
+                <constraint firstItem="IGw-gC-V8c" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="LaD-RL-4dc"/>
+                <constraint firstItem="2qs-Ia-7Sd" firstAttribute="top" secondItem="dIb-Wr-1o7" secondAttribute="bottom" constant="10" id="Lp6-tT-Ldx"/>
+                <constraint firstItem="PrG-GN-qnC" firstAttribute="top" secondItem="mhI-dU-p5X" secondAttribute="bottom" constant="10" id="NJY-zI-7r8"/>
+                <constraint firstItem="PrG-GN-qnC" firstAttribute="trailing" secondItem="mhI-dU-p5X" secondAttribute="trailing" id="avU-Ip-7Ek"/>
+                <constraint firstItem="uhF-aG-lgN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="dOG-Pz-HH2"/>
+                <constraint firstItem="dIb-Wr-1o7" firstAttribute="leading" secondItem="uhF-aG-lgN" secondAttribute="leading" id="dlK-QQ-0Ta"/>
+                <constraint firstItem="2qs-Ia-7Sd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="frV-RC-RUd"/>
+                <constraint firstAttribute="bottom" secondItem="IGw-gC-V8c" secondAttribute="bottom" constant="20" id="ghE-Tz-4D9"/>
+                <constraint firstItem="mhI-dU-p5X" firstAttribute="top" secondItem="2qs-Ia-7Sd" secondAttribute="bottom" constant="20" id="jl1-aX-WyQ"/>
+                <constraint firstItem="uhF-aG-lgN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="kEq-NU-8h6"/>
+                <constraint firstAttribute="trailing" secondItem="IGw-gC-V8c" secondAttribute="trailing" constant="20" id="ohr-CW-aLa"/>
+                <constraint firstAttribute="trailing" secondItem="2qs-Ia-7Sd" secondAttribute="trailing" constant="20" id="rPv-Sb-inY"/>
+                <constraint firstItem="mhI-dU-p5X" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="uon-RM-g04"/>
+                <constraint firstItem="yjs-e7-LYC" firstAttribute="centerY" secondItem="uhF-aG-lgN" secondAttribute="centerY" id="yJN-H2-nUS"/>
+            </constraints>
+            <connections>
+                <outlet property="backPointNumberLabel" destination="ORb-6c-ePo" id="XhK-EB-TAf"/>
+                <outlet property="characterCountLabel" destination="PrG-GN-qnC" id="MXf-Gf-IXR"/>
+                <outlet property="descriptionTextView" destination="mhI-dU-p5X" id="B6P-ID-LMt"/>
+                <outlet property="reasonButton" destination="2qs-Ia-7Sd" id="1vU-dY-1t2"/>
+                <outlet property="refundAmountView" destination="yjs-e7-LYC" id="VW6-uH-rMf"/>
+                <outlet property="submitButton" destination="IGw-gC-V8c" id="qFo-FB-d5K"/>
+            </connections>
+        </view>
+    </objects>
+</document>

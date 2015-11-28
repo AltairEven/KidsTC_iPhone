@@ -39,4 +39,6 @@ typedef enum {
 
 - (void)reloadData;
 
+- (void)setGetCodeButtonEnabled:(BOOL)enabled;
+
 @end

@@ -10,7 +10,7 @@
 #import "AppointmentOrderDetailViewController.h"
 #import "AppointmentOrderListViewModel.h"
 
-@interface AppointmentOrderListViewController () <AppointmentOrderListViewDelegate>
+@interface AppointmentOrderListViewController () <AppointmentOrderListViewDelegate, AppointmentOrderDetailViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet AppointmentOrderListView *listView;
 
@@ -50,10 +50,17 @@
         AppointmentOrderModel *model = [resultArray objectAtIndex:index];
         AppointmentOrderDetailViewController *controller = [[AppointmentOrderDetailViewController alloc] initWithAppointmentOrderModel:model];
         if (controller) {
+            [controller setDelegate:self];
             [controller setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:controller animated:YES];
         }
     }
+}
+
+#pragma mark AppointmentOrderDetailViewControllerDelegate
+
+- (void)AppointmentOrderDetailViewController:(AppointmentOrderDetailViewController *)vc didCanceledOrderWithId:(NSString *)orderId {
+    [self.viewModel startUpdateDataWithOrderListStatus:self.listView.currentLsitStatus];
 }
 
 - (void)didReceiveMemoryWarning {

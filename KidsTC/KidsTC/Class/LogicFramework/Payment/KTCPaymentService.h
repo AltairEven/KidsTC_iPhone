@@ -11,6 +11,10 @@
 
 @interface KTCPaymentService : NSObject
 
++ (instancetype)sharedService;
+
+- (void)startPaymentWithOrderIdentifier:(NSString *)identifier succeed:(void(^)())succeed failure:(void(^)(NSError *error))failure;
+
 + (void)startPaymentWithInfo:(KTCPaymentInfo *)info succeed:(void(^)())succeed failure:(void(^)(NSError *error))failure;
 
 @end

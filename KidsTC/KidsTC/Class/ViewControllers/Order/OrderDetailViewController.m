@@ -11,8 +11,10 @@
 #import "CommentFoundingViewController.h"
 #import "OrderDetailViewModel.h"
 #import "ServiceDetailViewController.h"
+#import "KTCPaymentService.h"
+#import "OrderRefundViewController.h"
 
-@interface OrderDetailViewController () <OrderDetailViewDelegate, CommentFoundingViewControllerDelegate>
+@interface OrderDetailViewController () <OrderDetailViewDelegate, CommentFoundingViewControllerDelegate, OrderRefundViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet OrderDetailView *detailView;
 
@@ -51,7 +53,17 @@
     switch (tag) {
         case OrderDetailActionTagPay:
         {
-            
+            __weak OrderDetailViewController *weakSelf = self;
+            [[KTCPaymentService sharedService] startPaymentWithOrderIdentifier:weakSelf.orderId succeed:^{
+                [weakSelf.viewModel startUpdateDataWithSucceed:nil failure:nil];
+            } failure:^(NSError *error) {
+                NSString *errMsg = @"支付失败";
+                NSString *text = [[error userInfo] objectForKey:kErrMsgKey];
+                if ([text isKindOfClass:[NSString class]] && [text length] > 0) {
+                    errMsg = text;
+                }
+                [[iToast makeText:errMsg] show];
+            }];
         }
             break;
         case OrderDetailActionTagCancel:
@@ -69,19 +81,38 @@
             break;
         case OrderDetailActionTagReturn:
         {
-            [self.viewModel refund];
+            OrderRefundViewController *controller = [[OrderRefundViewController alloc] initWithOrderId:self.orderId];
+            [controller setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:controller animated:YES];
         }
             break;
         case OrderDetailActionTagGotoService:
         {
-            ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithNibName:@"ServiceDetailViewController" bundle:nil];
+            ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithServiceId:self.viewModel.detailModel.serviceId channelId:@""];
             [controller setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:controller animated:YES];
         }
             break;
         case OrderDetailActionTagGetCode:
         {
-            [self.viewModel getConsumptionCode];
+            [self.detailView setGetCodeButtonEnabled:NO];
+            __weak OrderDetailViewController *weakSelf = self;
+            [weakSelf.viewModel getConsumeCodeWithSucceed:^{
+                [[iToast makeText:@"消费码已发到您的手机，请注意查收"] show];
+                [self.detailView setGetCodeButtonEnabled:YES];
+            } failure:^(NSError *error) {
+                if (error.userInfo) {
+                    NSString *msg = [error.userInfo objectForKey:@"data"];
+                    if ([msg isKindOfClass:[NSString class]] && [msg length] > 0) {
+                        [[iToast makeText:msg] show];
+                    } else {
+                        [[iToast makeText:@"获取消费码失败"] show];
+                    }
+                } else {
+                    [[iToast makeText:@"获取消费码失败"] show];
+                }
+                [self.detailView setGetCodeButtonEnabled:YES];
+            }];
         }
             break;
         default:
@@ -89,9 +120,15 @@
     }
 }
 
-#pragma mark OrderCommentViewControllerDelegate
+#pragma mark CommentFoundingViewControllerDelegate
 
 - (void)commentFoundingViewControllerDidFinishSubmitComment:(CommentFoundingViewController *)vc {
+    [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
+}
+
+#pragma mark OrderRefundViewControllerDelegate
+
+- (void)orderRefundViewController:(OrderRefundViewController *)vc didSucceedWithRefundForOrderId:(NSString *)identifier {
     [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
 }
 

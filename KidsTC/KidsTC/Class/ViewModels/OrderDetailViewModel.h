@@ -20,6 +20,6 @@
 
 - (void)refund;
 
-- (void)getConsumptionCode;
+- (void)getConsumeCodeWithSucceed:(void(^)())succeed failure:(void(^)(NSError *error))failure;
 
 @end

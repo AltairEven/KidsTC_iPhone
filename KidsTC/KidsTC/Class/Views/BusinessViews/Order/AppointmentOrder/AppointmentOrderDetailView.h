@@ -37,4 +37,6 @@
 
 - (void)reloadData;
 
+- (void)setGetCodeButtonEnabled:(BOOL)enabled;
+
 @end

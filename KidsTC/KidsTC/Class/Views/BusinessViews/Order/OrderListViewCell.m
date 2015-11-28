@@ -83,6 +83,7 @@
                 [self.rightButton setHidden:NO];
                 [self.rightButton setTitle:@"退款" forState:UIControlStateNormal];
             }
+                break;
             case OrderStatusAllUsed:
             {
                 [self.rightButton setHidden:NO];
@@ -114,6 +115,7 @@
                 [self.delegate didClickedReturnButtonOnOrderListViewCell:self];
             }
         }
+            break;
         case OrderStatusAllUsed:
         {
             if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedCommentButtonOnOrderListViewCell:)]) {

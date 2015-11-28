@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong) AppointmentOrderModel *orderModel;
 
+- (void)cancelOrderWithSucceed:(void(^)())succeed failure:(void(^)(NSError *error))failure;
+
 @end

@@ -36,7 +36,6 @@
         NSString *paymentName = [data objectForKey:@"paytypeName"];
         PaymentType payType = (PaymentType)[[data objectForKey:@"paytype"] integerValue];
         self.pamentType = [[PaymentTypeModel alloc] initWithPaymentName:paymentName paymenttype:payType logoImage:nil];
-
     }
     return self;
 }

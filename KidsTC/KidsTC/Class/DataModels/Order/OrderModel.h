@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "PaymentTypeModel.h"
+#import "KTCPaymentInfo.h"
 
 typedef enum {
     OrderStatusWaitingPayment = 1,
@@ -42,5 +43,7 @@ typedef enum {
 @property (nonatomic, copy) NSString *statusDescription;
 
 @property (nonatomic, strong) PaymentTypeModel *pamentType;
+
+@property (nonatomic, strong) KTCPaymentInfo *paymentInfo;
 
 @end

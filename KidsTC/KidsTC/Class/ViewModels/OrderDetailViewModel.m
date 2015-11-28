@@ -18,7 +18,7 @@
 
 @property (nonatomic, strong) HttpRequestClient *refundRequest;
 
-@property (nonatomic, strong) HttpRequestClient *getCodeRequest;
+@property (nonatomic, strong) HttpRequestClient *getConsumeCodeRequest;
 
 - (void)loadOrderDetailSucceed:(NSDictionary *)data;
 
@@ -32,9 +32,9 @@
 
 - (void)refundFailed:(NSError *)error;
 
-- (void)getCodeSucceed:(NSDictionary *)data;
+- (void)getConsumeCodeSucceed:(NSDictionary *)data;
 
-- (void)getCodeFailed:(NSError *)error;
+- (void)getConsumeCodeFailed:(NSError *)error;
 
 @end
 
@@ -84,11 +84,11 @@
     
 }
 
-- (void)getCodeSucceed:(NSDictionary *)data {
+- (void)getConsumeCodeSucceed:(NSDictionary *)data {
     
 }
 
-- (void)getCodeFailed:(NSError *)error {
+- (void)getConsumeCodeFailed:(NSError *)error {
     
 }
 
@@ -112,8 +112,23 @@
     
 }
 
-- (void)getConsumptionCode {
-    
+- (void)getConsumeCodeWithSucceed:(void (^)())succeed failure:(void (^)(NSError *))failure {
+    if (!self.getConsumeCodeRequest) {
+        self.getConsumeCodeRequest = [HttpRequestClient clientWithUrlAliasName:@"ORDER_SEND_CONSUME_CODE"];
+    }
+    NSDictionary *param = [NSDictionary dictionaryWithObject:self.detailModel.orderId forKey:@"orderId"];
+    __weak OrderDetailViewModel *weakSelf = self;
+    [weakSelf.getConsumeCodeRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
+        [weakSelf getConsumeCodeSucceed:responseData];
+        if (succeed) {
+            succeed();
+        }
+    } failure:^(HttpRequestClient *client, NSError *error) {
+        [weakSelf getConsumeCodeFailed:error];
+        if (failure) {
+            failure(error);
+        }
+    }];
 }
 
 #pragma mark Super methods

@@ -28,7 +28,7 @@
         {
             KTCAlipayPaymentInfo *info = [[KTCAlipayPaymentInfo alloc] init];
             info.paymentType = type;
-            info.paymentUrl = [data objectForKey:@"payUrl"];
+            info.paymentUrl = [NSString stringWithFormat:@"%@", [data objectForKey:@"payUrl"]];
             return info;
         }
             break;

@@ -8,8 +8,10 @@
 
 #import "AppointmentOrderDetailViewController.h"
 #import "AppointmentOrderDetailViewModel.h"
+#import "StoreDetailViewController.h"
+#import "CommentFoundingViewController.h"
 
-@interface AppointmentOrderDetailViewController () <AppointmentOrderDetailViewDelegate>
+@interface AppointmentOrderDetailViewController () <AppointmentOrderDetailViewDelegate, CommentFoundingViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet AppointmentOrderDetailView *detailView;
 
@@ -42,22 +44,49 @@
     [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
 }
 
-#pragma mark
+#pragma mark AppointmentOrderDetailViewDelegate
 
 - (void)didClickedStoreOnAppointmentOrderDetailView:(AppointmentOrderDetailView *)detailView {
-    
+    StoreDetailViewController *controller = [[StoreDetailViewController alloc] initWithStoreId:self.viewModel.orderModel.storeId];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)didClickedCommentButtonOnAppointmentOrderDetailView:(AppointmentOrderDetailView *)detailView {
-    
+    CommentFoundingViewController *controller = [[CommentFoundingViewController alloc] initWithCommentFoundingModel:[CommentFoundingModel modelFromStoreAppointmentModel:self.viewModel.orderModel]];
+    controller.delegate = self;
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)didClickedCancelButtonOnAppointmentOrderDetailView:(AppointmentOrderDetailView *)detailView {
-    
+    __weak AppointmentOrderDetailViewController *weakSelf = self;
+    [weakSelf.viewModel cancelOrderWithSucceed:^{
+        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(AppointmentOrderDetailViewController:didCanceledOrderWithId:)]) {
+            [weakSelf.delegate AppointmentOrderDetailViewController:weakSelf didCanceledOrderWithId:weakSelf.orderModel.orderId];
+        }
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+    } failure:^(NSError *error) {
+        if (error.userInfo) {
+            NSString *msg = [error.userInfo objectForKey:@"data"];
+            if ([msg isKindOfClass:[NSString class]] && [msg length] > 0) {
+                [[iToast makeText:msg] show];
+            } else {
+                [[iToast makeText:@"取消订单失败"] show];
+            }
+        } else {
+            [[iToast makeText:@"取消订单失败"] show];
+        }
+    }];
 }
 
 - (void)didClickedGetCodeButtonOnAppointmentOrderDetailView:(AppointmentOrderDetailView *)detailView {
-    
+}
+
+#pragma mark CommentFoundingViewControllerDelegate
+
+- (void)commentFoundingViewControllerDidFinishSubmitComment:(CommentFoundingViewController *)vc {
+    [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
 }
 
 - (void)didReceiveMemoryWarning {

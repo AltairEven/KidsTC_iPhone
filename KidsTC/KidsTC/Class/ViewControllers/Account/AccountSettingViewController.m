@@ -22,9 +22,13 @@
 
 @property (nonatomic, strong) AccountSettingModel *settingModel;
 
+@property (nonatomic, strong) HttpRequestClient *changeFaceImageRequest;
+
 - (void)uploadFaceImage:(UIImage *)image succeed:(void(^)(NSArray *urlStrings))succeed failure:(void(^)(NSError *error))failure;
 
 - (void)getMediaFromSource:(UIImagePickerControllerSourceType)sourceType;
+
+- (void)changeFaceImageWithImage:(UIImage *)image uploadLocationUrlString:(NSString *)urlString;
 
 @end
 
@@ -157,8 +161,7 @@
         __weak AccountSettingViewController *weakSelf = self;
         [[GAlertLoadingView sharedAlertLoadingView] show];
         [weakSelf uploadFaceImage:trimmedImage succeed:^(NSArray *urlStrings) {
-            [weakSelf.viewModel resetFaceImage:trimmedImage];
-            [[GAlertLoadingView sharedAlertLoadingView] hide];
+            [weakSelf changeFaceImageWithImage:trimmedImage uploadLocationUrlString:[urlStrings firstObject]];
         } failure:^(NSError *error) {
             [[GAlertLoadingView sharedAlertLoadingView] hide];
             if (error.userInfo) {
@@ -212,6 +215,33 @@
         [self presentViewController:alert animated:YES completion:nil];
     }
     
+}
+
+- (void)changeFaceImageWithImage:(UIImage *)image uploadLocationUrlString:(NSString *)urlString {
+    
+    if (!self.changeFaceImageRequest) {
+        self.changeFaceImageRequest = [HttpRequestClient clientWithUrlAliasName:@"USER_UPDATE_INFO"];
+    }
+    
+    NSDictionary *param = [NSDictionary dictionaryWithObject:urlString forKey:@"headUrl"];
+    
+    __weak AccountSettingViewController *weakSelf = self;
+    [weakSelf.changeFaceImageRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
+        [[GAlertLoadingView sharedAlertLoadingView] hide];
+        [self.viewModel resetFaceImage:image];
+    } failure:^(HttpRequestClient *client, NSError *error) {
+        [[GAlertLoadingView sharedAlertLoadingView] hide];
+        if (error.userInfo) {
+            NSString *errMsg = [error.userInfo objectForKey:@"data"];
+            if ([errMsg isKindOfClass:[NSString class]]) {
+                [[iToast makeText:errMsg] show];
+            } else {
+                [[iToast makeText:@"头像上传失败，请重新尝试"] show];
+            }
+        } else {
+            [[iToast makeText:@"头像上传失败，请重新尝试"] show];
+        }
+    }];
 }
 
 #pragma mark Super methods

@@ -9,8 +9,10 @@
 #import "OrderListViewController.h"
 #import "OrderDetailViewController.h"
 #import "CommentFoundingViewController.h"
+#import "KTCPaymentService.h"
+#import "OrderRefundViewController.h"
 
-@interface OrderListViewController () <OrderListViewDelegate, CommentFoundingViewControllerDelegate>
+@interface OrderListViewController () <OrderListViewDelegate, CommentFoundingViewControllerDelegate, OrderRefundViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet OrderListView *orderListView;
 
@@ -63,7 +65,18 @@
 }
 
 - (void)orderListView:(OrderListView *)listView didClickedPayButtonAtIndex:(NSUInteger)index {
-    
+    OrderListModel *model = [self.viewModel.orderModels objectAtIndex:index];
+    __weak OrderListViewController *weakSelf = self;
+    [[KTCPaymentService sharedService] startPaymentWithOrderIdentifier:model.orderId succeed:^{
+        [weakSelf.viewModel startUpdateDataWithSucceed:nil failure:nil];
+    } failure:^(NSError *error) {
+        NSString *errMsg = @"支付失败";
+        NSString *text = [[error userInfo] objectForKey:kErrMsgKey];
+        if ([text isKindOfClass:[NSString class]] && [text length] > 0) {
+            errMsg = text;
+        }
+        [[iToast makeText:errMsg] show];
+    }];
 }
 
 - (void)orderListView:(OrderListView *)listView didClickedCommentButtonAtIndex:(NSUInteger)index {
@@ -75,12 +88,21 @@
 }
 
 - (void)orderListView:(OrderListView *)listView didClickedReturnButtonAtIndex:(NSUInteger)index {
-    
+    OrderListModel *model = [self.viewModel.orderModels objectAtIndex:index];
+    OrderRefundViewController *controller = [[OrderRefundViewController alloc] initWithOrderId:model.orderId];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
-#pragma mark OrderCommentViewControllerDelegate
+#pragma mark CommentFoundingViewControllerDelegate
 
 - (void)commentFoundingViewControllerDidFinishSubmitComment:(CommentFoundingViewController *)vc {
+    [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
+}
+
+#pragma mark OrderRefundViewControllerDelegate
+
+- (void)orderRefundViewController:(OrderRefundViewController *)vc didSucceedWithRefundForOrderId:(NSString *)identifier {
     [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
 }
 

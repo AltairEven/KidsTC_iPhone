@@ -72,16 +72,17 @@
     [self.cancelAppointmentButton.layer setMasksToBounds:YES];
     
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
-    self.getCodeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.getCodeButton setFrame:CGRectMake(15, 10, SCREEN_WIDTH - 30, 40)];
-    [self.getCodeButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
-    [self.getCodeButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
-    [self.getCodeButton setTitle:@"获取消费码" forState:UIControlStateNormal];
-    [self.getCodeButton addTarget:self action:@selector(didClickedGetCodeButton:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [footerView addSubview:self.getCodeButton];
-    self.tableView.tableFooterView = footerView;
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
+//    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
+//    self.getCodeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [self.getCodeButton setFrame:CGRectMake(15, 10, SCREEN_WIDTH - 30, 40)];
+//    [self.getCodeButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
+//    [self.getCodeButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+//    [self.getCodeButton setTitle:@"获取消费码" forState:UIControlStateNormal];
+//    [self.getCodeButton addTarget:self action:@selector(didClickedGetCodeButton:) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    [footerView addSubview:self.getCodeButton];
+//    self.tableView.tableFooterView = footerView;
 }
 
 #pragma mark UITableViewDataSource & UITableViewDelegate
@@ -106,8 +107,8 @@
             [self.storeImageView setImageWithURL:self.orderModel.imageUrl placeholderImage:PLACEHOLDERIMAGE_SMALL];
             [self.storeNameLabel setText:self.orderModel.storeName];
             [self.appointmentTimeDesLabel setText:self.orderModel.appointmentTimeDes];
-            [self.commentButton setHidden:[self.orderModel canComment]];
-            [self.cancelAppointmentButton setHidden:[self.orderModel canCancel]];
+            [self.commentButton setHidden:![self.orderModel canComment]];
+            [self.cancelAppointmentButton setHidden:![self.orderModel canCancel]];
             [self.storeInfoCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
             return self.storeInfoCell;
         }
@@ -197,6 +198,10 @@
         self.orderModel = [self.dataSource orderModelForAppointmentOrderDetailView:self];
         [self.tableView reloadData];
     }
+}
+
+- (void)setGetCodeButtonEnabled:(BOOL)enabled {
+    [self.getCodeButton setEnabled:enabled];
 }
 /*
 // Only override drawRect: if you perform custom drawing.

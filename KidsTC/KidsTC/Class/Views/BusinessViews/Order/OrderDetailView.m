@@ -311,6 +311,10 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
     }
 }
 
+- (void)setGetCodeButtonEnabled:(BOOL)enabled {
+    [self.getCodeButton setEnabled:enabled];
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

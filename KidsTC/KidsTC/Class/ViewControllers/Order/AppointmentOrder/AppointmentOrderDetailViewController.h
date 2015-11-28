@@ -9,8 +9,17 @@
 #import "GViewController.h"
 
 @class AppointmentOrderModel;
+@class AppointmentOrderDetailViewController;
+
+@protocol AppointmentOrderDetailViewControllerDelegate <NSObject>
+
+- (void)AppointmentOrderDetailViewController:(AppointmentOrderDetailViewController *)vc didCanceledOrderWithId:(NSString *)orderId;
+
+@end
 
 @interface AppointmentOrderDetailViewController : GViewController
+
+@property (nonatomic, assign) id<AppointmentOrderDetailViewControllerDelegate> delegate;
 
 - (instancetype)initWithAppointmentOrderModel:(AppointmentOrderModel *)model;
 

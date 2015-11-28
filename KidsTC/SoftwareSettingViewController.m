@@ -24,11 +24,11 @@
     _navigationTitle = @"设置";
     // Do any additional setup after loading the view from its nib.
     self.viewModel = [[SoftwareSettingViewModel alloc] initWithView:self.settingView];
+    [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
 }
 
 #pragma mark SoftwareSettingViewDelegate

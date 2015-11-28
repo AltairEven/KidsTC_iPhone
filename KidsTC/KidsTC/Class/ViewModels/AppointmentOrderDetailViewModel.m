@@ -12,6 +12,12 @@
 
 @property (nonatomic, weak) AppointmentOrderDetailView *view;
 
+@property (nonatomic, strong) HttpRequestClient *cancelOrderRequest;
+
+- (void)cancelOrderSucceed:(NSDictionary *)data;
+
+- (void)cancelOrderFailed:(NSError *)error;
+
 @end
 
 @implementation AppointmentOrderDetailViewModel
@@ -29,6 +35,37 @@
 
 - (AppointmentOrderModel *)orderModelForAppointmentOrderDetailView:(AppointmentOrderDetailView *)detailView {
     return self.orderModel;
+}
+
+#pragma mark Private methods
+
+- (void)cancelOrderSucceed:(NSDictionary *)data {
+    
+}
+
+- (void)cancelOrderFailed:(NSError *)error {
+    
+}
+
+#pragma mark Public methods
+
+- (void)cancelOrderWithSucceed:(void (^)())succeed failure:(void (^)(NSError *))failure {
+    if (!self.cancelOrderRequest) {
+        self.cancelOrderRequest = [HttpRequestClient clientWithUrlAliasName:@"ORDER_CANCLE_APPOINTMENTORDER"];
+    }
+    NSDictionary *param = [NSDictionary dictionaryWithObject:self.orderModel.orderId forKey:@"orderId"];
+    __weak AppointmentOrderDetailViewModel *weakSelf = self;
+    [weakSelf.cancelOrderRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
+        [weakSelf cancelOrderSucceed:responseData];
+        if (succeed) {
+            succeed();
+        }
+    } failure:^(HttpRequestClient *client, NSError *error) {
+        [weakSelf cancelOrderFailed:error];
+        if (failure) {
+            failure(error);
+        }
+    }];
 }
 
 #pragma mark Super methods
