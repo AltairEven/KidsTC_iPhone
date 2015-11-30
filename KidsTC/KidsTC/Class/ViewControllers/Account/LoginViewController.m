@@ -14,6 +14,8 @@
 #import "KTCUser.h"
 #import "ThirdPartyLoginService.h"
 #import "BindPhoneViewController.h"
+#import "ResetPasswordViewController.h"
+#import "UserRegisterViewController.h"
 
 @interface LoginViewController () <LoginViewDelegate>
 
@@ -31,6 +33,8 @@
 
 - (void)handleThirdPartyLoginFailure:(NSError *)error;
 
+- (void)didClickedRegisterButton;
+
 @end
 
 @implementation LoginViewController
@@ -47,6 +51,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self setupLeftBarButtonWithFrontImage:@"navigation_close" andBackImage:@"navigation_close"];
+    [self setupRightBarButton:@"注册" target:self action:@selector(didClickedRegisterButton) frontImage:nil andBackImage:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -114,6 +119,12 @@
     }
 }
 
+- (void)didClickedResetPasswordButtonOnLoginView:(LoginView *)loginView {
+    ResetPasswordViewController *controller = [[ResetPasswordViewController alloc] initWithNibName:@"ResetPasswordViewController" bundle:nil];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
 #pragma mark Private methods
 
 - (NSArray *)supportedLoginTypes {
@@ -175,6 +186,12 @@
     [[GAlertLoadingView sharedAlertLoadingView] hide];
 }
 
+- (void)didClickedRegisterButton {
+    UserRegisterViewController *controller = [[UserRegisterViewController alloc] initWithNibName:@"UserRegisterViewController" bundle:nil];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
 #pragma mark KTC login
 
 - (BOOL)validAccount:(NSString *)account andPassword:(NSString *)password {
@@ -198,7 +215,35 @@
 }
 
 - (void)handleKTCLoginFailedWithError:(NSError *)error {
+    NSString *errMsg = @"";
+    if (error.userInfo) {
+        errMsg = [error.userInfo objectForKey:@"data"];
+    }
     
+    if (error.code == -2008) {
+        if (![errMsg isKindOfClass:[NSString class]] || [errMsg length] == 0) {
+            errMsg = @"密码尚未设置，请先设置密码";
+        }
+        
+        UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"提示" message:errMsg preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction *goAction = [UIAlertAction actionWithTitle:@"设置" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            ResetPasswordViewController *controller = [[ResetPasswordViewController alloc] initWithNibName:@"ResetPasswordViewController" bundle:nil];
+            [controller setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:controller animated:YES];
+        }];
+        [controller addAction:cancelAction];
+        [controller addAction:goAction];
+        
+        [self presentViewController:controller animated:YES completion:nil];
+        
+        return;
+    }
+    if (![errMsg isKindOfClass:[NSString class]] || [errMsg length] == 0) {
+        errMsg = @"登录失败";
+    }
+    
+    [[iToast makeText:errMsg] show];
 }
 
 #pragma mark Super methods

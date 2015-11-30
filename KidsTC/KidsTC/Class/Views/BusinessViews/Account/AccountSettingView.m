@@ -118,7 +118,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
             break;
         case AccountSettingViewTagPassword:
         {
-            [cell resetWithMainTitle:@"修改密码" subTitle:@"" showImage:NO showArrow:YES];
+            [cell resetWithMainTitle:@"重置密码" subTitle:@"" showImage:NO showArrow:YES];
         }
             break;
         default:

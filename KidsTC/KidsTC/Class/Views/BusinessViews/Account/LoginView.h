@@ -17,6 +17,8 @@
 
 - (void)loginView:(LoginView *)loginView didClickedThirdPartyLoginButtonWithModel:(LoginItemModel *)model;
 
+- (void)didClickedResetPasswordButtonOnLoginView:(LoginView *)loginView;
+
 @end
 
 @interface LoginView : UIView

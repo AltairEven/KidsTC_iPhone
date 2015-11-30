@@ -67,7 +67,7 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
         [self.tableView registerNib:self.contentNib forCellReuseIdentifier:kContentCellIdentifier];
     }
     __weak CouponListView *weakSelf = self;
-    [weakSelf.tableView addLegendHeaderWithRefreshingBlock:^{
+    [weakSelf.tableView addRefreshViewHeaderWithRefreshingBlock:^{
         [weakSelf pullDownToRefresh];
     }];
     [weakSelf.tableView addGifFooterWithRefreshingBlock:^{
@@ -212,7 +212,7 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
 }
 
 - (void)endRefresh {
-    [self.tableView.legendHeader endRefreshing];
+    [self.tableView.header endRefreshing];
 }
 
 - (void)endLoadMore {

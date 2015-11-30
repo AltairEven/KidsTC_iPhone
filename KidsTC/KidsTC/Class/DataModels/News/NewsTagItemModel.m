@@ -107,6 +107,45 @@
     return self;
 }
 
+- (KTCUserRole *)relatedUserRole {
+    KTCUserRole *role = nil;
+    switch (self.type) {
+        case 1:
+        {
+            role = [KTCUserRole instanceWithRole:UserRolePrepregnancy sex:KTCSexMale];
+        }
+            break;
+        case 2:
+        {
+            role = [KTCUserRole instanceWithRole:UserRolePregnancy sex:KTCSexMale];
+        }
+            break;
+        case 3:
+        {
+            role = [KTCUserRole instanceWithRole:UserRoleBirth sex:KTCSexMale];
+        }
+            break;
+        case 4:
+        {
+            role = [KTCUserRole instanceWithRole:UserRoleBabyInOne sex:KTCSexMale];
+        }
+            break;
+        case 5:
+        {
+            role = [KTCUserRole instanceWithRole:UserRoleBabyOneToThree sex:KTCSexMale];
+        }
+            break;
+        case 6:
+        {
+            role = [KTCUserRole instanceWithRole:UserRoleBabyFourToSix sex:KTCSexMale];
+        }
+            break;
+        default:
+            break;
+    }
+    return role;
+}
+
 @end
 
 @implementation NewsTagTypeModelMetaData

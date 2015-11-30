@@ -48,4 +48,8 @@ typedef enum {
 
 + (NSString *)subDescriptionWithUserRole:(KTCUserRole *)role;
 
+- (UIImage *)refreshImageForUp;
+
+- (UIImage *)refreshImageForDown;
+
 @end

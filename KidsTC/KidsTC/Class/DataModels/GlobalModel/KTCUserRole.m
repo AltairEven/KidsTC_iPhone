@@ -287,4 +287,116 @@
     return description;
 }
 
+- (UIImage *)refreshImageForUp {
+    UIImage *image = nil;
+    if (self.sex == KTCSexMale) {
+        switch (self.role) {
+            case UserRolePrepregnancy:
+            case UserRolePregnancy:
+            case UserRoleBirth:
+            case UserRoleBabyInOne:
+            {
+                image = [UIImage imageNamed:@"refresh_0-1_male_1"];
+            }
+                break;
+            case UserRoleBabyOneToThree:
+            {
+                image = [UIImage imageNamed:@"refresh_1-3_male_1"];
+            }
+                break;
+            case UserRoleBabyFourToSix:
+            {
+                image = [UIImage imageNamed:@"refresh_4-6_male_1"];
+            }
+                break;
+            default:
+                break;
+        }
+    } else if (self.sex == KTCSexFemale) {
+        switch (self.role) {
+            case UserRolePrepregnancy:
+            case UserRolePregnancy:
+            case UserRoleBirth:
+            case UserRoleBabyInOne:
+            {
+                image = [UIImage imageNamed:@"refresh_0-1_female_1"];
+            }
+                break;
+            case UserRoleBabyOneToThree:
+            {
+                image = [UIImage imageNamed:@"refresh_1-3_female_1"];
+            }
+                break;
+            case UserRoleBabyFourToSix:
+            {
+                image = [UIImage imageNamed:@"refresh_4-6_female_1"];
+            }
+                break;
+            default:
+                break;
+        }
+    }
+    if (!image) {
+        image = [UIImage imageNamed:@"refresh_0-1_male_1"];
+    }
+    
+    return image;
+}
+
+- (UIImage *)refreshImageForDown {
+    UIImage *image = nil;
+    if (self.sex == KTCSexMale) {
+        switch (self.role) {
+            case UserRolePrepregnancy:
+            case UserRolePregnancy:
+            case UserRoleBirth:
+            case UserRoleBabyInOne:
+            {
+                image = [UIImage imageNamed:@"refresh_0-1_male_2"];
+            }
+                break;
+            case UserRoleBabyOneToThree:
+            {
+                image = [UIImage imageNamed:@"refresh_1-3_male_2"];
+            }
+                break;
+            case UserRoleBabyFourToSix:
+            {
+                image = [UIImage imageNamed:@"refresh_4-6_male_2"];
+            }
+                break;
+            default:
+                break;
+        }
+    } else if (self.sex == KTCSexFemale) {
+        switch (self.role) {
+            case UserRolePrepregnancy:
+            case UserRolePregnancy:
+            case UserRoleBirth:
+            case UserRoleBabyInOne:
+            {
+                image = [UIImage imageNamed:@"refresh_0-1_female_2"];
+            }
+                break;
+            case UserRoleBabyOneToThree:
+            {
+                image = [UIImage imageNamed:@"refresh_1-3_female_2"];
+            }
+                break;
+            case UserRoleBabyFourToSix:
+            {
+                image = [UIImage imageNamed:@"refresh_4-6_female_2"];
+            }
+                break;
+            default:
+                break;
+        }
+    }
+    if (!image) {
+        image = [UIImage imageNamed:@"refresh_0-1_male_1"];
+    }
+    
+    return image;
+}
+
 @end

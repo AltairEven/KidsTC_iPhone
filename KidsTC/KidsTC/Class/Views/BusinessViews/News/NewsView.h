@@ -45,4 +45,6 @@ typedef enum {
 
 @property (nonatomic, readonly) NSUInteger currentNewsTagIndex;
 
+- (void)resetRoleTypeWithImage:(UIImage *)image;
+
 @end

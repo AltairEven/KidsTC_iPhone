@@ -71,7 +71,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     _enableUpdate = enableUpdate;
     if (enableUpdate) {
         __weak ServiceListView *weakSelf = self;
-        [self.tableView addLegendHeaderWithRefreshingBlock:^{
+        [self.tableView addRefreshViewHeaderWithRefreshingBlock:^{
             [weakSelf pullToRefreshTable];
         }];
     } else {
@@ -148,11 +148,11 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 }
 
 - (void)startRefresh {
-    [self.tableView.legendHeader beginRefreshing];
+    [self.tableView.header beginRefreshing];
 }
 
 - (void)endRefresh {
-    [self.tableView.legendHeader endRefreshing];
+    [self.tableView.header endRefreshing];
 }
 
 - (void)endLoadMore {

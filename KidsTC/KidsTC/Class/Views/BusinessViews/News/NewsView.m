@@ -146,6 +146,12 @@
     }
 }
 
+#pragma mark Public
+
+- (void)resetRoleTypeWithImage:(UIImage *)image {
+    [self.roleSelectButton setImage:image forState:UIControlStateNormal];
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

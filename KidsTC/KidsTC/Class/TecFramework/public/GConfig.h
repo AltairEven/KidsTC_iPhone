@@ -552,6 +552,12 @@ typedef enum {
     GEventTemplateDoubleColumn
 }GEventTemplateType;
 
+
+typedef enum {
+    SMSValidateTypeRegister = 1,
+    SMSValidateTypeFindPassword
+}SMSValidateType;
+
 static const int kInvalidShowPrice = 99999900;
 
 @class GConfig;

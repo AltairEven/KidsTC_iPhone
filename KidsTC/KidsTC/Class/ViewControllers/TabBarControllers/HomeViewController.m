@@ -41,6 +41,7 @@
     self.floorNavigationView.delegate = self;
     [self.floorNavigationView setEnableCollapse:YES];
     [self.floorNavigationView setAnimateDirection:AUIFloorNavigationViewAnimateDirectionDown];
+    [self.homeView resetTopRoleWithImage:[KTCUserRole smallImageWithUserRole:[KTCUser currentUser].userRole]];
     
     self.viewModel = [[HomeViewModel alloc] initWithView:self.homeView];
     
@@ -259,6 +260,7 @@
 
 - (void)userRoleHasChanged:(id)info {
     [self.viewModel refreshHomeDataWithSucceed:^(NSDictionary *data) {
+        [self.homeView resetTopRoleWithImage:[KTCUserRole smallImageWithUserRole:[KTCUser currentUser].userRole]];
         [self.floorNavigationView reloadData];
         [self.floorNavigationView setSelectedIndex:0];
     } failure:nil];

@@ -51,7 +51,7 @@
     CGFloat headYOrigin = HEAD_MOST_TOP;
     CGFloat shadowYOrigin = self.frame.size.height - 2 - shadowSize.height;
     self.headImageView = [[UIImageView alloc] initWithFrame:CGRectMake(centerX - headSize.width / 2, headYOrigin, headSize.width, headSize.height)];
-    [self.headImageView setImage:[UIImage imageNamed:@"pull_down_activity_0"]];
+    [self.headImageView setImage:[[KTCUser currentUser].userRole refreshImageForDown]];
     self.shadowImageView = [[UIImageView alloc] initWithFrame:CGRectMake(centerX - shadowSize.width / 2, shadowYOrigin, shadowSize.width, shadowSize.height)];
     [self.shadowImageView setImage:[UIImage imageNamed:@"pull_down_shadow"]];
     
@@ -78,6 +78,9 @@
     self.countdownTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
     
     dispatch_source_set_timer(self.countdownTimer, DISPATCH_TIME_NOW, self.duration * 50 * NSEC_PER_MSEC, 0 * NSEC_PER_SEC);
+    
+    UIImage *upImage = [[KTCUser currentUser].userRole refreshImageForUp];
+    UIImage *downImage = [[KTCUser currentUser].userRole refreshImageForDown];
     
     __weak HeaderRefreshView *weakSelf = self;
     __block CGFloat centerY = HEAD_MOST_TOP;
@@ -122,9 +125,9 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             weakSelf.headImageView.center = CGPointMake(centerX, centerY);
             if (isDown) {
-                [weakSelf.headImageView setImage:[UIImage imageNamed:@"pull_down_activity_0"]];
+                [weakSelf.headImageView setImage:downImage];
             } else {
-                [weakSelf.headImageView setImage:[UIImage imageNamed:@"pull_down_activity_1"]];
+                [weakSelf.headImageView setImage:upImage];
             }
         });
     });

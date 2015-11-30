@@ -58,14 +58,12 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
         [self.tableView registerNib:self.cellNib forCellReuseIdentifier:kCellIdentifier];
     }
     __weak NewsRecommendListView *weakSelf = self;
-    [self.tableView addLegendHeaderWithRefreshingBlock:^{
+    [self.tableView addRefreshViewHeaderWithRefreshingBlock:^{
         if (weakSelf.noMoreData) {
             return ;
         }
         [weakSelf pullToLoadMoreData];
     }];
-    [self.tableView.legendHeader setStateHidden:YES];
-    [self.tableView.legendHeader setUpdatedTimeHidden:YES];
 }
 
 #pragma mark UITableViewDataSource & UITableViewDelegate
@@ -128,16 +126,16 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 }
 
 - (void)startLoadMore {
-    [self.tableView.legendHeader beginRefreshing];
+    [self.tableView.header beginRefreshing];
 }
 
 - (void)endLoadMore {
-    [self.tableView.legendHeader endRefreshing];
+    [self.tableView.header endRefreshing];
 }
 
 - (void)noMoreEarlierData:(BOOL)noMore {
     self.noMoreData = noMore;
-    [self.tableView.legendHeader setHidden:noMore];
+    [self.tableView.header setHidden:noMore];
 }
 
 /*

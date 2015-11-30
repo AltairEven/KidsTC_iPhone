@@ -109,7 +109,7 @@ static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIden
     _enableUpdate = enableUpdate;
     if (enableUpdate) {
         __weak CommentDetailView *weakSelf = self;
-        [self.tableView addLegendHeaderWithRefreshingBlock:^{
+        [self.tableView addRefreshViewHeaderWithRefreshingBlock:^{
             [weakSelf pullToRefreshTable];
         }];
     } else {
@@ -273,11 +273,11 @@ static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIden
 }
 
 - (void)startRefresh {
-    [self.tableView.legendHeader beginRefreshing];
+    [self.tableView.header beginRefreshing];
 }
 
 - (void)endRefresh {
-    [self.tableView.legendHeader endRefreshing];
+    [self.tableView.header endRefreshing];
 }
 
 - (void)endLoadMore {

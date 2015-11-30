@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -21,10 +21,10 @@
                                 <constraint firstAttribute="height" constant="30" id="iP8-WD-jhN"/>
                             </constraints>
                         </imageView>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="手机号/邮箱/用户名" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="5bO-XH-G8U">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="5bO-XH-G8U">
                             <rect key="frame" x="55" y="13" width="255" height="19"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                            <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="next"/>
                         </textField>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -47,19 +47,33 @@
                                 <constraint firstAttribute="height" constant="30" id="oiU-Cl-I5k"/>
                             </constraints>
                         </imageView>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="5N4-TZ-10B">
-                            <rect key="frame" x="55" y="13" width="255" height="19"/>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入密码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="5N4-TZ-10B">
+                            <rect key="frame" x="55" y="13" width="225" height="19"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES"/>
                         </textField>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tqq-A3-mfc">
+                            <rect key="frame" x="280" y="7" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="NOh-7j-QOg"/>
+                                <constraint firstAttribute="height" constant="30" id="cGQ-xx-uLp"/>
+                            </constraints>
+                            <state key="normal" image="showpassword_normal"/>
+                            <state key="selected" image="showpassword_highlight"/>
+                            <connections>
+                                <action selector="didClickedShowPasswordButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="WZZ-Xn-V7a"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="5N4-TZ-10B" secondAttribute="trailing" constant="10" id="E3u-Xa-35E"/>
+                        <constraint firstAttribute="trailing" secondItem="5N4-TZ-10B" secondAttribute="trailing" constant="40" id="E3u-Xa-35E"/>
                         <constraint firstAttribute="centerY" secondItem="Dtl-0G-Ijh" secondAttribute="centerY" id="E5c-l8-oMk"/>
                         <constraint firstAttribute="centerY" secondItem="5N4-TZ-10B" secondAttribute="centerY" id="YNA-Aa-GkF"/>
                         <constraint firstItem="Dtl-0G-Ijh" firstAttribute="leading" secondItem="o4A-4O-JqP" secondAttribute="leading" constant="15" id="hnC-jd-S6Q"/>
+                        <constraint firstItem="Tqq-A3-mfc" firstAttribute="centerY" secondItem="5N4-TZ-10B" secondAttribute="centerY" id="icC-no-XN7"/>
                         <constraint firstAttribute="height" constant="44" id="j8H-r7-WTr"/>
+                        <constraint firstItem="Tqq-A3-mfc" firstAttribute="leading" secondItem="5N4-TZ-10B" secondAttribute="trailing" id="mfK-gq-Um5"/>
                         <constraint firstItem="5N4-TZ-10B" firstAttribute="leading" secondItem="Dtl-0G-Ijh" secondAttribute="trailing" constant="10" id="uVl-v2-F3h"/>
                     </constraints>
                 </view>
@@ -79,23 +93,12 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VjJ-Dr-S8Z">
                     <rect key="frame" x="10" y="159" width="60" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" title="找回密码">
+                    <state key="normal" title="重置密码">
                         <color key="titleColor" red="1" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="didClickedFindPasswordButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="xme-tr-vom"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uhi-WH-LKR">
-                    <rect key="frame" x="280" y="159" width="30" height="30"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" title="注册">
-                        <color key="titleColor" red="1" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="didClickedRegisterButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="8P5-ab-ZTq"/>
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lhg-tM-Dh2" userLabel="footerBG">
@@ -156,12 +159,10 @@
                 <constraint firstItem="VjJ-Dr-S8Z" firstAttribute="top" secondItem="Ops-fE-r1P" secondAttribute="bottom" constant="10" id="EaF-Ny-DgX"/>
                 <constraint firstAttribute="trailing" secondItem="Ops-fE-r1P" secondAttribute="trailing" constant="10" id="I2h-lf-dIG"/>
                 <constraint firstItem="Lhg-tM-Dh2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Ml0-S2-URh"/>
-                <constraint firstAttribute="trailing" secondItem="Uhi-WH-LKR" secondAttribute="trailing" constant="10" id="Qiz-ZA-BlT"/>
                 <constraint firstItem="43V-iR-EXz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="gtx-4e-Q4K"/>
                 <constraint firstItem="o4A-4O-JqP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="h8v-Py-1NL"/>
                 <constraint firstItem="Ops-fE-r1P" firstAttribute="top" secondItem="o4A-4O-JqP" secondAttribute="bottom" constant="10" id="iCS-HK-g0X"/>
                 <constraint firstItem="43V-iR-EXz" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="lZZ-ZC-7HE"/>
-                <constraint firstItem="Uhi-WH-LKR" firstAttribute="top" secondItem="Ops-fE-r1P" secondAttribute="bottom" constant="10" id="wtW-Kf-YYe"/>
                 <constraint firstAttribute="trailing" secondItem="Lhg-tM-Dh2" secondAttribute="trailing" id="xae-gI-BTa"/>
                 <constraint firstItem="Ops-fE-r1P" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="zwT-cd-Xke"/>
             </constraints>
@@ -169,7 +170,7 @@
                 <outlet property="findPasswordButton" destination="VjJ-Dr-S8Z" id="P02-5P-9vd"/>
                 <outlet property="loginButton" destination="Ops-fE-r1P" id="cof-KH-jpf"/>
                 <outlet property="passwordField" destination="5N4-TZ-10B" id="Zh5-Ai-tWk"/>
-                <outlet property="registerButton" destination="Uhi-WH-LKR" id="TIq-O7-vs0"/>
+                <outlet property="showPasswordButton" destination="Tqq-A3-mfc" id="Raz-WN-0iw"/>
                 <outlet property="thirdPartyLoginView" destination="kj6-x0-B4O" id="Mbo-pU-kyd"/>
                 <outlet property="userNameField" destination="5bO-XH-G8U" id="WXG-as-I7n"/>
             </connections>
@@ -179,5 +180,7 @@
     <resources>
         <image name="login_password" width="30" height="30"/>
         <image name="login_userName" width="30" height="30"/>
+        <image name="showpassword_highlight" width="35" height="35"/>
+        <image name="showpassword_normal" width="35" height="35"/>
     </resources>
 </document>

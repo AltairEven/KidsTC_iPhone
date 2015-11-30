@@ -98,7 +98,7 @@
     self.codeButton.layer.masksToBounds = YES;
     [self.codeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
     [self.codeButton setTitleColor:[AUITheme theme].globalThemeColor forState:UIControlStateNormal];
-    [self.codeButton setTitleColor:[AUITheme theme].lightTextColor forState:UIControlStateNormal];
+    [self.codeButton setTitleColor:[AUITheme theme].lightTextColor forState:UIControlStateDisabled];
     [self.codeButton setBackgroundColor:[UIColor clearColor] forState:UIControlStateNormal];
     [self.codeButton setBackgroundColor:[UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1] forState:UIControlStateDisabled];
     
@@ -128,7 +128,7 @@
                            codeKey, @"codeKey",
                            self.phoneField.text, @"mobile",
                            @"0", @"smsType",
-                           @"1", @"validateType", nil];
+                           [NSNumber numberWithInteger:SMSValidateTypeRegister], @"validateType", nil];
     
     __weak BindPhoneViewController *weakSelf = self;
     [weakSelf.getCodeRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {

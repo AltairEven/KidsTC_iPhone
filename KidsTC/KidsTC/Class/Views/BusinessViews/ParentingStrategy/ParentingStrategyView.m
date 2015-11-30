@@ -60,7 +60,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
         [self.tableView registerNib:self.cellNib forCellReuseIdentifier:kCellIdentifier];
     }
     __weak ParentingStrategyView *weakSelf = self;
-    [weakSelf.tableView addLegendHeaderWithRefreshingBlock:^{
+    [weakSelf.tableView addRefreshViewHeaderWithRefreshingBlock:^{
         [weakSelf pullDownToRefresh];
     }];
     [weakSelf.tableView addGifFooterWithRefreshingBlock:^{
@@ -148,11 +148,11 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 }
 
 - (void)startRefresh {
-    [self.tableView.legendHeader beginRefreshing];
+    [self.tableView.header beginRefreshing];
 }
 
 - (void)endRefresh {
-    [self.tableView.legendHeader endRefreshing];
+    [self.tableView.header endRefreshing];
 }
 
 - (void)endLoadMore {

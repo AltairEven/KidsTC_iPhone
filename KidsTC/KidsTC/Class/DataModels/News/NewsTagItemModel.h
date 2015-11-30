@@ -37,6 +37,8 @@
 
 - (instancetype)initWithRawData:(NSDictionary *)data;
 
+- (KTCUserRole *)relatedUserRole;
+
 @end
 
 @interface NewsTagTypeModelMetaData : NSObject

@@ -10,7 +10,7 @@
 #import "AccountSettingViewModel.h"
 #import "UserRoleSelectViewController.h"
 #import "ChangeNickNameViewController.h"
-#import "ChangePasswordViewController.h"
+#import "ResetPasswordViewController.h"
 #import "ImageTrimViewController.h"
 #import "KTCImageUploader.h"
 
@@ -119,7 +119,7 @@
             break;
         case AccountSettingViewTagPassword:
         {
-            ChangePasswordViewController *controller = [[ChangePasswordViewController alloc] initWithNibName:@"ChangePasswordViewController" bundle:nil];
+            ResetPasswordViewController *controller = [[ResetPasswordViewController alloc] initWithNibName:@"ResetPasswordViewController" bundle:nil];
             [controller setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:controller animated:YES];
         }

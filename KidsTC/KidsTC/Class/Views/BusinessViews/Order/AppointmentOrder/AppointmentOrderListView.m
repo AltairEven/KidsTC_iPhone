@@ -67,7 +67,7 @@ static NSString *const kCellIdentifier = @"cellIdentifier";
         [self.tableView registerNib:self.cellNib forCellReuseIdentifier:kCellIdentifier];
     }
     __weak AppointmentOrderListView *weakSelf = self;
-    [weakSelf.tableView addLegendHeaderWithRefreshingBlock:^{
+    [weakSelf.tableView addRefreshViewHeaderWithRefreshingBlock:^{
         [weakSelf pullDownToRefresh];
     }];
     [weakSelf.tableView addGifFooterWithRefreshingBlock:^{
@@ -233,7 +233,7 @@ static NSString *const kCellIdentifier = @"cellIdentifier";
 }
 
 - (void)endRefresh {
-    [self.tableView.legendHeader endRefreshing];
+    [self.tableView.header endRefreshing];
 }
 
 - (void)endLoadMore {

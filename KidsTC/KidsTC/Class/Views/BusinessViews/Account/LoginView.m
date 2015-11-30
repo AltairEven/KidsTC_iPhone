@@ -13,16 +13,17 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *userNameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UIButton *showPasswordButton;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 @property (weak, nonatomic) IBOutlet UIButton *findPasswordButton;
-@property (weak, nonatomic) IBOutlet UIButton *registerButton;
 @property (weak, nonatomic) IBOutlet AUIStackView *thirdPartyLoginView;
 
 - (void)resetThirdPartyLoginView;
 
+- (IBAction)didClickedShowPasswordButton:(id)sender;
 - (IBAction)didClickedLoginButton:(id)sender;
+
 - (IBAction)didClickedFindPasswordButton:(id)sender;
-- (IBAction)didClickedRegisterButton:(id)sender;
 
 - (void)didClickedThirdPartyButton:(id)sender;
 
@@ -61,9 +62,6 @@
     [self.findPasswordButton setTitleColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
     [self.findPasswordButton setTitleColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
     
-    [self.registerButton setTitleColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
-    [self.registerButton setTitleColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
-    
     [self.thirdPartyLoginView setViewGap:30];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnView)];
@@ -76,6 +74,19 @@
 }
 
 #pragma mark UITextFieldDelegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if (textField == self.passwordField) {
+        [self.showPasswordButton setHidden:NO];
+    }
+}
+
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if (textField == self.passwordField) {
+        [self.showPasswordButton setHidden:YES];
+    }
+}
 
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -103,6 +114,11 @@
     [self.thirdPartyLoginView setSubViews:viewArray];
 }
 
+- (IBAction)didClickedShowPasswordButton:(id)sender {
+    [self.showPasswordButton setSelected:![self.showPasswordButton isSelected]];
+    [self.passwordField setSecureTextEntry:![self.showPasswordButton isSelected]];
+}
+
 - (IBAction)didClickedLoginButton:(id)sender {
     [self endEditing:YES];
     if (self.delegate && [self.delegate respondsToSelector:@selector(loginView:didClickedLoginButtonWithAccount:password:)]) {
@@ -112,10 +128,9 @@
 
 - (IBAction)didClickedFindPasswordButton:(id)sender {
     [self endEditing:YES];
-}
-
-- (IBAction)didClickedRegisterButton:(id)sender {
-    [self endEditing:YES];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedResetPasswordButtonOnLoginView:)]) {
+        [self.delegate didClickedResetPasswordButtonOnLoginView:self];
+    }
 }
 
 - (void)didClickedThirdPartyButton:(id)sender {

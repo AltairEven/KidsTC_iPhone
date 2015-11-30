@@ -67,7 +67,7 @@ static NSString *const kContentCellIdentifier = @"kCommentCellIdentifier";
         [self.tableView registerNib:self.contentNib forCellReuseIdentifier:kContentCellIdentifier];
     }
     __weak CommentListView *weakSelf = self;
-    [weakSelf.tableView addLegendHeaderWithRefreshingBlock:^{
+    [weakSelf.tableView addRefreshViewHeaderWithRefreshingBlock:^{
         [weakSelf pullDownToRefresh];
     }];
     [weakSelf.tableView addGifFooterWithRefreshingBlock:^{
@@ -265,7 +265,7 @@ static NSString *const kContentCellIdentifier = @"kCommentCellIdentifier";
 }
 
 - (void)endRefresh {
-    [self.tableView.legendHeader endRefreshing];
+    [self.tableView.header endRefreshing];
 }
 
 - (void)endLoadMore {

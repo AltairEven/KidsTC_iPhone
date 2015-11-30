@@ -81,6 +81,7 @@
     NewsListTagFilterViewController *controller = [[NewsListTagFilterViewController alloc] initWithNewsTagTypeModels:[self.newsViewModel tagTypeModels]];
     [controller setCompletionBlock:^(NewsTagItemModel *itemModel) {
         [self.newsViewModel setTagItemModelsWithModel:itemModel];
+        [self.newsView resetRoleTypeWithImage:[KTCUserRole smallImageWithUserRole:[itemModel relatedUserRole]]];
     }];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];

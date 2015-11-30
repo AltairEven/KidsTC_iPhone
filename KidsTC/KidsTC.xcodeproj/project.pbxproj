@@ -796,6 +796,10 @@
 		8F38D1E91C085F080061C329 /* CommentFoundingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F38D1E81C085F080061C329 /* CommentFoundingView.m */; };
 		8F38D1EB1C085F1E0061C329 /* CommentFoundingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F38D1EA1C085F1E0061C329 /* CommentFoundingView.xib */; };
 		8F38D1EE1C089AB70061C329 /* CommentFoundingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F38D1ED1C089AB70061C329 /* CommentFoundingModel.m */; };
+		8F42FABE1C0BF8F500E9F62A /* ResetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F42FABC1C0BF8F500E9F62A /* ResetPasswordViewController.m */; };
+		8F42FABF1C0BF8F500E9F62A /* ResetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F42FABD1C0BF8F500E9F62A /* ResetPasswordViewController.xib */; };
+		8F42FAC31C0C20F600E9F62A /* UserRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F42FAC11C0C20F600E9F62A /* UserRegisterViewController.m */; };
+		8F42FAC41C0C20F600E9F62A /* UserRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F42FAC21C0C20F600E9F62A /* UserRegisterViewController.xib */; };
 		8F5D8E381C0456D500632390 /* NewsListTagFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5D8E371C0456D500632390 /* NewsListTagFilterView.m */; };
 		8F5D8E3A1C0456FA00632390 /* NewsListTagFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F5D8E391C0456FA00632390 /* NewsListTagFilterView.xib */; };
 		8F5D8E3E1C045D1000632390 /* NewsListTagFilterViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5D8E3C1C045D1000632390 /* NewsListTagFilterViewCell.m */; };
@@ -812,6 +816,18 @@
 		8F7E45051C09E18C001EF3B5 /* OrderRefundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7E45031C09E18C001EF3B5 /* OrderRefundViewController.m */; };
 		8F7E45061C09E18C001EF3B5 /* OrderRefundViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F7E45041C09E18C001EF3B5 /* OrderRefundViewController.xib */; };
 		8F7E45091C09E1F0001EF3B5 /* OrderRefundViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7E45081C09E1F0001EF3B5 /* OrderRefundViewModel.m */; };
+		8F85AD6E1C0C32D100890526 /* refresh_0-1_female_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD621C0C32D100890526 /* refresh_0-1_female_1.png */; };
+		8F85AD6F1C0C32D100890526 /* refresh_0-1_female_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD631C0C32D100890526 /* refresh_0-1_female_2.png */; };
+		8F85AD701C0C32D100890526 /* refresh_0-1_male_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD641C0C32D100890526 /* refresh_0-1_male_1.png */; };
+		8F85AD711C0C32D100890526 /* refresh_0-1_male_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD651C0C32D100890526 /* refresh_0-1_male_2.png */; };
+		8F85AD721C0C32D100890526 /* refresh_1-3_female_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD661C0C32D100890526 /* refresh_1-3_female_1.png */; };
+		8F85AD731C0C32D100890526 /* refresh_1-3_female_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD671C0C32D100890526 /* refresh_1-3_female_2.png */; };
+		8F85AD741C0C32D100890526 /* refresh_1-3_male_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD681C0C32D100890526 /* refresh_1-3_male_1.png */; };
+		8F85AD751C0C32D100890526 /* refresh_1-3_male_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD691C0C32D100890526 /* refresh_1-3_male_2.png */; };
+		8F85AD761C0C32D100890526 /* refresh_4-6_female_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD6A1C0C32D100890526 /* refresh_4-6_female_1.png */; };
+		8F85AD771C0C32D100890526 /* refresh_4-6_female_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD6B1C0C32D100890526 /* refresh_4-6_female_2.png */; };
+		8F85AD781C0C32D100890526 /* refresh_4-6_male_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD6C1C0C32D100890526 /* refresh_4-6_male_1.png */; };
+		8F85AD791C0C32D100890526 /* refresh_4-6_male_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD6D1C0C32D100890526 /* refresh_4-6_male_2.png */; };
 		8F8A08D21BF9E31300134A9A /* BindPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8A08D01BF9E31300134A9A /* BindPhoneViewController.m */; };
 		8F8A08D31BF9E31300134A9A /* BindPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F8A08D11BF9E31300134A9A /* BindPhoneViewController.xib */; };
 		8F98D2541C000EF900C1388A /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8F98D2521C000EF900C1388A /* AlipaySDK.bundle */; };
@@ -822,8 +838,6 @@
 		8F9996081BF5BE590055F016 /* KTCUserRole.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9996071BF5BE590055F016 /* KTCUserRole.m */; };
 		8F9996151BF5E6560055F016 /* ChangeNickNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9996131BF5E6560055F016 /* ChangeNickNameViewController.m */; };
 		8F9996161BF5E6560055F016 /* ChangeNickNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F9996141BF5E6560055F016 /* ChangeNickNameViewController.xib */; };
-		8F99961A1BF5E66C0055F016 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9996181BF5E66C0055F016 /* ChangePasswordViewController.m */; };
-		8F99961B1BF5E66C0055F016 /* ChangePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F9996191BF5E66C0055F016 /* ChangePasswordViewController.xib */; };
 		8F9EA6B01BF9A6B400062E91 /* WeiboManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9EA6AF1BF9A6B400062E91 /* WeiboManager.m */; };
 		8F9EA6B31BF9A72B00062E91 /* ThirdPartyLoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9EA6B21BF9A72B00062E91 /* ThirdPartyLoginService.m */; };
 		8F9EA6B61BF9AE7100062E91 /* WeChatManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9EA6B51BF9AE7100062E91 /* WeChatManager.m */; };
@@ -2228,6 +2242,12 @@
 		8F38D1EA1C085F1E0061C329 /* CommentFoundingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentFoundingView.xib; sourceTree = "<group>"; };
 		8F38D1EC1C089AB70061C329 /* CommentFoundingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentFoundingModel.h; sourceTree = "<group>"; };
 		8F38D1ED1C089AB70061C329 /* CommentFoundingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentFoundingModel.m; sourceTree = "<group>"; };
+		8F42FABB1C0BF8F500E9F62A /* ResetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetPasswordViewController.h; sourceTree = "<group>"; };
+		8F42FABC1C0BF8F500E9F62A /* ResetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPasswordViewController.m; sourceTree = "<group>"; };
+		8F42FABD1C0BF8F500E9F62A /* ResetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResetPasswordViewController.xib; sourceTree = "<group>"; };
+		8F42FAC01C0C20F600E9F62A /* UserRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserRegisterViewController.h; sourceTree = "<group>"; };
+		8F42FAC11C0C20F600E9F62A /* UserRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserRegisterViewController.m; sourceTree = "<group>"; };
+		8F42FAC21C0C20F600E9F62A /* UserRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserRegisterViewController.xib; sourceTree = "<group>"; };
 		8F5D8E361C0456D500632390 /* NewsListTagFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsListTagFilterView.h; sourceTree = "<group>"; };
 		8F5D8E371C0456D500632390 /* NewsListTagFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsListTagFilterView.m; sourceTree = "<group>"; };
 		8F5D8E391C0456FA00632390 /* NewsListTagFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsListTagFilterView.xib; sourceTree = "<group>"; };
@@ -2254,6 +2274,18 @@
 		8F7E45041C09E18C001EF3B5 /* OrderRefundViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderRefundViewController.xib; sourceTree = "<group>"; };
 		8F7E45071C09E1F0001EF3B5 /* OrderRefundViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderRefundViewModel.h; sourceTree = "<group>"; };
 		8F7E45081C09E1F0001EF3B5 /* OrderRefundViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderRefundViewModel.m; sourceTree = "<group>"; };
+		8F85AD621C0C32D100890526 /* refresh_0-1_female_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh_0-1_female_1.png"; sourceTree = "<group>"; };
+		8F85AD631C0C32D100890526 /* refresh_0-1_female_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh_0-1_female_2.png"; sourceTree = "<group>"; };
+		8F85AD641C0C32D100890526 /* refresh_0-1_male_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh_0-1_male_1.png"; sourceTree = "<group>"; };
+		8F85AD651C0C32D100890526 /* refresh_0-1_male_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh_0-1_male_2.png"; sourceTree = "<group>"; };
+		8F85AD661C0C32D100890526 /* refresh_1-3_female_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh_1-3_female_1.png"; sourceTree = "<group>"; };
+		8F85AD671C0C32D100890526 /* refresh_1-3_female_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh_1-3_female_2.png"; sourceTree = "<group>"; };
+		8F85AD681C0C32D100890526 /* refresh_1-3_male_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh_1-3_male_1.png"; sourceTree = "<group>"; };
+		8F85AD691C0C32D100890526 /* refresh_1-3_male_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh_1-3_male_2.png"; sourceTree = "<group>"; };
+		8F85AD6A1C0C32D100890526 /* refresh_4-6_female_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh_4-6_female_1.png"; sourceTree = "<group>"; };
+		8F85AD6B1C0C32D100890526 /* refresh_4-6_female_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh_4-6_female_2.png"; sourceTree = "<group>"; };
+		8F85AD6C1C0C32D100890526 /* refresh_4-6_male_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh_4-6_male_1.png"; sourceTree = "<group>"; };
+		8F85AD6D1C0C32D100890526 /* refresh_4-6_male_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh_4-6_male_2.png"; sourceTree = "<group>"; };
 		8F8A08CF1BF9E31300134A9A /* BindPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindPhoneViewController.h; sourceTree = "<group>"; };
 		8F8A08D01BF9E31300134A9A /* BindPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindPhoneViewController.m; sourceTree = "<group>"; };
 		8F8A08D11BF9E31300134A9A /* BindPhoneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindPhoneViewController.xib; sourceTree = "<group>"; };
@@ -2269,9 +2301,6 @@
 		8F9996121BF5E6560055F016 /* ChangeNickNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeNickNameViewController.h; sourceTree = "<group>"; };
 		8F9996131BF5E6560055F016 /* ChangeNickNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeNickNameViewController.m; sourceTree = "<group>"; };
 		8F9996141BF5E6560055F016 /* ChangeNickNameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangeNickNameViewController.xib; sourceTree = "<group>"; };
-		8F9996171BF5E66C0055F016 /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
-		8F9996181BF5E66C0055F016 /* ChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewController.m; sourceTree = "<group>"; };
-		8F9996191BF5E66C0055F016 /* ChangePasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangePasswordViewController.xib; sourceTree = "<group>"; };
 		8F9EA6AE1BF9A6B400062E91 /* WeiboManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboManager.h; sourceTree = "<group>"; };
 		8F9EA6AF1BF9A6B400062E91 /* WeiboManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiboManager.m; sourceTree = "<group>"; };
 		8F9EA6B11BF9A72B00062E91 /* ThirdPartyLoginService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdPartyLoginService.h; sourceTree = "<group>"; };
@@ -4532,15 +4561,18 @@
 				8F9996121BF5E6560055F016 /* ChangeNickNameViewController.h */,
 				8F9996131BF5E6560055F016 /* ChangeNickNameViewController.m */,
 				8F9996141BF5E6560055F016 /* ChangeNickNameViewController.xib */,
-				8F9996171BF5E66C0055F016 /* ChangePasswordViewController.h */,
-				8F9996181BF5E66C0055F016 /* ChangePasswordViewController.m */,
-				8F9996191BF5E66C0055F016 /* ChangePasswordViewController.xib */,
 				1E0B77AA1B68D60B00A58AD4 /* LoginViewController.h */,
 				1E0B77AB1B68D60B00A58AD4 /* LoginViewController.m */,
 				1E0B77AC1B68D60B00A58AD4 /* LoginViewController.xib */,
 				8F8A08CF1BF9E31300134A9A /* BindPhoneViewController.h */,
 				8F8A08D01BF9E31300134A9A /* BindPhoneViewController.m */,
 				8F8A08D11BF9E31300134A9A /* BindPhoneViewController.xib */,
+				8F42FABB1C0BF8F500E9F62A /* ResetPasswordViewController.h */,
+				8F42FABC1C0BF8F500E9F62A /* ResetPasswordViewController.m */,
+				8F42FABD1C0BF8F500E9F62A /* ResetPasswordViewController.xib */,
+				8F42FAC01C0C20F600E9F62A /* UserRegisterViewController.h */,
+				8F42FAC11C0C20F600E9F62A /* UserRegisterViewController.m */,
+				8F42FAC21C0C20F600E9F62A /* UserRegisterViewController.xib */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -4971,6 +5003,7 @@
 		1EC73C101B5F992E008B39EA /* TempResources */ = {
 			isa = PBXGroup;
 			children = (
+				8F85AD611C0C32D100890526 /* Refresh */,
 				1E827CD71B9C3E76008F3F08 /* Coupon */,
 				1E943F491B7DDFDF0029FE74 /* Loading */,
 			);
@@ -5059,6 +5092,25 @@
 				8FAFABAE1BFF1F3200082F20 /* CommonShareObject.m */,
 			);
 			path = Share;
+			sourceTree = "<group>";
+		};
+		8F85AD611C0C32D100890526 /* Refresh */ = {
+			isa = PBXGroup;
+			children = (
+				8F85AD621C0C32D100890526 /* refresh_0-1_female_1.png */,
+				8F85AD631C0C32D100890526 /* refresh_0-1_female_2.png */,
+				8F85AD641C0C32D100890526 /* refresh_0-1_male_1.png */,
+				8F85AD651C0C32D100890526 /* refresh_0-1_male_2.png */,
+				8F85AD661C0C32D100890526 /* refresh_1-3_female_1.png */,
+				8F85AD671C0C32D100890526 /* refresh_1-3_female_2.png */,
+				8F85AD681C0C32D100890526 /* refresh_1-3_male_1.png */,
+				8F85AD691C0C32D100890526 /* refresh_1-3_male_2.png */,
+				8F85AD6A1C0C32D100890526 /* refresh_4-6_female_1.png */,
+				8F85AD6B1C0C32D100890526 /* refresh_4-6_female_2.png */,
+				8F85AD6C1C0C32D100890526 /* refresh_4-6_male_1.png */,
+				8F85AD6D1C0C32D100890526 /* refresh_4-6_male_2.png */,
+			);
+			path = Refresh;
 			sourceTree = "<group>";
 		};
 		8F98D2581C002CA200C1388A /* Payment */ = {
@@ -5183,6 +5235,8 @@
 				1E5CD75A1B510F7900D177CB /* ServiceListViewCell.xib in Resources */,
 				1E827BCE1B941337008F3F08 /* ImageError@2x.png in Resources */,
 				1E943F421B7DC74B0029FE74 /* HomeViewHorizontalListCell.xib in Resources */,
+				8F85AD751C0C32D100890526 /* refresh_1-3_male_2.png in Resources */,
+				8F85AD791C0C32D100890526 /* refresh_4-6_male_2.png in Resources */,
 				1E827BD51B941337008F3F08 /* ImageSelectedOn@3x.png in Resources */,
 				1EC4A10F1B5CCD1B00206BB9 /* KTCSearchHeaderView.xib in Resources */,
 				1E7994F11BC651E00099CFF9 /* HorizontalCalendarView.xib in Resources */,
@@ -5201,6 +5255,7 @@
 				1EC73BDD1B5E487E008B39EA /* HomeViewCountDownTitleCell.xib in Resources */,
 				1E15F9B11BE1C784000C74E7 /* CommentDetailViewController.xib in Resources */,
 				1E827BE91B941337008F3F08 /* UIBarButtonItemGrid@2x.png in Resources */,
+				8F42FABF1C0BF8F500E9F62A /* ResetPasswordViewController.xib in Resources */,
 				1E0B7AF01B6F6A6D00A58AD4 /* GuideViewController.xib in Resources */,
 				1E76003F1B56496100DF0972 /* ServiceDetailViewController.xib in Resources */,
 				1E0B7B0F1B6F6C1400A58AD4 /* SaiDanPhotoView.xib in Resources */,
@@ -5238,6 +5293,7 @@
 				8FAFABAC1BFF1EC600082F20 /* CommonShareViewController.xib in Resources */,
 				1E0B77FF1B6F32D300A58AD4 /* KTCSearchAreaFilterView.xib in Resources */,
 				1E7995581BCB96DF0099CFF9 /* ActivityViewController.xib in Resources */,
+				8F85AD771C0C32D100890526 /* refresh_4-6_female_2.png in Resources */,
 				1E15F9C11BE8953C000C74E7 /* AccountSettingViewCell.xib in Resources */,
 				1E8017091BB006D100B6C352 /* HomeViewWholeImageNewsCell.xib in Resources */,
 				1E8EFD201B68BBA100D00808 /* AccountSettingView.xib in Resources */,
@@ -5283,6 +5339,7 @@
 				1E0B7A771B6F67B800A58AD4 /* SmsConfirmView.xib in Resources */,
 				1E1CFA1E1BD4FEE20005653D /* KTCSearchViewCategoryCell.xib in Resources */,
 				1E7994EC1BC650B70099CFF9 /* ActivityViewCell.xib in Resources */,
+				8F85AD6F1C0C32D100890526 /* refresh_0-1_female_2.png in Resources */,
 				1E7995301BC79E3A0099CFF9 /* HomeViewImageNewsCell.xib in Resources */,
 				1EC73BB91B5E2604008B39EA /* HomeView.xib in Resources */,
 				1E0B77FA1B6B798100A58AD4 /* KTCSearchResultSortCell.xib in Resources */,
@@ -5297,17 +5354,18 @@
 				1E0B77DE1B6A48F600A58AD4 /* ServiceDetailConfirmViewCell.xib in Resources */,
 				1E943F481B7DC7A20029FE74 /* HomeTimeQiangCell.xib in Resources */,
 				1E3D8F6B1B4D1E5800275C35 /* OrderListViewCell.xib in Resources */,
-				8F99961B1BF5E66C0055F016 /* ChangePasswordViewController.xib in Resources */,
 				1E827BE81B941337008F3F08 /* UIBarButtonItemGrid.png in Resources */,
 				1E827BD71B941337008F3F08 /* ImageSelectedSmallOff@2x.png in Resources */,
 				1EA8B6A31B63367D00F90688 /* SettlementBottomView.xib in Resources */,
 				8F8A08D31BF9E31300134A9A /* BindPhoneViewController.xib in Resources */,
 				1EC73C641B61164A008B39EA /* SettlementView.xib in Resources */,
 				1E15F98E1BDF2B32000C74E7 /* StoreDetailServiceLinearCell.xib in Resources */,
+				8F85AD731C0C32D100890526 /* refresh_1-3_female_2.png in Resources */,
 				1E827BE41B941337008F3F08 /* UIBarButtonItemArrowLeft@3x.png in Resources */,
 				1E7995191BC758560099CFF9 /* NewsRecommendListView.xib in Resources */,
 				1E827BDA1B941337008F3F08 /* ImageSelectedSmallOn@2x.png in Resources */,
 				1E79950F1BC758560099CFF9 /* NewsListView.xib in Resources */,
+				8F85AD701C0C32D100890526 /* refresh_0-1_male_1.png in Resources */,
 				1E943F511B7DDFDF0029FE74 /* loadingBg_640_960.png in Resources */,
 				1E15F9D21BE8A47C000C74E7 /* SoftwareSettingViewCell.xib in Resources */,
 				1E827BDB1B941337008F3F08 /* ImageSelectedSmallOn@3x.png in Resources */,
@@ -5333,15 +5391,19 @@
 				1EC73BE21B5E4895008B39EA /* HomeViewMoreTitleCell.xib in Resources */,
 				1E15F9991BDF799B000C74E7 /* CommentDetailViewCell.xib in Resources */,
 				1EA8B6A91B633CE100F90688 /* SettlementViewController.xib in Resources */,
+				8F85AD721C0C32D100890526 /* refresh_1-3_female_1.png in Resources */,
 				1E3D8F5E1B4D1DB300275C35 /* OrderDetailViewController.xib in Resources */,
 				1E0B78041B6F429E00A58AD4 /* KTCSearchSortFilterView.xib in Resources */,
 				1E827BD31B941337008F3F08 /* ImageSelectedOn.png in Resources */,
 				1EC4A0B61B58E08800206BB9 /* StoreDetailBottomView.xib in Resources */,
 				1EC73BA21B5E25A4008B39EA /* HotActivityGroupView.xib in Resources */,
+				8F85AD6E1C0C32D100890526 /* refresh_0-1_female_1.png in Resources */,
 				1E3D8F581B4D1D4D00275C35 /* UserCenterView.xib in Resources */,
 				1EC4A0C51B5914FB00206BB9 /* StoreDetailViewActiveCell.xib in Resources */,
 				1EC73BA41B5E25A4008B39EA /* HotActivityGroupViewCell.xib in Resources */,
+				8F42FAC41C0C20F600E9F62A /* UserRegisterViewController.xib in Resources */,
 				8F38D1EB1C085F1E0061C329 /* CommentFoundingView.xib in Resources */,
+				8F85AD781C0C32D100890526 /* refresh_4-6_male_1.png in Resources */,
 				1E3D8D0C1B4BF4A100275C35 /* TRViewController.xib in Resources */,
 				1EA8B6C21B638FFE00F90688 /* StoreAppointmentViewController.xib in Resources */,
 				1EC4A1151B5CCD4200206BB9 /* KTCSearchHistoryView.xib in Resources */,
@@ -5354,6 +5416,7 @@
 				1E3D8F631B4D1DFE00275C35 /* OrderListViewController.xib in Resources */,
 				1E1CFA2D1BD8E1880005653D /* ServiceDetailSegmentCell.xib in Resources */,
 				1E15F97D1BDDD194000C74E7 /* StoreDetailCommentCell.xib in Resources */,
+				8F85AD741C0C32D100890526 /* refresh_1-3_male_1.png in Resources */,
 				1E827BD11B941337008F3F08 /* ImageSelectedOff@2x.png in Resources */,
 				1E943F5E1B7DE67B0029FE74 /* logo_750_1334.png in Resources */,
 				8F5D8E441C047BCB00632390 /* NewsListTagFilterViewController.xib in Resources */,
@@ -5388,6 +5451,7 @@
 				1E943F061B7B231F0029FE74 /* AppointmentOrderDetailViewController.xib in Resources */,
 				1E7994DE1BC615280099CFF9 /* ParentingStrategyDetailViewCell.xib in Resources */,
 				1EC73BF11B5E6785008B39EA /* HomeViewThemeCell.xib in Resources */,
+				8F85AD711C0C32D100890526 /* refresh_0-1_male_2.png in Resources */,
 				1E827BE31B941337008F3F08 /* UIBarButtonItemArrowLeft@2x.png in Resources */,
 				1EFD19421B4E1F9B00767021 /* OrderDetailView.xib in Resources */,
 				1E5CD74D1B4F6A7700D177CB /* ServiceListView.xib in Resources */,
@@ -5400,6 +5464,7 @@
 				1E827CED1B9D318F008F3F08 /* CouponUsableListViewController.xib in Resources */,
 				1E0B7A851B6F67B800A58AD4 /* CouponPrizeShowView.xib in Resources */,
 				1E827BEC1B941337008F3F08 /* VideoOverlay@2x.png in Resources */,
+				8F85AD761C0C32D100890526 /* refresh_4-6_female_1.png in Resources */,
 				1E7995A91BCF48C70099CFF9 /* NewsRecommendCellViewBigImageView.xib in Resources */,
 				1E7995111BC758560099CFF9 /* NewsListViewCell.xib in Resources */,
 				1E943F521B7DDFDF0029FE74 /* loadingBg_750_1334.png in Resources */,
@@ -5585,6 +5650,7 @@
 				1EC73BF81B5F4F96008B39EA /* HomeNormalTitleCellModel.m in Sources */,
 				1EA5C9181BA84439001E599D /* KTCWebViewController.m in Sources */,
 				1E827B651B8EB90B008F3F08 /* KTCMapViewController.m in Sources */,
+				8F42FABE1C0BF8F500E9F62A /* ResetPasswordViewController.m in Sources */,
 				1E3D8D981B4BF4A100275C35 /* MJRefreshGifHeader.m in Sources */,
 				1E943E971B71E7CD0029FE74 /* OCOrderItem.m in Sources */,
 				1E827BA51B9412C6008F3F08 /* MWPhoto.m in Sources */,
@@ -5782,7 +5848,6 @@
 				1E8EFCD61B6657E200D00808 /* OrderDetailButtonCell.m in Sources */,
 				1E0B7A8F1B6F67B800A58AD4 /* GBannersView.m in Sources */,
 				1EA8B6B51B637F0F00F90688 /* OrderModel.m in Sources */,
-				8F99961A1BF5E66C0055F016 /* ChangePasswordViewController.m in Sources */,
 				1E15F9CB1BE8A057000C74E7 /* SoftwareSettingView.m in Sources */,
 				1EC73BE11B5E4895008B39EA /* HomeViewMoreTitleCell.m in Sources */,
 				1E943F3D1B7D8DAB0029FE74 /* HomeTwoColumnCellModel.m in Sources */,
@@ -5849,6 +5914,7 @@
 				1E827CC21B9BDEF1008F3F08 /* CouponFullCutModel.m in Sources */,
 				1E0B7A9C1B6F67B800A58AD4 /* GCountDownView.m in Sources */,
 				1E827C701B94144E008F3F08 /* DACircularProgressView.m in Sources */,
+				8F42FAC31C0C20F600E9F62A /* UserRegisterViewController.m in Sources */,
 				1E3D8D921B4BF4A100275C35 /* ATRefreshViewHeader.m in Sources */,
 				1E1CFA1D1BD4FEE20005653D /* KTCSearchViewCategoryCell.m in Sources */,
 				1E37D9761B87244B004B03BD /* KTCCommentManager.m in Sources */,
