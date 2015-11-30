@@ -472,7 +472,6 @@
 		1E827B421B8C47F5008F3F08 /* NewsListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E827B411B8C47F5008F3F08 /* NewsListViewModel.m */; };
 		1E827B451B8C5929008F3F08 /* UserCenterViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E827B441B8C5929008F3F08 /* UserCenterViewModel.m */; };
 		1E827B491B8C5BB5008F3F08 /* UserCenterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E827B481B8C5BB5008F3F08 /* UserCenterModel.m */; };
-		1E827B4E1B8D8F6D008F3F08 /* libXG-SDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E827B4B1B8D8F6D008F3F08 /* libXG-SDK.a */; };
 		1E827B521B8DC047008F3F08 /* NotificationCenterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E827B511B8DC047008F3F08 /* NotificationCenterView.m */; };
 		1E827B541B8DC059008F3F08 /* NotificationCenterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E827B531B8DC059008F3F08 /* NotificationCenterView.xib */; };
 		1E827B5A1B8DD634008F3F08 /* KTCMapService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E827B591B8DD634008F3F08 /* KTCMapService.m */; };
@@ -828,6 +827,15 @@
 		8F85AD771C0C32D100890526 /* refresh_4-6_female_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD6B1C0C32D100890526 /* refresh_4-6_female_2.png */; };
 		8F85AD781C0C32D100890526 /* refresh_4-6_male_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD6C1C0C32D100890526 /* refresh_4-6_male_1.png */; };
 		8F85AD791C0C32D100890526 /* refresh_4-6_male_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD6D1C0C32D100890526 /* refresh_4-6_male_2.png */; };
+		8F85AD7D1C0C43F000890526 /* NotificationCenterViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85AD7B1C0C43F000890526 /* NotificationCenterViewCell.m */; };
+		8F85AD7E1C0C43F000890526 /* NotificationCenterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD7C1C0C43F000890526 /* NotificationCenterViewCell.xib */; };
+		8F85AD821C0C498F00890526 /* PushNotificationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85AD811C0C498F00890526 /* PushNotificationModel.m */; };
+		8F85AD861C0C6C8200890526 /* NotificationCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85AD841C0C6C8200890526 /* NotificationCenterViewController.m */; };
+		8F85AD871C0C6C8200890526 /* NotificationCenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD851C0C6C8200890526 /* NotificationCenterViewController.xib */; };
+		8F85AD8A1C0C6CE100890526 /* NotificationCenterViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85AD891C0C6CE100890526 /* NotificationCenterViewModel.m */; };
+		8F85AD941C0C936800890526 /* libXG-SDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F85AD901C0C936800890526 /* libXG-SDK.a */; };
+		8F85AD951C0C936800890526 /* ReleaseNotes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD911C0C936800890526 /* ReleaseNotes.txt */; };
+		8F85AD9E1C0C955C00890526 /* KTCPushNotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85AD9D1C0C955C00890526 /* KTCPushNotificationService.m */; };
 		8F8A08D21BF9E31300134A9A /* BindPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8A08D01BF9E31300134A9A /* BindPhoneViewController.m */; };
 		8F8A08D31BF9E31300134A9A /* BindPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F8A08D11BF9E31300134A9A /* BindPhoneViewController.xib */; };
 		8F98D2541C000EF900C1388A /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8F98D2521C000EF900C1388A /* AlipaySDK.bundle */; };
@@ -1720,9 +1728,6 @@
 		1E827B441B8C5929008F3F08 /* UserCenterViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterViewModel.m; sourceTree = "<group>"; };
 		1E827B471B8C5BB5008F3F08 /* UserCenterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterModel.h; sourceTree = "<group>"; };
 		1E827B481B8C5BB5008F3F08 /* UserCenterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterModel.m; sourceTree = "<group>"; };
-		1E827B4B1B8D8F6D008F3F08 /* libXG-SDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libXG-SDK.a"; sourceTree = "<group>"; };
-		1E827B4C1B8D8F6D008F3F08 /* XGPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGPush.h; sourceTree = "<group>"; };
-		1E827B4D1B8D8F6D008F3F08 /* XGSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGSetting.h; sourceTree = "<group>"; };
 		1E827B501B8DC047008F3F08 /* NotificationCenterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationCenterView.h; sourceTree = "<group>"; };
 		1E827B511B8DC047008F3F08 /* NotificationCenterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationCenterView.m; sourceTree = "<group>"; };
 		1E827B531B8DC059008F3F08 /* NotificationCenterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationCenterView.xib; sourceTree = "<group>"; };
@@ -2286,6 +2291,22 @@
 		8F85AD6B1C0C32D100890526 /* refresh_4-6_female_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh_4-6_female_2.png"; sourceTree = "<group>"; };
 		8F85AD6C1C0C32D100890526 /* refresh_4-6_male_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh_4-6_male_1.png"; sourceTree = "<group>"; };
 		8F85AD6D1C0C32D100890526 /* refresh_4-6_male_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh_4-6_male_2.png"; sourceTree = "<group>"; };
+		8F85AD7A1C0C43F000890526 /* NotificationCenterViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationCenterViewCell.h; sourceTree = "<group>"; };
+		8F85AD7B1C0C43F000890526 /* NotificationCenterViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationCenterViewCell.m; sourceTree = "<group>"; };
+		8F85AD7C1C0C43F000890526 /* NotificationCenterViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationCenterViewCell.xib; sourceTree = "<group>"; };
+		8F85AD801C0C498F00890526 /* PushNotificationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushNotificationModel.h; sourceTree = "<group>"; };
+		8F85AD811C0C498F00890526 /* PushNotificationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushNotificationModel.m; sourceTree = "<group>"; };
+		8F85AD831C0C6C8200890526 /* NotificationCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationCenterViewController.h; sourceTree = "<group>"; };
+		8F85AD841C0C6C8200890526 /* NotificationCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationCenterViewController.m; sourceTree = "<group>"; };
+		8F85AD851C0C6C8200890526 /* NotificationCenterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationCenterViewController.xib; sourceTree = "<group>"; };
+		8F85AD881C0C6CE100890526 /* NotificationCenterViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationCenterViewModel.h; sourceTree = "<group>"; };
+		8F85AD891C0C6CE100890526 /* NotificationCenterViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationCenterViewModel.m; sourceTree = "<group>"; };
+		8F85AD901C0C936800890526 /* libXG-SDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libXG-SDK.a"; sourceTree = "<group>"; };
+		8F85AD911C0C936800890526 /* ReleaseNotes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReleaseNotes.txt; sourceTree = "<group>"; };
+		8F85AD921C0C936800890526 /* XGPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGPush.h; sourceTree = "<group>"; };
+		8F85AD931C0C936800890526 /* XGSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGSetting.h; sourceTree = "<group>"; };
+		8F85AD9C1C0C955C00890526 /* KTCPushNotificationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCPushNotificationService.h; sourceTree = "<group>"; };
+		8F85AD9D1C0C955C00890526 /* KTCPushNotificationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCPushNotificationService.m; sourceTree = "<group>"; };
 		8F8A08CF1BF9E31300134A9A /* BindPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindPhoneViewController.h; sourceTree = "<group>"; };
 		8F8A08D01BF9E31300134A9A /* BindPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindPhoneViewController.m; sourceTree = "<group>"; };
 		8F8A08D11BF9E31300134A9A /* BindPhoneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindPhoneViewController.xib; sourceTree = "<group>"; };
@@ -2333,6 +2354,7 @@
 				8F98D2571C0010B500C1388A /* CoreMotion.framework in Frameworks */,
 				1EFFAE0E1BEB793E001D4245 /* ImageIO.framework in Frameworks */,
 				1E8CBBBD1BDA366900F78828 /* libsqlite3.0.tbd in Frameworks */,
+				8F85AD941C0C936800890526 /* libXG-SDK.a in Frameworks */,
 				1E8CBBBB1BDA365000F78828 /* libstdc++.6.0.9.tbd in Frameworks */,
 				1E8CBBB71BDA355F00F78828 /* libiconv.tbd in Frameworks */,
 				1E8CBBB31BDA353B00F78828 /* libz.tbd in Frameworks */,
@@ -2357,7 +2379,6 @@
 				1E8CBBB11BDA2F0100F78828 /* BaiduMapAPI_Utils.framework in Frameworks */,
 				1E3D8DA41B4BF4A100275C35 /* libWeChatSDK.a in Frameworks */,
 				1E8CBBAC1BDA2F0100F78828 /* BaiduMapAPI_Cloud.framework in Frameworks */,
-				1E827B4E1B8D8F6D008F3F08 /* libXG-SDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2933,6 +2954,8 @@
 				1E15F9E41BE8ABF2000C74E7 /* SoftwareSettingViewModel.m */,
 				8F7E45071C09E1F0001EF3B5 /* OrderRefundViewModel.h */,
 				8F7E45081C09E1F0001EF3B5 /* OrderRefundViewModel.m */,
+				8F85AD881C0C6CE100890526 /* NotificationCenterViewModel.h */,
+				8F85AD891C0C6CE100890526 /* NotificationCenterViewModel.m */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -3345,6 +3368,7 @@
 		1E3D89711B4BF4A000275C35 /* Thirdpart */ = {
 			isa = PBXGroup;
 			children = (
+				8F85AD8B1C0C91E400890526 /* XGPush */,
 				1EFFADFE1BEB7925001D4245 /* libWeiboSDK */,
 				1E8CBBA31BDA2F0100F78828 /* BMapKit */,
 				1E827B8C1B9412C6008F3F08 /* MWPhotoBrowser */,
@@ -3620,6 +3644,7 @@
 		1E3D8EFA1B4CB83A00275C35 /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
+				8F85AD7F1C0C496000890526 /* PushNotification */,
 				1E7995781BCD262D0099CFF9 /* LoveHouse */,
 				1E7995771BCD262D0099CFF9 /* Hospital */,
 				1E7994F21BC6832A0099CFF9 /* Activity */,
@@ -3701,6 +3726,9 @@
 				8F5D8E401C047BCB00632390 /* NewsListTagFilterViewController.h */,
 				8F5D8E411C047BCB00632390 /* NewsListTagFilterViewController.m */,
 				8F5D8E421C047BCB00632390 /* NewsListTagFilterViewController.xib */,
+				8F85AD831C0C6C8200890526 /* NotificationCenterViewController.h */,
+				8F85AD841C0C6C8200890526 /* NotificationCenterViewController.m */,
+				8F85AD851C0C6C8200890526 /* NotificationCenterViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -4179,9 +4207,8 @@
 		1E827B4A1B8D8F6D008F3F08 /* Push */ = {
 			isa = PBXGroup;
 			children = (
-				1E827B4C1B8D8F6D008F3F08 /* XGPush.h */,
-				1E827B4D1B8D8F6D008F3F08 /* XGSetting.h */,
-				1E827B4B1B8D8F6D008F3F08 /* libXG-SDK.a */,
+				8F85AD9C1C0C955C00890526 /* KTCPushNotificationService.h */,
+				8F85AD9D1C0C955C00890526 /* KTCPushNotificationService.m */,
 			);
 			path = Push;
 			sourceTree = "<group>";
@@ -4192,6 +4219,9 @@
 				1E827B501B8DC047008F3F08 /* NotificationCenterView.h */,
 				1E827B511B8DC047008F3F08 /* NotificationCenterView.m */,
 				1E827B531B8DC059008F3F08 /* NotificationCenterView.xib */,
+				8F85AD7A1C0C43F000890526 /* NotificationCenterViewCell.h */,
+				8F85AD7B1C0C43F000890526 /* NotificationCenterViewCell.m */,
+				8F85AD7C1C0C43F000890526 /* NotificationCenterViewCell.xib */,
 			);
 			path = PushNotification;
 			sourceTree = "<group>";
@@ -5113,6 +5143,26 @@
 			path = Refresh;
 			sourceTree = "<group>";
 		};
+		8F85AD7F1C0C496000890526 /* PushNotification */ = {
+			isa = PBXGroup;
+			children = (
+				8F85AD801C0C498F00890526 /* PushNotificationModel.h */,
+				8F85AD811C0C498F00890526 /* PushNotificationModel.m */,
+			);
+			path = PushNotification;
+			sourceTree = "<group>";
+		};
+		8F85AD8B1C0C91E400890526 /* XGPush */ = {
+			isa = PBXGroup;
+			children = (
+				8F85AD901C0C936800890526 /* libXG-SDK.a */,
+				8F85AD911C0C936800890526 /* ReleaseNotes.txt */,
+				8F85AD921C0C936800890526 /* XGPush.h */,
+				8F85AD931C0C936800890526 /* XGSetting.h */,
+			);
+			path = XGPush;
+			sourceTree = "<group>";
+		};
 		8F98D2581C002CA200C1388A /* Payment */ = {
 			isa = PBXGroup;
 			children = (
@@ -5278,6 +5328,7 @@
 				1E3D8F721B4D37D700275C35 /* OrderListView.xib in Resources */,
 				1EFFAE1C1BEC8364001D4245 /* ActivityFilterView.xib in Resources */,
 				1E79958B1BCE2DC20099CFF9 /* HospitalListView.xib in Resources */,
+				8F85AD951C0C936800890526 /* ReleaseNotes.txt in Resources */,
 				8F7E45061C09E18C001EF3B5 /* OrderRefundViewController.xib in Resources */,
 				1E0B77A41B68C49000A58AD4 /* AccountSettingViewController.xib in Resources */,
 				1E827BCF1B941337008F3F08 /* ImageError@3x.png in Resources */,
@@ -5368,6 +5419,7 @@
 				8F85AD701C0C32D100890526 /* refresh_0-1_male_1.png in Resources */,
 				1E943F511B7DDFDF0029FE74 /* loadingBg_640_960.png in Resources */,
 				1E15F9D21BE8A47C000C74E7 /* SoftwareSettingViewCell.xib in Resources */,
+				8F85AD7E1C0C43F000890526 /* NotificationCenterViewCell.xib in Resources */,
 				1E827BDB1B941337008F3F08 /* ImageSelectedSmallOn@3x.png in Resources */,
 				1E943F011B7B23070029FE74 /* AppointmentOrderListViewController.xib in Resources */,
 				1E827B7C1B9064F0008F3F08 /* KTCAnnotationTipDestinationView.xib in Resources */,
@@ -5438,6 +5490,7 @@
 				1E1CFA231BD72F5E0005653D /* ServiceDetailMoreInfoView.xib in Resources */,
 				1E827BD21B941337008F3F08 /* ImageSelectedOff@3x.png in Resources */,
 				1E8017371BB3CDC900B6C352 /* NewsViewController.xib in Resources */,
+				8F85AD871C0C6C8200890526 /* NotificationCenterViewController.xib in Resources */,
 				1EFFAE0C1BEB7925001D4245 /* WeiboSDK.bundle in Resources */,
 				1E827CCE1B9BE9B9008F3F08 /* CouponListViewSegmentCell.xib in Resources */,
 				1EFFADFD1BEAFB02001D4245 /* UserRoleSelectViewController.xib in Resources */,
@@ -5602,6 +5655,7 @@
 				1E0B7AB31B6F67B800A58AD4 /* GSearchListProductTable.m in Sources */,
 				1E3D8F081B4CCC5000275C35 /* GViewController.m in Sources */,
 				1E3D8CDE1B4BF4A100275C35 /* IcsonTown.m in Sources */,
+				8F85AD821C0C498F00890526 /* PushNotificationModel.m in Sources */,
 				1E943E901B71E7CD0029FE74 /* CheckFlashMD5.m in Sources */,
 				8F7E44F91C09D616001EF3B5 /* OrderRefundView.m in Sources */,
 				1E79958F1BCE2DEC0099CFF9 /* HospitalListViewCell.m in Sources */,
@@ -5641,6 +5695,7 @@
 				8F5D8E431C047BCB00632390 /* NewsListTagFilterViewController.m in Sources */,
 				1E0B7ACC1B6F67B800A58AD4 /* TuanHeaderNumberLabel.m in Sources */,
 				1E3D8D591B4BF4A100275C35 /* HttpCookieWrapper.m in Sources */,
+				8F85AD7D1C0C43F000890526 /* NotificationCenterViewCell.m in Sources */,
 				1E827CAC1B94144E008F3F08 /* UIImageView+WebCache.m in Sources */,
 				1E3D8F201B4CD12E00275C35 /* KTCTabBarController.m in Sources */,
 				1E0B7A921B6F67B800A58AD4 /* GButton.m in Sources */,
@@ -5716,6 +5771,7 @@
 				1E0B7B4F1B6F891100A58AD4 /* WebCookieCache.m in Sources */,
 				1E943E9B1B71E7CD0029FE74 /* ShippingTypeItem.m in Sources */,
 				1E943EFB1B7B19360029FE74 /* AppointmentOrderListViewModel.m in Sources */,
+				8F85AD8A1C0C6CE100890526 /* NotificationCenterViewModel.m in Sources */,
 				1E943EF31B7AE7800029FE74 /* AppointmentOrderModel.m in Sources */,
 				1EC73C621B611630008B39EA /* SettlementView.m in Sources */,
 				1E3D8D4E1B4BF4A100275C35 /* StatisticLogUtil.m in Sources */,
@@ -5763,6 +5819,7 @@
 				1E3D8D811B4BF4A100275C35 /* AlixPayResult.m in Sources */,
 				1E0B7ACB1B6F67B800A58AD4 /* TTTAttributedLabel.m in Sources */,
 				1EC73BA31B5E25A4008B39EA /* HotActivityGroupViewCell.m in Sources */,
+				8F85AD861C0C6C8200890526 /* NotificationCenterViewController.m in Sources */,
 				1E7995AC1BCF49250099CFF9 /* NewsRecommendCellViewSmallImageView.m in Sources */,
 				1E827CAD1B94144E008F3F08 /* UIView+WebCacheOperation.m in Sources */,
 				1E0B7AEF1B6F6A6D00A58AD4 /* GuideViewController.m in Sources */,
@@ -6001,6 +6058,7 @@
 				1E15F9AC1BE1C16E000C74E7 /* CommentDetailViewModel.m in Sources */,
 				1E8017121BB0071000B6C352 /* HomeViewThreeImageNewsCell.m in Sources */,
 				1E3D8D481B4BF4A100275C35 /* DDContextFilterLogFormatter.m in Sources */,
+				8F85AD9E1C0C955C00890526 /* KTCPushNotificationService.m in Sources */,
 				1E827CDE1B9D280D008F3F08 /* CouponUsableListView.m in Sources */,
 				1E943F411B7DC74B0029FE74 /* HomeViewHorizontalListCell.m in Sources */,
 				8F5D8E3E1C045D1000632390 /* NewsListTagFilterViewCell.m in Sources */,
@@ -6195,6 +6253,7 @@
 					"$(PROJECT_DIR)/KidsTC/Class/LogicFramework/Push",
 					"$(PROJECT_DIR)/KidsTC/Class/TecFramework/Thirdpart/BMapKit",
 					"$(PROJECT_DIR)/KidsTC/Class/TecFramework/Thirdpart/libWeiboSDK",
+					"$(PROJECT_DIR)/KidsTC/Class/TecFramework/Thirdpart/XGPush",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -6231,6 +6290,7 @@
 					"$(PROJECT_DIR)/KidsTC/Class/LogicFramework/Push",
 					"$(PROJECT_DIR)/KidsTC/Class/TecFramework/Thirdpart/BMapKit",
 					"$(PROJECT_DIR)/KidsTC/Class/TecFramework/Thirdpart/libWeiboSDK",
+					"$(PROJECT_DIR)/KidsTC/Class/TecFramework/Thirdpart/XGPush",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",

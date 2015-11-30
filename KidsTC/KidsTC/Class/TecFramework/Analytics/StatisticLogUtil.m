@@ -361,144 +361,144 @@ static StatisticLogUtil *sharedInstance = nil;
 
 - (void) asyncUserDeviceInfoWithLoginStat:(NSInteger)stat
 {
-    NSString * url = [NSString stringWithFormat:@"%@&appSource=iPhone&appVersion=%@", URL_USERINFO_UPDATE, [GConfig getCurrentAppVersionCode]];
-    mtaUserInfoUpdate = [[MTAAppMonitorStat alloc] init];
-    [mtaUserInfoUpdate setInterface:@"URL_USERINFO_UPDATE"];
-    
-	if(url == nil)
-		return;
-	
-	BOOL b = [GToolUtil filterBlackList:url];
-	if(!b)return ;
-	
-    _lastLoginStat = stat;
-    
-    if (!_netAvailable) {
-        _asyncUserInfoFail = YES;
-        return;
-    }
-    _asyncUserInfoFail = NO;
-    
-    UserWrapper *user = [UserWrapper shareMasterUser];
-    UIDevice * device = [UIDevice currentDevice];
-    
-    NSString * oldUdid = @"";
-    NSString * udid = [device vendorIdentifier:&oldUdid];
-    
-    NSString* deviceToken = [[NSUserDefaults standardUserDefaults] stringForKey:kDeviceToken];
-    double lat = [[NSUserDefaults standardUserDefaults] doubleForKey:kLantitude];
-    double lon = [[NSUserDefaults standardUserDefaults] doubleForKey:kLongitude];
-    NSDictionary * plistDict = [[NSBundle mainBundle] infoDictionary];
-
-	
-    ASIFormDataRequest *request = [[ASIFormDataRequest alloc] initWithURL:[NSURL URLWithString:url]];
-    
-    [request setStringEncoding: CFStringConvertEncodingToNSStringEncoding ( kCFStringEncodingGB_18030_2000 )];
-    
-    [request setPostValue:udid forKey:@"udid"];
-    [request setPostValue:[[NSString stringWithFormat:@"%@&%@", udid, [StatisticLogUtil icsonKey]] stringFromMD5] forKey:@"verify_key"];
-    
-    [request setPostValue:I2N(200) forKey:@"device_type"];       // 200 for iphone
-    //edit by Altair, 20141125, use CFBundleShortVersionString istead of CFBundleVersion
-    [request setPostValue:[plistDict objectForKey:@"CFBundleShortVersionString"] forKey:@"app_version"];
-    [request setPostValue:device.systemVersion forKey:@"os_version"];
-
-	[request setPostValue:[[UserWrapper shareMasterUser] provinceId] forKey:@"geo_graphic"];
-    [request setPostValue:[[UserWrapper shareMasterUser] provinceId] forKey:@"zone"];
-
-    
-    [request setPostValue:@"开发" forKey:@"app_src"];
-    
-    if (lat != 0 || lon != 0) {
-        [request setPostValue:[NSNumber numberWithDouble:lat] forKey:@"lat"];
-        [request setPostValue:[NSNumber numberWithDouble:lon] forKey:@"lon"];
-    }
-    if (user.uid > 0) [request setPostValue:I2N(user.uid) forKey:@"uid"];
-    if (stat > 0) [request setPostValue:I2N(stat) forKey:@"status"];
-    if (deviceToken) [request setPostValue:deviceToken forKey:@"device_token"];
-    if (oldUdid) [request setPostValue:oldUdid forKey:@"oldUdid"];
-    
-    //NSLog(@"uid = %d, udid = %@, token = %@, oldUdid = %@", user.uid, udid, deviceToken, oldUdid);
-    
-    __weak typeof(request) weakReq = request;
-    
-    [request setCompletionBlock:^{
-        [mtaUserInfoUpdate setResultType:MTA_SUCCESS];
-        [MTA reportAppMonitorStat:mtaUserInfoUpdate];
-        _asyncUserInfoFail = NO;
-        NSLog(@"asyncUserDeviceInfo return = %@", weakReq.responseString);
-    }];
-    [request setFailedBlock:^{
-        [mtaUserInfoUpdate setResultType:MTA_FAILURE];
-        [MTA reportAppMonitorStat:mtaUserInfoUpdate];
-        _asyncUserInfoFail = YES;
-        NSString *errMsg = [NSString stringWithFormat:@"更新用户设备信息失败，失败码：%@", weakReq.error];
-        [MTA trackError:errMsg];
-        NSLog(@"asyncUserDeviceInfo error = %@", weakReq.error);
-    }];
-    
-    [HttpProcessHelper getIcsonCookie:request];
-    
-    [[ASIDataProvider sharedASIDataProvider] addASIRequest:request];
+//    NSString * url = [NSString stringWithFormat:@"%@&appSource=iPhone&appVersion=%@", URL_USERINFO_UPDATE, [GConfig getCurrentAppVersionCode]];
+//    mtaUserInfoUpdate = [[MTAAppMonitorStat alloc] init];
+//    [mtaUserInfoUpdate setInterface:@"URL_USERINFO_UPDATE"];
+//    
+//	if(url == nil)
+//		return;
+//	
+//	BOOL b = [GToolUtil filterBlackList:url];
+//	if(!b)return ;
+//	
+//    _lastLoginStat = stat;
+//    
+//    if (!_netAvailable) {
+//        _asyncUserInfoFail = YES;
+//        return;
+//    }
+//    _asyncUserInfoFail = NO;
+//    
+//    UserWrapper *user = [UserWrapper shareMasterUser];
+//    UIDevice * device = [UIDevice currentDevice];
+//    
+//    NSString * oldUdid = @"";
+//    NSString * udid = [device vendorIdentifier:&oldUdid];
+//    
+//    NSString* deviceToken = [[NSUserDefaults standardUserDefaults] stringForKey:kDeviceToken];
+//    double lat = [[NSUserDefaults standardUserDefaults] doubleForKey:kLantitude];
+//    double lon = [[NSUserDefaults standardUserDefaults] doubleForKey:kLongitude];
+//    NSDictionary * plistDict = [[NSBundle mainBundle] infoDictionary];
+//
+//	
+//    ASIFormDataRequest *request = [[ASIFormDataRequest alloc] initWithURL:[NSURL URLWithString:url]];
+//    
+//    [request setStringEncoding: CFStringConvertEncodingToNSStringEncoding ( kCFStringEncodingGB_18030_2000 )];
+//    
+//    [request setPostValue:udid forKey:@"udid"];
+//    [request setPostValue:[[NSString stringWithFormat:@"%@&%@", udid, [StatisticLogUtil icsonKey]] stringFromMD5] forKey:@"verify_key"];
+//    
+//    [request setPostValue:I2N(200) forKey:@"device_type"];       // 200 for iphone
+//    //edit by Altair, 20141125, use CFBundleShortVersionString istead of CFBundleVersion
+//    [request setPostValue:[plistDict objectForKey:@"CFBundleShortVersionString"] forKey:@"app_version"];
+//    [request setPostValue:device.systemVersion forKey:@"os_version"];
+//
+//	[request setPostValue:[[UserWrapper shareMasterUser] provinceId] forKey:@"geo_graphic"];
+//    [request setPostValue:[[UserWrapper shareMasterUser] provinceId] forKey:@"zone"];
+//
+//    
+//    [request setPostValue:@"开发" forKey:@"app_src"];
+//    
+//    if (lat != 0 || lon != 0) {
+//        [request setPostValue:[NSNumber numberWithDouble:lat] forKey:@"lat"];
+//        [request setPostValue:[NSNumber numberWithDouble:lon] forKey:@"lon"];
+//    }
+//    if (user.uid > 0) [request setPostValue:I2N(user.uid) forKey:@"uid"];
+//    if (stat > 0) [request setPostValue:I2N(stat) forKey:@"status"];
+//    if (deviceToken) [request setPostValue:deviceToken forKey:@"device_token"];
+//    if (oldUdid) [request setPostValue:oldUdid forKey:@"oldUdid"];
+//    
+//    //NSLog(@"uid = %d, udid = %@, token = %@, oldUdid = %@", user.uid, udid, deviceToken, oldUdid);
+//    
+//    __weak typeof(request) weakReq = request;
+//    
+//    [request setCompletionBlock:^{
+//        [mtaUserInfoUpdate setResultType:MTA_SUCCESS];
+//        [MTA reportAppMonitorStat:mtaUserInfoUpdate];
+//        _asyncUserInfoFail = NO;
+//        NSLog(@"asyncUserDeviceInfo return = %@", weakReq.responseString);
+//    }];
+//    [request setFailedBlock:^{
+//        [mtaUserInfoUpdate setResultType:MTA_FAILURE];
+//        [MTA reportAppMonitorStat:mtaUserInfoUpdate];
+//        _asyncUserInfoFail = YES;
+//        NSString *errMsg = [NSString stringWithFormat:@"更新用户设备信息失败，失败码：%@", weakReq.error];
+//        [MTA trackError:errMsg];
+//        NSLog(@"asyncUserDeviceInfo error = %@", weakReq.error);
+//    }];
+//    
+//    [HttpProcessHelper getIcsonCookie:request];
+//    
+//    [[ASIDataProvider sharedASIDataProvider] addASIRequest:request];
 
 }
 
 
 - (void) asyncPushNotificationWithBlock:(void (^)(id, int))block
 {
-    UserWrapper *user = [UserWrapper shareMasterUser];
-    NSString * url = [NSString stringWithFormat:@"%@&appSource=iPhone&appVersion=%@", URL_PUSHNOTIFY_GET, [GConfig getCurrentAppVersionCode]];
-    
-    
-	if(url == nil)
-	{
-		return;
-	}
-	BOOL b = [GToolUtil filterBlackList:url];
-	if(!b)return ;
-	
-    ASIFormDataRequest *request = [[ASIFormDataRequest alloc] initWithURL:[NSURL URLWithString:url]];
-    [request setStringEncoding: CFStringConvertEncodingToNSStringEncoding ( kCFStringEncodingGB_18030_2000 )];
-    
-    if (user.uid > 0) {
-        [request setPostValue:I2N(user.uid) forKey:@"uid"];
-    } else {
-        NSString* deviceToken = [[NSUserDefaults standardUserDefaults] stringForKey:kDeviceToken];
-        if (deviceToken) [request setPostValue:deviceToken forKey:@"token"];
-    }
-
-    if (block)
-    {
-        __weak typeof(request) weakReq = request;
-        
-        [request setCompletionBlock:^{
-            MTAAppMonitorStat *mtaPushNotifyGetStat;
-            mtaPushNotifyGetStat = [[MTAAppMonitorStat alloc] init];
-            [mtaPushNotifyGetStat setInterface:@"URL_PUSHNOTIFY_GET"];
-            [mtaPushNotifyGetStat setResultType:MTA_SUCCESS];
-            [MTA reportAppMonitorStat:mtaPushNotifyGetStat];
-            NSDictionary * allDict = [weakReq.responseData toJSONObjectFO];
-            if (allDict) {
-                int errNo = [[allDict objectForKey: @"errno"] intValue];
-                block([allDict objectForKey: @"data"], errNo);
-            } else {
-                block(nil, -1);
-            }
-        }];
-        [request setFailedBlock:^{
-            MTAAppMonitorStat *mtaPushNotifyGetStat;
-            mtaPushNotifyGetStat = [[MTAAppMonitorStat alloc] init];
-            [mtaPushNotifyGetStat setInterface:@"URL_PUSHNOTIFY_GET"];
-            [mtaPushNotifyGetStat setResultType:MTA_FAILURE];
-            [MTA reportAppMonitorStat:mtaPushNotifyGetStat];
-
-            NSString *errMsg = [NSString stringWithFormat:@"获取push消息接口失败"];
-            [MTA trackError:errMsg];
-            block(nil, weakReq.responseStatusCode);
-        }];
-    }
-    
-    [[ASIDataProvider sharedASIDataProvider] addASIRequest:request];
+//    UserWrapper *user = [UserWrapper shareMasterUser];
+//    NSString * url = [NSString stringWithFormat:@"%@&appSource=iPhone&appVersion=%@", URL_PUSHNOTIFY_GET, [GConfig getCurrentAppVersionCode]];
+//    
+//    
+//	if(url == nil)
+//	{
+//		return;
+//	}
+//	BOOL b = [GToolUtil filterBlackList:url];
+//	if(!b)return ;
+//	
+//    ASIFormDataRequest *request = [[ASIFormDataRequest alloc] initWithURL:[NSURL URLWithString:url]];
+//    [request setStringEncoding: CFStringConvertEncodingToNSStringEncoding ( kCFStringEncodingGB_18030_2000 )];
+//    
+//    if (user.uid > 0) {
+//        [request setPostValue:I2N(user.uid) forKey:@"uid"];
+//    } else {
+//        NSString* deviceToken = [[NSUserDefaults standardUserDefaults] stringForKey:kDeviceToken];
+//        if (deviceToken) [request setPostValue:deviceToken forKey:@"token"];
+//    }
+//
+//    if (block)
+//    {
+//        __weak typeof(request) weakReq = request;
+//        
+//        [request setCompletionBlock:^{
+//            MTAAppMonitorStat *mtaPushNotifyGetStat;
+//            mtaPushNotifyGetStat = [[MTAAppMonitorStat alloc] init];
+//            [mtaPushNotifyGetStat setInterface:@"URL_PUSHNOTIFY_GET"];
+//            [mtaPushNotifyGetStat setResultType:MTA_SUCCESS];
+//            [MTA reportAppMonitorStat:mtaPushNotifyGetStat];
+//            NSDictionary * allDict = [weakReq.responseData toJSONObjectFO];
+//            if (allDict) {
+//                int errNo = [[allDict objectForKey: @"errno"] intValue];
+//                block([allDict objectForKey: @"data"], errNo);
+//            } else {
+//                block(nil, -1);
+//            }
+//        }];
+//        [request setFailedBlock:^{
+//            MTAAppMonitorStat *mtaPushNotifyGetStat;
+//            mtaPushNotifyGetStat = [[MTAAppMonitorStat alloc] init];
+//            [mtaPushNotifyGetStat setInterface:@"URL_PUSHNOTIFY_GET"];
+//            [mtaPushNotifyGetStat setResultType:MTA_FAILURE];
+//            [MTA reportAppMonitorStat:mtaPushNotifyGetStat];
+//
+//            NSString *errMsg = [NSString stringWithFormat:@"获取push消息接口失败"];
+//            [MTA trackError:errMsg];
+//            block(nil, weakReq.responseStatusCode);
+//        }];
+//    }
+//    
+//    [[ASIDataProvider sharedASIDataProvider] addASIRequest:request];
 }
 
 @end

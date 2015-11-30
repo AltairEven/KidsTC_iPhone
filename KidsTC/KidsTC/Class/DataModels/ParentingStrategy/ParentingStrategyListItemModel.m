@@ -30,17 +30,8 @@
         self.commentCount = [[data objectForKey:@"commentCount"] integerValue];
         self.likeCount = [[data objectForKey:@"praiseCount"] integerValue];
         self.brief = [data objectForKey:@"simply"];
-        BOOL isRecommend = [[data objectForKey:@"isRecommend"] boolValue];
-        BOOL isHot = [[data objectForKey:@"isHot"] boolValue];
-        if (isRecommend && isHot) {
-            self.listTag = ParentingStrategyListTagRNH;
-        } else if (isRecommend) {
-            self.listTag = ParentingStrategyListTagRecommend;
-        } else if (isHot) {
-            self.listTag = ParentingStrategyListTagHot;
-        } else {
-            self.listTag = ParentingStrategyListTagNone;
-        }
+        self.isHot = [[data objectForKey:@"isHot"] boolValue];
+        self.isRecommend = [[data objectForKey:@"isRecommend"] boolValue];
         
         self.imageRatio = 0.6;
     }

@@ -171,7 +171,7 @@ typedef enum
 #define kAliPaySchema               @"com51buy"
 
 
-#define kDeviceToken                @"device_token"
+//#define kDeviceToken                @"device_token"
 #define kLantitude                  @"lantitude"
 #define kLongitude                  @"longitude"
 #define kIcsonURLPefixFromOutside   @"wap2app://app.launch/param?"

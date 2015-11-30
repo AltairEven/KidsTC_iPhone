@@ -19,7 +19,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *editorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *viewCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentCountLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *tagImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *hotImageView;
+@property (weak, nonatomic) IBOutlet UILabel *recommendLabel;
 
 @end
 
@@ -29,6 +30,12 @@
     // Initialization code
     
     [self.contentBGView bringSubviewToFront:self.descriptionBGView];
+    
+    self.recommendLabel.layer.cornerRadius = 3;
+    self.recommendLabel.layer.masksToBounds = YES;
+    self.recommendLabel.layer.borderColor = [AUITheme theme].highlightTextColor.CGColor;
+    self.recommendLabel.layer.borderWidth = 1;
+    [self.recommendLabel setTextColor:[AUITheme theme].highlightTextColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -54,34 +61,8 @@
     [self.editorLabel setText:model.editorName];
     [self.viewCountLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)model.viewCount]];
     [self.commentCountLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)model.commentCount]];
-    
-    switch (model.listTag) {
-        case ParentingStrategyListTagNone:
-        {
-            [self.tagImageView setHidden:YES];
-        }
-            break;
-        case ParentingStrategyListTagRecommend:
-        {
-            [self.tagImageView setHidden:NO];
-            [self.tagImageView setImage:[UIImage imageNamed:@""]];
-        }
-            break;
-        case ParentingStrategyListTagHot:
-        {
-            [self.tagImageView setHidden:NO];
-            [self.tagImageView setImage:[UIImage imageNamed:@""]];
-        }
-            break;
-        case ParentingStrategyListTagRNH:
-        {
-            [self.tagImageView setHidden:NO];
-            [self.tagImageView setImage:[UIImage imageNamed:@""]];
-        }
-            break;
-        default:
-            break;
-    }
+    [self.hotImageView setHidden:!model.isHot];
+    [self.recommendLabel setHidden:!model.isRecommend];
 }
 
 @end

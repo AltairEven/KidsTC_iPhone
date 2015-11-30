@@ -89,7 +89,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     if (!cell) {
         cell =  [[[NSBundle mainBundle] loadNibNamed:@"ActivityViewCell" owner:nil options:nil] objectAtIndex:0];
     }
-    [cell configWithItemModel:[self.listModels objectAtIndex:indexPath.row]];
+    [cell configWithItemModel:[self.listModels objectAtIndex:indexPath.section]];
     return cell;
 }
 

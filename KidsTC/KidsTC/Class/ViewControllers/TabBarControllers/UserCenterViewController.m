@@ -15,6 +15,7 @@
 #import "SoftwareSettingViewController.h"
 #import "LoginViewController.h"
 #import "AppointmentOrderListViewController.h"
+#import "NotificationCenterViewController.h"
 
 @interface UserCenterViewController () <UserCenterViewDelegate>
 
@@ -138,6 +139,9 @@
                 break;
             case UserCenterTagMessageCenter:
             {
+                NotificationCenterViewController *controller = [[NotificationCenterViewController alloc] initWithNibName:@"NotificationCenterViewController" bundle:nil];
+                controller.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:controller animated:YES];
             }
                 break;
             default:

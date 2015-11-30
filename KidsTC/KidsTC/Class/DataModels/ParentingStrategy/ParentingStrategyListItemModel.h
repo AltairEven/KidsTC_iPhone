@@ -8,13 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum {
-    ParentingStrategyListTagNone,
-    ParentingStrategyListTagRecommend,
-    ParentingStrategyListTagHot,
-    ParentingStrategyListTagRNH
-}ParentingStrategyListTag;
-
 @interface ParentingStrategyListItemModel : NSObject
 
 @property (nonatomic, copy) NSString *identifier;
@@ -24,7 +17,8 @@ typedef enum {
 @property (nonatomic, copy) NSString *editorName;
 @property (nonatomic, assign) NSUInteger viewCount;
 @property (nonatomic, assign) NSUInteger commentCount;
-@property (nonatomic, assign) ParentingStrategyListTag listTag;
+@property (nonatomic, assign) BOOL isHot;
+@property (nonatomic, assign) BOOL isRecommend;
 @property (nonatomic, assign) NSUInteger likeCount;
 @property (nonatomic, copy) NSString *brief;
 

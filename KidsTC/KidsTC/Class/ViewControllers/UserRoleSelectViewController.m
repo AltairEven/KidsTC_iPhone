@@ -58,6 +58,8 @@ typedef enum {
 
 - (void)didClickedSexImage:(id)sender;
 
+- (void)selectSexWithTag:(NSUInteger)tag;
+
 @end
 
 @implementation UserRoleSelectViewController
@@ -234,6 +236,8 @@ typedef enum {
     [self.rightImageView setUserInteractionEnabled:YES];
     UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickedSexImage:)];
     [self.rightImageView addGestureRecognizer:tap2];
+    
+    [self selectSexWithTag:self.leftImageView.tag];
 }
 
 - (void)resetSecondView {
@@ -324,10 +328,19 @@ typedef enum {
 
 - (void)didClickedSexImage:(id)sender {
     UITapGestureRecognizer *tap = (UITapGestureRecognizer *)sender;
-    if (tap.view == self.leftImageView) {
+    NSUInteger tag = tap.view.tag;
+    [self selectSexWithTag:tag];
+}
+
+- (void)selectSexWithTag:(NSUInteger)tag {
+    if (tag == self.leftImageView.tag) {
         self.sexTag = SexSelectTagBoy;
-    } else if (tap.view == self.rightImageView) {
+        [self.leftImageView setAlpha:1];
+        [self.rightImageView setAlpha:0.3];
+    } else if (tag == self.rightImageView.tag) {
         self.sexTag = SexSelectTagGirl;
+        [self.leftImageView setAlpha:0.3];
+        [self.rightImageView setAlpha:1];
     }
 }
 
