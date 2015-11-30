@@ -1,22 +1,21 @@
 //
-//  ChangePasswordViewController.m
+//  UserRegisterViewController.m
 //  KidsTC
 //
-//  Created by Altair on 11/13/15.
+//  Created by Altair on 11/30/15.
 //  Copyright © 2015 KidsTC. All rights reserved.
 //
 
-#import "ChangePasswordViewController.h"
+#import "UserRegisterViewController.h"
 
-@interface ChangePasswordViewController ()
+@interface UserRegisterViewController ()
 
 @end
 
-@implementation ChangePasswordViewController
+@implementation UserRegisterViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _navigationTitle = @"修改密码";
     // Do any additional setup after loading the view from its nib.
 }
 
