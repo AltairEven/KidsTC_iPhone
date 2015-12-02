@@ -88,6 +88,8 @@ typedef NS_ENUM(NSInteger, ChosenTag){
 
 - (void)hasGetAllPicturesFromLibrary:(NSArray *)dataArray;
 
+- (void)dismiss;
+
 @end
 
 @implementation MC_ImagePickerViewController
@@ -215,7 +217,7 @@ typedef NS_ENUM(NSInteger, ChosenTag){
 #pragma mark self method
 - (void)onClickCancelButton
 {
-    [self dismissViewControllerAnimated:YES completion:^(void){;}];
+    [self dismiss];
 }
 
 
@@ -257,7 +259,7 @@ typedef NS_ENUM(NSInteger, ChosenTag){
         [self.delegate MC_ImagePickerViewController:self didFinishPickingImageWithInfo:dataDic];
 //    }
     
-    [self dismissViewControllerAnimated:YES completion:^(void){;}];
+    [self dismiss];
 }
 
 
@@ -912,10 +914,13 @@ typedef NS_ENUM(NSInteger, ChosenTag){
         
     }
     [picker dismissViewControllerAnimated:NO completion:nil];
-    [self dismissViewControllerAnimated:NO completion:nil];
+    [self dismiss];
 }
 
 -(void) imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(pickerViewControllerWillDismiss:)]) {
+        [self.delegate pickerViewControllerWillDismiss:self];
+    }
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -939,6 +944,13 @@ typedef NS_ENUM(NSInteger, ChosenTag){
         [alert show];
     }
     
+}
+
+- (void)dismiss {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(pickerViewControllerWillDismiss:)]) {
+        [self.delegate pickerViewControllerWillDismiss:self];
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

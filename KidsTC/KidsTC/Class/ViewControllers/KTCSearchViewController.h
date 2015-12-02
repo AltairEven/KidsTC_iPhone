@@ -10,4 +10,6 @@
 
 @interface KTCSearchViewController : GViewController
 
+- (instancetype)initWithSearchType:(KTCSearchType)type;
+
 @end

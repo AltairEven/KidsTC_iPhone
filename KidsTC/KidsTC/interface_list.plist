@@ -88,6 +88,13 @@
 			<key>url</key>
 			<string>http://api.kidstc.com/json.php?mod=comment&amp;&amp;act=add_comment</string>
 		</dict>
+		<key>COMMENT_GET_BY_USER</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=comment&amp;&amp;act=get_user_comment_info</string>
+		</dict>
 		<key>COMMENT_GET_COUNT</key>
 		<dict>
 			<key>method</key>
@@ -122,6 +129,13 @@
 			<string>get</string>
 			<key>url</key>
 			<string>http://api.kidstc.com/json.php?mod=comment&amp;&amp;act=get_comment_score_cfg</string>
+		</dict>
+		<key>COMMENT_MODIFY</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=comment&amp;&amp;act=modify_comment</string>
 		</dict>
 		<key>COMMENT_PRAISE</key>
 		<dict>
@@ -263,6 +277,13 @@
 			<key>url</key>
 			<string>http://api.kidstc.com/json.php?mod=order&amp;&amp;act=get_refund_type</string>
 		</dict>
+		<key>ORDER_GET_USER_REFUND</key>
+		<dict>
+			<key>method</key>
+			<string>get</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=order&amp;&amp;act=get_user_refund</string>
+		</dict>
 		<key>ORDER_PLACE_ORDER</key>
 		<dict>
 			<key>method</key>
@@ -382,6 +403,13 @@
 			<key>url</key>
 			<string>http://api.kidstc.com/json.php?mod=search&amp;&amp;act=search</string>
 		</dict>
+		<key>SHARE_ADD_RECORD</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=UserCenter&amp;&amp;act=add_share_record</string>
+		</dict>
 		<key>SHOPPINGCART_GET</key>
 		<dict>
 			<key>method</key>
@@ -491,6 +519,6 @@
 	<key>errno</key>
 	<integer>0</integer>
 	<key>version</key>
-	<string>24</string>
+	<string>26</string>
 </dict>
 </plist>

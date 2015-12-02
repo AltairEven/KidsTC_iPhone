@@ -16,6 +16,10 @@
 
 @property (nonatomic, copy) NSString *userName;
 
+@property (nonatomic, copy) NSString *beRepliedUserIdentifier;
+
+@property (nonatomic, copy) NSString *beRepliedUserName;
+
 @property (nonatomic, copy) NSString *replyContent;
 
 @property (nonatomic, copy) NSString *timeDescription;

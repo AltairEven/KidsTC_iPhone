@@ -33,10 +33,6 @@
 
 @property (nonatomic, assign) BOOL isComment;
 
-@property (nonatomic, copy) NSString *commentIdetifier;
-
-@property (nonatomic, copy) NSString *currentReplyedName;
-
 @property (nonatomic, strong) KTCCommentManager *commentManager;
 
 - (void)makeMWPhotoFromImageUrlArray:(NSArray *)urlArray;
@@ -74,7 +70,7 @@
     self.viewModel = [[CommentDetailViewModel alloc] initWithView:self.detailView];
     [self.viewModel.detailModel setModelSource:self.viewSource];
     [self.viewModel.detailModel setRelationType:self.relationType];
-    [self.viewModel.detailModel setIdentifier:self.commentIdetifier];
+    [self.viewModel.detailModel setIdentifier:self.commentIdentifier];
     [self.viewModel.detailModel setRelationIdentifier:self.relationIdentifier];
     [self.viewModel.detailModel setHeaderModel:self.headerModel];
     [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
@@ -111,11 +107,10 @@
         [self.keyboardAdhesiveView expand];
         if (self.viewSource == CommentDetailViewSourceStrategy || self.viewSource == CommentDetailViewSourceStrategyDetail) {
             self.isComment = YES;
-            self.commentIdetifier = model.identifier;
+            self.commentIdentifier = model.identifier;
         } else {
             self.isComment = NO;
-        }
-        self.currentReplyedName = model.userName;
+        };
     } target:self];
 }
 
@@ -123,9 +118,10 @@
     [GToolUtil checkLogin:^(NSString *uid) {
         [self.keyboardAdhesiveView setPlaceholder:@"回复楼主："];
         [self.keyboardAdhesiveView expand];
+        self.commentIdentifier = self.viewModel.detailModel.identifier;
         if (self.viewSource == CommentDetailViewSourceStrategy || self.viewSource == CommentDetailViewSourceStrategyDetail) {
             self.isComment = YES;
-            self.commentIdetifier = self.viewModel.detailModel.identifier;
+            self.commentIdentifier = nil;
         } else {
             self.isComment = NO;
         }
@@ -356,12 +352,10 @@
     object.relationType = self.relationType;
     object.isAnonymous = NO;
     object.isComment = self.isComment;
-    object.commentIdentifier = self.commentIdetifier;
-    if (self.viewSource == CommentDetailViewSourceStrategy || self.viewSource == CommentDetailViewSourceStrategyDetail) {
-        object.content = [NSString stringWithFormat:@"回复%@:%@", self.currentReplyedName, self.keyboardAdhesiveView.text];
-    } else {
-        object.content = self.keyboardAdhesiveView.text;
+    if ([self.commentIdentifier length] > 0) {
+        object.commentIdentifier = self.commentIdentifier;
     }
+    object.content = self.keyboardAdhesiveView.text;
     object.uploadImageStrings = locationUrls;
     
     if (!self.commentManager) {

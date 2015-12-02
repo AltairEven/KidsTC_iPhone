@@ -53,4 +53,6 @@
 
 - (NSString *)keywords;
 
+- (void)setCurrentSearchTypeItemIndex:(NSUInteger)index;
+
 @end

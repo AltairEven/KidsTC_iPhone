@@ -25,7 +25,6 @@
 
 @property (strong, nonatomic)  NSArray *photoArray;
 @property (strong, nonatomic)  NSDictionary *photoDictionary;
-@property (nonatomic, strong) NSDictionary *produceInfo;
 
 @property (nonatomic, strong) NSArray *mwPhotosArray;
 

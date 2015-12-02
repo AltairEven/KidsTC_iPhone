@@ -19,6 +19,8 @@
 
 - (void)didClickedDeleteButton;
 
+- (void)dismiss;
+
 @end
 
 #define PADDING                  10
@@ -1258,10 +1260,10 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
     if (error) {
         // Error occured so dismiss with a delay incase error was immediate and we need to wait to dismiss the VC
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [self dismiss];
         });
     } else {
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [self dismiss];
     }
     
 }
@@ -1525,7 +1527,7 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
 - (void)toggleControls {
 //    [self setControlsHidden:![self areControlsHidden] animated:YES permanent:NO];
     
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismiss];
 }
 
 #pragma mark - Properties
@@ -1567,7 +1569,7 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
             // Call delegate method and let them dismiss us
             [_delegate photoBrowserDidFinishModalPresentation:self];
         } else  {
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [self dismiss];
         }
     }
 }
@@ -1667,6 +1669,13 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
 - (void)didClickedDeleteButton {
     if (self.delegate && [self.delegate respondsToSelector:@selector(photoBrowser:didClickedDeleteButtonAtIndex:)]) {
         [self.delegate photoBrowser:self didClickedDeleteButtonAtIndex:self.currentIndex];
+    }
+    [self dismiss];
+}
+
+- (void)dismiss {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(photoBrowserDidDismissed:)]) {
+        [self.delegate photoBrowserDidDismissed:self];
     }
     [self dismissViewControllerAnimated:YES completion:nil];
 }

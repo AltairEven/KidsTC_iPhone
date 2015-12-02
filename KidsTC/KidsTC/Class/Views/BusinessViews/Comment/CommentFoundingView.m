@@ -15,7 +15,7 @@
 #define PLACEHOLDRERTEXT (@"环境如何，宝宝玩得开心吗？您的意见对其他家长有很大帮助！")
 #define MAXCOMMENTLENGTH (500)
 
-@interface CommentFoundingView ()<UITableViewDataSource, UITableViewDelegate, AUIImageGridViewDelegate, UITextViewDelegate, FiveStarsViewDelegate>
+@interface CommentFoundingView () <UITableViewDataSource, UITableViewDelegate, AUIImageGridViewDelegate, UITextViewDelegate, FiveStarsViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UITableViewCell *commentCell;

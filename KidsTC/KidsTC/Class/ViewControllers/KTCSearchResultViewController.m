@@ -95,7 +95,7 @@
 }
 
 - (void)didClickedSearchButtonOnSearchResultView:(KTCSearchResultView *)headerView {
-    KTCSearchViewController *controller = [[KTCSearchViewController alloc] initWithNibName:@"KTCSearchViewController" bundle:nil];
+    KTCSearchViewController *controller = [[KTCSearchViewController alloc] initWithSearchType:self.searchType];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
 }

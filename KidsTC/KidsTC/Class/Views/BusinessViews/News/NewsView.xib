@@ -24,8 +24,19 @@
                                 <segment title="知识库"/>
                             </segments>
                         </segmentedControl>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4FB-lk-czY">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jsN-Wb-oqt">
                             <rect key="frame" x="282" y="28" width="28" height="28"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="28" id="LZr-0i-PsQ"/>
+                                <constraint firstAttribute="height" constant="28" id="N5r-dv-sJC"/>
+                            </constraints>
+                            <state key="normal" image="navigation_search"/>
+                            <connections>
+                                <action selector="didClickedSearchButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="coh-8X-CKV"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4FB-lk-czY">
+                            <rect key="frame" x="10" y="28" width="28" height="28"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="28" id="C44-w6-5em"/>
                                 <constraint firstAttribute="height" constant="28" id="Mc5-5N-m8D"/>
@@ -39,10 +50,12 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="0Ja-Oi-iqr" firstAttribute="centerY" secondItem="ejO-Z5-Zgo" secondAttribute="centerY" constant="10" id="5H0-4C-Kmx"/>
-                        <constraint firstAttribute="trailing" secondItem="4FB-lk-czY" secondAttribute="trailing" constant="10" id="WRG-s0-7tL"/>
+                        <constraint firstItem="jsN-Wb-oqt" firstAttribute="centerY" secondItem="0Ja-Oi-iqr" secondAttribute="centerY" id="dIX-x4-t3s"/>
                         <constraint firstItem="0Ja-Oi-iqr" firstAttribute="centerX" secondItem="ejO-Z5-Zgo" secondAttribute="centerX" id="eJq-io-TdC"/>
+                        <constraint firstAttribute="trailing" secondItem="jsN-Wb-oqt" secondAttribute="trailing" constant="10" id="eig-Bv-nNZ"/>
                         <constraint firstAttribute="height" constant="64" id="iS1-dZ-a2x"/>
                         <constraint firstItem="4FB-lk-czY" firstAttribute="centerY" secondItem="0Ja-Oi-iqr" secondAttribute="centerY" id="owB-7A-IrY"/>
+                        <constraint firstItem="4FB-lk-czY" firstAttribute="leading" secondItem="ejO-Z5-Zgo" secondAttribute="leading" constant="10" id="z4t-qj-kAn"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mu1-vC-iMW" userLabel="listBG">
@@ -92,6 +105,7 @@
         </view>
     </objects>
     <resources>
+        <image name="navigation_search" width="28" height="28"/>
         <image name="roleselect_prepregnancy_small" width="28" height="28"/>
     </resources>
 </document>

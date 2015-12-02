@@ -30,6 +30,8 @@
 - (void)MC_ImagePickerViewController:(MC_ImagePickerViewController *)controller didFinishPickingImageWithInfo:(NSDictionary *)info;
 - (void)getTakePicturePhoto : (UIImage *)image photosDictionary : (NSDictionary *)photosdictionary;
 
+- (void)pickerViewControllerWillDismiss:(MC_ImagePickerViewController *)controller;
+
 @end
 
 @interface MC_ImagePickerViewController : UIViewController <MC_PhotoAlbumViewControllerDelegate>

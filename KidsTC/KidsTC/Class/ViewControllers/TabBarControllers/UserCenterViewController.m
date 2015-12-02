@@ -9,6 +9,7 @@
 #import "UserCenterViewController.h"
 #import "UserCenterViewModel.h"
 #import "OrderListViewController.h"
+#import "MyCommentListViewController.h"
 #import "CouponListViewController.h"
 #import "FavourateViewController.h"
 #import "AccountSettingViewController.h"
@@ -119,6 +120,13 @@
             case UserCenterTagAllOrder:
             {
                 OrderListViewController *controller = [[OrderListViewController alloc] initWithOrderListType:OrderListTypeAll];
+                controller.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:controller animated:YES];
+            }
+                break;
+            case UserCenterTagMyComment:
+            {
+                MyCommentListViewController *controller = [[MyCommentListViewController alloc] initWithNibName:@"MyCommentListViewController" bundle:nil];
                 controller.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:controller animated:YES];
             }

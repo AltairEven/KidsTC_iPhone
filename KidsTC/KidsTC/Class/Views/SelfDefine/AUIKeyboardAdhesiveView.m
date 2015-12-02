@@ -10,9 +10,11 @@
 
 #define MaxLength (1000)
 
-@interface AUIKeyboardAdhesiveView () <UITextViewDelegate>
+@interface AUIKeyboardAdhesiveView () <UITextViewDelegate, AUIImageGridViewDelegate>
 
 @property (nonatomic, strong) UILabel *textLimitCountLabel;
+
+@property (nonatomic, strong) AUIImageGridView *imageGridView;
 
 @property (nonatomic, assign) NSUInteger leftTextInputCount;
 
@@ -74,7 +76,13 @@
 }
 
 - (void)setUploadImages:(NSArray *)uploadImages {
+    [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y + self.imageGridView.frame.size.height, self.frame.size.width, self.frame.size.height - self.imageGridView.frame.size.height)];
+    
     _uploadImages = uploadImages;
+    [self.imageGridView setImagesArray:uploadImages];
+    
+    [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y - self.imageGridView.frame.size.height, self.frame.size.width, self.frame.size.height + self.imageGridView.frame.size.height)];
+    [self didClickedTextButton];
 }
 
 - (NSString *)text {
@@ -134,6 +142,14 @@
     }
 }
 
+#pragma mark AUIImageGridViewDelegate
+
+- (void)imageGridView:(AUIImageGridView *)view didClickedImageAtIndex:(NSUInteger)index {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(keyboardAdhesiveView:didClickedUploadImageAtIndex:)]) {
+        [self.delegate keyboardAdhesiveView:self didClickedUploadImageAtIndex:index];
+    }
+}
+
 #pragma mark Private methods
 
 - (void)buildSubviews {
@@ -156,10 +172,25 @@
     
     xPosition = hideButton.frame.origin.x + hideButton.frame.size.width + gap;
     UIButton *textButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [textButton setFrame:CGRectMake(xPosition, yPosition, width, height)];
-    [textButton setImage:[UIImage imageNamed:@"keyboard_text_n"] forState:UIControlStateNormal];
+    [textButton setFrame:CGRectMake(xPosition, 10, width, 20)];
+    [textButton.titleLabel setFont:[UIFont systemFontOfSize:13]];
+    [textButton setTitle:@"文字" forState:UIControlStateNormal];
+//    [textButton setImage:[UIImage imageNamed:@"keyboard_text_n"] forState:UIControlStateNormal];
     [textButton addTarget:self action:@selector(didClickedTextButton) forControlEvents:UIControlEventTouchUpInside];
     [self.headerView addSubview:textButton];
+    textButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    textButton.layer.borderWidth = 0.5;
+    textButton.layer.cornerRadius = 3;
+    textButton.layer.masksToBounds = YES;
+    
+    width = 30;
+    xPosition = self.headerView.frame.size.width - gap - width;
+    self.sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.sendButton setFrame:CGRectMake(xPosition, yPosition, width, height)];
+    [self.sendButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
+    [self.sendButton setTitle:@"发送" forState:UIControlStateNormal];
+    [self.sendButton addTarget:self action:@selector(didClickedSendButton) forControlEvents:UIControlEventTouchUpInside];
+    [self.headerView addSubview:self.sendButton];
     
     BOOL needHideTextEditButton = YES;
     gap = 10;
@@ -179,15 +210,6 @@
         [self buildExtensionViewWithType:function.type];
     }
     [textButton setHidden:needHideTextEditButton];
-    
-    width = 30;
-    xPosition = self.headerView.frame.size.width - gap - width;
-    self.sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.sendButton setFrame:CGRectMake(xPosition, yPosition, width, height)];
-    [self.sendButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
-    [self.sendButton setTitle:@"发送" forState:UIControlStateNormal];
-    [self.sendButton addTarget:self action:@selector(didClickedSendButton) forControlEvents:UIControlEventTouchUpInside];
-    [self.headerView addSubview:self.sendButton];
     
     //text view
     yPosition = self.headerView.frame.size.height;
@@ -211,6 +233,17 @@
         case AUIKeyboardAdhesiveViewExtensionFunctionTypeImageUpload:
         {
             self.uploadImageLimitCount = 10;
+            CGFloat yPosition = self.frame.size.height;
+            if (![self.textLimitCountLabel isHidden]) {
+                yPosition += self.textLimitCountLabel.frame.size.height;
+            }
+            self.imageGridView = [[AUIImageGridView alloc] initWithFrame:CGRectMake(10, self.frame.size.height, SCREEN_WIDTH - 20, 100)];
+            [self.imageGridView setBackgroundColor:[UIColor clearColor]];
+            [self.imageGridView setMaxLimit:4];
+            [self.imageGridView setOneLineCount:4];
+            [self.imageGridView setHCellGap:5];
+            [self.imageGridView setDelegate:self];
+            [self addSubview:self.imageGridView];
         }
             break;
         default:
@@ -229,6 +262,13 @@
         [self addSubview:self.textLimitCountLabel];
         
         [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y - self.textLimitCountLabel.frame.size.height, self.frame.size.width, self.frame.size.height + self.textLimitCountLabel.frame.size.height)];
+        
+        if (self.imageGridView) {
+            //存在图片视图
+            [self.imageGridView setCenter:CGPointMake(self.imageGridView.center.x, self.imageGridView.center.y + self.textLimitCountLabel.frame.size.height)];
+            [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y - self.textLimitCountLabel.frame.size.height, self.frame.size.width, self.frame.size.height + self.textLimitCountLabel.frame.size.height)];
+        }
+        
     } else if (self.textLimitCountLabel && hidden) {
         //已存在，并且隐藏
         [self.textLimitCountLabel setHidden:YES];
@@ -338,14 +378,18 @@
 }
 
 - (void)expand {
+    [self setHidden:NO];
     [self.textView setText:@""];
+    [self setUploadImages:nil];
     [self.textView setIsPlaceHolderState:YES];
     
-    [self setFrame:CGRectMake(0, SCREEN_HEIGHT - self.frame.size.height, self.frame.size.width, self.frame.size.height)];
-    [[UIApplication sharedApplication].keyWindow addSubview:self];
-    [self.textView becomeFirstResponder];
-    [self setHidden:NO];
-    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self];
+    [self show];
+    
+//    [self setFrame:CGRectMake(0, SCREEN_HEIGHT - self.frame.size.height, self.frame.size.width, self.frame.size.height)];
+//    [[UIApplication sharedApplication].keyWindow addSubview:self];
+//    [self.textView becomeFirstResponder];
+//    [self setHidden:NO];
+//    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self];
 }
 
 - (void)shrink {
@@ -361,6 +405,19 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
+}
+
+- (void)hide {
+    [self setHidden:YES];
+}
+
+- (void)show {
+    [self setHidden:NO];
+    [self endEditing:YES];
+    [self setFrame:CGRectMake(0, SCREEN_HEIGHT - self.frame.size.height, self.frame.size.width, self.frame.size.height)];
+    [[UIApplication sharedApplication].keyWindow addSubview:self];
+    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self];
+    [self.textView becomeFirstResponder];
 }
 /*
 // Only override drawRect: if you perform custom drawing.

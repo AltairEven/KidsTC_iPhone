@@ -12,13 +12,15 @@
 
 @interface CommentScoreConfigModel : NSObject
 
-@property (nonatomic, readonly) BOOL needShowScore;
+@property (nonatomic, assign) BOOL needShowScore;
 
 @property (nonatomic, strong, readonly) CommentScoreItem *totalScoreItem;
 
 @property (nonatomic, strong, readonly) NSArray<CommentScoreItem *> *otherScoreItems;
 
 - (instancetype)initWithRawData:(NSDictionary *)data;
+
+- (instancetype)initWithTotalScoreItem:(CommentScoreItem *)total ScoreItems:(NSArray<CommentScoreItem *> *)items;
 
 - (NSArray<CommentScoreItem *> *)allShowingScoreItems;
 

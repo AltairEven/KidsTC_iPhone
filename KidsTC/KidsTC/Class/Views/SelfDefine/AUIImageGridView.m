@@ -89,22 +89,35 @@
     CGFloat yPosition = self.vMargin;
     
     NSArray *dataArray = nil;
-    if (type == AUIImageGridViewTypeImage) {
-        dataArray = self.imagesArray;
-    } else {
-        dataArray = self.imageUrlStringsArray;
+    switch (type) {
+        case AUIImageGridViewTypeImage:
+        {
+            dataArray = self.imagesArray;
+        }
+            break;
+        case AUIImageGridViewTypeImageUrlString:
+        {
+            dataArray = self.imageUrlStringsArray;
+        }
+            break;
+        case AUIImageGridViewTypeCombined:
+        {
+            dataArray = self.imageOrUrlStringsCombinedArray;
+        }
+            break;
+        default:
+            break;
     }
     NSUInteger index = 0;
     for (; index < [dataArray count]; index ++) {
         UIView *tempView = [[UIView alloc] initWithFrame:CGRectMake(xPosition, yPosition, self.gridSize.width, self.gridSize.height)];
-        [tempView setBackgroundColor:[AUITheme theme].globalThemeColor];
+        [tempView setBackgroundColor:[UIColor clearColor]];
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(xPosition, yPosition, self.gridSize.width, self.gridSize.height)];
-        if (type == AUIImageGridViewTypeImage) {
-            UIImage *image = [dataArray objectAtIndex:index];
-            [imageView setImage:image];
-        } else {
-            NSString *urlString = [dataArray objectAtIndex:index];
-            [imageView setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:PLACEHOLDERIMAGE_SMALL];
+        id object = [dataArray objectAtIndex:index];
+        if ([object isKindOfClass:[UIImage class]]) {
+            [imageView setImage:object];
+        } else if ([object isKindOfClass:[NSString class]]) {
+            [imageView setImageWithURL:[NSURL URLWithString:object] placeholderImage:PLACEHOLDERIMAGE_SMALL];
         }
         [imageView setTag:index];
         [imageView setUserInteractionEnabled:YES];
@@ -217,11 +230,27 @@
     [self resetSubViewsWithType:self.type];
 }
 
+- (void)setImageOrUrlStringsCombinedArray:(NSArray *)imageOrUrlStringsCombinedArray {
+    if ([imageOrUrlStringsCombinedArray count] > self.maxLimit) {
+        _imageOrUrlStringsCombinedArray = [NSArray arrayWithArray:[imageOrUrlStringsCombinedArray subarrayWithRange:NSMakeRange(0, self.maxLimit)]];
+    } else {
+        _imageOrUrlStringsCombinedArray = [NSArray arrayWithArray:imageOrUrlStringsCombinedArray];
+    }
+    _type = AUIImageGridViewTypeCombined;
+    [self resetSubViewsWithType:self.type];
+}
+
 
 - (CGFloat)viewHeight {
     NSUInteger photoCount = [self.imagesArray count];
     if (photoCount == 0) {
         photoCount = [self.imageUrlStringsArray count];
+    }
+    if (photoCount == 0) {
+        photoCount = [self.imageOrUrlStringsCombinedArray count];
+    }
+    if (photoCount == 0 && !self.showAddButton) {
+        return 0;
     }
     CGFloat rowCount = photoCount / self.oneLineCount;
     NSUInteger leftCount = photoCount % self.oneLineCount;

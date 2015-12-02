@@ -50,18 +50,34 @@ typedef struct {
 
 
 @interface KTCCommentManager : NSObject
-
+//config
 - (void)getScoreConfigWithSourceType:(CommentFoundingSourceType)type succeed:(void(^)(NSDictionary *data))succeed failure:(void(^)(NSError *error))failure;
 
 - (void)stopGettingScoreConfig;
-
+//add
 - (void)addCommentWithObject:(KTCCommentObject *)object succeed:(void(^)(NSDictionary *data))succeed failure:(void(^)(NSError *error))failure;
 
 - (void)stopAdding;
-
+//load
 - (void)loadCommentsWithIdentifier:(NSString *)identifier RequestParam:(KTCCommentRequestParam)param succeed:(void(^)(NSDictionary *data))succeed failure:(void(^)(NSError *error))failure;
 
 - (void)stopLoading;
+//load user
+- (void)loadUserCommentsWithPageIndex:(NSUInteger)index pageSize:(NSUInteger)size succeed:(void(^)(NSDictionary *data))succeed failure:(void(^)(NSError *error))failure;
+
+- (void)stopLoadingUserComments;
+//delete user
+- (void)deleteUserCommentWithRelationIdentifier:(NSString *)rId
+                              commentIdentifier:(NSString *)cId
+                                   relationType:(CommentRelationType)type
+                                        succeed:(void(^)(NSDictionary *data))succeed
+                                        failure:(void(^)(NSError *error))failure;
+
+- (void)stopDeleteUserComment;
+//modify user
+- (void)modifyUserCommentWithObject:(KTCCommentObject *)object succeed:(void(^)(NSDictionary *data))succeed failure:(void(^)(NSError *error))failure;
+
+- (void)stopModifyUserComment;
 
 @end
 

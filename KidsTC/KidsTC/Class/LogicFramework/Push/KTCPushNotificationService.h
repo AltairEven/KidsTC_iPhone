@@ -10,16 +10,20 @@
 
 @interface KTCPushNotificationService : NSObject
 
+@property (nonatomic, strong, readonly) NSString *token;
+
 @property (nonatomic, readonly) BOOL isOnLine;
 
 + (instancetype)sharedService;
 
-- (void)launchServiceWithOption:(NSDictionary *)launchOptions;
-
-- (void)handleApplication:(UIApplication *)application withReceivedNotification:(NSDictionary *)userInfo;
-
 - (NSString *)registerDevice:(NSData *)deviceToken;
 
 - (void)handleRegisterDeviceFailure:(NSError *)error;
+
+- (void)bindAccount:(BOOL)bind;
+
+- (void)launchServiceWithOption:(NSDictionary *)launchOptions;
+
+- (void)handleApplication:(UIApplication *)application withReceivedNotification:(NSDictionary *)userInfo;
 
 @end

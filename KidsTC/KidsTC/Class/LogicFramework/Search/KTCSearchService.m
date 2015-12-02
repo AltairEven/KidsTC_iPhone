@@ -16,6 +16,8 @@ static KTCSearchService *_sharedInstance;
 
 @property (nonatomic, strong) HttpRequestClient *storeSearchRequest;
 
+@property (nonatomic, strong) HttpRequestClient *newsSearchRequest;
+
 @end
 
 @implementation KTCSearchService
@@ -118,12 +120,56 @@ static KTCSearchService *_sharedInstance;
     }];
 }
 
+- (void)startNewsSearchWithKeyWord:(NSString *)keyword
+                         pageIndex:(NSUInteger)index
+                          pageSize:(NSUInteger)size
+                           success:(void (^)(NSDictionary *))success
+                           failure:(void (^)(NSError *))failure {
+    if (!self.newsSearchRequest) {
+        self.newsSearchRequest = [HttpRequestClient clientWithUrlAliasName:@"ARTICLE_GET_LIST"];
+    }
+    
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
+                           [NSNumber numberWithInteger:index], @"page",
+                           [NSNumber numberWithInteger:size], @"pageCount",
+                           [NSNumber numberWithInteger:0], @"authorId",
+                           keyword, @"keyWord", nil];
+    __weak KTCSearchService *weakSelf = self;
+    [weakSelf.newsSearchRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
+        if (success) {
+            success(responseData);
+        }
+    } failure:^(HttpRequestClient *client, NSError *error) {
+        if (failure) {
+            failure(error);
+        }
+    }];
+}
+
 - (void)stopServiceSearch {
     [self.serviceSearchRequest cancel];
 }
 
 - (void)stopStoreSearch {
     [self.storeSearchRequest cancel];
+}
+
+- (void)stopNewsSearch {
+    
+}
+
+@end
+
+
+
+@implementation KTCSearchTypeItem
+
++ (instancetype)itemWithType:(KTCSearchType)type Name:(NSString *)name image:(UIImage *)image {
+    KTCSearchTypeItem *item = [[KTCSearchTypeItem alloc] init];
+    item.type = type;
+    item.name = name;
+    item.relationImage = image;
+    return item;
 }
 
 @end

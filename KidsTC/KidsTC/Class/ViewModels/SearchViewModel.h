@@ -18,6 +18,8 @@ extern NSString *const kSearchHotKeyCondition;
 
 @property (nonatomic, assign) KTCSearchType searchType;
 
+- (instancetype)initWithView:(UIView *)view defaultSearchType:(KTCSearchType)type;
+
 - (void)getSearchHistory;
 
 - (void)addSearchHistoryWithType:(KTCSearchType)type keyword:(NSString *)keyword;

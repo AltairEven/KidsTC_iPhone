@@ -16,6 +16,10 @@
 
 @property (nonatomic, strong) HttpRequestClient *loadCommentsRequest;
 
+@property (nonatomic, strong) HttpRequestClient *loadUserCommentsRequest;
+
+@property (nonatomic, strong) HttpRequestClient *modifyUserCommentRequest;
+
 - (NSDictionary *)getParamDicFromCommentRequestParam:(KTCCommentRequestParam)param;
 
 @end
@@ -106,6 +110,95 @@
     [self.loadCommentsRequest cancel];
 }
 
+#pragma mark User Comments
+
+- (void)loadUserCommentsWithPageIndex:(NSUInteger)index pageSize:(NSUInteger)size succeed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
+    if (!self.loadUserCommentsRequest) {
+        self.loadUserCommentsRequest = [HttpRequestClient clientWithUrlAliasName:@"COMMENT_GET_BY_USER"];
+    }
+    [self.loadUserCommentsRequest cancel];
+    
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
+                           [NSNumber numberWithInteger:index], @"page",
+                           [NSNumber numberWithInteger:size], @"pageCount", nil];
+    
+    [self.loadUserCommentsRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
+        if (succeed) {
+            succeed(responseData);
+        }
+    } failure:^(HttpRequestClient *client, NSError *error) {
+        if (failure) {
+            failure(error);
+        }
+    }];
+}
+
+
+- (void)stopLoadingUserComments {
+    [self.loadUserCommentsRequest cancel];
+}
+
+#pragma mark Delete User Comment
+
+- (void)deleteUserCommentWithRelationIdentifier:(NSString *)rId
+                              commentIdentifier:(NSString *)cId
+                                   relationType:(CommentRelationType)type
+                                        succeed:(void (^)(NSDictionary *))succeed
+                                        failure:(void (^)(NSError *))failure {
+    if (!self.modifyUserCommentRequest) {
+        self.modifyUserCommentRequest = [HttpRequestClient clientWithUrlAliasName:@"COMMENT_MODIFY"];
+    }
+    [self.modifyUserCommentRequest cancel];
+    
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
+                           rId, @"relationSysNo",
+                           cId, @"commentSysNo",
+                           [NSNumber numberWithInteger:type], @"relationType",
+                           [NSNumber numberWithInteger:2], @"type", nil];
+    
+    [self.modifyUserCommentRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
+        if (succeed) {
+            succeed(responseData);
+        }
+    } failure:^(HttpRequestClient *client, NSError *error) {
+        if (failure) {
+            failure(error);
+        }
+    }];
+}
+
+- (void)stopDeleteUserComment {
+    [self.modifyUserCommentRequest cancel];
+}
+
+#pragma mark Modify User Comment
+
+- (void)modifyUserCommentWithObject:(KTCCommentObject *)object succeed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
+    if (!self.modifyUserCommentRequest) {
+        self.modifyUserCommentRequest = [HttpRequestClient clientWithUrlAliasName:@"COMMENT_MODIFY"];
+    }
+    [self.modifyUserCommentRequest cancel];
+    
+    NSMutableDictionary *paramDic = [NSMutableDictionary dictionaryWithDictionary:[object addCommentRequestParam]];
+    [paramDic setObject:[NSNumber numberWithInteger:1] forKey:@"type"];
+    
+    [self.modifyUserCommentRequest startHttpRequestWithParameter:paramDic success:^(HttpRequestClient *client, NSDictionary *responseData) {
+        if (succeed) {
+            succeed(responseData);
+        }
+    } failure:^(HttpRequestClient *client, NSError *error) {
+        if (failure) {
+            failure(error);
+        }
+    }];
+}
+
+- (void)stopModifyUserComment {
+    [self.modifyUserCommentRequest cancel];
+}
+
+#pragma mark Request Param
+
 
 - (NSDictionary *)getParamDicFromCommentRequestParam:(KTCCommentRequestParam)param {
     if (param.relationType == CommentRelationTypeNone || param.commentType == KTCCommentTypeNone) {
@@ -181,7 +274,7 @@
                                   [NSNumber numberWithBool:self.isAnonymous], @"isAnonymous",
                                   [NSNumber numberWithBool:self.isComment], @"isComment",
                                   self.content, @"content", nil];
-    if (!self.isComment && [self.commentIdentifier length] > 0) {
+    if ([self.commentIdentifier length] > 0) {
         [param setObject:self.commentIdentifier forKey:@"commentSysNo"];
     }
     if ([self.orderId length] > 0) {

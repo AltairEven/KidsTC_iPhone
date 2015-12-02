@@ -28,13 +28,26 @@ NSString *const kSearchHotKeyCondition = @"kSearchHotKeyCondition";
 
 @implementation SearchViewModel
 
-- (instancetype)initWithView:(UIView *)view {
+- (instancetype)initWithView:(UIView *)view defaultSearchType:(KTCSearchType)type {
     self = [super initWithView:view];
     if (self) {
         self.view = (KTCSearchView *)view;
         self.view.dataSource = self;
-        [self.view setCategoryArray:[NSArray arrayWithObjects:@"服务", @"门店", nil]];
+        KTCSearchTypeItem *item1 = [KTCSearchTypeItem itemWithType:KTCSearchTypeService Name:@"服务" image:[UIImage imageNamed:@"bizicon_service_n"]];
+        KTCSearchTypeItem *item2 = [KTCSearchTypeItem itemWithType:KTCSearchTypeStore Name:@"门店" image:[UIImage imageNamed:@"bizicon_store_n"]];
+        KTCSearchTypeItem *item3 = [KTCSearchTypeItem itemWithType:KTCSearchTypeNews Name:@"知识库" image:[UIImage imageNamed:@"bizicon_news_n"]];
+        [self.view setCategoryArray:[NSArray arrayWithObjects:item1, item2, item3, nil]];
         self.historySearchDic = [[NSMutableDictionary alloc] init];
+        
+        if (type != KTCSearchTypeNone) {
+            for (NSUInteger index = 0; index < [self.view.categoryArray count]; index ++) {
+                KTCSearchTypeItem *item  = [self.view.categoryArray objectAtIndex:index];
+                if (item.type == type) {
+                    [self.view setCurrentSearchTypeItemIndex:index];
+                    break;
+                }
+            }
+        }
     }
     return self;
 }
@@ -127,7 +140,7 @@ NSString *const kSearchHotKeyCondition = @"kSearchHotKeyCondition";
     if ([keyword length] == 0) {
         return;
     }
-    if (type == KTCSearchTypeService || type == KTCSearchTypeStore) {
+    if (type == KTCSearchTypeService || type == KTCSearchTypeStore || type == KTCSearchTypeNews) {
         BOOL alreadyExist = NO;
         for (NSString *key in [self.historySearchDic allKeys]) {
             if ([key isEqualToString:keyword] && [[self.historySearchDic objectForKey:key] integerValue] == type) {

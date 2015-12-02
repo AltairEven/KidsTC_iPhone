@@ -68,6 +68,10 @@ typedef enum {
 
 - (void)destroy;
 
+- (void)hide;
+
+- (void)show;
+
 @end
 
 

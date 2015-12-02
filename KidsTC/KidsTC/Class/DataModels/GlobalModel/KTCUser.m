@@ -9,7 +9,7 @@
 #import "KTCUser.h"
 #import "SFHFKeychainUtils.h"
 #import "HttpIcsonCookieManager.h"
-#import "XGPush.h"
+#import "KTCPushNotificationService.h"
 
 #define USERDEFAULT_UID_KEY (@"UserDefaultUidKey")
 #define KEYCHAIN_SERVICE_UIDSKEY (@"com.KidsTC.iPhoneAPP.uid")
@@ -87,7 +87,7 @@ static KTCUser *_sharedInstance = nil;
         _uid = uid;
         _skey = skey;
         [self localSave];
-        [XGPush setAccount:self.uid];
+        [[KTCPushNotificationService sharedService] bindAccount:YES];
     }
 }
 
@@ -103,7 +103,7 @@ static KTCUser *_sharedInstance = nil;
         [weakSelf.checkLoginRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
             _hasLogin = YES;
             [[HttpIcsonCookieManager sharedManager] setupCookies]; //设置cookie
-            [XGPush setAccount:self.uid];
+            [[KTCPushNotificationService sharedService] bindAccount:YES];
         } failure:^(HttpRequestClient *client, NSError *error) {
             _hasLogin = NO;
             [weakSelf clearLoginInfo];
@@ -163,6 +163,7 @@ static KTCUser *_sharedInstance = nil;
     _skey = nil;
     _hasLogin = NO;
     [[HttpIcsonCookieManager sharedManager] setupCookies]; //设置cookie
+    [[KTCPushNotificationService sharedService] bindAccount:NO];
 }
 
 @end

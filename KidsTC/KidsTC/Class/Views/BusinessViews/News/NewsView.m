@@ -17,6 +17,7 @@
 
 - (void)tabControlDidChangedSelectedIndex:(id)sender;
 - (IBAction)didClickedRoleSelectButton:(id)sender;
+- (IBAction)didClickedSearchButton:(id)sender;
 
 @end
 
@@ -143,6 +144,12 @@
 - (IBAction)didClickedRoleSelectButton:(id)sender {
     if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedUserRoleButton)]) {
         [self.delegate didClickedUserRoleButton];
+    }
+}
+
+- (IBAction)didClickedSearchButton:(id)sender {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedSearchButton)]) {
+        [self.delegate didClickedSearchButton];
     }
 }
 

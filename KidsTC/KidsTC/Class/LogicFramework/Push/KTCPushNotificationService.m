@@ -19,6 +19,8 @@ static KTCPushNotificationService *sharedInstance = nil;
 
 @interface KTCPushNotificationService ()
 
+@property (nonatomic, strong) HttpRequestClient *setAccountRequest;
+
 @end
 
 @implementation KTCPushNotificationService
@@ -117,6 +119,7 @@ static KTCPushNotificationService *sharedInstance = nil;
     NSString * deviceTokenStr = [XGPush registerDevice:deviceToken successCallback:successBlock errorCallback:errorBlock];
     
     [[NSUserDefaults standardUserDefaults] setValue:deviceTokenStr forKey:kDeviceToken];
+    _token = deviceTokenStr;
     
     return deviceTokenStr;
 }
@@ -125,6 +128,26 @@ static KTCPushNotificationService *sharedInstance = nil;
     NSLog(@"Push Register Error:%@", error.description);
     NSString *errMsg = [NSString stringWithFormat:@"push注册失败，失败原因:%@", error.description];
     [MTA trackError:errMsg];
+}
+
+#pragma mark Account
+
+- (void)bindAccount:(BOOL)bind {
+    if (!self.setAccountRequest) {
+        self.setAccountRequest = [HttpRequestClient clientWithUrlAliasName:@"PUSH_REGISTER_DEVICE"];
+    }
+    NSUInteger type = 2;//解绑
+    if (bind) {
+        type = 1;//绑定
+        [XGPush setAccount:[KTCUser currentUser].uid];
+    }
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:type], @"type", self.token, @"deviceId", nil];
+    __weak KTCPushNotificationService *weakSelf = self;
+    [weakSelf.setAccountRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
+        NSLog(@"Push Set Account:%@", responseData);
+    } failure:^(HttpRequestClient *client, NSError *error) {
+        NSLog(@"Push Set Account:%@", error);
+    }];
 }
 
 #pragma mark Handle Notification

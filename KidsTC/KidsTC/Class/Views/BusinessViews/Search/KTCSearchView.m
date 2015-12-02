@@ -72,7 +72,8 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 - (void)setCategoryArray:(NSArray *)categoryArray {
     _categoryArray = [NSArray arrayWithArray:categoryArray];
     if ([categoryArray count] > 0) {
-        [self.headerView setCategoryName:[categoryArray objectAtIndex:0] withPlaceholder:nil];
+        KTCSearchTypeItem *item = [self.categoryArray firstObject];
+        [self.headerView setCategoryName:item.name withPlaceholder:nil];
     }
 }
 
@@ -173,8 +174,9 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     if (!cell) {
         cell =  [[[NSBundle mainBundle] loadNibNamed:@"KTCSearchViewCategoryCell" owner:nil options:nil] objectAtIndex:0];
     }
-    [cell.cellImageView setImage:[UIImage imageNamed:@"relatedInfo"]];
-    [cell.titleLabel setText:[self.categoryArray objectAtIndex:indexPath.row]];
+    KTCSearchTypeItem *item = [self.categoryArray objectAtIndex:indexPath.row];
+    [cell.cellImageView setImage:item.relationImage];
+    [cell.titleLabel setText:item.name];
     if (indexPath.row >= [self.categoryArray count] - 1) {
         [cell hideSeparator:YES];
     } else {
@@ -190,9 +192,10 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self.headerView setCategoryName:[self.categoryArray objectAtIndex:indexPath.row] withPlaceholder:nil];
     [self.categoryTableBGView setHidden:YES];
-    _type = (KTCSearchType)(indexPath.row + 1);
+    KTCSearchTypeItem *item = [self.categoryArray objectAtIndex:indexPath.row];
+    [self.headerView setCategoryName:item.name withPlaceholder:nil];
+    _type = item.type;
     if (self.delegate && [self.delegate respondsToSelector:@selector(KTCSearchView:didChangedToSearchType:)]) {
         [self.delegate KTCSearchView:self didChangedToSearchType:self.type];
     }
@@ -240,6 +243,14 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 
 - (NSString *)keywords {
     return self.headerView.keywords;
+}
+
+- (void)setCurrentSearchTypeItemIndex:(NSUInteger)index {
+    if ([self.categoryArray count] > index) {
+        KTCSearchTypeItem *item = [self.categoryArray objectAtIndex:index];
+        [self.headerView setCategoryName:item.name withPlaceholder:nil];
+        _type = item.type;
+    }
 }
 
 /*

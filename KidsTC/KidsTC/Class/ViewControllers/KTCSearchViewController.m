@@ -9,6 +9,7 @@
 #import "KTCSearchViewController.h"
 #import "SearchViewModel.h"
 #import "KTCSearchResultViewController.h"
+#import "NewSearchResultViewController.h"
 
 @interface KTCSearchViewController () <KTCSearchViewDelegate>
 
@@ -16,15 +17,25 @@
 
 @property (nonatomic, strong) SearchViewModel *viewModel;
 
+@property (nonatomic, assign) KTCSearchType defaultSearchType;
+
 @end
 
 @implementation KTCSearchViewController
+
+- (instancetype)initWithSearchType:(KTCSearchType)type {
+    self = [super initWithNibName:@"KTCSearchViewController" bundle:nil];
+    if (self) {
+        self.defaultSearchType = type;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.searchView.delegate = self;
-    self.viewModel = [[SearchViewModel alloc] initWithView:self.searchView];
+    self.viewModel = [[SearchViewModel alloc] initWithView:self.searchView defaultSearchType:self.defaultSearchType];
     [self.viewModel setSearchType:self.searchView.type];
     [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
 }
@@ -81,6 +92,14 @@
         case KTCSearchTypeStore:
         {
             condition = [[KTCSearchStoreCondition alloc] init];
+        }
+            break;
+        case KTCSearchTypeNews:
+        {
+            NewSearchResultViewController *controller = [[NewSearchResultViewController alloc] initWithKeyWord:kw];
+            [controller setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:controller animated:YES];
+            return;
         }
             break;
         default:

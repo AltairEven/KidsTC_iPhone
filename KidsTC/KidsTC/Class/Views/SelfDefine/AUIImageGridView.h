@@ -10,7 +10,8 @@
 
 typedef enum {
     AUIImageGridViewTypeImage,
-    AUIImageGridViewTypeImageUrlString
+    AUIImageGridViewTypeImageUrlString,
+    AUIImageGridViewTypeCombined
 }AUIImageGridViewType;
 
 @class AUIImageGridView;
@@ -48,6 +49,9 @@ typedef enum {
 
 //url string array
 @property (nonatomic, strong) NSArray *imageUrlStringsArray;
+
+//image & url string array
+@property (nonatomic, strong) NSArray *imageOrUrlStringsCombinedArray;
 
 @property (nonatomic, assign) BOOL showAddButton;
 

@@ -29,6 +29,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UITableViewCell *allOrderCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *myCommentCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *myFavourateCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *couponCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *messageCenterCell;
@@ -120,7 +121,7 @@
 #pragma mark UITableViewDataSource & UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return UserCenterTagMessageCenter - UserCenterTagWaitingComment;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -136,16 +137,21 @@
         }
             break;
         case 1:{
+            [self.myCommentCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+            return self.myCommentCell;
+        }
+            break;
+        case 2:{
             [self.myFavourateCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
             return self.myFavourateCell;
         }
             break;
-        case 2:{
+        case 3:{
             [self.couponCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
             return self.couponCell;
         }
             break;
-        case 3:{
+        case 4:{
             [self.messageCenterCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
             return self.messageCenterCell;
         }

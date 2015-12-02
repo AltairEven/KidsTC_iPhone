@@ -37,6 +37,15 @@
     return self;
 }
 
+- (instancetype)initWithTotalScoreItem:(CommentScoreItem *)total ScoreItems:(NSArray<CommentScoreItem *> *)items {
+    self = [super init];
+    if (self) {
+        _totalScoreItem = total;
+        _otherScoreItems = items;
+    }
+    return self;
+}
+
 - (NSArray<CommentScoreItem *> *)allShowingScoreItems {
     if (!self.needShowScore) {
         return nil;

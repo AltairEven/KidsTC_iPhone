@@ -72,11 +72,11 @@
 #pragma mark Private methods
 
 - (void)getNewsTags {
+    self.gettingNewsTag = YES;
     if (!self.loadNewsTagRequest) {
         self.loadNewsTagRequest = [HttpRequestClient clientWithUrlAliasName:@"ARTICLE_GET_KNOWLEDGE"];
     }
     [self.loadNewsTagRequest cancel];
-    self.gettingNewsTag = YES;
     __weak NewsListViewModel *weakSelf = self;
     [weakSelf.loadNewsTagRequest startHttpRequestWithParameter:nil success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [weakSelf parseTagsWithData:responseData];
@@ -227,7 +227,10 @@
 }
 
 - (void)startUpdateDataWithNewsTagIndex:(NSUInteger)index {
-    if ([self.newsTagItemModels count] == 0 && self.gettingNewsTag == NO) {
+    if (self.gettingNewsTag == YES) {
+        return;
+    }
+    if ([self.newsTagItemModels count] == 0) {
         [self getNewsTags];
         return;
     }
@@ -262,6 +265,10 @@
 }
 
 - (void)getMoreDataWithNewsTagIndex:(NSUInteger)index {
+    if ([self.newsTagItemModels count] == 0) {
+        [self.view noMoreData:YES forNewsTagIndex:index];
+        [self.view hideLoadMoreFooter:YES forNewsTagIndex:index];        return;
+    }
     if (!self.loadNewsRequest) {
         self.loadNewsRequest = [HttpRequestClient clientWithUrlAliasName:@"ARTICLE_GET_LIST"];
     }

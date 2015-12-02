@@ -10,6 +10,7 @@
 #import "NewsViewModel.h"
 #import "KTCWebViewController.h"
 #import "NewsListTagFilterViewController.h"
+#import "KTCSearchViewController.h"
 
 @interface NewsViewController () <NewsViewDelegate>
 
@@ -85,6 +86,11 @@
     }];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)didClickedSearchButton {
+    KTCSearchViewController *controller = [[KTCSearchViewController alloc] initWithSearchType:KTCSearchTypeNews];
+    [self.navigationController pushViewController:controller animated:NO];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -21,7 +21,19 @@
         }
         self.faceImageUrl = [NSURL URLWithString:[data objectForKey:@"userImgUrl"]];
         self.userName = [data objectForKey:@"userName"];
-        self.replyContent = [data objectForKey:@"content"];
+        NSDictionary *reply = [data objectForKey:@"replyUser"];
+        if ([reply isKindOfClass:[NSDictionary class]]) {
+            if ([reply objectForKey:@"Uid"]) {
+                self.beRepliedUserIdentifier = [reply objectForKey:@"Uid"];
+            }
+            self.beRepliedUserName = [reply objectForKey:@"UserName"];
+        }
+        NSString *content = [data objectForKey:@"content"];
+        if ([self.beRepliedUserName length] > 0) {
+            self.replyContent = [NSString stringWithFormat:@"回复%@：%@", self.beRepliedUserName, content];
+        } else {
+            self.replyContent = content;
+        }
         self.timeDescription = [data objectForKey:@"time"];
         self.replyCount = [[data objectForKey:@"replyCount"] integerValue];
         self.isLiked = [[data objectForKey:@"isPrasise"] boolValue];

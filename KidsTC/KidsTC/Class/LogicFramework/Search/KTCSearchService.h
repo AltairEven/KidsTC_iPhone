@@ -10,8 +10,10 @@
 #import "KTCSearchCondition.h"
 
 typedef enum {
+    KTCSearchTypeNone = 0,
     KTCSearchTypeService = 1,
-    KTCSearchTypeStore
+    KTCSearchTypeStore,
+    KTCSearchTypeNews
 }KTCSearchType;
 
 @interface KTCSearchService : NSObject
@@ -28,8 +30,28 @@ typedef enum {
                              success:(void(^)(NSDictionary *responseData))success
                              failure:(void(^)(NSError *error))failure;
 
+- (void)startNewsSearchWithKeyWord:(NSString *)keyword
+                         pageIndex:(NSUInteger)index
+                          pageSize:(NSUInteger)size
+                           success:(void(^)(NSDictionary *responseData))success
+                           failure:(void(^)(NSError *error))failure;
+
 - (void)stopServiceSearch;
 
 - (void)stopStoreSearch;
+
+- (void)stopNewsSearch;
+
+@end
+
+@interface KTCSearchTypeItem : NSObject
+
+@property (nonatomic, assign) KTCSearchType type;
+
+@property (nonatomic, copy) NSString *name;
+
+@property (nonatomic, strong) UIImage *relationImage;
+
++ (instancetype)itemWithType:(KTCSearchType)type Name:(NSString *)name image:(UIImage *)image;
 
 @end
