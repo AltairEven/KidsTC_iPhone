@@ -806,6 +806,7 @@
 		8F5D8E441C047BCB00632390 /* NewsListTagFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F5D8E421C047BCB00632390 /* NewsListTagFilterViewController.xib */; };
 		8F5E56BC1C004F7500365ED4 /* KTCPaymentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5E56BB1C004F7500365ED4 /* KTCPaymentInfo.m */; };
 		8F6513961BFC96B9003BE006 /* KTCActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6513951BFC96B9003BE006 /* KTCActionView.m */; };
+		8F65D9D51C10335D007CA5BC /* KTCBrowseHistoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F65D9D41C10335D007CA5BC /* KTCBrowseHistoryManager.m */; };
 		8F70F9F01C00749600A175F0 /* AlipayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F70F9EF1C00749600A175F0 /* AlipayManager.m */; };
 		8F7E44F91C09D616001EF3B5 /* OrderRefundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7E44F81C09D616001EF3B5 /* OrderRefundView.m */; };
 		8F7E44FB1C09D62C001EF3B5 /* OrderRefundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F7E44FA1C09D62C001EF3B5 /* OrderRefundView.xib */; };
@@ -873,6 +874,14 @@
 		8FABCB3F1C0FEA80005BF7AD /* FavouriteStoreItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FABCB3E1C0FEA80005BF7AD /* FavouriteStoreItemModel.m */; };
 		8FABCB421C0FEA95005BF7AD /* FavouriteStrategyItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FABCB411C0FEA95005BF7AD /* FavouriteStrategyItemModel.m */; };
 		8FABCB451C0FEAA5005BF7AD /* FavouriteNewsItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FABCB441C0FEAA5005BF7AD /* FavouriteNewsItemModel.m */; };
+		8FABCB621C102A93005BF7AD /* KTCBrowseHistoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FABCB5A1C102A93005BF7AD /* KTCBrowseHistoryView.m */; };
+		8FABCB631C102A93005BF7AD /* KTCBrowseHistoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FABCB5B1C102A93005BF7AD /* KTCBrowseHistoryView.xib */; };
+		8FABCB641C102A93005BF7AD /* KTCBrowseHistoryViewServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FABCB5D1C102A93005BF7AD /* KTCBrowseHistoryViewServiceCell.m */; };
+		8FABCB651C102A93005BF7AD /* KTCBrowseHistoryViewServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FABCB5E1C102A93005BF7AD /* KTCBrowseHistoryViewServiceCell.xib */; };
+		8FABCB661C102A93005BF7AD /* KTCBrowseHistoryViewStoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FABCB601C102A93005BF7AD /* KTCBrowseHistoryViewStoreCell.m */; };
+		8FABCB671C102A93005BF7AD /* KTCBrowseHistoryViewStoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FABCB611C102A93005BF7AD /* KTCBrowseHistoryViewStoreCell.xib */; };
+		8FABCB6E1C102B2A005BF7AD /* BrowseHistoryStoreListItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FABCB6D1C102B2A005BF7AD /* BrowseHistoryStoreListItemModel.m */; };
+		8FABCB711C102B43005BF7AD /* BrowseHistoryServiceListItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FABCB701C102B43005BF7AD /* BrowseHistoryServiceListItemModel.m */; };
 		8FAFABAB1BFF1EC600082F20 /* CommonShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FAFABA91BFF1EC600082F20 /* CommonShareViewController.m */; };
 		8FAFABAC1BFF1EC600082F20 /* CommonShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FAFABAA1BFF1EC600082F20 /* CommonShareViewController.xib */; };
 		8FAFABAF1BFF1F3200082F20 /* CommonShareObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FAFABAE1BFF1F3200082F20 /* CommonShareObject.m */; };
@@ -2292,6 +2301,8 @@
 		8F5E56BB1C004F7500365ED4 /* KTCPaymentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCPaymentInfo.m; sourceTree = "<group>"; };
 		8F6513941BFC96B9003BE006 /* KTCActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCActionView.h; sourceTree = "<group>"; };
 		8F6513951BFC96B9003BE006 /* KTCActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCActionView.m; sourceTree = "<group>"; };
+		8F65D9D31C10335D007CA5BC /* KTCBrowseHistoryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCBrowseHistoryManager.h; sourceTree = "<group>"; };
+		8F65D9D41C10335D007CA5BC /* KTCBrowseHistoryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCBrowseHistoryManager.m; sourceTree = "<group>"; };
 		8F70F9EE1C00749600A175F0 /* AlipayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlipayManager.h; sourceTree = "<group>"; };
 		8F70F9EF1C00749600A175F0 /* AlipayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlipayManager.m; sourceTree = "<group>"; };
 		8F7E44F71C09D616001EF3B5 /* OrderRefundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderRefundView.h; sourceTree = "<group>"; };
@@ -2395,6 +2406,19 @@
 		8FABCB411C0FEA95005BF7AD /* FavouriteStrategyItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouriteStrategyItemModel.m; sourceTree = "<group>"; };
 		8FABCB431C0FEAA5005BF7AD /* FavouriteNewsItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouriteNewsItemModel.h; sourceTree = "<group>"; };
 		8FABCB441C0FEAA5005BF7AD /* FavouriteNewsItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouriteNewsItemModel.m; sourceTree = "<group>"; };
+		8FABCB591C102A93005BF7AD /* KTCBrowseHistoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCBrowseHistoryView.h; sourceTree = "<group>"; };
+		8FABCB5A1C102A93005BF7AD /* KTCBrowseHistoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCBrowseHistoryView.m; sourceTree = "<group>"; };
+		8FABCB5B1C102A93005BF7AD /* KTCBrowseHistoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTCBrowseHistoryView.xib; sourceTree = "<group>"; };
+		8FABCB5C1C102A93005BF7AD /* KTCBrowseHistoryViewServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCBrowseHistoryViewServiceCell.h; sourceTree = "<group>"; };
+		8FABCB5D1C102A93005BF7AD /* KTCBrowseHistoryViewServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCBrowseHistoryViewServiceCell.m; sourceTree = "<group>"; };
+		8FABCB5E1C102A93005BF7AD /* KTCBrowseHistoryViewServiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTCBrowseHistoryViewServiceCell.xib; sourceTree = "<group>"; };
+		8FABCB5F1C102A93005BF7AD /* KTCBrowseHistoryViewStoreCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCBrowseHistoryViewStoreCell.h; sourceTree = "<group>"; };
+		8FABCB601C102A93005BF7AD /* KTCBrowseHistoryViewStoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCBrowseHistoryViewStoreCell.m; sourceTree = "<group>"; };
+		8FABCB611C102A93005BF7AD /* KTCBrowseHistoryViewStoreCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTCBrowseHistoryViewStoreCell.xib; sourceTree = "<group>"; };
+		8FABCB6C1C102B2A005BF7AD /* BrowseHistoryStoreListItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowseHistoryStoreListItemModel.h; sourceTree = "<group>"; };
+		8FABCB6D1C102B2A005BF7AD /* BrowseHistoryStoreListItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowseHistoryStoreListItemModel.m; sourceTree = "<group>"; };
+		8FABCB6F1C102B43005BF7AD /* BrowseHistoryServiceListItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowseHistoryServiceListItemModel.h; sourceTree = "<group>"; };
+		8FABCB701C102B43005BF7AD /* BrowseHistoryServiceListItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowseHistoryServiceListItemModel.m; sourceTree = "<group>"; };
 		8FAFABA81BFF1EC600082F20 /* CommonShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonShareViewController.h; sourceTree = "<group>"; };
 		8FAFABA91BFF1EC600082F20 /* CommonShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonShareViewController.m; sourceTree = "<group>"; };
 		8FAFABAA1BFF1EC600082F20 /* CommonShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonShareViewController.xib; sourceTree = "<group>"; };
@@ -3151,6 +3175,7 @@
 		1E3D87FA1B4BF49F00275C35 /* LogicFramework */ = {
 			isa = PBXGroup;
 			children = (
+				8F65D9D21C103340007CA5BC /* History */,
 				8F98D2581C002CA200C1388A /* Payment */,
 				8F2C55B81BFF163A00C2B6BF /* Share */,
 				8F9EA6AD1BF9A60C00062E91 /* Login */,
@@ -3719,6 +3744,7 @@
 		1E3D8EFA1B4CB83A00275C35 /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
+				8FABCB681C102ADD005BF7AD /* History */,
 				8FABCB391C0FE9FE005BF7AD /* Favourite */,
 				8F85AD7F1C0C496000890526 /* PushNotification */,
 				1E7995781BCD262D0099CFF9 /* LoveHouse */,
@@ -3848,6 +3874,7 @@
 		1E3D8F471B4D1D4D00275C35 /* BusinessViews */ = {
 			isa = PBXGroup;
 			children = (
+				8FABCB581C102A6F005BF7AD /* History */,
 				1E79956A1BCD25510099CFF9 /* LoveHouse */,
 				1E7995691BCD25510099CFF9 /* Hospital */,
 				1E7994E21BC634020099CFF9 /* Activity */,
@@ -5227,6 +5254,15 @@
 			path = Share;
 			sourceTree = "<group>";
 		};
+		8F65D9D21C103340007CA5BC /* History */ = {
+			isa = PBXGroup;
+			children = (
+				8F65D9D31C10335D007CA5BC /* KTCBrowseHistoryManager.h */,
+				8F65D9D41C10335D007CA5BC /* KTCBrowseHistoryManager.m */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
 		8F85AD611C0C32D100890526 /* Refresh */ = {
 			isa = PBXGroup;
 			children = (
@@ -5316,6 +5352,33 @@
 				8FABCB441C0FEAA5005BF7AD /* FavouriteNewsItemModel.m */,
 			);
 			path = Favourite;
+			sourceTree = "<group>";
+		};
+		8FABCB581C102A6F005BF7AD /* History */ = {
+			isa = PBXGroup;
+			children = (
+				8FABCB591C102A93005BF7AD /* KTCBrowseHistoryView.h */,
+				8FABCB5A1C102A93005BF7AD /* KTCBrowseHistoryView.m */,
+				8FABCB5B1C102A93005BF7AD /* KTCBrowseHistoryView.xib */,
+				8FABCB5C1C102A93005BF7AD /* KTCBrowseHistoryViewServiceCell.h */,
+				8FABCB5D1C102A93005BF7AD /* KTCBrowseHistoryViewServiceCell.m */,
+				8FABCB5E1C102A93005BF7AD /* KTCBrowseHistoryViewServiceCell.xib */,
+				8FABCB5F1C102A93005BF7AD /* KTCBrowseHistoryViewStoreCell.h */,
+				8FABCB601C102A93005BF7AD /* KTCBrowseHistoryViewStoreCell.m */,
+				8FABCB611C102A93005BF7AD /* KTCBrowseHistoryViewStoreCell.xib */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		8FABCB681C102ADD005BF7AD /* History */ = {
+			isa = PBXGroup;
+			children = (
+				8FABCB6F1C102B43005BF7AD /* BrowseHistoryServiceListItemModel.h */,
+				8FABCB701C102B43005BF7AD /* BrowseHistoryServiceListItemModel.m */,
+				8FABCB6C1C102B2A005BF7AD /* BrowseHistoryStoreListItemModel.h */,
+				8FABCB6D1C102B2A005BF7AD /* BrowseHistoryStoreListItemModel.m */,
+			);
+			path = History;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -5478,6 +5541,7 @@
 				8F5D8E3A1C0456FA00632390 /* NewsListTagFilterView.xib in Resources */,
 				1E3D8D0A1B4BF4A100275C35 /* GuideViewController1.xib in Resources */,
 				1E3D8DA31B4BF4A100275C35 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
+				8FABCB671C102A93005BF7AD /* KTCBrowseHistoryViewStoreCell.xib in Resources */,
 				1E0B77AE1B68D60B00A58AD4 /* LoginViewController.xib in Resources */,
 				1E943F7B1B831AB60029FE74 /* StoreListViewController.xib in Resources */,
 				1EC73C0F1B5F6168008B39EA /* HomeViewTwinklingElfCell.xib in Resources */,
@@ -5514,6 +5578,7 @@
 				8F85AD6F1C0C32D100890526 /* refresh_0-1_female_2.png in Resources */,
 				1E7995301BC79E3A0099CFF9 /* HomeViewImageNewsCell.xib in Resources */,
 				1EC73BB91B5E2604008B39EA /* HomeView.xib in Resources */,
+				8FABCB651C102A93005BF7AD /* KTCBrowseHistoryViewServiceCell.xib in Resources */,
 				1E0B77FA1B6B798100A58AD4 /* KTCSearchResultSortCell.xib in Resources */,
 				1E0B7B091B6F6C1400A58AD4 /* SaiDanCommentView.xib in Resources */,
 				1E3D7E861B4BD83D00275C35 /* Images.xcassets in Resources */,
@@ -5548,6 +5613,7 @@
 				1E7995601BCBCA4B0099CFF9 /* KTCAreaSelectView.xib in Resources */,
 				1EA8B6DB1B66127600F90688 /* CategorySubLevelCollectionCell.xib in Resources */,
 				1E3D8DA01B4BF4A100275C35 /* ReleaseNotes.txt in Resources */,
+				8FABCB631C102A93005BF7AD /* KTCBrowseHistoryView.xib in Resources */,
 				1EA8B6CE1B66080400F90688 /* CategoryView.xib in Resources */,
 				8FF57C101BF5EE56006867D2 /* ImageTrimViewController.xib in Resources */,
 				1E943EE51B7A19A00029FE74 /* AppointmentOrderListView.xib in Resources */,
@@ -5782,6 +5848,7 @@
 				1E3D7E7E1B4BD83D00275C35 /* AppDelegate.m in Sources */,
 				1E15F97C1BDDD194000C74E7 /* StoreDetailCommentCell.m in Sources */,
 				1E943E981B71E7CD0029FE74 /* PayTypeItem.m in Sources */,
+				8FABCB621C102A93005BF7AD /* KTCBrowseHistoryView.m in Sources */,
 				1E943EB61B72361A0029FE74 /* KTCArea.m in Sources */,
 				1E0B7AB31B6F67B800A58AD4 /* GSearchListProductTable.m in Sources */,
 				1E3D8F081B4CCC5000275C35 /* GViewController.m in Sources */,
@@ -5880,6 +5947,7 @@
 				1E0B7AB61B6F67B800A58AD4 /* GSinglePickerView.m in Sources */,
 				1E827BA21B9412C6008F3F08 /* MWCaptionView.m in Sources */,
 				1E0B7A761B6F67B800A58AD4 /* SmsConfirmView.m in Sources */,
+				8FABCB661C102A93005BF7AD /* KTCBrowseHistoryViewStoreCell.m in Sources */,
 				1EC73BCD1B5E36E7008B39EA /* HomeElementBaseModel.m in Sources */,
 				1EC73BDC1B5E487E008B39EA /* HomeViewCountDownTitleCell.m in Sources */,
 				1E3D8D6E1B4BF4A100275C35 /* ATCountDown.m in Sources */,
@@ -5985,6 +6053,7 @@
 				1E3D8D871B4BF4A100275C35 /* ASIHTTPRequest.m in Sources */,
 				1E76003E1B56496100DF0972 /* ServiceDetailViewController.m in Sources */,
 				8F38D1EE1C089AB70061C329 /* CommentFoundingModel.m in Sources */,
+				8F65D9D51C10335D007CA5BC /* KTCBrowseHistoryManager.m in Sources */,
 				1E943ED51B78A4760029FE74 /* FavourateViewModel.m in Sources */,
 				1E0B7A931B6F67B800A58AD4 /* GCheckBox.m in Sources */,
 				1E943F0C1B7B57E40029FE74 /* OrderDetailViewModel.m in Sources */,
@@ -6147,6 +6216,7 @@
 				8F9996151BF5E6560055F016 /* ChangeNickNameViewController.m in Sources */,
 				1E3D8D4A1B4BF4A100275C35 /* DDMultiFormatter.m in Sources */,
 				1EC4A10D1B5CCCFF00206BB9 /* KTCSearchHistoryView.m in Sources */,
+				8FABCB6E1C102B2A005BF7AD /* BrowseHistoryStoreListItemModel.m in Sources */,
 				1E3D8CDC1B4BF4A100275C35 /* IcsonCounty.m in Sources */,
 				1E80170D1BB006EF00B6C352 /* HomeViewNewsCell.m in Sources */,
 				1E0B7AA21B6F67B800A58AD4 /* GEventPageViewCell2.m in Sources */,
@@ -6177,6 +6247,7 @@
 				1EC4A1191B5CD3BB00206BB9 /* KTCSearchViewController.m in Sources */,
 				1E3D8D581B4BF4A100275C35 /* AFHTTPClientV2.m in Sources */,
 				1E827CD51B9C145B008F3F08 /* CouponListViewController.m in Sources */,
+				8FABCB711C102B43005BF7AD /* BrowseHistoryServiceListItemModel.m in Sources */,
 				1EC4A0B41B58E06B00206BB9 /* StoreDetailBottomView.m in Sources */,
 				1E827BA71B9412C6008F3F08 /* MWTapDetectingImageView.m in Sources */,
 				1E0B7B0C1B6F6C1400A58AD4 /* SaiDanOrderView.m in Sources */,
@@ -6263,6 +6334,7 @@
 				1E3D8D4F1B4BF4A100275C35 /* GInterface.m in Sources */,
 				1E827BA81B9412C6008F3F08 /* MWTapDetectingView.m in Sources */,
 				1E827BA31B9412C6008F3F08 /* MWGridCell.m in Sources */,
+				8FABCB641C102A93005BF7AD /* KTCBrowseHistoryViewServiceCell.m in Sources */,
 				1E79957B1BCD26820099CFF9 /* LoveHouseListItemModel.m in Sources */,
 				1E3D8D961B4BF4A100275C35 /* MJRefreshFooter.m in Sources */,
 				1E943EA51B7202890029FE74 /* LoginService.m in Sources */,

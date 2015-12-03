@@ -24,17 +24,23 @@
 #import "KTCSearchViewController.h"
 #import "CommonShareViewController.h"
 #import "KTCWebViewController.h"
+#import "KTCBrowseHistoryView.h"
+#import "KTCBrowseHistoryManager.h"
 
-@interface StoreDetailViewController () <StoreDetailViewDelegate, StoreDetailBottomViewDelegate, KTCActionViewDelegate>
+@interface StoreDetailViewController () <StoreDetailViewDelegate, StoreDetailBottomViewDelegate, KTCActionViewDelegate, KTCBrowseHistoryViewDataSource, KTCBrowseHistoryViewDelegate>
 
 @property (weak, nonatomic) IBOutlet StoreDetailView *detailView;
 @property (weak, nonatomic) IBOutlet StoreDetailBottomView *bottomView;
 
 @property (nonatomic, copy) NSString *storeId;
 @property (nonatomic, strong) StoreDetailViewModel *viewModel;
+- (void)buildRightBarButtons;
 
 - (void)setupBottomView;
 
+
+- (void)getHistoryDataForTag:(KTCBrowseHistoryViewTag)tag needMore:(BOOL)need;
+- (void)showHistoryView;
 - (void)showActionView;
 
 @end
@@ -63,15 +69,15 @@
     [self.viewModel setNetErrorBlock:^(NSError *error) {
         [weakSelf showConnectError:YES];
     }];
-    
-    
-    [self setupRightBarButton:nil target:self action:@selector(showActionView) frontImage:@"navigation_more" andBackImage:@"navigation_more"];
+    [self buildRightBarButtons];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [[GAlertLoadingView sharedAlertLoadingView] hide];
     [self.viewModel stopUpdateData];
+    [[KTCActionView actionView] hide];
+    [[KTCBrowseHistoryView historyView] hide];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -211,6 +217,30 @@
     }
 }
 
+#pragma mark KTCBrowseHistoryViewDataSource & KTCBrowseHistoryViewDelegate
+
+- (NSString *)titleForBrowseHistoryView:(KTCBrowseHistoryView *)view withTag:(KTCBrowseHistoryViewTag)tag {
+    NSString *title = @"浏览足迹";
+    if (![[KTCUser currentUser] hasLogin]) {
+        title = @"尚未登录";
+    }
+    return title;
+}
+
+- (NSArray *)itemModelsForBrowseHistoryView:(KTCBrowseHistoryView *)view withTag:(KTCBrowseHistoryViewTag)tag {
+    KTCBrowseHistoryType type = [KTCBrowseHistoryView typeOfViewTag:tag];
+    NSArray *array = [[KTCBrowseHistoryManager sharedManager] resultForType:type];
+    return [NSArray arrayWithArray:array];
+}
+
+- (void)browseHistoryView:(KTCBrowseHistoryView *)view didChangedTag:(KTCBrowseHistoryViewTag)tag {
+    [self getHistoryDataForTag:tag needMore:NO];
+}
+
+- (void)browseHistoryView:(KTCBrowseHistoryView *)view didPulledUpToloadMoreForTag:(KTCBrowseHistoryViewTag)tag {
+    [self getHistoryDataForTag:tag needMore:YES];
+}
+
 #pragma mark KTCActionViewDelegate
 
 - (void)actionViewDidClickedWithTag:(KTCActionViewTag)tag {
@@ -250,6 +280,75 @@
 - (void)setupBottomView {
     if ([[KTCUser currentUser] hasLogin]) {
         [self.bottomView setFavourite:self.viewModel.detailModel.isFavourate];
+    }
+}
+
+- (void)buildRightBarButtons {
+    CGFloat buttonWidth = 28;
+    CGFloat buttonHeight = 28;
+    CGFloat buttonGap = 15;
+    
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, buttonWidth * 2 + buttonGap, buttonHeight)];
+    [bgView setBackgroundColor:[UIColor clearColor]];
+    
+    CGFloat xPosition = 0;
+    UIButton *historyButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [historyButton setFrame:CGRectMake(xPosition, 0, buttonWidth, buttonHeight)];
+    [historyButton setBackgroundColor:[UIColor clearColor]];
+    [historyButton setImage:[UIImage imageNamed:@"navigation_sort"] forState:UIControlStateNormal];
+    [historyButton setImage:[UIImage imageNamed:@"navigation_sort"] forState:UIControlStateHighlighted];
+    [historyButton addTarget:self action:@selector(showHistoryView) forControlEvents:UIControlEventTouchUpInside];
+    [bgView addSubview:historyButton];
+    
+    xPosition += buttonWidth + buttonGap;
+    UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [shareButton setFrame:CGRectMake(xPosition, 0, buttonWidth, buttonHeight)];
+    [shareButton setBackgroundColor:[UIColor clearColor]];
+    [shareButton setImage:[UIImage imageNamed:@"navigation_more"] forState:UIControlStateNormal];
+    [shareButton addTarget:self action:@selector(showActionView) forControlEvents:UIControlEventTouchUpInside];
+    [bgView addSubview:shareButton];
+    
+    UIBarButtonItem *rItem = [[UIBarButtonItem alloc] initWithCustomView:bgView];
+    self.navigationItem.rightBarButtonItem = rItem;
+}
+
+- (void)getHistoryDataForTag:(KTCBrowseHistoryViewTag)tag needMore:(BOOL)need {
+    KTCBrowseHistoryType type = [KTCBrowseHistoryView typeOfViewTag:tag];
+    NSArray *array = [[KTCBrowseHistoryManager sharedManager] resultForType:type];
+    if ([array count] == 0) {
+        [[KTCBrowseHistoryManager sharedManager] getUserBrowseHistoryWithType:type needMore:NO succeed:^(NSArray *modelsArray) {
+            [[KTCBrowseHistoryView historyView] reloadDataForTag:tag];
+            [[KTCBrowseHistoryView historyView] startLoadingAnimation:NO];
+        } failure:^(NSError *error) {
+            [[KTCBrowseHistoryView historyView] reloadDataForTag:tag];
+            [[KTCBrowseHistoryView historyView] startLoadingAnimation:NO];
+        }];
+    } else if (need){
+        [[KTCBrowseHistoryManager sharedManager] getUserBrowseHistoryWithType:type needMore:YES succeed:^(NSArray *modelsArray) {
+            [[KTCBrowseHistoryView historyView] reloadDataForTag:tag];
+            [[KTCBrowseHistoryView historyView] startLoadingAnimation:NO];
+        } failure:^(NSError *error) {
+            [[KTCBrowseHistoryView historyView] reloadDataForTag:tag];
+            [[KTCBrowseHistoryView historyView] startLoadingAnimation:NO];
+        }];
+    } else {
+        [[KTCBrowseHistoryView historyView] reloadDataForTag:tag];
+        [[KTCBrowseHistoryView historyView] startLoadingAnimation:NO];
+    }
+}
+
+- (void)showHistoryView {
+    if ([[KTCBrowseHistoryView historyView] isShowing]) {
+        [[KTCBrowseHistoryView historyView] startLoadingAnimation:NO];
+        [[KTCBrowseHistoryView historyView] setDelegate:nil];
+        [[KTCBrowseHistoryView historyView] setDataSource:nil];
+        [[KTCBrowseHistoryView historyView] hide];
+    } else {
+        [[KTCBrowseHistoryView historyView] startLoadingAnimation:YES];
+        [[KTCBrowseHistoryView historyView] setDelegate:self];
+        [[KTCBrowseHistoryView historyView] setDataSource:self];
+        [[KTCBrowseHistoryView historyView] showInViewController:self];
+        [self getHistoryDataForTag:KTCBrowseHistoryViewTagStore needMore:NO];
     }
 }
 

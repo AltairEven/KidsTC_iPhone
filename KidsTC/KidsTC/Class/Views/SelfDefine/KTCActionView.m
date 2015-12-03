@@ -36,6 +36,17 @@ static KTCActionView *_sharedInstance = nil;
 
 @implementation KTCActionView
 
++ (instancetype)actionView {
+    static dispatch_once_t token = 0;
+    
+    dispatch_once(&token, ^{
+        _sharedInstance = [[[NSBundle mainBundle] loadNibNamed:@"KTCActionView" owner:nil options:nil] firstObject];
+        [_sharedInstance buildSubViews];
+    });
+    
+    return _sharedInstance;
+}
+
 - (instancetype)init {
     self = [super init];
     if (self) {
@@ -61,17 +72,6 @@ static KTCActionView *_sharedInstance = nil;
 
 
 #pragma mark Public methods
-
-+ (instancetype)actionView {
-    static dispatch_once_t token = 0;
-    
-    dispatch_once(&token, ^{
-        _sharedInstance = [[[NSBundle mainBundle] loadNibNamed:@"KTCActionView" owner:nil options:nil] firstObject];
-        [_sharedInstance buildSubViews];
-    });
-    
-    return _sharedInstance;
-}
 
 - (void)showInViewController:(UIViewController *)viewController {
     if (self.animationBlock || [self isShowing]) {

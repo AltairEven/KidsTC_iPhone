@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="208" id="KGk-i7-Jjw" customClass="KTCBrowseHistoryViewServiceCell">
+            <rect key="frame" x="0.0" y="0.0" width="144" height="208"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="144" height="207.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FSI-XV-5SP">
+                        <rect key="frame" x="10" y="0.0" width="124" height="124"/>
+                        <constraints>
+                            <constraint firstAttribute="height" secondItem="FSI-XV-5SP" secondAttribute="width" multiplier="1:1" id="sj2-n1-U3h"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s2W-a5-6Oh">
+                        <rect key="frame" x="10" y="132" width="124" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PC2-bx-i6v" customClass="RichPriceView">
+                        <rect key="frame" x="10" y="158" width="20" height="20"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="1q5-E5-SGb"/>
+                            <constraint firstAttribute="width" constant="20" id="B1L-tD-C4p"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="FSI-XV-5SP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="6bR-Q3-aus"/>
+                    <constraint firstItem="PC2-bx-i6v" firstAttribute="top" secondItem="s2W-a5-6Oh" secondAttribute="bottom" constant="10" id="7cT-AA-Nd5"/>
+                    <constraint firstItem="s2W-a5-6Oh" firstAttribute="width" secondItem="FSI-XV-5SP" secondAttribute="width" id="8DM-6Y-Kxm"/>
+                    <constraint firstAttribute="trailing" secondItem="FSI-XV-5SP" secondAttribute="trailing" constant="10" id="TH5-HN-3T0"/>
+                    <constraint firstItem="FSI-XV-5SP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="TYP-yj-Xei"/>
+                    <constraint firstItem="PC2-bx-i6v" firstAttribute="leading" secondItem="s2W-a5-6Oh" secondAttribute="leading" id="U4p-FY-iGh"/>
+                    <constraint firstItem="s2W-a5-6Oh" firstAttribute="centerX" secondItem="FSI-XV-5SP" secondAttribute="centerX" id="a7B-6h-XXy"/>
+                    <constraint firstItem="s2W-a5-6Oh" firstAttribute="top" secondItem="FSI-XV-5SP" secondAttribute="bottom" constant="8" id="emW-Xp-iGK"/>
+                    <constraint firstItem="s2W-a5-6Oh" firstAttribute="leading" secondItem="FSI-XV-5SP" secondAttribute="leading" id="mOk-kJ-3u8"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="mOk-kJ-3u8"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="cellImageView" destination="FSI-XV-5SP" id="5C7-0c-BEW"/>
+                <outlet property="priceView" destination="PC2-bx-i6v" id="fkd-aK-9jc"/>
+                <outlet property="titleLabel" destination="s2W-a5-6Oh" id="eM8-fy-Kja"/>
+            </connections>
+            <point key="canvasLocation" x="204" y="372"/>
+        </tableViewCell>
+    </objects>
+</document>
