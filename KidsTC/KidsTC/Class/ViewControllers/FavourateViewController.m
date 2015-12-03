@@ -7,9 +7,11 @@
 //
 
 #import "FavourateViewController.h"
+#import "FavourateViewModel.h"
 #import "ServiceDetailViewController.h"
 #import "StoreDetailViewController.h"
-#import "FavourateViewModel.h"
+#import "ParentingStrategyDetailViewController.h"
+#import "KTCWebViewController.h"
 
 @interface FavourateViewController () <FavourateViewDelegate>
 
@@ -30,7 +32,8 @@
     self.favourateView.delegate = self;
     
     self.viewModel = [[FavourateViewModel alloc] initWithView:self.favourateView];
-    [self.viewModel startUpdateDataWithFavouratedTag:FavourateViewSegmentTagService];
+    [self.favourateView startRefreshWithTag:FavourateViewSegmentTagService];
+//    [self.viewModel startUpdateDataWithFavouratedTag:FavourateViewSegmentTagService];
 }
 
 #pragma mark FavourateViewDelegate
@@ -40,6 +43,44 @@
 }
 
 - (void)favourateView:(FavourateView *)favourateView didSelectedAtIndex:(NSUInteger)index ofTag:(FavourateViewSegmentTag)tag {
+    NSArray *array = [self.viewModel resultWithFavouratedTag:tag];
+    switch (tag) {
+        case FavourateViewSegmentTagService:
+        {
+            FavouriteServiceItemModel *model = [array objectAtIndex:index];
+            ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithServiceId:model.identifier channelId:model.channelId];
+            [controller setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+            break;
+        case FavourateViewSegmentTagStore:
+        {
+            FavouriteStoreItemModel *model = [array objectAtIndex:index];
+            StoreDetailViewController *controller = [[StoreDetailViewController alloc] initWithStoreId:model.identifier];
+            [controller setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+            break;
+        case FavourateViewSegmentTagStrategy:
+        {
+            FavouriteStrategyItemModel *model = [array objectAtIndex:index];
+            ParentingStrategyDetailViewController *controller = [[ParentingStrategyDetailViewController alloc] initWithStrategyIdentifier:model.identifier];
+            [controller setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+            break;
+        case FavourateViewSegmentTagNews:
+        {
+            FavouriteNewsItemModel *model = [array objectAtIndex:index];
+            KTCWebViewController *controller = [[KTCWebViewController alloc] init];
+            [controller setWebUrlString:model.linkUrlString];
+            [controller setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+            break;
+        default:
+            break;
+    }
     
 }
 

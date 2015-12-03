@@ -51,7 +51,11 @@ typedef enum {
 
 - (void)reloadDataForTag:(FavourateViewSegmentTag)tag;
 
+- (void)startRefreshWithTag:(FavourateViewSegmentTag)tag;
+
 - (void)endRefresh;
+
+- (void)loadMoreWithTag:(FavourateViewSegmentTag)tag;
 
 - (void)endLoadMore;
 

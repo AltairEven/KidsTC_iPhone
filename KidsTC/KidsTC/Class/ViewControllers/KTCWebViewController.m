@@ -245,6 +245,7 @@
                 }
                 if (descRange.location != NSNotFound) {
                     NSString *desc = [string substringFromIndex:descRange.length];
+                    desc = [desc URLDecodedString];
                     [tempDic setObject:desc forKey:@"desc"];
                     continue;
                 }

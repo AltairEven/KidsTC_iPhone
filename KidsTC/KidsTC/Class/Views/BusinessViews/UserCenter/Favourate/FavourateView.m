@@ -7,10 +7,10 @@
 //
 
 #import "FavourateView.h"
-#import "ServiceListViewCell.h"
-#import "StoreListViewCell.h"
-#import "ParentingStrategyViewCell.h"
-#import "NewsListViewCell.h"
+#import "FavouriteViewServiceCell.h"
+#import "FavouriteViewStoreCell.h"
+#import "FavouriteViewStrategyCell.h"
+#import "FavouriteViewNewsCell.h"
 #import "AUISegmentView.h"
 #import "FavourateSegmentViewCell.h"
 
@@ -82,19 +82,19 @@ static NSString *const kNewsCellIdentifier = @"kNewsCellIdentifier";
     
     
     if (!self.serviceCellNib) {
-        self.serviceCellNib = [UINib nibWithNibName:NSStringFromClass([ServiceListViewCell class]) bundle:nil];
+        self.serviceCellNib = [UINib nibWithNibName:NSStringFromClass([FavouriteViewServiceCell class]) bundle:nil];
         [self.tableView registerNib:self.serviceCellNib forCellReuseIdentifier:kServiceCellIdentifier];
     }
     if (!self.storeCellNib) {
-        self.storeCellNib = [UINib nibWithNibName:NSStringFromClass([StoreListViewCell class]) bundle:nil];
+        self.storeCellNib = [UINib nibWithNibName:NSStringFromClass([FavouriteViewStoreCell class]) bundle:nil];
         [self.tableView registerNib:self.storeCellNib forCellReuseIdentifier:kStoreCellIdentifier];
     }
     if (!self.parentingStrategyCellNib) {
-        self.parentingStrategyCellNib = [UINib nibWithNibName:NSStringFromClass([ParentingStrategyViewCell class]) bundle:nil];
+        self.parentingStrategyCellNib = [UINib nibWithNibName:NSStringFromClass([FavouriteViewStrategyCell class]) bundle:nil];
         [self.tableView registerNib:self.parentingStrategyCellNib forCellReuseIdentifier:kParentingStrategyCellIdentifier];
     }
     if (!self.newsCellNib) {
-        self.newsCellNib = [UINib nibWithNibName:NSStringFromClass([NewsListViewCell class]) bundle:nil];
+        self.newsCellNib = [UINib nibWithNibName:NSStringFromClass([FavouriteViewNewsCell class]) bundle:nil];
         [self.tableView registerNib:self.newsCellNib forCellReuseIdentifier:kNewsCellIdentifier];
     }
     
@@ -191,9 +191,9 @@ static NSString *const kNewsCellIdentifier = @"kNewsCellIdentifier";
     switch (self.currentTag) {
         case FavourateViewSegmentTagService:
         {
-            ServiceListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kServiceCellIdentifier forIndexPath:indexPath];
+            FavouriteViewServiceCell *cell = [tableView dequeueReusableCellWithIdentifier:kServiceCellIdentifier forIndexPath:indexPath];
             if (!cell) {
-                cell =  [[[NSBundle mainBundle] loadNibNamed:@"ServiceListViewCell" owner:nil options:nil] objectAtIndex:0];
+                cell =  [[[NSBundle mainBundle] loadNibNamed:@"FavouriteViewServiceCell" owner:nil options:nil] objectAtIndex:0];
             }
             [cell configWithItemModel:[self.ItemModelArray objectAtIndex:indexPath.row]];
             return cell;
@@ -201,9 +201,9 @@ static NSString *const kNewsCellIdentifier = @"kNewsCellIdentifier";
             break;
         case FavourateViewSegmentTagStore:
         {
-            StoreListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kStoreCellIdentifier forIndexPath:indexPath];
+            FavouriteViewStoreCell *cell = [tableView dequeueReusableCellWithIdentifier:kStoreCellIdentifier forIndexPath:indexPath];
             if (!cell) {
-                cell =  [[[NSBundle mainBundle] loadNibNamed:@"StoreListViewCell" owner:nil options:nil] objectAtIndex:0];
+                cell =  [[[NSBundle mainBundle] loadNibNamed:@"FavouriteViewStoreCell" owner:nil options:nil] objectAtIndex:0];
             }
             [cell configWithItemModel:[self.ItemModelArray objectAtIndex:indexPath.row]];
             return cell;
@@ -211,9 +211,9 @@ static NSString *const kNewsCellIdentifier = @"kNewsCellIdentifier";
             break;
         case FavourateViewSegmentTagStrategy:
         {
-            ParentingStrategyViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kParentingStrategyCellIdentifier forIndexPath:indexPath];
+            FavouriteViewStrategyCell *cell = [tableView dequeueReusableCellWithIdentifier:kParentingStrategyCellIdentifier forIndexPath:indexPath];
             if (!cell) {
-                cell =  [[[NSBundle mainBundle] loadNibNamed:@"ParentingStrategyViewCell" owner:nil options:nil] objectAtIndex:0];
+                cell =  [[[NSBundle mainBundle] loadNibNamed:@"FavouriteViewStrategyCell" owner:nil options:nil] objectAtIndex:0];
             }
             [cell configWithItemModel:[self.ItemModelArray objectAtIndex:indexPath.row]];
             return cell;
@@ -221,9 +221,9 @@ static NSString *const kNewsCellIdentifier = @"kNewsCellIdentifier";
             break;
         case FavourateViewSegmentTagNews:
         {
-            NewsListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNewsCellIdentifier forIndexPath:indexPath];
+            FavouriteViewNewsCell *cell = [tableView dequeueReusableCellWithIdentifier:kNewsCellIdentifier forIndexPath:indexPath];
             if (!cell) {
-                cell =  [[[NSBundle mainBundle] loadNibNamed:@"NewsListViewCell" owner:nil options:nil] objectAtIndex:0];
+                cell =  [[[NSBundle mainBundle] loadNibNamed:@"FavouriteViewStrategyCell" owner:nil options:nil] objectAtIndex:0];
             }
             [cell configWithItemModel:[self.ItemModelArray objectAtIndex:indexPath.row]];
             return cell;
@@ -242,25 +242,22 @@ static NSString *const kNewsCellIdentifier = @"kNewsCellIdentifier";
     switch (self.currentTag) {
         case FavourateViewSegmentTagService:
         {
-            ServiceListItemModel *model = [self.ItemModelArray objectAtIndex:indexPath.row];
-            height = [model cellHeight];
+            height = [FavouriteViewServiceCell cellHeight];
         }
             break;
         case FavourateViewSegmentTagStore:
         {
-            StoreListItemModel *model = [self.ItemModelArray objectAtIndex:indexPath.row];
-            height = [model cellHeight];
+            height = [FavouriteViewStoreCell cellHeight];
         }
             break;
         case FavourateViewSegmentTagStrategy:
         {
-            ParentingStrategyListItemModel *model = [self.ItemModelArray objectAtIndex:indexPath.row];
-            height = [model cellHeight];
+            height = [FavouriteViewStrategyCell cellHeight];
         }
             break;
         case FavourateViewSegmentTagNews:
         {
-            height = [NewsListViewCell cellHeight];
+            height = [FavouriteViewNewsCell cellHeight];
         }
             break;
         default:
@@ -330,8 +327,16 @@ static NSString *const kNewsCellIdentifier = @"kNewsCellIdentifier";
     [self.tableView.gifFooter setHidden:[[self.hideFooterDic objectForKey:[NSString stringWithFormat:@"%d", self.currentTag]] boolValue]];
 }
 
+- (void)startRefreshWithTag:(FavourateViewSegmentTag)tag {
+    [self.tableView.header beginRefreshing];
+}
+
 - (void)endRefresh {
     [self.tableView.header endRefreshing];
+}
+
+- (void)loadMoreWithTag:(FavourateViewSegmentTag)tag {
+    [self.tableView.gifFooter beginRefreshing];
 }
 
 - (void)endLoadMore {

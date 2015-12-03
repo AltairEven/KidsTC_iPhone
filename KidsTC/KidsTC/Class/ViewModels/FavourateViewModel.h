@@ -7,10 +7,10 @@
 //
 
 #import "BaseViewModel.h"
-#import "ServiceListItemModel.h"
-#import "StoreListItemModel.h"
-#import "ParentingStrategyListItemModel.h"
-#import "NewsListItemModel.h"
+#import "FavouriteServiceItemModel.h"
+#import "FavouriteStoreItemModel.h"
+#import "FavouriteStrategyItemModel.h"
+#import "FavouriteNewsItemModel.h"
 #import "FavourateView.h"
 
 @interface FavourateViewModel : BaseViewModel
@@ -22,5 +22,7 @@
 - (void)resetResultWithFavouratedTag:(FavourateViewSegmentTag)tag;
 
 - (void)deleteFavourateDataForTag:(FavourateViewSegmentTag)tag atInde:(NSUInteger)index;
+
+- (NSArray *)resultWithFavouratedTag:(FavourateViewSegmentTag)tag;
 
 @end

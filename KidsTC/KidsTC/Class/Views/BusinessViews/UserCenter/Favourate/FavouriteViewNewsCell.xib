@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="102" id="zdO-vi-Cua" customClass="FavouriteViewNewsCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zdO-vi-Cua" id="i3S-mN-0mK">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WOt-YA-81c">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xAg-vM-A7V">
+                                <rect key="frame" x="230" y="10" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="OUg-uQ-v4I"/>
+                                    <constraint firstAttribute="height" constant="80" id="vzs-5S-i7c"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ond-Ux-Byh">
+                                <rect key="frame" x="10" y="20" width="210" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M6s-WT-ohQ">
+                                <rect key="frame" x="10" y="64" width="33" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ond-Ux-Byh" firstAttribute="leading" secondItem="xAg-vM-A7V" secondAttribute="trailing" constant="10" id="5kl-8e-zzH"/>
+                            <constraint firstItem="ond-Ux-Byh" firstAttribute="leading" secondItem="WOt-YA-81c" secondAttribute="leading" constant="10" id="9uH-hT-wLP"/>
+                            <constraint firstItem="M6s-WT-ohQ" firstAttribute="bottom" secondItem="xAg-vM-A7V" secondAttribute="bottom" constant="-10" id="Jhe-Ot-uff"/>
+                            <constraint firstAttribute="trailing" secondItem="xAg-vM-A7V" secondAttribute="trailing" constant="10" id="QLe-6q-xo4"/>
+                            <constraint firstItem="M6s-WT-ohQ" firstAttribute="leading" secondItem="WOt-YA-81c" secondAttribute="leading" constant="10" id="hYT-Tl-DSO"/>
+                            <constraint firstItem="xAg-vM-A7V" firstAttribute="centerY" secondItem="WOt-YA-81c" secondAttribute="centerY" id="jLk-T8-Amu"/>
+                            <constraint firstAttribute="trailing" secondItem="ond-Ux-Byh" secondAttribute="trailing" constant="10" id="nZM-vc-s8b"/>
+                            <constraint firstItem="xAg-vM-A7V" firstAttribute="leading" secondItem="WOt-YA-81c" secondAttribute="leading" constant="10" id="otP-Fo-F7t"/>
+                            <constraint firstItem="xAg-vM-A7V" firstAttribute="leading" secondItem="ond-Ux-Byh" secondAttribute="trailing" constant="10" id="t9T-j6-pIq"/>
+                            <constraint firstItem="ond-Ux-Byh" firstAttribute="top" secondItem="xAg-vM-A7V" secondAttribute="top" constant="10" id="vyZ-CI-4pX"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="5kl-8e-zzH"/>
+                                <exclude reference="nZM-vc-s8b"/>
+                                <exclude reference="otP-Fo-F7t"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="WOt-YA-81c" secondAttribute="bottom" id="Bix-wr-RTv"/>
+                    <constraint firstAttribute="trailing" secondItem="WOt-YA-81c" secondAttribute="trailing" id="Lfg-uv-N5v"/>
+                    <constraint firstItem="WOt-YA-81c" firstAttribute="top" secondItem="i3S-mN-0mK" secondAttribute="top" id="Zy2-rB-Xgs"/>
+                    <constraint firstItem="WOt-YA-81c" firstAttribute="leading" secondItem="i3S-mN-0mK" secondAttribute="leading" id="rLt-9e-Zmw"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="authorLabel" destination="M6s-WT-ohQ" id="fxK-Fp-a86"/>
+                <outlet property="bgView" destination="WOt-YA-81c" id="qzI-8f-bbV"/>
+                <outlet property="cellImageView" destination="xAg-vM-A7V" id="LFe-Yu-8QC"/>
+                <outlet property="titleLabel" destination="ond-Ux-Byh" id="6s5-4h-ste"/>
+            </connections>
+            <point key="canvasLocation" x="292" y="319"/>
+        </tableViewCell>
+    </objects>
+</document>

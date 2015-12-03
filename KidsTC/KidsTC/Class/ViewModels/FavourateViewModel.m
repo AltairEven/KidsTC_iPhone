@@ -227,7 +227,7 @@
             case FavourateViewSegmentTagService:
             {
                 for (NSDictionary *singleService in dataArray) {
-                    ServiceListItemModel *model = [[ServiceListItemModel alloc] initWithRawData:singleService];
+                    FavouriteServiceItemModel *model = [[FavouriteServiceItemModel alloc] initWithRawData:singleService];
                     if (model) {
                         [self.serviceResultArray addObject:model];
                     }
@@ -242,7 +242,7 @@
             case FavourateViewSegmentTagStore:
             {
                 for (NSDictionary *singleStore in dataArray) {
-                    StoreListItemModel *model = [[StoreListItemModel alloc] initWithRawData:singleStore];
+                    FavouriteStoreItemModel *model = [[FavouriteStoreItemModel alloc] initWithRawData:singleStore];
                     if (model) {
                         [self.storeResultArray addObject:model];
                     }
@@ -257,7 +257,7 @@
             case FavourateViewSegmentTagStrategy:
             {
                 for (NSDictionary *singleStrategy in dataArray) {
-                    ParentingStrategyListItemModel *model = [[ParentingStrategyListItemModel alloc] initWithRawData:singleStrategy];
+                    FavouriteStrategyItemModel *model = [[FavouriteStrategyItemModel alloc] initWithRawData:singleStrategy];
                     if (model) {
                         [self.strategyResultArray addObject:model];
                     }
@@ -272,7 +272,7 @@
             case FavourateViewSegmentTagNews:
             {
                 for (NSDictionary *singleStrategy in dataArray) {
-                    NewsListItemModel *model = [[NewsListItemModel alloc] initWithRawData:singleStrategy];
+                    FavouriteNewsItemModel *model = [[FavouriteNewsItemModel alloc] initWithRawData:singleStrategy];
                     if (model) {
                         [self.newsResultArray addObject:model];
                     }
@@ -304,6 +304,7 @@
     KTCFavouriteType type = KTCFavouriteTypeService;
     NSUInteger page = 1;
     NSUInteger pageSize = 10;
+    self.currentTag = tag;
     switch (tag) {
         case FavourateViewSegmentTagService:
         {
@@ -394,41 +395,34 @@
 
 - (void)resetResultWithFavouratedTag:(FavourateViewSegmentTag)tag {
     [self.view endRefresh];
+    [self.view reloadDataForTag:tag];
     self.currentTag = tag;
     switch (tag) {
         case FavourateViewSegmentTagService:
         {
-            if ([self.serviceResultArray count] > 0) {
-                [self.view reloadDataForTag:FavourateViewSegmentTagService];
-            } else {
-                [self startUpdateDataWithFavouratedTag:FavourateViewSegmentTagService];
+            if ([self.serviceResultArray count] == 0) {
+                [self.view startRefreshWithTag:tag];
             }
         }
             break;
         case FavourateViewSegmentTagStore:
         {
-            if ([self.storeResultArray count] > 0) {
-                [self.view reloadDataForTag:FavourateViewSegmentTagStore];
-            } else {
-                [self startUpdateDataWithFavouratedTag:FavourateViewSegmentTagStore];
+            if ([self.storeResultArray count] == 0) {
+                [self.view startRefreshWithTag:tag];
             }
         }
             break;
         case FavourateViewSegmentTagStrategy:
         {
-            if ([self.strategyResultArray count] > 0) {
-                [self.view reloadDataForTag:FavourateViewSegmentTagStrategy];
-            } else {
-                [self startUpdateDataWithFavouratedTag:FavourateViewSegmentTagStrategy];
+            if ([self.strategyResultArray count] == 0) {
+                [self.view startRefreshWithTag:tag];
             }
         }
             break;
         case FavourateViewSegmentTagNews:
         {
-            if ([self.newsResultArray count] > 0) {
-                [self.view reloadDataForTag:FavourateViewSegmentTagNews];
-            } else {
-                [self startUpdateDataWithFavouratedTag:FavourateViewSegmentTagNews];
+            if ([self.newsResultArray count] == 0) {
+                [self.view startRefreshWithTag:tag];
             }
         }
             break;
@@ -452,28 +446,28 @@
         case FavourateViewSegmentTagService:
         {
             type = KTCFavouriteTypeService;
-            ServiceListItemModel *model = [self.serviceResultArray objectAtIndex:index];
+            FavouriteServiceItemModel *model = [self.serviceResultArray objectAtIndex:index];
             identifier = model.identifier;
         }
             break;
         case FavourateViewSegmentTagStore:
         {
             type = KTCFavouriteTypeStore;
-            StoreListItemModel *model = [self.storeResultArray objectAtIndex:index];
+            FavouriteStoreItemModel *model = [self.storeResultArray objectAtIndex:index];
             identifier = model.identifier;
         }
             break;
         case FavourateViewSegmentTagStrategy:
         {
-            type = KTCFavouriteTypeStore;
-            StoreListItemModel *model = [self.storeResultArray objectAtIndex:index];
+            type = KTCFavouriteTypeStrategy;
+            FavouriteStrategyItemModel *model = [self.storeResultArray objectAtIndex:index];
             identifier = model.identifier;
         }
             break;
         case FavourateViewSegmentTagNews:
         {
-            type = KTCFavouriteTypeStore;
-            StoreListItemModel *model = [self.storeResultArray objectAtIndex:index];
+            type = KTCFavouriteTypeNews;
+            FavouriteNewsItemModel *model = [self.storeResultArray objectAtIndex:index];
             identifier = model.identifier;
         }
             break;
@@ -486,6 +480,35 @@
     } failure:^(NSError *error) {
         [weakSelf deleteFavourateFailedWithError:error atIndex:index forSegmmentTag:tag];
     }];
+}
+
+- (NSArray *)resultWithFavouratedTag:(FavourateViewSegmentTag)tag {
+    NSArray *retArray = nil;
+    switch (tag) {
+        case FavourateViewSegmentTagService:
+        {
+            retArray = [NSArray arrayWithArray:self.serviceResultArray];
+        }
+            break;
+        case FavourateViewSegmentTagStore:
+        {
+            retArray = [NSArray arrayWithArray:self.storeResultArray];
+        }
+            break;
+        case FavourateViewSegmentTagStrategy:
+        {
+            retArray = [NSArray arrayWithArray:self.strategyResultArray];
+        }
+            break;
+        case FavourateViewSegmentTagNews:
+        {
+            retArray = [NSArray arrayWithArray:self.newsResultArray];
+        }
+            break;
+        default:
+            break;
+    }
+    return retArray;
 }
 
 @end

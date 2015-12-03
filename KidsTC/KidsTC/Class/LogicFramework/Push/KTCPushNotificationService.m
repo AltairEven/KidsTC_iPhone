@@ -140,6 +140,8 @@ static KTCPushNotificationService *sharedInstance = nil;
     if (bind) {
         type = 1;//绑定
         [XGPush setAccount:[KTCUser currentUser].uid];
+    } else {
+        [XGPush setAccount:@""];
     }
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:type], @"type", self.token, @"deviceId", nil];
     __weak KTCPushNotificationService *weakSelf = self;

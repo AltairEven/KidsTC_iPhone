@@ -19,7 +19,7 @@
     if ([infoDic isKindOfClass:[NSDictionary class]]) {
         self.isFavourite = [[infoDic objectForKey:@"isCollect"] boolValue];
 //        self.mainImageUrl = [NSURL URLWithString:[infoDic objectForKey:@"image"]];
-        NSArray *array = [data objectForKey:@"image"];
+        NSArray *array = [infoDic objectForKey:@"image"];
         self.mainImageUrl = [NSURL URLWithString:[array lastObject]];
         self.title = [infoDic objectForKey:@"title"];
         self.authorName = [infoDic objectForKey:@"authorName"];

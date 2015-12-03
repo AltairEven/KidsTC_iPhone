@@ -83,11 +83,14 @@ static KTCFavouriteManager *_sharedInstance = nil;
         self.loadFavourateRequest = [HttpRequestClient clientWithUrlAliasName:@"COLLECT_QUERY"];
     }
     [self.loadFavourateRequest cancel];
-    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
-                           [NSNumber numberWithInteger:type], @"type",
-                           [NSNumber numberWithInteger:page], @"page",
-                           [NSNumber numberWithInteger:pageSize], @"pagecount", nil];
-    [self.loadFavourateRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
+    NSMutableDictionary *tempParam = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                      [NSNumber numberWithInteger:type], @"type",
+                                      [NSNumber numberWithInteger:page], @"page",
+                                      [NSNumber numberWithInteger:pageSize], @"pagecount", nil];
+    if (type == KTCFavouriteTypeStore) {
+        [tempParam setObject:[GConfig sharedConfig].currentLocationCoordinateString forKey:@"mapaddr"];
+    }
+    [self.loadFavourateRequest startHttpRequestWithParameter:[NSDictionary dictionaryWithDictionary:tempParam] success:^(HttpRequestClient *client, NSDictionary *responseData) {
         if (succeed) {
             succeed(responseData);
         }
