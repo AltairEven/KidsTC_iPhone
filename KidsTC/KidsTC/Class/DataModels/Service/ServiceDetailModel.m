@@ -39,6 +39,10 @@
     self.saleCount = [[data objectForKey:@"saleCount"] integerValue];
     self.price = [[data objectForKey:@"price"] floatValue];
     self.priceDescription = [data objectForKey:@"priceSortName"];
+    NSArray *coupons = [data objectForKey:@"coupons"];
+    if ([coupons isKindOfClass:[NSArray class]] && [coupons count] > 0) {
+        self.couponName = [coupons firstObject];
+    }
     self.couponUrlString = [data objectForKey:@"couponLink"];
     self.countdownTime = [[data objectForKey:@"remainCount"] integerValue];
     self.showCountdown = [[data objectForKey:@"showCountDown"] integerValue];
@@ -148,7 +152,7 @@
 }
 
 - (BOOL)hasCoupon {
-    return ([self.couponUrlString length] > 0);
+    return ([self.couponName length] > 0);
 }
 
 @end

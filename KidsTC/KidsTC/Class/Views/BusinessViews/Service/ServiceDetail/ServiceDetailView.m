@@ -40,10 +40,11 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
 //price
 @property (weak, nonatomic) IBOutlet RichPriceView *priceView;
 @property (weak, nonatomic) IBOutlet UILabel *priceDescriptionLabel;
-@property (weak, nonatomic) IBOutlet UIButton *couponButton;
 @property (weak, nonatomic) IBOutlet UILabel *commentNSaleLabel;
 //insurance
 @property (weak, nonatomic) IBOutlet InsuranceView *InsuranceView;
+//coupon
+@property (weak, nonatomic) IBOutlet UILabel *couponTitleLabel;
 //notice
 @property (weak, nonatomic) IBOutlet UIView *noticeTitleCellTagView;
 @property (weak, nonatomic) IBOutlet UILabel *noticeTitleLabel;
@@ -81,8 +82,6 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
 
 - (void)configRecommendCell;
 
-- (IBAction)didClickedCouponButton:(id)sender;
-
 @end
 
 @implementation ServiceDetailView
@@ -119,18 +118,16 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
     [self.priceView.priceLabel setFont:[UIFont systemFontOfSize:25]];
     
     self.priceDescriptionLabel.layer.borderWidth = BORDER_WIDTH;
-    self.priceDescriptionLabel.layer.borderColor = [UIColor orangeColor].CGColor;
+    self.priceDescriptionLabel.layer.borderColor = [AUITheme theme].globalThemeColor.CGColor;
+    self.priceDescriptionLabel.layer.cornerRadius = 2;
     self.priceDescriptionLabel.layer.masksToBounds = YES;
+    [self.priceDescriptionLabel setTextColor:[AUITheme theme].globalThemeColor];
     //segment view
     //moreinfo view
     //cells
     [self.topCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
     
     [self.priceCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
-    [self.couponButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
-    [self.couponButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
-    self.couponButton.layer.cornerRadius = 5;
-    self.couponButton.layer.masksToBounds = YES;
     
     [self.InsuranceView setFontSize:13];
     [self.InsuranceCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
@@ -270,6 +267,16 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
         height = SectionGap;
     }
     return height;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UITableViewCell *cell = [[self.cellArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    if (cell == self.couponCell) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedCouponOnServiceDetailView:)]) {
+            [self.delegate didClickedCouponOnServiceDetailView:self];
+        }
+    }
 }
 
 #pragma mark UIScrollViewDelegate
@@ -450,8 +457,6 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
     } else {
         [self.priceDescriptionLabel setHidden:YES];
     }
-    //coupon
-    [self.couponButton setHidden:![self.detailModel hasCoupon]];
     //count
     NSString *commentCount = [NSString stringWithFormat:@"%lu", (unsigned long)self.detailModel.commentsNumber];
     NSString *saleCount = [NSString stringWithFormat:@"%lu", (unsigned long)self.detailModel.saleCount];
@@ -469,7 +474,7 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
 }
 
 - (void)configCouponCell {
-    
+    [self.couponTitleLabel setText:self.detailModel.couponName];
 }
 
 - (void)configNoticeTitleCell {
@@ -527,12 +532,6 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
     [labelString setAttributes:attribute range:NSMakeRange(0, [recommderName length] + 1)];
     [self.recommendLabel setAttributedText:labelString];
     
-}
-
-- (IBAction)didClickedCouponButton:(id)sender {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedCouponButtonOnServiceDetailView:)]) {
-        [self.delegate didClickedCouponButtonOnServiceDetailView:self];
-    }
 }
 
 #pragma mark Public methods

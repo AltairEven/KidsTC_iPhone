@@ -11,6 +11,7 @@
 #import "FiveStarsView.h"
 #import "AUISegmentView.h"
 #import "StoreDetailViewActiveCell.h"
+#import "StoreDetailViewCouponCell.h"
 #import "StoreListViewCell.h"
 #import "StoreDetailTitleCell.h"
 #import "StoreDetailHotRecommendCell.h"
@@ -23,19 +24,21 @@ typedef enum {
     StoreDetailViewSectionTop = 0,
     StoreDetailViewSectionPhone = 1,
     StoreDetailViewSectionAddress = 2,
-    StoreDetailViewSectionActivity = 3,
-    StoreDetailViewSectionHotRecommend = 4,
-    StoreDetailViewSectionRecommend = 5,
-    StoreDetailViewSectionBrief = 6,
-    StoreDetailViewSectionComment = 7,
-    StoreDetailViewSectionNearby = 8,
-    StoreDetailViewSectionBrother = 9,
-    StoreDetailViewSectionService = 10
+    StoreDetailViewSectionCoupon = 3,
+    StoreDetailViewSectionActivity = 4,
+    StoreDetailViewSectionHotRecommend = 5,
+    StoreDetailViewSectionRecommend = 6,
+    StoreDetailViewSectionBrief = 7,
+    StoreDetailViewSectionComment = 8,
+    StoreDetailViewSectionNearby = 9,
+    StoreDetailViewSectionBrother = 10,
+    StoreDetailViewSectionService = 11
 }StoreDetailViewSection;
 
 
 static NSString *const kTitleCellIdentifier = @"kTitleCellIdentifier";
 static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
+static NSString *const kCouponCellIdentifier = @"kCouponCellIdentifier";
 static NSString *const kHotRecommendCellIdentifier = @"kHotRecommendCellIdentifier";
 static NSString *const kCommentCellIdentifier = @"kCommentCellIdentifier";
 static NSString *const kBrotherStoreCellIdentifier = @"kBrotherStoreCellIdentifier";
@@ -57,7 +60,6 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
 //top
 @property (weak, nonatomic) IBOutlet UILabel *storeName;
 @property (weak, nonatomic) IBOutlet FiveStarsView *starView;
-@property (weak, nonatomic) IBOutlet UIButton *couponButton;
 @property (weak, nonatomic) IBOutlet UILabel *appointmentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *reviewLabel;
 //tel
@@ -78,6 +80,7 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
 
 @property (nonatomic, strong) UINib *titleCellNib;
 @property (nonatomic, strong) UINib *activityCellNib;
+@property (nonatomic, strong) UINib *couponCellNib;
 @property (nonatomic, strong) UINib *hotRecommendCellNib;
 @property (nonatomic, strong) UINib *commentCellNib;
 @property (nonatomic, strong) UINib *brotherStoreCellNib;
@@ -143,6 +146,10 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
         self.activityCellNib = [UINib nibWithNibName:NSStringFromClass([StoreDetailViewActiveCell class]) bundle:nil];
         [self.tableView registerNib:self.activityCellNib forCellReuseIdentifier:kActivityCellIdentifier];
     }
+    if (!self.couponCellNib) {
+        self.couponCellNib = [UINib nibWithNibName:NSStringFromClass([StoreDetailViewCouponCell class]) bundle:nil];
+        [self.tableView registerNib:self.couponCellNib forCellReuseIdentifier:kCouponCellIdentifier];
+    }
     if (!self.hotRecommendCellNib) {
         self.hotRecommendCellNib = [UINib nibWithNibName:NSStringFromClass([StoreDetailHotRecommendCell class]) bundle:nil];
         [self.tableView registerNib:self.hotRecommendCellNib forCellReuseIdentifier:kHotRecommendCellIdentifier];
@@ -191,6 +198,11 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
         }
             break;
         case StoreDetailViewSectionAddress:
+        {
+            number = 1;
+        }
+            break;
+        case StoreDetailViewSectionCoupon:
         {
             number = 1;
         }
@@ -284,6 +296,12 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
         case StoreDetailViewSectionAddress:
         {
             cell = self.addressCell;
+        }
+            break;
+        case StoreDetailViewSectionCoupon:
+        {
+            cell = [self createTableCellWithIdentifier:kCouponCellIdentifier forTableView:tableView atIndexPath:indexPath];
+            [((StoreDetailViewCouponCell *)cell).descriptionLabel setText:self.detailModel.couponName];
         }
             break;
         case StoreDetailViewSectionActivity:
@@ -386,6 +404,11 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
         case StoreDetailViewSectionAddress:
         {
             height = self.addressCell.frame.size.height;
+        }
+            break;
+        case StoreDetailViewSectionCoupon:
+        {
+            height = [self.detailModel couponCellHeight];
         }
             break;
         case StoreDetailViewSectionActivity:
@@ -494,6 +517,13 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
                 }
             }
                 break;
+            case StoreDetailViewSectionCoupon:
+            {
+                if ([self.delegate respondsToSelector:@selector(didClickedCouponButtonOnStoreDetailView:)]) {
+                    [self.delegate didClickedCouponButtonOnStoreDetailView:self];
+                }
+            }
+                break;
             case StoreDetailViewSectionActivity:
             {
                 if ([self.delegate respondsToSelector:@selector(didClickedActiveOnStoreDetailView:atIndex:)]) {
@@ -590,6 +620,9 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
         if ([identifier isEqualToString:kTitleCellIdentifier]) {
             cell =  [[[NSBundle mainBundle] loadNibNamed:@"StoreDetailTitleCell" owner:nil options:nil] objectAtIndex:0];
         }
+        if ([identifier isEqualToString:kCouponCellIdentifier]) {
+            cell =  [[[NSBundle mainBundle] loadNibNamed:@"StoreDetailViewCouponCell" owner:nil options:nil] objectAtIndex:0];
+        }
         if ([identifier isEqualToString:kActivityCellIdentifier]) {
             cell =  [[[NSBundle mainBundle] loadNibNamed:@"StoreDetailViewActiveCell" owner:nil options:nil] objectAtIndex:0];
         }
@@ -610,13 +643,6 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
     [self.storeName setText:self.detailModel.storeName];
     
     [self.starView setStarNumber:self.detailModel.starNumber];
-    [self.couponButton setHidden:![self.detailModel hasCoupon]];
-    if (![self.couponButton isHidden]) {
-        [self.couponButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
-        [self.couponButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
-        self.couponButton.layer.cornerRadius = 5;
-        self.couponButton.layer.masksToBounds = YES;
-    }
     
     NSString *appointmentCount = [NSString stringWithFormat:@"%lu", (unsigned long)self.detailModel.appointmentNumber];
     NSString *wholeString = [NSString stringWithFormat:@"%@预约", appointmentCount];
@@ -773,6 +799,9 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
             if ([self.detailModel.storeAddress length] > 0) {
                 [self.addressLabel setText:self.detailModel.storeAddress];
                 [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionAddress]];
+            }
+            if ([self.detailModel hasCoupon]) {
+                [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionCoupon]];
             }
             if ([self.detailModel.activeModelsArray count] > 0) {
                 [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionActivity]];

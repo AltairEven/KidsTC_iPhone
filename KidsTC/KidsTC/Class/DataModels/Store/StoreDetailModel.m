@@ -29,6 +29,10 @@
     self.bannerRatio = 1;
     self.storeName = [data objectForKey:@"storeName"];
     self.starNumber = [[data objectForKey:@"level"] integerValue];
+    NSArray *coupons = [data objectForKey:@"coupons"];
+    if ([coupons isKindOfClass:[NSArray class]] && [coupons count] > 0) {
+        self.couponName = [coupons firstObject];
+    }
     self.couponUrlString = [data objectForKey:@"couponLink"];
     self.appointmentNumber = [[data objectForKey:@"bookNum"] integerValue];
     self.commentNumber = [[data objectForKey:@"evaluateNum"] integerValue];
@@ -207,7 +211,7 @@
 }
 
 - (BOOL)hasCoupon {
-    return ([self.couponUrlString length] > 0);
+    return ([self.couponName length] > 0);
 }
 
 - (NSArray<NSString *> *)phoneNumbersArray {
@@ -215,6 +219,10 @@
         return nil;
     }
     return [self.phoneNumber componentsSeparatedByString:@";"];
+}
+
+- (CGFloat)couponCellHeight {
+    return 40;
 }
 
 - (CGFloat)activityCellHeightAtIndex:(NSUInteger)index {

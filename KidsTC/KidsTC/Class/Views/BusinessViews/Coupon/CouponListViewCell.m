@@ -23,6 +23,8 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    [self.contentView setBackgroundColor:[AUITheme theme].globalBGColor];
+    
     UIImage *bgImage = [[UIImage imageNamed:@"coupon_cellBG"] resizableImageWithCapInsets:UIEdgeInsetsMake(20, 30, 28, 30) resizingMode:UIImageResizingModeTile];
     [self.cellBGView setImage:bgImage];
     

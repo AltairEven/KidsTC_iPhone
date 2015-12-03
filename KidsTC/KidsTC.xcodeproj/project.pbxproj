@@ -848,6 +848,8 @@
 		8F85ADBC1C0EBC9300890526 /* NewsSearchResultListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F85ADBB1C0EBC9300890526 /* NewsSearchResultListView.xib */; };
 		8F85ADC01C0EC05700890526 /* NewSearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85ADBE1C0EC05700890526 /* NewSearchResultViewController.m */; };
 		8F85ADC11C0EC05700890526 /* NewSearchResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F85ADBF1C0EC05700890526 /* NewSearchResultViewController.xib */; };
+		8F8671681C107E29005C838B /* StoreDetailViewCouponCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8671661C107E29005C838B /* StoreDetailViewCouponCell.m */; };
+		8F8671691C107E29005C838B /* StoreDetailViewCouponCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F8671671C107E29005C838B /* StoreDetailViewCouponCell.xib */; };
 		8F8A08D21BF9E31300134A9A /* BindPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8A08D01BF9E31300134A9A /* BindPhoneViewController.m */; };
 		8F8A08D31BF9E31300134A9A /* BindPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F8A08D11BF9E31300134A9A /* BindPhoneViewController.xib */; };
 		8F98D2541C000EF900C1388A /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8F98D2521C000EF900C1388A /* AlipaySDK.bundle */; };
@@ -2363,6 +2365,9 @@
 		8F85ADBD1C0EC05700890526 /* NewSearchResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewSearchResultViewController.h; sourceTree = "<group>"; };
 		8F85ADBE1C0EC05700890526 /* NewSearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewSearchResultViewController.m; sourceTree = "<group>"; };
 		8F85ADBF1C0EC05700890526 /* NewSearchResultViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewSearchResultViewController.xib; sourceTree = "<group>"; };
+		8F8671651C107E29005C838B /* StoreDetailViewCouponCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreDetailViewCouponCell.h; sourceTree = "<group>"; };
+		8F8671661C107E29005C838B /* StoreDetailViewCouponCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreDetailViewCouponCell.m; sourceTree = "<group>"; };
+		8F8671671C107E29005C838B /* StoreDetailViewCouponCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreDetailViewCouponCell.xib; sourceTree = "<group>"; };
 		8F8A08CF1BF9E31300134A9A /* BindPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindPhoneViewController.h; sourceTree = "<group>"; };
 		8F8A08D01BF9E31300134A9A /* BindPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindPhoneViewController.m; sourceTree = "<group>"; };
 		8F8A08D11BF9E31300134A9A /* BindPhoneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindPhoneViewController.xib; sourceTree = "<group>"; };
@@ -4096,6 +4101,9 @@
 				1EC4A0C11B5914FB00206BB9 /* StoreDetailViewActiveCell.h */,
 				1EC4A0C21B5914FB00206BB9 /* StoreDetailViewActiveCell.m */,
 				1EC4A0C31B5914FB00206BB9 /* StoreDetailViewActiveCell.xib */,
+				8F8671651C107E29005C838B /* StoreDetailViewCouponCell.h */,
+				8F8671661C107E29005C838B /* StoreDetailViewCouponCell.m */,
+				8F8671671C107E29005C838B /* StoreDetailViewCouponCell.xib */,
 				1EC4A0CF1B59F1D400206BB9 /* StoreDetailTitleCell.h */,
 				1EC4A0D01B59F1D400206BB9 /* StoreDetailTitleCell.m */,
 				1EC4A0D11B59F1D400206BB9 /* StoreDetailTitleCell.xib */,
@@ -5493,6 +5501,7 @@
 				1E0B7AAB1B6F67B800A58AD4 /* GNewCenterCell.xib in Resources */,
 				1E943EBE1B7375F60029FE74 /* Area.plist in Resources */,
 				1EC73BD81B5E4854008B39EA /* HomeViewNormalTitleCell.xib in Resources */,
+				8F8671691C107E29005C838B /* StoreDetailViewCouponCell.xib in Resources */,
 				1E15F9DF1BE8AA56000C74E7 /* SoftwareSettingViewController.xib in Resources */,
 				1E15F99E1BDF79D3000C74E7 /* CommentDetailViewStrategyHeaderCell.xib in Resources */,
 				1E8EFCE11B6729A900D00808 /* OrderCommentBottomView.xib in Resources */,
@@ -6112,6 +6121,7 @@
 				1E3D8CD91B4BF4A100275C35 /* IcsonADList.xcdatamodeld in Sources */,
 				1E8EFCD61B6657E200D00808 /* OrderDetailButtonCell.m in Sources */,
 				1E0B7A8F1B6F67B800A58AD4 /* GBannersView.m in Sources */,
+				8F8671681C107E29005C838B /* StoreDetailViewCouponCell.m in Sources */,
 				1EA8B6B51B637F0F00F90688 /* OrderModel.m in Sources */,
 				1E15F9CB1BE8A057000C74E7 /* SoftwareSettingView.m in Sources */,
 				1EC73BE11B5E4895008B39EA /* HomeViewMoreTitleCell.m in Sources */,

@@ -25,6 +25,8 @@
 
 @property (nonatomic, copy) NSString *storeName;
 
+@property (nonatomic, copy) NSString *couponName;
+
 @property (nonatomic, copy) NSString *couponUrlString;
 
 @property (nonatomic, assign) NSUInteger starNumber;
@@ -92,6 +94,8 @@
 - (BOOL)hasCoupon;
 
 - (NSArray<NSString *> *)phoneNumbersArray;
+
+- (CGFloat)couponCellHeight;
 
 - (CGFloat)activityCellHeightAtIndex:(NSUInteger)index;
 

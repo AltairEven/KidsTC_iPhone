@@ -27,8 +27,8 @@
                 <outlet property="InsuranceView" destination="U12-Qt-3cp" id="Rrf-Gi-tpt"/>
                 <outlet property="bannerScrollView" destination="7dk-sl-uzs" id="3cm-ie-qP1"/>
                 <outlet property="commentNSaleLabel" destination="8hv-um-5uM" id="HL8-a4-pU3"/>
-                <outlet property="couponButton" destination="S1u-Ag-cOc" id="qI9-FY-1H8"/>
                 <outlet property="couponCell" destination="L8f-WK-1ab" id="tG2-NC-6k4"/>
+                <outlet property="couponTitleLabel" destination="iBt-xD-fX4" id="chL-em-dKN"/>
                 <outlet property="noticeBGView" destination="kGV-yB-1MF" id="JQa-8o-IWP"/>
                 <outlet property="noticeCell" destination="bhY-cA-oMa" id="lmP-UL-dS8"/>
                 <outlet property="noticeTitleCell" destination="rrn-HP-8rO" id="Ycb-Zg-EaG"/>
@@ -118,22 +118,11 @@
                         </constraints>
                     </view>
                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="价格描述" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rRJ-I7-DXa">
-                        <rect key="frame" x="45" y="14.5" width="48" height="14.5"/>
+                        <rect key="frame" x="45" y="17.5" width="48" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.80392156859999997" green="0.0039215686269999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S1u-Ag-cOc">
-                        <rect key="frame" x="113" y="7" width="80" height="30"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="80" id="roe-LN-dub"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <state key="normal" title="点击领券"/>
-                        <connections>
-                            <action selector="didClickedCouponButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="VfE-Zz-JzB"/>
-                        </connections>
-                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="54" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8hv-um-5uM">
                         <rect key="frame" x="377.5" y="14" width="16.5" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -145,10 +134,8 @@
                     <constraint firstItem="gOc-Ty-LnP" firstAttribute="centerY" secondItem="sED-lL-BUz" secondAttribute="centerY" id="2Vw-YD-yJF"/>
                     <constraint firstItem="rRJ-I7-DXa" firstAttribute="leading" secondItem="gOc-Ty-LnP" secondAttribute="trailing" constant="5" id="8sI-aJ-0Zu"/>
                     <constraint firstItem="8hv-um-5uM" firstAttribute="centerY" secondItem="sED-lL-BUz" secondAttribute="centerY" id="Dag-ej-Cuq"/>
-                    <constraint firstItem="rRJ-I7-DXa" firstAttribute="centerY" secondItem="gOc-Ty-LnP" secondAttribute="centerY" id="ILG-iZ-ilO"/>
                     <constraint firstItem="gOc-Ty-LnP" firstAttribute="leading" secondItem="sED-lL-BUz" secondAttribute="leading" constant="10" id="Uwr-zQ-Wrf"/>
-                    <constraint firstItem="S1u-Ag-cOc" firstAttribute="centerY" secondItem="rRJ-I7-DXa" secondAttribute="centerY" id="g1G-cl-L5N"/>
-                    <constraint firstItem="S1u-Ag-cOc" firstAttribute="leading" secondItem="rRJ-I7-DXa" secondAttribute="trailing" constant="20" id="v5a-sc-cjH"/>
+                    <constraint firstItem="rRJ-I7-DXa" firstAttribute="bottom" secondItem="gOc-Ty-LnP" secondAttribute="bottom" id="hcF-R4-tCb"/>
                     <constraint firstAttribute="trailing" secondItem="8hv-um-5uM" secondAttribute="trailing" constant="10" id="zF5-hK-Bdy"/>
                 </constraints>
             </tableViewCellContentView>
@@ -183,6 +170,45 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="L8f-WK-1ab" id="fKi-Y8-iMh">
                 <rect key="frame" x="0.0" y="0.0" width="404" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="activitylogo_coupon" translatesAutoresizingMaskIntoConstraints="NO" id="biJ-hX-eon">
+                        <rect key="frame" x="10" y="7" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="ctG-w8-RK5"/>
+                            <constraint firstAttribute="height" constant="30" id="j2o-M1-k23"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iBt-xD-fX4">
+                        <rect key="frame" x="50" y="13" width="249" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.93978821999999995" green="0.4733254321" blue="0.40583982359999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="更多优惠券" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dt4-YS-Dic">
+                        <rect key="frame" x="309" y="14" width="65" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_r" translatesAutoresizingMaskIntoConstraints="NO" id="dJV-JL-hpx">
+                        <rect key="frame" x="379" y="14.5" width="15" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="6TZ-AC-KJh"/>
+                            <constraint firstAttribute="width" constant="15" id="clc-tV-TPC"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="biJ-hX-eon" firstAttribute="centerY" secondItem="fKi-Y8-iMh" secondAttribute="centerY" id="1Jx-Nc-1PK"/>
+                    <constraint firstItem="iBt-xD-fX4" firstAttribute="centerY" secondItem="biJ-hX-eon" secondAttribute="centerY" id="F7t-ny-zSM"/>
+                    <constraint firstItem="Dt4-YS-Dic" firstAttribute="leading" secondItem="iBt-xD-fX4" secondAttribute="trailing" constant="10" id="IkS-6u-PK3"/>
+                    <constraint firstAttribute="trailing" secondItem="dJV-JL-hpx" secondAttribute="trailing" constant="10" id="LEy-5x-Xv0"/>
+                    <constraint firstItem="dJV-JL-hpx" firstAttribute="leading" secondItem="Dt4-YS-Dic" secondAttribute="trailing" constant="5" id="PXH-Oz-mPe"/>
+                    <constraint firstItem="biJ-hX-eon" firstAttribute="leading" secondItem="fKi-Y8-iMh" secondAttribute="leading" constant="10" id="bO0-ct-drN"/>
+                    <constraint firstItem="Dt4-YS-Dic" firstAttribute="centerY" secondItem="dJV-JL-hpx" secondAttribute="centerY" id="cah-Ps-9bM"/>
+                    <constraint firstItem="iBt-xD-fX4" firstAttribute="leading" secondItem="biJ-hX-eon" secondAttribute="trailing" constant="10" id="hZa-5Q-mHf"/>
+                    <constraint firstItem="dJV-JL-hpx" firstAttribute="centerY" secondItem="fKi-Y8-iMh" secondAttribute="centerY" id="ieR-WE-zx1"/>
+                </constraints>
             </tableViewCellContentView>
             <point key="canvasLocation" x="301" y="197"/>
         </tableViewCell>
@@ -293,4 +319,8 @@
             <point key="canvasLocation" x="297.5" y="504"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="activitylogo_coupon" width="30" height="30"/>
+        <image name="arrow_r" width="15" height="15"/>
+    </resources>
 </document>

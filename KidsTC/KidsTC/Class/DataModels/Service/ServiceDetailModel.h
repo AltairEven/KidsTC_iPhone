@@ -41,6 +41,8 @@
 
 @property (nonatomic, strong) NSArray *supportedInsurances;
 
+@property (nonatomic, copy) NSString *couponName;
+
 @property (nonatomic, copy) NSString *couponUrlString;
 
 @property (nonatomic, copy) NSArray<ServiceDetailNoticeItem *> *noticeArray;

@@ -108,7 +108,7 @@
 
 #pragma mark ServiceDetailViewDelegate
 
-- (void)didClickedCouponButtonOnServiceDetailView:(ServiceDetailView *)detailView {
+- (void)didClickedCouponOnServiceDetailView:(ServiceDetailView *)detailView {
     KTCWebViewController * controller = [[KTCWebViewController alloc] init];
     [controller setHidesBottomBarWhenPushed:YES];
     [controller setWebUrlString:self.viewModel.detailModel.couponUrlString];

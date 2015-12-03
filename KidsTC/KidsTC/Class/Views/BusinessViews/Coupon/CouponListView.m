@@ -18,6 +18,7 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
 @interface CouponListView () <UITableViewDataSource, UITableViewDelegate, AUISegmentViewDataSource, AUISegmentViewDelegate>
 
 @property (weak, nonatomic) IBOutlet AUISegmentView *segmentView;
+@property (weak, nonatomic) IBOutlet UIView *gapView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) UINib *segmentNib;
@@ -56,6 +57,9 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
 }
 
 - (void)buildSubviews {
+    [self setBackgroundColor:[AUITheme theme].globalBGColor];
+    [self.gapView setBackgroundColor:[AUITheme theme].globalBGColor];
+    
     self.tableView.backgroundView = nil;
     [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
     self.tableView.delegate = self;
@@ -137,8 +141,12 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
 
 #pragma mark UITableViewDataSource & UITableViewDelegate
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [self.listModels count];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
 }
 
 
@@ -164,7 +172,7 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
     if ([self.listModels count] > 0) {
-        [view setBackgroundColor:[UIColor whiteColor]];
+        [view setBackgroundColor:[AUITheme theme].globalBGColor];
     }
     return view;
 }
