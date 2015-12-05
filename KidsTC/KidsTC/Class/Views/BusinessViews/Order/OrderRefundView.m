@@ -9,11 +9,15 @@
 #import "OrderRefundView.h"
 #import "RichPriceView.h"
 #import "PlaceHolderTextView.h"
+#import "StepperView.h"
 
 #define MAXREASONLENGTH (200)
 
-@interface OrderRefundView () <UITextViewDelegate>
+@interface OrderRefundView () <UITextViewDelegate, StepperDelegate>
 
+@property (weak, nonatomic) IBOutlet UIView *countBGView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *countBGHeight;
+@property (weak, nonatomic) IBOutlet StepperView *stepperView;
 @property (weak, nonatomic) IBOutlet RichPriceView *refundAmountView;
 @property (weak, nonatomic) IBOutlet UILabel *backPointNumberLabel;
 @property (weak, nonatomic) IBOutlet UIButton *reasonButton;
@@ -49,6 +53,9 @@
 }
 
 - (void)buildSubviews {
+    
+    self.stepperView.stepperDelegate = self;
+    
     [self.refundAmountView setContentColor:[AUITheme theme].globalThemeColor];
     [self.refundAmountView.unitLabel setFont:[UIFont systemFontOfSize:16]];
     [self.refundAmountView.priceLabel setFont:[UIFont systemFontOfSize:20]];
@@ -72,6 +79,14 @@
     [self.submitButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
 }
 
+#pragma mark StepperViewDelegate
+
+- (void)stepperView:(StepperView *)stepper valueChanged:(NSInteger)val byType:(eSteptype)type {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(orderRefundView:didChangedRefundCountToValue:)]) {
+        [self.delegate orderRefundView:self didChangedRefundCountToValue:val];
+    }
+}
+
 
 #pragma mark UITextViewDelegate
 
@@ -89,12 +104,13 @@
     } else {
         [self.descriptionTextView setIsPlaceHolderState:YES];
     }
+    [self.refundModel setRefundDescription:textView.text];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     NSInteger number = [text length];
     if (number > MAXREASONLENGTH) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"字数不能大于500" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"字数不能大于200" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
         textView.text = [textView.text substringToIndex:MAXREASONLENGTH];
     }
@@ -104,7 +120,7 @@
 - (void)textViewDidChange:(UITextView *)textView {
     NSInteger number = [textView.text length];
     if (number > MAXREASONLENGTH) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"字数不能大于500" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"字数不能大于200" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
         textView.text = [textView.text substringToIndex:MAXREASONLENGTH];
         number = MAXREASONLENGTH;
@@ -130,13 +146,24 @@
 
 #pragma mark Public methods
 
+- (void)setMinCount:(NSInteger)min andMaxCount:(NSInteger)max {
+    [self.stepperView setMaxVal:max andMinVal:min];
+    if (max <= 1) {
+        [self.countBGView setHidden:YES];
+        self.countBGHeight.constant = 0;
+    } else {
+        [self.countBGView setHidden:NO];
+        self.countBGHeight.constant = 60;
+    }
+}
+
 - (void)reloadData {
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(refundModelForOrderRefundView:)]) {
         self.refundModel = [self.dataSource refundModelForOrderRefundView:self];
     }
     if (self.refundModel) {
-        [self.refundAmountView setPrice:self.refundModel.refundAmount];
-        [self.backPointNumberLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)self.refundModel.backPointNumber]];
+        [self.refundAmountView setPrice:[self.refundModel refundAmount]];
+        [self.backPointNumberLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)[self.refundModel backPoint]]];
         if (self.refundModel.selectedReasonItem) {
             [self.reasonButton setTitle:self.refundModel.selectedReasonItem.reasonName forState:UIControlStateNormal];
         } else {

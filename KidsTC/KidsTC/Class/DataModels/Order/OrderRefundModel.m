@@ -14,13 +14,45 @@
     if (!data || ![data isKindOfClass:[NSDictionary class]]) {
         return;
     }
-    self.refundAmount = 999.99;
-    self.backPointNumber = 30;
-    
-    OrderRefundReasonItem *item1 = [OrderRefundReasonItem reasonItemWithIdentifier:@"1" name:@"不好玩"];
-    OrderRefundReasonItem *item2 = [OrderRefundReasonItem reasonItemWithIdentifier:@"2" name:@"往哪里跑"];
-    OrderRefundReasonItem *item3 = [OrderRefundReasonItem reasonItemWithIdentifier:@"3" name:@"别害怕"];
-    self.refundReasons = [NSArray arrayWithObjects:item1, item2, item3, nil];
+    self.maxRefundCount = [[data objectForKey:@"refundMaxNum"] integerValue];
+    self.unitRefundAmount = [[data objectForKey:@"singleRefundAmt"] floatValue];
+    self.totalRefundAmount = [[data objectForKey:@"totalRefundAmt"] floatValue];
+    self.unitPointNumber = [[data objectForKey:@"singleRefundScore"] integerValue];
+    self.totalPointNumber = [[data objectForKey:@"totalRefundScore"] integerValue];
+    NSArray *reasons = [data objectForKey:@"reasons"];
+    if ([reasons isKindOfClass:[NSArray class]]) {
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        for (NSDictionary *singleDic in reasons) {
+            NSString *identifier = [NSString stringWithFormat:@"%@", [singleDic objectForKey:@"type"]];
+            NSString *name = [singleDic objectForKey:@"name"];
+            OrderRefundReasonItem *item = [OrderRefundReasonItem reasonItemWithIdentifier:identifier name:name];
+            if (item) {
+                [tempArray addObject:item];
+            }
+        }
+        self.refundReasons = [NSArray arrayWithArray:tempArray];
+    }
+    self.refundCount = 1;
+}
+
+- (CGFloat)refundAmount {
+    CGFloat amount = 0;
+    if (self.refundCount == self.maxRefundCount) {
+        amount = self.totalRefundAmount;
+    } else {
+        amount = self.refundCount * self.unitRefundAmount;
+    }
+    return amount;
+}
+
+- (NSUInteger)backPoint {
+    NSUInteger point = 0;
+    if (self.refundCount == self.maxRefundCount) {
+        point = self.totalPointNumber;
+    } else {
+        point = self.refundCount * self.unitPointNumber;
+    }
+    return point;
 }
 
 @end

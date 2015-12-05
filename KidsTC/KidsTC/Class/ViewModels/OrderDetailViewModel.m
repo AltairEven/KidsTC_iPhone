@@ -141,8 +141,14 @@
     __weak OrderDetailViewModel *weakSelf = self;
     [weakSelf.loadOrderRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [weakSelf loadOrderDetailSucceed:responseData];
+        if (succeed) {
+            succeed(responseData);
+        }
     } failure:^(HttpRequestClient *client, NSError *error) {
         [weakSelf loadOrderDetailFailed:error];
+        if (failure) {
+            failure(error);
+        }
     }];
 }
 

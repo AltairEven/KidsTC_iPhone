@@ -19,6 +19,8 @@
 
 @protocol OrderRefundViewDelegate <NSObject>
 
+- (void)orderRefundView:(OrderRefundView *)view didChangedRefundCountToValue:(NSUInteger)count;
+
 - (void)didClickedReasonButtonOnOrderRefundView:(OrderRefundView *)view;
 
 - (void)didClickedSubmitButtonOnOrderRefundView:(OrderRefundView *)view;
@@ -30,6 +32,8 @@
 @property (nonatomic, assign) id<OrderRefundViewDataSource> dataSource;
 
 @property (nonatomic, assign) id<OrderRefundViewDelegate> delegate;
+
+- (void)setMinCount:(NSInteger)min andMaxCount:(NSInteger)max;
 
 - (void)reloadData;
 

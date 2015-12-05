@@ -236,7 +236,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cHY-7H-qes">
                                 <rect key="frame" x="272" y="12" width="6" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" red="1" green="0.08740861472" blue="0.1398824568" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.93978821999999995" green="0.4733254321" blue="0.40583982359999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mMy-92-7tU" customClass="RichPriceView">
@@ -274,7 +274,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="98I-Tx-0cH">
                                 <rect key="frame" x="272" y="12" width="6" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" red="1" green="0.08740861472" blue="0.1398824568" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.93978821999999995" green="0.4733254321" blue="0.40583982359999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OUC-B2-HNJ" customClass="RichPriceView">

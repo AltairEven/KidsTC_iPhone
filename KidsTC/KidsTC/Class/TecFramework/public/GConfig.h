@@ -35,7 +35,7 @@ static NSString * const kAppIDInAppStore = @"557825088";
 //static NSString *const kWeChatSourceKey = @"comefrom";
 //static NSString *const kWeChatSourceValue = @"weixin";
 
-static NSString *const kCustomerServicePhoneNumber = @"15000168321";
+static NSString *const kCustomerServicePhoneNumber = @"10086";
 
 static NSString *const UserRoleHasChangedNotification = @"UserRoleHasChangedNotification";
 
@@ -560,6 +560,9 @@ typedef enum {
 
 static const int kInvalidShowPrice = 99999900;
 
+
+#define ScoreCoefficient (0.1)
+
 @class GConfig;
 @class ATCountDown;
 
@@ -629,5 +632,6 @@ static const int kInvalidShowPrice = 99999900;
 + (void)resetLineView:(UIView *)view withLayoutAttribute:(NSLayoutAttribute)attribute;
 
 + (NSString *)generateSMSCodeKey;
+
 
 @end

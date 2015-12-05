@@ -143,6 +143,7 @@ static KTCPushNotificationService *sharedInstance = nil;
     } else {
         [XGPush setAccount:@""];
     }
+    _token = [[NSUserDefaults standardUserDefaults] objectForKey:kDeviceToken];
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:type], @"type", self.token, @"deviceId", nil];
     __weak KTCPushNotificationService *weakSelf = self;
     [weakSelf.setAccountRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {

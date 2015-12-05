@@ -12,7 +12,7 @@ typedef enum {
     OrderDetailActionTagPay = 0,
     OrderDetailActionTagCancel,
     OrderDetailActionTagComment,
-    OrderDetailActionTagReturn,
+    OrderDetailActionTagRefund,
     OrderDetailActionTagGotoService,
     OrderDetailActionTagGetCode
 }OrderDetailActionTag;

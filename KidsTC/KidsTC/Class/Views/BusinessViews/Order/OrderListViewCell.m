@@ -78,12 +78,6 @@
                 [self.rightButton setTitle:@"付款" forState:UIControlStateNormal];
             }
                 break;
-            case OrderStatusHasPayed:
-            {
-                [self.rightButton setHidden:NO];
-                [self.rightButton setTitle:@"退款" forState:UIControlStateNormal];
-            }
-                break;
             case OrderStatusAllUsed:
             {
                 [self.rightButton setHidden:NO];

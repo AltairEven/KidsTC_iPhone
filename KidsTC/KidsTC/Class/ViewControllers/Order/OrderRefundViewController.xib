@@ -2,12 +2,13 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9060"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OrderRefundViewController">
             <connections>
-                <outlet property="refundView" destination="Zek-Fq-LmP" id="cEi-PW-nRV"/>
+                <outlet property="refundView" destination="lBX-Vy-9qq" id="XOx-8T-E51"/>
+                <outlet property="scrollBGView" destination="BCr-sF-T0P" id="am3-YE-hd8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,17 +17,30 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zek-Fq-LmP" customClass="OrderRefundView">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BCr-sF-T0P">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </view>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lBX-Vy-9qq" customClass="OrderRefundView">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="lBX-Vy-9qq" firstAttribute="leading" secondItem="BCr-sF-T0P" secondAttribute="leading" id="BXi-bX-aop"/>
+                        <constraint firstAttribute="trailing" secondItem="lBX-Vy-9qq" secondAttribute="trailing" id="JfN-2e-ryg"/>
+                        <constraint firstAttribute="bottom" secondItem="lBX-Vy-9qq" secondAttribute="bottom" id="P7J-Ez-c5s"/>
+                        <constraint firstItem="lBX-Vy-9qq" firstAttribute="top" secondItem="BCr-sF-T0P" secondAttribute="top" id="veD-me-8YR"/>
+                    </constraints>
+                </scrollView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Zek-Fq-LmP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="0BK-BJ-7w3"/>
-                <constraint firstAttribute="trailing" secondItem="Zek-Fq-LmP" secondAttribute="trailing" id="EzC-5n-du2"/>
-                <constraint firstItem="Zek-Fq-LmP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Kn7-h4-bMs"/>
-                <constraint firstAttribute="bottom" secondItem="Zek-Fq-LmP" secondAttribute="bottom" id="SrD-7R-Hyl"/>
+                <constraint firstItem="lBX-Vy-9qq" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" id="0Zb-Td-vUC"/>
+                <constraint firstItem="BCr-sF-T0P" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="2fe-go-wBN"/>
+                <constraint firstAttribute="bottom" secondItem="BCr-sF-T0P" secondAttribute="bottom" id="SVl-Si-Raj"/>
+                <constraint firstAttribute="trailing" secondItem="BCr-sF-T0P" secondAttribute="trailing" id="g4F-Wo-aai"/>
+                <constraint firstItem="BCr-sF-T0P" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="hur-QX-1NM"/>
+                <constraint firstItem="lBX-Vy-9qq" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="ryG-kc-G8P"/>
             </constraints>
         </view>
     </objects>

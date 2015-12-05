@@ -36,16 +36,18 @@
         NSString *paymentName = [data objectForKey:@"paytypeName"];
         PaymentType payType = (PaymentType)[[data objectForKey:@"paytype"] integerValue];
         self.pamentType = [[PaymentTypeModel alloc] initWithPaymentName:paymentName paymenttype:payType logoImage:nil];
+        self.canRefund = [[data objectForKey:@"canRefund"] boolValue];
+        self.canContactCS = [[data objectForKey:@"canContactCS"] boolValue];
+        self.originalAmount = [[data objectForKey:@"originalAmt"] floatValue];
+        self.discountAmount = [[data objectForKey:@"discountAmt"] floatValue];
+        self.orderDetailDescription = [data objectForKey:@"orderDetailDesc"];
+        self.usedPointNumber = [[data objectForKey:@"scoreNum"] integerValue];
+        
+        if ([self.orderDetailDescription length] == 0) {
+            self.orderDetailDescription = self.statusDescription;
+        }
     }
     return self;
-}
-
-- (BOOL)supportRefund {
-    BOOL bSupport = NO;
-    if ([self.supportedInsurances count] > 0) {
-        bSupport = YES;
-    }
-    return bSupport;
 }
 
 

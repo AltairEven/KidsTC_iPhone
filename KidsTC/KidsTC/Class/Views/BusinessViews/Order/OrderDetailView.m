@@ -9,21 +9,23 @@
 #import "OrderDetailView.h"
 #import "FiveStarsView.h"
 #import "RichPriceView.h"
-#import "OrderDetailButtonCell.h"
 #import "InsuranceView.h"
 #import "OrderDetailConsumptionCodeCell.h"
+#import "OrderDetailModel.h"
 
+#define LeftButtonWith (150)
 
 static NSString *const kCellIdentifier = @"kCellIdentifier";
 static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellIdentifier";
 
 
-@interface OrderDetailView () <UITableViewDataSource, UITableViewDelegate, OrderDetailButtonCellDelegate>
+@interface OrderDetailView () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UITableViewCell *orderDetailCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *serviceDetailCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *InsuranceCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *settlementCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *orderDetailHeaderCell;
 
 @property (weak, nonatomic) IBOutlet UILabel *orderIdLabel;
@@ -36,17 +38,33 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
 @property (weak, nonatomic) IBOutlet UIImageView *serviceImageView;
 @property (weak, nonatomic) IBOutlet UILabel *serviceNameLabel;
 @property (weak, nonatomic) IBOutlet RichPriceView *servicePriceView;
+@property (weak, nonatomic) IBOutlet UILabel *buyCountLabel;
 @property (weak, nonatomic) IBOutlet InsuranceView *InsuranceView;
+
+@property (nonatomic, strong) UIView *noticeView;
 
 @property (nonatomic, strong) UINib *cellNib;
 @property (nonatomic, strong) UINib *consumptionCodeCellNib;
 
-@property (nonatomic, strong) UIButton *getCodeButton;
-
 @property (nonatomic, strong) OrderDetailModel *detailModel;
+//settlement
+@property (weak, nonatomic) IBOutlet RichPriceView *productTotalPriceView;
+@property (weak, nonatomic) IBOutlet UILabel *promotionDescriptionLabel;
+@property (weak, nonatomic) IBOutlet RichPriceView *promotionPriceView;
+@property (weak, nonatomic) IBOutlet RichPriceView *scorePriceView;
 
+//button view
+@property (weak, nonatomic) IBOutlet UIView *buttonBGView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *buttonBGHeight;
+@property (weak, nonatomic) IBOutlet UIView *leftButtonBGView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftButtonWidth;
+@property (weak, nonatomic) IBOutlet UIButton *leftButton;
+@property (weak, nonatomic) IBOutlet UIView *rightButtonBGView;
+@property (weak, nonatomic) IBOutlet UIButton *rightButton;
 
-- (void)didClickedGetCodeButton:(id)sender;
+- (void)resetButtonView;
+- (IBAction)didClickedLeftButton:(id)sender;
+- (IBAction)didClickedRightButton:(id)sender;
 
 @end
 
@@ -77,18 +95,8 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
     self.tableView.dataSource = self;
     
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
-    self.getCodeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.getCodeButton setFrame:CGRectMake(15, 10, SCREEN_WIDTH - 30, 40)];
-    [self.getCodeButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
-    [self.getCodeButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
-    [self.getCodeButton setTitle:@"获取消费码" forState:UIControlStateNormal];
-    [self.getCodeButton addTarget:self action:@selector(didClickedGetCodeButton:) forControlEvents:UIControlEventTouchUpInside];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
     
-    [footerView addSubview:self.getCodeButton];
-    [self.getCodeButton setHidden:YES];
-    
-    self.tableView.tableFooterView = footerView;
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     }
@@ -96,20 +104,44 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
         [self.tableView setLayoutMargins:UIEdgeInsetsZero];
     }
     
+    self.noticeView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20)];
+    [self.noticeView setBackgroundColor:[UIColor clearColor]];
+    UILabel *noticeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, self.noticeView.frame.size.width - 20, 20)];
+    [noticeLabel setBackgroundColor:[UIColor clearColor]];
+    [noticeLabel setFont:[UIFont systemFontOfSize:11]];
+    [noticeLabel setTextColor:[UIColor orangeColor]];
+    [noticeLabel setText:@"注：如果您对退款有疑问，可以点击右上角联系客服"];
+    [self.noticeView addSubview:noticeLabel];
+    
     //price views
+    [self.InsuranceView setFontSize:13];
+    
     [self.servicePriceView setContentColor:[AUITheme theme].buttonBGColor_Normal];
     [self.servicePriceView setFont:[UIFont systemFontOfSize:15]];
     [self.servicePriceView sizeToFitParameters];
     
-    if (!self.cellNib) {
-        self.cellNib = [UINib nibWithNibName:NSStringFromClass([OrderDetailButtonCell class]) bundle:nil];
-        [self.tableView registerNib:self.cellNib forCellReuseIdentifier:kCellIdentifier];
-    }
+    [self.productTotalPriceView setContentColor:[AUITheme theme].globalThemeColor];
+    [self.productTotalPriceView setFont:[UIFont systemFontOfSize:13]];
+    [self.promotionPriceView setContentColor:[AUITheme theme].globalThemeColor];
+    [self.promotionPriceView setFont:[UIFont systemFontOfSize:13]];
+    [self.scorePriceView setContentColor:[AUITheme theme].globalThemeColor];
+    [self.scorePriceView setFont:[UIFont systemFontOfSize:13]];
     
     if (!self.consumptionCodeCellNib) {
         self.consumptionCodeCellNib = [UINib nibWithNibName:NSStringFromClass([OrderDetailConsumptionCodeCell class]) bundle:nil];
         [self.tableView registerNib:self.consumptionCodeCellNib forCellReuseIdentifier:kConsumptionCodeCellIdentifier];
     }
+    
+    [self.leftButton setBackgroundColor:RGBA(239, 239, 239, 1) forState:UIControlStateNormal];
+    [self.leftButton setBackgroundColor:RGBA(200, 200, 200, 1) forState:UIControlStateHighlighted];
+    [self.leftButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    
+    [self.rightButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.rightButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    [self.rightButton setBackgroundColor:[AUITheme theme].buttonBGColor_Disable forState:UIControlStateDisabled];
+    [self.rightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.buttonBGView setHidden:YES];
+    self.buttonBGHeight.constant = 0;
 }
 
 #pragma mark UITableViewDataSource & UITableViewDelegate
@@ -117,7 +149,7 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     NSUInteger number = 0;
     if (self.detailModel) {
-        number = 3;
+        number = 4;
     }
     return number;
 }
@@ -133,11 +165,7 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
                 break;
             case 1:
             {
-                if ([OrderDetailButtonCell willShowWithOrderStatus:self.detailModel.status]) {
-                    number = 1;
-                } else {
-                    number = 0;
-                }
+                number = 1;
             }
                 break;
             case 2:
@@ -161,6 +189,11 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
                 [self.serviceImageView setImageWithURL:self.detailModel.imageUrl placeholderImage:PLACEHOLDERIMAGE_SMALL];
                 [self.serviceNameLabel setText:self.detailModel.orderName];
                 [self.servicePriceView setPrice:self.detailModel.servicePrice];
+                NSString *countString = @"";
+                if (self.detailModel.serviceCount > 1) {
+                    countString = [NSString stringWithFormat:@"x%lu", (unsigned long)self.detailModel.serviceCount];
+                }
+                [self.buyCountLabel setText:countString];
                 cell = self.serviceDetailCell;
             } else {
                 [self.InsuranceView setSupportedInsurance:self.detailModel.supportedInsurances];
@@ -169,13 +202,15 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
         }
             break;
         case 1:{
-            cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:indexPath];
-            if (!cell) {
-                cell =  [[[NSBundle mainBundle] loadNibNamed:@"OrderDetailButtonCell" owner:nil options:nil] objectAtIndex:0];
-            }
-            [(OrderDetailButtonCell *)cell setStatus:self.detailModel.status];
-            [(OrderDetailButtonCell *)cell setSupportRefund:[self.detailModel supportRefund]];
-            ((OrderDetailButtonCell *)cell).delegate = self;
+            CGFloat totalPrice = self.detailModel.originalAmount;
+            [self.productTotalPriceView setPrice:totalPrice];
+            [self.promotionDescriptionLabel setText:@""];
+            [self.promotionPriceView setPrice:self.detailModel.discountAmount];
+            
+            CGFloat scorePrice = self.detailModel.usedPointNumber * ScoreCoefficient;
+            [self.scorePriceView setPrice:scorePrice];
+            [self.settlementCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+            cell = self.settlementCell;
         }
             break;
         case 2:
@@ -184,7 +219,7 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
                 cell = self.orderDetailHeaderCell;
             } else {
                 [self.orderIdLabel setText:self.detailModel.orderId];
-                [self.orderStatusLabel setText:self.detailModel.statusDescription];
+                [self.orderStatusLabel setText:self.detailModel.orderDetailDescription];
                 [self.orderPhoneLabel setText:self.detailModel.phone];
                 [self.orderCreateTimeLabel setText:self.detailModel.orderDate];
                 [self.orderItemCountLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)self.detailModel.serviceCount]];
@@ -192,6 +227,7 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
                 cell = self.orderDetailCell;
             }
         }
+            break;
         default:
             break;
     }
@@ -225,7 +261,7 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
             break;
         case 1:
         {
-            height = [OrderDetailButtonCell cellHeight];
+            height = self.settlementCell.frame.size.height;
         }
             break;
         case 2:
@@ -267,37 +303,138 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
     }
 }
 
-#pragma mark OrderDetailButtonCellDelegate
-
-
-- (void)didClickedPayButtonOnOrderDetailButtonCell:(OrderDetailButtonCell *)cell {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(orderDetailView:executeActionWithTag:)]) {
-        [self.delegate orderDetailView:self executeActionWithTag:OrderDetailActionTagPay];
-    }
-}
-
-- (void)didClickedCommentButtonOnOrderDetailButtonCell:(OrderDetailButtonCell *)cell {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(orderDetailView:executeActionWithTag:)]) {
-        [self.delegate orderDetailView:self executeActionWithTag:OrderDetailActionTagComment];
-    }
-}
-
-- (void)didClickedCancelButtonOnOrderDetailButtonCell:(OrderDetailButtonCell *)cell {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(orderDetailView:executeActionWithTag:)]) {
-        [self.delegate orderDetailView:self executeActionWithTag:OrderDetailActionTagCancel];
-    }}
-
-- (void)didClickedReturnButtonOnOrderDetailButtonCell:(OrderDetailButtonCell *)cell {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(orderDetailView:executeActionWithTag:)]) {
-        [self.delegate orderDetailView:self executeActionWithTag:OrderDetailActionTagReturn];
-    }
-}
-
 #pragma mark Private methods
 
-- (void)didClickedGetCodeButton:(id)sender {
+- (void)resetButtonView {
+    if (self.detailModel) {
+        self.buttonBGHeight.constant = 50;
+        [self.buttonBGView setHidden:NO];
+        switch (self.detailModel.status) {
+            case OrderStatusWaitingPayment:
+            {
+                [self.leftButtonBGView setHidden:NO];
+                [self.leftButton setTitle:@"取消订单" forState:UIControlStateNormal];
+                self.leftButtonWidth.constant = LeftButtonWith;
+                
+                [self.rightButtonBGView setHidden:NO];
+                [self.rightButton setTitle:@"立即支付" forState:UIControlStateNormal];
+            }
+                break;
+            case OrderStatusHasPayed:
+            {
+                if ([self.detailModel canRefund]) {
+                    [self.leftButtonBGView setHidden:NO];
+                    [self.leftButton setTitle:@"申请退款" forState:UIControlStateNormal];
+                    self.leftButtonWidth.constant = LeftButtonWith;
+                } else {
+                    [self.leftButtonBGView setHidden:YES];
+                    self.leftButtonWidth.constant = 0;
+                }
+                
+                [self.rightButtonBGView setHidden:NO];
+                [self.rightButton setTitle:@"获取消费码" forState:UIControlStateNormal];
+            }
+                break;
+            case OrderStatusPartialUsed:
+            {
+                if ([self.detailModel canRefund]) {
+                    [self.leftButtonBGView setHidden:NO];
+                    [self.leftButton setTitle:@"申请退款" forState:UIControlStateNormal];
+                    self.leftButtonWidth.constant = LeftButtonWith;
+                } else {
+                    [self.leftButtonBGView setHidden:YES];
+                    self.leftButtonWidth.constant = 0;
+                }
+                
+                [self.rightButtonBGView setHidden:NO];
+                [self.rightButton setTitle:@"获取消费码" forState:UIControlStateNormal];
+            }
+                break;
+            case OrderStatusAllUsed:
+            {
+                [self.leftButtonBGView setHidden:YES];
+                self.leftButtonWidth.constant = 0;
+                
+                [self.rightButtonBGView setHidden:NO];
+                [self.rightButton setTitle:@"发表评价" forState:UIControlStateNormal];
+            }
+                break;
+            case OrderStatusHasCanceled:
+            {
+                [self.buttonBGView setHidden:YES];
+                self.buttonBGHeight.constant = 0;
+            }
+                break;
+            case OrderStatusRefunding:
+            {
+                [self.buttonBGView setHidden:YES];
+                self.buttonBGHeight.constant = 0;
+            }
+                break;
+            case OrderStatusRefundSucceed:
+            {
+                [self.buttonBGView setHidden:YES];
+                self.buttonBGHeight.constant = 0;
+            }
+                break;
+            case OrderStatusRefundFailed:
+            {
+                [self.buttonBGView setHidden:YES];
+                self.buttonBGHeight.constant = 0;
+            }
+                break;
+            case OrderStatusHasComment:
+            {
+                [self.buttonBGView setHidden:YES];
+                self.buttonBGHeight.constant = 0;
+            }
+                break;
+            default:
+                break;
+        }
+        if ([self.detailModel canRefund]) {
+            [self.leftButtonBGView setHidden:NO];
+            [self.leftButton setTitle:@"申请退款" forState:UIControlStateNormal];
+            self.leftButtonWidth.constant = LeftButtonWith;
+        }
+    } else {
+        self.buttonBGHeight.constant = 0;
+        [self.buttonBGView setHidden:YES];
+    }
+}
+
+- (IBAction)didClickedLeftButton:(id)sender {
     if (self.delegate && [self.delegate respondsToSelector:@selector(orderDetailView:executeActionWithTag:)]) {
-        [self.delegate orderDetailView:self executeActionWithTag:OrderDetailActionTagGetCode];
+        if (self.detailModel.status == OrderStatusWaitingPayment) {
+            [self.delegate orderDetailView:self executeActionWithTag:OrderDetailActionTagCancel];
+        } else if ([self.detailModel canRefund]) {
+            [self.delegate orderDetailView:self executeActionWithTag:OrderDetailActionTagRefund];
+        }
+    }
+}
+
+- (IBAction)didClickedRightButton:(id)sender {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(orderDetailView:executeActionWithTag:)]) {
+        switch (self.detailModel.status) {
+            case OrderStatusWaitingPayment:
+            {
+                [self.delegate orderDetailView:self executeActionWithTag:OrderDetailActionTagPay];
+            }
+                break;
+            case OrderStatusHasPayed:
+            case OrderStatusPartialUsed:
+            {
+                [self.delegate orderDetailView:self executeActionWithTag:OrderDetailActionTagGetCode];
+            }
+                break;
+            case OrderStatusAllUsed:
+            {
+                [self.delegate orderDetailView:self executeActionWithTag:OrderDetailActionTagComment];
+            }
+                break;
+            default:
+                break;
+        }
     }
 }
 
@@ -306,13 +443,18 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
 - (void)reloadData {
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(orderDetailModelForOrderDetailView:)]) {
         self.detailModel = [self.dataSource orderDetailModelForOrderDetailView:self];
+        if ([self.detailModel canContactCS]) {
+            self.tableView.tableFooterView = self.noticeView;
+        } else {
+            self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
+        }
         [self.tableView reloadData];
-        [self.getCodeButton setHidden:![self.detailModel canGetCode]];
     }
+    [self resetButtonView];
 }
 
 - (void)setGetCodeButtonEnabled:(BOOL)enabled {
-    [self.getCodeButton setEnabled:enabled];
+    [self.rightButton setEnabled:enabled];
 }
 
 /*

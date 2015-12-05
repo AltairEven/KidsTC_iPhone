@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong) OrderRefundModel *refundModel;
 
+- (void)createOrderRefundWithSucceed:(void (^)(NSDictionary *data))succeed failure:(void (^)(NSError *error))failure;
+
 @end

@@ -14,9 +14,17 @@
 
 @property (nonatomic, copy) NSString *orderId;
 
-@property (nonatomic, assign) CGFloat refundAmount;
+@property (nonatomic, assign) NSUInteger maxRefundCount;
 
-@property (nonatomic, assign) NSUInteger backPointNumber;
+@property (nonatomic, assign) NSUInteger refundCount;
+
+@property (nonatomic, assign) CGFloat unitRefundAmount;
+
+@property (nonatomic, assign) CGFloat totalRefundAmount;
+
+@property (nonatomic, assign) NSUInteger unitPointNumber;
+
+@property (nonatomic, assign) NSUInteger totalPointNumber;
 
 @property (nonatomic, strong) NSArray<OrderRefundReasonItem *> *refundReasons;
 
@@ -25,6 +33,10 @@
 @property (nonatomic, copy) NSString *refundDescription;
 
 - (void)fillWithRawData:(NSDictionary *)data;
+
+- (CGFloat)refundAmount;
+
+- (NSUInteger)backPoint;
 
 @end
 

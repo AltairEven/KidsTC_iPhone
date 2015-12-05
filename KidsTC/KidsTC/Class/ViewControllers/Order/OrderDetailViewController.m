@@ -24,6 +24,8 @@
 
 @property (nonatomic, assign) OrderDetailPushSource pushSource;
 
+- (void)didClickedContectCSButton;
+
 @end
 
 @implementation OrderDetailViewController
@@ -45,7 +47,12 @@
     self.detailView.delegate = self;
     self.viewModel = [[OrderDetailViewModel alloc] initWithView:self.detailView];
     [self.viewModel setOrderId:self.orderId];
-    [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
+    __weak OrderDetailViewController *weakSelf = self;
+    [weakSelf.viewModel startUpdateDataWithSucceed:^(NSDictionary *data) {
+        if ([weakSelf.viewModel.detailModel canContactCS]) {
+            [weakSelf setupRightBarButton:@"" target:self action:@selector(didClickedContectCSButton) frontImage:@"phone2" andBackImage:@"phone2"];
+        }
+    } failure:nil];
 }
 #pragma mark & OrderDetailViewDelegate
 
@@ -68,7 +75,14 @@
             break;
         case OrderDetailActionTagCancel:
         {
-            [self.viewModel cancelOrder];
+            UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"" message:@"您真的要取消订单么？" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"不取消了" style:UIAlertActionStyleCancel handler:nil];
+            UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"忍痛取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [self.viewModel cancelOrder];
+            }];
+            [controller addAction:cancelAction];
+            [controller addAction:confirmAction];
+            [self presentViewController:controller animated:YES completion:nil];
         }
             break;
         case OrderDetailActionTagComment:
@@ -79,7 +93,7 @@
             [self.navigationController pushViewController:controller animated:YES];
         }
             break;
-        case OrderDetailActionTagReturn:
+        case OrderDetailActionTagRefund:
         {
             OrderRefundViewController *controller = [[OrderRefundViewController alloc] initWithOrderId:self.orderId];
             [controller setHidesBottomBarWhenPushed:YES];
@@ -130,6 +144,12 @@
 
 - (void)orderRefundViewController:(OrderRefundViewController *)vc didSucceedWithRefundForOrderId:(NSString *)identifier {
     [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
+}
+
+#pragma mark Private methods
+
+- (void)didClickedContectCSButton {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@", kCustomerServicePhoneNumber]]];
 }
 
 #pragma mark Super methods

@@ -11,8 +11,6 @@
 #import "CouponFullCutModel.h"
 #import "PromotionFullCutModel.h"
 
-#define ScoreCoefficient (0.1)
-
 @interface SettlementModel : NSObject
 
 @property (nonatomic, copy) NSString *serviceId;

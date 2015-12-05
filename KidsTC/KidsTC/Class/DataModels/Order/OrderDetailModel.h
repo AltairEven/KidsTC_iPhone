@@ -16,11 +16,21 @@
 
 @property (nonatomic, strong) NSArray *supportedInsurances;
 
+@property (nonatomic, assign) CGFloat originalAmount;
+
+@property (nonatomic, assign) NSUInteger usedPointNumber;
+
+@property (nonatomic, assign) CGFloat discountAmount;
+
+@property (nonatomic, copy) NSString *orderDetailDescription;
+
 @property (nonatomic, copy) NSString *phone;
 
-- (instancetype)initWithRawData:(NSDictionary *)data;
+@property (nonatomic, assign) BOOL canRefund;
 
-- (BOOL)supportRefund;
+@property (nonatomic, assign) BOOL canContactCS;
+
+- (instancetype)initWithRawData:(NSDictionary *)data;
 
 - (BOOL)canGetCode;
 

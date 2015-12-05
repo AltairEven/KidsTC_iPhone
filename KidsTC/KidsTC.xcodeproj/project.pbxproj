@@ -584,8 +584,6 @@
 		1E8CBBB71BDA355F00F78828 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8CBBB61BDA355F00F78828 /* libiconv.tbd */; };
 		1E8CBBBB1BDA365000F78828 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8CBBBA1BDA365000F78828 /* libstdc++.6.0.9.tbd */; };
 		1E8CBBBD1BDA366900F78828 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8CBBBC1BDA366900F78828 /* libsqlite3.0.tbd */; };
-		1E8EFCD61B6657E200D00808 /* OrderDetailButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8EFCD41B6657E200D00808 /* OrderDetailButtonCell.m */; };
-		1E8EFCD71B6657E200D00808 /* OrderDetailButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E8EFCD51B6657E200D00808 /* OrderDetailButtonCell.xib */; };
 		1E8EFCDF1B6729A000D00808 /* OrderCommentBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8EFCDE1B6729A000D00808 /* OrderCommentBottomView.m */; };
 		1E8EFCE11B6729A900D00808 /* OrderCommentBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E8EFCE01B6729A900D00808 /* OrderCommentBottomView.xib */; };
 		1E8EFCF71B68697700D00808 /* ServiceCommentListViewHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8EFCF51B68697700D00808 /* ServiceCommentListViewHeaderCell.m */; };
@@ -841,7 +839,6 @@
 		8F85ADAB1C0D410000890526 /* MyCommentListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F85ADA91C0D410000890526 /* MyCommentListViewCell.xib */; };
 		8F85ADAD1C0D4F7800890526 /* MyCommentListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F85ADAC1C0D4F7800890526 /* MyCommentListView.xib */; };
 		8F85ADB01C0D50E400890526 /* MyCommentListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85ADAF1C0D50E400890526 /* MyCommentListViewModel.m */; };
-		8F85ADB21C0D542900890526 /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F85ADB11C0D542900890526 /* interface_list.plist */; };
 		8F85ADB61C0D5BB600890526 /* MyCommentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85ADB41C0D5BB600890526 /* MyCommentListViewController.m */; };
 		8F85ADB71C0D5BB600890526 /* MyCommentListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F85ADB51C0D5BB600890526 /* MyCommentListViewController.xib */; };
 		8F85ADBA1C0EBC8100890526 /* NewsSearchResultListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85ADB91C0EBC8100890526 /* NewsSearchResultListView.m */; };
@@ -895,6 +892,7 @@
 		8FD213C21C08A29B0073F2CA /* CommentFoundingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FD213C01C08A29B0073F2CA /* CommentFoundingViewController.m */; };
 		8FD213C31C08A29B0073F2CA /* CommentFoundingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FD213C11C08A29B0073F2CA /* CommentFoundingViewController.xib */; };
 		8FD213C61C0949E60073F2CA /* CommentScoreConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FD213C51C0949E60073F2CA /* CommentScoreConfigModel.m */; };
+		8FEAED6F1C1187BF00DF6E5E /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8FEAED6E1C1187BF00DF6E5E /* interface_list.plist */; };
 		8FEFF4F81BFCC54F001C098F /* KTCActionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FEFF4F71BFCC54F001C098F /* KTCActionView.xib */; };
 		8FF57C0F1BF5EE56006867D2 /* ImageTrimViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF57C0D1BF5EE56006867D2 /* ImageTrimViewController.m */; };
 		8FF57C101BF5EE56006867D2 /* ImageTrimViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FF57C0E1BF5EE56006867D2 /* ImageTrimViewController.xib */; };
@@ -1933,9 +1931,6 @@
 		1E8CBBB81BDA356D00F78828 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		1E8CBBBA1BDA365000F78828 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		1E8CBBBC1BDA366900F78828 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
-		1E8EFCD31B6657E200D00808 /* OrderDetailButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailButtonCell.h; sourceTree = "<group>"; };
-		1E8EFCD41B6657E200D00808 /* OrderDetailButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailButtonCell.m; sourceTree = "<group>"; };
-		1E8EFCD51B6657E200D00808 /* OrderDetailButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderDetailButtonCell.xib; sourceTree = "<group>"; };
 		1E8EFCDD1B6729A000D00808 /* OrderCommentBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderCommentBottomView.h; sourceTree = "<group>"; };
 		1E8EFCDE1B6729A000D00808 /* OrderCommentBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderCommentBottomView.m; sourceTree = "<group>"; };
 		1E8EFCE01B6729A900D00808 /* OrderCommentBottomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderCommentBottomView.xib; sourceTree = "<group>"; };
@@ -2355,7 +2350,6 @@
 		8F85ADAC1C0D4F7800890526 /* MyCommentListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCommentListView.xib; sourceTree = "<group>"; };
 		8F85ADAE1C0D50E400890526 /* MyCommentListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCommentListViewModel.h; sourceTree = "<group>"; };
 		8F85ADAF1C0D50E400890526 /* MyCommentListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCommentListViewModel.m; sourceTree = "<group>"; };
-		8F85ADB11C0D542900890526 /* interface_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = interface_list.plist; sourceTree = "<group>"; };
 		8F85ADB31C0D5BB600890526 /* MyCommentListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCommentListViewController.h; sourceTree = "<group>"; };
 		8F85ADB41C0D5BB600890526 /* MyCommentListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCommentListViewController.m; sourceTree = "<group>"; };
 		8F85ADB51C0D5BB600890526 /* MyCommentListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCommentListViewController.xib; sourceTree = "<group>"; };
@@ -2442,6 +2436,7 @@
 		8FD213C11C08A29B0073F2CA /* CommentFoundingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentFoundingViewController.xib; sourceTree = "<group>"; };
 		8FD213C41C0949E60073F2CA /* CommentScoreConfigModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentScoreConfigModel.h; sourceTree = "<group>"; };
 		8FD213C51C0949E60073F2CA /* CommentScoreConfigModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentScoreConfigModel.m; sourceTree = "<group>"; };
+		8FEAED6E1C1187BF00DF6E5E /* interface_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = interface_list.plist; sourceTree = "<group>"; };
 		8FEFF4F71BFCC54F001C098F /* KTCActionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTCActionView.xib; sourceTree = "<group>"; };
 		8FF57C0C1BF5EE56006867D2 /* ImageTrimViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTrimViewController.h; sourceTree = "<group>"; };
 		8FF57C0D1BF5EE56006867D2 /* ImageTrimViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageTrimViewController.m; sourceTree = "<group>"; };
@@ -3137,7 +3132,7 @@
 		1E3D7E781B4BD83D00275C35 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8F85ADB11C0D542900890526 /* interface_list.plist */,
+				8FEAED6E1C1187BF00DF6E5E /* interface_list.plist */,
 				1E943EBD1B7375F60029FE74 /* Area.plist */,
 				1E0B7B591B709A2100A58AD4 /* Category.plist */,
 				1E3D7E791B4BD83D00275C35 /* Info.plist */,
@@ -3916,9 +3911,6 @@
 				1EFD193E1B4E1F1100767021 /* OrderDetailView.h */,
 				1EFD193F1B4E1F1100767021 /* OrderDetailView.m */,
 				1EFD19411B4E1F9B00767021 /* OrderDetailView.xib */,
-				1E8EFCD31B6657E200D00808 /* OrderDetailButtonCell.h */,
-				1E8EFCD41B6657E200D00808 /* OrderDetailButtonCell.m */,
-				1E8EFCD51B6657E200D00808 /* OrderDetailButtonCell.xib */,
 				1E943F0D1B7B5B850029FE74 /* OrderDetailConsumptionCodeCell.h */,
 				1E943F0E1B7B5B850029FE74 /* OrderDetailConsumptionCodeCell.m */,
 				1E943F0F1B7B5B850029FE74 /* OrderDetailConsumptionCodeCell.xib */,
@@ -5520,6 +5512,7 @@
 				1E3D8F721B4D37D700275C35 /* OrderListView.xib in Resources */,
 				1EFFAE1C1BEC8364001D4245 /* ActivityFilterView.xib in Resources */,
 				1E79958B1BCE2DC20099CFF9 /* HospitalListView.xib in Resources */,
+				8FEAED6F1C1187BF00DF6E5E /* interface_list.plist in Resources */,
 				8F85AD951C0C936800890526 /* ReleaseNotes.txt in Resources */,
 				8F7E45061C09E18C001EF3B5 /* OrderRefundViewController.xib in Resources */,
 				1E0B77A41B68C49000A58AD4 /* AccountSettingViewController.xib in Resources */,
@@ -5628,14 +5621,12 @@
 				1E943EE51B7A19A00029FE74 /* AppointmentOrderListView.xib in Resources */,
 				8F85ADBC1C0EBC9300890526 /* NewsSearchResultListView.xib in Resources */,
 				1EC73C5B1B61129D008B39EA /* ParentingStrategyFilterView.xib in Resources */,
-				1E8EFCD71B6657E200D00808 /* OrderDetailButtonCell.xib in Resources */,
 				1EC73C4F1B60CCB2008B39EA /* ParentingStrategyViewCell.xib in Resources */,
 				1E827CDA1B9C3E76008F3F08 /* coupon_cellBG.png in Resources */,
 				1E8017131BB0071000B6C352 /* HomeViewThreeImageNewsCell.xib in Resources */,
 				1E827BD81B941337008F3F08 /* ImageSelectedSmallOff@3x.png in Resources */,
 				1E827C9E1B94144E008F3F08 /* LICENSE in Resources */,
 				1EC73BAA1B5E25A4008B39EA /* HomeTopView.xib in Resources */,
-				8F85ADB21C0D542900890526 /* interface_list.plist in Resources */,
 				1EA8B6D31B66084D00F90688 /* CategoryViewCell.xib in Resources */,
 				1E7995651BCBCB480099CFF9 /* AddressSelectTableViewCell.xib in Resources */,
 				1E8EFD101B68836600D00808 /* CommentListViewCell.xib in Resources */,
@@ -6119,7 +6110,6 @@
 				1EC4A0D71B5A001C00206BB9 /* StoreDetailViewController.m in Sources */,
 				8FD213C61C0949E60073F2CA /* CommentScoreConfigModel.m in Sources */,
 				1E3D8CD91B4BF4A100275C35 /* IcsonADList.xcdatamodeld in Sources */,
-				1E8EFCD61B6657E200D00808 /* OrderDetailButtonCell.m in Sources */,
 				1E0B7A8F1B6F67B800A58AD4 /* GBannersView.m in Sources */,
 				8F8671681C107E29005C838B /* StoreDetailViewCouponCell.m in Sources */,
 				1EA8B6B51B637F0F00F90688 /* OrderModel.m in Sources */,
