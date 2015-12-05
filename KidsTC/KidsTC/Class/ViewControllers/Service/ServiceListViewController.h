@@ -12,4 +12,6 @@
 
 - (instancetype)initWithListItemModels:(NSArray *)models;
 
+- (instancetype)initWithSearchCondition:(KTCSearchServiceCondition *)condition;
+
 @end

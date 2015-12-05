@@ -53,6 +53,7 @@
 #import "KTCUser.h"
 #import "KTCSearchService.h"
 #import "MJRefresh.h"
+#import "KTCEmptyDataView.h"
 
 #define SuppressPerformSelectorLeakWarning(Stuff) \
 do { \

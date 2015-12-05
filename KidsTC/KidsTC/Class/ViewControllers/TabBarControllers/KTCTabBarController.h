@@ -12,7 +12,7 @@
 
 typedef enum {
     KTCTabHome = 0,
-    KTCTabStoreAppointment = 1,
+    KTCTabNews = 1,
     KTCTabParentingStrategy = 2,
     KTCTabUserCenter = 3
 } KTCTabEnum;

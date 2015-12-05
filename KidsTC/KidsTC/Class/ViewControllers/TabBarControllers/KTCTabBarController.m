@@ -121,7 +121,7 @@ static KTCTabBarController* _shareTabBarController = nil;
     }
     else if(viewController == self.newsTab)
     {
-        _selectTabBarButtonIndex = KTCTabStoreAppointment;
+        _selectTabBarButtonIndex = KTCTabNews;
     }
     else if(viewController == self.parentingStrategyTab)
     {
@@ -248,7 +248,7 @@ static KTCTabBarController* _shareTabBarController = nil;
         case KTCTabHome:
             aViewCtrl = self.homeVC;
             break;
-        case KTCTabStoreAppointment:
+        case KTCTabNews:
             aViewCtrl = self.newsListVC;
             break;
         case KTCTabParentingStrategy:

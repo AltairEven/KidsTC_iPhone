@@ -11,11 +11,27 @@
 #import "ServiceListItemModel.h"
 #import "ServiceDetailViewController.h"
 
+#define PageSize (10)
+
 @interface ServiceListViewController () <ServiceListViewDataSource, ServiceListViewDelegate>
 
 @property (weak, nonatomic) IBOutlet ServiceListView *listView;
 
 @property (nonatomic, strong) NSArray *listItemModels;
+
+@property (nonatomic, strong) KTCSearchServiceCondition *searchCondition;
+
+@property (nonatomic, assign) NSUInteger pageIndex;
+
+- (void)loadServiceDataSucceed:(NSDictionary *)data;
+
+- (void)loadServiceDataFailed:(NSError *)error;
+
+- (void)loadMoreServiceDataSucceed:(NSDictionary *)data;
+
+- (void)loadMoreServiceDataFailed:(NSError *)error;
+
+- (void)reloadViewWithData:(NSDictionary *)data;
 
 @end
 
@@ -32,6 +48,18 @@
     return self;
 }
 
+- (instancetype)initWithSearchCondition:(KTCSearchServiceCondition *)condition {
+    if (!condition) {
+        return nil;
+    }
+    self = [super initWithNibName:@"ServiceListViewController" bundle:nil];
+    if (self) {
+        self.searchCondition = condition;
+        self.pageIndex = 1;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     _navigationTitle = @"服务列表";
@@ -39,18 +67,30 @@
     self.listView.dataSource = self;
     self.listView.delegate = self;
     [self.listView setEnableUpdate:NO];
-    [self.listView setEnbaleLoadMore:NO];
-    [self.listView reloadData];
+    [self.listView setEnbaleLoadMore:YES];
+    [self.listView hideLoadMoreFooter:YES];
+    if ([self.listItemModels count] > 0) {
+        [self.listView reloadData];
+    } else {
+        NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
+                               [NSNumber numberWithInteger:KTCSearchTypeService], @"type",
+                               [NSNumber numberWithInteger:self.pageIndex], @"page",
+                               [NSNumber numberWithInteger:PageSize], @"pageSize", nil];
+        [[GAlertLoadingView sharedAlertLoadingView] show];
+        [[KTCSearchService sharedService] startServiceSearchWithParamDic:param Condition:self.searchCondition success:^(NSDictionary *responseData) {
+            [self loadServiceDataSucceed:responseData];
+            [[GAlertLoadingView sharedAlertLoadingView] hide];
+        } failure:^(NSError *error) {
+            [self loadServiceDataFailed:error];
+            [[GAlertLoadingView sharedAlertLoadingView] hide];
+        }];
+    }
 }
 
 #pragma mark ServiceListViewDataSource & ServiceListViewDelegate
 
-- (NSUInteger)numberOfServiceInListView:(ServiceListView *)listView {
-    return [self.listItemModels count];
-}
-
-- (ServiceListItemModel *)itemModelForServiceListView:(ServiceListView *)listView atIndex:(NSUInteger)index {
-    return [self.listItemModels objectAtIndex:index];
+- (NSArray *)itemModelsForServiceListView:(ServiceListView *)listView {
+    return self.listItemModels;
 }
 
 - (void)serviceListView:(ServiceListView *)listView didSelectedItemAtIndex:(NSUInteger)index {
@@ -58,6 +98,66 @@
     ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithServiceId:model.identifier channelId:model.channelId];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
+}
+
+
+- (void)serviceListViewDidPulledUpToloadMore:(ServiceListView *)listView {
+    NSUInteger index = self.pageIndex + 1;
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
+                           [NSNumber numberWithInteger:KTCSearchTypeService], @"type",
+                           [NSNumber numberWithInteger:index], @"page",
+                           [NSNumber numberWithInteger:PageSize], @"pageSize", nil];
+    [[GAlertLoadingView sharedAlertLoadingView] showInView:self.view];
+    [[KTCSearchService sharedService] startServiceSearchWithParamDic:param Condition:self.searchCondition success:^(NSDictionary *responseData) {
+        [self loadServiceDataSucceed:responseData];
+        [[GAlertLoadingView sharedAlertLoadingView] hide];
+    } failure:^(NSError *error) {
+        [self loadServiceDataFailed:error];
+        [[GAlertLoadingView sharedAlertLoadingView] hide];
+    }];
+}
+
+#pragma mark Private methods
+
+- (void)loadServiceDataSucceed:(NSDictionary *)data {
+    [self reloadViewWithData:data];
+}
+
+- (void)loadServiceDataFailed:(NSError *)error {
+    [self reloadViewWithData:nil];
+}
+
+- (void)loadMoreServiceDataSucceed:(NSDictionary *)data {
+    self.pageIndex ++;
+    [self reloadViewWithData:data];
+}
+
+- (void)loadMoreServiceDataFailed:(NSError *)error {
+    [self reloadViewWithData:nil];
+}
+
+- (void)reloadViewWithData:(NSDictionary *)data {
+    NSArray *dataArray = [data objectForKey:@"data"];
+    if ([dataArray isKindOfClass:[NSArray class]] && [dataArray count] > 0) {
+        [self.listView hideLoadMoreFooter:NO];
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        for (NSDictionary *singleService in dataArray) {
+            ServiceListItemModel *model = [[ServiceListItemModel alloc] initWithRawData:singleService];
+            if (model) {
+                [tempArray addObject:model];
+            }
+        }
+        self.listItemModels = [NSArray arrayWithArray:tempArray];
+        if ([dataArray count] < PageSize) {
+            [self.listView noMoreLoad];
+            [self.listView hideLoadMoreFooter:YES];
+        }
+    } else {
+        [self.listView noMoreLoad];
+        [self.listView hideLoadMoreFooter:YES];
+    }
+    [self.listView reloadData];
+    [self.listView endLoadMore];
 }
 
 - (void)didReceiveMemoryWarning {

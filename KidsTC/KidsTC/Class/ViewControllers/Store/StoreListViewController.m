@@ -11,11 +11,27 @@
 #import "StoreListItemModel.h"
 #import "StoreDetailViewController.h"
 
+#define PageSize (10)
+
 @interface StoreListViewController () <StoreListViewDataSource, StoreListViewDelegate>
 
 @property (weak, nonatomic) IBOutlet StoreListView *listView;
 
 @property (nonatomic, strong) NSArray *listItemModels;
+
+@property (nonatomic, strong) KTCSearchStoreCondition *searchCondition;
+
+@property (nonatomic, assign) NSUInteger pageIndex;
+
+- (void)loadStoreDataSucceed:(NSDictionary *)data;
+
+- (void)loadStoreDataFailed:(NSError *)error;
+
+- (void)loadMoreStoreDataSucceed:(NSDictionary *)data;
+
+- (void)loadMoreStoreDataFailed:(NSError *)error;
+
+- (void)reloadViewWithData:(NSDictionary *)data;
 
 @end
 
@@ -32,6 +48,18 @@
     return self;
 }
 
+- (instancetype)initWithSearchCondition:(KTCSearchStoreCondition *)condition {
+    if (!condition) {
+        return nil;
+    }
+    self = [super initWithNibName:@"StoreListViewController" bundle:nil];
+    if (self) {
+        self.searchCondition = condition;
+        self.pageIndex = 1;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     _navigationTitle = @"门店列表";
@@ -39,19 +67,36 @@
     self.listView.dataSource = self;
     self.listView.delegate = self;
     [self.listView setEnableUpdate:NO];
-    [self.listView setEnbaleLoadMore:NO];
-    [self.listView reloadData];
+    [self.listView setEnbaleLoadMore:YES];
+    [self.listView hideLoadMoreFooter:YES];
+    if ([self.listItemModels count] > 0) {
+        [self.listView reloadData];
+    } else {
+        NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
+                               [NSNumber numberWithInteger:KTCSearchTypeStore], @"type",
+                               [NSNumber numberWithInteger:self.pageIndex], @"page",
+                               [NSNumber numberWithInteger:PageSize], @"pageSize", nil];
+        [[GAlertLoadingView sharedAlertLoadingView] show];
+        [[KTCSearchService sharedService] startStoreSearchWithParamDic:param Condition:self.searchCondition success:^(NSDictionary *responseData) {
+            [self loadStoreDataSucceed:responseData];
+            [[GAlertLoadingView sharedAlertLoadingView] hide];
+        } failure:^(NSError *error) {
+            [self loadStoreDataFailed:error];
+            [[GAlertLoadingView sharedAlertLoadingView] hide];
+        }];
+    }
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[GAlertLoadingView sharedAlertLoadingView] hide];
+    [[KTCSearchService sharedService] stopStoreSearch];
+}
 
 #pragma mark StoreListViewDataSource & StoreListViewDelegate
 
-- (NSUInteger)numberOfStoresInListView:(StoreListView *)listView {
-    return [self.listItemModels count];
-}
-
-- (StoreListItemModel *)itemModelForStoreListView:(StoreListView *)listView atIndex:(NSUInteger)index {
-    return [self.listItemModels objectAtIndex:index];
+- (NSArray *)itemModelsForStoreListView:(StoreListView *)listView {
+    return self.listItemModels;
 }
 
 
@@ -60,6 +105,65 @@
     StoreDetailViewController *controller = [[StoreDetailViewController alloc] initWithStoreId:model.identifier];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)storeListViewDidPulledUpToloadMore:(StoreListView *)listView {
+    NSUInteger index = self.pageIndex + 1;
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
+                           [NSNumber numberWithInteger:KTCSearchTypeStore], @"type",
+                           [NSNumber numberWithInteger:index], @"page",
+                           [NSNumber numberWithInteger:PageSize], @"pageSize", nil];
+    [[GAlertLoadingView sharedAlertLoadingView] showInView:self.view];
+    [[KTCSearchService sharedService] startStoreSearchWithParamDic:param Condition:self.searchCondition success:^(NSDictionary *responseData) {
+        [self loadStoreDataSucceed:responseData];
+        [[GAlertLoadingView sharedAlertLoadingView] hide];
+    } failure:^(NSError *error) {
+        [self loadStoreDataFailed:error];
+        [[GAlertLoadingView sharedAlertLoadingView] hide];
+    }];
+}
+
+#pragma mark Private methods
+
+- (void)loadStoreDataSucceed:(NSDictionary *)data {
+    [self reloadViewWithData:data];
+}
+
+- (void)loadStoreDataFailed:(NSError *)error {
+    [self reloadViewWithData:nil];
+}
+
+- (void)loadMoreStoreDataSucceed:(NSDictionary *)data {
+    self.pageIndex ++;
+    [self reloadViewWithData:data];
+}
+
+- (void)loadMoreStoreDataFailed:(NSError *)error {
+    [self reloadViewWithData:nil];
+}
+
+- (void)reloadViewWithData:(NSDictionary *)data {
+    NSArray *dataArray = [data objectForKey:@"data"];
+    if ([dataArray isKindOfClass:[NSArray class]] && [dataArray count] > 0) {
+        [self.listView hideLoadMoreFooter:NO];
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        for (NSDictionary *singleService in dataArray) {
+            StoreListItemModel *model = [[StoreListItemModel alloc] initWithRawData:singleService];
+            if (model) {
+                [tempArray addObject:model];
+            }
+        }
+        self.listItemModels = [NSArray arrayWithArray:tempArray];
+        if ([dataArray count] < PageSize) {
+            [self.listView noMoreLoad];
+            [self.listView hideLoadMoreFooter:YES];
+        }
+    } else {
+        [self.listView noMoreLoad];
+        [self.listView hideLoadMoreFooter:YES];
+    }
+    [self.listView reloadData];
+    [self.listView endLoadMore];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -36,6 +36,28 @@
     return self;
 }
 
+- (instancetype)initWithRemoteNotificationData:(NSDictionary *)data {
+    if (!data || ![data isKindOfClass:[NSDictionary class]]) {
+        return nil;
+    }
+    self = [super init];
+    if (self) {
+        NSDictionary *content = [data objectForKey:@"customContent"];
+        if (!content || ![content isKindOfClass:[NSDictionary class]]) {
+            return nil;
+        }
+        self.createTimeDescription = [content objectForKey:@"pushtime"];
+        HomeSegueDestination dest = (HomeSegueDestination)[content objectForKey:@"linkType"];
+        if (dest != HomeSegueDestinationNone) {
+            NSString *paramString = [content objectForKey:@"params"];
+            NSData *paramData = [paramString dataUsingEncoding:NSUTF8StringEncoding];
+            NSDictionary *paramDic = [NSJSONSerialization JSONObjectWithData:paramData options:NSJSONReadingAllowFragments error:nil];
+            self.segueModel = [[HomeSegueModel alloc] initWithDestination:dest paramRawData:paramDic];
+        }
+    }
+    return self;
+}
+
 - (CGFloat)cellHeight {
     CGFloat height = 27;
     

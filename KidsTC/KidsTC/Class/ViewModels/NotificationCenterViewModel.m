@@ -28,7 +28,7 @@
 
 - (void)loadMoreNotificationsFailedWithError:(NSError *)error;
 
-- (void)reloadActivityViewWithData:(NSDictionary *)data;
+- (void)reloadNotificationCenterViewWithData:(NSDictionary *)data;
 
 @end
 
@@ -54,7 +54,7 @@
 
 - (void)loadNotificationsSucceedWithData:(NSDictionary *)data {
     [self.dataArray removeAllObjects];
-    [self reloadActivityViewWithData:data];
+    [self reloadNotificationCenterViewWithData:data];
 }
 
 - (void)loadNotificationsFailedWithError:(NSError *)error {
@@ -75,13 +75,13 @@
         default:
             break;
     }
-    [self reloadActivityViewWithData:nil];
+    [self reloadNotificationCenterViewWithData:nil];
     [self.view endRefresh];
 }
 
 - (void)loadMoreNotificationsSucceedWithData:(NSDictionary *)data {
     self.currentPageIndex += 1;
-    [self reloadActivityViewWithData:data];
+    [self reloadNotificationCenterViewWithData:data];
     [self.view endLoadMore];
 }
 
@@ -102,11 +102,11 @@
         default:
             break;
     }
-    [self reloadActivityViewWithData:nil];
+    [self reloadNotificationCenterViewWithData:nil];
     [self.view endLoadMore];
 }
 
-- (void)reloadActivityViewWithData:(NSDictionary *)data {
+- (void)reloadNotificationCenterViewWithData:(NSDictionary *)data {
     NSArray *dataArray = [data objectForKey:@"data"];
     if ([dataArray isKindOfClass:[NSArray class]] && [dataArray count] > 0) {
         [self.view hideLoadMoreFooter:NO];

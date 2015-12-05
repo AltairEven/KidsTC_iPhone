@@ -40,10 +40,6 @@ NSString *const kHomeSegueParameterKeySearchSort = @"kHomeSegueParameterKeySearc
 
 
 - (void)fillSegueParamWithData:(NSDictionary *)data {
-    if (!data || ![data isKindOfClass:[NSDictionary class]]) {
-        _destination = HomeSegueDestinationNone;
-        return;
-    }
     switch (self.destination) {
         case HomeSegueDestinationH5:
         {

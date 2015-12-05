@@ -11,11 +11,8 @@
 #import "KTCSearchViewController.h"
 #import "CategoryViewController.h"
 #import "AUIFloorNavigationView.h"
-#import "KTCWebViewController.h"
-#import "ActivityViewController.h"
-#import "LoveHouseListViewController.h"
-#import "HospitalListViewController.h"
 #import "UserRoleSelectViewController.h"
+#import "KTCSegueMaster.h"
 
 
 @interface HomeViewController () <HomeViewDelegate, AUIFloorNavigationViewDataSource, AUIFloorNavigationViewDelegate>
@@ -116,64 +113,7 @@
 
 - (void)homeView:(HomeView *)homeView didClickedAtCoordinate:(HomeClickCoordinate)coordinate {
     HomeSegueModel *segueModel = [self.viewModel.homeModel segueModelAtHomeClickCoordinate:coordinate];
-    switch (segueModel.destination) {
-        case HomeSegueDestinationH5:
-        {
-            KTCWebViewController *controller = [[KTCWebViewController alloc] init];
-            [controller setWebUrlString:[segueModel.segueParam objectForKey:kHomeSegueParameterKeyLinkUrl]];
-            [controller setHidesBottomBarWhenPushed:YES];
-            [self.navigationController pushViewController:controller animated:YES];
-        }
-            break;
-        case HomeSegueDestinationNewsRecommend:
-        {
-            
-        }
-            break;
-        case HomeSegueDestinationNewsList:
-        {
-            
-        }
-            break;
-        case HomeSegueDestinationActivity:
-        {
-            ActivityViewController *controller = [[ActivityViewController alloc] initWithNibName:@"ActivityViewController" bundle:nil];
-            [controller setHidesBottomBarWhenPushed:YES];
-            [self.navigationController pushViewController:controller animated:YES];
-        }
-            break;
-        case HomeSegueDestinationLoveHouse:
-        {
-            LoveHouseListViewController *controller = [[LoveHouseListViewController alloc] initWithNibName:@"LoveHouseListViewController" bundle:nil];
-            [controller setHidesBottomBarWhenPushed:YES];
-            [self.navigationController pushViewController:controller animated:YES];
-        }
-            break;
-        case HomeSegueDestinationHospital:
-        {
-            HospitalListViewController *controller = [[HospitalListViewController alloc] initWithNibName:@"HospitalListViewController" bundle:nil];
-            [controller setHidesBottomBarWhenPushed:YES];
-            [self.navigationController pushViewController:controller animated:YES];
-        }
-            break;
-        case HomeSegueDestinationStrategyList:
-        {
-            
-        }
-            break;
-        case HomeSegueDestinationServiceList:
-        {
-            
-        }
-            break;
-        case HomeSegueDestinationStoreList:
-        {
-            
-        }
-            break;
-        default:
-            break;
-    }
+    [KTCSegueMaster makeSegueWithModel:segueModel fromController:self];
 }
 
 - (void)homeView:(HomeView *)homeView didScrolled:(CGPoint)offset {

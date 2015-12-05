@@ -33,6 +33,8 @@ typedef enum {
 
 - (instancetype)initWithRawData:(NSDictionary *)data;
 
+- (instancetype)initWithRemoteNotificationData:(NSDictionary *)data;
+
 - (CGFloat)cellHeight;
 
 @end

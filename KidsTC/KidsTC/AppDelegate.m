@@ -7,22 +7,15 @@
 //
 
 #import "AppDelegate.h"
-#import "WeChatModel.h"
 #import "HttpRequestClient.h"
 #import "HttpIcsonCookieManager.h"
 #import "KTCTabBarController.h"
 #import "CheckFirstInstalDataManager.h"
 #import "AddressManager.h"
 #import "IcsonCategoryManager.h"
-#import "GPayment.h"
-#import "RemindManager.h"
-#import "UIDevice+IdentifierAddition.h"
-#import "MessageItem.h"
-#import <sys/utsname.h>
 #import "VersionManager.h"
 #import "MTA.h"
 #import "MTAConfig.h"
-#import <TencentOpenAPI/TencentOAuth.h>
 #import "GuideViewController1.h"
 #import "CheckFlashMD5.h"
 #import "GuideViewController.h"
@@ -35,13 +28,14 @@
 #import "TencentManager.h"
 #import "WeiboManager.h"
 #import "AlipayManager.h"
+#import "KTCSegueMaster.h"
 
 static BOOL _alreadyLaunched = NO;
 
 static const NSInteger kVersionUpdateAlertViewTag = 31415926;
 static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
 
-@interface AppDelegate ()
+@interface AppDelegate () <KTCPushNotificationServiceDelegate>
 
 + (void)handleNetworkStatusChange:(IcsonNetworkStatus)status;
 
@@ -228,6 +222,43 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
 {
     [[KTCPushNotificationService sharedService] handleRegisterDeviceFailure:err];
 }
+
+#pragma mark KTCPushNotificationServiceDelegate
+
+- (void)didRecievedRemoteNotificationWithModel:(PushNotificationModel *)model {
+    if (!model) {
+        return;
+    }
+    //获取当前VC
+    UIViewController *currentVC = nil;
+    
+    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
+    if (window.windowLevel != UIWindowLevelNormal)
+    {
+        NSArray *windows = [[UIApplication sharedApplication] windows];
+        for(UIWindow * tmpWin in windows)
+        {
+            if (tmpWin.windowLevel == UIWindowLevelNormal)
+            {
+                window = tmpWin;
+                break;
+            }
+        }
+    }
+    
+    UIView *frontView = [[window subviews] objectAtIndex:0];
+    id nextResponder = [frontView nextResponder];
+    
+    if ([nextResponder isKindOfClass:[UIViewController class]]) {
+        currentVC = nextResponder;
+    } else {
+        currentVC = window.rootViewController;
+    }
+    
+    //展示消息跳转页面
+    [KTCSegueMaster makeSegueWithModel:model.segueModel fromController:currentVC];
+}
+
 
 #pragma mark Private Methods ------------------------------------------------------------------------------------
 

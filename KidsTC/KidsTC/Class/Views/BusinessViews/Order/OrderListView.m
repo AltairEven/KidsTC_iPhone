@@ -48,7 +48,7 @@ static NSString *const kCellIdentifier = @"cellIdentifier";
 }
 
 - (void)buildSubviews {
-    self.tableView.backgroundView = nil;
+    self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
     [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;

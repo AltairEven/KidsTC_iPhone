@@ -7,8 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PushNotificationModel.h"
+
+@protocol KTCPushNotificationServiceDelegate <NSObject>
+
+- (void)didRecievedRemoteNotificationWithModel:(PushNotificationModel *)model;
+
+@end
 
 @interface KTCPushNotificationService : NSObject
+
+@property (nonatomic, assign) id<KTCPushNotificationServiceDelegate> delegate;
 
 @property (nonatomic, strong, readonly) NSString *token;
 

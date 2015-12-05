@@ -391,7 +391,7 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
     if (!self.tableView) {
         //table view initialization, init after scroll view built
         self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableViewHeight) style:UITableViewStyleGrouped];
-        self.tableView.backgroundView = nil;
+        self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
         [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
         [self.tableView setScrollEnabled:NO];
         [self.tableView setShowsHorizontalScrollIndicator:NO];

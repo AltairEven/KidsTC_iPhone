@@ -861,6 +861,8 @@
 		8F9EA6B31BF9A72B00062E91 /* ThirdPartyLoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9EA6B21BF9A72B00062E91 /* ThirdPartyLoginService.m */; };
 		8F9EA6B61BF9AE7100062E91 /* WeChatManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9EA6B51BF9AE7100062E91 /* WeChatManager.m */; };
 		8F9EA6B91BF9B7C500062E91 /* TencentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9EA6B81BF9B7C500062E91 /* TencentManager.m */; };
+		8FA3614C1C12DBAB0094A9AA /* KTCSegueMaster.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FA3614B1C12DBAB0094A9AA /* KTCSegueMaster.m */; };
+		8FA3614F1C12E1110094A9AA /* KTCEmptyDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FA3614E1C12E1110094A9AA /* KTCEmptyDataView.m */; };
 		8FABCB281C0FCBAB005BF7AD /* FavouriteViewServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FABCB261C0FCBAB005BF7AD /* FavouriteViewServiceCell.m */; };
 		8FABCB291C0FCBAB005BF7AD /* FavouriteViewServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FABCB271C0FCBAB005BF7AD /* FavouriteViewServiceCell.xib */; };
 		8FABCB2D1C0FCBD0005BF7AD /* FavouriteViewStoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FABCB2B1C0FCBD0005BF7AD /* FavouriteViewStoreCell.m */; };
@@ -893,6 +895,8 @@
 		8FD213C31C08A29B0073F2CA /* CommentFoundingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FD213C11C08A29B0073F2CA /* CommentFoundingViewController.xib */; };
 		8FD213C61C0949E60073F2CA /* CommentScoreConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FD213C51C0949E60073F2CA /* CommentScoreConfigModel.m */; };
 		8FEAED6F1C1187BF00DF6E5E /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8FEAED6E1C1187BF00DF6E5E /* interface_list.plist */; };
+		8FEAED751C12C23400DF6E5E /* NewsRecommedListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FEAED731C12C23400DF6E5E /* NewsRecommedListViewController.m */; };
+		8FEAED761C12C23400DF6E5E /* NewsRecommedListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FEAED741C12C23400DF6E5E /* NewsRecommedListViewController.xib */; };
 		8FEFF4F81BFCC54F001C098F /* KTCActionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FEFF4F71BFCC54F001C098F /* KTCActionView.xib */; };
 		8FF57C0F1BF5EE56006867D2 /* ImageTrimViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF57C0D1BF5EE56006867D2 /* ImageTrimViewController.m */; };
 		8FF57C101BF5EE56006867D2 /* ImageTrimViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FF57C0E1BF5EE56006867D2 /* ImageTrimViewController.xib */; };
@@ -2385,6 +2389,10 @@
 		8F9EA6B51BF9AE7100062E91 /* WeChatManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeChatManager.m; sourceTree = "<group>"; };
 		8F9EA6B71BF9B7C500062E91 /* TencentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TencentManager.h; sourceTree = "<group>"; };
 		8F9EA6B81BF9B7C500062E91 /* TencentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TencentManager.m; sourceTree = "<group>"; };
+		8FA3614A1C12DBAB0094A9AA /* KTCSegueMaster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCSegueMaster.h; sourceTree = "<group>"; };
+		8FA3614B1C12DBAB0094A9AA /* KTCSegueMaster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCSegueMaster.m; sourceTree = "<group>"; };
+		8FA3614D1C12E1110094A9AA /* KTCEmptyDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCEmptyDataView.h; sourceTree = "<group>"; };
+		8FA3614E1C12E1110094A9AA /* KTCEmptyDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCEmptyDataView.m; sourceTree = "<group>"; };
 		8FABCB251C0FCBAB005BF7AD /* FavouriteViewServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouriteViewServiceCell.h; sourceTree = "<group>"; };
 		8FABCB261C0FCBAB005BF7AD /* FavouriteViewServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouriteViewServiceCell.m; sourceTree = "<group>"; };
 		8FABCB271C0FCBAB005BF7AD /* FavouriteViewServiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavouriteViewServiceCell.xib; sourceTree = "<group>"; };
@@ -2437,6 +2445,9 @@
 		8FD213C41C0949E60073F2CA /* CommentScoreConfigModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentScoreConfigModel.h; sourceTree = "<group>"; };
 		8FD213C51C0949E60073F2CA /* CommentScoreConfigModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentScoreConfigModel.m; sourceTree = "<group>"; };
 		8FEAED6E1C1187BF00DF6E5E /* interface_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = interface_list.plist; sourceTree = "<group>"; };
+		8FEAED721C12C23400DF6E5E /* NewsRecommedListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsRecommedListViewController.h; sourceTree = "<group>"; };
+		8FEAED731C12C23400DF6E5E /* NewsRecommedListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsRecommedListViewController.m; sourceTree = "<group>"; };
+		8FEAED741C12C23400DF6E5E /* NewsRecommedListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsRecommedListViewController.xib; sourceTree = "<group>"; };
 		8FEFF4F71BFCC54F001C098F /* KTCActionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTCActionView.xib; sourceTree = "<group>"; };
 		8FF57C0C1BF5EE56006867D2 /* ImageTrimViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTrimViewController.h; sourceTree = "<group>"; };
 		8FF57C0D1BF5EE56006867D2 /* ImageTrimViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageTrimViewController.m; sourceTree = "<group>"; };
@@ -2749,6 +2760,8 @@
 				8F6513941BFC96B9003BE006 /* KTCActionView.h */,
 				8F6513951BFC96B9003BE006 /* KTCActionView.m */,
 				8FEFF4F71BFCC54F001C098F /* KTCActionView.xib */,
+				8FA3614D1C12E1110094A9AA /* KTCEmptyDataView.h */,
+				8FA3614E1C12E1110094A9AA /* KTCEmptyDataView.m */,
 			);
 			path = SelfDefine;
 			sourceTree = "<group>";
@@ -3175,6 +3188,7 @@
 		1E3D87FA1B4BF49F00275C35 /* LogicFramework */ = {
 			isa = PBXGroup;
 			children = (
+				8FA361491C12DB990094A9AA /* SegueMaster */,
 				8F65D9D21C103340007CA5BC /* History */,
 				8F98D2581C002CA200C1388A /* Payment */,
 				8F2C55B81BFF163A00C2B6BF /* Share */,
@@ -3776,6 +3790,7 @@
 		1E3D8EFC1B4CB83A00275C35 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8FEAED711C12C21800DF6E5E /* News */,
 				1E7995761BCD261F0099CFF9 /* LoveHouse */,
 				1E7995751BCD261F0099CFF9 /* Hospital */,
 				1E7995531BCB96CA0099CFF9 /* Activity */,
@@ -5339,6 +5354,15 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		8FA361491C12DB990094A9AA /* SegueMaster */ = {
+			isa = PBXGroup;
+			children = (
+				8FA3614A1C12DBAB0094A9AA /* KTCSegueMaster.h */,
+				8FA3614B1C12DBAB0094A9AA /* KTCSegueMaster.m */,
+			);
+			path = SegueMaster;
+			sourceTree = "<group>";
+		};
 		8FABCB391C0FE9FE005BF7AD /* Favourite */ = {
 			isa = PBXGroup;
 			children = (
@@ -5379,6 +5403,16 @@
 				8FABCB6D1C102B2A005BF7AD /* BrowseHistoryStoreListItemModel.m */,
 			);
 			path = History;
+			sourceTree = "<group>";
+		};
+		8FEAED711C12C21800DF6E5E /* News */ = {
+			isa = PBXGroup;
+			children = (
+				8FEAED721C12C23400DF6E5E /* NewsRecommedListViewController.h */,
+				8FEAED731C12C23400DF6E5E /* NewsRecommedListViewController.m */,
+				8FEAED741C12C23400DF6E5E /* NewsRecommedListViewController.xib */,
+			);
+			path = News;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -5683,6 +5717,7 @@
 				1E1CFA231BD72F5E0005653D /* ServiceDetailMoreInfoView.xib in Resources */,
 				1E827BD21B941337008F3F08 /* ImageSelectedOff@3x.png in Resources */,
 				1E8017371BB3CDC900B6C352 /* NewsViewController.xib in Resources */,
+				8FEAED761C12C23400DF6E5E /* NewsRecommedListViewController.xib in Resources */,
 				8F85AD871C0C6C8200890526 /* NotificationCenterViewController.xib in Resources */,
 				1EFFAE0C1BEB7925001D4245 /* WeiboSDK.bundle in Resources */,
 				1E827CCE1B9BE9B9008F3F08 /* CouponListViewSegmentCell.xib in Resources */,
@@ -5798,6 +5833,7 @@
 				1E0B7AB91B6F67B800A58AD4 /* GToolbar.m in Sources */,
 				1E3D8D561B4BF4A100275C35 /* FMResultSet.m in Sources */,
 				8FC75DB51C0EF16400D1E5F0 /* CommentEditingModel.m in Sources */,
+				8FA3614F1C12E1110094A9AA /* KTCEmptyDataView.m in Sources */,
 				1E79953B1BC8C4230099CFF9 /* HomeSegueModel.m in Sources */,
 				1E8EFCDF1B6729A000D00808 /* OrderCommentBottomView.m in Sources */,
 				1E943EC21B7457240029FE74 /* KTCSearchService.m in Sources */,
@@ -6048,6 +6084,7 @@
 				1EC73C4E1B60CCB2008B39EA /* ParentingStrategyViewCell.m in Sources */,
 				1E0B7A791B6F67B800A58AD4 /* AUIBannerScrollView.m in Sources */,
 				8FABCB2D1C0FCBD0005BF7AD /* FavouriteViewStoreCell.m in Sources */,
+				8FEAED751C12C23400DF6E5E /* NewsRecommedListViewController.m in Sources */,
 				8FF57C0F1BF5EE56006867D2 /* ImageTrimViewController.m in Sources */,
 				1E943EA91B7212660029FE74 /* SFHFKeychainUtils.m in Sources */,
 				1E3D8D871B4BF4A100275C35 /* ASIHTTPRequest.m in Sources */,
@@ -6261,6 +6298,7 @@
 				1E3D8D5A1B4BF4A100275C35 /* HttpIcsonCookieManager.m in Sources */,
 				1E0B7AE41B6F693000A58AD4 /* GNavController.m in Sources */,
 				1E5CD7591B510F7900D177CB /* ServiceListViewCell.m in Sources */,
+				8FA3614C1C12DBAB0094A9AA /* KTCSegueMaster.m in Sources */,
 				1E0B7B0E1B6F6C1400A58AD4 /* SaiDanPhotoView.m in Sources */,
 				1E943F251B7CB1F50029FE74 /* HomeContentCellModel.m in Sources */,
 				1E3D8D471B4BF4A100275C35 /* DDTTYLogger.m in Sources */,

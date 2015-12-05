@@ -15,6 +15,8 @@
 uint32_t const kXGPushAppId = 2200143808;
 NSString *const kXGPushAppKey = @"IA6953JED6IJ";
 
+NSString *const kRemotePushNeedSegueNotification = @"kRemotePushNeedSegueNotification";
+
 static KTCPushNotificationService *sharedInstance = nil;
 
 @interface KTCPushNotificationService ()
@@ -45,6 +47,7 @@ static KTCPushNotificationService *sharedInstance = nil;
         {
             [self registerNotification];
         }
+//        [self registerNotification];
     };
     [XGPush initForReregister:successCallback];
     
@@ -143,7 +146,9 @@ static KTCPushNotificationService *sharedInstance = nil;
     } else {
         [XGPush setAccount:@""];
     }
-    _token = [[NSUserDefaults standardUserDefaults] objectForKey:kDeviceToken];
+    if ([self.token length] == 0) {
+        _token = [[NSUserDefaults standardUserDefaults] objectForKey:kDeviceToken];
+    }
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:type], @"type", self.token, @"deviceId", nil];
     __weak KTCPushNotificationService *weakSelf = self;
     [weakSelf.setAccountRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
@@ -178,12 +183,9 @@ static KTCPushNotificationService *sharedInstance = nil;
         [[KTCTabBarController shareTabBarController] presentViewController:controller animated:YES completion:nil];
     } else {
         AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        if([app.window.rootViewController isKindOfClass:[KTCTabBarController class]])
-        {
+        if([app.window.rootViewController isKindOfClass:[KTCTabBarController class]]) {
             [self handlePushPayload:payload];
-        }
-        else
-        {
+        } else {
             //程序正在启动
             double delayInSeconds = 0.3;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
@@ -196,7 +198,13 @@ static KTCPushNotificationService *sharedInstance = nil;
 }
 
 - (void)handlePushPayload:(NSDictionary *)payload {
-    NSLog(@"%@", payload);
+    PushNotificationModel *model = [[PushNotificationModel alloc] initWithRemoteNotificationData:payload];
+    if (!model || model.segueModel.destination == HomeSegueDestinationNone) {
+        return;
+    }
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didRecievedRemoteNotificationWithModel:)]) {
+        [self.delegate didRecievedRemoteNotificationWithModel:model];
+    }
 }
 
 @end
