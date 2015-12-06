@@ -92,7 +92,7 @@
         for (NSDictionary *singleItem in dataArray) {
             NewsRecommendListModel *model = [[NewsRecommendListModel alloc] initWithRawData:singleItem];
             if (model) {
-                [tempContainer addObject:model];
+                [tempContainer insertObject:model atIndex:0];
             }
         }
         NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [tempContainer count])];

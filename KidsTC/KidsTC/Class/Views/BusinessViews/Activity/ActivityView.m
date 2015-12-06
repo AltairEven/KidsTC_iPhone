@@ -49,7 +49,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 }
 
 - (void)buildSubviews {
-    self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
+    self.tableView.backgroundView = nil;
     [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -118,12 +118,14 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 #pragma mark Private methods
 
 - (void)pullDownToRefresh {
+    self.tableView.backgroundView = nil;
     if (self.delegate && [self.delegate respondsToSelector:@selector(didPullDownToRefreshForActivityView:)]) {
         [self.delegate didPullDownToRefreshForActivityView:self];
     }
 }
 
 - (void)pullUpToLoadMore {
+    self.tableView.backgroundView = nil;
     if (self.delegate && [self.delegate respondsToSelector:@selector(didPullUpToLoadMoreForactivityView:)]) {
         [self.delegate didPullUpToLoadMoreForactivityView:self];
     }
@@ -143,6 +145,11 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
         } else {
             [self.tableView.gifFooter resetNoMoreData];
         }
+    }
+    if ([self.listModels count] == 0) {
+        self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
+    } else {
+        self.tableView.backgroundView = nil;
     }
 }
 

@@ -48,7 +48,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 }
 
 - (void)buildSubviews {
-    self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
+    self.tableView.backgroundView = nil;
     [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -113,12 +113,14 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 #pragma mark Private methods
 
 - (void)pullDownToRefresh {
+    self.tableView.backgroundView = nil;
     if (self.delegate && [self.delegate respondsToSelector:@selector(didPullDownToRefreshForNotificationCenterView:)]) {
         [self.delegate didPullDownToRefreshForNotificationCenterView:self];
     }
 }
 
 - (void)pullUpToLoadMore {
+    self.tableView.backgroundView = nil;
     if (self.delegate && [self.delegate respondsToSelector:@selector(didPullUpToLoadMoreForNotificationCenterView:)]) {
         [self.delegate didPullUpToLoadMoreForNotificationCenterView:self];
     }
@@ -129,12 +131,17 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 - (void)reloadData {
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(notificationModelsForNotificationCenterView:)]) {
         self.listModels = [self.dataSource notificationModelsForNotificationCenterView:self];
-        [self.tableView reloadData];
         if (self.noMoreData) {
             [self.tableView.gifFooter noticeNoMoreData];
         } else {
             [self.tableView.gifFooter resetNoMoreData];
         }
+    }
+    [self.tableView reloadData];
+    if ([self.listModels count] == 0) {
+        self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
+    } else {
+        self.tableView.backgroundView = nil;
     }
 }
 

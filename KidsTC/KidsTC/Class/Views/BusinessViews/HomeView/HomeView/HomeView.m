@@ -109,7 +109,7 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
     self.topView.delegate = self;
     [self.topView setBackgroundColor:[AUITheme theme].navibarBGColor];
     
-    self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
+    self.tableView.backgroundView = nil;
     [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -339,7 +339,7 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
                     break;
                 case HomeTitleCellTypeCountDownMoreTitle:
                 {
-                    HomeViewCountDownMoreTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:kMoreTitleCellIdentifier];
+                    HomeViewCountDownMoreTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:kCountDownMoreTitleCellIdentifier];
                     if (!cell) {
                         cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewCountDownMoreTitleCell" owner:nil options:nil] objectAtIndex:0];
                     }
@@ -574,6 +574,7 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
 #pragma mark Private Methods
 
 - (void)pullToRefreshTable {
+    self.tableView.backgroundView = nil;
     [self.tableView.gifFooter resetNoMoreData];
     self.noMoreData = NO;
     if (self.delegate && [self.delegate respondsToSelector:@selector(homeViewDidPulledDownToRefresh:)]) {
@@ -582,6 +583,7 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
 }
 
 - (void)pullToLoadMoreData {
+    self.tableView.backgroundView = nil;
     if (self.delegate && [self.delegate respondsToSelector:@selector(homeViewDidPulledUpToloadMore:)]) {
         [self.delegate homeViewDidPulledUpToloadMore:self];
     }
@@ -635,6 +637,11 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
         [array addObjectsFromArray:[self.customerRecommendModel allSectionModels]];
         self.totalSectionModels = [NSArray arrayWithArray:array];
         [self.tableView reloadData];
+    }
+    if ([self.totalSectionModels count] == 0) {
+        self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
+    } else {
+        self.tableView.backgroundView = nil;
     }
 }
 

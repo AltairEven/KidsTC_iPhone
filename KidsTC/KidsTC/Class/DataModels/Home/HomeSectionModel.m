@@ -50,6 +50,11 @@
                 _titleModel = [[HomeMoreTitleCellModel alloc] initWithRawData:[data objectForKey:@"titleContent"]];
             }
                 break;
+            case HomeTitleCellTypeCountDownMoreTitle:
+            {
+                _titleModel = [[HomeCountDownMoreTitleCellModel alloc] initWithRawData:[data objectForKey:@"titleContent"]];
+            }
+                break;
             default:
                 break;
         }

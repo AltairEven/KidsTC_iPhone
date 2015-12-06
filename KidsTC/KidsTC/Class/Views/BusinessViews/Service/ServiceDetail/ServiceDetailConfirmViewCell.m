@@ -30,7 +30,7 @@
 
     // Configure the view for the selected state
     if (selected) {
-        [self.bgView setBackgroundColor:[[AUITheme theme].globalThemeColor colorWithAlphaComponent:0.5]];
+        [self.bgView setBackgroundColor:[[AUITheme theme].globalThemeColor colorWithAlphaComponent:0.2]];
     } else {
         [self.bgView setBackgroundColor:[AUITheme theme].globalCellBGColor];
     }

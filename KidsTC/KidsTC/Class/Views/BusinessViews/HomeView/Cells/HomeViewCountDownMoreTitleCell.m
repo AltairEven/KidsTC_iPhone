@@ -14,6 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIView *countDownBGView;
+@property (weak, nonatomic) IBOutlet UILabel *countdownDesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *hourLabel;
 @property (weak, nonatomic) IBOutlet UILabel *minuteLabel;
 @property (weak, nonatomic) IBOutlet UILabel *secondLabel;
@@ -28,7 +29,8 @@
 - (void)awakeFromNib {
     // Initialization code
     self.countDownBGView.layer.borderWidth = 0.5;
-    self.countDownBGView.layer.borderColor = [UIColor orangeColor].CGColor;
+    self.countDownBGView.layer.borderColor = [AUITheme theme].globalThemeColor.CGColor;
+    self.countDownBGView.layer.cornerRadius = 3;
     self.countDownBGView.layer.masksToBounds = YES;
     [self.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
     [self.tagView setBackgroundColor:[AUITheme theme].globalThemeColor];
@@ -47,6 +49,7 @@
 - (void)configWithModel:(HomeCountDownMoreTitleCellModel *)model {
     if (model) {
         [self.titleLabel setText:model.mainTitle];
+        [self.countdownDesLabel setText:model.countdownDes];
         [self.subTitleLabel setText:model.subTitle];
         [self setLeftTime:model.timeLeft];
     }

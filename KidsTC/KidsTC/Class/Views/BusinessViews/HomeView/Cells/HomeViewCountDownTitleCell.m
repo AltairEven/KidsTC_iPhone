@@ -27,7 +27,8 @@
 - (void)awakeFromNib {
     // Initialization code
     self.countDownBGView.layer.borderWidth = 0.5;
-    self.countDownBGView.layer.borderColor = [UIColor orangeColor].CGColor;
+    self.countDownBGView.layer.borderColor = [AUITheme theme].globalThemeColor.CGColor;
+    self.countDownBGView.layer.cornerRadius = 3;
     self.countDownBGView.layer.masksToBounds = YES;
     [self.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
     [self.tagView setBackgroundColor:[AUITheme theme].globalThemeColor];

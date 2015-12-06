@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class UserActivityModel;
+
 @interface UserCenterModel : NSObject
 
 @property (nonatomic, copy) NSString *userName; //用户名
@@ -35,6 +37,24 @@
 @property (nonatomic, assign) NSUInteger waitingPaymentOrderCount; // 待付款订单数
 
 @property (nonatomic, assign) NSUInteger waitingCommentOrderCount; // 待评论订单数
+
+@property (nonatomic, strong) UserActivityModel *activityModel;
+
+- (instancetype)initWithRawData:(NSDictionary *)data;
+
+- (BOOL)hasUserActivity;
+
+@end
+
+@interface UserActivityModel : NSObject
+
+@property (nonatomic, copy) NSString *buttonTitle;
+
+@property (nonatomic, copy) NSString *activityDescription;
+
+@property (nonatomic, strong) NSURL *iconUrl;
+
+@property (nonatomic, copy) NSString *linkUrlString;
 
 - (instancetype)initWithRawData:(NSDictionary *)data;
 

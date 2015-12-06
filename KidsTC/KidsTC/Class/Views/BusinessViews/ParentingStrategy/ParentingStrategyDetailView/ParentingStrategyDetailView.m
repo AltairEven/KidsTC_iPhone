@@ -57,7 +57,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 }
 
 - (void)buildSubviews {
-    self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
+    self.tableView.backgroundView = nil;
     [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -351,6 +351,11 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     }
     self.tableView.tableHeaderView = [self buildHeaderView];
     [self.tableView reloadData];
+    if (!self.detailModel) {
+        self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
+    } else {
+        self.tableView.backgroundView = nil;
+    }
 }
 
 /*

@@ -17,9 +17,12 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 @property (strong, nonatomic) IBOutlet UIView *tapArea;
 @property (strong, nonatomic) IBOutlet UIView *infoBGView;
+@property (weak, nonatomic) IBOutlet UIView *limitBGView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *limitBGHeight;
 
 @property (strong, nonatomic) IBOutlet StepperView *stepperView;
 @property (strong, nonatomic) IBOutlet UILabel *stockNumberLabel;
+@property (weak, nonatomic) IBOutlet UILabel *limitLabel;
 @property (strong, nonatomic) IBOutlet UILabel *selectedStoreNameLabel;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UILabel *priceLabel;
@@ -179,6 +182,26 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 
 - (void)setMinBuyCount:(NSUInteger)min maxBuyCount:(NSUInteger)max {
     [self.stepperView setMaxVal:max andMinVal:min];
+    NSMutableString *limitString = [NSMutableString stringWithString:@""];
+    if (min > 1) {
+        [limitString appendFormat:@"限购最少%lu份", (unsigned long)min];
+    }
+    if (max < 99) {
+        if ([limitString length] == 0) {
+            [limitString appendString:@"限购"];
+        } else {
+            [limitString appendString:@"，"];
+        }
+        [limitString appendFormat:@"最多%lu份", (unsigned long)max];
+    }
+    if ([limitString length] > 0) {
+        [self.limitBGView setHidden:NO];
+        self.limitBGHeight.constant = 40;
+        [self.limitLabel setText:[NSString stringWithString:limitString]];
+    } else {
+        [self.limitBGView setHidden:YES];
+        self.limitBGHeight.constant = 0;
+    }
 }
 
 - (void)show {

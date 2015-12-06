@@ -73,10 +73,23 @@
                                         <constraint firstAttribute="height" constant="60" id="pt4-ms-oHO"/>
                                     </constraints>
                                 </view>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="krt-Mh-9UC">
+                                    <rect key="frame" x="12" y="28" width="28" height="28"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="28" id="DvV-bm-AyH"/>
+                                        <constraint firstAttribute="height" constant="28" id="OGu-T2-ZzT"/>
+                                    </constraints>
+                                    <state key="normal" image="userCenter_setting"/>
+                                    <connections>
+                                        <action selector="didClickedSettingButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="h5S-PL-SW8"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <constraints>
                                 <constraint firstAttribute="centerY" secondItem="fKN-rj-TnB" secondAttribute="centerY" id="G8d-2r-7Ga"/>
+                                <constraint firstItem="krt-Mh-9UC" firstAttribute="leading" secondItem="eLI-Xz-fVn" secondAttribute="leading" constant="12" id="Me5-7q-ws7"/>
                                 <constraint firstAttribute="trailing" secondItem="fKN-rj-TnB" secondAttribute="trailing" id="Qq9-bm-0pK"/>
+                                <constraint firstItem="krt-Mh-9UC" firstAttribute="top" secondItem="eLI-Xz-fVn" secondAttribute="top" constant="28" id="S66-I6-7qa"/>
                                 <constraint firstItem="fKN-rj-TnB" firstAttribute="width" secondItem="eLI-Xz-fVn" secondAttribute="width" multiplier="1:2" id="jQK-Tb-lRE"/>
                             </constraints>
                         </view>
@@ -301,6 +314,7 @@
                 <outlet property="myCommentCell" destination="Nvi-5q-0Db" id="Nzf-xP-997"/>
                 <outlet property="myFavourateCell" destination="bOf-4e-c9v" id="Kld-h8-vRo"/>
                 <outlet property="scoreLabel" destination="chK-GW-zHc" id="bcd-Rb-y1Y"/>
+                <outlet property="settingButton" destination="krt-Mh-9UC" id="YJi-Dt-Rhj"/>
                 <outlet property="tableView" destination="G9C-au-bfn" id="2rG-7f-K38"/>
                 <outlet property="userInfoBGView" destination="fKN-rj-TnB" id="TeM-m7-IcH"/>
                 <outlet property="userInfoContainerView" destination="eLI-Xz-fVn" id="pDd-de-qLP"/>
@@ -520,6 +534,7 @@
         <image name="userCenter_messageCenter" width="28" height="28"/>
         <image name="userCenter_myAppointments" width="30" height="30"/>
         <image name="userCenter_myFavourate" width="30" height="30"/>
+        <image name="userCenter_setting" width="28" height="28"/>
         <image name="userCenter_waitForComment" width="30" height="30"/>
         <image name="userCenter_waitForPay" width="30" height="30"/>
     </resources>

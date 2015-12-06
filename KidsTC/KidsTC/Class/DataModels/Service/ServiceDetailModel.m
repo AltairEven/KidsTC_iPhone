@@ -108,6 +108,9 @@
         self.commentBadNumber = [[commentDic objectForKey:@"bad"] integerValue];
         self.commentPictureNumber = [[commentDic objectForKey:@"pic"] integerValue];
     }
+    
+    self.showCountdown = YES;
+    self.countdownTime = 100000;
 }
 
 

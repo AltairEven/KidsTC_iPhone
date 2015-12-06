@@ -70,7 +70,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     _currentNewsTagIndex = 0;
     [self.segmentView setSelectedIndex:self.currentNewsTagIndex];
     
-    self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
+    self.tableView.backgroundView = nil;
     [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -163,12 +163,14 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 #pragma mark Private methods
 
 - (void)pullToRefreshTable {
+    self.tableView.backgroundView = nil;
     if (self.delegate && [self.delegate respondsToSelector:@selector(newsListViewDidPulledDownToRefresh:atNewsTagIndex:)]) {
         [self.delegate newsListViewDidPulledDownToRefresh:self atNewsTagIndex:self.currentNewsTagIndex];
     }
 }
 
 - (void)pullToLoadMoreData {
+    self.tableView.backgroundView = nil;
     if (self.delegate && [self.delegate respondsToSelector:@selector(newsListViewDidPulledUpToloadMore:atNewsTagIndex:)]) {
         [self.delegate newsListViewDidPulledUpToloadMore:self atNewsTagIndex:self.currentNewsTagIndex];
     }
@@ -286,6 +288,11 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
         }
     }
     [self.tableView.gifFooter setHidden:[[self.hideFooterDic objectForKey:[NSString stringWithFormat:@"%lu", (unsigned long)self.currentNewsTagIndex]] boolValue]];
+    if ([self.listModels count] == 0) {
+        self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
+    } else {
+        self.tableView.backgroundView = nil;
+    }
 }
 
 - (void)startRefresh {

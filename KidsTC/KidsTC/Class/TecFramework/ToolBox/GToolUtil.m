@@ -1027,10 +1027,16 @@ NSInteger sortImageDictionaryWithIdx(id v1, id v2, void *context)
 + (NSString *)countDownTimeStringWithLeftTime:(NSTimeInterval)leftTime {
     NSUInteger intTime = leftTime;
     
-    NSUInteger hour = intTime / 3600;
+    NSUInteger day = intTime / 3600 / 24;
+    NSUInteger hour = (intTime % (24 * 3600)) / 3600;
     NSUInteger minute = (intTime % 3600) / 60;
     NSUInteger second = (intTime % 3600) % 60;
-    NSString *timeString = [NSString stringWithFormat:@"%02lu时%02lu分%02lu秒", (unsigned long)hour, (unsigned long)minute, (unsigned long)second];
+    NSString *timeString = @"";
+    if (day < 1) {
+        timeString = [NSString stringWithFormat:@"%02lu时%02lu分%02lu秒", (unsigned long)hour, (unsigned long)minute, (unsigned long)second];
+    } else {
+        timeString = [NSString stringWithFormat:@"%lu天%02lu时%02lu分%02lu秒", (unsigned long)day, (unsigned long)hour, (unsigned long)minute, (unsigned long)second];
+    }
     return timeString;
 }
 

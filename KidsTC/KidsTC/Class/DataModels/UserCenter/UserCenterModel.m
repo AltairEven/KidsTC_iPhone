@@ -30,6 +30,31 @@
         self.appointmentOrderCount = [[data objectForKey:@"appointment_wait_arrive"] integerValue];
         self.waitingPaymentOrderCount = [[data objectForKey:@"order_wait_pay"] integerValue];
         self.waitingCommentOrderCount = [[data objectForKey:@"order_wait_evaluate"] integerValue];
+        self.activityModel = [[UserActivityModel alloc] initWithRawData:[data objectForKey:@"invite"]];
+    }
+    return self;
+}
+
+- (BOOL)hasUserActivity {
+    if (!self.activityModel) {
+        return NO;
+    }
+    return YES;
+}
+
+@end
+
+@implementation UserActivityModel
+
+- (instancetype)initWithRawData:(NSDictionary *)data {
+    if (!data || ![data isKindOfClass:[NSDictionary class]]) {
+        return nil;
+    }
+    if (self) {
+        self.buttonTitle = [data objectForKey:@"btnDesc"];
+        self.activityDescription = [data objectForKey:@"desc"];
+        self.iconUrl = [NSURL URLWithString:[data objectForKey:@"icon"]];
+        self.linkUrlString = [data objectForKey:@"linkUrl"];
     }
     return self;
 }

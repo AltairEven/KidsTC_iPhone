@@ -25,6 +25,7 @@
 - (void)internalInit
 {
     self.bounds = CGRectMake(0, 0, STEPPER_WIDTH, STEPPER_HEIGHT);
+    [self setBackgroundColor:[UIColor clearColor]];
     
     _subBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _subBtn.frame = CGRectMake(0.0f, 0.0f, STEPPER_BTN_WIDTH, STEPPER_HEIGHT);
@@ -50,6 +51,7 @@
     
     _addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _addBtn.frame = CGRectMake(STEPPER_BTN_WIDTH+STEPPER_TEXT_WIDTH, 0.0f, STEPPER_BTN_WIDTH, STEPPER_HEIGHT);
+    [_addBtn setBackgroundColor:[UIColor clearColor]];
 //    [_addBtn setImage:[UIImage imageNamed:@"stepper_add"] forState:UIControlStateNormal];
 //    [_addBtn setImage:[UIImage imageNamed:@"stepper_add_press"] forState:UIControlStateHighlighted];
 //    [_addBtn setImage:[UIImage imageNamed:@"stepper_add_disable"] forState:UIControlStateDisabled];
@@ -57,6 +59,7 @@
     [self addSubview:_addBtn];
     
     //add by Altair, 20150320
+    [_subBtn setBackgroundColor:[UIColor clearColor]];
     [_subBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_subBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     [_subBtn.layer setBorderWidth:BORDER_WIDTH];

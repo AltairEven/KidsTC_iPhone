@@ -48,7 +48,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 }
 
 - (void)buildSubviews {
-    self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
+    self.tableView.backgroundView = nil;
     [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -118,12 +118,14 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 #pragma mark Private methods
 
 - (void)pullDownToRefresh {
+    self.tableView.backgroundView = nil;
     if (self.delegate && [self.delegate respondsToSelector:@selector(didPullDownToRefreshForParentingStrategyView:)]) {
         [self.delegate didPullDownToRefreshForParentingStrategyView:self];
     }
 }
 
 - (void)pullUpToLoadMore {
+    self.tableView.backgroundView = nil;
     if (self.delegate && [self.delegate respondsToSelector:@selector(didPullUpToLoadMoreForParentingStrategyView:)]) {
         [self.delegate didPullUpToLoadMoreForParentingStrategyView:self];
     }
@@ -134,17 +136,19 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 - (void)reloadData {
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(listItemModelsOfParentingStrategyView:)]) {
         self.listModels = [self.dataSource listItemModelsOfParentingStrategyView:self];
-        [self.tableView reloadData];
-        if ([self.listModels count] > 0) {
-            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
-        }
-        if (self.noMoreData) {
-            [self.tableView.gifFooter noticeNoMoreData];
-        } else {
-            [self.tableView.gifFooter resetNoMoreData];
-        }
+    }
+    [self.tableView reloadData];
+    if (self.noMoreData) {
+        [self.tableView.gifFooter noticeNoMoreData];
+    } else {
+        [self.tableView.gifFooter resetNoMoreData];
     }
     [self.tableView.gifFooter setHidden:self.noMoreData];
+    if ([self.listModels count] == 0) {
+        self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
+    } else {
+        self.tableView.backgroundView = nil;
+    }
 }
 
 - (void)startRefresh {

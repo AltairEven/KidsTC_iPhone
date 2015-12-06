@@ -15,6 +15,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *userInfoContainerView;
 @property (weak, nonatomic) IBOutlet UIView *userInfoBGView;
+@property (weak, nonatomic) IBOutlet UIButton *settingButton;
 @property (weak, nonatomic) IBOutlet UIImageView *BGImageView;
 @property (strong, nonatomic) UIImageView *faceImageView;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
@@ -34,6 +35,11 @@
 @property (strong, nonatomic) IBOutlet UITableViewCell *couponCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *messageCenterCell;
 
+@property (nonatomic, strong) UIView *tableFooterView;
+@property (nonatomic, strong) UILabel *userActivityLable;
+@property (nonatomic, strong) UIImageView *userActivityIcon;
+@property (nonatomic, strong) UIButton *userActivityButton;
+
 @property (nonatomic, strong) UserCenterModel *dataModel;
 
 - (void)buildSubviews;
@@ -43,6 +49,10 @@
 - (void)didClickedfaceImageView;
 
 - (void)didTappedOnView:(id)sender;
+
+- (IBAction)didClickedSettingButton:(id)sender;
+
+- (void)didClickedUserActivityButton;
 
 @end
 
@@ -102,6 +112,32 @@
     self.tableView.dataSource = self;
     
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+    self.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 80)];
+    [self.tableFooterView setBackgroundColor:[UIColor clearColor]];
+    
+    self.userActivityLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 50, 15)];
+    [self.userActivityLable setTextColor:[AUITheme theme].globalThemeColor];
+    [self.userActivityLable setFont:[UIFont systemFontOfSize:12]];
+    [self.userActivityLable setBackgroundColor:[UIColor clearColor]];
+    [self.userActivityLable setLineBreakMode:NSLineBreakByCharWrapping];
+    [self.userActivityLable setNumberOfLines:2];
+    [self.userActivityLable setBackgroundColor:[UIColor clearColor]];
+    [self.tableFooterView addSubview:self.userActivityLable];
+    
+    self.userActivityIcon = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 12, 12)];
+    [self.userActivityIcon setBackgroundColor:[UIColor clearColor]];
+    [self.tableFooterView addSubview:self.userActivityIcon];
+    
+    self.userActivityButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.userActivityButton setFrame:CGRectMake(20, 30, SCREEN_WIDTH - 40, 40)];
+    [self.userActivityButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.userActivityButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    [self.userActivityButton setTitleColor:[AUITheme theme].navibarTitleColor_Normal forState:UIControlStateNormal];
+    [self.userActivityButton addTarget:self action:@selector(didClickedUserActivityButton) forControlEvents:UIControlEventTouchUpInside];
+    [self.userActivityButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
+    self.userActivityButton.layer.cornerRadius = 3;
+    self.userActivityButton.layer.masksToBounds = YES;
+    [self.tableFooterView addSubview:self.userActivityButton];
     
     [self reloadTopView];
     
@@ -255,6 +291,18 @@
     }
 }
 
+- (IBAction)didClickedSettingButton:(id)sender {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedSoftwareButtonOnUserCenterView:)]) {
+        [self.delegate didClickedSoftwareButtonOnUserCenterView:self];
+    }
+}
+
+- (void)didClickedUserActivityButton {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedUserActivityButtonOnUserCenterView:)]) {
+        [self.delegate didClickedUserActivityButtonOnUserCenterView:self];
+    }
+}
+
 
 #pragma mark Public methods
 
@@ -262,7 +310,20 @@
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(modelForUserCenterView:)]) {
         self.dataModel = [self.dataSource modelForUserCenterView:self];
         [self reloadTopView];
-        [self.tableView reloadData];
+    }
+    [self.tableView reloadData];
+    if ([self.dataModel hasUserActivity]) {
+        [self.userActivityLable setText:self.dataModel.activityModel.activityDescription];
+        CGFloat height = [self.userActivityLable sizeToFitWithMaximumNumberOfLines:2];
+        [self.userActivityLable setCenter:CGPointMake(SCREEN_WIDTH / 2, height)];
+        
+        [self.userActivityIcon setImageWithURL:self.dataModel.activityModel.iconUrl];
+        [self.userActivityIcon setCenter:CGPointMake(self.userActivityLable.frame.origin.x - 10, self.userActivityLable.center.y)];
+        
+        [self.userActivityButton setTitle:self.dataModel.activityModel.buttonTitle forState:UIControlStateNormal];
+        self.tableView.tableFooterView = self.tableFooterView;
+    } else {
+        self.tableView.tableFooterView = nil;
     }
 }
 

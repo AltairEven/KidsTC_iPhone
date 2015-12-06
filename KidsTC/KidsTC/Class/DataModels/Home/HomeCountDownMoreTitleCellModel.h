@@ -12,6 +12,8 @@
 
 @property (nonatomic, assign) NSUInteger timeLeft;
 
+@property (nonatomic, copy) NSString *countdownDes;
+
 @property (nonatomic, copy) NSString *subTitle;
 
 @end

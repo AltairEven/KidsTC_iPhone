@@ -73,7 +73,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 }
 
 - (void)buildSubviews {
-    self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
+    self.tableView.backgroundView = nil;
     [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -415,17 +415,22 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 - (void)reloadData {
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(settlementModelForSettlementView:)]) {
         self.model = [self.dataSource settlementModelForSettlementView:self];
-        [self.tableView reloadData];
-        NSUInteger index = 0;
-        for (NSUInteger arrayIndex = 0; arrayIndex < [self.model.supportedPaymentTypes count]; arrayIndex ++) {
-            PaymentTypeModel *typeModel = [self.model.supportedPaymentTypes objectAtIndex:arrayIndex];
-            if (typeModel.type == self.model.currentPaymentType.type) {
-                index = arrayIndex;
-            }
+    }
+    [self.tableView reloadData];
+    NSUInteger index = 0;
+    for (NSUInteger arrayIndex = 0; arrayIndex < [self.model.supportedPaymentTypes count]; arrayIndex ++) {
+        PaymentTypeModel *typeModel = [self.model.supportedPaymentTypes objectAtIndex:arrayIndex];
+        if (typeModel.type == self.model.currentPaymentType.type) {
+            index = arrayIndex;
         }
-        if (self.model.needPay) {
-            [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:SettlementViewSectionPayment] animated:NO scrollPosition:UITableViewScrollPositionNone];
-        }
+    }
+    if (self.model.needPay) {
+        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:SettlementViewSectionPayment] animated:NO scrollPosition:UITableViewScrollPositionNone];
+    }
+    if (!self.model) {
+        self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
+    } else {
+        self.tableView.backgroundView = nil;
     }
 }
 

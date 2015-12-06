@@ -31,7 +31,11 @@ typedef enum {
 
 @protocol UserCenterViewDelegate <NSObject>
 
+- (void)didClickedSoftwareButtonOnUserCenterView:(UserCenterView *)view;
+
 - (void)userCenterView:(UserCenterView *)view didClickedWithTag:(UserCenterTag)tag;
+
+- (void)didClickedUserActivityButtonOnUserCenterView:(UserCenterView *)view;
 
 @end
 

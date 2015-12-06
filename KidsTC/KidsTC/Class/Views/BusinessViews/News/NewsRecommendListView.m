@@ -46,7 +46,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 }
 
 - (void)buildSubviews {
-    self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
+    self.tableView.backgroundView = nil;
     [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -111,6 +111,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 #pragma mark Private methods
 
 - (void)pullToLoadMoreData {
+    self.tableView.backgroundView = nil;
     if (self.delegate && [self.delegate respondsToSelector:@selector(newsRecommendListViewDidPulledToloadMore:)]) {
         [self.delegate newsRecommendListViewDidPulledToloadMore:self];
     }
@@ -119,16 +120,26 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 #pragma mark Public methods
 
 - (void)reloadData {
+    NSUInteger lastCount = [self.listItemModels count];
+    NSUInteger nowCount = 0;
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(newsRecommendListModelsForNewsRecommendListView:)]) {
-        NSUInteger lastCount = [self.listItemModels count];
         self.listItemModels = [self.dataSource newsRecommendListModelsForNewsRecommendListView:self];
-        [self.tableView reloadData];
-        if (lastCount == 0) {
-            NSUInteger nowCount = [self.listItemModels count];
-            if (nowCount > 0) {
-                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:nowCount - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-            }
+        nowCount = [self.listItemModels count];
+    }
+    [self.tableView reloadData];
+    if (lastCount <= 0) {
+        if (nowCount > 0) {
+            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:nowCount - lastCount - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
         }
+    } else {
+        if (nowCount > 0) {
+            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:nowCount - lastCount - 1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+        }
+    }
+    if ([self.listItemModels count] == 0) {
+        self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
+    } else {
+        self.tableView.backgroundView = nil;
     }
 }
 

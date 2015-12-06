@@ -62,7 +62,7 @@ static NSString *const kNewsCellIdentifier = @"kNewsCellIdentifier";
 }
 
 - (void)buildSubviews {
-    self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
+    self.tableView.backgroundView = nil;
     [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -296,12 +296,14 @@ static NSString *const kNewsCellIdentifier = @"kNewsCellIdentifier";
 #pragma mark Private methods
 
 - (void)pullDownToRefresh {
+    self.tableView.backgroundView = nil;
     if (self.delegate && [self.delegate respondsToSelector:@selector(favourateView:needUpdateDataForTag:)]) {
         [self.delegate favourateView:self needUpdateDataForTag:self.currentTag];
     }
 }
 
 - (void)pullUpToLoadMore {
+    self.tableView.backgroundView = nil;
     if (self.delegate && [self.delegate respondsToSelector:@selector(favourateView:needLoadMoreDataForTag:)]) {
         [self.delegate favourateView:self needLoadMoreDataForTag:self.currentTag];
     }
@@ -325,6 +327,11 @@ static NSString *const kNewsCellIdentifier = @"kNewsCellIdentifier";
         }
     }
     [self.tableView.gifFooter setHidden:[[self.hideFooterDic objectForKey:[NSString stringWithFormat:@"%d", self.currentTag]] boolValue]];
+    if ([self.ItemModelArray count] == 0) {
+        self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
+    } else {
+        self.tableView.backgroundView = nil;
+    }
 }
 
 - (void)startRefreshWithTag:(FavourateViewSegmentTag)tag {

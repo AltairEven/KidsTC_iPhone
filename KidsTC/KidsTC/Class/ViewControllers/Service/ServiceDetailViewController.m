@@ -38,6 +38,14 @@
 
 @property (nonatomic, strong) ServiceDetailViewModel *viewModel;
 
+@property (nonatomic, strong) ATCountDown *countdownTimer;
+
+@property (weak, nonatomic) IBOutlet UILabel *label1;
+@property (weak, nonatomic) IBOutlet UILabel *countdownLabel;
+@property (weak, nonatomic) IBOutlet UIView *countdownBGView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *countdownBGHeight;
+@property (weak, nonatomic) IBOutlet UIView *gapView;
+
 - (void)buildRightBarButtons;
 
 - (void)loadConfirmView;
@@ -48,6 +56,11 @@
 - (void)getHistoryDataForTag:(KTCBrowseHistoryViewTag)tag needMore:(BOOL)need;
 - (void)showHistoryView;
 - (void)showActionView;
+
+- (void)buildCountDownView;
+- (void)startCountDown;
+- (void)stopCountDown;
+- (void)hideCountdown:(BOOL)hide;
 
 @end
 
@@ -81,6 +94,7 @@
     }];
     
     [self buildRightBarButtons];
+    [self buildCountDownView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -104,6 +118,10 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+}
+
+- (void)dealloc {
+    [self stopCountDown];
 }
 
 #pragma mark ServiceDetailViewDelegate
@@ -288,6 +306,13 @@
     } else {
         [self.bottomView.buyButton setEnabled:YES];
     }
+    if ([self.viewModel.detailModel showCountdown]) {
+        [self hideCountdown:NO];
+        [self startCountDown];
+    } else {
+        [self stopCountDown];
+        [self hideCountdown:YES];
+    }
 }
 
 
@@ -349,6 +374,46 @@
     }
 }
 
+- (void)buildCountDownView {
+    [self.label1 setTextColor:[AUITheme theme].globalThemeColor];
+    [self.gapView setBackgroundColor:[AUITheme theme].globalThemeColor];
+    [GConfig resetLineView:self.gapView withLayoutAttribute:NSLayoutAttributeWidth];
+    [self.countdownLabel setTextColor:[AUITheme theme].globalThemeColor];
+    [self hideCountdown:YES];
+}
+
+- (void)startCountDown {
+    if (!self.countdownTimer) {
+        self.countdownTimer = [[ATCountDown alloc] initWithLeftTimeInterval:self.viewModel.detailModel.countdownTime];
+    }
+    __weak ServiceDetailViewController *weakSelf = self;
+    [weakSelf.countdownTimer startCountDownWithCurrentTimeLeft:^(NSTimeInterval currentTimeLeft) {
+        NSString *string = [GToolUtil countDownTimeStringWithLeftTime:currentTimeLeft];
+        [weakSelf.countdownLabel setText:string];
+    } completion:^{
+        [weakSelf stopCountDown];
+        [weakSelf reloadNetworkData];
+    }];
+}
+
+- (void)stopCountDown {
+    if (!self.countdownTimer) {
+        return;
+    }
+    [self.countdownTimer stopCountDown];
+    self.countdownTimer = nil;
+}
+
+- (void)hideCountdown:(BOOL)hide {
+    if (hide) {
+        [self.countdownBGView setHidden:YES];
+        self.countdownBGHeight.constant = 0;
+    } else {
+        [self.countdownBGView setHidden:NO];
+        self.countdownBGHeight.constant = 30;
+    }
+}
+
 #pragma mark Super method
 
 - (void)reloadNetworkData {
@@ -363,10 +428,6 @@
         [weakSelf.detailView reloadData];
         [[GAlertLoadingView sharedAlertLoadingView] hide];
     }];
-}
-
-- (void)dealloc {
-    
 }
 
 - (void)didReceiveMemoryWarning {

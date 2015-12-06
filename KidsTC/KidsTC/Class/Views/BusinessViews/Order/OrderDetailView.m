@@ -89,7 +89,7 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
 }
 
 - (void)buildSubviews {
-    self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
+    self.tableView.backgroundView = nil;
     [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -448,9 +448,14 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
         } else {
             self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
         }
-        [self.tableView reloadData];
     }
+    [self.tableView reloadData];
     [self resetButtonView];
+    if (!self.detailModel) {
+        self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
+    } else {
+        self.tableView.backgroundView = nil;
+    }
 }
 
 - (void)setGetCodeButtonEnabled:(BOOL)enabled {

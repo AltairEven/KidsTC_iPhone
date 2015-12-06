@@ -17,6 +17,7 @@
 #import "LoginViewController.h"
 #import "AppointmentOrderListViewController.h"
 #import "NotificationCenterViewController.h"
+#import "KTCWebViewController.h"
 
 @interface UserCenterViewController () <UserCenterViewDelegate>
 
@@ -44,22 +45,13 @@
     if ([[KTCUser currentUser] hasLogin]) {
         [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
     }
-    [self setupLeftBarButtonWithFrontImage:@"userCenter_setting" andBackImage:@"userCenter_setting"];
-    //透明
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]  forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = YES;
-    self.edgesForExtendedLayout = UIRectEdgeAll;
+    [self.navigationController setNavigationBarHidden:YES];
 }
 
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    //不透明
-    [self.navigationController.navigationBar setBackgroundImage:nil  forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = nil;
-    self.navigationController.navigationBar.translucent = NO;
-    self.edgesForExtendedLayout = UIRectEdgeNone;
+    [self.navigationController setNavigationBarHidden:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -72,6 +64,12 @@
 
 
 #pragma mark UserCenterViewDelegate
+
+- (void)didClickedSoftwareButtonOnUserCenterView:(UserCenterView *)view {
+    SoftwareSettingViewController *controller = [[SoftwareSettingViewController alloc] initWithNibName:@"SoftwareSettingViewController" bundle:nil];
+    controller.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:controller animated:YES];
+}
 
 - (void)userCenterView:(UserCenterView *)view didClickedWithTag:(UserCenterTag)tag {
     if (tag == UserCenterTagFace && ![[KTCUser currentUser] hasLogin]) {
@@ -158,13 +156,14 @@
     } target:self];
 }
 
-#pragma mark Super Methods
-
-- (void)goBackController:(id)sender {
-    SoftwareSettingViewController *controller = [[SoftwareSettingViewController alloc] initWithNibName:@"SoftwareSettingViewController" bundle:nil];
-    controller.hidesBottomBarWhenPushed = YES;
+- (void)didClickedUserActivityButtonOnUserCenterView:(UserCenterView *)view {
+    KTCWebViewController *controller = [[KTCWebViewController alloc] init];
+    [controller setWebUrlString:self.viewModel.dataModel.activityModel.linkUrlString];
+    [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
 }
+
+#pragma mark Super Methods
 
 
 - (void)didReceiveMemoryWarning {

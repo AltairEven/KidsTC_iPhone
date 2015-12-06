@@ -21,6 +21,7 @@
 
 - (void)parseRawData:(NSDictionary *)data {
     [super parseRawData:data];
+    self.countdownDes = [data objectForKey:@"remainName"];
     self.timeLeft = [[data objectForKey:@"remainTime"] integerValue];
     self.subTitle = [data objectForKey:@"subName"];
 }

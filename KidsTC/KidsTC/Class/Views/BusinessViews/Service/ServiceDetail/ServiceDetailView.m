@@ -391,7 +391,7 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
     if (!self.tableView) {
         //table view initialization, init after scroll view built
         self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableViewHeight) style:UITableViewStyleGrouped];
-        self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
+        self.tableView.backgroundView = nil;
         [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
         [self.tableView setScrollEnabled:NO];
         [self.tableView setShowsHorizontalScrollIndicator:NO];
@@ -582,6 +582,11 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
     self.viewHeight = self.tableViewHeight + self.segmentView.frame.size.height + self.moreInfoView.frame.size.height;
     [self.scrollView setContentSize:CGSizeMake(0, self.viewHeight)];
     [self.tableView reloadData];
+    if (!self.detailModel) {
+        self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
+    } else {
+        self.tableView.backgroundView = nil;
+    }
 }
 
 /*

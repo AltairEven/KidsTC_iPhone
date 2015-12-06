@@ -63,7 +63,7 @@ static KTCBrowseHistoryView *_sharedInstance = nil;
 - (void)buildSubviews {
     [self.tableBGView setBackgroundColor:[AUITheme theme].globalCellBGColor];
     
-    self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH / 4, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
+    self.tableView.backgroundView = nil;
     [self.tableView setBackgroundColor:[AUITheme theme].globalCellBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -205,6 +205,7 @@ static KTCBrowseHistoryView *_sharedInstance = nil;
 }
 
 - (void)pullToLoadMoreData {
+    self.tableView.backgroundView = nil;
     if (self.delegate && [self.delegate respondsToSelector:@selector(browseHistoryView:didPulledUpToloadMoreForTag:)]) {
         [self.delegate browseHistoryView:self didPulledUpToloadMoreForTag:self.currentTag];
     }
@@ -271,6 +272,11 @@ static KTCBrowseHistoryView *_sharedInstance = nil;
         }
     }
     [self.tableView reloadData];
+    if ([self.dataArray count] == 0) {
+        self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH / 4, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
+    } else {
+        self.tableView.backgroundView = nil;
+    }
 }
 
 - (void)endLoadMore {

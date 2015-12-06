@@ -55,7 +55,7 @@ static NSString *const kCellIdentifier = @"cellIdentifier";
 }
 
 - (void)buildSubviews {
-    self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
+    self.tableView.backgroundView = nil;
     [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -202,12 +202,14 @@ static NSString *const kCellIdentifier = @"cellIdentifier";
 #pragma mark Private methods
 
 - (void)pullDownToRefresh {
+    self.tableView.backgroundView = nil;
     if (self.delegate && [self.delegate respondsToSelector:@selector(orderListViewDidPullDownToRefresh:forListStatus:)]) {
         [self.delegate orderListViewDidPullDownToRefresh:self forListStatus:self.currentLsitStatus];
     }
 }
 
 - (void)pullUpToLoadMore {
+    self.tableView.backgroundView = nil;
     if (self.delegate && [self.delegate respondsToSelector:@selector(orderListViewDidPullUpToLoadMore:forListStatus:)]) {
         [self.delegate orderListViewDidPullUpToLoadMore:self forListStatus:self.currentLsitStatus];
     }
@@ -230,6 +232,11 @@ static NSString *const kCellIdentifier = @"cellIdentifier";
         }
     }
     [self.tableView.gifFooter setHidden:[[self.hideFooterDic objectForKey:[NSString stringWithFormat:@"%d", self.currentLsitStatus]] boolValue]];
+    if ([self.listModels count] == 0) {
+        self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
+    } else {
+        self.tableView.backgroundView = nil;
+    }
 }
 
 - (void)endRefresh {
