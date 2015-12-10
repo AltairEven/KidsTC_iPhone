@@ -62,6 +62,11 @@
 - (void)stopCountDown;
 - (void)hideCountdown:(BOOL)hide;
 
+//cs
+- (void)makePhoneCallToCS;
+
+- (void)contectOnlineService;
+
 @end
 
 @implementation ServiceDetailViewController
@@ -173,11 +178,7 @@
 }
 
 - (void)didClickedCustomerServiceButtonOnServiceDetailBottomView:(ServiceDetailBottomView *)bottomView {
-    if ([self.viewModel.detailModel.phoneNumber length] > 0) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@", self.viewModel.detailModel.phoneNumber]]];
-    } else {
-        [[iToast makeText:[NSString stringWithFormat:@"服务电话信息有误，如有疑问，请联系客服:%@", kCustomerServicePhoneNumber]] show];
-    }
+    [self makePhoneCallToCS];
 }
 
 - (void)didClickedBuyButtonOnServiceDetailBottomView:(ServiceDetailBottomView *)bottomView {
@@ -246,10 +247,7 @@
             break;
         case KTCActionViewTagShare:
         {
-            CommonShareObject *shareObject = [CommonShareObject shareObjectWithTitle:self.viewModel.detailModel.serviceName description:[NSString stringWithFormat:@"【童成网】推荐：%@", self.viewModel.detailModel.serviceName] thumbImage:[UIImage imageNamed:@"userCenter_defaultFace_boy"] urlString:@"www.kidstc.com"];
-            shareObject.identifier = self.serviceId;
-            shareObject.followingContent = @"【童成网】";
-            CommonShareViewController *controller = [CommonShareViewController instanceWithShareObject:shareObject];
+            CommonShareViewController *controller = [CommonShareViewController instanceWithShareObject:self.viewModel.detailModel.shareObject sourceType:KTCShareServiceTypeService];
             
             [self presentViewController:controller animated:YES completion:nil] ;
         }
@@ -412,6 +410,18 @@
         [self.countdownBGView setHidden:NO];
         self.countdownBGHeight.constant = 30;
     }
+}
+
+- (void)makePhoneCallToCS {
+    if ([self.viewModel.detailModel.phoneNumber length] > 0) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@", self.viewModel.detailModel.phoneNumber]]];
+    } else {
+        [[iToast makeText:[NSString stringWithFormat:@"服务电话信息有误，如有疑问，请联系客服:%@", kCustomerServicePhoneNumber]] show];
+    }
+}
+
+- (void)contectOnlineService {
+    
 }
 
 #pragma mark Super method

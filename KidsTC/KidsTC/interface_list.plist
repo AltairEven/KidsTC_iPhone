@@ -193,6 +193,13 @@
 			<key>url</key>
 			<string>http://api.kidstc.com/json.php?mod=uploadImg&amp;&amp;act=upload_img</string>
 		</dict>
+		<key>KEFU_URL</key>
+		<dict>
+			<key>method</key>
+			<string>get</string>
+			<key>url</key>
+			<string>http://chat16.live800.com/live800/chatClient/chatbox.jsp?companyID=596891&amp;configID=118743&amp;jid=9665747091</string>
+		</dict>
 		<key>LOGIN_IS_LOGIN</key>
 		<dict>
 			<key>method</key>
@@ -519,6 +526,6 @@
 	<key>errno</key>
 	<integer>0</integer>
 	<key>version</key>
-	<string>26</string>
+	<string>27</string>
 </dict>
 </plist>

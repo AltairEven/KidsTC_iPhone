@@ -261,10 +261,7 @@
             break;
         case KTCActionViewTagShare:
         {
-            CommonShareObject *shareObject = [CommonShareObject shareObjectWithTitle:self.viewModel.detailModel.storeName description:[NSString stringWithFormat:@"【童成网】推荐：%@", self.viewModel.detailModel.storeName] thumbImage:[UIImage imageNamed:@"userCenter_defaultFace_boy"] urlString:@"www.kidstc.com"];
-            shareObject.identifier = self.storeId;
-            shareObject.followingContent = @"【童成网】";
-            CommonShareViewController *controller = [CommonShareViewController instanceWithShareObject:shareObject];
+            CommonShareViewController *controller = [CommonShareViewController instanceWithShareObject:self.viewModel.detailModel.shareObject sourceType:KTCShareServiceTypeStore];
             
             [self presentViewController:controller animated:YES completion:nil] ;
         }

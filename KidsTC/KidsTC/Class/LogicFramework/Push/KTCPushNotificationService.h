@@ -23,6 +23,8 @@
 
 @property (nonatomic, readonly) BOOL isOnLine;
 
+@property (nonatomic, readonly) NSUInteger unreadCount;
+
 + (instancetype)sharedService;
 
 - (NSString *)registerDevice:(NSData *)deviceToken;
@@ -34,5 +36,9 @@
 - (void)launchServiceWithOption:(NSDictionary *)launchOptions;
 
 - (void)handleApplication:(UIApplication *)application withReceivedNotification:(NSDictionary *)userInfo;
+
+- (void)checkUnreadMessage:(void(^)(NSUInteger unreadCount))succeed failure:(void(^)(NSError *error))failure;
+
+- (void)readMessageWithIdentifier:(NSString *)identifier;
 
 @end

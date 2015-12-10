@@ -54,13 +54,13 @@
 }
 
 - (IBAction)didClickedGotoButton:(id)sender {
-    if (self.delegate && [self respondsToSelector:@selector(didClickedGotoButtonOnLoveHouseListViewCell:)]) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedGotoButtonOnLoveHouseListViewCell:)]) {
         [self.delegate didClickedGotoButtonOnLoveHouseListViewCell:self];
     }
 }
 
 - (IBAction)didClickedNearbyButton:(id)sender {
-    if (self.delegate && [self respondsToSelector:@selector(didClickedNearbyButtonOnLoveHouseListViewCell:)]) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedNearbyButtonOnLoveHouseListViewCell:)]) {
         [self.delegate didClickedNearbyButtonOnLoveHouseListViewCell:self];
     }
 }

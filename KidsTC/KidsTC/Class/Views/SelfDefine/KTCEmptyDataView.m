@@ -31,7 +31,7 @@
         
         self.descriptionString = des;
         if (!img) {
-            img = [UIImage imageNamed:@"refresh_0-1_male_1"];
+            img = [[KTCUser currentUser].userRole emptyTableBGImage];
         }
         self.image = img;
         [self buildSubView];

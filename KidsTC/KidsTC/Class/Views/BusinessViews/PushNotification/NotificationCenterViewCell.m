@@ -34,6 +34,11 @@
     [self.titleLabel setText:model.title];
     [self.timeLabel setText:model.createTimeDescription];
     [self.contentLabel setText:model.content];
+    if (model.status == PushNotificationStatusHasRead) {
+        [self.bgView setAlpha:0.5];
+    } else {
+        [self.bgView setAlpha:1];
+    }
 }
 
 @end

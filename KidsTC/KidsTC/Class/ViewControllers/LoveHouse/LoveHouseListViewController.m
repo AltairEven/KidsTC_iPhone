@@ -8,6 +8,7 @@
 
 #import "LoveHouseListViewController.h"
 #import "LoveHouseListViewModel.h"
+#import "KTCMapViewController.h"
 
 @interface LoveHouseListViewController () <LoveHouseListViewDelegate>
 
@@ -41,7 +42,14 @@
 }
 
 - (void)loveHouseListView:(LoveHouseListView *)listView didClickedGotoButtonAtIndex:(NSUInteger)index {
-    
+    LoveHouseListItemModel *model = [[self.viewModel resutlItemModels] objectAtIndex:index];
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:model.coordinate.latitude longitude:model.coordinate.longitude];
+    KTCLocation *destination = [[KTCLocation alloc] initWithLocation:location locationDescription:model.name];
+    if (destination) {
+        KTCMapViewController *controller = [[KTCMapViewController alloc] initWithMapType:KTCMapTypeStoreGuide destination:destination];
+        [controller setHidesBottomBarWhenPushed:YES];
+        [self.navigationController pushViewController:controller animated:YES];
+    }
 }
 
 - (void)loveHouseListView:(LoveHouseListView *)listView didClickedNearbyButtonAtIndex:(NSUInteger)index {

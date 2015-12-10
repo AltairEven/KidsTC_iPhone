@@ -7,6 +7,7 @@
 //
 
 #import "UserCenterModel.h"
+#import "KTCPushNotificationService.h"
 
 @implementation UserCenterModel
 
@@ -26,11 +27,14 @@
         self.phone = [data objectForKey:@"mobile"];
         NSUInteger userRoleIdentifier = [[data objectForKey:@"sex"] integerValue];
         self.userRole = [KTCUserRole instanceWithIdentifier:userRoleIdentifier];
-        self.hasUnreadMessage = [[data objectForKey:@"hasNewMessage"] boolValue];
         self.appointmentOrderCount = [[data objectForKey:@"appointment_wait_arrive"] integerValue];
         self.waitingPaymentOrderCount = [[data objectForKey:@"order_wait_pay"] integerValue];
         self.waitingCommentOrderCount = [[data objectForKey:@"order_wait_evaluate"] integerValue];
         self.activityModel = [[UserActivityModel alloc] initWithRawData:[data objectForKey:@"invite"]];
+        if ([KTCPushNotificationService sharedService].unreadCount > 0) {
+            self.hasUnreadMessage = YES;
+            self.unreadMessageCount = [KTCPushNotificationService sharedService].unreadCount;
+        }
     }
     return self;
 }

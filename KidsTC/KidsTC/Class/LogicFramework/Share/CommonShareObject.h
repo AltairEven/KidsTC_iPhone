@@ -50,6 +50,8 @@
                        thumbImageUrl:(NSURL *)thumbUrl
                            urlString:(NSString *)urlString;
 
++ (instancetype)shareObjectWithRawData:(NSDictionary *)data;
+
 - (CommonShareObject *)copyObject;
 
 @end

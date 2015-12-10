@@ -12,6 +12,8 @@
 
 @interface LoveHouseListItemModel : NSObject
 
+@property (nonatomic, copy) NSString *identifier;
+
 @property (nonatomic, copy) NSString *name;
 
 @property (nonatomic, copy) NSString *houseDescription;

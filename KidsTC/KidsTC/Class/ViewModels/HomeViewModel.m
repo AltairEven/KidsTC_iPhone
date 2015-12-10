@@ -80,9 +80,7 @@ NSString *const kHomeViewDataFinishLoadingNotification = @"kHomeViewDataFinishLo
 
 - (void)loadHomeDataSucceed:(NSDictionary *)data {
     self.homeModel = [[HomeModel alloc] initWithRawData:data];
-    if (self.homeModel) {
-        [self.view reloadData];
-    }
+    [self.view reloadData];
     [self.view endRefresh];
     [self.view noMoreData:NO];
     [self.view hideLoadMoreFooter:NO];
@@ -153,9 +151,7 @@ NSString *const kHomeViewDataFinishLoadingNotification = @"kHomeViewDataFinishLo
             }
         }
     }
-    if (self.homeModel) {
-        [self.view reloadData];
-    }
+    [self.view reloadData];
     [self.view noMoreData:NO];
     [self.view endLoadMore];
 }

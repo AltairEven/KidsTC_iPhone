@@ -60,6 +60,25 @@
     return object;
 }
 
++ (instancetype)shareObjectWithRawData:(NSDictionary *)data {
+    if (!data || ![data isKindOfClass:[NSDictionary class]]) {
+        return nil;
+    }
+    NSString *title = [NSString stringWithFormat:@"%@", [data objectForKey:@"title"]];
+    NSString *desc = [NSString stringWithFormat:@"%@", [data objectForKey:@"desc"]];
+    NSString *imgUrlString = [NSString stringWithFormat:@"%@", [data objectForKey:@"imgUrl"]];
+    NSString *linkUrlString = [NSString stringWithFormat:@"%@", [data objectForKey:@"linkUrl"]];
+    CommonShareObject *shareObj = [CommonShareObject shareObjectWithTitle:title description:desc thumbImageUrl:[NSURL URLWithString:imgUrlString] urlString:linkUrlString];
+    return shareObj;
+}
+
+- (NSString *)identifier {
+    if (!_identifier) {
+        _identifier = @"noneId";
+    }
+    return _identifier;
+}
+
 - (CommonShareObject *)copyObject {
     CommonShareObject *retObj = [[CommonShareObject alloc] init];
     retObj.identifier = self.identifier;

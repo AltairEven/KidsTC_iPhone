@@ -63,19 +63,19 @@
 }
 
 - (IBAction)didClickedPhoneButton:(id)sender {
-    if (self.delegate && [self respondsToSelector:@selector(didClickedPhoneButtonOnHospitalListViewCell:)]) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedPhoneButtonOnHospitalListViewCell:)]) {
         [self.delegate didClickedPhoneButtonOnHospitalListViewCell:self];
     }
 }
 
 - (IBAction)didClickedGotoButton:(id)sender {
-    if (self.delegate && [self respondsToSelector:@selector(didClickedGotoButtonOnHospitalListViewCell:)]) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedGotoButtonOnHospitalListViewCell:)]) {
         [self.delegate didClickedGotoButtonOnHospitalListViewCell:self];
     }
 }
 
 - (IBAction)didClickedNearbyButton:(id)sender {
-    if (self.delegate && [self respondsToSelector:@selector(didClickedNearbyButtonOnHospitalListViewCell:)]) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedNearbyButtonOnHospitalListViewCell:)]) {
         [self.delegate didClickedNearbyButtonOnHospitalListViewCell:self];
     }
 }

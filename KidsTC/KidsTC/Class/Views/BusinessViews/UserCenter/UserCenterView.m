@@ -27,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *appointCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *waitpayCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *waitcommentCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *messageBadgeLabel;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UITableViewCell *allOrderCell;
@@ -141,9 +142,19 @@
     
     [self reloadTopView];
     
+    self.messageBadgeLabel.layer.cornerRadius = 7;
+    self.messageBadgeLabel.layer.masksToBounds = YES;
+    [self.messageBadgeLabel setHidden:YES];
+    
     [self.appointCountLabel setBackgroundColor:[AUITheme theme].globalThemeColor];
     [self.waitpayCountLabel setBackgroundColor:[AUITheme theme].globalThemeColor];
     [self.waitcommentCountLabel setBackgroundColor:[AUITheme theme].globalThemeColor];
+    [self.messageBadgeLabel setBackgroundColor:[AUITheme theme].globalThemeColor];
+    [self.allOrderCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.myCommentCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.myFavourateCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.couponCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.messageCenterCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
 }
 
 /*
@@ -168,27 +179,36 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case 0:{
-            [self.allOrderCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
             return self.allOrderCell;
         }
             break;
         case 1:{
-            [self.myCommentCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
             return self.myCommentCell;
         }
             break;
         case 2:{
-            [self.myFavourateCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
             return self.myFavourateCell;
         }
             break;
         case 3:{
-            [self.couponCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
             return self.couponCell;
         }
             break;
         case 4:{
-            [self.messageCenterCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+            if ([self.dataModel hasUnreadMessage]) {
+                [self.messageBadgeLabel setHidden:NO];
+                NSString *countString = @"";
+                if (self.dataModel.unreadMessageCount > 99) {
+                    countString = @"99+";
+                    [self.messageBadgeLabel setFont:[UIFont systemFontOfSize:6]];
+                } else {
+                    [self.messageBadgeLabel setFont:[UIFont systemFontOfSize:10]];
+                    countString = [NSString stringWithFormat:@"%lu", (unsigned long)self.dataModel.unreadMessageCount];
+                }
+                [self.messageBadgeLabel setText:countString];
+            } else {
+                [self.messageBadgeLabel setHidden:YES];
+            }
             return self.messageCenterCell;
         }
             break;

@@ -138,7 +138,7 @@
 }
 
 - (void)didClickedShareButton {
-    CommonShareViewController *controller = [CommonShareViewController instanceWithShareObject:self.viewModel.detailModel.shareObject];
+    CommonShareViewController *controller = [CommonShareViewController instanceWithShareObject:self.viewModel.detailModel.shareObject sourceType:KTCShareServiceTypeStrategy];
     [self presentViewController:controller animated:YES completion:nil];
 }
 

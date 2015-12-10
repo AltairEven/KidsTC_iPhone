@@ -14,16 +14,20 @@ typedef void(^GeoCodeSucceedBlock)(BMKGeoCodeResult *result);
 typedef void(^GeoCodeFalureBlock)(NSError *error);
 typedef void(^ReverseGeoCodeSucceedBlock)(BMKReverseGeoCodeResult *result);
 typedef void(^ReverseGeoCodeFalureBlock)(NSError *error);
+typedef void(^RouteSearchSucceedBlock)(id result);
+typedef void(^RouteSearchFalureBlock)(NSError *error);
 
 static KTCMapService *sharedInstance = nil;
 
-@interface KTCMapService () <BMKGeneralDelegate, BMKLocationServiceDelegate, BMKGeoCodeSearchDelegate>
+@interface KTCMapService () <BMKGeneralDelegate, BMKLocationServiceDelegate, BMKGeoCodeSearchDelegate, BMKRouteSearchDelegate>
 
 @property (nonatomic, strong) BMKMapManager *mapManager;
 
 @property (nonatomic, strong) BMKLocationService *locationService;
 
 @property (nonatomic, strong) BMKGeoCodeSearch *geoCodeSearch;
+
+@property (nonatomic, strong) BMKRouteSearch *routeSearch;
 
 @property (nonatomic, copy) GeoCodeSucceedBlock geoCodeSucceedBlock;
 
@@ -32,6 +36,10 @@ static KTCMapService *sharedInstance = nil;
 @property (nonatomic, copy) ReverseGeoCodeSucceedBlock reverseGeoCodeSucceedBlock;
 
 @property (nonatomic, copy) ReverseGeoCodeFalureBlock reverseGeoCodeFalureBlock;
+
+@property (nonatomic, copy) RouteSearchSucceedBlock routeSearchSucceedBlock;
+
+@property (nonatomic, copy) RouteSearchFalureBlock routeSearchFalureBlock;
 
 - (void)initializateLocationService;
 
@@ -106,6 +114,47 @@ static KTCMapService *sharedInstance = nil;
     }
 }
 
+#pragma mark BMKRouteSearchDelegate
+
+- (void)onGetTransitRouteResult:(BMKRouteSearch*)searcher result:(BMKTransitRouteResult*)result errorCode:(BMKSearchErrorCode)error {
+    if (error == BMK_SEARCH_NO_ERROR) {
+        if (self.routeSearchSucceedBlock) {
+            self.routeSearchSucceedBlock(result);
+        }
+    } else {
+        if (self.routeSearchFalureBlock) {
+            NSError *retError = [NSError errorWithDomain:@"KTCMapService bus route search result." code:error userInfo:nil];
+            self.routeSearchFalureBlock(retError);
+        }
+    }
+}
+
+- (void)onGetDrivingRouteResult:(BMKRouteSearch*)searcher result:(BMKDrivingRouteResult*)result errorCode:(BMKSearchErrorCode)error {
+    if (error == BMK_SEARCH_NO_ERROR) {
+        if (self.routeSearchSucceedBlock) {
+            self.routeSearchSucceedBlock(result);
+        }
+    } else {
+        if (self.routeSearchFalureBlock) {
+            NSError *retError = [NSError errorWithDomain:@"KTCMapService drive route search result." code:error userInfo:nil];
+            self.routeSearchFalureBlock(retError);
+        }
+    }
+}
+
+- (void)onGetWalkingRouteResult:(BMKRouteSearch*)searcher result:(BMKWalkingRouteResult*)result errorCode:(BMKSearchErrorCode)error {
+    if (error == BMK_SEARCH_NO_ERROR) {
+        if (self.routeSearchSucceedBlock) {
+            self.routeSearchSucceedBlock(result);
+        }
+    } else {
+        if (self.routeSearchFalureBlock) {
+            NSError *retError = [NSError errorWithDomain:@"KTCMapService walk route search result." code:error userInfo:nil];
+            self.routeSearchFalureBlock(retError);
+        }
+    }
+}
+
 #pragma mark Private methods
 
 
@@ -174,5 +223,88 @@ static KTCMapService *sharedInstance = nil;
     }
 }
 
+- (void)startRouteSearchWithType:(KTCRouteSearchType)type
+                 startCoordinate:(CLLocationCoordinate2D)start
+                   endCoordinate:(CLLocationCoordinate2D)end
+                         succeed:(void (^)(id))succeed
+                         failure:(void (^)(NSError *))failure {
+    self.routeSearchSucceedBlock = succeed;
+    self.routeSearchFalureBlock = failure;
+    if (!self.routeSearch) {
+        self.routeSearch = [[BMKRouteSearch alloc] init];
+        self.routeSearch.delegate = self;
+    }
+    
+    BMKPlanNode *startNode = [[BMKPlanNode alloc] init];
+    startNode.pt = start;
+    
+    BMKPlanNode *endNode = [[BMKPlanNode alloc] init];
+    endNode.pt = end;
+    
+    BOOL bRet = NO;
+    switch (type) {
+        case KTCRouteSearchTypeDrive:
+        {
+            BMKDrivingRoutePlanOption *option = [[BMKDrivingRoutePlanOption alloc] init];
+            option.from = startNode;
+            option.to = endNode;
+            bRet = [self.routeSearch drivingSearch:option];
+        }
+            break;
+        case KTCRouteSearchTypeBus:
+        {
+            BMKTransitRoutePlanOption *option = [[BMKTransitRoutePlanOption alloc] init];
+            option.from = startNode;
+            option.to = endNode;
+            option.city = @"上海";
+            bRet = [self.routeSearch transitSearch:option];
+        }
+            break;
+        case KTCRouteSearchTypeWalk:
+        {
+            BMKWalkingRoutePlanOption *option = [[BMKWalkingRoutePlanOption alloc] init];
+            option.from = startNode;
+            option.to = endNode;
+            bRet = [self.routeSearch walkingSearch:option];
+        }
+            break;
+        default:
+            break;
+    }
+    if (!bRet && failure) {
+        NSError *error = [NSError errorWithDomain:@"KTCMapService route search." code:-1 userInfo:nil];
+        failure(error);
+    }
+}
+
+#pragma mark Tools
+
++ (NSString *)timeDescriptionWithBMKTime:(BMKTime *)time {
+    if (!time) {
+        return @"";
+    }
+    NSMutableString *timeDes = [NSMutableString stringWithString:@""];
+    if (time.dates > 0) {
+        [timeDes appendFormat:@"%d天", time.dates];
+    }
+    if (time.hours > 0) {
+        [timeDes appendFormat:@"%d小时", time.hours];
+    }
+    if (time.minutes > 0) {
+        if (time.dates > 0 && time.hours == 0) {
+            [timeDes appendFormat:@"零%d分", time.minutes];
+        } else {
+            [timeDes appendFormat:@"%d分", time.minutes];
+        }
+    }
+    if (time.seconds > 0) {
+        if ((time.dates > 0 || time.hours > 0) && time.minutes == 0) {
+            [timeDes appendFormat:@"零%d秒", time.seconds];
+        } else {
+            [timeDes appendFormat:@"%d秒", time.seconds];
+        }
+    }
+    return [NSString stringWithString:timeDes];
+}
 
 @end

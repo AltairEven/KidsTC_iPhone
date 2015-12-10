@@ -52,4 +52,6 @@ typedef enum {
 
 - (UIImage *)refreshImageForDown;
 
+- (UIImage *)emptyTableBGImage;
+
 @end

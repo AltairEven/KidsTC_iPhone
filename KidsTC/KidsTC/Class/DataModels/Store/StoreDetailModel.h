@@ -14,6 +14,7 @@
 #import "StoreListItemModel.h"
 #import "CommentListItemModel.h"
 #import "StoreDetailNearbyModel.h"
+#import "CommonShareObject.h"
 
 @interface StoreDetailModel : NSObject
 
@@ -80,6 +81,8 @@
 @property (nonatomic, strong) NSDate *appointmentEndDate;
 
 @property (nonatomic, strong) NSArray *appointmentTimes;
+
+@property (nonatomic, strong) CommonShareObject *shareObject;
 
 - (void)fillWithRawData:(NSDictionary *)data;
 

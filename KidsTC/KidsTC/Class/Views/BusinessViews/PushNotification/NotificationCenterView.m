@@ -105,9 +105,12 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    PushNotificationModel *model = [self.listModels objectAtIndex:indexPath.row];
+    model.status = PushNotificationStatusHasRead;
     if (self.delegate && [self.delegate respondsToSelector:@selector(notificationCenterView:didClickedAtIndex:)]) {
         [self.delegate notificationCenterView:self didClickedAtIndex:indexPath.row];
     }
+    [self reloadData];
 }
 
 #pragma mark Private methods

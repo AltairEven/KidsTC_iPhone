@@ -70,15 +70,8 @@
 }
 
 - (void)setContentText:(NSString *)text {
-    UILabel *tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 20)];
-    [tempLabel setBackgroundColor:RGBA(255, 255, 255, 0.7)];
-    [tempLabel setTextColor:[UIColor darkGrayColor]];
-    [tempLabel setFont:[UIFont systemFontOfSize:13]];
-    [tempLabel setLineBreakMode:NSLineBreakByCharWrapping];
-    [tempLabel setTextAlignment:NSTextAlignmentLeft];
-    [tempLabel setText:text];
-    CGSize fitSize = [tempLabel sizeOfSizeToFitWithMaximumNumberOfLines:0];
-    [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, fitSize.width + 6, fitSize.height + 35)];
+    CGFloat height = [GConfig heightForLabelWithWidth:self.frame.size.width - 6 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:13] topGap:10 bottomGap:10 andText:text];
+    [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, 100, height + 35)];
     
     [self.descriptionLabel setText:text];
     [self updateConstraintsIfNeeded];

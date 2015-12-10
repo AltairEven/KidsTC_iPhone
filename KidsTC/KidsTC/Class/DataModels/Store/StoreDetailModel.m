@@ -163,6 +163,12 @@
         self.commentBadNumber = [[commentDic objectForKey:@"bad"] integerValue];
         self.commentPictureNumber = [[commentDic objectForKey:@"pic"] integerValue];
     }
+    
+    self.shareObject = [CommonShareObject shareObjectWithRawData:[data objectForKey:@"share"]];
+    if (self.shareObject) {
+        self.shareObject.identifier = self.storeId;
+        self.shareObject.followingContent = @"【童成】";
+    }
 }
 
 - (CGFloat)topCellHeight {

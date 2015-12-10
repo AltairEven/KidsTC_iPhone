@@ -115,7 +115,7 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
     self.tableView.dataSource = self;
     
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     }
@@ -181,14 +181,14 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
     [self.tableView addRefreshViewHeaderWithRefreshingBlock:^{
         [weakSelf pullToRefreshTable];
     }];
-    [self.tableView addLegendFooterWithRefreshingBlock:^{
-        if (weakSelf.noMoreData) {
-            [weakSelf.tableView.legendFooter noticeNoMoreData];
-            return;
-        }
-        [weakSelf pullToLoadMoreData];
-    }];
-    [self hideLoadMoreFooter:YES];
+//    [self.tableView addLegendFooterWithRefreshingBlock:^{
+//        if (weakSelf.noMoreData) {
+//            [weakSelf.tableView.legendFooter noticeNoMoreData];
+//            return;
+//        }
+//        [weakSelf pullToLoadMoreData];
+//    }];
+//    [self hideLoadMoreFooter:YES];
     
     self.backToTopButton.layer.cornerRadius = 20;
     self.backToTopButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
@@ -494,41 +494,41 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     CGFloat height = 0.01;
-    if ([[self.homeModel allSectionModels] count] == section + 1) {
-        height = 40;
-    }
+//    if ([[self.homeModel allSectionModels] count] == section + 1) {
+//        height = 40;
+//    }
     return height;
 }
 
 
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    if ([[self.homeModel allSectionModels] count] != section + 1) {
-        return nil;
-    }
-    if (!self.splitFooterView) {
-        CGFloat lableWidth = 80;
-        CGFloat viewHeight = 40;
-        self.splitFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, viewHeight)];
-        UILabel *splitLabel = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH / 2) - (lableWidth / 2), 0, lableWidth, viewHeight)];
-        [splitLabel setFont:[UIFont systemFontOfSize:13]];
-        [splitLabel setTextAlignment:NSTextAlignmentCenter];
-        [splitLabel setTextColor:[UIColor lightGrayColor]];
-        [splitLabel setText:@"为您推荐"];
-        [self.splitFooterView addSubview:splitLabel];
-        
-        CGFloat margin = 5;
-        CGFloat lineWidth = (SCREEN_WIDTH - lableWidth - margin * 2) / 2;
-        UIView *leftLine = [[UIView alloc] initWithFrame:CGRectMake(margin, viewHeight / 2, lineWidth, 1)];
-        [leftLine setBackgroundColor:[UIColor lightGrayColor]];
-        [self.splitFooterView addSubview:leftLine];
-        CGFloat xPosition =SCREEN_WIDTH / 2 + lableWidth / 2 + margin;
-        UIView *rightLine = [[UIView alloc] initWithFrame:CGRectMake(xPosition, viewHeight / 2, lineWidth, 1)];
-        [rightLine setBackgroundColor:[UIColor lightGrayColor]];
-        [self.splitFooterView addSubview:rightLine];
-    }
-    
-    return self.splitFooterView;
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+//    if ([[self.homeModel allSectionModels] count] != section + 1) {
+//        return nil;
+//    }
+//    if (!self.splitFooterView) {
+//        CGFloat lableWidth = 80;
+//        CGFloat viewHeight = 40;
+//        self.splitFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, viewHeight)];
+//        UILabel *splitLabel = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH / 2) - (lableWidth / 2), 0, lableWidth, viewHeight)];
+//        [splitLabel setFont:[UIFont systemFontOfSize:13]];
+//        [splitLabel setTextAlignment:NSTextAlignmentCenter];
+//        [splitLabel setTextColor:[UIColor lightGrayColor]];
+//        [splitLabel setText:@"为您推荐"];
+//        [self.splitFooterView addSubview:splitLabel];
+//        
+//        CGFloat margin = 5;
+//        CGFloat lineWidth = (SCREEN_WIDTH - lableWidth - margin * 2) / 2;
+//        UIView *leftLine = [[UIView alloc] initWithFrame:CGRectMake(margin, viewHeight / 2, lineWidth, 1)];
+//        [leftLine setBackgroundColor:[UIColor lightGrayColor]];
+//        [self.splitFooterView addSubview:leftLine];
+//        CGFloat xPosition =SCREEN_WIDTH / 2 + lableWidth / 2 + margin;
+//        UIView *rightLine = [[UIView alloc] initWithFrame:CGRectMake(xPosition, viewHeight / 2, lineWidth, 1)];
+//        [rightLine setBackgroundColor:[UIColor lightGrayColor]];
+//        [self.splitFooterView addSubview:rightLine];
+//    }
+//    
+//    return self.splitFooterView;
+//}
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -536,10 +536,15 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
     if (self.delegate && [self.delegate respondsToSelector:@selector(homeView:didClickedAtCoordinate:)]) {
         HomeSectionModel *model = [self.totalSectionModels objectAtIndex:indexPath.section];
         BOOL isTitle = NO;
-        if (model.hasTitle && indexPath.row == 0) {
-            isTitle = YES;
+        NSUInteger index = indexPath.row;
+        if (indexPath.row > 0) {
+            if (model.hasTitle) {
+                index --;
+            }
+        } else {
+            isTitle = model.hasTitle;
         }
-        [self.delegate homeView:self didClickedAtCoordinate:HomeClickMakeCoordinate(model.floorIndex, indexPath.section, isTitle, indexPath.row)];
+        [self.delegate homeView:self didClickedAtCoordinate:HomeClickMakeCoordinate(model.floorIndex, indexPath.section, isTitle, index)];
     }
 }
 

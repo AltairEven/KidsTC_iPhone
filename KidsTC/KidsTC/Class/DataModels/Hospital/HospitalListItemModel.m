@@ -16,12 +16,15 @@
     }
     self = [super init];
     if (self) {
+        if ([data objectForKey:@"id"]) {
+            self.identifier = [NSString stringWithFormat:@"%@", [data objectForKey:@"id"]];
+        }
         self.name = [data objectForKey:@"title"];
-        self.hospitalDescription = [data objectForKey:@"content"];
-        self.imageUrl = [NSURL URLWithString:[data objectForKey:@"imgUrl"]];
-        self.phoneNumber = [data objectForKey:@"phone"];
+        self.hospitalDescription = [data objectForKey:@"desc"];
+        self.imageUrl = [NSURL URLWithString:[data objectForKey:@"picUrl"]];
         self.distanceDescription = [data objectForKey:@"distance"];
-        self.coordinate = [GToolUtil coordinateFromString:[data objectForKey:@"mapAddr"]];
+        self.coordinate = [GToolUtil coordinateFromString:[data objectForKey:@"coordinate"]];
+        self.phoneNumber = [data objectForKey:@"mobile"];
     }
     return self;
 }

@@ -32,6 +32,8 @@
 
 @property (nonatomic, assign) BOOL hasUnreadMessage; //是否有未读信息
 
+@property (nonatomic, assign) NSUInteger unreadMessageCount; //未读消息数量
+
 @property (nonatomic, assign) NSUInteger appointmentOrderCount; // 预约订单数
 
 @property (nonatomic, assign) NSUInteger waitingPaymentOrderCount; // 待付款订单数

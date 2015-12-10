@@ -13,8 +13,17 @@
 #import "ParentingStrategyViewController.h"
 #import "UserCenterViewController.h"
 #import "KTCSearchViewController.h"
+#import "UITabBar+Badge.h"
 
 @interface KTCTabBarController ()
+
+@property (nonatomic, strong) UILabel *homeBadge;
+
+@property (nonatomic, strong) UILabel *newsBadge;
+
+@property (nonatomic, strong) UILabel *strategyBadge;
+
+@property (nonatomic, strong) UILabel *userCenterBadge;
 
 @end
 
@@ -117,18 +126,22 @@ static KTCTabBarController* _shareTabBarController = nil;
     }
     
     if (viewController == self.homeTab) {
+        [self setBadge:nil ForTab:KTCTabHome];
         _selectTabBarButtonIndex = KTCTabHome;
     }
     else if(viewController == self.newsTab)
     {
+        [self setBadge:nil ForTab:KTCTabNews];
         _selectTabBarButtonIndex = KTCTabNews;
     }
     else if(viewController == self.parentingStrategyTab)
     {
+        [self setBadge:nil ForTab:KTCTabParentingStrategy];
         _selectTabBarButtonIndex = KTCTabParentingStrategy;
     }
     else if(viewController == self.userCenterTab)
     {
+        [self setBadge:nil ForTab:KTCTabUserCenter];
         _selectTabBarButtonIndex = KTCTabUserCenter;
     }
     
@@ -262,6 +275,13 @@ static KTCTabBarController* _shareTabBarController = nil;
     }
     
     return aViewCtrl;
+}
+
+- (void)setBadge:(NSString *)badgeString ForTab:(KTCTabEnum)tabEnum {
+    if ([self selectedButton] == tabEnum) {
+        return;
+    }
+    [self.tabBar setBadgeWithValue:badgeString atIndex:tabEnum];
 }
 
 @end

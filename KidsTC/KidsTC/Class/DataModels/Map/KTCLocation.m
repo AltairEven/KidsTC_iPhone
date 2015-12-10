@@ -11,6 +11,9 @@
 @implementation KTCLocation
 
 - (instancetype)initWithLocation:(CLLocation *)location locationDescription:(NSString *)description {
+    if (!location) {
+        return nil;
+    }
     self = [super init];
     if (self) {
         self.location = location;

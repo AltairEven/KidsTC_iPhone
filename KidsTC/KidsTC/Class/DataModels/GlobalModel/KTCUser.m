@@ -88,6 +88,7 @@ static KTCUser *_sharedInstance = nil;
         _skey = skey;
         [self localSave];
         [[KTCPushNotificationService sharedService] bindAccount:YES];
+        [[KTCPushNotificationService sharedService] checkUnreadMessage:nil failure:nil];
     }
 }
 
@@ -104,6 +105,7 @@ static KTCUser *_sharedInstance = nil;
             _hasLogin = YES;
             [[HttpIcsonCookieManager sharedManager] setupCookies]; //设置cookie
             [[KTCPushNotificationService sharedService] bindAccount:YES];
+            [[KTCPushNotificationService sharedService] checkUnreadMessage:nil failure:nil];
         } failure:^(HttpRequestClient *client, NSError *error) {
             _hasLogin = NO;
             [weakSelf clearLoginInfo];

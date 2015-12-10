@@ -8,9 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "CommonShareObject.h"
+#import "KTCShareService.h"
 
 @interface CommonShareViewController : UIViewController
 
+@property (nonatomic, strong, readonly) CommonShareObject *shareObject;
+
+@property (nonatomic, readonly) KTCShareServiceType sourceType;
+
 + (instancetype)instanceWithShareObject:(CommonShareObject *)object;
+
++ (instancetype)instanceWithShareObject:(CommonShareObject *)object sourceType:(KTCShareServiceType)type;
 
 @end

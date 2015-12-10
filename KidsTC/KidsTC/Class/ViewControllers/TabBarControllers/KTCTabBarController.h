@@ -49,4 +49,6 @@ typedef enum {
 - (void)gotoTabIndex:(int) index;
 - (void)makeTabBarHidden:(BOOL)hidden;
 
+- (void)setBadge:(NSString *)badgeString ForTab:(KTCTabEnum)tabEnum;
+
 @end

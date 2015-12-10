@@ -399,4 +399,59 @@
     return image;
 }
 
+- (UIImage *)emptyTableBGImage {
+    UIImage *image = nil;
+    if (self.sex == KTCSexMale) {
+        switch (self.role) {
+            case UserRolePrepregnancy:
+            case UserRolePregnancy:
+            case UserRoleBirth:
+            case UserRoleBabyInOne:
+            {
+                image = [UIImage imageNamed:@"loading_empty_baby_boy"];
+            }
+                break;
+            case UserRoleBabyOneToThree:
+            {
+                image = [UIImage imageNamed:@"loading_empty_child_boy"];
+            }
+                break;
+            case UserRoleBabyFourToSix:
+            {
+                image = [UIImage imageNamed:@"loading_empty_kids_boy"];
+            }
+                break;
+            default:
+                break;
+        }
+    } else if (self.sex == KTCSexFemale) {
+        switch (self.role) {
+            case UserRolePrepregnancy:
+            case UserRolePregnancy:
+            case UserRoleBirth:
+            case UserRoleBabyInOne:
+            {
+                image = [UIImage imageNamed:@"loading_empty_baby_girl"];
+            }
+                break;
+            case UserRoleBabyOneToThree:
+            {
+                image = [UIImage imageNamed:@"loading_empty_child_girl"];
+            }
+                break;
+            case UserRoleBabyFourToSix:
+            {
+                image = [UIImage imageNamed:@"loading_empty_kids_girl"];
+            }
+                break;
+            default:
+                break;
+        }
+    }
+    if (!image) {
+        image = [UIImage imageNamed:@"loading_empty_baby_boy"];
+    }
+    return image;
+}
+
 @end

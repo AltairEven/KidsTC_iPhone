@@ -52,6 +52,7 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
 @property (weak, nonatomic) IBOutlet UILabel *promotionDescriptionLabel;
 @property (weak, nonatomic) IBOutlet RichPriceView *promotionPriceView;
 @property (weak, nonatomic) IBOutlet RichPriceView *scorePriceView;
+@property (weak, nonatomic) IBOutlet RichPriceView *totalPriceView;
 
 //button view
 @property (weak, nonatomic) IBOutlet UIView *buttonBGView;
@@ -126,6 +127,8 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
     [self.promotionPriceView setFont:[UIFont systemFontOfSize:13]];
     [self.scorePriceView setContentColor:[AUITheme theme].globalThemeColor];
     [self.scorePriceView setFont:[UIFont systemFontOfSize:13]];
+    [self.totalPriceView setContentColor:[AUITheme theme].globalThemeColor];
+    [self.totalPriceView setFont:[UIFont systemFontOfSize:13]];
     
     if (!self.consumptionCodeCellNib) {
         self.consumptionCodeCellNib = [UINib nibWithNibName:NSStringFromClass([OrderDetailConsumptionCodeCell class]) bundle:nil];
@@ -202,13 +205,16 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
         }
             break;
         case 1:{
-            CGFloat totalPrice = self.detailModel.originalAmount;
-            [self.productTotalPriceView setPrice:totalPrice];
+            [self.productTotalPriceView setPrice:self.detailModel.originalAmount];
+            
             [self.promotionDescriptionLabel setText:@""];
             [self.promotionPriceView setPrice:self.detailModel.discountAmount];
             
             CGFloat scorePrice = self.detailModel.usedPointNumber * ScoreCoefficient;
             [self.scorePriceView setPrice:scorePrice];
+            
+            [self.totalPriceView setPrice:self.detailModel.price];
+            
             [self.settlementCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
             cell = self.settlementCell;
         }

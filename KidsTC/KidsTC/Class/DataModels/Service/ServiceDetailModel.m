@@ -35,6 +35,7 @@
     }
     
     self.serviceName = [data objectForKey:@"serveName"];
+    self.starNumber = [[data objectForKey:@"level"] floatValue];
     self.commentsNumber = [[data objectForKey:@"evaluate"] integerValue];
     self.saleCount = [[data objectForKey:@"saleCount"] integerValue];
     self.price = [[data objectForKey:@"price"] floatValue];
@@ -109,8 +110,11 @@
         self.commentPictureNumber = [[commentDic objectForKey:@"pic"] integerValue];
     }
     
-    self.showCountdown = YES;
-    self.countdownTime = 100000;
+    self.shareObject = [CommonShareObject shareObjectWithRawData:[data objectForKey:@"share"]];
+    if (self.shareObject) {
+        self.shareObject.identifier = self.serviceId;
+        self.shareObject.followingContent = @"【童成】";
+    }
 }
 
 

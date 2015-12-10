@@ -124,14 +124,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    /*
-     当站点切换，用户登陆态改变
-     刷新数据
-     */
-//    if (_currentDistrictID != [[UserWrapper shareMasterUser].districtId integerValue] || _currentUID != [UserWrapper shareMasterUser].uid)
-//    {
-//        [self loadUrl:self.linkURL];
-//    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -180,6 +172,9 @@
 
 - (void)setWebUrlString:(NSString *)webUrlString
 {
+    if (![webUrlString hasPrefix:@"http://"]) {
+        webUrlString = [NSString stringWithFormat:@"http://%@", webUrlString];
+    }
     if(self.webUrlString != webUrlString)
     {
         _webUrlString = webUrlString;
@@ -257,6 +252,12 @@
                 if (urlRange.location != NSNotFound) {
                     NSString *url = [string substringFromIndex:urlRange.length];
                     [tempDic setObject:url forKey:@"url"];
+                    NSDictionary *urlParamsDic = [GToolUtil parsetUrl:url];
+                    if ([urlParamsDic objectForKey:@"id"]) {
+                        NSString *identifier = [NSString stringWithFormat:@"%@", [urlParamsDic objectForKey:@"id"]];
+                        [tempDic setObject:identifier forKey:@"id"];
+                        
+                    }
                     continue;
                 }
             }
@@ -605,11 +606,12 @@
     NSString *desc = [params objectForKey:@"desc"];
     NSString *thumbUrlString = [params objectForKey:@"pic"];
     NSString *linkUrlString = [params objectForKey:@"url"];
+    NSString *identifier = [params objectForKey:@"id"];
     
     CommonShareObject *shareObject = [CommonShareObject shareObjectWithTitle:title description:desc thumbImageUrl:[NSURL URLWithString:thumbUrlString] urlString:linkUrlString];
-    shareObject.identifier = title;
+    shareObject.identifier = identifier;
     shareObject.followingContent = @"【童成网】";
-    CommonShareViewController *controller = [CommonShareViewController instanceWithShareObject:shareObject];
+    CommonShareViewController *controller = [CommonShareViewController instanceWithShareObject:shareObject sourceType:KTCShareServiceTypeNews];
     
     [self presentViewController:controller animated:YES completion:nil] ;
 }

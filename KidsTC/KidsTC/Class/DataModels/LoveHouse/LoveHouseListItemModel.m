@@ -16,11 +16,14 @@
     }
     self = [super init];
     if (self) {
+        if ([data objectForKey:@"id"]) {
+            self.identifier = [NSString stringWithFormat:@"%@", [data objectForKey:@"id"]];
+        }
         self.name = [data objectForKey:@"title"];
-        self.houseDescription = [data objectForKey:@"content"];
-        self.imageUrl = [NSURL URLWithString:[data objectForKey:@"imgUrl"]];
+        self.houseDescription = [data objectForKey:@"desc"];
+        self.imageUrl = [NSURL URLWithString:[data objectForKey:@"picUrl"]];
         self.distanceDescription = [data objectForKey:@"distance"];
-        self.coordinate = [GToolUtil coordinateFromString:[data objectForKey:@"mapAddr"]];
+        self.coordinate = [GToolUtil coordinateFromString:[data objectForKey:@"coordinate"]];
     }
     return self;
 }

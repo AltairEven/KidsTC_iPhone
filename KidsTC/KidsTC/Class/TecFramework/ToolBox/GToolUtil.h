@@ -154,4 +154,7 @@ NSInteger sortImageDictionaryWithIdx(id v1, id v2, void *context);
 
 + (void)drawLineOnView:(UIView *)view withStartPoint:(CGPoint)start endPoint:(CGPoint)end lineWidth:(CGFloat)width gap:(CGFloat)gap sectionLength:(CGFloat)length color:(UIColor *)color isVirtual:(BOOL)isVirtual;
 
++ (NSString *)distanceDescriptionWithMeters:(NSUInteger)meters;
++ (NSString *)timeDescriptionWithSeconds:(NSUInteger)seconds;
+
 @end

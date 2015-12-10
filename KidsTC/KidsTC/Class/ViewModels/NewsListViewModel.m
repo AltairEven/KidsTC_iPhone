@@ -217,6 +217,12 @@
             [self.view endRefresh];
             [self.view endLoadMore];
         }
+    } else {
+        
+        [self.view reloadData];
+        [self.view endRefresh];
+        [self.view endLoadMore];
+        [self.view noMoreData:YES forNewsTagIndex:index];
     }
 }
 
@@ -301,10 +307,9 @@
     [self.view endLoadMore];
     self.currentTagIndex = index;
     NSMutableArray *dataArray = [self newsResultAtTagIndex:index];
+    [self.view reloadData];
     
-    if ([dataArray count] > 0) {
-        [self.view reloadData];
-    } else {
+    if ([dataArray count] == 0) {
         [self.view startRefresh];
     }
 }

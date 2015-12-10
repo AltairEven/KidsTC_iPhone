@@ -182,7 +182,7 @@
 }
 
 - (void)didClickedLocateButtonOnSearchResultView:(KTCSearchResultView *)resultView {
-    KTCMapViewController *controller = [[KTCMapViewController alloc] initWithMapType:KTCMapTypeStoreGuide destination:[GConfig sharedConfig].currentLocation];
+    KTCMapViewController *controller = [[KTCMapViewController alloc] initWithMapType:KTCMapTypeLocate destination:[GConfig sharedConfig].currentLocation];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
 }

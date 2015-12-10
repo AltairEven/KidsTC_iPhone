@@ -11,8 +11,8 @@
 #import "UIDevice+IdentifierAddition.h"
 //#import "GArea.h"
 
-#define DefaultLongitude (121.43333)
-#define DefailtLatitude (34.50000)
+#define DefaultLongitude (121.4812701835353)
+#define DefailtLatitude (31.239205868246547)
 
 static GConfig *_sharedConfig;
 

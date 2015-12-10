@@ -9,6 +9,7 @@
 #import "NotificationCenterViewController.h"
 #import "NotificationCenterViewModel.h"
 #import "KTCSegueMaster.h"
+#import "KTCPushNotificationService.h"
 
 @interface NotificationCenterViewController () <NotificationCenterViewDelegate>
 
@@ -48,6 +49,7 @@
 - (void)notificationCenterView:(NotificationCenterView *)view didClickedAtIndex:(NSUInteger)index {
     PushNotificationModel *model = [[self.viewModel resultArray] objectAtIndex:index];
     [KTCSegueMaster makeSegueWithModel:model.segueModel fromController:self];
+    [[KTCPushNotificationService sharedService] readMessageWithIdentifier:model.identifier];
 }
 
 - (void)didReceiveMemoryWarning {

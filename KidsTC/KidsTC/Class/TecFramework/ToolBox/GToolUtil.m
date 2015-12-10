@@ -1079,11 +1079,11 @@ NSInteger sortImageDictionaryWithIdx(id v1, id v2, void *context)
     if ([components count] != 2) {
         return CLLocationCoordinate2DMake(0, 0);
     }
-    NSString *latString = [components firstObject];
+    NSString *latString = [components lastObject];
     [latString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     CLLocationDegrees lat = [latString doubleValue];
     
-    NSString *lonString = [components lastObject];
+    NSString *lonString = [components firstObject];
     [lonString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     CLLocationDegrees lon = [lonString doubleValue];
     return CLLocationCoordinate2DMake(lat, lon);
@@ -1196,6 +1196,29 @@ NSInteger sortImageDictionaryWithIdx(id v1, id v2, void *context)
     CGPathRelease(path);
     
     [view.layer addSublayer:shapeLayer];
+}
+
++ (NSString *)distanceDescriptionWithMeters:(NSUInteger)meters {
+    NSString *des = @"";
+    if (meters < 1000) {
+        des = [NSString stringWithFormat:@"%lu米", (unsigned long)meters];
+    } else {
+        CGFloat km = meters / 1000.0;
+        des = [NSString stringWithFormat:@"%.2f千米", km];
+    }
+    return des;
+}
+
++ (NSString *)timeDescriptionWithSeconds:(NSUInteger)seconds {
+    NSUInteger hour = seconds / 3600;
+    NSUInteger minute = (seconds % 3600) / 60;
+    NSUInteger second = (seconds % 3600) % 60;
+    NSMutableString *timeString = [NSMutableString stringWithString:@""];
+    if (hour > 1) {
+        [timeString appendFormat:@"%lu小时", (unsigned long)hour];
+    }
+    [timeString appendFormat:@"%lu分%lu秒", (unsigned long)minute, (unsigned long)second];
+    return [NSString stringWithString:timeString];
 }
 
 @end

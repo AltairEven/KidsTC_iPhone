@@ -194,6 +194,14 @@
     return title;
 }
 
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(nullable UIView *)view {
+    UIView *retView = nil;
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(pickerView:viewForRow:forComponent:reusingView:)]) {
+        retView = [self.dataSource pickerView:self viewForRow:row forComponent:component reusingView:view];
+    }
+    return retView;
+}
+
 /*
  #pragma mark - Navigation
  

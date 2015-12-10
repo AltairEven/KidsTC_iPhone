@@ -13,6 +13,8 @@
 #import "ServiceDetailViewController.h"
 #import "KTCPaymentService.h"
 #import "OrderRefundViewController.h"
+#import "OnlineCustomerService.h"
+#import "KTCWebViewController.h"
 
 @interface OrderDetailViewController () <OrderDetailViewDelegate, CommentFoundingViewControllerDelegate, OrderRefundViewControllerDelegate>
 
@@ -25,6 +27,10 @@
 @property (nonatomic, assign) OrderDetailPushSource pushSource;
 
 - (void)didClickedContectCSButton;
+
+- (void)makePhoneCallToCS;
+
+- (void)contectOnlineCustomerService;
 
 @end
 
@@ -149,7 +155,36 @@
 #pragma mark Private methods
 
 - (void)didClickedContectCSButton {
+    BOOL hasOnlineService = [OnlineCustomerService serviceIsOnline];
+    if (hasOnlineService) {
+        UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"请选择客服类型" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+        UIAlertAction *onlineAction = [UIAlertAction actionWithTitle:@"在线客服" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self contectOnlineCustomerService];
+        }];
+        UIAlertAction *phoneAction = [UIAlertAction actionWithTitle:@"电话热线" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self makePhoneCallToCS];
+        }];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        [controller addAction:onlineAction];
+        [controller addAction:phoneAction];
+        [controller addAction:cancelAction];
+        
+        [self presentViewController:controller animated:YES completion:nil];
+        
+    } else {
+        [self makePhoneCallToCS];
+    }
+}
+
+- (void)makePhoneCallToCS {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@", kCustomerServicePhoneNumber]]];
+}
+
+- (void)contectOnlineCustomerService {
+    KTCWebViewController *controller = [[KTCWebViewController alloc] init];
+    [controller setWebUrlString:[OnlineCustomerService onlineCustomerServiceLinkUrlString]];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark Super methods

@@ -46,6 +46,7 @@
         if ([self.orderDetailDescription length] == 0) {
             self.orderDetailDescription = self.statusDescription;
         }
+        self.canContactCS = YES;
     }
     return self;
 }

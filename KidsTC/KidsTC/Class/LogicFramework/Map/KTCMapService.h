@@ -16,6 +16,12 @@
 
 extern NSString *const ktcMapServiceKey;
 
+typedef enum {
+    KTCRouteSearchTypeDrive,
+    KTCRouteSearchTypeBus,
+    KTCRouteSearchTypeWalk
+}KTCRouteSearchType;
+
 @interface KTCMapService : NSObject
 
 @property (nonatomic, readonly) BOOL serviceOnline;
@@ -34,5 +40,13 @@ extern NSString *const ktcMapServiceKey;
 - (void)getAddressDescriptionWithCoordinate:(CLLocationCoordinate2D)coordinate
                                     succeed:(void(^)(BMKReverseGeoCodeResult *result))succeed
                                     failure:(void(^)(NSError *error))failure;
+
+- (void)startRouteSearchWithType:(KTCRouteSearchType)type
+                 startCoordinate:(CLLocationCoordinate2D)start
+                   endCoordinate:(CLLocationCoordinate2D)end
+                         succeed:(void(^)(id result))succeed
+                         failure:(void(^)(NSError *error))failure;
+
++ (NSString *)timeDescriptionWithBMKTime:(BMKTime *)time;
 
 @end

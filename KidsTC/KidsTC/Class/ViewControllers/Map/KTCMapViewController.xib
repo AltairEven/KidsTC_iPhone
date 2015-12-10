@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="KTCMapViewController">
             <connections>
                 <outlet property="backButton" destination="GuV-Bz-evT" id="qgS-uW-mrH"/>
                 <outlet property="mapView" destination="kX8-AT-kyZ" id="TPz-JS-xr8"/>
+                <outlet property="routeTypeButton" destination="aEa-Oj-HVv" id="vru-o5-ZVN"/>
                 <outlet property="searchField" destination="iyg-Pn-W2n" id="blR-0k-xRM"/>
                 <outlet property="topView" destination="CUd-u3-pmZ" id="BR9-WV-B4g"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -28,8 +29,8 @@
                                 <constraint firstAttribute="width" constant="40" id="aEJ-I6-eJ3"/>
                                 <constraint firstAttribute="height" constant="30" id="s3f-ek-hBE"/>
                             </constraints>
-                            <state key="normal" image="navigation_back_n">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            <state key="normal" image="navigation_back_h">
+                                <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
                                 <action selector="didClickedBackButton:" destination="-1" eventType="touchUpInside" id="41K-uo-3Ar"/>
@@ -58,6 +59,19 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aEa-Oj-HVv" userLabel="routeTypeButton">
+                    <rect key="frame" x="260" y="508" width="40" height="40"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="9WP-Md-vzQ"/>
+                        <constraint firstAttribute="height" constant="40" id="lqj-wO-Im9"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="didClickedRouteTypeButton:" destination="-1" eventType="touchUpInside" id="hmZ-di-vCf"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -66,18 +80,15 @@
                 <constraint firstItem="CUd-u3-pmZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="FJF-px-cpj"/>
                 <constraint firstAttribute="trailing" secondItem="kX8-AT-kyZ" secondAttribute="trailing" id="Zcg-q1-kdi"/>
                 <constraint firstItem="kX8-AT-kyZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ec9-Hq-8sX"/>
+                <constraint firstAttribute="bottom" secondItem="aEa-Oj-HVv" secondAttribute="bottom" constant="20" id="eiS-eP-Mto"/>
                 <constraint firstItem="CUd-u3-pmZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hgo-vW-Yza"/>
+                <constraint firstAttribute="trailing" secondItem="aEa-Oj-HVv" secondAttribute="trailing" constant="20" id="j2f-Xo-oxQ"/>
                 <constraint firstItem="kX8-AT-kyZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="wGA-0e-Mi0"/>
             </constraints>
             <point key="canvasLocation" x="392" y="354"/>
         </view>
     </objects>
     <resources>
-        <image name="navigation_back_n" width="28" height="28"/>
+        <image name="navigation_back_h" width="28" height="28"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

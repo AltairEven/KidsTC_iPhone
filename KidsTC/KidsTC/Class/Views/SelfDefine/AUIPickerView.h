@@ -30,6 +30,7 @@
 // If you return back a different object, the old one will be released. the view will be centered in the row rect
 - (NSString *)pickerView:(AUIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component;
 - (NSAttributedString *)pickerView:(AUIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component NS_AVAILABLE_IOS(6_0); // attributed title is favored if both methods are implemented
+- (UIView *)pickerView:(AUIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view;
 
 @end
 
@@ -46,6 +47,8 @@
 @interface AUIPickerView : UIView
 
 @property (nonatomic, strong) UIView *topView;
+
+@property (nonatomic, strong) UIFont *font;
 
 @property (nonatomic, assign) id<AUIPickerViewDataSource> dataSource;
 

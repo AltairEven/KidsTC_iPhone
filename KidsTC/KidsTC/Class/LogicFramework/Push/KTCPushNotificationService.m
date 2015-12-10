@@ -23,6 +23,12 @@ static KTCPushNotificationService *sharedInstance = nil;
 
 @property (nonatomic, strong) HttpRequestClient *setAccountRequest;
 
+@property (nonatomic, strong) HttpRequestClient *checkUnreadRequest;
+
+@property (nonatomic, strong) HttpRequestClient *readMessageRequest;
+
+- (NSUInteger)checkUnreadMessageSucceed:(NSDictionary *)data;
+
 @end
 
 @implementation KTCPushNotificationService
@@ -138,6 +144,8 @@ static KTCPushNotificationService *sharedInstance = nil;
 - (void)bindAccount:(BOOL)bind {
     if (!self.setAccountRequest) {
         self.setAccountRequest = [HttpRequestClient clientWithUrlAliasName:@"PUSH_REGISTER_DEVICE"];
+    } else {
+        [self.setAccountRequest cancel];
     }
     NSUInteger type = 2;//解绑
     if (bind) {
@@ -205,6 +213,63 @@ static KTCPushNotificationService *sharedInstance = nil;
     if (self.delegate && [self.delegate respondsToSelector:@selector(didRecievedRemoteNotificationWithModel:)]) {
         [self.delegate didRecievedRemoteNotificationWithModel:model];
     }
+}
+
+
+#pragma mark Read Status
+
+- (void)checkUnreadMessage:(void (^)(NSUInteger))succeed failure:(void (^)(NSError *))failure {
+    if (!self.checkUnreadRequest) {
+        self.checkUnreadRequest = [HttpRequestClient clientWithUrlAliasName:@"PUSH_IS_UN_READ_MESSAGE"];
+    } else {
+        [self.checkUnreadRequest cancel];
+    }
+    
+    __weak KTCPushNotificationService *weakSelf = self;
+    [weakSelf.checkUnreadRequest startHttpRequestWithParameter:nil success:^(HttpRequestClient *client, NSDictionary *responseData) {
+        NSUInteger unreadCount = [weakSelf checkUnreadMessageSucceed:responseData];
+        if (succeed) {
+            succeed(unreadCount);
+        }
+    } failure:^(HttpRequestClient *client, NSError *error) {
+        if (failure) {
+            failure(error);
+        }
+    }];
+}
+
+
+- (void)readMessageWithIdentifier:(NSString *)identifier {
+    if (!self.readMessageRequest) {
+        self.readMessageRequest = [HttpRequestClient clientWithUrlAliasName:@"PUSH_USER_READ_MESSAGE"];
+    } else {
+        [self.readMessageRequest cancel];
+    }
+    NSDictionary *param = [NSDictionary dictionaryWithObject:identifier forKey:@"ids"];
+    
+    [self.readMessageRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
+        NSLog(@"Set read status succeed.");
+    } failure:^(HttpRequestClient *client, NSError *error) {
+        NSLog(@"Set read status failed.");
+    }];
+}
+
+#pragma mark Private methods
+
+- (NSUInteger)checkUnreadMessageSucceed:(NSDictionary *)data {
+    NSDictionary *countDic = [data objectForKey:@"data"];
+    if (!data || ![data isKindOfClass:[NSDictionary class]]) {
+        return 0;
+    }
+    NSUInteger count = [[countDic objectForKey:@"count"] integerValue];
+    _unreadCount = count;
+    if (count == 0) {
+        [[KTCTabBarController shareTabBarController] setBadge:nil ForTab:KTCTabUserCenter];
+    } else {
+//        NSString *badgeString = [NSString stringWithFormat:@"%lu", (unsigned long)count];
+        [[KTCTabBarController shareTabBarController] setBadge:@"" ForTab:KTCTabUserCenter];
+    }
+    return count;
 }
 
 @end

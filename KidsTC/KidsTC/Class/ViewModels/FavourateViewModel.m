@@ -395,8 +395,8 @@
 
 - (void)resetResultWithFavouratedTag:(FavourateViewSegmentTag)tag {
     [self.view endRefresh];
-    [self.view reloadDataForTag:tag];
     self.currentTag = tag;
+    [self.view reloadDataForTag:tag];
     switch (tag) {
         case FavourateViewSegmentTagService:
         {

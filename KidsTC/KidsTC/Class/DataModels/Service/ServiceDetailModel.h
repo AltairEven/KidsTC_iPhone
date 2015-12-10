@@ -10,6 +10,7 @@
 #import "StoreListItemModel.h"
 #import "CommentListItemModel.h"
 #import "Insurance.h"
+#import "CommonShareObject.h"
 
 @class ServiceDetailNoticeItem;
 
@@ -26,6 +27,8 @@
 @property (nonatomic, copy) NSString *serviceName;
 
 @property (nonatomic, copy) NSString *serviceDescription;
+
+@property (nonatomic, assign) CGFloat starNumber;
 
 @property (nonatomic, assign) CGFloat price;
 
@@ -82,6 +85,8 @@
 @property (nonatomic, assign) NSUInteger buyCount;
 
 @property (nonatomic, assign) CGFloat totalPrice;
+
+@property (nonatomic, strong) CommonShareObject *shareObject;
 
 - (void)fillWithRawData:(NSDictionary *)data;
 
