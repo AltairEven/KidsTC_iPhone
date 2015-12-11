@@ -87,7 +87,7 @@ static KTCFavouriteManager *_sharedInstance = nil;
                                       [NSNumber numberWithInteger:type], @"type",
                                       [NSNumber numberWithInteger:page], @"page",
                                       [NSNumber numberWithInteger:pageSize], @"pagecount", nil];
-    if (type == KTCFavouriteTypeStore) {
+    if (type == KTCFavouriteTypeStore || type == KTCFavouriteTypeService) {
         [tempParam setObject:[GConfig sharedConfig].currentLocationCoordinateString forKey:@"mapaddr"];
     }
     [self.loadFavourateRequest startHttpRequestWithParameter:[NSDictionary dictionaryWithDictionary:tempParam] success:^(HttpRequestClient *client, NSDictionary *responseData) {

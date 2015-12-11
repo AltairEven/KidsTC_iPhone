@@ -45,7 +45,7 @@
         self.couponName = [coupons firstObject];
     }
     self.couponUrlString = [data objectForKey:@"couponLink"];
-    self.countdownTime = [[data objectForKey:@"remainCount"] integerValue];
+    self.countdownTime = [[data objectForKey:@"countDownTime"] integerValue];
     self.showCountdown = [[data objectForKey:@"showCountDown"] integerValue];
     self.supportedInsurances = [Insurance InsurancesWithRawData:[data objectForKey:@"insurance"]];
     
@@ -78,6 +78,9 @@
     self.stockNumber = [[data objectForKey:@"remainCount"] integerValue];
     self.maxLimit = [[data objectForKey:@"buyMaxNum"] integerValue];
     self.minLimit = [[data objectForKey:@"buyMinNum"] integerValue];
+    if (self.stockNumber < self.maxLimit) {
+        self.maxLimit = self.stockNumber;
+    }
     
     NSArray *storesArray = [data objectForKey:@"store"];
     if ([storesArray isKindOfClass:[NSArray class]]) {
@@ -114,6 +117,16 @@
     if (self.shareObject) {
         self.shareObject.identifier = self.serviceId;
         self.shareObject.followingContent = @"【童成】";
+    }
+    
+    NSUInteger status = [[data objectForKey:@"status"] integerValue];
+    if (status == 1) {
+        self.canBuy = YES;
+    } else {
+        self.canBuy = NO;
+    }
+    if ([data objectForKey:@"statusDesc"]) {
+        self.buyButtonTitle = [NSString stringWithFormat:@"%@", [data objectForKey:@"statusDesc"]];
     }
 }
 

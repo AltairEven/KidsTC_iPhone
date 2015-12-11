@@ -12,6 +12,16 @@
 
 @interface HomeThreeImageNewsCellModel : HomeContentCellModel
 
+@property (nonatomic, copy) NSString *title;
+
+@property (nonatomic, assign) BOOL isHot;
+
+@property (nonatomic, assign) BOOL isRecommend;
+
+@property (nonatomic, assign) NSUInteger viewCount;
+
+@property (nonatomic, assign) NSUInteger commentCount;
+
 @property (nonatomic, strong) HomeThreeImageNewsElement *firstElement;
 
 @property (nonatomic, strong) HomeThreeImageNewsElement *secondeElement;

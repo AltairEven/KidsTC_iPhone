@@ -115,6 +115,7 @@
     start = CGPointMake(0, self.businessTimeBGView.bounds.size.height);
     end = CGPointMake(SCREEN_WIDTH, self.businessTimeBGView.bounds.size.height);
     [GToolUtil drawLineOnView:self.businessTimeBGView withStartPoint:start endPoint:end lineWidth:lineWidth gap:gap sectionLength:sectionLength color:color isVirtual:YES];
+    [self.businessTimeLabel setText:self.appointmentModel.appointmentTimeString];
     //button
     self.appointmentButton.layer.cornerRadius = 5;
     self.appointmentButton.layer.masksToBounds = YES;

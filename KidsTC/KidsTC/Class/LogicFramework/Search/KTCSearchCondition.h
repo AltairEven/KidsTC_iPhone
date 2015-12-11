@@ -57,4 +57,6 @@ typedef enum {
 
 @property (nonatomic, assign) KTCSearchResultStoreSortType sortType;
 
+@property (nonatomic, copy) NSString *coordinateString;
+
 @end

@@ -43,20 +43,7 @@
     }
     self.isFavourate = [[data objectForKey:@"favor"] boolValue];
     //appoint times
-    NSDictionary *appointTime = [data objectForKey:@"appointTime"];
-    if ([appointTime isKindOfClass:[NSDictionary class]]) {
-        //date
-        NSDateFormatter *dateFormatter =[[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-        NSString *start = [appointTime objectForKey:@"startTime"];
-        NSString *end = [appointTime objectForKey:@"endTime"];
-        self.appointmentStartDate = [dateFormatter dateFromString:start];
-        self.appointmentEndDate = [dateFormatter dateFromString:end];
-        NSArray *times = [appointTime objectForKey:@"dayTime"];
-        if ([times isKindOfClass:[NSArray class]]) {
-            self.appointmentTimes = [NSArray arrayWithArray:times];
-        }
-    }
+    self.appointmentTimeDes = [data objectForKey:@"businessHours"];
     //loc
     NSDictionary *location = [data objectForKey:@"loc"];
     if ([location isKindOfClass:[NSDictionary class]]) {
@@ -168,6 +155,17 @@
     if (self.shareObject) {
         self.shareObject.identifier = self.storeId;
         self.shareObject.followingContent = @"【童成】";
+    }
+    
+    
+    NSUInteger status = [[data objectForKey:@"status"] integerValue];
+    if (status == 1) {
+        self.canAppoint = YES;
+    } else {
+        self.canAppoint = NO;
+    }
+    if ([data objectForKey:@"statusDesc"]) {
+        self.appointButtonTitle = [NSString stringWithFormat:@"%@", [data objectForKey:@"statusDesc"]];
     }
 }
 

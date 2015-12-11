@@ -9,6 +9,7 @@
 #import "LoveHouseListViewController.h"
 #import "LoveHouseListViewModel.h"
 #import "KTCMapViewController.h"
+#import "KTCSegueMaster.h"
 
 @interface LoveHouseListViewController () <LoveHouseListViewDelegate>
 
@@ -53,7 +54,16 @@
 }
 
 - (void)loveHouseListView:(LoveHouseListView *)listView didClickedNearbyButtonAtIndex:(NSUInteger)index {
-    
+    LoveHouseListItemModel *model = [[self.viewModel resutlItemModels] objectAtIndex:index];
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
+                           [NSNumber numberWithInteger:0], @"a",
+                           [NSNumber numberWithInteger:0], @"c",
+                           @"", @"k",
+                           [NSNumber numberWithInteger:0], @"s",
+                           [NSNumber numberWithInteger:KTCSearchResultStoreSortTypeDistance], @"st",
+                           [GToolUtil stringFromCoordinate:model.coordinate], @"mapaddr", nil];
+    HomeSegueModel *segueModel = [[HomeSegueModel alloc] initWithDestination:HomeSegueDestinationStoreList paramRawData:param];
+    [KTCSegueMaster makeSegueWithModel:segueModel fromController:self];
 }
 
 - (void)didReceiveMemoryWarning {

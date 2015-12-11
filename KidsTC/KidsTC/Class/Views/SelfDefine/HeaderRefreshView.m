@@ -46,7 +46,7 @@
 
 - (void)initSubViews {
     CGFloat centerX = self.frame.size.width / 2;
-    CGSize headSize = CGSizeMake(40, 40);
+    CGSize headSize = CGSizeMake(50, 50);
     CGSize shadowSize = CGSizeMake(8, 8);
     CGFloat headYOrigin = HEAD_MOST_TOP;
     CGFloat shadowYOrigin = self.frame.size.height - 2 - shadowSize.height;

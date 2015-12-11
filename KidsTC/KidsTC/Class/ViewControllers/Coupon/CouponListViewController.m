@@ -8,12 +8,17 @@
 
 #import "CouponListViewController.h"
 #import "CouponListViewModel.h"
+#import "KTCWebViewController.h"
+
+static NSString *const kCouponUseRuleUrlString = @"http://m.kidstc.com/tools/coupon_desc";
 
 @interface CouponListViewController () <CouponListViewDelegate>
 
 @property (weak, nonatomic) IBOutlet CouponListView *listView;
 
 @property (nonatomic, strong) CouponListViewModel *viewModel;
+
+- (void)didClickedCouponRule;
 
 @end
 
@@ -26,6 +31,7 @@
     self.viewModel = [[CouponListViewModel alloc] initWithView:self.listView];
     [self.viewModel startUpdateDataWithViewTag:CouponListViewTagUnused];
     [self.listView reloadSegmentHeader];
+    [self setupRightBarButton:@"" target:self action:@selector(didClickedCouponRule) frontImage:@"phone1" andBackImage:@"phone2"];
 }
 
 #pragma mark CouponListViewDelegate
@@ -40,6 +46,15 @@
 
 - (void)couponListView:(CouponListView *)listView DidPullUpToLoadMoreforViewTag:(CouponListViewTag)tag {
     [self.viewModel getMoreDataWithViewTag:tag];
+}
+
+#pragma mark Private
+
+- (void)didClickedCouponRule {
+    KTCWebViewController *controller = [[KTCWebViewController alloc] init];
+    [controller setWebUrlString:kCouponUseRuleUrlString];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

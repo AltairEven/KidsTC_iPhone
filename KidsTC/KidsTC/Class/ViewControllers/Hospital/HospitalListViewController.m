@@ -8,6 +8,8 @@
 
 #import "HospitalListViewController.h"
 #import "HospitalListViewModel.h"
+#import "KTCMapViewController.h"
+#import "KTCSegueMaster.h"
 
 @interface HospitalListViewController () <HospitalListViewDelegate>
 
@@ -41,15 +43,32 @@
 }
 
 - (void)hospitalListView:(HospitalListView *)listView didClickedPhoneButtonAtIndex:(NSUInteger)index {
-    
+    HospitalListItemModel *model = [[self.viewModel resutlItemModels] objectAtIndex:index];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@", model.phoneNumber]]];
 }
 
 - (void)hospitalListView:(HospitalListView *)listView didClickedGotoButtonAtIndex:(NSUInteger)index {
-    
+    HospitalListItemModel *model = [[self.viewModel resutlItemModels] objectAtIndex:index];
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:model.coordinate.latitude longitude:model.coordinate.longitude];
+    KTCLocation *destination = [[KTCLocation alloc] initWithLocation:location locationDescription:model.name];
+    if (destination) {
+        KTCMapViewController *controller = [[KTCMapViewController alloc] initWithMapType:KTCMapTypeStoreGuide destination:destination];
+        [controller setHidesBottomBarWhenPushed:YES];
+        [self.navigationController pushViewController:controller animated:YES];
+    }
 }
 
 - (void)hospitalListView:(HospitalListView *)listView didClickedNearbyButtonAtIndex:(NSUInteger)index {
-    
+    HospitalListItemModel *model = [[self.viewModel resutlItemModels] objectAtIndex:index];
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
+                           [NSNumber numberWithInteger:0], @"a",
+                           [NSNumber numberWithInteger:0], @"c",
+                           @"", @"k",
+                           [NSNumber numberWithInteger:0], @"s",
+                           [NSNumber numberWithInteger:KTCSearchResultStoreSortTypeDistance], @"st",
+                           [GToolUtil stringFromCoordinate:model.coordinate], @"mapaddr", nil];
+    HomeSegueModel *segueModel = [[HomeSegueModel alloc] initWithDestination:HomeSegueDestinationStoreList paramRawData:param];
+    [KTCSegueMaster makeSegueWithModel:segueModel fromController:self];
 }
 
 - (void)didReceiveMemoryWarning {

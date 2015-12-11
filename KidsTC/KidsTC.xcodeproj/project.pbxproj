@@ -477,11 +477,7 @@
 		1E827B5A1B8DD634008F3F08 /* KTCMapService.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E827B591B8DD634008F3F08 /* KTCMapService.m */; };
 		1E827B651B8EB90B008F3F08 /* KTCMapViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1E827B631B8EB90B008F3F08 /* KTCMapViewController.mm */; };
 		1E827B661B8EB90B008F3F08 /* KTCMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E827B641B8EB90B008F3F08 /* KTCMapViewController.xib */; };
-		1E827B711B8F0923008F3F08 /* KTCAnnotationTipConfirmLocationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E827B701B8F0923008F3F08 /* KTCAnnotationTipConfirmLocationView.m */; };
-		1E827B731B8F0937008F3F08 /* KTCAnnotationTipConfirmLocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E827B721B8F0937008F3F08 /* KTCAnnotationTipConfirmLocationView.xib */; };
 		1E827B771B9004AC008F3F08 /* KTCLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E827B761B9004AC008F3F08 /* KTCLocation.m */; };
-		1E827B7A1B9064E2008F3F08 /* KTCAnnotationTipDestinationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E827B791B9064E2008F3F08 /* KTCAnnotationTipDestinationView.m */; };
-		1E827B7C1B9064F0008F3F08 /* KTCAnnotationTipDestinationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E827B7B1B9064F0008F3F08 /* KTCAnnotationTipDestinationView.xib */; };
 		1E827B7F1B918637008F3F08 /* AUIImageGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E827B7E1B918637008F3F08 /* AUIImageGridView.m */; };
 		1E827B8A1B93E7B3008F3F08 /* AUIPhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E827B881B93E7B3008F3F08 /* AUIPhotoBrowserViewController.m */; };
 		1E827B8B1B93E7B3008F3F08 /* AUIPhotoBrowserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E827B891B93E7B3008F3F08 /* AUIPhotoBrowserViewController.xib */; };
@@ -788,6 +784,14 @@
 		1EFFAE221BEC9EE3001D4245 /* ActivityFilterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFFAE211BEC9EE3001D4245 /* ActivityFilterModel.m */; };
 		8F06234B1C02EE7600A8AF6C /* PromotionLogoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F06234A1C02EE7600A8AF6C /* PromotionLogoItem.m */; };
 		8F06234E1C02EE8A00A8AF6C /* ActivityLogoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F06234D1C02EE8A00A8AF6C /* ActivityLogoItem.m */; };
+		8F1206251C1A622700662E01 /* KTCAnnotationTipConfirmLocationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F12061A1C1A622700662E01 /* KTCAnnotationTipConfirmLocationView.m */; };
+		8F1206261C1A622700662E01 /* KTCAnnotationTipConfirmLocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F12061B1C1A622700662E01 /* KTCAnnotationTipConfirmLocationView.xib */; };
+		8F1206271C1A622700662E01 /* KTCAnnotationTipDestinationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F12061D1C1A622700662E01 /* KTCAnnotationTipDestinationView.m */; };
+		8F1206281C1A622700662E01 /* KTCAnnotationTipDestinationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F12061E1C1A622700662E01 /* KTCAnnotationTipDestinationView.xib */; };
+		8F1206291C1A622700662E01 /* KTCAnnotationTipStoreItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1206201C1A622700662E01 /* KTCAnnotationTipStoreItemView.m */; };
+		8F12062A1C1A622700662E01 /* KTCAnnotationTipStoreItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F1206211C1A622700662E01 /* KTCAnnotationTipStoreItemView.xib */; };
+		8F12062B1C1A622700662E01 /* KTCAnnotationTipWelfareItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1206231C1A622700662E01 /* KTCAnnotationTipWelfareItemView.m */; };
+		8F12062C1C1A622700662E01 /* KTCAnnotationTipWelfareItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F1206241C1A622700662E01 /* KTCAnnotationTipWelfareItemView.xib */; };
 		8F2C55BB1BFF167B00C2B6BF /* CommonShareService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2C55BA1BFF167B00C2B6BF /* CommonShareService.m */; };
 		8F38D1E91C085F080061C329 /* CommentFoundingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F38D1E81C085F080061C329 /* CommentFoundingView.m */; };
 		8F38D1EB1C085F1E0061C329 /* CommentFoundingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F38D1EA1C085F1E0061C329 /* CommentFoundingView.xib */; };
@@ -812,18 +816,6 @@
 		8F7E45051C09E18C001EF3B5 /* OrderRefundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7E45031C09E18C001EF3B5 /* OrderRefundViewController.m */; };
 		8F7E45061C09E18C001EF3B5 /* OrderRefundViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F7E45041C09E18C001EF3B5 /* OrderRefundViewController.xib */; };
 		8F7E45091C09E1F0001EF3B5 /* OrderRefundViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7E45081C09E1F0001EF3B5 /* OrderRefundViewModel.m */; };
-		8F85AD6E1C0C32D100890526 /* refresh_0-1_female_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD621C0C32D100890526 /* refresh_0-1_female_1.png */; };
-		8F85AD6F1C0C32D100890526 /* refresh_0-1_female_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD631C0C32D100890526 /* refresh_0-1_female_2.png */; };
-		8F85AD701C0C32D100890526 /* refresh_0-1_male_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD641C0C32D100890526 /* refresh_0-1_male_1.png */; };
-		8F85AD711C0C32D100890526 /* refresh_0-1_male_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD651C0C32D100890526 /* refresh_0-1_male_2.png */; };
-		8F85AD721C0C32D100890526 /* refresh_1-3_female_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD661C0C32D100890526 /* refresh_1-3_female_1.png */; };
-		8F85AD731C0C32D100890526 /* refresh_1-3_female_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD671C0C32D100890526 /* refresh_1-3_female_2.png */; };
-		8F85AD741C0C32D100890526 /* refresh_1-3_male_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD681C0C32D100890526 /* refresh_1-3_male_1.png */; };
-		8F85AD751C0C32D100890526 /* refresh_1-3_male_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD691C0C32D100890526 /* refresh_1-3_male_2.png */; };
-		8F85AD761C0C32D100890526 /* refresh_4-6_female_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD6A1C0C32D100890526 /* refresh_4-6_female_1.png */; };
-		8F85AD771C0C32D100890526 /* refresh_4-6_female_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD6B1C0C32D100890526 /* refresh_4-6_female_2.png */; };
-		8F85AD781C0C32D100890526 /* refresh_4-6_male_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD6C1C0C32D100890526 /* refresh_4-6_male_1.png */; };
-		8F85AD791C0C32D100890526 /* refresh_4-6_male_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD6D1C0C32D100890526 /* refresh_4-6_male_2.png */; };
 		8F85AD7D1C0C43F000890526 /* NotificationCenterViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85AD7B1C0C43F000890526 /* NotificationCenterViewCell.m */; };
 		8F85AD7E1C0C43F000890526 /* NotificationCenterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD7C1C0C43F000890526 /* NotificationCenterViewCell.xib */; };
 		8F85AD821C0C498F00890526 /* PushNotificationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85AD811C0C498F00890526 /* PushNotificationModel.m */; };
@@ -1787,14 +1779,8 @@
 		1E827B621B8EB90B008F3F08 /* KTCMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCMapViewController.h; sourceTree = "<group>"; };
 		1E827B631B8EB90B008F3F08 /* KTCMapViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = KTCMapViewController.mm; sourceTree = "<group>"; };
 		1E827B641B8EB90B008F3F08 /* KTCMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTCMapViewController.xib; sourceTree = "<group>"; };
-		1E827B6F1B8F0923008F3F08 /* KTCAnnotationTipConfirmLocationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCAnnotationTipConfirmLocationView.h; sourceTree = "<group>"; };
-		1E827B701B8F0923008F3F08 /* KTCAnnotationTipConfirmLocationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCAnnotationTipConfirmLocationView.m; sourceTree = "<group>"; };
-		1E827B721B8F0937008F3F08 /* KTCAnnotationTipConfirmLocationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTCAnnotationTipConfirmLocationView.xib; sourceTree = "<group>"; };
 		1E827B751B9004AC008F3F08 /* KTCLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCLocation.h; sourceTree = "<group>"; };
 		1E827B761B9004AC008F3F08 /* KTCLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCLocation.m; sourceTree = "<group>"; };
-		1E827B781B9064E2008F3F08 /* KTCAnnotationTipDestinationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCAnnotationTipDestinationView.h; sourceTree = "<group>"; };
-		1E827B791B9064E2008F3F08 /* KTCAnnotationTipDestinationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCAnnotationTipDestinationView.m; sourceTree = "<group>"; };
-		1E827B7B1B9064F0008F3F08 /* KTCAnnotationTipDestinationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTCAnnotationTipDestinationView.xib; sourceTree = "<group>"; };
 		1E827B7D1B918637008F3F08 /* AUIImageGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIImageGridView.h; sourceTree = "<group>"; };
 		1E827B7E1B918637008F3F08 /* AUIImageGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIImageGridView.m; sourceTree = "<group>"; };
 		1E827B871B93E7B3008F3F08 /* AUIPhotoBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIPhotoBrowserViewController.h; sourceTree = "<group>"; };
@@ -2286,6 +2272,18 @@
 		8F06234A1C02EE7600A8AF6C /* PromotionLogoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PromotionLogoItem.m; sourceTree = "<group>"; };
 		8F06234C1C02EE8A00A8AF6C /* ActivityLogoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityLogoItem.h; sourceTree = "<group>"; };
 		8F06234D1C02EE8A00A8AF6C /* ActivityLogoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityLogoItem.m; sourceTree = "<group>"; };
+		8F1206191C1A622700662E01 /* KTCAnnotationTipConfirmLocationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCAnnotationTipConfirmLocationView.h; sourceTree = "<group>"; };
+		8F12061A1C1A622700662E01 /* KTCAnnotationTipConfirmLocationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCAnnotationTipConfirmLocationView.m; sourceTree = "<group>"; };
+		8F12061B1C1A622700662E01 /* KTCAnnotationTipConfirmLocationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTCAnnotationTipConfirmLocationView.xib; sourceTree = "<group>"; };
+		8F12061C1C1A622700662E01 /* KTCAnnotationTipDestinationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCAnnotationTipDestinationView.h; sourceTree = "<group>"; };
+		8F12061D1C1A622700662E01 /* KTCAnnotationTipDestinationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCAnnotationTipDestinationView.m; sourceTree = "<group>"; };
+		8F12061E1C1A622700662E01 /* KTCAnnotationTipDestinationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTCAnnotationTipDestinationView.xib; sourceTree = "<group>"; };
+		8F12061F1C1A622700662E01 /* KTCAnnotationTipStoreItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCAnnotationTipStoreItemView.h; sourceTree = "<group>"; };
+		8F1206201C1A622700662E01 /* KTCAnnotationTipStoreItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCAnnotationTipStoreItemView.m; sourceTree = "<group>"; };
+		8F1206211C1A622700662E01 /* KTCAnnotationTipStoreItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTCAnnotationTipStoreItemView.xib; sourceTree = "<group>"; };
+		8F1206221C1A622700662E01 /* KTCAnnotationTipWelfareItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCAnnotationTipWelfareItemView.h; sourceTree = "<group>"; };
+		8F1206231C1A622700662E01 /* KTCAnnotationTipWelfareItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCAnnotationTipWelfareItemView.m; sourceTree = "<group>"; };
+		8F1206241C1A622700662E01 /* KTCAnnotationTipWelfareItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTCAnnotationTipWelfareItemView.xib; sourceTree = "<group>"; };
 		8F2C55B91BFF167B00C2B6BF /* CommonShareService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonShareService.h; sourceTree = "<group>"; };
 		8F2C55BA1BFF167B00C2B6BF /* CommonShareService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonShareService.m; sourceTree = "<group>"; };
 		8F38D1E71C085F080061C329 /* CommentFoundingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentFoundingView.h; sourceTree = "<group>"; };
@@ -2326,18 +2324,6 @@
 		8F7E45041C09E18C001EF3B5 /* OrderRefundViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderRefundViewController.xib; sourceTree = "<group>"; };
 		8F7E45071C09E1F0001EF3B5 /* OrderRefundViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderRefundViewModel.h; sourceTree = "<group>"; };
 		8F7E45081C09E1F0001EF3B5 /* OrderRefundViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderRefundViewModel.m; sourceTree = "<group>"; };
-		8F85AD621C0C32D100890526 /* refresh_0-1_female_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh_0-1_female_1.png"; sourceTree = "<group>"; };
-		8F85AD631C0C32D100890526 /* refresh_0-1_female_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh_0-1_female_2.png"; sourceTree = "<group>"; };
-		8F85AD641C0C32D100890526 /* refresh_0-1_male_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh_0-1_male_1.png"; sourceTree = "<group>"; };
-		8F85AD651C0C32D100890526 /* refresh_0-1_male_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh_0-1_male_2.png"; sourceTree = "<group>"; };
-		8F85AD661C0C32D100890526 /* refresh_1-3_female_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh_1-3_female_1.png"; sourceTree = "<group>"; };
-		8F85AD671C0C32D100890526 /* refresh_1-3_female_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh_1-3_female_2.png"; sourceTree = "<group>"; };
-		8F85AD681C0C32D100890526 /* refresh_1-3_male_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh_1-3_male_1.png"; sourceTree = "<group>"; };
-		8F85AD691C0C32D100890526 /* refresh_1-3_male_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh_1-3_male_2.png"; sourceTree = "<group>"; };
-		8F85AD6A1C0C32D100890526 /* refresh_4-6_female_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh_4-6_female_1.png"; sourceTree = "<group>"; };
-		8F85AD6B1C0C32D100890526 /* refresh_4-6_female_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh_4-6_female_2.png"; sourceTree = "<group>"; };
-		8F85AD6C1C0C32D100890526 /* refresh_4-6_male_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh_4-6_male_1.png"; sourceTree = "<group>"; };
-		8F85AD6D1C0C32D100890526 /* refresh_4-6_male_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "refresh_4-6_male_2.png"; sourceTree = "<group>"; };
 		8F85AD7A1C0C43F000890526 /* NotificationCenterViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationCenterViewCell.h; sourceTree = "<group>"; };
 		8F85AD7B1C0C43F000890526 /* NotificationCenterViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationCenterViewCell.m; sourceTree = "<group>"; };
 		8F85AD7C1C0C43F000890526 /* NotificationCenterViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationCenterViewCell.xib; sourceTree = "<group>"; };
@@ -2759,12 +2745,6 @@
 				1E0B7A711B6F67B800A58AD4 /* UIView+GViewExtension.m */,
 				1E0B7A721B6F67B800A58AD4 /* UnderlineUILabel.h */,
 				1E0B7A731B6F67B800A58AD4 /* UnderlineUILabel.m */,
-				1E827B6F1B8F0923008F3F08 /* KTCAnnotationTipConfirmLocationView.h */,
-				1E827B701B8F0923008F3F08 /* KTCAnnotationTipConfirmLocationView.m */,
-				1E827B721B8F0937008F3F08 /* KTCAnnotationTipConfirmLocationView.xib */,
-				1E827B781B9064E2008F3F08 /* KTCAnnotationTipDestinationView.h */,
-				1E827B791B9064E2008F3F08 /* KTCAnnotationTipDestinationView.m */,
-				1E827B7B1B9064F0008F3F08 /* KTCAnnotationTipDestinationView.xib */,
 				1E827CF71BA02592008F3F08 /* AUIFloorNavigationView.h */,
 				1E827CF81BA02592008F3F08 /* AUIFloorNavigationView.m */,
 				1EA5C91A1BAA67F5001E599D /* AUILinearView.h */,
@@ -3915,6 +3895,7 @@
 		1E3D8F471B4D1D4D00275C35 /* BusinessViews */ = {
 			isa = PBXGroup;
 			children = (
+				8F1206181C1A61FE00662E01 /* Map */,
 				8FABCB581C102A6F005BF7AD /* History */,
 				1E79956A1BCD25510099CFF9 /* LoveHouse */,
 				1E7995691BCD25510099CFF9 /* Hospital */,
@@ -5214,7 +5195,6 @@
 		1EC73C101B5F992E008B39EA /* TempResources */ = {
 			isa = PBXGroup;
 			children = (
-				8F85AD611C0C32D100890526 /* Refresh */,
 				1E827CD71B9C3E76008F3F08 /* Coupon */,
 				1E943F491B7DDFDF0029FE74 /* Loading */,
 				8FA3615C1C1566B50094A9AA /* EmptyBG */,
@@ -5286,6 +5266,25 @@
 			path = ActivityAndPromotion;
 			sourceTree = "<group>";
 		};
+		8F1206181C1A61FE00662E01 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				8F1206191C1A622700662E01 /* KTCAnnotationTipConfirmLocationView.h */,
+				8F12061A1C1A622700662E01 /* KTCAnnotationTipConfirmLocationView.m */,
+				8F12061B1C1A622700662E01 /* KTCAnnotationTipConfirmLocationView.xib */,
+				8F12061C1C1A622700662E01 /* KTCAnnotationTipDestinationView.h */,
+				8F12061D1C1A622700662E01 /* KTCAnnotationTipDestinationView.m */,
+				8F12061E1C1A622700662E01 /* KTCAnnotationTipDestinationView.xib */,
+				8F12061F1C1A622700662E01 /* KTCAnnotationTipStoreItemView.h */,
+				8F1206201C1A622700662E01 /* KTCAnnotationTipStoreItemView.m */,
+				8F1206211C1A622700662E01 /* KTCAnnotationTipStoreItemView.xib */,
+				8F1206221C1A622700662E01 /* KTCAnnotationTipWelfareItemView.h */,
+				8F1206231C1A622700662E01 /* KTCAnnotationTipWelfareItemView.m */,
+				8F1206241C1A622700662E01 /* KTCAnnotationTipWelfareItemView.xib */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
 		8F2C55B81BFF163A00C2B6BF /* Share */ = {
 			isa = PBXGroup;
 			children = (
@@ -5306,25 +5305,6 @@
 				8F65D9D41C10335D007CA5BC /* KTCBrowseHistoryManager.m */,
 			);
 			path = History;
-			sourceTree = "<group>";
-		};
-		8F85AD611C0C32D100890526 /* Refresh */ = {
-			isa = PBXGroup;
-			children = (
-				8F85AD621C0C32D100890526 /* refresh_0-1_female_1.png */,
-				8F85AD631C0C32D100890526 /* refresh_0-1_female_2.png */,
-				8F85AD641C0C32D100890526 /* refresh_0-1_male_1.png */,
-				8F85AD651C0C32D100890526 /* refresh_0-1_male_2.png */,
-				8F85AD661C0C32D100890526 /* refresh_1-3_female_1.png */,
-				8F85AD671C0C32D100890526 /* refresh_1-3_female_2.png */,
-				8F85AD681C0C32D100890526 /* refresh_1-3_male_1.png */,
-				8F85AD691C0C32D100890526 /* refresh_1-3_male_2.png */,
-				8F85AD6A1C0C32D100890526 /* refresh_4-6_female_1.png */,
-				8F85AD6B1C0C32D100890526 /* refresh_4-6_female_2.png */,
-				8F85AD6C1C0C32D100890526 /* refresh_4-6_male_1.png */,
-				8F85AD6D1C0C32D100890526 /* refresh_4-6_male_2.png */,
-			);
-			path = Refresh;
 			sourceTree = "<group>";
 		};
 		8F85AD7F1C0C496000890526 /* PushNotification */ = {
@@ -5552,8 +5532,6 @@
 				1E5CD75A1B510F7900D177CB /* ServiceListViewCell.xib in Resources */,
 				1E827BCE1B941337008F3F08 /* ImageError@2x.png in Resources */,
 				1E943F421B7DC74B0029FE74 /* HomeViewHorizontalListCell.xib in Resources */,
-				8F85AD751C0C32D100890526 /* refresh_1-3_male_2.png in Resources */,
-				8F85AD791C0C32D100890526 /* refresh_4-6_male_2.png in Resources */,
 				1E827BD51B941337008F3F08 /* ImageSelectedOn@3x.png in Resources */,
 				1EC4A10F1B5CCD1B00206BB9 /* KTCSearchHeaderView.xib in Resources */,
 				1E7994F11BC651E00099CFF9 /* HorizontalCalendarView.xib in Resources */,
@@ -5602,6 +5580,7 @@
 				8F85AD951C0C936800890526 /* ReleaseNotes.txt in Resources */,
 				8F7E45061C09E18C001EF3B5 /* OrderRefundViewController.xib in Resources */,
 				1E0B77A41B68C49000A58AD4 /* AccountSettingViewController.xib in Resources */,
+				8F1206281C1A622700662E01 /* KTCAnnotationTipDestinationView.xib in Resources */,
 				1E827BCF1B941337008F3F08 /* ImageError@3x.png in Resources */,
 				1EC4A1261B5DE49400206BB9 /* KTCSearchResultHeaderView.xib in Resources */,
 				1E943EDA1B78A8900029FE74 /* FavourateSegmentViewCell.xib in Resources */,
@@ -5617,7 +5596,6 @@
 				1E0B77FF1B6F32D300A58AD4 /* KTCSearchAreaFilterView.xib in Resources */,
 				8FA114D81C190B05003FA52F /* interface_list.plist in Resources */,
 				1E7995581BCB96DF0099CFF9 /* ActivityViewController.xib in Resources */,
-				8F85AD771C0C32D100890526 /* refresh_4-6_female_2.png in Resources */,
 				1E15F9C11BE8953C000C74E7 /* AccountSettingViewCell.xib in Resources */,
 				1E8017091BB006D100B6C352 /* HomeViewWholeImageNewsCell.xib in Resources */,
 				1E8EFD201B68BBA100D00808 /* AccountSettingView.xib in Resources */,
@@ -5639,6 +5617,7 @@
 				1E943F4F1B7DDFDF0029FE74 /* loadingBg_828_1472.png in Resources */,
 				1EA8B6EA1B66253200F90688 /* CategoryViewController.xib in Resources */,
 				8F5D8E3F1C045D1000632390 /* NewsListTagFilterViewCell.xib in Resources */,
+				8F12062C1C1A622700662E01 /* KTCAnnotationTipWelfareItemView.xib in Resources */,
 				8F85ADAB1C0D410000890526 /* MyCommentListViewCell.xib in Resources */,
 				1EC4A1241B5D248300206BB9 /* KTCSearchResultViewController.xib in Resources */,
 				1EC4A0F41B5A4C8600206BB9 /* FavourateView.xib in Resources */,
@@ -5654,7 +5633,6 @@
 				1E827BEB1B941337008F3F08 /* VideoOverlay.png in Resources */,
 				1E827BE51B941337008F3F08 /* UIBarButtonItemArrowRight.png in Resources */,
 				1E827B541B8DC059008F3F08 /* NotificationCenterView.xib in Resources */,
-				1E827B731B8F0937008F3F08 /* KTCAnnotationTipConfirmLocationView.xib in Resources */,
 				1EC73C451B6099F8008B39EA /* ParentingStrategyView.xib in Resources */,
 				1E8EFCF81B68697700D00808 /* ServiceCommentListViewHeaderCell.xib in Resources */,
 				1E0B7B0B1B6F6C1400A58AD4 /* SaiDanCommitView.xib in Resources */,
@@ -5666,7 +5644,7 @@
 				1E0B7A771B6F67B800A58AD4 /* SmsConfirmView.xib in Resources */,
 				1E1CFA1E1BD4FEE20005653D /* KTCSearchViewCategoryCell.xib in Resources */,
 				1E7994EC1BC650B70099CFF9 /* ActivityViewCell.xib in Resources */,
-				8F85AD6F1C0C32D100890526 /* refresh_0-1_female_2.png in Resources */,
+				8F12062A1C1A622700662E01 /* KTCAnnotationTipStoreItemView.xib in Resources */,
 				1E7995301BC79E3A0099CFF9 /* HomeViewImageNewsCell.xib in Resources */,
 				1EC73BB91B5E2604008B39EA /* HomeView.xib in Resources */,
 				8FABCB651C102A93005BF7AD /* KTCBrowseHistoryViewServiceCell.xib in Resources */,
@@ -5689,19 +5667,16 @@
 				8F8A08D31BF9E31300134A9A /* BindPhoneViewController.xib in Resources */,
 				1EC73C641B61164A008B39EA /* SettlementView.xib in Resources */,
 				1E15F98E1BDF2B32000C74E7 /* StoreDetailServiceLinearCell.xib in Resources */,
-				8F85AD731C0C32D100890526 /* refresh_1-3_female_2.png in Resources */,
 				1E827BE41B941337008F3F08 /* UIBarButtonItemArrowLeft@3x.png in Resources */,
 				1E7995191BC758560099CFF9 /* NewsRecommendListView.xib in Resources */,
 				1E827BDA1B941337008F3F08 /* ImageSelectedSmallOn@2x.png in Resources */,
 				1E79950F1BC758560099CFF9 /* NewsListView.xib in Resources */,
-				8F85AD701C0C32D100890526 /* refresh_0-1_male_1.png in Resources */,
 				1E943F511B7DDFDF0029FE74 /* loadingBg_640_960.png in Resources */,
 				1E15F9D21BE8A47C000C74E7 /* SoftwareSettingViewCell.xib in Resources */,
 				8F85AD7E1C0C43F000890526 /* NotificationCenterViewCell.xib in Resources */,
 				1E827BDB1B941337008F3F08 /* ImageSelectedSmallOn@3x.png in Resources */,
 				8FC75DAF1C0EED8200D1E5F0 /* CommentEditViewController.xib in Resources */,
 				1E943F011B7B23070029FE74 /* AppointmentOrderListViewController.xib in Resources */,
-				1E827B7C1B9064F0008F3F08 /* KTCAnnotationTipDestinationView.xib in Resources */,
 				1E7995601BCBCA4B0099CFF9 /* KTCAreaSelectView.xib in Resources */,
 				1EA8B6DB1B66127600F90688 /* CategorySubLevelCollectionCell.xib in Resources */,
 				1E3D8DA01B4BF4A100275C35 /* ReleaseNotes.txt in Resources */,
@@ -5723,21 +5698,18 @@
 				1EC73BE21B5E4895008B39EA /* HomeViewMoreTitleCell.xib in Resources */,
 				1E15F9991BDF799B000C74E7 /* CommentDetailViewCell.xib in Resources */,
 				1EA8B6A91B633CE100F90688 /* SettlementViewController.xib in Resources */,
-				8F85AD721C0C32D100890526 /* refresh_1-3_female_1.png in Resources */,
 				1E3D8F5E1B4D1DB300275C35 /* OrderDetailViewController.xib in Resources */,
 				1E0B78041B6F429E00A58AD4 /* KTCSearchSortFilterView.xib in Resources */,
 				1E827BD31B941337008F3F08 /* ImageSelectedOn.png in Resources */,
 				1EC4A0B61B58E08800206BB9 /* StoreDetailBottomView.xib in Resources */,
 				8FABCB331C0FCBEA005BF7AD /* FavouriteViewStrategyCell.xib in Resources */,
 				1EC73BA21B5E25A4008B39EA /* HotActivityGroupView.xib in Resources */,
-				8F85AD6E1C0C32D100890526 /* refresh_0-1_female_1.png in Resources */,
 				1E3D8F581B4D1D4D00275C35 /* UserCenterView.xib in Resources */,
 				1EC4A0C51B5914FB00206BB9 /* StoreDetailViewActiveCell.xib in Resources */,
 				1EC73BA41B5E25A4008B39EA /* HotActivityGroupViewCell.xib in Resources */,
 				8F42FAC41C0C20F600E9F62A /* UserRegisterViewController.xib in Resources */,
 				8F85ADC11C0EC05700890526 /* NewSearchResultViewController.xib in Resources */,
 				8F38D1EB1C085F1E0061C329 /* CommentFoundingView.xib in Resources */,
-				8F85AD781C0C32D100890526 /* refresh_4-6_male_1.png in Resources */,
 				1E3D8D0C1B4BF4A100275C35 /* TRViewController.xib in Resources */,
 				1EA8B6C21B638FFE00F90688 /* StoreAppointmentViewController.xib in Resources */,
 				8FA361641C1566B50094A9AA /* loading_empty_baby_girl.png in Resources */,
@@ -5752,9 +5724,9 @@
 				1E3D8F631B4D1DFE00275C35 /* OrderListViewController.xib in Resources */,
 				1E1CFA2D1BD8E1880005653D /* ServiceDetailSegmentCell.xib in Resources */,
 				1E15F97D1BDDD194000C74E7 /* StoreDetailCommentCell.xib in Resources */,
-				8F85AD741C0C32D100890526 /* refresh_1-3_male_1.png in Resources */,
 				1E827BD11B941337008F3F08 /* ImageSelectedOff@2x.png in Resources */,
 				1E943F5E1B7DE67B0029FE74 /* logo_750_1334.png in Resources */,
+				8F1206261C1A622700662E01 /* KTCAnnotationTipConfirmLocationView.xib in Resources */,
 				8F5D8E441C047BCB00632390 /* NewsListTagFilterViewController.xib in Resources */,
 				8FC75DAA1C0EEBCB00D1E5F0 /* CommentEditView.xib in Resources */,
 				1E827BD91B941337008F3F08 /* ImageSelectedSmallOn.png in Resources */,
@@ -5791,7 +5763,6 @@
 				1E943F061B7B231F0029FE74 /* AppointmentOrderDetailViewController.xib in Resources */,
 				1E7994DE1BC615280099CFF9 /* ParentingStrategyDetailViewCell.xib in Resources */,
 				1EC73BF11B5E6785008B39EA /* HomeViewThemeCell.xib in Resources */,
-				8F85AD711C0C32D100890526 /* refresh_0-1_male_2.png in Resources */,
 				1E827BE31B941337008F3F08 /* UIBarButtonItemArrowLeft@2x.png in Resources */,
 				1EFD19421B4E1F9B00767021 /* OrderDetailView.xib in Resources */,
 				1E5CD74D1B4F6A7700D177CB /* ServiceListView.xib in Resources */,
@@ -5805,7 +5776,6 @@
 				1E827CED1B9D318F008F3F08 /* CouponUsableListViewController.xib in Resources */,
 				1E0B7A851B6F67B800A58AD4 /* CouponPrizeShowView.xib in Resources */,
 				1E827BEC1B941337008F3F08 /* VideoOverlay@2x.png in Resources */,
-				8F85AD761C0C32D100890526 /* refresh_4-6_female_1.png in Resources */,
 				1E7995A91BCF48C70099CFF9 /* NewsRecommendCellViewBigImageView.xib in Resources */,
 				1E7995111BC758560099CFF9 /* NewsListViewCell.xib in Resources */,
 				1E943F521B7DDFDF0029FE74 /* loadingBg_750_1334.png in Resources */,
@@ -5939,6 +5909,7 @@
 				1E79955E1BCBCA380099CFF9 /* KTCAreaSelectView.m in Sources */,
 				1E0B7A7D1B6F67B800A58AD4 /* AUIStackView.m in Sources */,
 				1E15F9B01BE1C784000C74E7 /* CommentDetailViewController.m in Sources */,
+				8F1206251C1A622700662E01 /* KTCAnnotationTipConfirmLocationView.m in Sources */,
 				1E827B421B8C47F5008F3F08 /* NewsListViewModel.m in Sources */,
 				1E3D7E7E1B4BD83D00275C35 /* AppDelegate.m in Sources */,
 				1E15F97C1BDDD194000C74E7 /* StoreDetailCommentCell.m in Sources */,
@@ -5977,7 +5948,6 @@
 				1E0B7A911B6F67B800A58AD4 /* GBigADView.m in Sources */,
 				1E0B7AC21B6F67B800A58AD4 /* ICPopTipView.m in Sources */,
 				1E827CAB1B94144E008F3F08 /* UIImageView+HighlightedWebCache.m in Sources */,
-				1E827B711B8F0923008F3F08 /* KTCAnnotationTipConfirmLocationView.m in Sources */,
 				1E79956D1BCD25770099CFF9 /* LoveHouseListView.m in Sources */,
 				1E3D8CDA1B4BF4A100275C35 /* IcsonCity.m in Sources */,
 				1EA8B6D21B66084D00F90688 /* CategoryViewCell.m in Sources */,
@@ -6098,6 +6068,7 @@
 				1E827BAA1B9412C6008F3F08 /* UIImage+MWPhotoBrowser.m in Sources */,
 				8FABCB3C1C0FEA21005BF7AD /* FavouriteServiceItemModel.m in Sources */,
 				1E827B281B8B0568008F3F08 /* ParentingStrategyViewModel.m in Sources */,
+				8F1206271C1A622700662E01 /* KTCAnnotationTipDestinationView.m in Sources */,
 				1E943E941B71E7CD0029FE74 /* GEventHome.m in Sources */,
 				1E943F191B7C9A2C0029FE74 /* HomeViewModel.m in Sources */,
 				1E3D8CE61B4BF4A100275C35 /* IcsonLevel3Category.m in Sources */,
@@ -6278,6 +6249,7 @@
 				1E0B7AA91B6F67B800A58AD4 /* GMessageView.m in Sources */,
 				1E0B77B51B68EE9F00A58AD4 /* LoginItemModel.m in Sources */,
 				1E827CC21B9BDEF1008F3F08 /* CouponFullCutModel.m in Sources */,
+				8F1206291C1A622700662E01 /* KTCAnnotationTipStoreItemView.m in Sources */,
 				1E0B7A9C1B6F67B800A58AD4 /* GCountDownView.m in Sources */,
 				1E827C701B94144E008F3F08 /* DACircularProgressView.m in Sources */,
 				8F42FAC31C0C20F600E9F62A /* UserRegisterViewController.m in Sources */,
@@ -6294,12 +6266,12 @@
 				1E0B78021B6F429100A58AD4 /* KTCSearchSortFilterView.m in Sources */,
 				1E3D8D941B4BF4A100275C35 /* MJRefreshComponent.m in Sources */,
 				1EC73BA11B5E25A4008B39EA /* HotActivityGroupView.m in Sources */,
+				8F12062B1C1A622700662E01 /* KTCAnnotationTipWelfareItemView.m in Sources */,
 				1E3D8F701B4D37CA00275C35 /* OrderListView.m in Sources */,
 				1E3D8DAD1B4BF4A100275C35 /* UIButton+Color.m in Sources */,
 				1E7995361BC7C2DE0099CFF9 /* HomeModel.m in Sources */,
 				1E3D8CDF1B4BF4A100275C35 /* IcsonBaseCategory.m in Sources */,
 				1E8017081BB006D100B6C352 /* HomeViewWholeImageNewsCell.m in Sources */,
-				1E827B7A1B9064E2008F3F08 /* KTCAnnotationTipDestinationView.m in Sources */,
 				1E827B7F1B918637008F3F08 /* AUIImageGridView.m in Sources */,
 				1E3D8D851B4BF4A100275C35 /* ASIDownloadCache.m in Sources */,
 				1E7994EB1BC650B70099CFF9 /* ActivityViewCell.m in Sources */,

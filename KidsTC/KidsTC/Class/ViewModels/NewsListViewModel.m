@@ -261,7 +261,8 @@
                            [NSNumber numberWithInteger:pageIndex], @"page",
                            [NSNumber numberWithInteger:PageSize], @"pageCount",
                            model.identifier, @"tagId",
-                           @"", @"authorId", nil];
+                           @"", @"authorId",
+                           [NSNumber numberWithInteger:model.type], @"population_type", nil];
     __weak NewsListViewModel *weakSelf = self;
     [weakSelf.loadNewsRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [weakSelf loadNewsSucceedWithData:responseData tagIndex:index];
@@ -280,10 +281,12 @@
     }
     
     NSString *tagId = @"0";
+    NSUInteger type = 0;
     if ([self.newsTagItemModels count] > index) {
         //已经有数据的情况
         NewsTagItemModel *model = [self.newsTagItemModels objectAtIndex:index];
         tagId = model.identifier;
+        type = model.type;
     }
     
     NSUInteger pageIndex = [[self.currentPageIndexs objectForKey:[NSString stringWithFormat:@"%lu", (unsigned long)index]] integerValue];
@@ -293,7 +296,8 @@
                            [NSNumber numberWithInteger:pageIndex], @"page",
                            [NSNumber numberWithInteger:PageSize], @"pageCount",
                            model.identifier, @"tagId",
-                           @"", @"authorId", nil];
+                           @"", @"authorId",
+                           [NSNumber numberWithInteger:type], @"population_type", nil];
     __weak NewsListViewModel *weakSelf = self;
     [weakSelf.loadNewsRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [weakSelf loadMoreNewsSucceedWithData:responseData tagIndex:index];

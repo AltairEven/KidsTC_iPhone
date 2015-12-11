@@ -80,9 +80,13 @@
 
 @property (nonatomic, strong) NSDate *appointmentEndDate;
 
-@property (nonatomic, strong) NSArray *appointmentTimes;
+@property (nonatomic, copy) NSString *appointmentTimeDes;
 
 @property (nonatomic, strong) CommonShareObject *shareObject;
+
+@property (nonatomic, assign) BOOL canAppoint;
+
+@property (nonatomic, copy) NSString *appointButtonTitle;
 
 - (void)fillWithRawData:(NSDictionary *)data;
 

@@ -89,6 +89,7 @@ static KTCSearchService *_sharedInstance;
         return;
     }
     NSMutableDictionary *requestParam = [NSMutableDictionary dictionaryWithDictionary:param];
+    NSString *mapAddr = @"";
     if (condition) {
         if ([condition.age.identifier length] > 0) {
             [requestParam setObject:condition.age.identifier forKey:@"a"];
@@ -105,8 +106,14 @@ static KTCSearchService *_sharedInstance;
         if (condition.sortType > 0) {
             [requestParam setObject:[NSString stringWithFormat:@"%d", condition.sortType] forKey:@"st"];
         }
+        if ([condition.coordinateString length] > 0) {
+            mapAddr = condition.coordinateString;
+        }
     }
-    [requestParam setObject:[[GConfig sharedConfig] currentLocationCoordinateString] forKey:@"mapAddr"];
+    if ([mapAddr length] == 0) {
+        mapAddr = [[GConfig sharedConfig] currentLocationCoordinateString];
+    }
+    [requestParam setObject:mapAddr forKey:@"mapaddr"];
     
     __weak KTCSearchService *weakSelf = self;
     [weakSelf.storeSearchRequest startHttpRequestWithParameter:requestParam success:^(HttpRequestClient *client, NSDictionary *responseData) {

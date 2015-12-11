@@ -38,6 +38,9 @@
 - (void)buildSubviews {
     [self.favourateButton setBackgroundColor:[AUITheme theme].globalBGColor forState:UIControlStateNormal];
     [self.commentButton setBackgroundColor:[AUITheme theme].globalBGColor forState:UIControlStateNormal];
+    [self.appointmentButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.appointmentButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    [self.appointmentButton setBackgroundColor:[AUITheme theme].buttonBGColor_Disable forState:UIControlStateDisabled];
 }
 
 - (void)setFavourite:(BOOL)isFavourite {

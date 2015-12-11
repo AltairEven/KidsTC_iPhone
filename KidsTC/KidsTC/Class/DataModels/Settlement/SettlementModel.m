@@ -71,8 +71,9 @@
             self.promotionModel = [[PromotionFullCutModel alloc] initWithRawData:promotionDic];
         }
         self.score = [[data objectForKey:@"scorenum"] integerValue];
-        if (self.price * self.count < self.score * ScoreCoefficient) {
-            self.score = self.price * self.count / ScoreCoefficient;
+        self.canUseScore = self.score;
+        if (self.price * self.count < self.canUseScore * ScoreCoefficient) {
+            self.canUseScore = self.price * self.count / ScoreCoefficient;
         }
         
         _totalPrice = (self.price * self.count) - self.promotionModel.cutAmount - (self.usedScore * ScoreCoefficient);
@@ -102,10 +103,16 @@
         _usedCoupon = nil;
         _totalPrice = (self.price * self.count) - self.promotionModel.cutAmount - (self.usedScore * ScoreCoefficient);
     }
+    self.canUseScore = self.score;
+    if (_totalPrice < self.canUseScore * ScoreCoefficient) {
+        self.canUseScore = _totalPrice / ScoreCoefficient;
+    } else if (self.price * self.count < self.canUseScore * ScoreCoefficient) {
+        self.canUseScore = self.price * self.count / ScoreCoefficient;
+    }
 }
 
 - (void)setUsedScore:(NSUInteger)usedScore {
-    if (self.score >= usedScore) {
+    if (self.canUseScore >= usedScore) {
         _usedScore = usedScore;
     } else {
         _usedScore = 0;
@@ -114,6 +121,12 @@
         _totalPrice = (self.price * self.count) - self.usedCoupon.discount - (_usedScore * ScoreCoefficient);
     } else {
         _totalPrice = (self.price * self.count) - self.promotionModel.cutAmount - (_usedScore * ScoreCoefficient);
+    }
+    self.canUseScore = self.score;
+    if (_totalPrice < self.canUseScore * ScoreCoefficient) {
+        self.canUseScore = _totalPrice / ScoreCoefficient;
+    } else if (self.price * self.count < self.canUseScore * ScoreCoefficient) {
+        self.canUseScore = self.price * self.count / ScoreCoefficient;
     }
 }
 

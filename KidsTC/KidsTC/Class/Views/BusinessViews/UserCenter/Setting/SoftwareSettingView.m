@@ -87,11 +87,6 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
             [cell resetWithMainTitle:@"当前版本" subTitle:self.settingModel.version showArrow:NO];
         }
             break;
-        case SoftwareSettingViewTagShare:
-        {
-            [cell resetWithMainTitle:@"分享给好友" subTitle:nil showArrow:YES];
-        }
-            break;
         case SoftwareSettingViewTagAbout:
         {
             [cell resetWithMainTitle:@"关于我们" subTitle:nil showArrow:YES];
@@ -99,7 +94,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
             break;
         case SoftwareSettingViewTagFeedback:
         {
-            [cell resetWithMainTitle:@"反馈" subTitle:nil showArrow:YES];
+            [cell resetWithMainTitle:@"联系我们" subTitle:nil showArrow:YES];
         }
             break;
         default:
@@ -127,7 +122,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (self.delegate && [self.delegate respondsToSelector:@selector(softwareSettingView:didClickedWithViewTag:)]) {
-        [self.delegate softwareSettingView:self didClickedWithViewTag:(SoftwareSettingViewTag)indexPath.row];
+        [self.delegate softwareSettingView:self didClickedWithViewTag:(SoftwareSettingViewTag)indexPath.section];
     }
 }
 

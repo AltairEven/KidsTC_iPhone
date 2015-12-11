@@ -299,11 +299,18 @@
     if ([[KTCUser currentUser] hasLogin]) {
         [self.bottomView setFavourite:self.viewModel.detailModel.isFavourate];
     }
-    if (self.viewModel.detailModel.stockNumber == 0) {
-        [self.bottomView.buyButton setEnabled:NO];
-    } else {
-        [self.bottomView.buyButton setEnabled:YES];
+    [self.bottomView.buyButton setEnabled:self.viewModel.detailModel.canBuy];
+    NSString *title = self.viewModel.detailModel.buyButtonTitle;
+    if ([title length] == 0) {
+        if (self.viewModel.detailModel.canBuy) {
+            title = @"立即购买";
+        } else {
+            title = @"暂不销售";
+        }
     }
+    [self.bottomView.buyButton setTitle:title forState:UIControlStateNormal];
+    [self.bottomView.buyButton setTitle:title forState:UIControlStateHighlighted];
+    [self.bottomView.buyButton setTitle:title forState:UIControlStateDisabled];
     if ([self.viewModel.detailModel showCountdown]) {
         [self hideCountdown:NO];
         [self startCountDown];

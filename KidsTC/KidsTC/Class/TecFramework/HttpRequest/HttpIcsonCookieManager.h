@@ -9,13 +9,14 @@
 #import <Foundation/Foundation.h>
 
 
-extern NSString *const kHttpIcsonCookieKeyUid;
-extern NSString *const kHttpIcsonCookieKeySkey;
-extern NSString *const kHttpIcsonCookieKeyVersion;
-extern NSString *const kHttpIcsonCookieKeyDeviceId;
-extern NSString *const kHttpIcsonCookieKeyAppSource;
-extern NSString *const kHttpIcsonCookieKeyApp;
-extern NSString *const kHttpIcsonCookieKeyUserRole;
+extern NSString *const kHttpKTCCookieKeyUid;
+extern NSString *const kHttpKTCCookieKeySkey;
+extern NSString *const kHttpKTCCookieKeyVersion;
+extern NSString *const kHttpKTCCookieKeyDeviceId;
+extern NSString *const kHttpKTCCookieKeyAppSource;
+extern NSString *const kHttpKTCCookieKeyApp;
+extern NSString *const kHttpKTCCookieKeyUserRole;
+extern NSString *const kHttpKTCCookieKeyCoordinate;
 
 //AFNetWorking共享NSHTTPCookieStorage中设置的cookie
 @interface HttpIcsonCookieManager : NSObject

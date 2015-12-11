@@ -99,7 +99,7 @@
     if (!self.cancelOrderRequest) {
         self.cancelOrderRequest = [HttpRequestClient clientWithUrlAliasName:@"ORDER_CANCLE_ORDER"];
     }
-    NSDictionary *param = [NSDictionary dictionaryWithObject:self.orderId forKey:@"orderId"];
+    NSDictionary *param = [NSDictionary dictionaryWithObject:self.orderId forKey:@"orderid"];
     __weak OrderDetailViewModel *weakSelf = self;
     [weakSelf.cancelOrderRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [weakSelf cancelOrderSucceed:responseData];

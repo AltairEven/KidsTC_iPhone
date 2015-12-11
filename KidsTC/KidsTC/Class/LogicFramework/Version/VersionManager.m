@@ -49,16 +49,16 @@ static VersionManager *_versionManager = nil;
 {
     if (!self.checkVersionRequest)
     {
-        self.checkVersionRequest = [HttpRequestClient clientWithUrlAliasName:@"URL_CHECK_VERSION_UPDATE"];
+        self.checkVersionRequest = [HttpRequestClient clientWithUrlAliasName:@"APP_UPDATE_VERSION"];
     }
     
-    NSDictionary *param = [NSDictionary dictionaryWithObject:_version forKey:@"version"];
-    
     __weak VersionManager *weakSelf = self;
-    [weakSelf.checkVersionRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
-        
-        success(responseData);
-        
+    [weakSelf.checkVersionRequest startHttpRequestWithParameter:nil success:^(HttpRequestClient *client, NSDictionary *responseData) {
+        if ([[responseData objectForKey:@"Code"] integerValue] != 0) {
+            failure(nil);
+        } else {
+            success(responseData);
+        }
     } failure:^(HttpRequestClient *client, NSError *error) {
         
         failure(error);

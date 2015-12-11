@@ -26,6 +26,17 @@
     self.firstElement = [[HomeThreeImageNewsElement alloc] initWithHomeData:[dataArray objectAtIndex:0]];
     self.secondeElement = [[HomeThreeImageNewsElement alloc] initWithHomeData:[dataArray objectAtIndex:1]];
     self.thirdElement = [[HomeThreeImageNewsElement alloc] initWithHomeData:[dataArray objectAtIndex:2]];
+    NSDictionary *param = [dataArray firstObject];
+    if (param && [param isKindOfClass:[NSDictionary class]]) {
+        self.title = [param objectForKey:@"title"];
+        NSDictionary *articleDic = [param objectForKey:@"articleParam"];
+        if ([articleDic isKindOfClass:[NSDictionary class]]) {
+            self.isHot = [[articleDic objectForKey:@"isHot"] boolValue];
+            self.isRecommend = [[articleDic objectForKey:@"isRecommend"] boolValue];
+            self.viewCount = [[articleDic objectForKey:@"viewTimes"] integerValue];
+            self.commentCount = [[articleDic objectForKey:@"commentCount"] integerValue];
+        }
+    }
 }
 
 

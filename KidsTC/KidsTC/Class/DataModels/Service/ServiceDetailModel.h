@@ -88,6 +88,10 @@
 
 @property (nonatomic, strong) CommonShareObject *shareObject;
 
+@property (nonatomic, assign) BOOL canBuy;
+
+@property (nonatomic, copy) NSString *buyButtonTitle;
+
 - (void)fillWithRawData:(NSDictionary *)data;
 
 - (CGFloat)topCellHeight;

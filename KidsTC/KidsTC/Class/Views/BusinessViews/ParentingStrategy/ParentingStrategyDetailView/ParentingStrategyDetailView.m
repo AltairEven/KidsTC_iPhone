@@ -133,6 +133,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
         cell =  [[[NSBundle mainBundle] loadNibNamed:@"ParentingStrategyDetailViewCell" owner:nil options:nil] objectAtIndex:0];
     }
     cell.indexPath = indexPath;
+    cell.delegate = self;
     [cell configWithDetailCellModel:[self.detailModel.cellModels objectAtIndex:indexPath.section]];
     return cell;
 }

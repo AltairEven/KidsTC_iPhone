@@ -12,7 +12,6 @@
 typedef enum {
     SoftwareSettingViewTagCache,
     SoftwareSettingViewTagVersion,
-    SoftwareSettingViewTagShare,
     SoftwareSettingViewTagAbout,
     SoftwareSettingViewTagFeedback
 }SoftwareSettingViewTag;

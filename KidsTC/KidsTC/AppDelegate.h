@@ -26,7 +26,7 @@
 
 @property (nonatomic, strong) KTCTabBarController *tabbarController;
 
-
+- (void)checkVersion;
 //- (void)exitApplication;
 
 @end

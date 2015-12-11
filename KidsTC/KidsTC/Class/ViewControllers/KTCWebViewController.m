@@ -22,6 +22,7 @@
 #import "MWPhotoBrowser.h"
 #import "KTCImageUploader.h"
 #import "NSString+UrlEncode.h"
+#import "HttpIcsonCookieManager.h"
 
 
 #define Hook_Prefix (@"hook::")
@@ -113,6 +114,8 @@
     }
     
     [self setupRightBarButton:@"" target:self action:@selector(closeWebPage) frontImage:@"navigation_close" andBackImage:@"navigation_close"];
+    
+    [[HttpIcsonCookieManager sharedManager] setIcsonCookieWithName:@"population_type" andValue:[[KTCUser currentUser].userRole userRoleIdentifierString]];
 }
 
 - (void)viewDidUnload
@@ -153,6 +156,8 @@
     if (self.keyboardAdhesiveView) {
         [self.keyboardAdhesiveView destroy];
     }
+    
+    [[HttpIcsonCookieManager sharedManager] deleteCookieWithName:@"population_type"];
 }
 
 - (void)didReceiveMemoryWarning {

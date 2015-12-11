@@ -51,7 +51,8 @@
                            [NSNumber numberWithInteger:LoveHouseLoadType], @"type",
                            [NSNumber numberWithInteger:self.currentPage], @"page",
                            [NSNumber numberWithInteger:PageSize], @"pageCount",
-                           [[GConfig sharedConfig] currentLocationCoordinateString], @"mapAddr", nil];
+                           [NSNumber numberWithDouble:[[GConfig sharedConfig] currentLocation].location.coordinate.latitude], @"latitude",
+                           [NSNumber numberWithDouble:[[GConfig sharedConfig] currentLocation].location.coordinate.longitude], @"longitude", nil];
     __weak LoveHouseListViewModel *weakSelf = self;
     [weakSelf.loadHouseRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [weakSelf loadHouseListSucceed:responseData];
@@ -173,7 +174,8 @@
                            [NSNumber numberWithInteger:LoveHouseLoadType], @"type",
                            [NSNumber numberWithInteger:nextPage], @"page",
                            [NSNumber numberWithInteger:PageSize], @"pageCount",
-                           [[GConfig sharedConfig] currentLocationCoordinateString], @"mapAddr", nil];
+                           [NSNumber numberWithDouble:[[GConfig sharedConfig] currentLocation].location.coordinate.latitude], @"latitude",
+                           [NSNumber numberWithDouble:[[GConfig sharedConfig] currentLocation].location.coordinate.longitude], @"longitude", nil];
     __weak LoveHouseListViewModel *weakSelf = self;
     [weakSelf.loadHouseRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [weakSelf loadMoreHouseListSucceed:responseData];

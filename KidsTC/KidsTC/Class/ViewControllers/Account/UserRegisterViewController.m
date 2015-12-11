@@ -11,7 +11,7 @@
 #import "KTCWebViewController.h"
 
 
-#define KTCProtocalLink (@"www.baidu.com")
+#define KTCProtocalLink (@"http://m.kidstc.com/tools/reg_desc")
 
 @interface UserRegisterViewController () <UITextFieldDelegate>
 

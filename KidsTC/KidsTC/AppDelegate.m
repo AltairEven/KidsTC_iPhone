@@ -126,13 +126,8 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
     application.applicationIconBadgeNumber = 0;
     
     //版本检查更新
-//    __weak AppDelegate *weakSelf = self;
-//    [[VersionManager sharedManager] checkAppVersionWithSuccess:^(NSDictionary *result) {
-//        [weakSelf checkVersionSucceed:result];
-//    } failure:^(NSError *error) {
-//        
-//    }];
-//    
+    [self checkVersion];
+//
 //    //更新三级地址信息
 //    [[AddressManager sharedManager] validateADListDataWithSuccess:^(AddressManager *manager) {
 //        if ([[AddressManager sharedManager] hasValidData]) {
@@ -265,16 +260,17 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
 #pragma mark Version
 
 - (void)checkVersionSucceed:(NSDictionary *)respData {
-    
+    if (!respData || ![respData isKindOfClass:[NSDictionary class]]) {
+        return;
+    }
     //    launchingFlag = YES;
-    BOOL _bNeedUpdate = [[respData objectForKey:@"needUpdate"] boolValue];
+    BOOL _bNeedUpdate = [[respData objectForKey:@"isUpdate"] boolValue];
     BOOL _bMustUpdate = NO;
     if (_bNeedUpdate)
     {
-        _bMustUpdate = [[respData objectForKey:@"mustUpdate"] boolValue];
+        _bMustUpdate = [[respData objectForKey:@"isForceUpdate"] boolValue];
         if (_bMustUpdate)
         {
-            //            [GConfig setForceUpdateInfo:result];
             [self showUpdateAlertViewWithInfo:respData andSource:kVersionForceUpdateAlertViewTag];
         }
         else
@@ -295,9 +291,8 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
 - (void)showUpdateAlertViewWithInfo:(NSDictionary *)info andSource:(int)sourceTag
 {
     BOOL _bMustUpdate = NO;
-    NSString *newVersionName = [info objectForKey:@"versionName"];
-    NSArray *descArr = [info objectForKey:@"desc"];
-    NSString *descStr = [descArr componentsJoinedByString:@"\n"];
+    NSString *newVersionName = [info objectForKey:@"newVersion"];
+    NSString *descStr = [info objectForKey:@"description"];
     _bMustUpdate = [[info objectForKey:@"mustUpdate"] intValue];
     NSString *cancelStr = sourceTag == kVersionForceUpdateAlertViewTag ? @"退出" : @"稍后再说";
     
@@ -317,7 +312,7 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
     }];
     [controller addAction:leftAction];
     [controller addAction:rightAction];
-    [self.tabbarController presentViewController:controller animated:YES completion:nil];
+    [self.window.rootViewController presentViewController:controller animated:YES completion:nil];
 }
 
 
@@ -447,6 +442,15 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
 }
 
 #pragma mark Exit
+
+- (void)checkVersion {
+    __weak AppDelegate *weakSelf = self;
+    [[VersionManager sharedManager] checkAppVersionWithSuccess:^(NSDictionary *result) {
+        [weakSelf checkVersionSucceed:[result objectForKey:@"data"]];
+    } failure:^(NSError *error) {
+        
+    }];
+}
 
 - (void)exitApplication {
     [UIView beginAnimations:@"exitApplication" context:nil];

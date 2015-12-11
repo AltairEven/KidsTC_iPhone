@@ -11,8 +11,8 @@
 
 typedef enum {
     HomeTitleCellTypeNormalTitle = 1,
-    HomeTitleCellTypeCountDownTitle,
     HomeTitleCellTypeMoreTitle,
+    HomeTitleCellTypeCountDownTitle,
     HomeTitleCellTypeCountDownMoreTitle
 }HomeTitleCellType;
 

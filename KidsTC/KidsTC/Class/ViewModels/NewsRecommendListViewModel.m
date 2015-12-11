@@ -120,7 +120,7 @@
         self.loadNewsRequest = [HttpRequestClient clientWithUrlAliasName:@"ARTICLE_GET_RECOMMEND_LIST"];
     }
     [self.loadNewsRequest cancel];
-    NSDictionary *param = [NSDictionary dictionaryWithObject:self.requestTimeDes forKey:@"time"];
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:self.requestTimeDes, @"time", [[KTCUser currentUser].userRole userRoleIdentifierString], @"population_type", nil];
     __weak NewsRecommendListViewModel *weakSelf = self;
     [weakSelf.loadNewsRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [weakSelf loadMoreNewsSucceed:responseData];

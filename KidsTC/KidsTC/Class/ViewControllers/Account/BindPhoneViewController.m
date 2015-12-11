@@ -119,7 +119,7 @@
     }
     
     if (!self.getCodeRequest) {
-        self.getCodeRequest = [HttpRequestClient clientWithUrlAliasName:@"TOOL_SEND_REGISTER_SMS"];
+        self.getCodeRequest = [HttpRequestClient clientWithUrlAliasName:@"TOOL_SEND_SMS"];
     }
     
     NSString *codeKey = [GConfig generateSMSCodeKey];
@@ -127,8 +127,7 @@
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
                            codeKey, @"codeKey",
                            self.phoneField.text, @"mobile",
-                           @"0", @"smsType",
-                           [NSNumber numberWithInteger:SMSValidateTypeRegister], @"validateType", nil];
+                           @"0", @"smsType", nil];
     
     __weak BindPhoneViewController *weakSelf = self;
     [weakSelf.getCodeRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {

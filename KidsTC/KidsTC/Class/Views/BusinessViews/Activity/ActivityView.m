@@ -137,9 +137,6 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(listItemModelsOfActivityView:)]) {
         self.listModels = [self.dataSource listItemModelsOfActivityView:self];
         [self.tableView reloadData];
-        if ([self.listModels count] > 0) {
-            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
-        }
         if (self.noMoreData) {
             [self.tableView.gifFooter noticeNoMoreData];
         } else {

@@ -17,7 +17,7 @@
     StoreAppointmentModel *appointmentModel = [[StoreAppointmentModel alloc] init];
     appointmentModel.storeId = model.storeId;
     appointmentModel.activities = model.activeModelsArray;
-    appointmentModel.appointmentTimeString = @"";
+    appointmentModel.appointmentTimeString = model.appointmentTimeDes;
     return appointmentModel;
 }
 

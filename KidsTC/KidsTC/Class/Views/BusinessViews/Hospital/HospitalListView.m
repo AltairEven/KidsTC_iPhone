@@ -112,8 +112,8 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 }
 
 - (void)didClickedNearbyButtonOnHospitalListViewCell:(HospitalListViewCell *)cell {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(hospitalListView:didClickedGotoButtonAtIndex:)]) {
-        [self.delegate hospitalListView:self didClickedGotoButtonAtIndex:cell.indexPath.row];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(hospitalListView:didClickedNearbyButtonAtIndex:)]) {
+        [self.delegate hospitalListView:self didClickedNearbyButtonAtIndex:cell.indexPath.row];
     }
 }
 

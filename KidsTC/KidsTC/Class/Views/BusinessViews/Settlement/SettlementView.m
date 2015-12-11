@@ -159,7 +159,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
                 [self setCell:self.couponCell enabled:self.model.needPay];
                 return self.couponCell;
             } else {
-                NSString *scoreText = [NSString stringWithFormat:@"%lu", (unsigned long)self.model.score];
+                NSString *scoreText = [NSString stringWithFormat:@"%lu", (unsigned long)self.model.canUseScore];
                 NSString *text = [NSString stringWithFormat:@"共有%@积分可使用", scoreText];
                 if (!self.model.needPay) {
                     text = @"没有可使用的积分";
@@ -385,8 +385,24 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     }
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self endEditing:YES];
+}
+
 
 #pragma mark UITextFieldDelegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    NSUInteger score = self.model.canUseScore + self.model.usedScore;
+    NSString *scoreText = [NSString stringWithFormat:@"%lu", (unsigned long)score];
+    NSString *text = [NSString stringWithFormat:@"共有%@积分可使用", scoreText];
+    if (!self.model.needPay) {
+        text = @"没有可使用的积分";
+    }
+    NSMutableAttributedString *attrText = [[NSMutableAttributedString alloc] initWithString:text];
+    [attrText addAttribute:NSForegroundColorAttributeName value:[UIColor orangeColor] range:NSMakeRange(2,[scoreText length])];
+    [self.totalScoreLabel setAttributedText:attrText];
+}
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     NSUInteger score = [textField.text integerValue];
@@ -401,8 +417,8 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     if (score < 0) {
         [textField setText:@"0"];
         return NO;
-    } else if (score > self.model.score) {
-        [textField setText:[NSString stringWithFormat:@"%lu", (unsigned long)self.model.score]];
+    } else if (score > self.model.canUseScore) {
+        [textField setText:[NSString stringWithFormat:@"%lu", (unsigned long)self.model.canUseScore]];
         return NO;
     } else if (score == 0) {
         return NO;

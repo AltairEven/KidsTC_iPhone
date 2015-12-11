@@ -7,6 +7,10 @@
 //
 
 #import "CouponUsableListViewController.h"
+#import "KTCWebViewController.h"
+
+
+static NSString *const kCouponUseRuleUrlString = @"http://m.kidstc.com/tools/coupon_desc";
 
 @interface CouponUsableListViewController () <CouponUsableListViewDataSource, CouponUsableListViewDelegate>
 
@@ -53,6 +57,7 @@
         }
     }
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    [self setupRightBarButton:@"" target:self action:@selector(didClickedCouponRule) frontImage:@"phone1" andBackImage:@"phone2"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -95,6 +100,15 @@
 
 - (void)couponUsableListView:(CouponUsableListView *)listView didDeselectedCouponAtIndex:(NSUInteger)index {
     self.selectedCoupon = nil;
+}
+
+#pragma mark Private
+
+- (void)didClickedCouponRule {
+    KTCWebViewController *controller = [[KTCWebViewController alloc] init];
+    [controller setWebUrlString:kCouponUseRuleUrlString];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

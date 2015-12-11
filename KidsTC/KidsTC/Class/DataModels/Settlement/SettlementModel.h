@@ -41,6 +41,8 @@
 
 @property (nonatomic, strong) CouponFullCutModel *usedCoupon;
 
+@property (nonatomic, assign) NSUInteger canUseScore;
+
 @property (nonatomic, assign) NSUInteger usedScore;
 
 @property (nonatomic, readonly) CGFloat totalPrice;

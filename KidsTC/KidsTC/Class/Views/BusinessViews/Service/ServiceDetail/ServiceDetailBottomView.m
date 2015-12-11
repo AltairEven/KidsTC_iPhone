@@ -37,6 +37,9 @@
 - (void)buildSubviews {
     [self.buyButton setTitle:@"已售完" forState:UIControlStateDisabled];
     [self.buyButton setTitle:@"立即购买" forState:UIControlStateDisabled];
+    [self.buyButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.buyButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    [self.buyButton setBackgroundColor:[AUITheme theme].buttonBGColor_Disable forState:UIControlStateDisabled];
 }
 
 /*

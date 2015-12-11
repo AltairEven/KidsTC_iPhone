@@ -123,11 +123,12 @@ NSString *const kRouteLineStepsKey = @"kRouteLineStepsKey";
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.mapView viewWillDisappear];
-    self.mapView.delegate = nil;
+//    self.mapView.delegate = nil;
     [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
 - (void)dealloc {
+    [self clearMap];
     if (self.mapView) {
         self.mapView = nil;
     }

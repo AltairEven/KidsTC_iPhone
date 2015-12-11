@@ -228,11 +228,15 @@
     if (self.currentAreaItem) {
         areaId = self.currentAreaItem.identifier;
     }
+    NSString *categoryId = @"0";
+    if (self.currentCategoryItem) {
+        categoryId = self.currentCategoryItem.identifier;
+    }
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
-                           @"", @"category",
+                           categoryId, @"categoryId",
                            [NSNumber numberWithInteger:self.currentPageIndex], @"page",
                            [NSNumber numberWithInteger:PageSize], @"pageCount",
-                           areaId, @"distinct", nil];
+                           areaId, @"districtId", nil];
     
     __weak ActivityViewModel *weakSelf = self;
     [weakSelf.loadActivitiesRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {

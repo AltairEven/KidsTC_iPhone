@@ -64,8 +64,7 @@
         self.loadStoreDetailRequest = [HttpRequestClient clientWithUrlAliasName:@"STORE_GETDETAIL"];
         [self.loadStoreDetailRequest setErrorBlock:self.netErrorBlock];
     }
-    NSString *coordinateString = [GToolUtil stringFromCoordinate:CLLocationCoordinate2DMake(31.241044, 121.456037)];
-//    NSString *coordinateString = [GToolUtil stringFromCoordinate:[[GConfig sharedConfig] currentCoordinate]];
+    NSString *coordinateString = [[GConfig sharedConfig] currentLocationCoordinateString];
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:storeId, @"storeId", coordinateString, @"mapaddr", nil];
     
     __weak StoreDetailViewModel *weakSelf = self;

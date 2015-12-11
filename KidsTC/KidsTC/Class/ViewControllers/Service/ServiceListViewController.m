@@ -17,7 +17,7 @@
 
 @property (weak, nonatomic) IBOutlet ServiceListView *listView;
 
-@property (nonatomic, strong) NSArray *listItemModels;
+@property (nonatomic, strong) NSMutableArray *listItemModels;
 
 @property (nonatomic, strong) KTCSearchServiceCondition *searchCondition;
 
@@ -43,7 +43,7 @@
     }
     self = [super initWithNibName:@"ServiceListViewController" bundle:nil];
     if (self) {
-        self.listItemModels = [NSArray arrayWithArray:models];
+        self.listItemModels = [NSMutableArray arrayWithArray:models];
     }
     return self;
 }
@@ -56,6 +56,7 @@
     if (self) {
         self.searchCondition = condition;
         self.pageIndex = 1;
+        self.listItemModels = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -109,10 +110,10 @@
                            [NSNumber numberWithInteger:PageSize], @"pageSize", nil];
     [[GAlertLoadingView sharedAlertLoadingView] showInView:self.view];
     [[KTCSearchService sharedService] startServiceSearchWithParamDic:param Condition:self.searchCondition success:^(NSDictionary *responseData) {
-        [self loadServiceDataSucceed:responseData];
+        [self loadMoreServiceDataSucceed:responseData];
         [[GAlertLoadingView sharedAlertLoadingView] hide];
     } failure:^(NSError *error) {
-        [self loadServiceDataFailed:error];
+        [self loadMoreServiceDataFailed:error];
         [[GAlertLoadingView sharedAlertLoadingView] hide];
     }];
 }
@@ -120,6 +121,7 @@
 #pragma mark Private methods
 
 - (void)loadServiceDataSucceed:(NSDictionary *)data {
+    [self.listItemModels removeAllObjects];
     [self reloadViewWithData:data];
 }
 
@@ -140,14 +142,12 @@
     NSArray *dataArray = [data objectForKey:@"data"];
     if ([dataArray isKindOfClass:[NSArray class]] && [dataArray count] > 0) {
         [self.listView hideLoadMoreFooter:NO];
-        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
         for (NSDictionary *singleService in dataArray) {
             ServiceListItemModel *model = [[ServiceListItemModel alloc] initWithRawData:singleService];
             if (model) {
-                [tempArray addObject:model];
+                [self.listItemModels addObject:model];
             }
         }
-        self.listItemModels = [NSArray arrayWithArray:tempArray];
         if ([dataArray count] < PageSize) {
             [self.listView noMoreLoad];
             [self.listView hideLoadMoreFooter:YES];

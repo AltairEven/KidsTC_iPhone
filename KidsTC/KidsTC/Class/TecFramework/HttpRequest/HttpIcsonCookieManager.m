@@ -16,13 +16,14 @@
 static HttpIcsonCookieManager *_sharedManager = nil;
 
 
-NSString *const kHttpIcsonCookieKeyUid = @"uid";
-NSString *const kHttpIcsonCookieKeySkey = @"skey";
-NSString *const kHttpIcsonCookieKeyVersion = @"version";
-NSString *const kHttpIcsonCookieKeyDeviceId = @"deviceid";
-NSString *const kHttpIcsonCookieKeyAppSource = @"appsource";
-NSString *const kHttpIcsonCookieKeyApp = @"app";
-NSString *const kHttpIcsonCookieKeyUserRole = @"population_type";
+NSString *const kHttpKTCCookieKeyUid = @"uid";
+NSString *const kHttpKTCCookieKeySkey = @"skey";
+NSString *const kHttpKTCCookieKeyVersion = @"appversion";
+NSString *const kHttpKTCCookieKeyDeviceId = @"deviceid";
+NSString *const kHttpKTCCookieKeyAppSource = @"appsource";
+NSString *const kHttpKTCCookieKeyApp = @"app";
+NSString *const kHttpKTCCookieKeyUserRole = @"population_type";
+NSString *const kHttpKTCCookieKeyCoordinate = @"mapaddr";
 
 @interface HttpIcsonCookieManager ()
 
@@ -61,26 +62,26 @@ NSString *const kHttpIcsonCookieKeyUserRole = @"population_type";
 {
     //组装需要设置的值
     NSMutableArray *cookieArray = [[NSMutableArray alloc] init];
-    NSDictionary *uid = [NSDictionary dictionaryWithObject:[KTCUser currentUser].uid forKey:kHttpIcsonCookieKeyUid];
+    NSDictionary *uid = [NSDictionary dictionaryWithObject:[KTCUser currentUser].uid forKey:kHttpKTCCookieKeyUid];
     [cookieArray addObject:uid];
     
-    NSDictionary *skey = [NSDictionary dictionaryWithObject:[KTCUser currentUser].skey forKey:kHttpIcsonCookieKeySkey];
+    NSDictionary *skey = [NSDictionary dictionaryWithObject:[KTCUser currentUser].skey forKey:kHttpKTCCookieKeySkey];
     [cookieArray addObject:skey];
     
-    NSDictionary *version = [NSDictionary dictionaryWithObject:[GConfig getCurrentAppVersionCode] forKey:kHttpIcsonCookieKeyVersion];
+    NSDictionary *version = [NSDictionary dictionaryWithObject:[GConfig getCurrentAppVersionCode] forKey:kHttpKTCCookieKeyVersion];
     [cookieArray addObject:version];
     
-    NSDictionary *deviceId = [NSDictionary dictionaryWithObject:[[UIDevice currentDevice] uniqueDeviceIdentifier] forKey:kHttpIcsonCookieKeyDeviceId];
+    NSDictionary *deviceId = [NSDictionary dictionaryWithObject:[[UIDevice currentDevice] uniqueDeviceIdentifier] forKey:kHttpKTCCookieKeyDeviceId];
     [cookieArray addObject:deviceId];
     
-    NSDictionary *appSource = [NSDictionary dictionaryWithObject:@"iPhone" forKey:kHttpIcsonCookieKeyAppSource];
+    NSDictionary *appSource = [NSDictionary dictionaryWithObject:@"iPhone" forKey:kHttpKTCCookieKeyAppSource];
     [cookieArray addObject:appSource];
     
-    NSDictionary *app = [NSDictionary dictionaryWithObject:@"1" forKey:kHttpIcsonCookieKeyApp];
+    NSDictionary *app = [NSDictionary dictionaryWithObject:@"1" forKey:kHttpKTCCookieKeyApp];
     [cookieArray addObject:app];
     
-    NSDictionary *userRole = [NSDictionary dictionaryWithObject:[[KTCUser currentUser].userRole userRoleIdentifierString] forKey:kHttpIcsonCookieKeyUserRole];
-    [cookieArray addObject:userRole];
+    NSDictionary *coordinate = [NSDictionary dictionaryWithObject:[[GConfig sharedConfig] currentLocationCoordinateString] forKey:kHttpKTCCookieKeyCoordinate];
+    [cookieArray addObject:coordinate];
     
     //设置cookie
     [self setIcsonCookiesWithNameValueDictionaries:[NSArray arrayWithArray:cookieArray]];

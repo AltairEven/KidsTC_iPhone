@@ -139,7 +139,7 @@
 }
 
 - (void)didClickedClearHistoryButtonOnKTCSearchView:(KTCSearchView *)searchView {
-    
+    [self.viewModel clearSearchHistory];
 }
 
 - (void)didReceiveMemoryWarning {

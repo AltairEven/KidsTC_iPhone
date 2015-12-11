@@ -8,6 +8,10 @@
 
 #import "SoftwareSettingViewController.h"
 #import "SoftwareSettingViewModel.h"
+#import "VersionManager.h"
+#import "KTCWebViewController.h"
+
+static NSString *const kAboutUsUrlString = @"http://m.kidstc.com/tools/about_us";
 
 @interface SoftwareSettingViewController () <SoftwareSettingViewDelegate>
 
@@ -23,6 +27,7 @@
     [super viewDidLoad];
     _navigationTitle = @"设置";
     // Do any additional setup after loading the view from its nib.
+    self.settingView.delegate = self;
     self.viewModel = [[SoftwareSettingViewModel alloc] initWithView:self.settingView];
     [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
 }
@@ -43,22 +48,21 @@
             break;
         case SoftwareSettingViewTagVersion:
         {
-            
-        }
-            break;
-        case SoftwareSettingViewTagShare:
-        {
-            
+            AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            [delegate checkVersion];
         }
             break;
         case SoftwareSettingViewTagAbout:
         {
-            
+            KTCWebViewController *controller = [[KTCWebViewController alloc] init];
+            [controller setWebUrlString:kAboutUsUrlString];
+            [controller setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:controller animated:YES];
         }
             break;
         case SoftwareSettingViewTagFeedback:
         {
-            
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@", kCustomerServicePhoneNumber]]];
         }
             break;
         default:

@@ -303,9 +303,9 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     HomeSectionModel *model = [self.totalSectionModels objectAtIndex:indexPath.section];
-    NSUInteger itemIndex = 0;
+    NSUInteger itemIndex = indexPath.row;
     if (model.hasTitle) {
-        if (indexPath.row == 0) {
+        if (itemIndex == 0) {
             switch (model.titleModel.type) {
                 case HomeTitleCellTypeNormalTitle:
                 {

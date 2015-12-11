@@ -10,6 +10,8 @@
 #import "ParentingStrategyDetailViewModel.h"
 #import "CommentDetailViewController.h"
 #import "CommonShareViewController.h"
+#import "KTCSegueMaster.h"
+#import "KTCMapViewController.h"
 
 @interface ParentingStrategyDetailViewController () <ParentingStrategyDetailViewDelegate>
 
@@ -65,15 +67,25 @@
 }
 
 - (void)parentingStrategyDetailView:(ParentingStrategyDetailView *)detailView didClickedLocationButtonAtIndex:(NSUInteger)index {
-    
+    ParentingStrategyDetailCellModel *model = [self.viewModel.detailModel.cellModels objectAtIndex:index];
+    if (model.location) {
+        KTCMapViewController *controller = [[KTCMapViewController alloc] initWithMapType:KTCMapTypeStoreGuide destination:model.location];
+        [controller setHidesBottomBarWhenPushed:YES];
+        [self.navigationController pushViewController:controller animated:YES];
+    }
 }
 
 - (void)parentingStrategyDetailView:(ParentingStrategyDetailView *)detailView didClickedCommentButtonAtIndex:(NSUInteger)index {
-    
+    ParentingStrategyDetailCellModel *model = [self.viewModel.detailModel.cellModels objectAtIndex:index];
+    CommentDetailViewController *controller = [[CommentDetailViewController alloc] initWithSource:CommentDetailViewSourceStrategyDetail relationType:CommentRelationTypeStrategyDetail headerModel:model];
+    [controller setRelationIdentifier:model.identifier];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)parentingStrategyDetailView:(ParentingStrategyDetailView *)detailView didClickedRelatedInfoButtonAtIndex:(NSUInteger)index {
-    
+    ParentingStrategyDetailCellModel *model = [self.viewModel.detailModel.cellModels objectAtIndex:index];
+    [KTCSegueMaster makeSegueWithModel:model.relatedInfoModel fromController:self];
 }
 
 
@@ -154,6 +166,7 @@
     __weak ParentingStrategyDetailViewController *weakSelf = self;
     [weakSelf.viewModel startUpdateDataWithStrategyIdentifier:self.strategyId Succeed:^(NSDictionary *data) {
         [[GAlertLoadingView sharedAlertLoadingView] hide];
+        [weakSelf.likeButton setHighlighted:weakSelf.viewModel.detailModel.isFavourite];
     } failure:^(NSError *error) {
         [[GAlertLoadingView sharedAlertLoadingView] hide];
     }];

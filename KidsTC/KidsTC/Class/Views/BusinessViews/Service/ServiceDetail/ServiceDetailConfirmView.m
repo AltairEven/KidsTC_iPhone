@@ -97,7 +97,6 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 - (void)setStockNumber:(NSUInteger)stockNumber {
     _stockNumber = stockNumber;
     [self.stockNumberLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)stockNumber]];
-    [self.stepperView setMaxVal:stockNumber andMinVal:1];
 }
 
 - (void)setStoreItemsArray:(NSArray *)storeItemsArray {

@@ -26,6 +26,7 @@
 #import "KTCWebViewController.h"
 #import "KTCBrowseHistoryView.h"
 #import "KTCBrowseHistoryManager.h"
+#import "KTCMapViewController.h"
 
 @interface StoreDetailViewController () <StoreDetailViewDelegate, StoreDetailBottomViewDelegate, KTCActionViewDelegate, KTCBrowseHistoryViewDataSource, KTCBrowseHistoryViewDelegate>
 
@@ -118,7 +119,13 @@
 }
 
 - (void)didClickedAddressOnStoreDetailView:(StoreDetailView *)detailView {
-    NSLog(@"Clicked Address");
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:self.viewModel.detailModel.storeCoordinate.latitude longitude:self.viewModel.detailModel.storeCoordinate.longitude];
+    KTCLocation *destination = [[KTCLocation alloc] initWithLocation:location locationDescription:self.viewModel.detailModel.storeName];
+    if (destination) {
+        KTCMapViewController *controller = [[KTCMapViewController alloc] initWithMapType:KTCMapTypeStoreGuide destination:destination];
+        [controller setHidesBottomBarWhenPushed:YES];
+        [self.navigationController pushViewController:controller animated:YES];
+    }
 }
 
 - (void)didClickedActiveOnStoreDetailView:(StoreDetailView *)detailView atIndex:(NSUInteger)index {
@@ -278,6 +285,18 @@
     if ([[KTCUser currentUser] hasLogin]) {
         [self.bottomView setFavourite:self.viewModel.detailModel.isFavourate];
     }
+    [self.bottomView.appointmentButton setEnabled:self.viewModel.detailModel.canAppoint];
+    NSString *title = self.viewModel.detailModel.appointButtonTitle;
+    if ([title length] == 0) {
+        if (self.viewModel.detailModel.canAppoint) {
+            title = @"预约门店";
+        } else {
+            title = @"暂停预约";
+        }
+    }
+    [self.bottomView.appointmentButton setTitle:title forState:UIControlStateNormal];
+    [self.bottomView.appointmentButton setTitle:title forState:UIControlStateHighlighted];
+    [self.bottomView.appointmentButton setTitle:title forState:UIControlStateDisabled];
 }
 
 - (void)buildRightBarButtons {

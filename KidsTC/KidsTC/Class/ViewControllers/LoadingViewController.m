@@ -76,22 +76,22 @@ static NSUInteger leftTime = 2;
     switch (height) {
         case 960:
         {
-            centerYPosition = 239.901;
+            centerYPosition = 250;
         }
             break;
         case 1136:
         {
-            centerYPosition = 384.956;
+            centerYPosition = 350;
         }
             break;
         case 1334:
         {
-            centerYPosition = 453.359;
+            centerYPosition = 400;
         }
             break;
         case 1472:
         {
-            centerYPosition = 500.258;
+            centerYPosition = 400;
         }
             break;
         default:

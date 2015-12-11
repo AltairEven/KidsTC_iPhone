@@ -173,7 +173,7 @@
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
                            [NSNumber numberWithInteger:self.currentSortType], @"orderByType",
                            [NSNumber numberWithInteger:nextPage], @"page",
-                           [NSNumber numberWithInteger:PageSize], @"pagecount", nil];
+                           [NSNumber numberWithInteger:PageSize], @"pageCount", nil];
     __weak ParentingStrategyViewModel *weakSelf = self;
     [weakSelf.loadStrategriesRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [weakSelf loadMoreStrategyListSucceed:responseData];

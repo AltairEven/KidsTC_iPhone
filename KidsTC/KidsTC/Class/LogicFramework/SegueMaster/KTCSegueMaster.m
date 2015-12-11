@@ -16,6 +16,8 @@
 #import "ParentingStrategyViewController.h"
 #import "ServiceListViewController.h"
 #import "StoreListViewController.h"
+#import "ServiceDetailViewController.h"
+#import "StoreDetailViewController.h"
 
 @implementation KTCSegueMaster
 
@@ -90,6 +92,32 @@
         {
             KTCSearchStoreCondition *condition = [KTCSearchStoreCondition conditionFromRawData:model.segueParam];
             StoreListViewController *controller = [[StoreListViewController alloc] initWithSearchCondition:condition];
+            [controller setHidesBottomBarWhenPushed:YES];
+            toController = controller;
+        }
+            break;
+        case HomeSegueDestinationServiceDetail:
+        {
+            NSString *serviceId = @"";
+            NSString *channelId = @"";
+            if ([model.segueParam objectForKey:@"pid"]) {
+                serviceId = [NSString stringWithFormat:@"%@", [model.segueParam objectForKey:@"pid"]];
+            }
+            if ([model.segueParam objectForKey:@"cid"]) {
+                channelId = [NSString stringWithFormat:@"%@", [model.segueParam objectForKey:@"cid"]];
+            }
+            ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithServiceId:serviceId channelId:channelId];
+            [controller setHidesBottomBarWhenPushed:YES];
+            toController = controller;
+        }
+            break;
+        case HomeSegueDestinationStoreDetail:
+        {
+            NSString *storeId = @"";
+            if ([model.segueParam objectForKey:@"sid"]) {
+                storeId = [model.segueParam objectForKey:@"sid"];
+            }
+            StoreDetailViewController *controller = [[StoreDetailViewController alloc] initWithStoreId:storeId];
             [controller setHidesBottomBarWhenPushed:YES];
             toController = controller;
         }

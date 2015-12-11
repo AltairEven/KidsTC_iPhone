@@ -35,6 +35,8 @@
 }
 
 - (void)setListItemModel:(NewsRecommendListModel *)listItemModel {
+    [self updateConstraintsIfNeeded];
+    [self layoutIfNeeded];
     _listItemModel = listItemModel;
     [self.timeLabel setText:listItemModel.timeDescription];
     [self.cellView setItemModels:listItemModel.cellModelsArray];

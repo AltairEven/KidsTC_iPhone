@@ -231,6 +231,9 @@
 }
 
 - (void)loadServiceDataFailed:(NSError *)error {
+    [self.view endRefreshWithSearchType:KTCSearchTypeService];
+    [self.serviceResultArray removeAllObjects];
+    [self reloadServiceWithData:nil];
     switch (error.code) {
         case -999:
         {
@@ -247,12 +250,9 @@
             break;
         default:
         {
-            [self.serviceResultArray removeAllObjects];
-            [self reloadServiceWithData:nil];
         }
             break;
     }
-    [self.view endRefreshWithSearchType:KTCSearchTypeService];
 }
 
 - (void)loadMoreServiceDataSucceed:(NSDictionary *)data {
@@ -262,6 +262,7 @@
 }
 
 - (void)loadMoreServiceDataFailed:(NSError *)error {
+    [self.view endLoadMoreWithSearchType:KTCSearchTypeService];
     switch (error.code) {
         case -999:
         {
@@ -279,7 +280,6 @@
         default:
             break;
     }
-    [self.view endLoadMoreWithSearchType:KTCSearchTypeService];
 }
 
 - (void)loadStoreDataSucceed:(NSDictionary *)data {
@@ -289,6 +289,9 @@
 }
 
 - (void)loadStoreDataFailed:(NSError *)error {
+    [self.view endRefreshWithSearchType:KTCSearchTypeStore];
+    [self.storeResultArray removeAllObjects];
+    [self reloadStoreWithData:nil];
     switch (error.code) {
         case -999:
         {
@@ -304,12 +307,9 @@
             break;
         default:
         {
-            [self.storeResultArray removeAllObjects];
-            [self reloadStoreWithData:nil];
         }
             break;
     }
-    [self.view endRefreshWithSearchType:KTCSearchTypeStore];
 }
 
 - (void)loadMoreStoreDataSucceed:(NSDictionary *)data {
@@ -415,7 +415,8 @@
             NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
                                    [NSNumber numberWithInteger:self.searchType], @"type",
                                    [NSNumber numberWithInteger:self.currentStorePage], @"page",
-                                   [NSNumber numberWithInteger:[self.view storeListPageSize]], @"pageSize", nil];
+                                   [NSNumber numberWithInteger:[self.view storeListPageSize]], @"pageSize",
+                                   [[GConfig sharedConfig] currentLocationCoordinateString], @"mapaddr", nil];
             [[GAlertLoadingView sharedAlertLoadingView] showInView:self.view.listBG];
             [[KTCSearchService sharedService] startStoreSearchWithParamDic:param Condition:self.searchStoreCondition success:^(NSDictionary *responseData) {
                 [self loadStoreDataSucceed:responseData];
@@ -453,7 +454,8 @@
             NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
                                    [NSNumber numberWithInteger:self.searchType], @"type",
                                    [NSNumber numberWithInteger:nextPage], @"page",
-                                   [NSNumber numberWithInteger:[self.view storeListPageSize]], @"pageSize", nil];
+                                   [NSNumber numberWithInteger:[self.view storeListPageSize]], @"pageSize",
+                                   [[GConfig sharedConfig] currentLocationCoordinateString], @"mapaddr", nil];
             [[KTCSearchService sharedService] startStoreSearchWithParamDic:param Condition:self.searchStoreCondition success:^(NSDictionary *responseData) {
                 [self loadMoreStoreDataSucceed:responseData];
             } failure:^(NSError *error) {
