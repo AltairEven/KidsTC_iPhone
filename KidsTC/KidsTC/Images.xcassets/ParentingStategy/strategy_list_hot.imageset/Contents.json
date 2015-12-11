@@ -2,17 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "idiom" : "universal",
-      "filename" : "icon_stgy_tag_pink.png",
-      "scale" : "2x"
-    },
-    {
-      "idiom" : "universal",
-      "filename" : "icon_stgy_tag_pink-1.png",
-      "scale" : "3x"
+      "filename" : "strategy_hot.pdf"
     }
   ],
   "info" : {

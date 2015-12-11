@@ -61,10 +61,15 @@
 #pragma mark ParentingStrategyFilterViewDelegate
 
 - (void)didClickedConfirmButtonOnParentingStrategyFilterView:(ParentingStrategyFilterView *)filterView withSelectedSortType:(ParentingStrategySortType)type selectedAreaIndex:(NSUInteger)index {
-    if (self.viewModel.currentSortType != type || self.viewModel.currentAreaIndex != index) {
+    if (self.viewModel.currentSortType != type/* || self.viewModel.currentAreaIndex != index*/) {
         [self.viewModel setCurrentSortType:type];
         [self.viewModel setCurrentAreaIndex:index];
-        [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
+        [[GAlertLoadingView sharedAlertLoadingView] showInView:self.view];
+        [self.viewModel startUpdateDataWithSucceed:^(NSDictionary *data) {
+            [[GAlertLoadingView sharedAlertLoadingView] hide];
+        } failure:^(NSError *error) {
+            [[GAlertLoadingView sharedAlertLoadingView] hide];
+        }];
     }
 }
 

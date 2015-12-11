@@ -311,8 +311,8 @@
     UIButton *historyButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [historyButton setFrame:CGRectMake(xPosition, 0, buttonWidth, buttonHeight)];
     [historyButton setBackgroundColor:[UIColor clearColor]];
-    [historyButton setImage:[UIImage imageNamed:@"navigation_sort"] forState:UIControlStateNormal];
-    [historyButton setImage:[UIImage imageNamed:@"navigation_sort"] forState:UIControlStateHighlighted];
+    [historyButton setImage:[UIImage imageNamed:@"navigation_time"] forState:UIControlStateNormal];
+    [historyButton setImage:[UIImage imageNamed:@"navigation_time"] forState:UIControlStateHighlighted];
     [historyButton addTarget:self action:@selector(showHistoryView) forControlEvents:UIControlEventTouchUpInside];
     [bgView addSubview:historyButton];
     

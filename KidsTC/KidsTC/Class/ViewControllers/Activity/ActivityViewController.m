@@ -44,7 +44,7 @@
     self.viewModel = [[ActivityViewModel alloc] initWithView:self.activityView];
     [self.activityView startRefresh];
     
-    [self setupRightBarButton:nil target:self action:@selector(didClickedFilterButton) frontImage:@"navigation_sort" andBackImage:@"navigation_sort"];
+    [self setupRightBarButton:nil target:self action:@selector(didClickedFilterButton) frontImage:@"navigation_filter" andBackImage:@"navigation_filter"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -94,6 +94,7 @@
 #pragma mark Private methods
 
 - (void)didClickedFilterButton {
+    [[GAlertLoadingView sharedAlertLoadingView] hide];
     if (!self.filterView) {
         self.filterView = [[ActivityFilterView alloc] init];
         self.filterView.delegate = self;
