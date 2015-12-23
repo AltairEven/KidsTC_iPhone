@@ -1,25 +1,25 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "874cb6b9-aa78-46bd-8cb9-aa9ec5a20be8++4974",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "c55e3cf2-8d15-4dcb-bf86-120f0d0b3392++1037",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
-    "874cb6b9-aa78-46bd-8cb9-aa9ec5a20be8++4974" : {
+    "c55e3cf2-8d15-4dcb-bf86-120f0d0b3392++1037" : {
 
     }
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "874cb6b9-aa78-46bd-8cb9-aa9ec5a20be8++4974" : 0
+    "c55e3cf2-8d15-4dcb-bf86-120f0d0b3392++1037" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "B1DE75E6-D3E0-4F3D-B5DC-9E1BD87FD6AB",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "874cb6b9-aa78-46bd-8cb9-aa9ec5a20be8++4974" : "KidsTC_SVN\/"
+    "c55e3cf2-8d15-4dcb-bf86-120f0d0b3392++1037" : "iPhoneKidsTC\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "KidsTC",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
-  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "branches\/KidsTC_1.0.0\/KidsTC\/KidsTC.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "trunk\/KidsTC\/KidsTC.xcodeproj",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
     {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/10.9.214.112",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/192.168.91.90",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "874cb6b9-aa78-46bd-8cb9-aa9ec5a20be8++4974"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "c55e3cf2-8d15-4dcb-bf86-120f0d0b3392++1037"
     }
   ]
 }
