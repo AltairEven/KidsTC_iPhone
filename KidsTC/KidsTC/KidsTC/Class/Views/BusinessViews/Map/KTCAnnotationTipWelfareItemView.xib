@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="4TP-mA-MA6" customClass="KTCAnnotationTipWelfareItemView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PBx-sb-nwj" userLabel="InfoBGView">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="570"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QAT-6A-4QE">
+                            <rect key="frame" x="5" y="250" width="505" height="16"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wlc-11-pqG">
+                            <rect key="frame" x="5" y="306.5" width="505" height="13.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XCM-aY-fPL">
+                            <rect key="frame" x="515" y="245" width="80" height="80"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="80" id="XKi-6z-huQ"/>
+                                <constraint firstAttribute="height" constant="80" id="rEK-TD-qHd"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="XCM-aY-fPL" firstAttribute="centerY" secondItem="PBx-sb-nwj" secondAttribute="centerY" id="12W-sz-4fE"/>
+                        <constraint firstItem="QAT-6A-4QE" firstAttribute="top" secondItem="XCM-aY-fPL" secondAttribute="top" constant="5" id="JCy-ty-XmP"/>
+                        <constraint firstItem="XCM-aY-fPL" firstAttribute="leading" secondItem="QAT-6A-4QE" secondAttribute="trailing" constant="5" id="L0l-9R-LJZ"/>
+                        <constraint firstItem="Wlc-11-pqG" firstAttribute="leading" secondItem="PBx-sb-nwj" secondAttribute="leading" constant="5" id="Ral-P3-0Fh"/>
+                        <constraint firstItem="Wlc-11-pqG" firstAttribute="bottom" secondItem="XCM-aY-fPL" secondAttribute="bottom" constant="-5" id="ZFJ-Em-gYU"/>
+                        <constraint firstAttribute="trailing" secondItem="XCM-aY-fPL" secondAttribute="trailing" constant="5" id="nXJ-5T-82M"/>
+                        <constraint firstItem="QAT-6A-4QE" firstAttribute="leading" secondItem="PBx-sb-nwj" secondAttribute="leading" constant="5" id="ofa-Zf-FRi"/>
+                        <constraint firstItem="XCM-aY-fPL" firstAttribute="leading" secondItem="Wlc-11-pqG" secondAttribute="trailing" constant="5" id="sVR-Zi-ur5"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="voV-ZI-Eqx" userLabel="actionBGView">
+                    <rect key="frame" x="0.0" y="570" width="600" height="30"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="69a-jh-frd">
+                            <rect key="frame" x="10" y="1" width="60" height="28"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="1ns-48-WDH"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <state key="normal" title="前往"/>
+                            <connections>
+                                <action selector="didClickedGotoButton:" destination="4TP-mA-MA6" eventType="touchUpInside" id="YzA-pN-eN0"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dFA-zA-RSO">
+                            <rect key="frame" x="530" y="1" width="60" height="28"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="2vs-s3-lZZ"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <state key="normal" title="附近商户"/>
+                            <connections>
+                                <action selector="didClickedGoDetailButton:" destination="4TP-mA-MA6" eventType="touchUpInside" id="RTX-QK-sQu"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="dFA-zA-RSO" secondAttribute="trailing" constant="10" id="288-bM-xVe"/>
+                        <constraint firstAttribute="height" constant="30" id="CdL-fh-0Zw"/>
+                        <constraint firstItem="dFA-zA-RSO" firstAttribute="centerY" secondItem="voV-ZI-Eqx" secondAttribute="centerY" id="a9H-Ae-UDJ"/>
+                        <constraint firstItem="69a-jh-frd" firstAttribute="leading" secondItem="voV-ZI-Eqx" secondAttribute="leading" constant="10" id="uaF-kE-yKv"/>
+                        <constraint firstItem="69a-jh-frd" firstAttribute="centerY" secondItem="voV-ZI-Eqx" secondAttribute="centerY" id="ukD-IA-KdW"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="PBx-sb-nwj" firstAttribute="leading" secondItem="4TP-mA-MA6" secondAttribute="leading" id="95t-ut-OvR"/>
+                <constraint firstAttribute="trailing" secondItem="PBx-sb-nwj" secondAttribute="trailing" id="GUR-fP-FJT"/>
+                <constraint firstAttribute="trailing" secondItem="voV-ZI-Eqx" secondAttribute="trailing" id="Ka0-yb-UgD"/>
+                <constraint firstItem="PBx-sb-nwj" firstAttribute="top" secondItem="4TP-mA-MA6" secondAttribute="top" id="Nao-nW-b99"/>
+                <constraint firstItem="voV-ZI-Eqx" firstAttribute="leading" secondItem="4TP-mA-MA6" secondAttribute="leading" id="Ptb-t0-CuT"/>
+                <constraint firstAttribute="bottom" secondItem="voV-ZI-Eqx" secondAttribute="bottom" id="UZN-gR-U6g"/>
+                <constraint firstItem="voV-ZI-Eqx" firstAttribute="top" secondItem="PBx-sb-nwj" secondAttribute="bottom" id="hKs-WC-zJV"/>
+            </constraints>
+            <connections>
+                <outlet property="descriptionLabel" destination="Wlc-11-pqG" id="bdW-P8-Qwo"/>
+                <outlet property="gotoButton" destination="69a-jh-frd" id="5Ls-FJ-Quy"/>
+                <outlet property="imageView" destination="XCM-aY-fPL" id="OlY-91-B3m"/>
+                <outlet property="nameLabel" destination="QAT-6A-4QE" id="Y6f-92-9xS"/>
+                <outlet property="nearbyButton" destination="dFA-zA-RSO" id="7FK-1u-qCy"/>
+            </connections>
+        </view>
+    </objects>
+</document>
