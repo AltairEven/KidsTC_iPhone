@@ -16,15 +16,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "KidsTC/Class/LogicFramework/Push/KTCPushNotificationService.m"
-            timestampString = "471147962.268844"
+            timestampString = "471649007.275629"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
             landmarkName = "-handleRegisterDeviceFailure:"
             landmarkType = "5">
          </BreakpointContent>
@@ -67,13 +67,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "KidsTC/Class/LogicFramework/Push/KTCPushNotificationService.m"
-            timestampString = "471147962.268844"
+            filePath = "KidsTC/Class/ViewModels/UserCenterViewModel.m"
+            timestampString = "471652402.049168"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
-            landmarkName = "-handleApplication:withReceivedNotification:"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "-loadUserCenterInfoFailed:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -83,77 +83,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "KidsTC/Class/LogicFramework/Push/KTCPushNotificationService.m"
-            timestampString = "471147962.268844"
+            filePath = "KidsTC/Class/Views/BusinessViews/HomeView/Cells/HomeViewCountDownTitleCell.m"
+            timestampString = "471666206.779719"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
-            landmarkName = "-dealRemoteNotification:appState:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KidsTC/Class/LogicFramework/Push/KTCPushNotificationService.m"
-            timestampString = "471147962.268844"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
-            landmarkName = "-bindAccount:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KidsTC/Class/LogicFramework/Push/KTCPushNotificationService.m"
-            timestampString = "471147962.268844"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
-            landmarkName = "-bindAccount:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KidsTC/Class/LogicFramework/Push/KTCPushNotificationService.m"
-            timestampString = "471147962.268844"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
-            landmarkName = "-bindAccount:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KidsTC/Class/LogicFramework/Push/KTCPushNotificationService.m"
-            timestampString = "471147962.268844"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "-launchServiceWithOption:"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "-setLeftTime:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -163,13 +99,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "KidsTC/Class/ViewControllers/Service/ServiceListViewController.m"
-            timestampString = "471547934.805412"
+            filePath = "KidsTC/Class/Views/BusinessViews/HomeView/Cells/HomeViewCountDownTitleCell.m"
+            timestampString = "471666220.483154"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
-            landmarkName = "-reloadViewWithData:"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "-stopCountDown"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -229,7 +229,7 @@
         //多个
         [data enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
             IcsonCategoryCondition *condition = [IcsonCategoryCondition conditionInstance];
-            [condition setValue:(NSString *)obj forKey:ICKEY_CONDITIONITEM];
+            [condition setValue:[NSString stringWithFormat:@"%@", obj] forKey:ICKEY_CONDITIONITEM];
             [condition setValue:key forKey:ICKEY_CONDITIONKEY];
             [condition setValue:category forKey:ICKEY_CONDITIONCATEGORY];
             [conditionSet addObject:condition];

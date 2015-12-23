@@ -26,6 +26,7 @@ static NSString *const kAboutUsUrlString = @"http://m.kidstc.com/tools/about_us"
 - (void)viewDidLoad {
     [super viewDidLoad];
     _navigationTitle = @"设置";
+    _pageIdentifier = @"pv_acct_syssetting";
     // Do any additional setup after loading the view from its nib.
     self.settingView.delegate = self;
     self.viewModel = [[SoftwareSettingViewModel alloc] initWithView:self.settingView];

@@ -810,6 +810,8 @@
 		8F6513961BFC96B9003BE006 /* KTCActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6513951BFC96B9003BE006 /* KTCActionView.m */; };
 		8F65D9D51C10335D007CA5BC /* KTCBrowseHistoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F65D9D41C10335D007CA5BC /* KTCBrowseHistoryManager.m */; };
 		8F70F9F01C00749600A175F0 /* AlipayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F70F9EF1C00749600A175F0 /* AlipayManager.m */; };
+		8F7A574E1C1D66B500BD9497 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F7A574D1C1D66B500BD9497 /* GameKit.framework */; };
+		8F7A57501C1D66BA00BD9497 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F7A574F1C1D66BA00BD9497 /* StoreKit.framework */; };
 		8F7E44F91C09D616001EF3B5 /* OrderRefundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7E44F81C09D616001EF3B5 /* OrderRefundView.m */; };
 		8F7E44FB1C09D62C001EF3B5 /* OrderRefundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F7E44FA1C09D62C001EF3B5 /* OrderRefundView.xib */; };
 		8F7E44FE1C09DA66001EF3B5 /* OrderRefundModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7E44FD1C09DA66001EF3B5 /* OrderRefundModel.m */; };
@@ -2284,6 +2286,7 @@
 		8F1206221C1A622700662E01 /* KTCAnnotationTipWelfareItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCAnnotationTipWelfareItemView.h; sourceTree = "<group>"; };
 		8F1206231C1A622700662E01 /* KTCAnnotationTipWelfareItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCAnnotationTipWelfareItemView.m; sourceTree = "<group>"; };
 		8F1206241C1A622700662E01 /* KTCAnnotationTipWelfareItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTCAnnotationTipWelfareItemView.xib; sourceTree = "<group>"; };
+		8F205F7D1C1BC67E00A74386 /* MTAFeedback.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTAFeedback.h; sourceTree = "<group>"; };
 		8F2C55B91BFF167B00C2B6BF /* CommonShareService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonShareService.h; sourceTree = "<group>"; };
 		8F2C55BA1BFF167B00C2B6BF /* CommonShareService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonShareService.m; sourceTree = "<group>"; };
 		8F38D1E71C085F080061C329 /* CommentFoundingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentFoundingView.h; sourceTree = "<group>"; };
@@ -2314,6 +2317,8 @@
 		8F65D9D41C10335D007CA5BC /* KTCBrowseHistoryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCBrowseHistoryManager.m; sourceTree = "<group>"; };
 		8F70F9EE1C00749600A175F0 /* AlipayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlipayManager.h; sourceTree = "<group>"; };
 		8F70F9EF1C00749600A175F0 /* AlipayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlipayManager.m; sourceTree = "<group>"; };
+		8F7A574D1C1D66B500BD9497 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		8F7A574F1C1D66BA00BD9497 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		8F7E44F71C09D616001EF3B5 /* OrderRefundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderRefundView.h; sourceTree = "<group>"; };
 		8F7E44F81C09D616001EF3B5 /* OrderRefundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderRefundView.m; sourceTree = "<group>"; };
 		8F7E44FA1C09D62C001EF3B5 /* OrderRefundView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderRefundView.xib; sourceTree = "<group>"; };
@@ -2474,6 +2479,7 @@
 				8F85AD941C0C936800890526 /* libXG-SDK.a in Frameworks */,
 				1E8CBBBB1BDA365000F78828 /* libstdc++.6.0.9.tbd in Frameworks */,
 				1E8CBBB71BDA355F00F78828 /* libiconv.tbd in Frameworks */,
+				8F7A574E1C1D66B500BD9497 /* GameKit.framework in Frameworks */,
 				1E8CBBB31BDA353B00F78828 /* libz.tbd in Frameworks */,
 				1E943F631B7F1F520029FE74 /* CoreLocation.framework in Frameworks */,
 				1E3D8EF91B4C021600275C35 /* SystemConfiguration.framework in Frameworks */,
@@ -2494,6 +2500,7 @@
 				1E8CBBAB1BDA2F0100F78828 /* BaiduMapAPI_Base.framework in Frameworks */,
 				1E8CBBB01BDA2F0100F78828 /* BaiduMapAPI_Search.framework in Frameworks */,
 				1E8CBBB11BDA2F0100F78828 /* BaiduMapAPI_Utils.framework in Frameworks */,
+				8F7A57501C1D66BA00BD9497 /* StoreKit.framework in Frameworks */,
 				1E3D8DA41B4BF4A100275C35 /* libWeChatSDK.a in Frameworks */,
 				1E8CBBAC1BDA2F0100F78828 /* BaiduMapAPI_Cloud.framework in Frameworks */,
 			);
@@ -3668,6 +3675,7 @@
 				1E3D89D51B4BF4A000275C35 /* libmtasdk.a */,
 				1E3D89D61B4BF4A000275C35 /* MTA.h */,
 				1E3D89D71B4BF4A000275C35 /* MTAConfig.h */,
+				8F205F7D1C1BC67E00A74386 /* MTAFeedback.h */,
 				1E3D89D81B4BF4A000275C35 /* ReleaseNotes.txt */,
 			);
 			path = sdk;
@@ -3740,6 +3748,8 @@
 		1E3D8EE11B4C016300275C35 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8F7A574F1C1D66BA00BD9497 /* StoreKit.framework */,
+				8F7A574D1C1D66B500BD9497 /* GameKit.framework */,
 				8F98D2561C0010B500C1388A /* CoreMotion.framework */,
 				1EFFAE0D1BEB793E001D4245 /* ImageIO.framework */,
 				1E8CBBBC1BDA366900F78828 /* libsqlite3.0.tbd */,
@@ -5496,6 +5506,18 @@
 				TargetAttributes = {
 					1E3D7E741B4BD83D00275C35 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = F8C2RFLJQX;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					1E3D7E8D1B4BD83D00275C35 = {
 						CreatedOnToolsVersion = 6.4;
@@ -6449,7 +6471,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Tongcheng Information Technology Co., Ltd. (F8C2RFLJQX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Tongcheng Information Technology Co., Ltd. (F8C2RFLJQX)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -6470,9 +6493,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "9c12f2ec-516b-4672-8913-1762d50ce75c";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -6494,7 +6518,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Tongcheng Information Technology Co., Ltd. (F8C2RFLJQX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Tongcheng Information Technology Co., Ltd. (F8C2RFLJQX)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -6509,8 +6534,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "9c12f2ec-516b-4672-8913-1762d50ce75c";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -6521,8 +6547,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: YE QIAN (L4HESQKF9M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: YE QIAN (L4HESQKF9M)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Tongcheng Information Technology Co., Ltd. (F8C2RFLJQX)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6549,8 +6575,9 @@
 					"-ObjC",
 					"-licucore",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kidstc.iPhonKidsTC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9dee74e9-8f77-4d8d-a578-0d1ba1362a14";
+				PROVISIONING_PROFILE = "9c12f2ec-516b-4672-8913-1762d50ce75c";
 			};
 			name = Debug;
 		};
@@ -6559,8 +6586,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: YE QIAN (L4HESQKF9M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: YE QIAN (L4HESQKF9M)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Tongcheng Information Technology Co., Ltd. (F8C2RFLJQX)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6586,8 +6613,9 @@
 					"-ObjC",
 					"-licucore",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.kidstc.iPhonKidsTC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9dee74e9-8f77-4d8d-a578-0d1ba1362a14";
+				PROVISIONING_PROFILE = "9c12f2ec-516b-4672-8913-1762d50ce75c";
 			};
 			name = Release;
 		};

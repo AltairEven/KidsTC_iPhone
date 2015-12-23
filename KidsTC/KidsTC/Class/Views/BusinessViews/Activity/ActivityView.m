@@ -111,7 +111,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (self.delegate && [self.delegate respondsToSelector:@selector(activityView:didSelectedItemAtIndex:)]) {
-        [self.delegate activityView:self didSelectedItemAtIndex:indexPath.row];
+        [self.delegate activityView:self didSelectedItemAtIndex:indexPath.section];
     }
 }
 

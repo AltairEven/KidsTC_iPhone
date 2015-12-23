@@ -11,8 +11,10 @@
 #import "CommentListItemModel.h"
 #import "Insurance.h"
 #import "CommonShareObject.h"
+#import "KTCCommentManager.h"
 
 @class ServiceDetailNoticeItem;
+@class ServiceDetailPhoneItem;
 
 @interface ServiceDetailModel : NSObject
 
@@ -40,6 +42,8 @@
 
 @property (nonatomic, assign) NSTimeInterval countdownTime;
 
+@property (nonatomic, assign) CommentRelationType relationType;
+
 @property (nonatomic, assign) BOOL showCountdown;
 
 @property (nonatomic, strong) NSArray *supportedInsurances;
@@ -58,7 +62,7 @@
 
 @property (nonatomic, assign) BOOL isFavourate;
 
-@property (nonatomic, copy) NSString *phoneNumber;
+@property (nonatomic, strong, readonly) NSArray *phoneItems;
 
 @property (nonatomic, copy) NSString *introductionUrlString;
 
@@ -121,5 +125,17 @@
 - (instancetype)initWithRawData:(NSDictionary *)data;
 
 - (CGFloat)itemHeight;
+
+@end
+
+@interface ServiceDetailPhoneItem : NSObject
+
+@property (nonatomic, strong) NSArray *phoneNumbers;
+
+@property (nonatomic, copy) NSString *title;
+
+- (instancetype)initWithTitle:(NSString *)title andPhoneNumbers:(NSArray *)numbers;
+
+- (instancetype)initWithTitle:(NSString *)title andPhoneNumberString:(NSString *)string;
 
 @end

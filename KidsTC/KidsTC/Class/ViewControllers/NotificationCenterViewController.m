@@ -24,6 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _navigationTitle = @"消息中心";
+    _pageIdentifier= @"pv_acct_msgs";
     // Do any additional setup after loading the view from its nib.
     self.listView.delegate = self;
     
@@ -34,6 +35,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [self.viewModel stopUpdateData];
+    [[KTCPushNotificationService sharedService] setUnreadCount:0];
 }
 
 #pragma mark NotificationCenterViewDelegate

@@ -36,6 +36,8 @@
 
 - (void)didClickedMoreReviewOnStoreDetailView:(StoreDetailView *)detailView;
 
+- (void)storeDetailView:(StoreDetailView *)detailView didClickedReviewAtIndex:(NSUInteger)index;
+
 - (void)didClickedMoreBrothersStoreOnStoreDetailView:(StoreDetailView *)detailView;
 
 - (void)storeDetailView:(StoreDetailView *)detailView didClickedServiceAtIndex:(NSUInteger)index;

@@ -16,7 +16,7 @@
     }
     self = [super init];
     if (self) {
-        if ([data objectForKey:@"storeId"]) {
+        if ([data objectForKey:@"rSysNo"]) {
             self.identifier = [NSString stringWithFormat:@"%@", [data objectForKey:@"rSysNo"]];
         }
         self.imageUrl = [NSURL URLWithString:[data objectForKey:@"imgUrl"]];

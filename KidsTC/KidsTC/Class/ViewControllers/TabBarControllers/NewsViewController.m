@@ -24,6 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _pageIdentifier = @"pv_main_found";
     // Do any additional setup after loading the view from its nib.
     self.newsView.delegate = self;
     
@@ -57,10 +58,17 @@
 
 - (void)newsView:(NewsView *)newsView didClickedSegmentControlWithNewsViewTag:(NewsViewTag)viewTag {
     [self.newsViewModel resetNewsViewWithViewTag:viewTag newsTagIndex:0];
+    if (viewTag == NewsViewTagRecommend) {
+        _pageIdentifier = @"pv_found_recommends";
+    } else {
+        _pageIdentifier = @"pv_found_kbs";
+    }
 }
 
 - (void)newsView:(NewsView *)newsView didChangedNewsTagIndex:(NSUInteger)index {
     [self.newsViewModel resetNewsViewWithViewTag:NewsViewTagMore newsTagIndex:index];
+    NewsTagItemModel *model = [[self.newsViewModel tagItemModels] objectAtIndex:index];
+    [self.newsView resetRoleTypeWithImage:[KTCUserRole smallImageWithUserRole:[model relatedUserRole]]];
 }
 
 - (void)newsView:(NewsView *)newsView didSelectedItem:(NewsListItemModel *)item {

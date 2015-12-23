@@ -79,7 +79,7 @@
 #pragma mark CommentEditViewDelegate
 
 - (void)didClickedAddPhotoButtonOnCommentEditView:(CommentEditView *)editView {
-    MC_ImagePickerViewController *mc_PhotoAlbumViewController = [[MC_ImagePickerViewController alloc]initWithMaxCount:10 andPhotoDictionary:self.photoDictionary];
+    MC_ImagePickerViewController *mc_PhotoAlbumViewController = [[MC_ImagePickerViewController alloc]initWithMaxCount:10 - [self.commentModel.thumbnailPhotoUrlStringsArray count] andPhotoDictionary:self.photoDictionary];
     mc_PhotoAlbumViewController.hidesBottomBarWhenPushed = YES;
     mc_PhotoAlbumViewController.delegate = self;
     [self.navigationController presentViewController:mc_PhotoAlbumViewController animated:YES completion:nil];
@@ -101,6 +101,10 @@
         __weak CommentEditViewController *weakSelf = self;
         [[GAlertLoadingView sharedAlertLoadingView] show];
         [weakSelf getNeedUploadPhotosArray:^(NSArray *photosArray) {
+            if ([photosArray count] == 0) {
+                [weakSelf submitComments];
+                return;
+            }
             [[KTCImageUploader sharedInstance]  startUploadWithImagesArray:photosArray splitCount:2 withSucceed:^(NSArray *locateUrlStrings) {
                 NSArray *remote = [weakSelf.commentModel remoteImageUrlStrings];
                 NSMutableArray *tempArray = [[NSMutableArray alloc] init];
@@ -218,6 +222,11 @@
         [tempArray removeObjectAtIndex:index];
         self.mwPhotosArray = [NSArray arrayWithArray:tempArray];
         
+        [tempArray removeAllObjects];
+        [tempArray addObjectsFromArray:self.commentModel.uploadPhotoLocationStrings];
+        [tempArray removeObjectAtIndex:index];
+        self.commentModel.uploadPhotoLocationStrings = [NSArray arrayWithArray:tempArray];
+        
         return;
     } else {
         index -= [self.commentModel.thumbnailPhotoUrlStringsArray count];
@@ -325,6 +334,9 @@
     NSArray *selectAllImageArray = [[self.photoDictionary objectForKey:PickedInfoSelectAllImageArray]mutableCopy] ;
     NSUInteger allUrlsArrayCount = [selectAllURLArray count];
     if (allUrlsArrayCount == 0) {
+        if (finished) {
+            finished(nil);
+        }
         return;
     }
     

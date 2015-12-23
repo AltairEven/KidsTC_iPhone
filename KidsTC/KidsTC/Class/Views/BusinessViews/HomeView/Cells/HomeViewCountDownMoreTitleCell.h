@@ -13,4 +13,6 @@
 
 - (void)configWithModel:(HomeCountDownMoreTitleCellModel *)model;
 
+- (void)stopCountDown;
+
 @end

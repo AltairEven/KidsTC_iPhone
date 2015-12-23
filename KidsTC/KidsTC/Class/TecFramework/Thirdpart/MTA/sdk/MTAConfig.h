@@ -38,7 +38,6 @@ typedef enum {
 @property int8_t accountType;                       //帐号类型
 @property (nonatomic, retain) NSString* accountExt;   //帐号的扩展信息
 @property BOOL statEnable;
-//@property BOOL enableReportIDFA;               //是否上报IDFA，默认为NO，注意：苹果限制只有带广告的APP才能获取，开启前请确保符合要求67
 
 @property (nonatomic, retain) NSString* customerUserID;
 @property (nonatomic, retain) NSString* customerAppVersion;
@@ -51,8 +50,8 @@ typedef enum {
 @property (nonatomic,retain) NSString* op;          //运营商
 @property (nonatomic,retain) NSString* cn;          //网络类型
 @property (nonatomic,retain) NSString* sp;   //测速结果
-
--(id) init;
+typedef void (^errorCallback)(NSString *);
+@property (nonatomic,copy) errorCallback crashCallback; //用于crash日志删除前回调， param为crash JSON数据
 -(NSString*)getCustomProperty:(NSString*) key default:(NSString*) v;
-+(id) getInstance;
++(instancetype) getInstance;
 @end

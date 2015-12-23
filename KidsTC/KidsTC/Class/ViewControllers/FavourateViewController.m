@@ -27,6 +27,7 @@
     [super viewDidLoad];
     
     _navigationTitle = @"我的收藏";
+    _pageIdentifier = @"pv_acct_favors";
     // Do any additional setup after loading the view from its nib.
     self.hidesBottomBarWhenPushed = YES;
     self.favourateView.delegate = self;

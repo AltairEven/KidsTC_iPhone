@@ -98,6 +98,7 @@
     }
     if (selectedIndex >= 0) {
         _usedCoupon = usedCoupon;
+        _usedScore = 0;
         _totalPrice = (self.price * self.count) - usedCoupon.discount - (self.usedScore * ScoreCoefficient);
     } else {
         _usedCoupon = nil;

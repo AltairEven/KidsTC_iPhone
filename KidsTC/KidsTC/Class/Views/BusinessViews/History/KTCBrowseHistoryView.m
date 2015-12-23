@@ -169,6 +169,9 @@ static KTCBrowseHistoryView *_sharedInstance = nil;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(browseHistoryView:didSelectedItemAtIndex:)]) {
+        [self.delegate browseHistoryView:self didSelectedItemAtIndex:indexPath.row];
+    }
 }
 
 #pragma mark Private methods
@@ -272,11 +275,11 @@ static KTCBrowseHistoryView *_sharedInstance = nil;
         }
     }
     [self.tableView reloadData];
-    if ([self.dataArray count] == 0) {
-        self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH / 4, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
-    } else {
-        self.tableView.backgroundView = nil;
-    }
+//    if ([self.dataArray count] == 0) {
+//        self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH / 4, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
+//    } else {
+//        self.tableView.backgroundView = nil;
+//    }
 }
 
 - (void)endLoadMore {

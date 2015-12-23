@@ -104,8 +104,6 @@
 #pragma mark Public methods
 
 - (void)configWithItemModel:(MyCommentListItemModel *)model {
-    [self updateConstraintsIfNeeded];
-    [self layoutIfNeeded];
     if (model) {
         [self.typeImageView setImage:[model bizIcon]];
         [self.timeDesLabel setText:model.commentTime];

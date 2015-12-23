@@ -142,7 +142,7 @@
         
         CLLocationCoordinate2D coordinate = [GToolUtil coordinateFromString:[data objectForKey:@"mapAddress"]];
         NSString *address = [data objectForKey:@"address"];
-        if (CLLocationCoordinate2DIsValid(coordinate)) {
+        if (CLLocationCoordinate2DIsValid(coordinate) && coordinate.latitude != 0 && coordinate.longitude != 0) {
             self.location = [[KTCLocation alloc] initWithLocation:[[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude] locationDescription:address];
         }
         
@@ -160,7 +160,7 @@
     CGFloat height = 40; //时间栏高度
     CGFloat cellWidth = SCREEN_WIDTH - 20;
     height += cellWidth * self.ratio; //图片
-    height += [GConfig heightForLabelWithWidth:cellWidth - 20 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:15] topGap:10 bottomGap:10 andText:self.cellContentString]; //内容
+    height += [GConfig heightForLabelWithWidth:cellWidth - 20 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:15] topGap:0 bottomGap:0 andText:self.cellContentString]; //内容
     return height + 3;
 }
 

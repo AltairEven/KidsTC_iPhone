@@ -170,12 +170,14 @@ typedef enum {
     self.navigationItem.title = _navigationTitle;
     //开启侧滑返回, ios 7以上
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    [MTA trackPageViewBegin:_pageIdentifier];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
+    [[GAlertLoadingView sharedAlertLoadingView] hide];
     //防止子类切换页面时造成crash
     self.navigationController.interactivePopGestureRecognizer.delegate = nil;
     self.edgesForExtendedLayout = UIRectEdgeAll;
@@ -187,6 +189,7 @@ typedef enum {
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     self.navigationItem.title = @"";
+    [MTA trackPageViewEnd:_pageIdentifier];
 }
 
 - (void)setupBackBarButton

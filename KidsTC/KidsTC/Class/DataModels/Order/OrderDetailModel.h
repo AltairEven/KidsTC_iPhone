@@ -30,6 +30,8 @@
 
 @property (nonatomic, assign) BOOL canContactCS;
 
+@property (nonatomic, copy) NSString *orderPaymentDes;
+
 - (instancetype)initWithRawData:(NSDictionary *)data;
 
 - (BOOL)canGetCode;

@@ -103,12 +103,21 @@ NSString *const kSearchHotKeyCondition = @"kSearchHotKeyCondition";
         for (NSDictionary *hotDic in hotArray) {
             NSString *name = [hotDic objectForKey:@"name"];
             NSDictionary *searchParam = [hotDic objectForKey:@"search_parms"];
-            KTCSearchCondition *condition = [KTCSearchCondition conditionFromRawData:searchParam];
-            if (condition) {
+            if (self.searchType == KTCSearchTypeService) {
+                KTCSearchServiceCondition *condition = [KTCSearchServiceCondition conditionFromRawData:searchParam];
+                if (!condition) {
+                    condition = [[KTCSearchServiceCondition alloc] init];
+                    condition.keyWord = name;
+                }
                 NSDictionary *hotKey = [NSDictionary dictionaryWithObjectsAndKeys:name, kSearchHotKeyName, condition, kSearchHotKeyCondition, nil];
                 [tempArray addObject:hotKey];
-            } else {
-                NSDictionary *hotKey = [NSDictionary dictionaryWithObjectsAndKeys:name, kSearchHotKeyName, nil];
+            } else if (self.searchType == KTCSearchTypeStore) {
+                KTCSearchStoreCondition *condition = [KTCSearchStoreCondition conditionFromRawData:searchParam];
+                if (!condition) {
+                    condition = [[KTCSearchStoreCondition alloc] init];
+                    condition.keyWord = name;
+                }
+                NSDictionary *hotKey = [NSDictionary dictionaryWithObjectsAndKeys:name, kSearchHotKeyName, condition, kSearchHotKeyCondition, nil];
                 [tempArray addObject:hotKey];
             }
         }

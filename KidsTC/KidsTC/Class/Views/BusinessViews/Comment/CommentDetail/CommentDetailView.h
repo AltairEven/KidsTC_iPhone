@@ -23,6 +23,8 @@
 
 - (void)didTappedOnCommentDetailView:(CommentDetailView *)detailView;
 
+- (void)didClickedRelationInfoOnCommentDetailView:(CommentDetailView *)detailView;
+
 @optional
 
 - (void)commentDetailViewDidPulledDownToRefresh:(CommentDetailView *)detailView;

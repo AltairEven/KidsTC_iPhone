@@ -44,7 +44,7 @@ static NSString *const kCommentCellIdentifier = @"kCommentCellIdentifier";
 static NSString *const kBrotherStoreCellIdentifier = @"kBrotherStoreCellIdentifier";
 static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdentifier";
 
-@interface StoreDetailView () <UITableViewDataSource, UITableViewDelegate, AUIBannerScrollViewDataSource, AUISegmentViewDataSource, AUISegmentViewDelegate>
+@interface StoreDetailView () <UITableViewDataSource, UITableViewDelegate, AUIBannerScrollViewDataSource, AUISegmentViewDataSource, AUISegmentViewDelegate, StoreDetailCommentCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UITableViewCell *topCell;
@@ -230,17 +230,21 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
         case StoreDetailViewSectionBrief:
         {
             //include title
-            number = 2;
+            if ([self.detailModel.storeBrief length] > 0) {
+                number = 2;
+            } else {
+                number = 1;
+            }
         }
             break;
         case StoreDetailViewSectionComment:
         {
-            NSUInteger count = [self.detailModel.commentItemsArray count];
-            if (count > 0) {
-                //include title
-                count ++;
-            }
-            number = count;
+//            NSUInteger count = [self.detailModel.commentItemsArray count];
+//            if (count > 0) {
+//                //include title
+//                count ++;
+//            }
+            number = 2;
         }
             break;
         case StoreDetailViewSectionNearby:
@@ -343,7 +347,13 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
                 [self configTitleCell:(StoreDetailTitleCell *)cell WithSection:StoreDetailViewSectionComment];
             } else {
                 cell = [self createTableCellWithIdentifier:kCommentCellIdentifier forTableView:tableView atIndexPath:indexPath];
-                [((StoreDetailCommentCell *)cell) configWithModel:[self.detailModel.commentItemsArray objectAtIndex:indexPath.row - 1]];
+                if ([self.detailModel.commentItemsArray count] > 0) {
+                    ((StoreDetailCommentCell *)cell).delegate = self;
+                    [((StoreDetailCommentCell *)cell) configWithModel:[self.detailModel.commentItemsArray objectAtIndex:indexPath.row - 1]];
+                    ((StoreDetailCommentCell *)cell).indexPath = indexPath;
+                } else {
+                    [((StoreDetailCommentCell *)cell) configWithModel:nil];
+                }
             }
         }
             break;
@@ -444,8 +454,12 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
             if (indexPath.row == 0) {
                 height = [StoreDetailTitleCell cellHeight];
             } else {
-                CommentListItemModel *model = [self.detailModel.commentItemsArray objectAtIndex:indexPath.row - 1];
-                height = [model storeDetailCellHeight];
+                if ([self.detailModel.commentItemsArray count] > 0) {
+                    CommentListItemModel *model = [self.detailModel.commentItemsArray objectAtIndex:indexPath.row - 1];
+                    height = [model storeDetailCellHeight];
+                } else {
+                    return 140;
+                }
             }
         }
             break;
@@ -553,8 +567,14 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
                 break;
             case StoreDetailViewSectionComment:
             {
-                if ([self.delegate respondsToSelector:@selector(didClickedMoreReviewOnStoreDetailView:)]) {
-                    [self.delegate didClickedMoreReviewOnStoreDetailView:self];
+                if (indexPath.row == 0) {
+                    if ([self.delegate respondsToSelector:@selector(didClickedMoreReviewOnStoreDetailView:)]) {
+                        [self.delegate didClickedMoreReviewOnStoreDetailView:self];
+                    }
+                } else {
+                    if ([self.delegate respondsToSelector:@selector(storeDetailView:didClickedReviewAtIndex:)]) {
+                        [self.delegate storeDetailView:self didClickedReviewAtIndex:indexPath.row - 1];
+                    }
                 }
             }
                 break;
@@ -609,6 +629,14 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
 - (void)segmentView:(AUISegmentView *)segmentView didSelectedAtIndex:(NSUInteger)index {
     if (self.delegate && [self.delegate respondsToSelector:@selector(storeDetailView:didClickedServiceAtIndex:)]) {
         [self.delegate storeDetailView:self didClickedServiceAtIndex:index];
+    }
+}
+
+#pragma mark StoreDetailCommentCellDelegate
+
+- (void)storeDetailCommentCell:(StoreDetailCommentCell *)cell didClickedImageAtIndex:(NSInteger)index {
+    if ([self.delegate respondsToSelector:@selector(storeDetailView:didClickedReviewAtIndex:)]) {
+        [self.delegate storeDetailView:self didClickedReviewAtIndex:cell.indexPath.row - 1];
     }
 }
 
@@ -815,11 +843,9 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
             }
             if ([self.detailModel.storeBrief length] > 0) {
                 [self.storeBriefLabel setText:self.detailModel.storeBrief];
-                [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionBrief]];
             }
-            if ([self.detailModel.commentItemsArray count] > 0) {
-                [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionComment]];
-            }
+            [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionBrief]];
+            [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionComment]];
             if ([self.detailModel.nearbyFacilities count] > 0) {
                 [self configNearbyCell];
                 [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionNearby]];

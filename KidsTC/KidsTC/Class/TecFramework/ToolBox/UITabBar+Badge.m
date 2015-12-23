@@ -23,7 +23,7 @@
     //新建小红点
     CGRect frame = CGRectZero;
     CGFloat yPosition = 5;
-    CGFloat rightMargin = 10;
+    CGFloat rightMargin = 20;
     CGFloat badgeSide = 0;
     NSUInteger stringLentgh = [value length];
     CGFloat barItemWidth = self.frame.size.width / TabbarItemNums;

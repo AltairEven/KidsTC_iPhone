@@ -30,6 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _navigationTitle = @"知识库";
+    _pageIdentifier = @"pv_found_kbs_filter";
     // Do any additional setup after loading the view from its nib.
     self.filterView.dataSource = self;
     self.filterView.delegate = self;

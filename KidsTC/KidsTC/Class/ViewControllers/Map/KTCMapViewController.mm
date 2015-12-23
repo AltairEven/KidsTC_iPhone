@@ -108,6 +108,7 @@ NSString *const kRouteLineStepsKey = @"kRouteLineStepsKey";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _pageIdentifier = @"pv_map";
     // Do any additional setup after loading the view from its nib.
     [self initializeMapView];
     [self initOtherSubviews];
@@ -222,8 +223,8 @@ NSString *const kRouteLineStepsKey = @"kRouteLineStepsKey";
     if ([overlay isKindOfClass:[BMKPolyline class]]) {
         BMKPolylineView* polylineView = [[BMKPolylineView alloc] initWithOverlay:overlay];
         polylineView.fillColor = [[UIColor alloc] initWithRed:0 green:1 blue:1 alpha:1];
-        polylineView.strokeColor = [AUITheme theme].globalThemeColor;
-        polylineView.lineWidth = 3.0;
+        polylineView.strokeColor = [AUITheme theme].highlightTextColor;
+        polylineView.lineWidth = 5.0;
         return polylineView;
     }
     return nil;
@@ -318,6 +319,7 @@ NSString *const kRouteLineStepsKey = @"kRouteLineStepsKey";
     if (self.type == KTCMapTypeLocate) {
         //如果地图用于定位，则给全局变量赋值完以后pop
         [self.startLocation setLocationDescription:pickedString];
+        [[KTCMapService sharedService] stopUpdateLocation];
         [[GConfig sharedConfig] setCurrentLocation:[self.startLocation copy]];
         [self goBackController:nil];
     }

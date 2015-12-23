@@ -13,8 +13,10 @@
 + (instancetype)modelFromServiceOrderModel:(OrderModel *)orderModel {
     CommentFoundingModel *commentModel = [[CommentFoundingModel alloc] init];
     commentModel.orderId = orderModel.orderId;
+    commentModel.relationSysNo = orderModel.serviceId;
     commentModel.sourceType = (CommentFoundingSourceType)orderModel.productType;
     commentModel.objectId = orderModel.serviceId;
+    commentModel.relationType = (CommentRelationType)orderModel.productType;
     commentModel.objectName = orderModel.orderName;
     commentModel.imageUrl = orderModel.imageUrl;
     return commentModel;

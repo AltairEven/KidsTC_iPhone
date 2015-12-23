@@ -170,7 +170,7 @@
     [weakSelf.bindPhoneRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [weakSelf bindPhoneSucceedWithRespData:responseData];
     } failure:^(HttpRequestClient *client, NSError *error) {
-        NSString *errMsg = [error.userInfo objectForKey:kErrMsgKey];
+        NSString *errMsg = [error.userInfo objectForKey:@"data"];
         if ([errMsg length] == 0) {
             errMsg = @"绑定失败";
         }

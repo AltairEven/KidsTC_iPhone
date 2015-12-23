@@ -42,12 +42,15 @@
     }
     self = [super init];
     if (self) {
-        NSDictionary *content = [data objectForKey:@"customContent"];
-        if (!content || ![content isKindOfClass:[NSDictionary class]]) {
+        NSString *contentString = [data objectForKey:@"CustomDicStr"];
+        if (!contentString || ![contentString isKindOfClass:[NSString class]]) {
             return nil;
         }
+        NSData *paramData = [contentString dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *content = [NSJSONSerialization JSONObjectWithData:paramData options:NSJSONReadingAllowFragments error:nil];
+        
         self.createTimeDescription = [content objectForKey:@"pushtime"];
-        HomeSegueDestination dest = (HomeSegueDestination)[content objectForKey:@"linkType"];
+        HomeSegueDestination dest = (HomeSegueDestination)[[content objectForKey:@"linkType"] integerValue];
         if (dest != HomeSegueDestinationNone) {
             NSString *paramString = [content objectForKey:@"params"];
             NSData *paramData = [paramString dataUsingEncoding:NSUTF8StringEncoding];

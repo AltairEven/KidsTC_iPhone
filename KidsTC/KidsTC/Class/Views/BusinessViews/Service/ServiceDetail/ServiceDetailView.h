@@ -30,6 +30,8 @@
 
 - (void)serviceDetailView:(ServiceDetailView *)detailView didClickedCommentCellAtIndex:(NSUInteger)index;
 
+- (void)didClickedMoreCommentOnServiceDetailView:(ServiceDetailView *)detailView;
+
 @end
 
 @interface ServiceDetailView : UIView

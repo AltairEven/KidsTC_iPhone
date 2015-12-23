@@ -30,6 +30,10 @@ typedef enum {
 
 - (void)startService;
 
+- (void)startUpdateLocation;
+
+- (void)stopUpdateLocation;
+
 - (void)stopService;
 
 - (void)getCoordinateWithCity:(NSString *)cityName

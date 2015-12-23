@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet FiveStarsView *starsView;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 @property (weak, nonatomic) IBOutlet AUIImageGridView *imageGridView;
+@property (weak, nonatomic) IBOutlet UIView *emptyView;
 
 @end
 
@@ -28,6 +29,8 @@
     [self.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
     
     self.imageGridView.delegate = self;
+    
+    [self.emptyView setHidden:YES];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -40,11 +43,14 @@
     [self updateConstraintsIfNeeded];
     [self layoutIfNeeded];
     if (model) {
+        [self.emptyView setHidden:YES];
         [self.faceImageView setImageWithURL:model.faceImageUrl];
         [self.nameLabel setText:model.userName];
         [self.starsView setStarNumber:model.starNumber];
         [self.contentLabel setText:model.comments];
         [self.imageGridView setImageUrlStringsArray:model.thumbnailPhotoUrlStringsArray];
+    } else {
+        [self.emptyView setHidden:NO];
     }
 }
 

@@ -58,13 +58,6 @@ static NSString *const kStoreCellIdentifier = @"kStoreCellIdentifier";
 @property (nonatomic, copy) NSString *currentAreaName;
 @property (nonatomic, copy) NSString *currentSortString;
 
-@property (nonatomic, assign) KTCSearchResultFilterCoordinate areaFilterCoordinate;
-
-@property (nonatomic, assign) KTCSearchResultFilterCoordinate sortFilterCoordinate;
-
-@property (nonatomic, assign) KTCSearchResultFilterCoordinate ageFilterCoordinate;
-@property (nonatomic, assign) KTCSearchResultFilterCoordinate categoryFilterCoordinate;
-
 @property (nonatomic, assign) BOOL displayingFilter;
 
 

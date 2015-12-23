@@ -1,14 +1,15 @@
 //
-//  StatService.h
-//  TA-SDK
+//  MTA.h
+//  MTA-SDK
 //
 //  Created by WQY on 12-11-5.
 //  Copyright (c) 2012年 WQY. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIImage.h>
 
-#define MTA_SDK_VERSION @"1.4.1"
+#define MTA_SDK_VERSION @"1.4.8"
 #define MTA_APP_USER_VERSION  @"MTA_USER_APP_VER" 
 
 typedef enum {
@@ -45,6 +46,7 @@ typedef enum {
 +(void) trackCustomKeyValueEvent:(NSString*)event_id props:(NSDictionary*) kvs;
 +(void) trackCustomKeyValueEventBegin:(NSString*)event_id props:(NSDictionary*) kvs;
 +(void) trackCustomKeyValueEventEnd:(NSString*)event_id props:(NSDictionary*) kvs;
++(void) trackCustomKeyValueEventDuration:(uint32_t)seconds withEventid:(NSString*)event_id props:(NSDictionary*) kvs;
 
 +(void) commitCachedStats:(int32_t) maxStatCount;
 
@@ -61,9 +63,7 @@ typedef enum {
 
 +(NSString *) getMtaUDID;
 
-+(id)getInstance;
 
--(void) handleCrashReport;
 /*********************************************************************
  以下是需要自定义的增强接口,
  appkey:指定appkey进行上报
@@ -82,6 +82,7 @@ typedef enum {
 +(void) trackCustomKeyValueEvent:(NSString*)event_id props:(NSDictionary*) kvs appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
 +(void) trackCustomKeyValueEventBegin:(NSString*)event_id props:(NSDictionary*) kvs appkey:(NSString *)appkey;
 +(void) trackCustomKeyValueEventEnd:(NSString*)event_id props:(NSDictionary*) kvs appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
++(void) trackCustomKeyValueEventDuration:(uint32_t) seconds withEventid:(NSString*)event_id props:(NSDictionary*) kvs appKey:(NSString*)appkey isRealTime:(BOOL)isRealTime;
 
 +(void) reportAppMonitorStat:(MTAAppMonitorStat*)stat appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
 
@@ -92,4 +93,5 @@ typedef enum {
 +(void) trackGameUser:(NSString*)uid world:(NSString*)wd level:(NSString*)lev appkey:(NSString *)appkey isRealTime:(BOOL)isRealTime;
 
 +(void) startNewSession:(BOOL)isRealTime;
+
 @end

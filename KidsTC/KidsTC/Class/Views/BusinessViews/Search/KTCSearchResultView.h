@@ -69,6 +69,13 @@ typedef enum {
 @property (nonatomic, strong) KTCSearchResultFilterModel *peopleFilterModel;
 @property (nonatomic, strong) NSArray *categoriesFilterModelArray;
 
+@property (nonatomic, assign) KTCSearchResultFilterCoordinate areaFilterCoordinate;
+
+@property (nonatomic, assign) KTCSearchResultFilterCoordinate sortFilterCoordinate;
+
+@property (nonatomic, assign) KTCSearchResultFilterCoordinate ageFilterCoordinate;
+@property (nonatomic, assign) KTCSearchResultFilterCoordinate categoryFilterCoordinate;
+
 @property (nonatomic, readonly) NSUInteger serviceListPageSize;
 @property (nonatomic, readonly) NSUInteger storeListPageSize;
 

@@ -167,6 +167,12 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
                 NSMutableAttributedString *attrText = [[NSMutableAttributedString alloc] initWithString:text];
                 [attrText addAttribute:NSForegroundColorAttributeName value:[UIColor orangeColor] range:NSMakeRange(2,[scoreText length])];
                 [self.totalScoreLabel setAttributedText:attrText];
+                
+                if (self.model.usedScore > 0) {
+                    [self.scoreField setText:[NSString stringWithFormat:@"%lu", (unsigned long)self.model.usedScore]];
+                } else {
+                    [self.scoreField setText:@""];
+                }
                 [self setCell:self.scoreCell enabled:self.model.needPay];
                 return self.scoreCell;
             }
@@ -393,8 +399,8 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 #pragma mark UITextFieldDelegate
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    NSUInteger score = self.model.canUseScore + self.model.usedScore;
-    NSString *scoreText = [NSString stringWithFormat:@"%lu", (unsigned long)score];
+    self.model.usedScore = 0;
+    NSString *scoreText = [NSString stringWithFormat:@"%lu", (unsigned long)self.model.canUseScore];
     NSString *text = [NSString stringWithFormat:@"共有%@积分可使用", scoreText];
     if (!self.model.needPay) {
         text = @"没有可使用的积分";

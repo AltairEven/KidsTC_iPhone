@@ -84,7 +84,7 @@ static AUITheme *_sharedInstance = nil;
 
 - (UIColor *)buttonBGColor_Disable {
     if (!_buttonBGColor_Disable) {
-        _buttonBGColor_Disable = RGBA(230, 230, 230, 1);
+        _buttonBGColor_Disable = RGBA(200, 200, 200, 1);
     }
     return _buttonBGColor_Disable;
 }

@@ -69,6 +69,9 @@
         if ([data objectForKey:@"businessZone"]) {
             self.businessZone = [NSString stringWithFormat:@"%@", [data objectForKey:@"businessZone"]];
         }
+        if ([data objectForKey:@"phone"]) {
+            self.phoneNumber = [NSString stringWithFormat:@"%@", [data objectForKey:@"phone"]];
+        }
     }
     return self;
 }

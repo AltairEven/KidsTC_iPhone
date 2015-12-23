@@ -49,6 +49,8 @@
 
 - (void)resetSearchResultViewWithSearchType:(KTCSearchType)type;
 
+- (void)resetSortFilterWithSearchType:(KTCSearchType)type;
+
 - (void)stopUpdateDataWithSearchType:(KTCSearchType)type;
 
 - (NSArray *)serviceResult;

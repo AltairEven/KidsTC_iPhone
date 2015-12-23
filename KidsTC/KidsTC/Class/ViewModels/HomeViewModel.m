@@ -14,7 +14,7 @@ static NSString *kLocalCacheDate = @"localSaveDate";
 
 NSString *const kHomeViewDataFinishLoadingNotification = @"kHomeViewDataFinishLoadingNotification";
 
-#define LOCAL_CACHE_TIME (300)
+#define LOCAL_CACHE_TIME (100)
 
 @interface HomeViewModel () <HomeViewDataSource>
 

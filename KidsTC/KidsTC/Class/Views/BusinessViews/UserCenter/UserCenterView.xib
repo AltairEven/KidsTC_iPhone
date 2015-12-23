@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -132,7 +132,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L48-h2-JJ6">
-                                            <rect key="frame" x="82" y="2" width="14" height="14"/>
+                                            <rect key="frame" x="72" y="2" width="14" height="14"/>
                                             <color key="backgroundColor" red="1" green="0.08740861472" blue="0.1398824568" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="14" id="UvZ-sL-Ive"/>
@@ -149,7 +149,7 @@
                                         <constraint firstItem="yhv-f9-sWJ" firstAttribute="top" secondItem="h6p-xI-yEj" secondAttribute="bottom" constant="4" id="Iha-GW-ci7"/>
                                         <constraint firstAttribute="centerX" secondItem="yhv-f9-sWJ" secondAttribute="centerX" id="ODo-XZ-3XS"/>
                                         <constraint firstAttribute="centerX" secondItem="h6p-xI-yEj" secondAttribute="centerX" id="QHS-rb-nco"/>
-                                        <constraint firstAttribute="trailing" secondItem="L48-h2-JJ6" secondAttribute="trailing" constant="10" id="mEG-XM-zjD"/>
+                                        <constraint firstAttribute="trailing" secondItem="L48-h2-JJ6" secondAttribute="trailing" constant="20" id="mEG-XM-zjD"/>
                                         <constraint firstItem="L48-h2-JJ6" firstAttribute="top" secondItem="DFo-r9-zh2" secondAttribute="top" constant="2" id="ted-Ce-exv"/>
                                     </constraints>
                                 </view>
@@ -170,7 +170,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nly-dF-nx3">
-                                            <rect key="frame" x="82" y="2" width="14" height="14"/>
+                                            <rect key="frame" x="72" y="2" width="14" height="14"/>
                                             <color key="backgroundColor" red="1" green="0.08740861472" blue="0.1398824568" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="14" id="4wz-9v-dBM"/>
@@ -185,7 +185,7 @@
                                     <constraints>
                                         <constraint firstItem="FAb-TW-bTL" firstAttribute="top" secondItem="3bh-lW-Cez" secondAttribute="top" constant="4" id="3NM-ue-U4n"/>
                                         <constraint firstAttribute="centerX" secondItem="FAb-TW-bTL" secondAttribute="centerX" id="CeX-BS-IqA"/>
-                                        <constraint firstAttribute="trailing" secondItem="nly-dF-nx3" secondAttribute="trailing" constant="10" id="JLR-8M-eEN"/>
+                                        <constraint firstAttribute="trailing" secondItem="nly-dF-nx3" secondAttribute="trailing" constant="20" id="JLR-8M-eEN"/>
                                         <constraint firstItem="nly-dF-nx3" firstAttribute="top" secondItem="3bh-lW-Cez" secondAttribute="top" constant="2" id="aGG-Ya-KrD"/>
                                         <constraint firstAttribute="centerX" secondItem="fwX-MH-EL8" secondAttribute="centerX" id="avl-aa-Mb1"/>
                                         <constraint firstItem="fwX-MH-EL8" firstAttribute="top" secondItem="FAb-TW-bTL" secondAttribute="bottom" constant="4" id="t8u-nh-y2k"/>
@@ -201,7 +201,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZFO-Fg-Ukf">
-                                            <rect key="frame" x="82" y="2" width="14" height="14"/>
+                                            <rect key="frame" x="72" y="2" width="14" height="14"/>
                                             <color key="backgroundColor" red="1" green="0.08740861472" blue="0.1398824568" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="14" id="WRY-Sp-S8S"/>
@@ -224,7 +224,7 @@
                                         <constraint firstItem="Jcs-BF-bA4" firstAttribute="top" secondItem="Xyz-Yz-UZ1" secondAttribute="bottom" constant="4" id="6JU-WV-dES"/>
                                         <constraint firstAttribute="centerX" secondItem="Xyz-Yz-UZ1" secondAttribute="centerX" id="UUO-Vq-wlC"/>
                                         <constraint firstItem="ZFO-Fg-Ukf" firstAttribute="top" secondItem="qCW-lz-WTW" secondAttribute="top" constant="2" id="cWi-f4-wHG"/>
-                                        <constraint firstAttribute="trailing" secondItem="ZFO-Fg-Ukf" secondAttribute="trailing" constant="10" id="qDQ-ux-kVX"/>
+                                        <constraint firstAttribute="trailing" secondItem="ZFO-Fg-Ukf" secondAttribute="trailing" constant="20" id="qDQ-ux-kVX"/>
                                         <constraint firstAttribute="centerX" secondItem="Jcs-BF-bA4" secondAttribute="centerX" id="xJI-uA-UWu"/>
                                         <constraint firstItem="Xyz-Yz-UZ1" firstAttribute="top" secondItem="qCW-lz-WTW" secondAttribute="top" constant="4" id="xgc-oD-lMz"/>
                                     </constraints>
@@ -374,7 +374,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="544" height="100.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userCenter_messageCenter" translatesAutoresizingMaskIntoConstraints="NO" id="bZ7-bo-Zk7">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userCenter_myComment" translatesAutoresizingMaskIntoConstraints="NO" id="bZ7-bo-Zk7">
                         <rect key="frame" x="10" y="35" width="30" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="EXp-rO-E8b"/>
@@ -414,7 +414,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="544" height="100.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userCenter_allOrder" translatesAutoresizingMaskIntoConstraints="NO" id="mpN-sI-4I4">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userCenter_coupon" translatesAutoresizingMaskIntoConstraints="NO" id="mpN-sI-4I4">
                         <rect key="frame" x="10" y="35" width="30" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="1jJ-RU-OMh"/>
@@ -543,9 +543,11 @@
     <resources>
         <image name="arrow_r" width="15" height="15"/>
         <image name="userCenter_allOrder" width="28" height="28"/>
-        <image name="userCenter_bg" width="544" height="285"/>
+        <image name="userCenter_bg" width="500" height="300"/>
+        <image name="userCenter_coupon" width="28" height="28"/>
         <image name="userCenter_messageCenter" width="28" height="28"/>
         <image name="userCenter_myAppointments" width="30" height="30"/>
+        <image name="userCenter_myComment" width="27" height="26"/>
         <image name="userCenter_myFavourate" width="30" height="30"/>
         <image name="userCenter_setting" width="28" height="28"/>
         <image name="userCenter_waitForComment" width="30" height="30"/>

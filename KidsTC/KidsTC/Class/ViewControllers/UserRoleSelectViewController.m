@@ -67,6 +67,7 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
     _navigationTitle = @"状态更改";
+    _pageIdentifier = @"pv_stage_switch";
     // Do any additional setup after loading the view from its nib.
     [self.view setBackgroundColor:[AUITheme theme].globalBGColor];
     
@@ -319,6 +320,7 @@ typedef enum {
     }
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:role] forKey:UserRoleDefaultKey];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:self.sexTag + 1] forKey:UserSexDefaultKey];
     
     __weak UserRoleSelectViewController *weakSelf = self;
     if (weakSelf.completeBlock) {

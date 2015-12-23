@@ -42,6 +42,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _navigationTitle = @"登陆";
+    _pageIdentifier = @"pv_login";
     self.isNavShowType = NO;
     // Do any additional setup after loading the view from its nib.
     self.loginView.delegate = self;

@@ -9,6 +9,7 @@
 #import "GViewController.h"
 
 #define UserRoleDefaultKey (@"UserRoleDefaultKey")
+#define UserSexDefaultKey (@"UserSexDefaultKey")
 
 
 typedef void(^select_complete)(UserRole role, KTCSex sex);

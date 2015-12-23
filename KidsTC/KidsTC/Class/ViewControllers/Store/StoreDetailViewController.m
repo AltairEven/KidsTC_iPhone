@@ -27,8 +27,9 @@
 #import "KTCBrowseHistoryView.h"
 #import "KTCBrowseHistoryManager.h"
 #import "KTCMapViewController.h"
+#import "CommentDetailViewController.h"
 
-@interface StoreDetailViewController () <StoreDetailViewDelegate, StoreDetailBottomViewDelegate, KTCActionViewDelegate, KTCBrowseHistoryViewDataSource, KTCBrowseHistoryViewDelegate>
+@interface StoreDetailViewController () <StoreDetailViewDelegate, StoreDetailBottomViewDelegate, KTCActionViewDelegate, KTCBrowseHistoryViewDataSource, KTCBrowseHistoryViewDelegate, CommentFoundingViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet StoreDetailView *detailView;
 @property (weak, nonatomic) IBOutlet StoreDetailBottomView *bottomView;
@@ -60,6 +61,7 @@
     [super viewDidLoad];
     
     _navigationTitle = @"门店详情";
+    _pageIdentifier = @"pv_server_dtl";
     self.hidesBottomBarWhenPushed = YES;
     // Do any additional setup after loading the view from its nib.
     self.detailView.delegate = self;
@@ -171,6 +173,23 @@
     [self.navigationController pushViewController:controller animated:YES];
 }
 
+- (void)storeDetailView:(StoreDetailView *)detailView didClickedReviewAtIndex:(NSUInteger)index {
+    if ([self.viewModel.detailModel.commentItemsArray count] > 0) {
+        CommentListItemModel *model = [self.viewModel.detailModel.commentItemsArray objectAtIndex:index];
+        model.relationIdentifier = self.storeId;
+        CommentDetailViewController *controller = [[CommentDetailViewController alloc] initWithSource:CommentDetailViewSourceServiceOrStore relationType:CommentRelationTypeStore headerModel:model];
+        [controller setHidesBottomBarWhenPushed:YES];
+        [self.navigationController pushViewController:controller animated:YES];
+    } else {
+        [GToolUtil checkLogin:^(NSString *uid) {
+            CommentFoundingViewController *controller = [[CommentFoundingViewController alloc] initWithCommentFoundingModel:[CommentFoundingModel modelFromStore:self.viewModel.detailModel]];
+            controller.delegate = self;
+            [controller setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:controller animated:YES];
+        } target:self];
+    }
+}
+
 - (void)didClickedMoreBrothersStoreOnStoreDetailView:(StoreDetailView *)detailView {
     StoreListViewController *controller = [[StoreListViewController alloc] initWithStoreListItemModels:self.viewModel.detailModel.brotherStores];
     [controller setHidesBottomBarWhenPushed:YES];
@@ -186,6 +205,7 @@
 
 
 #pragma mark StoreDetailBottomViewDelegate
+
 - (void)storeDetailBottomView:(StoreDetailBottomView *)bottomView didClickedButtonWithTag:(StoreDetailBottomSubviewTag)tag {
     switch (tag) {
         case StoreDetailBottomSubviewTagFavourate:
@@ -206,6 +226,7 @@
         {
             [GToolUtil checkLogin:^(NSString *uid) {
                 CommentFoundingViewController *controller = [[CommentFoundingViewController alloc] initWithCommentFoundingModel:[CommentFoundingModel modelFromStore:self.viewModel.detailModel]];
+                controller.delegate = self;
                 [controller setHidesBottomBarWhenPushed:YES];
                 [self.navigationController pushViewController:controller animated:YES];
             } target:self];
@@ -235,9 +256,37 @@
 }
 
 - (NSArray *)itemModelsForBrowseHistoryView:(KTCBrowseHistoryView *)view withTag:(KTCBrowseHistoryViewTag)tag {
-    KTCBrowseHistoryType type = [KTCBrowseHistoryView typeOfViewTag:tag];
+    if ([[KTCUser currentUser] hasLogin]) {
+        KTCBrowseHistoryType type = [KTCBrowseHistoryView typeOfViewTag:tag];
+        NSArray *array = [[KTCBrowseHistoryManager sharedManager] resultForType:type];
+        return [NSArray arrayWithArray:array];
+    }
+    return nil;
+}
+
+- (void)browseHistoryView:(KTCBrowseHistoryView *)view didSelectedItemAtIndex:(NSUInteger)index {
+    KTCBrowseHistoryType type = [KTCBrowseHistoryView typeOfViewTag:view.currentTag];
     NSArray *array = [[KTCBrowseHistoryManager sharedManager] resultForType:type];
-    return [NSArray arrayWithArray:array];
+    switch (type) {
+        case KTCBrowseHistoryTypeService:
+        {
+            BrowseHistoryServiceListItemModel *model = [array objectAtIndex:index];
+            ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithServiceId:model.identifier channelId:model.channelId];
+            [controller setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+            break;
+        case KTCBrowseHistoryTypeStore:
+        {
+            BrowseHistoryStoreListItemModel *model = [array objectAtIndex:index];
+            StoreDetailViewController *controller = [[StoreDetailViewController alloc] initWithStoreId:model.identifier];
+            [controller setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)browseHistoryView:(KTCBrowseHistoryView *)view didChangedTag:(KTCBrowseHistoryViewTag)tag {
@@ -276,6 +325,12 @@
         default:
             break;
     }
+}
+
+#pragma mark CommentFoundingViewControllerDelegate
+
+- (void)commentFoundingViewControllerDidFinishSubmitComment:(CommentFoundingViewController *)vc {
+    [self reloadNetworkData];
 }
 
 #pragma mark Privated methods
@@ -354,6 +409,7 @@
 }
 
 - (void)showHistoryView {
+    [[KTCActionView actionView] hide];
     if ([[KTCBrowseHistoryView historyView] isShowing]) {
         [[KTCBrowseHistoryView historyView] startLoadingAnimation:NO];
         [[KTCBrowseHistoryView historyView] setDelegate:nil];
@@ -369,6 +425,7 @@
 }
 
 - (void)showActionView {
+    [[KTCBrowseHistoryView historyView] hide];
     if ([[KTCActionView actionView] isShowing]) {
         [[KTCActionView actionView] hide];
         [[KTCActionView actionView] setDelegate:nil];

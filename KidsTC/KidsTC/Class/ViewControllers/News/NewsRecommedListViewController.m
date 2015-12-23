@@ -23,6 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _navigationTitle = @"推荐";
+    _pageIdentifier = @"pv_found_recommends";
     // Do any additional setup after loading the view from its nib.
     self.listView.delegate = self;
     self.viewModel = [[NewsRecommendListViewModel alloc] initWithView:self.listView];

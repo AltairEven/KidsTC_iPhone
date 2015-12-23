@@ -32,9 +32,9 @@
 
 - (BOOL)canComment {
     BOOL retValue = NO;
-    if (self.status == AppointmentOrderStatusHasUsed) {
-        retValue = YES;
-    }
+//    if (self.status == AppointmentOrderStatusHasUsed) {
+//        retValue = YES;
+//    }
     return retValue;
 }
 

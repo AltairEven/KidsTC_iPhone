@@ -103,8 +103,12 @@
     __weak OrderDetailViewModel *weakSelf = self;
     [weakSelf.cancelOrderRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [weakSelf cancelOrderSucceed:responseData];
+        NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:self.orderId, @"id", @"true", @"result", nil];
+        [MTA trackCustomKeyValueEvent:@"event_result_order_dtl_cancel" props:trackParam];
     } failure:^(HttpRequestClient *client, NSError *error) {
         [weakSelf cancelOrderFailed:error];
+        NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:self.orderId, @"id", @"false", @"result", nil];
+        [MTA trackCustomKeyValueEvent:@"event_result_order_dtl_cancel" props:trackParam];
     }];
 }
 
@@ -144,11 +148,15 @@
         if (succeed) {
             succeed(responseData);
         }
+        NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:self.orderId, @"id", @"true", @"result", nil];
+        [MTA trackCustomKeyValueEvent:@"event_result_orders_dtl" props:trackParam];
     } failure:^(HttpRequestClient *client, NSError *error) {
         [weakSelf loadOrderDetailFailed:error];
         if (failure) {
             failure(error);
         }
+        NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:self.orderId, @"id", @"false", @"result", nil];
+        [MTA trackCustomKeyValueEvent:@"event_result_orders_dtl" props:trackParam];
     }];
 }
 

@@ -21,6 +21,8 @@
 
 @property (nonatomic, strong) KTCSearchResultHeaderView *headerView;
 
+- (void)resetLocation;
+
 @end
 
 @implementation KTCSearchResultViewController
@@ -37,26 +39,31 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _pageIdentifier = @"pv_search_result";
     // Do any additional setup after loading the view from its nib.
-    self.resultView.delegate = self;
     self.viewModel = [[KTCSearchResultViewModel alloc] initWithView:self.resultView];
+    [self.viewModel resetSortFilterWithSearchType:self.searchType];
+    self.resultView.delegate = self;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetLocation) name:UserLocationHasChangedNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
-    [self.resultView setLocation:[GConfig sharedConfig].currentLocation.locationDescription];
+    [self resetLocation];
     [self.resultView setCurrentSearchType:self.searchType];
     self.viewModel.searchType = self.searchType;
     switch (self.searchType) {
         case KTCSearchTypeService:
         {
             self.viewModel.searchServiceCondition = (KTCSearchServiceCondition *)self.searchCondition;
+            [self.viewModel resetSortFilterWithSearchType:self.searchType];
         }
             break;
         case KTCSearchTypeStore:
         {
             self.viewModel.searchStoreCondition = (KTCSearchStoreCondition *)self.searchCondition;
+            [self.viewModel resetSortFilterWithSearchType:self.searchType];
         }
             break;
         default:
@@ -83,6 +90,10 @@
     [super viewDidDisappear:animated];
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UserLocationHasChangedNotification object:nil];
+}
+
 #pragma mark KTCSearchResultViewDelegate
 
 - (void)didClickedBackButtonOnSearchResultView:(KTCSearchResultView *)resultView {
@@ -91,6 +102,26 @@
 
 - (void)searchResultView:(KTCSearchResultView *)resultView didClickedSegmentControlWithSearchType:(KTCSearchType)type {
     self.searchType = type;
+    switch (type) {
+        case KTCSearchTypeService:
+        {
+            if ([self.searchCondition isKindOfClass:[KTCSearchStoreCondition class]]) {
+                self.searchCondition = [KTCSearchServiceCondition conditionFromStoreCondition:(KTCSearchStoreCondition *)self.searchCondition];
+                self.viewModel.searchServiceCondition = (KTCSearchServiceCondition *)self.searchCondition;
+            }
+        }
+            break;
+        case KTCSearchTypeStore:
+        {
+            if ([self.searchCondition isKindOfClass:[KTCSearchServiceCondition class]]) {
+                self.searchCondition = [KTCSearchStoreCondition conditionFromServiceCondition:(KTCSearchServiceCondition *)self.searchCondition];
+                self.viewModel.searchStoreCondition = (KTCSearchStoreCondition *)self.searchCondition;
+            }
+        }
+            break;
+        default:
+            break;
+    }
     [self.viewModel resetSearchResultViewWithSearchType:type];
 }
 
@@ -185,6 +216,13 @@
     KTCMapViewController *controller = [[KTCMapViewController alloc] initWithMapType:KTCMapTypeLocate destination:[GConfig sharedConfig].currentLocation];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
+}
+
+#pragma mark Private methods
+
+
+- (void)resetLocation {
+    [self.resultView setLocation:[GConfig sharedConfig].currentLocation.locationDescription];
 }
 
 

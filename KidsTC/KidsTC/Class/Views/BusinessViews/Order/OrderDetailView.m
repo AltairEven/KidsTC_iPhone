@@ -42,6 +42,7 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
 @property (weak, nonatomic) IBOutlet InsuranceView *InsuranceView;
 
 @property (nonatomic, strong) UIView *noticeView;
+@property (nonatomic, strong) UILabel *noticeLabel;
 
 @property (nonatomic, strong) UINib *cellNib;
 @property (nonatomic, strong) UINib *consumptionCodeCellNib;
@@ -107,12 +108,11 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
     
     self.noticeView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20)];
     [self.noticeView setBackgroundColor:[UIColor clearColor]];
-    UILabel *noticeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, self.noticeView.frame.size.width - 20, 20)];
-    [noticeLabel setBackgroundColor:[UIColor clearColor]];
-    [noticeLabel setFont:[UIFont systemFontOfSize:11]];
-    [noticeLabel setTextColor:[UIColor orangeColor]];
-    [noticeLabel setText:@"注：如果您对退款有疑问，可以点击右上角联系客服"];
-    [self.noticeView addSubview:noticeLabel];
+    self.noticeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, self.noticeView.frame.size.width - 20, 20)];
+    [self.noticeLabel setBackgroundColor:[UIColor clearColor]];
+    [self.noticeLabel setFont:[UIFont systemFontOfSize:11]];
+    [self.noticeLabel setTextColor:[UIColor orangeColor]];
+    [self.noticeView addSubview:self.noticeLabel];
     
     //price views
     [self.InsuranceView setFontSize:13];
@@ -301,7 +301,7 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if (indexPath.row != 1) {
+    if (indexPath.section != 0) {
         return;
     }
     if (self.delegate && [self.delegate respondsToSelector:@selector(orderDetailView:executeActionWithTag:)]) {
@@ -395,6 +395,11 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
                 self.buttonBGHeight.constant = 0;
             }
                 break;
+            case OrderStatusHasOverTime:
+            {
+                [self.buttonBGView setHidden:YES];
+                self.buttonBGHeight.constant = 0;
+            }
             default:
                 break;
         }
@@ -451,6 +456,10 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
         self.detailModel = [self.dataSource orderDetailModelForOrderDetailView:self];
         if ([self.detailModel canContactCS]) {
             self.tableView.tableFooterView = self.noticeView;
+            [self.noticeLabel setText:@"注：如果您对退款有疑问，可以点击右上角联系客服"];
+        } else if (self.detailModel.status == OrderStatusWaitingPayment) {
+            self.tableView.tableFooterView = self.noticeView;
+            [self.noticeLabel setText:self.detailModel.orderPaymentDes];
         } else {
             self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
         }

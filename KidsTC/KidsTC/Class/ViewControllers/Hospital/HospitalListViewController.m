@@ -24,6 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _navigationTitle = @"医院";
+    _pageIdentifier = @"pv_healthcare_rooms";
     // Do any additional setup after loading the view from its nib.
     self.listView.delegate = self;
     

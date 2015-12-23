@@ -132,7 +132,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
             [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:nowCount - lastCount - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
         }
     } else {
-        if (nowCount > 0) {
+        if (nowCount > 0 && nowCount > lastCount) {
             [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:nowCount - lastCount - 1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
         }
     }

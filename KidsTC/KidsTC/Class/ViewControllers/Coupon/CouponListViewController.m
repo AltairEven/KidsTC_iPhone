@@ -26,12 +26,13 @@ static NSString *const kCouponUseRuleUrlString = @"http://m.kidstc.com/tools/cou
 
 - (void)viewDidLoad {
     _navigationTitle = @"优惠券";
+    _pageIdentifier = @"pv_coupons";
     // Do any additional setup after loading the view from its nib.
     self.listView.delegate = self;
     self.viewModel = [[CouponListViewModel alloc] initWithView:self.listView];
     [self.viewModel startUpdateDataWithViewTag:CouponListViewTagUnused];
     [self.listView reloadSegmentHeader];
-    [self setupRightBarButton:@"" target:self action:@selector(didClickedCouponRule) frontImage:@"phone1" andBackImage:@"phone2"];
+    [self setupRightBarButton:@"" target:self action:@selector(didClickedCouponRule) frontImage:@"navigation_question" andBackImage:@"navigation_question"];
 }
 
 #pragma mark CouponListViewDelegate

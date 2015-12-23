@@ -32,6 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _navigationTitle = @"订单确认";
+    _pageIdentifier = @"pv_orderpalce";
     // Do any additional setup after loading the view from its nib.
     self.settlementView.delegate = self;
     self.bottomView.delegate = self;
@@ -89,6 +90,8 @@
     [weakSelf.viewModel submitOrderWithSucceed:^(NSDictionary *data) {
         [[GAlertLoadingView sharedAlertLoadingView] hide];
         [weakSelf submitOrderSucceed];
+        NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:self.viewModel.orderId, @"id", [NSNumber numberWithInteger:self.viewModel.paymentInfo.paymentType], @"payType", @"true", @"result", nil];
+        [MTA trackCustomKeyValueEvent:@"event_result_orderplace_submit" props:trackParam];
     } failure:^(NSError *error) {
         [[GAlertLoadingView sharedAlertLoadingView] hide];
         NSString *errMsg = @"提交订单失败";
@@ -97,6 +100,8 @@
             errMsg = text;
         }
         [[iToast makeText:errMsg] show];
+        NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:@"false", @"result", nil];
+        [MTA trackCustomKeyValueEvent:@"event_result_orderplace_submit" props:trackParam];
     }];
 }
 
@@ -133,6 +138,8 @@
     
     [KTCPaymentService startPaymentWithInfo:self.viewModel.paymentInfo succeed:^{
         [self goToOrderDetailViewController];
+        NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:self.viewModel.orderId, @"id", @"true", @"result", nil];
+        [MTA trackCustomKeyValueEvent:@"event_result_pay_result" props:trackParam];
     } failure:^(NSError *error) {
         NSString *errMsg = @"支付失败";
         NSString *text = [[error userInfo] objectForKey:kErrMsgKey];
@@ -141,6 +148,8 @@
         }
         [[iToast makeText:errMsg] show];
         [self goToOrderDetailViewController];
+        NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:self.viewModel.orderId, @"id", @"false", @"result", nil];
+        [MTA trackCustomKeyValueEvent:@"event_result_pay_result" props:trackParam];
     }];
 }
 

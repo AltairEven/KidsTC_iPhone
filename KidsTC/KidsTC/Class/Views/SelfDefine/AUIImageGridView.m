@@ -109,7 +109,7 @@
             break;
     }
     NSUInteger index = 0;
-    for (; index < [dataArray count]; index ++) {
+    for (; index < [dataArray count]; ) {
         UIView *tempView = [[UIView alloc] initWithFrame:CGRectMake(xPosition, yPosition, self.gridSize.width, self.gridSize.height)];
         [tempView setBackgroundColor:[UIColor clearColor]];
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(xPosition, yPosition, self.gridSize.width, self.gridSize.height)];
@@ -125,16 +125,18 @@
         [imageView addGestureRecognizer:tap];
         [self addSubview:imageView];
         
-        if (index >= (self.maxLimit - 1)) {
-            break;
-        }
-        
         NSUInteger totalCount = index + 1;
         if ((totalCount % self.oneLineCount) == 0) {
             xPosition = self.hMargin;
             yPosition += self.gridSize.height + self.vCellGap;
         } else {
             xPosition += self.gridSize.width + self.hCellGap;
+        }
+        
+        if (index >= (self.maxLimit - 1) || index >= [dataArray count] - 1) {
+            break;
+        } else {
+            index ++;
         }
     }
     

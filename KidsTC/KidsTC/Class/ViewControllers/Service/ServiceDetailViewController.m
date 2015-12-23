@@ -14,6 +14,7 @@
 #import "AUIPickerView.h"
 #import "SettlementViewController.h"
 #import "CommentListViewController.h"
+#import "CommentDetailViewController.h"
 #import "ServiceDetailConfirmView.h"
 #import "KTCWebViewController.h"
 #import "KTCActionView.h"
@@ -22,6 +23,7 @@
 #import "StoreDetailViewController.h"
 #import "KTCBrowseHistoryView.h"
 #import "KTCBrowseHistoryManager.h"
+#import "OnlineCustomerService.h"
 
 
 @interface ServiceDetailViewController () <ServiceDetailViewDelegate, ServiceDetailBottomViewDelegate, ServiceDetailConfirmViewDelegate, KTCActionViewDelegate, KTCBrowseHistoryViewDataSource, KTCBrowseHistoryViewDelegate>
@@ -63,7 +65,8 @@
 - (void)hideCountdown:(BOOL)hide;
 
 //cs
-- (void)makePhoneCallToCS;
+
+- (void)makePhoneCallWithNumbers:(NSArray *)numbers;
 
 - (void)contectOnlineService;
 
@@ -84,6 +87,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     _navigationTitle = @"服务详情";
+    _pageIdentifier = @"pv_store_dtl";
     
     self.detailView.delegate = self;
     
@@ -150,6 +154,15 @@
 }
 
 - (void)serviceDetailView:(ServiceDetailView *)detailView didClickedCommentCellAtIndex:(NSUInteger)index {
+    CommentListItemModel *model = [self.viewModel.detailModel.commentItemsArray objectAtIndex:index];
+    model.relationIdentifier = self.serviceId;
+    CommentDetailViewController *controller = [[CommentDetailViewController alloc] initWithSource:CommentDetailViewSourceServiceOrStore relationType:self.viewModel.detailModel.relationType headerModel:model];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+
+- (void)didClickedMoreCommentOnServiceDetailView:(ServiceDetailView *)detailView {
     NSDictionary *commentNumberDic = [NSDictionary dictionaryWithObjectsAndKeys:
                                       [NSNumber numberWithInteger:self.viewModel.detailModel.commentAllNumber], CommentListTabNumberKeyAll,
                                       [NSNumber numberWithInteger:self.viewModel.detailModel.commentGoodNumber], CommentListTabNumberKeyGood,
@@ -157,7 +170,7 @@
                                       [NSNumber numberWithInteger:self.viewModel.detailModel.commentBadNumber], CommentListTabNumberKeyBad,
                                       [NSNumber numberWithInteger:self.viewModel.detailModel.commentPictureNumber], CommentListTabNumberKeyPicture, nil];
     
-    CommentListViewController *controller = [[CommentListViewController alloc] initWithIdentifier:self.serviceId relationType:(CommentRelationType)self.viewModel.detailModel.type commentNumberDic:commentNumberDic];
+    CommentListViewController *controller = [[CommentListViewController alloc] initWithIdentifier:self.serviceId relationType:self.viewModel.detailModel.relationType commentNumberDic:commentNumberDic];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
 }
@@ -178,7 +191,34 @@
 }
 
 - (void)didClickedCustomerServiceButtonOnServiceDetailBottomView:(ServiceDetailBottomView *)bottomView {
-    [self makePhoneCallToCS];
+    if ([[self.viewModel.detailModel phoneItems] count] > 0) {
+        //telprompt
+        UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"请选择门店" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+        for (ServiceDetailPhoneItem *item in self.viewModel.detailModel.phoneItems) {
+            UIAlertAction *action = [UIAlertAction actionWithTitle:item.title style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [self makePhoneCallWithNumbers:item.phoneNumbers];
+            }];
+            [controller addAction:action];
+        }
+        UIAlertAction *onlineAction = [UIAlertAction actionWithTitle:@"联系在线客服" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self contectOnlineService];
+        }];
+        [controller addAction:onlineAction];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        [controller addAction:cancelAction];
+        [self presentViewController:controller animated:YES completion:nil];
+    } else {
+//        UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"提示" message:[NSString stringWithFormat:@"服务电话信息有误，如有疑问，请联系客服:%@", kCustomerServicePhoneNumber] preferredStyle:UIAlertControllerStyleAlert];
+//        UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"联系客服" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", kCustomerServicePhoneNumber]]];
+//        }];
+//        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+//        [controller addAction:confirmAction];
+//        [controller addAction:cancelAction];
+//        [self presentViewController:controller animated:YES completion:nil];
+        
+        [self contectOnlineService];
+    }
 }
 
 - (void)didClickedBuyButtonOnServiceDetailBottomView:(ServiceDetailBottomView *)bottomView {
@@ -214,9 +254,37 @@
 }
 
 - (NSArray *)itemModelsForBrowseHistoryView:(KTCBrowseHistoryView *)view withTag:(KTCBrowseHistoryViewTag)tag {
-    KTCBrowseHistoryType type = [KTCBrowseHistoryView typeOfViewTag:tag];
+    if ([[KTCUser currentUser] hasLogin]) {
+        KTCBrowseHistoryType type = [KTCBrowseHistoryView typeOfViewTag:tag];
+        NSArray *array = [[KTCBrowseHistoryManager sharedManager] resultForType:type];
+        return [NSArray arrayWithArray:array];
+    }
+    return nil;
+}
+
+- (void)browseHistoryView:(KTCBrowseHistoryView *)view didSelectedItemAtIndex:(NSUInteger)index {
+    KTCBrowseHistoryType type = [KTCBrowseHistoryView typeOfViewTag:view.currentTag];
     NSArray *array = [[KTCBrowseHistoryManager sharedManager] resultForType:type];
-    return [NSArray arrayWithArray:array];
+    switch (type) {
+        case KTCBrowseHistoryTypeService:
+        {
+            BrowseHistoryServiceListItemModel *model = [array objectAtIndex:index];
+            ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithServiceId:model.identifier channelId:model.channelId];
+            [controller setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+            break;
+        case KTCBrowseHistoryTypeStore:
+        {
+            BrowseHistoryStoreListItemModel *model = [array objectAtIndex:index];
+            StoreDetailViewController *controller = [[StoreDetailViewController alloc] initWithStoreId:model.identifier];
+            [controller setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)browseHistoryView:(KTCBrowseHistoryView *)view didChangedTag:(KTCBrowseHistoryViewTag)tag {
@@ -355,6 +423,7 @@
 }
 
 - (void)showHistoryView {
+    [[KTCActionView actionView] hide];
     if ([[KTCBrowseHistoryView historyView] isShowing]) {
         [[KTCBrowseHistoryView historyView] startLoadingAnimation:NO];
         [[KTCBrowseHistoryView historyView] setDelegate:nil];
@@ -370,6 +439,7 @@
 }
 
 - (void)showActionView {
+    [[KTCBrowseHistoryView historyView] hide];
     if ([[KTCActionView actionView] isShowing]) {
         [[KTCActionView actionView] hide];
         [[KTCActionView actionView] setDelegate:nil];
@@ -419,16 +489,37 @@
     }
 }
 
-- (void)makePhoneCallToCS {
-    if ([self.viewModel.detailModel.phoneNumber length] > 0) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@", self.viewModel.detailModel.phoneNumber]]];
+- (void)makePhoneCallWithNumbers:(NSArray *)numbers {
+    if (!numbers || ![numbers isKindOfClass:[NSArray class]]) {
+        return;
+    }
+    if ([numbers count] == 0) {
+        return;
+    } else if ([numbers count] == 1) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", [numbers firstObject]]]];
     } else {
-        [[iToast makeText:[NSString stringWithFormat:@"服务电话信息有误，如有疑问，请联系客服:%@", kCustomerServicePhoneNumber]] show];
+        UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"请选择联系电话" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+        for (NSString *phoneNumber in numbers) {
+            UIAlertAction *action = [UIAlertAction actionWithTitle:phoneNumber style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", phoneNumber]]];
+            }];
+            [controller addAction:action];
+        }
+        UIAlertAction *onlineAction = [UIAlertAction actionWithTitle:@"联系在线客服" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self contectOnlineService];
+        }];
+        [controller addAction:onlineAction];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        [controller addAction:cancelAction];
+        [self presentViewController:controller animated:YES completion:nil];
     }
 }
 
 - (void)contectOnlineService {
-    
+    KTCWebViewController *controller = [[KTCWebViewController alloc] init];
+    [controller setWebUrlString:[OnlineCustomerService onlineCustomerServiceLinkUrlString]];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark Super method

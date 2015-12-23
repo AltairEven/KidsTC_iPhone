@@ -39,6 +39,7 @@ static NSString *const kCouponUseRuleUrlString = @"http://m.kidstc.com/tools/cou
 - (void)viewDidLoad {
     [super viewDidLoad];
     _navigationTitle = @"可用优惠券";
+    _pageIdentifier = @"pv_coupons_select";
     // Do any additional setup after loading the view from its nib.
     self.listView.dataSource = self;
     self.listView.delegate = self;
@@ -57,7 +58,7 @@ static NSString *const kCouponUseRuleUrlString = @"http://m.kidstc.com/tools/cou
         }
     }
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-    [self setupRightBarButton:@"" target:self action:@selector(didClickedCouponRule) frontImage:@"phone1" andBackImage:@"phone2"];
+    [self setupRightBarButton:@"" target:self action:@selector(didClickedCouponRule) frontImage:@"navigation_question" andBackImage:@"navigation_question"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

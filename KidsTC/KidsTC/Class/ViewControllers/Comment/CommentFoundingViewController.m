@@ -105,6 +105,10 @@
         __weak CommentFoundingViewController *weakSelf = self;
         [[GAlertLoadingView sharedAlertLoadingView] show];
         [weakSelf getNeedUploadPhotosArray:^(NSArray *photosArray) {
+            if ([photosArray count] == 0) {
+                [weakSelf submitComments];
+                return;
+            }
             [[KTCImageUploader sharedInstance]  startUploadWithImagesArray:photosArray splitCount:2 withSucceed:^(NSArray *locateUrlStrings) {
                 weakSelf.commentModel.uploadPhotoLocationStrings = locateUrlStrings;
                 [weakSelf submitComments];
@@ -272,6 +276,9 @@
     NSArray *selectAllImageArray = [[self.photoDictionary objectForKey:PickedInfoSelectAllImageArray]mutableCopy] ;
     NSUInteger allUrlsArrayCount = [selectAllURLArray count];
     if (allUrlsArrayCount == 0) {
+        if (finished) {
+            finished(nil);
+        }
         return;
     }
     

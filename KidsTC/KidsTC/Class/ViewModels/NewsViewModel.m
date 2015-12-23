@@ -111,8 +111,12 @@
     return nil;
 }
 
-- (NSArray *)tagTypeModels {
+- (NSArray<NewsTagTypeModel *> *)tagTypeModels {
     return self.listViewModel.newsTagTypeModels;
+}
+
+- (NSArray<NewsTagItemModel *> *)tagItemModels {
+    return [NSArray arrayWithArray:self.listViewModel.newsTagItemModels];
 }
 
 - (void)setTagItemModelsWithModel:(NewsTagItemModel *)model {

@@ -17,10 +17,9 @@ typedef enum {
 }AppointmentOrderStatus;
 
 typedef enum {
-    AppointmentOrderListStatusAll = 0,
-    AppointmentOrderListStatusWaitingUse = 1,
-    AppointmentOrderListStatusWaitingComment = 6,
-    AppointmentOrderListStatusHasOverDate = 3
+    AppointmentOrderListStatusAll = -1,
+    AppointmentOrderListStatusWaitingUse = 0,
+    AppointmentOrderListStatusWaitingComment = 1
 }AppointmentOrderListStatus;
 
 #import <Foundation/Foundation.h>

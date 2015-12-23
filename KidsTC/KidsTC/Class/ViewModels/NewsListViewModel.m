@@ -323,7 +323,7 @@
     NSUInteger index = 0;
     for (; index < [self.newsTagItemModels count]; index ++) {
         NewsTagItemModel *existModel = [self.newsTagItemModels objectAtIndex:index];
-        if ([existModel.identifier isEqualToString:model.identifier]) {
+        if ([existModel.identifier isEqualToString:model.identifier] && existModel.type == model.type) {
             isExisting = YES;
             break;
         }

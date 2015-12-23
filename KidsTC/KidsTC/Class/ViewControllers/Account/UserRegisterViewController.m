@@ -62,6 +62,7 @@
     self.bTapToEndEditing = YES;
     [super viewDidLoad];
     _navigationTitle = @"注册";
+    _pageIdentifier = @"pv_regist";
     // Do any additional setup after loading the view from its nib.
     [self buildSubviews];
 }

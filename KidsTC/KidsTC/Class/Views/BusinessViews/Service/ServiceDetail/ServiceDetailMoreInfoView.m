@@ -27,6 +27,8 @@ NSString *const kCommentCellIdentifier = @"kCommentCellIdentifier";
 
 - (void)changeViewHeight:(CGFloat)height;
 
+- (void)didClickedMoreCommentButton;
+
 @end
 
 @implementation ServiceDetailMoreInfoView
@@ -117,6 +119,17 @@ NSString *const kCommentCellIdentifier = @"kCommentCellIdentifier";
         }
             break;
         case ServiceDetailMoreInfoViewTagStore:
+        {
+            [self bringSubviewToFront:self.tableView];
+            [self.webView setHidden:YES];
+            [self.tableView setHidden:NO];
+            
+            [self.tableView reloadData];
+            CGSize size = self.tableView.contentSize;
+            [self changeViewHeight:size.height];
+            self.tableView.backgroundView = nil;
+        }
+            break;
         case ServiceDetailMoreInfoViewTagComment:
         {
             [self bringSubviewToFront:self.tableView];
@@ -126,6 +139,11 @@ NSString *const kCommentCellIdentifier = @"kCommentCellIdentifier";
             [self.tableView reloadData];
             CGSize size = self.tableView.contentSize;
             [self changeViewHeight:size.height];
+            if ([self.commentListModels count] == 0) {
+                self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 120) image:[UIImage imageNamed:@"nocomment"] description:@"暂无评论"];
+            } else {
+                self.tableView.backgroundView = nil;
+            }
         }
             break;
         default:
@@ -210,6 +228,38 @@ NSString *const kCommentCellIdentifier = @"kCommentCellIdentifier";
     return height;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (self.viewTag == ServiceDetailMoreInfoViewTagComment) {
+        return 50;
+    }
+    return 0.01;
+}
+
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    if ([self.commentListModels count] > 0 && self.viewTag == ServiceDetailMoreInfoViewTagComment) {
+        UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
+        [bgView setBackgroundColor:[UIColor clearColor]];
+        
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setBackgroundColor:[AUITheme theme].globalCellBGColor];
+        [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+        [button setTitle:@"查看全部评论" forState:UIControlStateNormal];
+        [button.titleLabel setFont:[UIFont systemFontOfSize:15]];
+        [button setFrame:CGRectMake(20, 10, bgView.frame.size.width - 40, 30)];
+        [button addTarget:self action:@selector(didClickedMoreCommentButton) forControlEvents:UIControlEventTouchUpInside];
+        
+        button.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        button.layer.borderWidth = BORDER_WIDTH;
+        button.layer.cornerRadius = 3;
+        button.layer.masksToBounds = YES;
+        
+        [bgView addSubview:button];
+        return bgView;
+    }
+    return nil;
+}
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -248,6 +298,12 @@ NSString *const kCommentCellIdentifier = @"kCommentCellIdentifier";
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, height);
     if (self.delegate && [self.delegate respondsToSelector:@selector(serviceDetailMoreInfoView:didChangedViewContentSize:)]) {
         [self.delegate serviceDetailMoreInfoView:self didChangedViewContentSize:CGSizeMake(self.frame.size.width, height)];
+    }
+}
+
+- (void)didClickedMoreCommentButton {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedMoreCommentButtonOnServiceDetailMoreInfoView:)]) {
+        [self.delegate didClickedMoreCommentButtonOnServiceDetailMoreInfoView:self];
     }
 }
 

@@ -48,8 +48,10 @@
 }
 
 - (void)loadUserCenterInfoFailed:(NSError *)error {
-    _dataModel = nil;
-    [self.view reloadData];
+    if (error.code != -1000 && error.code != -2001) {
+        _dataModel = nil;
+        [self.view reloadData];
+    }
 }
 
 

@@ -19,7 +19,8 @@ typedef enum {
     OrderStatusRefunding,
     OrderStatusRefundSucceed,
     OrderStatusRefundFailed,
-    OrderStatusHasComment
+    OrderStatusHasComment,
+    OrderStatusHasOverTime
 }OrderStatus;
 
 @interface OrderModel : NSObject

@@ -32,6 +32,7 @@ static BOOL bLoadWebImage = YES;
 @synthesize URLMapWithAlias = _URLMapWithAlias;
 @synthesize envInfo = _envInfo;
 @synthesize lock = _lock;
+@synthesize currentLocation = _currentLocation;
 
 + (GConfig *)sharedConfig
 {
@@ -79,6 +80,11 @@ static BOOL bLoadWebImage = YES;
         _currentLocation = [[KTCLocation alloc] initWithLocation:location locationDescription:@"正在定位···"];
     }
     return _currentLocation;
+}
+
+- (void)setCurrentLocation:(KTCLocation *)currentLocation {
+    _currentLocation = currentLocation;
+    [[NSNotificationCenter defaultCenter] postNotificationName:UserLocationHasChangedNotification object:nil];
 }
 
 - (NSString *)currentLocationCoordinateString {

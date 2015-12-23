@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -56,6 +56,7 @@
                 <outlet property="hotKeyContentView" destination="nSN-7X-4ga" id="Bea-1n-OfP"/>
                 <outlet property="hotKeyScrollView" destination="7rL-Yt-oKZ" id="OQL-Op-PNo"/>
                 <outlet property="hotKeyView" destination="9c9-hk-jEt" id="gTT-aC-TwI"/>
+                <outlet property="hotTagLabel" destination="3Vg-QF-Lmw" id="3Qo-1h-KFF"/>
                 <outlet property="tableView" destination="A7N-zM-Ncm" id="qx2-sj-7Gc"/>
             </connections>
             <point key="canvasLocation" x="-38" y="440"/>
@@ -64,7 +65,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="G1g-8y-Acj" id="5Rr-Ou-Qkt">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FCU-OH-SG7">

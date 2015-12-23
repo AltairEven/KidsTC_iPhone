@@ -33,6 +33,7 @@
         }
         self.imageUrls = [NSArray arrayWithArray:tempArray];
     }
+    self.relationType = (CommentRelationType)[[data objectForKey:@"productType"] integerValue];
     
     self.serviceName = [data objectForKey:@"serveName"];
     self.starNumber = [[data objectForKey:@"level"] floatValue];
@@ -70,10 +71,11 @@
         self.recommendString = [recommendDic objectForKey:@"note"];
     }
     
+    self.serviceDescription = [data objectForKey:@"promote"];
+    
     self.introductionUrlString = [data objectForKey:@"detailUrl"];
     
     self.isFavourate = [[data objectForKey:@"isFavor"] boolValue];
-    self.phoneNumber = [data objectForKey:@"phone"];
     
     self.stockNumber = [[data objectForKey:@"remainCount"] integerValue];
     self.maxLimit = [[data objectForKey:@"buyMaxNum"] integerValue];
@@ -85,11 +87,18 @@
     NSArray *storesArray = [data objectForKey:@"store"];
     if ([storesArray isKindOfClass:[NSArray class]]) {
         NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        NSMutableArray *tempPhoneArray = [[NSMutableArray alloc] init];
         for (NSDictionary *singleDic in storesArray) {
             StoreListItemModel *item = [[StoreListItemModel alloc] initWithRawData:singleDic];
-            [tempArray addObject:item];
+            if (item) {
+                [tempArray addObject:item];
+                ServiceDetailPhoneItem *phoneItem = [[ServiceDetailPhoneItem alloc] initWithTitle:item.storeName andPhoneNumberString:item.phoneNumber];
+                [tempPhoneArray addObject:phoneItem];
+            }
+            
         }
         self.storeItemsArray = [NSArray arrayWithArray:tempArray];
+        _phoneItems = [NSArray arrayWithArray:tempPhoneArray];
     }
     
     
@@ -163,7 +172,7 @@
 }
 
 - (CGFloat)recommendCellHeight {
-    CGFloat height = [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 10 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:13] topGap:10 bottomGap:10 maxLine:0 andText:self.recommendString];
+    CGFloat height = [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 90 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:13] topGap:10 bottomGap:10 maxLine:0 andText:self.recommendString];
     if (height < 80) {
         height = 80;
     }
@@ -203,6 +212,42 @@
     height += [GConfig heightForLabelWithWidth:labelWidth LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:wordWidth] topGap:10 bottomGap:10 andText:self.content];
     
     return height;
+}
+
+@end
+
+@implementation ServiceDetailPhoneItem
+
+- (instancetype)initWithTitle:(NSString *)title andPhoneNumbers:(NSArray *)numbers {
+    if (!title || ![title isKindOfClass:[NSString class]]) {
+        title = @"门店";
+    }
+    if (!numbers || ![numbers isKindOfClass:[NSArray class]]) {
+        return nil;
+    }
+    self = [super init];
+    if (self) {
+        self.title = title;
+        self.phoneNumbers = numbers;
+    }
+    return self;
+}
+
+- (instancetype)initWithTitle:(NSString *)title andPhoneNumberString:(NSString *)string {
+    if (!title || ![title isKindOfClass:[NSString class]]) {
+        title = @"门店";
+    }
+    if (!string || ![string isKindOfClass:[NSString class]]) {
+        return nil;
+    }
+    self = [super init];
+    if (self) {
+        self.title = title;
+        string = [string stringByReplacingOccurrencesOfString:@" " withString:@""];
+        string = [string stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        self.phoneNumbers = [string componentsSeparatedByString:@";"];
+    }
+    return self;
 }
 
 @end

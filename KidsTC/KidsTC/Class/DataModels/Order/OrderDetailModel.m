@@ -37,7 +37,7 @@
         PaymentType payType = (PaymentType)[[data objectForKey:@"paytype"] integerValue];
         self.pamentType = [[PaymentTypeModel alloc] initWithPaymentName:paymentName paymenttype:payType logoImage:nil];
         self.canRefund = [[data objectForKey:@"canRefund"] boolValue];
-        self.canContactCS = [[data objectForKey:@"canContactCS"] boolValue];
+        self.canContactCS = [[data objectForKey:@"isNeedConnectService"] boolValue];
         self.originalAmount = [[data objectForKey:@"originalAmt"] floatValue];
         self.discountAmount = [[data objectForKey:@"discountAmt"] floatValue];
         self.orderDetailDescription = [data objectForKey:@"orderDetailDesc"];
@@ -46,7 +46,10 @@
         if ([self.orderDetailDescription length] == 0) {
             self.orderDetailDescription = self.statusDescription;
         }
-        self.canContactCS = YES;
+        self.orderPaymentDes = [data objectForKey:@"expireTimeDesc"];
+        self.productType = [[data objectForKey:@"productType"] integerValue];
+        
+        self.price = self.originalAmount - self.discountAmount - self.usedPointNumber * ScoreCoefficient;
     }
     return self;
 }

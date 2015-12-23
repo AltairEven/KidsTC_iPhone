@@ -374,14 +374,21 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
 }
 
 - (void)serviceDetailMoreInfoView:(ServiceDetailMoreInfoView *)infoView didClickedStoreAtIndex:(NSUInteger)index {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(serviceDetailMoreInfoView:didClickedStoreAtIndex:)]) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(serviceDetailView:didClickedStoreCellAtIndex:)]) {
         [self.delegate serviceDetailView:self didClickedStoreCellAtIndex:index];
     }
 }
 
 - (void)serviceDetailMoreInfoView:(ServiceDetailMoreInfoView *)infoView didClickedCommentAtIndex:(NSUInteger)index {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(serviceDetailMoreInfoView:didClickedCommentAtIndex:)]) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(serviceDetailView:didClickedCommentCellAtIndex:)]) {
         [self.delegate serviceDetailView:self didClickedCommentCellAtIndex:index];
+    }
+}
+
+
+- (void)didClickedMoreCommentButtonOnServiceDetailMoreInfoView:(ServiceDetailMoreInfoView *)infoView {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedMoreCommentOnServiceDetailView:)]) {
+        [self.delegate didClickedMoreCommentOnServiceDetailView:self];
     }
 }
 

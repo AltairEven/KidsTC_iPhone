@@ -89,6 +89,28 @@
     return condition;
 }
 
+//@property (nonatomic, copy) NSString *keyWord;
+//
+//@property (nonatomic, strong) KTCAreaItem *area;
+//
+//@property (nonatomic, strong) KTCAgeItem *age;
+//
+//@property (nonatomic, copy) NSString *categoryIdentifier;
+
++ (KTCSearchServiceCondition *)conditionFromStoreCondition:(KTCSearchStoreCondition *)condition {
+    if (!condition) {
+        return nil;
+    }
+    KTCSearchServiceCondition *serviceCondition = [[KTCSearchServiceCondition alloc] init];
+    serviceCondition.sortType = KTCSearchResultServiceSortTypeSmart;
+    serviceCondition.keyWord = condition.keyWord;
+    serviceCondition.area = condition.area;
+    serviceCondition.age = condition.age;
+    serviceCondition.categoryIdentifier = condition.categoryIdentifier;
+    
+    return serviceCondition;
+}
+
 @end
 
 
@@ -159,6 +181,21 @@
     }
     
     return condition;
+}
+
++ (KTCSearchStoreCondition *)conditionFromServiceCondition:(KTCSearchServiceCondition *)condition {
+    if (!condition) {
+        return nil;
+    }
+    KTCSearchStoreCondition *storeCondition = [[KTCSearchStoreCondition alloc] init];
+    storeCondition.sortType = KTCSearchResultStoreSortTypeSmart;
+    storeCondition.keyWord = condition.keyWord;
+    storeCondition.area = condition.area;
+    storeCondition.age = condition.age;
+    storeCondition.categoryIdentifier = condition.categoryIdentifier;
+    storeCondition.coordinateString = [[GConfig sharedConfig] currentLocationCoordinateString];
+    
+    return storeCondition;
 }
 
 @end

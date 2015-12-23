@@ -15,6 +15,7 @@
 @property (strong, nonatomic) IBOutlet UITableViewCell *hotKeyCell;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *hotKeyScrollView;
+@property (weak, nonatomic) IBOutlet UILabel *hotTagLabel;
 
 //view2
 @property (weak, nonatomic) IBOutlet UIView *hotKeyView;
@@ -250,6 +251,11 @@
 - (void)setupHotKeyButtons {
     for (UIView *subview in self.hotKeyContentView.subviews) {
         [subview removeFromSuperview];
+    }
+    if ([self.hotKeysArray count] > 0) {
+        [self.hotTagLabel setHidden:NO];
+    } else {
+        [self.hotTagLabel setHidden:YES];
     }
     
     CGFloat xPosition = 0;

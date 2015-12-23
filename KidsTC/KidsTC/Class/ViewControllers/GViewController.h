@@ -20,6 +20,7 @@
 @interface GViewController : UIViewController<GConnectUselessViewDelegate> {
     UITapGestureRecognizer *_tapGesture;
     NSString *_navigationTitle;
+    NSString *_pageIdentifier;
     BOOL showFirstTime;
 }
 

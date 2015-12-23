@@ -13,7 +13,17 @@ typedef enum {
     OrderDetailPushSourceSettlement
 }OrderDetailPushSource;
 
+@class OrderDetailViewController;
+
+@protocol OrderDetailViewControllerDelegate  <NSObject>
+
+- (void)orderStatusChanged:(NSString *)orderId  needRefresh:(BOOL)need;
+
+@end
+
 @interface OrderDetailViewController : GViewController
+
+@property (nonatomic, assign) id<OrderDetailViewControllerDelegate> delegate;
 
 - (instancetype)initWithOrderId:(NSString *)orderId pushSource:(OrderDetailPushSource)source;
 

@@ -480,7 +480,8 @@ typedef NS_ENUM(NSInteger, ChosenTag){
         case ChosenTagUnchosen:
         {
             if ([self.chosenPhotos count] + [self.takePicturesArray count] >= maxNum) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"最多选择十张照片" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                NSString *msg = [NSString stringWithFormat:@"最多选择%ld张照片", (long)self.maxNum];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:msg delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 [alert show];
                 break;
             }
@@ -553,7 +554,8 @@ typedef NS_ENUM(NSInteger, ChosenTag){
         case ChosenTagUnchosen:
         {
             if ([self.chosenPhotos count] + [self.takePicturesArray count] >= maxNum) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"最多选择十张照片" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                NSString *msg = [NSString stringWithFormat:@"最多选择%ld张照片", (long)self.maxNum];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:msg delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 [alert show];
                 break;
             }
@@ -726,7 +728,7 @@ typedef NS_ENUM(NSInteger, ChosenTag){
         [group enumerateAssetsUsingBlock:assetsEnumerator];
     };
     
-    [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:assetsGroupsEnumerator failureBlock:^(NSError *){
+    [self.assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupLibrary|ALAssetsGroupAlbum|ALAssetsGroupEvent|ALAssetsGroupFaces|ALAssetsGroupSavedPhotos usingBlock:assetsGroupsEnumerator failureBlock:^(NSError *){
         NSLog(@"Get saved photos failed.");}];
 }
 

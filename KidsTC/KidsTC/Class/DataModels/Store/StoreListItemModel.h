@@ -28,6 +28,8 @@
 
 @property (nonatomic, copy) NSString *businessZone;
 
+@property (nonatomic, copy) NSString *phoneNumber;
+
 @property (nonatomic, strong) NSArray <PromotionLogoItem *> *promotionLogoItems;
 
 @property (nonatomic, strong) NSArray <ActivityLogoItem *> *activityLogoItems;

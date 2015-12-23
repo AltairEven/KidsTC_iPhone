@@ -29,6 +29,7 @@ typedef enum {
 }KTCSearchResultStoreSortType;
 
 @class IcsonBaseCategory;
+@class KTCSearchStoreCondition;
 
 @interface KTCSearchCondition : NSObject
 
@@ -51,6 +52,8 @@ typedef enum {
 
 @property (nonatomic, assign) KTCSearchResultServiceSortType sortType;
 
++ (KTCSearchServiceCondition *)conditionFromStoreCondition:(KTCSearchStoreCondition *)condition;
+
 @end
 
 @interface KTCSearchStoreCondition : KTCSearchCondition
@@ -58,5 +61,7 @@ typedef enum {
 @property (nonatomic, assign) KTCSearchResultStoreSortType sortType;
 
 @property (nonatomic, copy) NSString *coordinateString;
+
++ (KTCSearchStoreCondition *)conditionFromServiceCondition:(KTCSearchServiceCondition *)condition;
 
 @end

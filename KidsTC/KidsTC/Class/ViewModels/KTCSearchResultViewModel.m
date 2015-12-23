@@ -27,8 +27,6 @@
 
 - (void)dataInitialization;
 
-- (void)resetSortFilterWithSearchType:(KTCSearchType)type;
-
 - (void)loadServiceDataSucceed:(NSDictionary *)data;
 
 - (void)loadServiceDataFailed:(NSError *)error;
@@ -67,8 +65,51 @@
         [self dataInitialization];
         self.serviceResultArray = [[NSMutableArray alloc] init];
         self.storeResultArray = [[NSMutableArray alloc] init];
+        self.serviceAreaFilterCoordinate = FilterCoordinateMake(-1, -1);
+        self.serviceSortFilterCoordinate = FilterCoordinateMake(-1, -1);
+        self.serviceAgeFilterCoordinate = FilterCoordinateMake(-1, -1);
+        self.serviceCategoryFilterCoordinate = FilterCoordinateMake(-1, -1);
+        self.storeAreaFilterCoordinate = FilterCoordinateMake(-1, -1);
+        self.storeSortFilterCoordinate = FilterCoordinateMake(-1, -1);
+        self.storeAgeFilterCoordinate = FilterCoordinateMake(-1, -1);
+        self.storeCategoryFilterCoordinate = FilterCoordinateMake(-1, -1);
     }
     return self;
+}
+
+- (void)setSearchServiceCondition:(KTCSearchServiceCondition *)searchServiceCondition {
+    _searchServiceCondition = searchServiceCondition;
+    NSArray *lvl1Categories = [[IcsonCategoryManager sharedManager] getCategoryArrayWithLevel:CategoryLevel1 Error:nil];
+    KTCSearchResultFilterCoordinate cateCoord = FilterCoordinateMake(-1, -1);
+    for (NSUInteger index = 0; index < [lvl1Categories count]; index ++) {
+        IcsonLevel1Category *category = [lvl1Categories objectAtIndex:index];
+        NSArray *nextLevel = [category nextLevel];
+        for (NSUInteger nextIndex = 0; nextIndex < [nextLevel count]; nextIndex ++) {
+            IcsonLevel2Category *level2Category = [nextLevel objectAtIndex:nextIndex];
+            if ([level2Category.identifier isEqualToString:searchServiceCondition.categoryIdentifier]) {
+                cateCoord = FilterCoordinateMake(index, nextIndex);
+            }
+        }
+    }
+    self.serviceCategoryFilterCoordinate = cateCoord;
+}
+
+
+- (void)setSearchStoreCondition:(KTCSearchStoreCondition *)searchStoreCondition {
+    _searchStoreCondition = searchStoreCondition;
+    NSArray *lvl1Categories = [[IcsonCategoryManager sharedManager] getCategoryArrayWithLevel:CategoryLevel1 Error:nil];
+    KTCSearchResultFilterCoordinate cateCoord = FilterCoordinateMake(-1, -1);
+    for (NSUInteger index = 0; index < [lvl1Categories count]; index ++) {
+        IcsonLevel1Category *category = [lvl1Categories objectAtIndex:index];
+        NSArray *nextLevel = [category nextLevel];
+        for (NSUInteger nextIndex = 0; nextIndex < [nextLevel count]; nextIndex ++) {
+            IcsonLevel2Category *level2Category = [nextLevel objectAtIndex:nextIndex];
+            if ([level2Category.identifier isEqualToString:searchStoreCondition.categoryIdentifier]) {
+                cateCoord = FilterCoordinateMake(index, nextIndex);
+            }
+        }
+    }
+    self.storeCategoryFilterCoordinate = cateCoord;
 }
 
 - (void)setServiceAreaFilterCoordinate:(KTCSearchResultFilterCoordinate)serviceAreaFilterCoordinate {
@@ -90,6 +131,8 @@
     _serviceAgeFilterCoordinate = serviceAgeFilterCoordinate;
     if (serviceAgeFilterCoordinate.level1Index >=0 && serviceAgeFilterCoordinate.level2Index >= 0) {
         self.searchServiceCondition.age = [self.ageFilterModel.subArray objectAtIndex:serviceAgeFilterCoordinate.level2Index];
+    } else {
+        self.searchServiceCondition.age = nil;
     }
 }
 
@@ -99,6 +142,45 @@
         KTCSearchResultFilterModel *level1Model = [self.categoryFilterModels objectAtIndex:serviceCategoryFilterCoordinate.level1Index];
         KTCSearchResultFilterModel *level2Model = [level1Model.subArray objectAtIndex:serviceCategoryFilterCoordinate.level2Index];
         self.searchServiceCondition.categoryIdentifier = level2Model.identifier;
+    } else {
+        self.searchServiceCondition.categoryIdentifier = 0;
+    }
+}
+
+- (void)setStoreAreaFilterCoordinate:(KTCSearchResultFilterCoordinate)storeAreaFilterCoordinate {
+    _storeAreaFilterCoordinate = storeAreaFilterCoordinate;
+    if (storeAreaFilterCoordinate.level1Index >=0 && storeAreaFilterCoordinate.level2Index >= 0) {
+        self.searchStoreCondition.area = [self.areaFilterModel.subArray objectAtIndex:storeAreaFilterCoordinate.level2Index];
+    }
+}
+
+
+- (void)setStoreSortFilterCoordinate:(KTCSearchResultFilterCoordinate)storeSortFilterCoordinate {
+    _storeSortFilterCoordinate = storeSortFilterCoordinate;
+    if (storeSortFilterCoordinate.level1Index >=0 && storeSortFilterCoordinate.level2Index >= 0) {
+        KTCSearchResultFilterModel *sortModel = [self.sortFilterModel.subArray objectAtIndex:storeSortFilterCoordinate.level2Index];
+        self.searchStoreCondition.sortType = (KTCSearchResultStoreSortType)[sortModel.identifier integerValue];
+    }
+}
+
+
+- (void)setStoreAgeFilterCoordinate:(KTCSearchResultFilterCoordinate)storeAgeFilterCoordinate {
+    _storeAgeFilterCoordinate = storeAgeFilterCoordinate;
+    if (storeAgeFilterCoordinate.level1Index >=0 && storeAgeFilterCoordinate.level2Index >= 0) {
+        self.searchStoreCondition.age = [self.ageFilterModel.subArray objectAtIndex:storeAgeFilterCoordinate.level2Index];
+    } else {
+        self.searchStoreCondition.age = nil;
+    }
+}
+
+- (void)setStoreCategoryFilterCoordinate:(KTCSearchResultFilterCoordinate)storeCategoryFilterCoordinate {
+    _storeCategoryFilterCoordinate = storeCategoryFilterCoordinate;
+    if (storeCategoryFilterCoordinate.level1Index >=0 && storeCategoryFilterCoordinate.level2Index >= 0) {
+        KTCSearchResultFilterModel *level1Model = [self.categoryFilterModels objectAtIndex:storeCategoryFilterCoordinate.level1Index];
+        KTCSearchResultFilterModel *level2Model = [level1Model.subArray objectAtIndex:storeCategoryFilterCoordinate.level2Index];
+        self.searchStoreCondition.categoryIdentifier = level2Model.identifier;
+    } else {
+        self.searchStoreCondition.categoryIdentifier = 0;
     }
 }
 
@@ -171,7 +253,11 @@
 
 - (void)resetSortFilterWithSearchType:(KTCSearchType)type {
     _sortFilterModel = [[KTCSearchResultFilterModel alloc] init];
-    _sortFilterModel.name = @"智能排序";
+    
+    KTCSearchResultFilterCoordinate areaFilterCoordinate;
+    KTCSearchResultFilterCoordinate sortFilterCoordinate;
+    KTCSearchResultFilterCoordinate ageFilterCoordinate;
+    KTCSearchResultFilterCoordinate cateFilterCoordinate;
     
     switch (type) {
         case KTCSearchTypeService:
@@ -198,6 +284,21 @@
             
             
             _sortFilterModel.subArray = [NSArray arrayWithObjects:sortFilter1, sortFilter2, sortFilter3, sortFilter4, sortFilter5, nil];
+            areaFilterCoordinate = self.serviceAreaFilterCoordinate;
+            sortFilterCoordinate = self.serviceSortFilterCoordinate;
+            ageFilterCoordinate = self.serviceAgeFilterCoordinate;
+            cateFilterCoordinate = self.serviceCategoryFilterCoordinate;
+            if (sortFilterCoordinate.level2Index <= 0) {
+                _sortFilterModel.name = sortFilter1.name;
+            } else if (sortFilterCoordinate.level2Index == 1) {
+                _sortFilterModel.name = sortFilter2.name;
+            } else if (sortFilterCoordinate.level2Index == 2) {
+                _sortFilterModel.name = sortFilter3.name;
+            } else if (sortFilterCoordinate.level2Index == 3) {
+                _sortFilterModel.name = sortFilter4.name;
+            } else if (sortFilterCoordinate.level2Index == 4) {
+                _sortFilterModel.name = sortFilter5.name;
+            }
         }
             break;
         case KTCSearchTypeStore:
@@ -215,12 +316,27 @@
             sortFilter3.identifier = [NSString stringWithFormat:@"%d", KTCSearchResultStoreSortTypeDistance];
             
             _sortFilterModel.subArray = [NSArray arrayWithObjects:sortFilter1, sortFilter2, sortFilter3, nil];
+            areaFilterCoordinate = self.storeAreaFilterCoordinate;
+            sortFilterCoordinate = self.storeSortFilterCoordinate;
+            ageFilterCoordinate = self.storeAgeFilterCoordinate;
+            cateFilterCoordinate = self.storeCategoryFilterCoordinate;
+            if (sortFilterCoordinate.level2Index <= 0) {
+                _sortFilterModel.name = sortFilter1.name;
+            } else if (sortFilterCoordinate.level2Index == 1) {
+                _sortFilterModel.name = sortFilter2.name;
+            } else if (sortFilterCoordinate.level2Index == 2) {
+                _sortFilterModel.name = sortFilter3.name;
+            }
         }
             break;
         default:
             break;
     }
     [self.view setSortFilterModel:self.sortFilterModel];
+    [self.view setAreaFilterCoordinate:areaFilterCoordinate];
+    [self.view setSortFilterCoordinate:sortFilterCoordinate];
+    [self.view setAgeFilterCoordinate:ageFilterCoordinate];
+    [self.view setCategoryFilterCoordinate:cateFilterCoordinate];
 }
 
 

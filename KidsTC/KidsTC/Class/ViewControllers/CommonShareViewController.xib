@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -247,7 +247,7 @@
                             <rect key="frame" x="0.0" y="240" width="600" height="60"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CzO-tF-gca">
-                                    <rect key="frame" x="285" y="10" width="30" height="40"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="EIH-5z-wxw"/>
                                     </constraints>
@@ -255,6 +255,11 @@
                                     <state key="normal" title="取消">
                                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="EIH-5z-wxw"/>
+                                        </mask>
+                                    </variation>
                                     <connections>
                                         <action selector="didClickedCancelButton:" destination="-1" eventType="touchUpInside" id="vKd-9Z-bBA"/>
                                     </connections>
@@ -263,9 +268,19 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="60" id="ONh-6y-9aN"/>
+                                <constraint firstAttribute="trailing" secondItem="CzO-tF-gca" secondAttribute="trailing" id="OyK-VU-PXx"/>
+                                <constraint firstItem="CzO-tF-gca" firstAttribute="leading" secondItem="H40-6j-eM6" secondAttribute="leading" id="TIt-dn-w7Y"/>
+                                <constraint firstItem="CzO-tF-gca" firstAttribute="top" secondItem="H40-6j-eM6" secondAttribute="top" id="W0y-wT-2CZ"/>
                                 <constraint firstItem="CzO-tF-gca" firstAttribute="centerX" secondItem="H40-6j-eM6" secondAttribute="centerX" id="vpT-nM-Oel"/>
                                 <constraint firstItem="CzO-tF-gca" firstAttribute="centerY" secondItem="H40-6j-eM6" secondAttribute="centerY" id="w11-CI-ZUk"/>
+                                <constraint firstAttribute="bottom" secondItem="CzO-tF-gca" secondAttribute="bottom" id="zyD-i6-gjn"/>
                             </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="vpT-nM-Oel"/>
+                                    <exclude reference="w11-CI-ZUk"/>
+                                </mask>
+                            </variation>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

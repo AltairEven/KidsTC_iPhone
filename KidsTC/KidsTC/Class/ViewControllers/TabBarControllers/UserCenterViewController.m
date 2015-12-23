@@ -33,6 +33,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _pageIdentifier = @"pv_acct";
     // Do any additional setup after loading the view from its nib.
     self.userCenterView.delegate = self;
     
@@ -148,6 +149,8 @@
                 NotificationCenterViewController *controller = [[NotificationCenterViewController alloc] initWithNibName:@"NotificationCenterViewController" bundle:nil];
                 controller.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:controller animated:YES];
+                self.viewModel.dataModel.unreadMessageCount = 0;
+                [self.userCenterView reloadData];
             }
                 break;
             default:

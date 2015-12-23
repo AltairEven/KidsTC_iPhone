@@ -143,11 +143,15 @@
             if ([self.commentModel.commentText length] > 0) {
                 [self.textField setIsPlaceHolderState:NO];
                 [self.textField setText:self.commentModel.commentText];
+                self.commentLengthLabel.text = [NSString stringWithFormat:@"%ld",(long)[self.commentModel.commentText length]];
+
             } else {
                 [self.textField setText:@""];
                 [self.textField setIsPlaceHolderState:YES];
             }
             [self.takePhotoView setImageOrUrlStringsCombinedArray:self.commentModel.combinedImagesArray];
+            [self.commentCell.contentView updateConstraintsIfNeeded];
+            [self.commentCell.contentView layoutIfNeeded];
             cell = self.commentCell;
         }
             break;
@@ -345,6 +349,7 @@
 }
 
 - (void)didClickedSubmitButton {
+    [self endEditing];
     if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedSubmitButtonOnCommentEditView:)]) {
         [self.delegate didClickedSubmitButtonOnCommentEditView:self];
     }

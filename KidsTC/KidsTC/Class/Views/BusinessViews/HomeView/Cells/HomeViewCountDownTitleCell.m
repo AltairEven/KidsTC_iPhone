@@ -20,6 +20,8 @@
 
 @property (nonatomic, strong) ATCountDown *countDownTimer;
 
+@property (nonatomic, assign) BOOL hasStartCountDown;
+
 @end
 
 @implementation HomeViewCountDownTitleCell
@@ -48,11 +50,14 @@
     if (model) {
         [self.titleLabel setText:model.mainTitle];
         [self setLeftTime:model.timeLeft];
+    } else {
+        [self setLeftTime:0];
     }
 }
 
 - (void)setLeftTime:(NSTimeInterval)leftTime {
-    if (!self.countDownTimer) {
+    if (!self.hasStartCountDown) {
+        self.hasStartCountDown = YES;
         self.countDownTimer = [[ATCountDown alloc] initWithLeftTimeInterval:leftTime];
         __weak HomeViewCountDownTitleCell *weakSelf = self;
         [weakSelf.countDownTimer startCountDownWithCurrentTimeLeft:^(NSTimeInterval currentTimeLeft) {
@@ -68,6 +73,12 @@
     [self.hourLabel setText:hourString];
     [self.minuteLabel setText:minuteString];
     [self.secondLabel setText:secondString];
+}
+
+
+- (void)stopCountDown {
+    [self.countDownTimer stopCountDown];
+    self.hasStartCountDown = NO;
 }
 
 @end

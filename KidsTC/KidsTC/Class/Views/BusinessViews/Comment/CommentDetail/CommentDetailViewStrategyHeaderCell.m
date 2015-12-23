@@ -73,7 +73,7 @@
             [self.relatedInfoButton setHidden:NO];
             [self.relatedInfoButton setTitle:cellModel.relatedInfoTitle forState:UIControlStateNormal];
         } else {
-            [self.relatedInfoButton setHidden:NO];
+            [self.relatedInfoButton setHidden:YES];
         }
         if ([self.timeLabel isHidden] && [self.relatedInfoButton isHidden]) {
             self.infoHeight.constant = 0;

@@ -19,6 +19,8 @@
 
 @property (nonatomic, assign) KTCSearchType defaultSearchType;
 
+- (void)searchWithKeyword:(NSString *)kw;
+
 @end
 
 @implementation KTCSearchViewController
@@ -33,6 +35,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _pageIdentifier = @"pv_search";
     // Do any additional setup after loading the view from its nib.
     self.searchView.delegate = self;
     self.viewModel = [[SearchViewModel alloc] initWithView:self.searchView defaultSearchType:self.defaultSearchType];
@@ -81,6 +84,42 @@
 
 - (void)didClickedSearchButtonOnKTCSearchView:(KTCSearchView *)searchView {
     NSString *kw = [self.searchView keywords];
+    [self searchWithKeyword:kw];
+}
+
+- (void)searchView:(KTCSearchView *)searchView didSelectedHotKeyAtIndex:(NSUInteger)index {
+    NSDictionary *searchParam = [[self.viewModel hotSearchArray] objectAtIndex:index];
+    BOOL needPush = YES;
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[KTCSearchResultViewController class]]) {
+            needPush = NO;
+            KTCSearchResultViewController *resultVC = (KTCSearchResultViewController *)controller;
+            resultVC.searchType = self.searchView.type;
+            resultVC.searchCondition = [searchParam objectForKey:kSearchHotKeyCondition];
+            resultVC.needRefresh = YES;
+            [self.navigationController popToViewController:controller animated:YES];
+            break;
+        }
+    }
+    if (needPush) {
+        KTCSearchResultViewController *controller = [[KTCSearchResultViewController alloc] initWithSearchType:self.searchView.type condition:[searchParam objectForKey:kSearchHotKeyCondition]];
+        [controller setHidesBottomBarWhenPushed:YES];
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+}
+
+- (void)searchView:(KTCSearchView *)searchView didSelectedHistoryAtIndex:(NSUInteger)index {
+    NSString *kw = [[[self.viewModel searchHistory] allKeys] firstObject];
+    [self searchWithKeyword:kw];
+}
+
+- (void)didClickedClearHistoryButtonOnKTCSearchView:(KTCSearchView *)searchView {
+    [self.viewModel clearSearchHistory];
+}
+
+#pragma mark Private methods
+
+- (void)searchWithKeyword:(NSString *)kw {
     [self.viewModel addSearchHistoryWithType:self.searchView.type keyword:kw];
     KTCSearchCondition *condition = nil;
     switch (self.searchView.type) {
@@ -124,22 +163,6 @@
         [controller setHidesBottomBarWhenPushed:YES];
         [self.navigationController pushViewController:controller animated:YES];
     }
-}
-
-- (void)searchView:(KTCSearchView *)searchView didSelectedHotKeyAtIndex:(NSUInteger)index {
-    KTCSearchResultViewController *controller = [[KTCSearchResultViewController alloc] initWithNibName:@"KTCSearchResultViewController" bundle:nil];
-    [controller setHidesBottomBarWhenPushed:YES];
-    [self.navigationController pushViewController:controller animated:YES];
-}
-
-- (void)searchView:(KTCSearchView *)searchView didSelectedHistoryAtIndex:(NSUInteger)index {
-    KTCSearchResultViewController *controller = [[KTCSearchResultViewController alloc] initWithNibName:@"KTCSearchResultViewController" bundle:nil];
-    [controller setHidesBottomBarWhenPushed:YES];
-    [self.navigationController pushViewController:controller animated:YES];
-}
-
-- (void)didClickedClearHistoryButtonOnKTCSearchView:(KTCSearchView *)searchView {
-    [self.viewModel clearSearchHistory];
 }
 
 - (void)didReceiveMemoryWarning {

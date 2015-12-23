@@ -129,6 +129,12 @@
 }
 
 - (void)textViewDidChange:(UITextView *)textView {
+    if (self.textView.isPlaceHolderState)
+    {
+        [self.textView setText:@""];
+        [self.textView setIsPlaceHolderState:NO];
+        return;
+    }
     NSInteger number = [textView.text length];
     if (number > self.textLimitLength) {
 //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"字数不能大于500" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
@@ -197,6 +203,17 @@
     xPosition = textButton.frame.origin.x + textButton.frame.size.width + gap;
     for (NSUInteger index = 0; index < [self.availableExtFuntions count]; index ++) {
         AUIKeyboardAdhesiveViewExtensionFunction *function = [self.availableExtFuntions objectAtIndex:index];
+        //有扩展，则不用隐藏文字按钮
+        if (function.type == AUIKeyboardAdhesiveViewExtensionFunctionTypeEmotionEdit) {
+            needHideTextEditButton = NO;
+        }
+    }
+    if (needHideTextEditButton) {
+        [textButton setHidden:needHideTextEditButton];
+        xPosition = textButton.frame.origin.x;
+    }
+    for (NSUInteger index = 0; index < [self.availableExtFuntions count]; index ++) {
+        AUIKeyboardAdhesiveViewExtensionFunction *function = [self.availableExtFuntions objectAtIndex:index];
         UIButton *functionButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [functionButton setFrame:CGRectMake(xPosition, yPosition, width, height)];
         [functionButton setImage:function.icon forState:UIControlStateNormal];
@@ -205,11 +222,12 @@
         [self.headerView addSubview:functionButton];
         xPosition += functionButton.frame.size.width + gap;
         //有扩展，则不用隐藏文字按钮
-        needHideTextEditButton = NO;
+        if (function.type == AUIKeyboardAdhesiveViewExtensionFunctionTypeEmotionEdit) {
+            needHideTextEditButton = NO;
+        }
         //创建扩展视图
         [self buildExtensionViewWithType:function.type];
     }
-    [textButton setHidden:needHideTextEditButton];
     
     //text view
     yPosition = self.headerView.frame.size.height;

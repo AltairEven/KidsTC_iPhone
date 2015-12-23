@@ -193,9 +193,13 @@
     [weakSelf.submitOrderRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [[GAlertLoadingView sharedAlertLoadingView] hide];
         [weakSelf submitOrderSucceed:responseData];
+        NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:@"true", @"result", nil];
+        [MTA trackCustomKeyValueEvent:@"event_result_appoint_result" props:trackParam];
     } failure:^(HttpRequestClient *client, NSError *error) {
         [[GAlertLoadingView sharedAlertLoadingView] hide];
         [weakSelf submitOrderFailed:error];
+        NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:@"false", @"result", nil];
+        [MTA trackCustomKeyValueEvent:@"event_result_appoint_result" props:trackParam];
     }];
 
 }

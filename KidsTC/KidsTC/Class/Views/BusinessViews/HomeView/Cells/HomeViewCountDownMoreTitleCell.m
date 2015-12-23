@@ -22,6 +22,8 @@
 
 @property (nonatomic, strong) ATCountDown *countDownTimer;
 
+@property (nonatomic, assign) BOOL hasStartCountDown;
+
 @end
 
 @implementation HomeViewCountDownMoreTitleCell
@@ -56,7 +58,8 @@
 }
 
 - (void)setLeftTime:(NSTimeInterval)leftTime {
-    if (!self.countDownTimer) {
+    if (!self.hasStartCountDown) {
+        self.hasStartCountDown = YES;
         self.countDownTimer = [[ATCountDown alloc] initWithLeftTimeInterval:leftTime];
         __weak HomeViewCountDownMoreTitleCell *weakSelf = self;
         [weakSelf.countDownTimer startCountDownWithCurrentTimeLeft:^(NSTimeInterval currentTimeLeft) {
@@ -72,6 +75,12 @@
     [self.hourLabel setText:hourString];
     [self.minuteLabel setText:minuteString];
     [self.secondLabel setText:secondString];
+}
+
+
+- (void)stopCountDown {
+    [self.countDownTimer stopCountDown];
+    self.hasStartCountDown = NO;
 }
 
 @end

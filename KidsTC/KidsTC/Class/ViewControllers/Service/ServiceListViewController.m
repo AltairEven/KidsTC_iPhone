@@ -64,6 +64,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _navigationTitle = @"服务列表";
+    _pageIdentifier = @"pv_store_servers";
     // Do any additional setup after loading the view from its nib.
     self.listView.dataSource = self;
     self.listView.delegate = self;

@@ -23,6 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _navigationTitle = @"预约订单";
+    _pageIdentifier = @"pv_appoints";
     // Do any additional setup after loading the view from its nib.
     self.listView.delegate = self;
     

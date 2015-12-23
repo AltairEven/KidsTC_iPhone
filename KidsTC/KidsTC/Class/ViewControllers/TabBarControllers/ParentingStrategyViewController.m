@@ -29,6 +29,7 @@
     [super viewDidLoad];
     
     _navigationTitle = @"亲子攻略";
+    _pageIdentifier = @"pv_stgys";
     // Do any additional setup after loading the view from its nib.
     self.strategyView.delegate = self;
     

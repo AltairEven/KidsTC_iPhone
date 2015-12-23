@@ -54,6 +54,9 @@ static WeiboManager *_sharedInstance = nil;
     if (self) {
         [WeiboSDK enableDebugMode:YES];
         _isOnline = [WeiboSDK registerApp:kWeiboAppKey];
+        if (![WeiboSDK isWeiboAppInstalled]) {
+            _isOnline = NO;
+        }
     }
     return self;
 }
@@ -235,7 +238,7 @@ static WeiboManager *_sharedInstance = nil;
 #pragma mark Public methods
 
 + (BOOL)canShare {
-    return YES;
+    return [[WeiboManager sharedManager] isOnline];
 }
 
 - (BOOL)handleOpenURL:(NSURL *)url {
@@ -257,6 +260,9 @@ static WeiboManager *_sharedInstance = nil;
     //当用户安装了可以支持微博客户端內分享的微博客户端时,会自动唤起微博并分享
     //当用户没有安装微博客户端或微博客户端过低无法支持通过客户端內分享的时候会自动唤起SDK內微博发布器
     //故不用判断是否可以分享
+    if (!self.isOnline) {
+        return NO;
+    }
     
     self.shareSuccessBlock = succeed;
     self.shareFailureBlock = failure;

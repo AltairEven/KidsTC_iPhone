@@ -1079,13 +1079,15 @@ NSInteger sortImageDictionaryWithIdx(id v1, id v2, void *context)
     if ([components count] != 2) {
         return CLLocationCoordinate2DMake(0, 0);
     }
-    NSString *latString = [components lastObject];
-    [latString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    CLLocationDegrees lat = [latString doubleValue];
     
     NSString *lonString = [components firstObject];
     [lonString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     CLLocationDegrees lon = [lonString doubleValue];
+    
+    NSString *latString = [components lastObject];
+    [latString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    CLLocationDegrees lat = [latString doubleValue];
+    
     return CLLocationCoordinate2DMake(lat, lon);
 }
 

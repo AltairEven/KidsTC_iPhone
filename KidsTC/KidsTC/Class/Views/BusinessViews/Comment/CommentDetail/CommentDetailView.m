@@ -17,7 +17,7 @@ static NSString *const kNormalHeaderCellIdentifier = @"kNormalHeaderCellIdentifi
 
 static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIdentifier";
 
-@interface CommentDetailView () <UITableViewDataSource, UITableViewDelegate, CommentDetailViewNormalHeaderCellDelegate>
+@interface CommentDetailView () <UITableViewDataSource, UITableViewDelegate, CommentDetailViewNormalHeaderCellDelegate, CommentDetailViewStrategyHeaderCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
@@ -174,7 +174,9 @@ static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIden
                 if (!cell) {
                     cell =  [[[NSBundle mainBundle] loadNibNamed:@"CommentDetailViewStrategyHeaderCell" owner:nil options:nil] objectAtIndex:0];
                 }
+                ((ParentingStrategyDetailCellModel *)self.detailModel.headerModel).commentCount = [self.detailModel.replyModels count];
                 [cell configWithDetailCellModel:self.detailModel.headerModel];
+                cell.delegate = self;
                 return cell;
             }
                 break;
@@ -185,6 +187,7 @@ static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIden
                     cell =  [[[NSBundle mainBundle] loadNibNamed:@"CommentDetailViewNormalHeaderCell" owner:nil options:nil] objectAtIndex:0];
                 }
                 cell.delegate = self;
+                ((CommentListItemModel *)self.detailModel.headerModel).replyNumber = [self.detailModel.replyModels count];
                 [cell configWithModel:self.detailModel.headerModel];
                 return cell;
             }
@@ -237,6 +240,15 @@ static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIden
 - (void)headerCell:(CommentDetailViewNormalHeaderCell *)cell didChangedBoundsWithNewHeight:(CGFloat)height {
     self.detailModel.headerCellHeight = height;
     [self.tableView reloadData];
+}
+
+#pragma mark CommentDetailViewStrategyHeaderCellDelegate
+
+
+- (void)didClickedRelatedInfoButtonOnCommentDetailViewStrategyHeaderCell:(CommentDetailViewStrategyHeaderCell *)cell {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedRelationInfoOnCommentDetailView:)]) {
+        [self.delegate didClickedRelationInfoOnCommentDetailView:self];
+    }
 }
 
 #pragma mark Private methods

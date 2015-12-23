@@ -29,6 +29,14 @@
     if ([model.thumbnailPhotoUrlStringsArray count] > 0) {
         model.combinedImagesArray = [model.thumbnailPhotoUrlStringsArray copy];
     }
+    NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+    for (NSUInteger index = 0; index < [model.thumbnailPhotoUrlStringsArray count]; index ++) {
+        NSString *thumb = [model.thumbnailPhotoUrlStringsArray objectAtIndex:index];
+        NSString *origin = [model.originalPhotoUrlStringsArray objectAtIndex:index];
+        NSString *total = [NSString stringWithFormat:@"%@|%@", origin, thumb];
+        [tempArray addObject:total];
+    }
+    model.uploadPhotoLocationStrings = [NSArray arrayWithArray:tempArray];
     model.photosArray = item.photosArray;
     if (model.relationType == CommentRelationTypeStrategy || model.relationType == CommentRelationTypeStrategyDetail) {
         model.showPhotoGrid = NO;

@@ -10,6 +10,8 @@
 
 NSString *const ktcMapServiceKey = @"KifRsgtkbracIAf486Rtm25b";
 
+static NSDate *lastUpdateDate = nil;
+
 typedef void(^GeoCodeSucceedBlock)(BMKGeoCodeResult *result);
 typedef void(^GeoCodeFalureBlock)(NSError *error);
 typedef void(^ReverseGeoCodeSucceedBlock)(BMKReverseGeoCodeResult *result);
@@ -73,10 +75,16 @@ static KTCMapService *sharedInstance = nil;
 }
 
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation {
-    if (![userLocation isUpdating]) {
+    if (!lastUpdateDate || [lastUpdateDate timeIntervalSinceDate:[NSDate date]] < -60) {
+        lastUpdateDate = [NSDate date];
+        
         KTCLocation *currentLocation = [[KTCLocation alloc] initWithLocation:userLocation.location locationDescription:userLocation.title];
         currentLocation.moreDescription = userLocation.subtitle;
-        [[GConfig sharedConfig] setCurrentLocation:currentLocation];
+        [self getAddressDescriptionWithCoordinate:userLocation.location.coordinate succeed:^(BMKReverseGeoCodeResult *result) {
+            BMKPoiInfo *poi = [result.poiList firstObject];
+            currentLocation.locationDescription = poi.name;
+            [[GConfig sharedConfig] setCurrentLocation:currentLocation];
+        } failure:nil];
     }
 }
 
@@ -174,6 +182,18 @@ static KTCMapService *sharedInstance = nil;
         self.mapManager = [[BMKMapManager alloc] init];
     }
     [self.mapManager start:ktcMapServiceKey generalDelegate:self];
+}
+
+- (void)startUpdateLocation {
+    if (!self.locationService) {
+        self.locationService = [[BMKLocationService alloc] init];
+        self.locationService.delegate = self;
+    }
+    [self.locationService startUserLocationService];
+}
+
+- (void)stopUpdateLocation {
+    [self.locationService stopUserLocationService];
 }
 
 - (void)stopService {

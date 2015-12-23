@@ -36,6 +36,7 @@
     self.bTapToEndEditing = YES;
     [super viewDidLoad];
     _navigationTitle= @"申请退款";
+    _pageIdentifier = @"pv_refund";
     // Do any additional setup after loading the view from its nib.
     self.refundView.delegate = self;
     [self.refundView setMinCount:1 andMaxCount:1];
@@ -84,17 +85,24 @@
     }
     __weak OrderRefundViewController *weakSelf = self;
     [weakSelf.viewModel createOrderRefundWithSucceed:^(NSDictionary *data) {
-        [[iToast makeText:@"退款成功"] show];
+        [[iToast makeText:@"退款申请提交成功"] show];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(orderRefundViewController:didSucceedWithRefundForOrderId:)]) {
+            [self.delegate orderRefundViewController:self didSucceedWithRefundForOrderId:self.orderId];
+        }
         [weakSelf goBackController:nil];
+        NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:self.orderId, @"id", @"true", @"result", nil];
+        [MTA trackCustomKeyValueEvent:@"event_result_refund_apply" props:trackParam];
     } failure:^(NSError *error) {
         NSString *msg = nil;
         if (error.userInfo) {
             msg = [error.userInfo objectForKey:@"data"];
         }
         if ([msg length] == 0) {
-            msg = @"退款失败";
+            msg = @"退款申请提交失败";
         }
         [[iToast makeText:msg] show];
+        NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:self.orderId, @"id", @"false", @"result", nil];
+        [MTA trackCustomKeyValueEvent:@"event_result_refund_apply" props:trackParam];
     }];
 }
 

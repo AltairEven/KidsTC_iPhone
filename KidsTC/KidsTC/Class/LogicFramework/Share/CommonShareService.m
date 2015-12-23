@@ -101,7 +101,7 @@ static CommonShareService *_sharedInstance = nil;
         }
         __weak CommonShareService *weakSelf = self;
         [weakSelf.loadImageRequest downloadImageWithSuccess:^(HttpRequestClient *client, UIImage *image) {
-            UIImage *compressedImage = [image imageByCompressToMemorySize:31 * 1024 * 8];
+            UIImage *compressedImage = [image imageByScalingToSize:CGSizeMake(100, 100)];
             CommonShareObject *refreshedObject = [object copyObject];
             refreshedObject.thumbImage = compressedImage;
             [weakSelf shareWithType:type object:refreshedObject succeed:succeed failure:failure];

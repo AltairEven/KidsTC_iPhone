@@ -340,9 +340,9 @@
     
     __weak CouponListViewModel *weakSelf = self;
     [weakSelf.loadCouponsRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
-        [weakSelf loadCouponsSucceedWithData:responseData segmmentTag:weakSelf.currentTag];
+        [weakSelf loadMoreCouponsSucceedWithData:responseData segmmentTag:weakSelf.currentTag];
     } failure:^(HttpRequestClient *client, NSError *error) {
-        [weakSelf loadCouponsFailedWithError:error segmmentTag:weakSelf.currentTag];
+        [weakSelf loadMoreCouponsFailedWithError:error segmmentTag:weakSelf.currentTag];
     }];
 }
 

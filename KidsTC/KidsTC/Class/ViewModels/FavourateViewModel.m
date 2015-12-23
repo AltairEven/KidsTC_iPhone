@@ -448,6 +448,7 @@
             type = KTCFavouriteTypeService;
             FavouriteServiceItemModel *model = [self.serviceResultArray objectAtIndex:index];
             identifier = model.identifier;
+            [self.serviceResultArray removeObjectAtIndex:index];
         }
             break;
         case FavourateViewSegmentTagStore:
@@ -455,20 +456,23 @@
             type = KTCFavouriteTypeStore;
             FavouriteStoreItemModel *model = [self.storeResultArray objectAtIndex:index];
             identifier = model.identifier;
+            [self.storeResultArray removeObjectAtIndex:index];
         }
             break;
         case FavourateViewSegmentTagStrategy:
         {
             type = KTCFavouriteTypeStrategy;
-            FavouriteStrategyItemModel *model = [self.storeResultArray objectAtIndex:index];
+            FavouriteStrategyItemModel *model = [self.strategyResultArray objectAtIndex:index];
             identifier = model.identifier;
+            [self.strategyResultArray removeObjectAtIndex:index];
         }
             break;
         case FavourateViewSegmentTagNews:
         {
             type = KTCFavouriteTypeNews;
-            FavouriteNewsItemModel *model = [self.storeResultArray objectAtIndex:index];
+            FavouriteNewsItemModel *model = [self.newsResultArray objectAtIndex:index];
             identifier = model.identifier;
+            [self.newsResultArray removeObjectAtIndex:index];
         }
             break;
         default:

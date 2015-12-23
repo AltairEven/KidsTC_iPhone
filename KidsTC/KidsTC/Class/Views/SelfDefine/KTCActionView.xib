@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -22,10 +22,10 @@
                             <rect key="frame" x="0.0" y="0.0" width="200" height="40"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZnQ-2H-5Wg">
-                                    <rect key="frame" x="85" y="5" width="30" height="30"/>
+                                    <rect key="frame" x="70" y="5" width="60" height="30"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="30" id="RJn-Oa-tJp"/>
+                                        <constraint firstAttribute="width" constant="60" id="RJn-Oa-tJp"/>
                                         <constraint firstAttribute="height" constant="30" id="w1M-nc-jXc"/>
                                     </constraints>
                                     <state key="normal" image="actionview_home"/>
@@ -44,12 +44,13 @@
                             <rect key="frame" x="200" y="0.0" width="200" height="40"/>
                             <subviews>
                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ASU-SZ-O7U">
-                                    <rect key="frame" x="85" y="5" width="30" height="30"/>
+                                    <rect key="frame" x="70" y="5" width="60" height="30"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="30" id="U7r-zd-LBu"/>
+                                        <constraint firstAttribute="width" constant="60" id="U7r-zd-LBu"/>
                                         <constraint firstAttribute="height" constant="30" id="eff-kj-xqg"/>
                                     </constraints>
+                                    <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="Button" image="actionview_search"/>
                                     <connections>
                                         <action selector="didClickedButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="1xX-OS-CaG"/>
@@ -66,12 +67,13 @@
                             <rect key="frame" x="400" y="0.0" width="200" height="40"/>
                             <subviews>
                                 <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XOs-2W-f2m">
-                                    <rect key="frame" x="85" y="5" width="30" height="30"/>
+                                    <rect key="frame" x="70" y="5" width="60" height="30"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="GXY-CT-nPE"/>
-                                        <constraint firstAttribute="width" constant="30" id="vXL-8Y-agx"/>
+                                        <constraint firstAttribute="width" constant="60" id="vXL-8Y-agx"/>
                                     </constraints>
+                                    <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="Button" image="actionview_share"/>
                                     <connections>
                                         <action selector="didClickedButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="AmA-MU-WxM"/>

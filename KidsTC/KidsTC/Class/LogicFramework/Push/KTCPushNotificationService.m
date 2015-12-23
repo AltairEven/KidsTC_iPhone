@@ -44,16 +44,16 @@ static KTCPushNotificationService *sharedInstance = nil;
 #pragma mark Register
 
 - (void)launchServiceWithOption:(NSDictionary *)launchOptions {
-    [XGPush startApp:kXGPushAppId appKey:kXGPushAppKey];
+//    [XGPush startApp:kXGPushAppId appKey:kXGPushAppKey];
     
     //注销之后需要再次注册前的准备
     void (^successCallback)(void) = ^(void){
         //如果变成需要注册状态
-        if([XGPush isUnRegisterStatus])
-        {
-            [self registerNotification];
-        }
-//        [self registerNotification];
+//        if([XGPush isUnRegisterStatus])
+//        {
+//            [self registerNotification];
+//        }
+        [self registerNotification];
     };
     [XGPush initForReregister:successCallback];
     
@@ -69,10 +69,16 @@ static KTCPushNotificationService *sharedInstance = nil;
         NSLog(@"[XGPush]handleLaunching's errorBlock");
     };
     
+    NSDictionary * userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    [self handlePushPayload:userInfo];
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"sss" message:[NSString stringWithFormat:@"%@", launchOptions] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:nil, nil];
+//    [alert show];
+    [XGPush handleLaunching:launchOptions successCallback:successBlock errorCallback:errorBlock];
+    
+    
     //角标清0
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
-    
-    [XGPush handleLaunching:launchOptions successCallback:successBlock errorCallback:errorBlock];
+    [self registerNotification];
 }
 
 - (void)registerNotification
@@ -110,25 +116,29 @@ static KTCPushNotificationService *sharedInstance = nil;
 }
 
 - (NSString *)registerDevice:(NSData *)deviceToken {
-    void (^successBlock)(void) = ^(void){
-        //成功之后的处理
-        NSLog(@"[XGPush]register successBlock");
-    };
-    
-    void (^errorBlock)(void) = ^(void){
-        //失败之后的处理
-        NSLog(@"[XGPush]register errorBlock");
-    };
+//    void (^successBlock)(void) = ^(void){
+//        //成功之后的处理
+//        NSLog(@"[XGPush]register successBlock");
+//    };
+//    
+//    void (^errorBlock)(void) = ^(void){
+//        //失败之后的处理
+//        NSLog(@"[XGPush]register errorBlock");
+//    };
     
     //注册设备
     [[XGSetting getInstance] setChannel:@"appstore"];
     [[XGSetting getInstance] setGameServer:@"appstore"];
     
     
-    NSString * deviceTokenStr = [XGPush registerDevice:deviceToken successCallback:successBlock errorCallback:errorBlock];
+//    NSString * deviceTokenStr = [XGPush registerDevice:deviceToken successCallback:successBlock errorCallback:errorBlock];
+    NSString *deviceTokenStr = [NSString stringWithFormat:@"%@", deviceToken];
+    deviceTokenStr = [deviceTokenStr stringByReplacingOccurrencesOfString:@" " withString:@""];
+    deviceTokenStr = [deviceTokenStr stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     
     [[NSUserDefaults standardUserDefaults] setValue:deviceTokenStr forKey:kDeviceToken];
     _token = deviceTokenStr;
+    [self bindAccount:YES];
     
     return deviceTokenStr;
 }
@@ -152,7 +162,7 @@ static KTCPushNotificationService *sharedInstance = nil;
         type = 1;//绑定
         [XGPush setAccount:[KTCUser currentUser].uid];
     } else {
-        [XGPush setAccount:@""];
+//        [XGPush setAccount:@"*"];
     }
     if ([self.token length] == 0) {
         _token = [[NSUserDefaults standardUserDefaults] objectForKey:kDeviceToken];

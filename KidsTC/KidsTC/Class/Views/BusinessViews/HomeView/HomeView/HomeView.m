@@ -37,7 +37,7 @@ static NSString *const kImageNewsCellIdentifier = @"kImageNewsCellIdentifier";
 static NSString *const kThreeImageNewsCellIdentifier = @"kThreeImageNewsCellIdentifier";
 static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIdentifier";
 
-@interface HomeView () <HomeTopViewDelegate, UITableViewDataSource, UITableViewDelegate, HomeViewBannerCellDelegate, HomeViewThemeCellDelegate, HomeViewThreeCellDelegate, HomeViewTwinklingElfCellDelegate, HomeViewHorizontalListCellDelegate, UIScrollViewDelegate>
+@interface HomeView () <HomeTopViewDelegate, UITableViewDataSource, UITableViewDelegate, HomeViewBannerCellDelegate, HomeViewThemeCellDelegate, HomeViewThreeCellDelegate, HomeViewTwinklingElfCellDelegate, HomeViewHorizontalListCellDelegate, UIScrollViewDelegate, HomeViewThreeImageNewsCellDelegate>
 
 //top
 @property (weak, nonatomic) IBOutlet HomeTopView *topView;
@@ -72,6 +72,8 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
 @property (nonatomic, strong) NSArray *totalSectionModels;
 
 @property (nonatomic, assign) BOOL noMoreData;
+
+@property (nonatomic, strong) NSMutableDictionary *countDownCells;
 
 - (void)pullToRefreshTable;
 
@@ -195,6 +197,9 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
     self.backToTopButton.layer.borderWidth = 2;
     self.backToTopButton.layer.masksToBounds = YES;
     [self.backToTopButton setHidden:YES];
+    
+    
+    self.countDownCells = [[NSMutableDictionary alloc] init];
 }
 
 
@@ -267,6 +272,15 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
     }
 }
 
+#pragma mark HomeViewThreeImageNewsCellDelegate
+
+- (void)homeViewThreeImageNewsCell:(HomeViewThreeImageNewsCell *)cell didClickedAtIndex:(NSUInteger)index {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(homeView:didClickedAtCoordinate:)]) {
+        HomeSectionModel *model = [self.totalSectionModels objectAtIndex:cell.indexPath.section];
+        [self.delegate homeView:self didClickedAtCoordinate:HomeClickMakeCoordinate(model.floorIndex, cell.indexPath.section, NO, index)];
+    }
+}
+
 
 #pragma mark UITableViewDataSource & UITableViewDelegate
 
@@ -324,6 +338,7 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
                         cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewCountDownTitleCell" owner:nil options:nil] objectAtIndex:0];
                     }
                     [cell configWithModel:(HomeCountDownTitleCellModel *)model.titleModel];
+                    [self.countDownCells setObject:cell forKey:indexPath];
                     return cell;
                 }
                     break;
@@ -344,6 +359,7 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
                         cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewCountDownMoreTitleCell" owner:nil options:nil] objectAtIndex:0];
                     }
                     [cell configWithModel:(HomeCountDownMoreTitleCellModel *)model.titleModel];
+                    [self.countDownCells setObject:cell forKey:indexPath];
                     return cell;
                 }
                     break;
@@ -448,6 +464,7 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
             }
             [cell configWithModel:(HomeThreeImageNewsCellModel *)contentModel];
             cell.indexPath = indexPath;
+            cell.delegate = self;
             return cell;
         }
             break;
@@ -631,6 +648,14 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
 #pragma mark Public Methods
 
 - (void)reloadData {
+    for (UITableViewCell *cell in [self.countDownCells allValues]) {
+        if ([cell isKindOfClass:[HomeViewCountDownTitleCell class]]) {
+            [(HomeViewCountDownTitleCell *)cell stopCountDown];
+        }
+        if ([cell isKindOfClass:[HomeViewCountDownMoreTitleCell class]]) {
+            [(HomeViewCountDownMoreTitleCell *)cell stopCountDown];
+        }
+    }
     if (self.dataSource) {
         if ([self.dataSource respondsToSelector:@selector(homeModelForHomeView:)]) {
             self.homeModel= [self.dataSource homeModelForHomeView:self];

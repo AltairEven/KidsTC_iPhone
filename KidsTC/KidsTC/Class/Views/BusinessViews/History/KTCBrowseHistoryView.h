@@ -26,6 +26,8 @@ typedef enum {
 
 @protocol KTCBrowseHistoryViewDelegate <NSObject>
 
+- (void)browseHistoryView:(KTCBrowseHistoryView *)view didSelectedItemAtIndex:(NSUInteger)index;
+
 - (void)browseHistoryView:(KTCBrowseHistoryView *)view didChangedTag:(KTCBrowseHistoryViewTag)tag;
 
 - (void)browseHistoryView:(KTCBrowseHistoryView *)view didPulledUpToloadMoreForTag:(KTCBrowseHistoryViewTag)tag;

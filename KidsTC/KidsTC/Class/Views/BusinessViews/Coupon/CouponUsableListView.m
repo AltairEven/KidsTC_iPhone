@@ -60,8 +60,12 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
 
 #pragma mark UITableViewDataSource & UITableViewDelegate
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [self.listModels count];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
 }
 
 
@@ -81,7 +85,11 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 10;
+    return 0.01;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 0.01;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -94,16 +102,16 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.currentSelectedIndex == indexPath.row) {
+    if (self.currentSelectedIndex == indexPath.section) {
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         self.currentSelectedIndex = -1;
         if (self.delegate && [self.delegate respondsToSelector:@selector(couponUsableListView:didDeselectedCouponAtIndex:)]) {
-            [self.delegate couponUsableListView:self didDeselectedCouponAtIndex:indexPath.row];
+            [self.delegate couponUsableListView:self didDeselectedCouponAtIndex:indexPath.section];
         }
     } else {
-        self.currentSelectedIndex = indexPath.row;
+        self.currentSelectedIndex = indexPath.section;
         if (self.delegate && [self.delegate respondsToSelector:@selector(couponUsableListView:didSelectedCouponAtIndex:)]) {
-            [self.delegate couponUsableListView:self didSelectedCouponAtIndex:indexPath.row];
+            [self.delegate couponUsableListView:self didSelectedCouponAtIndex:indexPath.section];
         }
     }
 }
@@ -123,7 +131,7 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
 }
 
 - (void)setIndex:(NSUInteger)index selected:(BOOL)selected {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:index];
     if (selected) {
         [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
         self.currentSelectedIndex = index;

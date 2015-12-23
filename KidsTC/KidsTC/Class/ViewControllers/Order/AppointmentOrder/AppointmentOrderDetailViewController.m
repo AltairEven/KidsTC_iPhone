@@ -37,6 +37,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _navigationTitle = @"预约订单";
+    _pageIdentifier = @"pv_appoint_dtl";
     // Do any additional setup after loading the view from its nib.
     self.detailView.delegate = self;
     self.viewModel = [[AppointmentOrderDetailViewModel alloc] initWithView:self.detailView];
@@ -47,9 +48,9 @@
 #pragma mark AppointmentOrderDetailViewDelegate
 
 - (void)didClickedStoreOnAppointmentOrderDetailView:(AppointmentOrderDetailView *)detailView {
-    StoreDetailViewController *controller = [[StoreDetailViewController alloc] initWithStoreId:self.viewModel.orderModel.storeId];
-    [controller setHidesBottomBarWhenPushed:YES];
-    [self.navigationController pushViewController:controller animated:YES];
+//    StoreDetailViewController *controller = [[StoreDetailViewController alloc] initWithStoreId:self.viewModel.orderModel.storeId];
+//    [controller setHidesBottomBarWhenPushed:YES];
+//    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)didClickedCommentButtonOnAppointmentOrderDetailView:(AppointmentOrderDetailView *)detailView {
@@ -66,6 +67,8 @@
             [weakSelf.delegate AppointmentOrderDetailViewController:weakSelf didCanceledOrderWithId:weakSelf.orderModel.orderId];
         }
         [weakSelf.navigationController popViewControllerAnimated:YES];
+        NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:self.viewModel.orderModel.orderId, @"id", @"true", @"result", nil];
+        [MTA trackCustomKeyValueEvent:@"event_result_appoint_dtl_cancel" props:trackParam];
     } failure:^(NSError *error) {
         if (error.userInfo) {
             NSString *msg = [error.userInfo objectForKey:@"data"];
@@ -77,6 +80,8 @@
         } else {
             [[iToast makeText:@"取消订单失败"] show];
         }
+        NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:self.viewModel.orderModel.orderId, @"id", @"false", @"result", nil];
+        [MTA trackCustomKeyValueEvent:@"event_result_appoint_dtl_cancel" props:trackParam];
     }];
 }
 

@@ -66,7 +66,9 @@
         [self.orderStatusLabel setText:model.statusDescription];
         [self.orderNameLabel setText:model.orderName];
         [self.priceView setPrice:model.price];
-        [self.payTypeDescriptionLabel setText:[NSString stringWithFormat:@"(%@)", model.pamentType.name]];
+        if ([model.pamentType.name length] > 0) {
+            [self.payTypeDescriptionLabel setText:[NSString stringWithFormat:@"(%@)", model.pamentType.name]];
+        }
         [self.orderDateLabel setText:model.orderDate];
         self.orderStatus = model.status;
         self.indexPath = indexPath;

@@ -20,8 +20,6 @@
 
 @property (nonatomic, strong) NSMutableArray *waitingCommentResultArray;
 
-@property (nonatomic, strong) NSMutableArray *overDataResultArray;
-
 @property (nonatomic, strong) HttpRequestClient *loadOrderListRequest;
 
 @property (nonatomic, assign) AppointmentOrderListStatus currentListStatus;
@@ -31,8 +29,6 @@
 @property (nonatomic, assign) NSUInteger currentWaitingUsePage;
 
 @property (nonatomic, assign) NSUInteger currentWaitingCommentPage;
-
-@property (nonatomic, assign) NSUInteger currentOverDatePage;
 
 - (void)clearDataForOrderListStatus:(AppointmentOrderListStatus)status;
 
@@ -60,15 +56,12 @@
         self.currentAllPage = 1;
         self.currentWaitingUsePage = 1;
         self.currentWaitingCommentPage = 1;
-        self.currentOverDatePage = 1;
         [self.view hideLoadMoreFooter:YES forListStatus:AppointmentOrderListStatusAll];
         [self.view hideLoadMoreFooter:YES forListStatus:AppointmentOrderListStatusWaitingUse];
         [self.view hideLoadMoreFooter:YES forListStatus:AppointmentOrderListStatusWaitingComment];
-        [self.view hideLoadMoreFooter:YES forListStatus:AppointmentOrderListStatusHasOverDate];
         self.allResultArray = [[NSMutableArray alloc] init];
         self.waitingUseResultArray = [[NSMutableArray alloc] init];
         self.waitingCommentResultArray = [[NSMutableArray alloc] init];
-        self.overDataResultArray = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -91,11 +84,6 @@
         case AppointmentOrderListStatusWaitingComment:
         {
             retArray = [NSArray arrayWithArray:self.waitingCommentResultArray];
-        }
-            break;
-        case AppointmentOrderListStatusHasOverDate:
-        {
-            retArray = [NSArray arrayWithArray:self.overDataResultArray];
         }
             break;
         default:
@@ -121,11 +109,6 @@
         case AppointmentOrderListStatusWaitingComment:
         {
             [self.waitingCommentResultArray removeAllObjects];
-        }
-            break;
-        case AppointmentOrderListStatusHasOverDate:
-        {
-            [self.overDataResultArray removeAllObjects];
         }
             break;
         default:
@@ -175,11 +158,6 @@
         case AppointmentOrderListStatusWaitingComment:
         {
             self.currentWaitingCommentPage ++;
-        }
-            break;
-        case AppointmentOrderListStatusHasOverDate:
-        {
-            self.currentOverDatePage ++;
         }
             break;
         default:
@@ -233,11 +211,6 @@
                         [self.waitingCommentResultArray addObject:model];
                     }
                         break;
-                    case AppointmentOrderListStatusHasOverDate:
-                    {
-                        [self.overDataResultArray addObject:model];
-                    }
-                        break;
                     default:
                         break;
                 }
@@ -252,11 +225,9 @@
         [self.view noMoreData:YES forListStatus:status];
         [self.view hideLoadMoreFooter:YES forListStatus:status];
     }
-    if (self.currentListStatus == status) {
-        [self.view reloadDataforListStatus:status];
-        [self.view endRefresh];
-        [self.view endLoadMore];
-    }
+    [self.view reloadDataforListStatus:status];
+    [self.view endRefresh];
+    [self.view endLoadMore];
 }
 
 #pragma mark Public methods
@@ -277,11 +248,6 @@
         case AppointmentOrderListStatusWaitingComment:
         {
             array = [NSArray arrayWithArray:self.waitingCommentResultArray];
-        }
-            break;
-        case AppointmentOrderListStatusHasOverDate:
-        {
-            array = [NSArray arrayWithArray:self.overDataResultArray];
         }
             break;
         default:
@@ -318,15 +284,6 @@
             param = [NSDictionary dictionaryWithObjectsAndKeys:
                      [NSNumber numberWithInteger:AppointmentOrderListStatusWaitingComment], @"status",
                      [NSNumber numberWithInteger:self.currentWaitingCommentPage], @"page",
-                     [NSNumber numberWithInteger:PageSize], @"pagecount", nil];
-        }
-            break;
-        case AppointmentOrderListStatusHasOverDate:
-        {
-            self.currentOverDatePage = 1;
-            param = [NSDictionary dictionaryWithObjectsAndKeys:
-                     [NSNumber numberWithInteger:AppointmentOrderListStatusHasOverDate], @"status",
-                     [NSNumber numberWithInteger:self.currentOverDatePage], @"page",
                      [NSNumber numberWithInteger:PageSize], @"pagecount", nil];
         }
             break;
@@ -375,15 +332,6 @@
                      [NSNumber numberWithInteger:PageSize], @"pagecount", nil];
         }
             break;
-        case AppointmentOrderListStatusHasOverDate:
-        {
-            NSUInteger nextPage = self.currentOverDatePage + 1;
-            param = [NSDictionary dictionaryWithObjectsAndKeys:
-                     [NSNumber numberWithInteger:AppointmentOrderListStatusHasOverDate], @"status",
-                     [NSNumber numberWithInteger:nextPage], @"page",
-                     [NSNumber numberWithInteger:PageSize], @"pagecount", nil];
-        }
-            break;
         default:
             break;
     }
@@ -425,15 +373,6 @@
         case AppointmentOrderListStatusWaitingComment:
         {
             if ([self.waitingCommentResultArray count] > 0) {
-                [self.view reloadDataforListStatus:status];
-            } else {
-                [self startUpdateDataWithOrderListStatus:status];
-            }
-        }
-            break;
-        case AppointmentOrderListStatusHasOverDate:
-        {
-            if ([self.overDataResultArray count] > 0) {
                 [self.view reloadDataforListStatus:status];
             } else {
                 [self startUpdateDataWithOrderListStatus:status];

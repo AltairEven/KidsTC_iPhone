@@ -12,13 +12,15 @@
 #import "KTCPaymentService.h"
 #import "OrderRefundViewController.h"
 
-@interface OrderListViewController () <OrderListViewDelegate, CommentFoundingViewControllerDelegate, OrderRefundViewControllerDelegate>
+@interface OrderListViewController () <OrderListViewDelegate, CommentFoundingViewControllerDelegate, OrderRefundViewControllerDelegate, OrderDetailViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet OrderListView *orderListView;
 
 @property (nonatomic, strong) OrderListViewModel *viewModel;
 
 @property (nonatomic, assign) OrderListType listType;
+
+@property (nonatomic, assign) BOOL needRefresh;
 
 @end
 
@@ -36,11 +38,19 @@
     [super viewDidLoad];
     
     _navigationTitle = @"订单列表";
+    _pageIdentifier = @"pv_orders";
     // Do any additional setup after loading the view from its nib.
     self.orderListView.delegate = self;
     self.viewModel = [[OrderListViewModel alloc] initWithView:self.orderListView];
     [self.viewModel setOrderListType:self.listType];
     [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.needRefresh) {
+        [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
+    }
 }
 
 
@@ -59,6 +69,7 @@
     if ([modelArray count] > index) {
         OrderListModel *model = [modelArray objectAtIndex:index];
         OrderDetailViewController *controller = [[OrderDetailViewController alloc] initWithOrderId:model.orderId pushSource:OrderDetailPushSourceOrderList];
+        controller.delegate = self;
         [controller setHidesBottomBarWhenPushed:YES];
         [self.navigationController pushViewController:controller animated:YES];
     }
@@ -69,6 +80,8 @@
     __weak OrderListViewController *weakSelf = self;
     [[KTCPaymentService sharedService] startPaymentWithOrderIdentifier:model.orderId succeed:^{
         [weakSelf.viewModel startUpdateDataWithSucceed:nil failure:nil];
+        NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:model.orderId, @"id", @"true", @"result", nil];
+        [MTA trackCustomKeyValueEvent:@"event_result_orders_pay" props:trackParam];
     } failure:^(NSError *error) {
         NSString *errMsg = @"支付失败";
         NSString *text = [[error userInfo] objectForKey:kErrMsgKey];
@@ -76,6 +89,8 @@
             errMsg = text;
         }
         [[iToast makeText:errMsg] show];
+        NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:model.orderId, @"id", @"false", @"result", nil];
+        [MTA trackCustomKeyValueEvent:@"event_result_orders_pay" props:trackParam];
     }];
 }
 
@@ -90,6 +105,7 @@
 - (void)orderListView:(OrderListView *)listView didClickedReturnButtonAtIndex:(NSUInteger)index {
     OrderListModel *model = [self.viewModel.orderModels objectAtIndex:index];
     OrderRefundViewController *controller = [[OrderRefundViewController alloc] initWithOrderId:model.orderId];
+    controller.delegate = self;
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
 }
@@ -104,6 +120,14 @@
 
 - (void)orderRefundViewController:(OrderRefundViewController *)vc didSucceedWithRefundForOrderId:(NSString *)identifier {
     [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
+}
+
+#pragma mark OrderDetailViewControllerDelegate
+
+- (void)orderStatusChanged:(NSString *)orderId needRefresh:(BOOL)need {
+    if (need) {
+        self.needRefresh = YES;
+    }
 }
 
 

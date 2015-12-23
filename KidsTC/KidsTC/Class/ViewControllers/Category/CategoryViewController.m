@@ -24,6 +24,7 @@
     [super viewDidLoad];
     
     _navigationTitle = @"全部分类";
+    _pageIdentifier = @"pv_category";
     // Do any additional setup after loading the view from its nib.
     self.categoryView.delegate = self;
     self.viewModel = [[CategoryViewModel alloc] initWithView:self.categoryView];

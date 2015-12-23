@@ -41,6 +41,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _navigationTitle = @"用户评价";
+    _pageIdentifier = @"pv_prod_evaluations";
     // Do any additional setup after loading the view from its nib.
     self.listView.delegate = self;
     self.viewModel = [[CommentListViewModel alloc] initWithView:self.listView];

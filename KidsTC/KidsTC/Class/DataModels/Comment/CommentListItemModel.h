@@ -10,7 +10,9 @@
 
 @interface CommentListItemModel : NSObject
 
-@property (nonatomic, strong) NSString *identifier;
+@property (nonatomic, copy) NSString *identifier;
+
+@property (nonatomic, copy) NSString *relationIdentifier;
 
 @property (nonatomic, strong) NSURL *faceImageUrl;
 

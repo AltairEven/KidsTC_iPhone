@@ -305,7 +305,7 @@
 
 - (void)keyboardAdhesiveView:(AUIKeyboardAdhesiveView *)view didClickedExtensionFunctionButtonWithType:(AUIKeyboardAdhesiveViewExtensionFunctionType)type {
     if (type == AUIKeyboardAdhesiveViewExtensionFunctionTypeImageUpload) {
-        MC_ImagePickerViewController *mc_PhotoAlbumViewController = [[MC_ImagePickerViewController alloc]initWithMaxCount:10 andPhotoDictionary:self.photoDictionary];
+        MC_ImagePickerViewController *mc_PhotoAlbumViewController = [[MC_ImagePickerViewController alloc]initWithMaxCount:4 andPhotoDictionary:self.photoDictionary];
         mc_PhotoAlbumViewController.delegate = self;
         [self.keyboardAdhesiveView hide];
         [self presentViewController:mc_PhotoAlbumViewController animated:YES completion:nil];

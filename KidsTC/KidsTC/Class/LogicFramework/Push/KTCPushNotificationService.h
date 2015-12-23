@@ -23,7 +23,7 @@
 
 @property (nonatomic, readonly) BOOL isOnLine;
 
-@property (nonatomic, readonly) NSUInteger unreadCount;
+@property (nonatomic, assign) NSUInteger unreadCount;
 
 + (instancetype)sharedService;
 

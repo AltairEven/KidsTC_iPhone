@@ -45,6 +45,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _pageIdentifier = @"pv_stgy";
     // Do any additional setup after loading the view from its nib.
     [self buildRightBarItems];
     self.detailView.delegate = self;

@@ -77,9 +77,9 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
     //图片加载策略
     [self handleWebImageLoadingStrategy];
     
-    [MTA startWithAppkey:@"IBY24Y7P2AES"];
+    [MTA startWithAppkey:@"IGILB3C2N33P"];
     [[MTAConfig getInstance] setChannel:@"iphone"];
-    [[MTAConfig getInstance] setDebugEnable:YES];
+    [[MTAConfig getInstance] setDebugEnable:NO];
     [[MTAConfig getInstance] setReportStrategy:MTA_STRATEGY_INSTANT]; //update mta, edit by Altair, 20141125
     [[MTAConfig getInstance] setSessionTimeoutSecs:60];
     
@@ -94,6 +94,7 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
     [self showUserRoleSelectWithFinishController:tabbar];
     
     //处理通知
+    [KTCPushNotificationService sharedService].delegate = self;
     [[KTCPushNotificationService sharedService] launchServiceWithOption:launchOptions];
     
     //map
@@ -225,7 +226,6 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
         return;
     }
     //获取当前VC
-    UIViewController *currentVC = nil;
     
     UIWindow * window = [[UIApplication sharedApplication] keyWindow];
     if (window.windowLevel != UIWindowLevelNormal)
@@ -240,18 +240,10 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
             }
         }
     }
-    
-    UIView *frontView = [[window subviews] objectAtIndex:0];
-    id nextResponder = [frontView nextResponder];
-    
-    if ([nextResponder isKindOfClass:[UIViewController class]]) {
-        currentVC = nextResponder;
-    } else {
-        currentVC = window.rootViewController;
-    }
+    UINavigationController *controller = [KTCTabBarController shareTabBarController].selectedViewController;
     
     //展示消息跳转页面
-    [KTCSegueMaster makeSegueWithModel:model.segueModel fromController:currentVC];
+    [KTCSegueMaster makeSegueWithModel:model.segueModel fromController:controller.topViewController];
 }
 
 
@@ -331,10 +323,11 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
 
 - (void)showUserRoleSelectWithFinishController:(UIViewController *)controller {
     NSNumber *userRoleValue = [[NSUserDefaults standardUserDefaults] objectForKey:UserRoleDefaultKey];
+    NSNumber *userSexValue = [[NSUserDefaults standardUserDefaults] objectForKey:UserSexDefaultKey];
     if (userRoleValue) {
         UserRole role = (UserRole)[userRoleValue integerValue];
         if (role != UserRoleUnknown) {
-            [[KTCUser currentUser] setUserRole:[KTCUserRole instanceWithRole:role sex:KTCSexUnknown]];
+            [[KTCUser currentUser] setUserRole:[KTCUserRole instanceWithRole:role sex:(KTCSex)[userSexValue integerValue]]];
             //show loading
             [self showLoading];
             return;

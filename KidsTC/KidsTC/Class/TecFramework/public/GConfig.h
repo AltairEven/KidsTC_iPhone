@@ -39,6 +39,8 @@ static NSString *const kCustomerServicePhoneNumber = @"021-51135015";
 
 static NSString *const UserRoleHasChangedNotification = @"UserRoleHasChangedNotification";
 
+static NSString *const UserLocationHasChangedNotification = @"UserLocationHasChangedNotification";
+
 static NSString *const kErrMsgKey = @"kErrMsgKey";
 
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )

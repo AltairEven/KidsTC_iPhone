@@ -91,12 +91,14 @@ static NSString *const kCellIdentifier = @"cellIdentifier";
     //data
     self.noMoreDataDic = [[NSMutableDictionary alloc] init];
     self.hideFooterDic = [[NSMutableDictionary alloc] init];
+    
+    _currentLsitStatus = AppointmentOrderListStatusAll;
 }
 
 #pragma mark AUISegmentViewDataSource & AUISegmentViewDelegate
 
 - (NSUInteger)numberOfCellsForSegmentView:(AUISegmentView *)segmentView {
-    return 4;
+    return 3;
 }
 
 - (UITableViewCell *)segmentView:(AUISegmentView *)segmentView cellAtIndex:(NSUInteger)index {
@@ -113,17 +115,12 @@ static NSString *const kCellIdentifier = @"cellIdentifier";
             break;
         case 1:
         {
-            [cell.titleLabel setText:@"未使用"];
+            [cell.titleLabel setText:@"待到店"];
         }
             break;
         case 2:
         {
-            [cell.titleLabel setText:@"待评价"];
-        }
-            break;
-        case 3:
-        {
-            [cell.titleLabel setText:@"已过期"];
+            [cell.titleLabel setText:@"已到店"];
         }
             break;
         default:
@@ -147,11 +144,6 @@ static NSString *const kCellIdentifier = @"cellIdentifier";
         case 2:
         {
             _currentLsitStatus = AppointmentOrderListStatusWaitingComment;
-        }
-            break;
-        case 3:
-        {
-            _currentLsitStatus = AppointmentOrderListStatusHasOverDate;
         }
             break;
         default:
@@ -178,7 +170,7 @@ static NSString *const kCellIdentifier = @"cellIdentifier";
     if (!cell) {
         cell =  [[[NSBundle mainBundle] loadNibNamed:@"OrderListViewCell" owner:nil options:nil] objectAtIndex:0];
     }
-    [cell configWithOrderModel:[self.listModels objectAtIndex:indexPath.row]];
+    [cell configWithOrderModel:[self.listModels objectAtIndex:indexPath.section]];
     return cell;
 }
 

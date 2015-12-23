@@ -45,6 +45,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _navigationTitle = @"账户设置";
+    _pageIdentifier = @"pv_acct_usersetting";
     // Do any additional setup after loading the view from its nib.
     self.settingView.delegate = self;
     self.viewModel = [[AccountSettingViewModel alloc] initWithView:self.settingView];
@@ -140,7 +141,7 @@
     NSString *lastChosenMediaType=[info objectForKey:UIImagePickerControllerMediaType];
     if([lastChosenMediaType isEqual:(NSString *) kUTTypeImage]) {
         UIImage *chosenImage=[info objectForKey:UIImagePickerControllerOriginalImage];
-        ImageTrimViewController *trimVC = [[ImageTrimViewController alloc] initWithImage:chosenImage targetSize:CGSizeMake(200, 200)];
+        ImageTrimViewController *trimVC = [[ImageTrimViewController alloc] initWithImage:chosenImage targetSize:CGSizeMake(400, 400)];
         trimVC.delegate = self;
         [picker pushViewController:trimVC animated:YES];
     } else {
@@ -157,7 +158,7 @@
 
 - (void)imageTrimViewController:(ImageTrimViewController *)controller didFinishedTrimmingWithNewImage:(UIImage *)image {
     if (image) {
-        UIImage *trimmedImage = [image imageByScalingToSize:CGSizeMake(100, 100)];
+        UIImage *trimmedImage = image;//[image imageByScalingToSize:CGSizeMake(400, 400)];
         __weak AccountSettingViewController *weakSelf = self;
         [[GAlertLoadingView sharedAlertLoadingView] show];
         [weakSelf uploadFaceImage:trimmedImage succeed:^(NSArray *urlStrings) {

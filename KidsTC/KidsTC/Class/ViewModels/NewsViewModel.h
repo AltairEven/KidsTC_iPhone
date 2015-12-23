@@ -28,6 +28,8 @@
 
 - (NSArray<NewsTagTypeModel *> *)tagTypeModels;
 
+- (NSArray<NewsTagItemModel *> *)tagItemModels;
+
 - (void)setTagItemModelsWithModel:(NewsTagItemModel *)model;
 
 @end

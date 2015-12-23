@@ -49,16 +49,20 @@
     [super viewDidLoad];
     
     _navigationTitle = @"订单详情";
+    _pageIdentifier = @"pv_order_dtl";
     // Do any additional setup after loading the view from its nib.
     self.detailView.delegate = self;
     self.viewModel = [[OrderDetailViewModel alloc] initWithView:self.detailView];
     [self.viewModel setOrderId:self.orderId];
     __weak OrderDetailViewController *weakSelf = self;
     [weakSelf.viewModel startUpdateDataWithSucceed:^(NSDictionary *data) {
-        if ([weakSelf.viewModel.detailModel canContactCS]) {
-            [weakSelf setupRightBarButton:@"" target:self action:@selector(didClickedContectCSButton) frontImage:@"phone2" andBackImage:@"phone2"];
-        }
-    } failure:nil];
+    } failure:^(NSError *error) {
+    }];
+    [weakSelf setupRightBarButton:@"" target:self action:@selector(didClickedContectCSButton) frontImage:@"customerService_n" andBackImage:@"customerService_n"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
 }
 #pragma mark & OrderDetailViewDelegate
 
@@ -69,6 +73,11 @@
             __weak OrderDetailViewController *weakSelf = self;
             [[KTCPaymentService sharedService] startPaymentWithOrderIdentifier:weakSelf.orderId succeed:^{
                 [weakSelf.viewModel startUpdateDataWithSucceed:nil failure:nil];
+                if (self.delegate && [self.delegate respondsToSelector:@selector(orderStatusChanged:needRefresh:)]) {
+                    [self.delegate orderStatusChanged:self.orderId needRefresh:YES];
+                }
+                NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:self.orderId, @"id", @"true", @"result", nil];
+                [MTA trackCustomKeyValueEvent:@"event_result_order_dtl_pay" props:trackParam];
             } failure:^(NSError *error) {
                 NSString *errMsg = @"支付失败";
                 NSString *text = [[error userInfo] objectForKey:kErrMsgKey];
@@ -76,6 +85,8 @@
                     errMsg = text;
                 }
                 [[iToast makeText:errMsg] show];
+                NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:self.orderId, @"id", @"false", @"result", nil];
+                [MTA trackCustomKeyValueEvent:@"event_result_order_dtl_pay" props:trackParam];
             }];
         }
             break;
@@ -85,6 +96,9 @@
             UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"不取消了" style:UIAlertActionStyleCancel handler:nil];
             UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"忍痛取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 [self.viewModel cancelOrder];
+                if (self.delegate && [self.delegate respondsToSelector:@selector(orderStatusChanged:needRefresh:)]) {
+                    [self.delegate orderStatusChanged:self.orderId needRefresh:YES];
+                }
             }];
             [controller addAction:cancelAction];
             [controller addAction:confirmAction];
@@ -102,6 +116,7 @@
         case OrderDetailActionTagRefund:
         {
             OrderRefundViewController *controller = [[OrderRefundViewController alloc] initWithOrderId:self.orderId];
+            controller.delegate = self;
             [controller setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:controller animated:YES];
         }
@@ -120,6 +135,8 @@
             [weakSelf.viewModel getConsumeCodeWithSucceed:^{
                 [[iToast makeText:@"消费码已发到您的手机，请注意查收"] show];
                 [self.detailView setGetCodeButtonEnabled:YES];
+                NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:self.orderId, @"id", @"true", @"result", nil];
+                [MTA trackCustomKeyValueEvent:@"event_result_order_dtl_consume" props:trackParam];
             } failure:^(NSError *error) {
                 if (error.userInfo) {
                     NSString *msg = [error.userInfo objectForKey:@"data"];
@@ -132,6 +149,8 @@
                     [[iToast makeText:@"获取消费码失败"] show];
                 }
                 [self.detailView setGetCodeButtonEnabled:YES];
+                NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:self.orderId, @"id", @"false", @"result", nil];
+                [MTA trackCustomKeyValueEvent:@"event_result_order_dtl_consume" props:trackParam];
             }];
         }
             break;
@@ -144,12 +163,23 @@
 
 - (void)commentFoundingViewControllerDidFinishSubmitComment:(CommentFoundingViewController *)vc {
     [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(orderStatusChanged:needRefresh:)]) {
+        [self.delegate orderStatusChanged:self.orderId needRefresh:YES];
+    }
 }
 
 #pragma mark OrderRefundViewControllerDelegate
 
 - (void)orderRefundViewController:(OrderRefundViewController *)vc didSucceedWithRefundForOrderId:(NSString *)identifier {
-    [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
+    [[GAlertLoadingView sharedAlertLoadingView] showInView:self.view];
+    [self.viewModel startUpdateDataWithSucceed:^(NSDictionary *data) {
+        [[GAlertLoadingView sharedAlertLoadingView] hide];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(orderStatusChanged:needRefresh:)]) {
+            [self.delegate orderStatusChanged:self.orderId needRefresh:YES];
+        }
+    } failure:^(NSError *error) {
+        [[GAlertLoadingView sharedAlertLoadingView] hide];
+    }];
 }
 
 #pragma mark Private methods

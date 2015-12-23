@@ -54,6 +54,7 @@
     self.bTapToEndEditing = YES;
     [super viewDidLoad];
     _navigationTitle = @"重置密码";
+    _pageIdentifier = @"pv_resetpwd";
     // Do any additional setup after loading the view from its nib.
     [self buildSubviews];
 }

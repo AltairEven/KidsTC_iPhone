@@ -13,6 +13,7 @@
 #import "KTCImageUploader.h"
 #import "ServiceDetailViewController.h"
 #import "StoreDetailViewController.h"
+#import "KTCSegueMaster.h"
 
 @interface CommentDetailViewController () <CommentDetailViewDelegate, AUIKeyboardAdhesiveViewDelegate,MC_ImagePickerViewControllerDelegate, MWPhotoBrowserDelegate>
 
@@ -57,6 +58,10 @@
         _viewSource = source;
         _relationType = type;
         self.headerModel = model;
+        if (source == CommentDetailViewSourceServiceOrStore) {
+            _relationIdentifier = ((CommentListItemModel *)model).relationIdentifier;
+            _commentIdentifier = ((CommentListItemModel *)model).identifier;
+        }
     }
     return self;
 }
@@ -65,6 +70,25 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     _navigationTitle = @"用户评价";
+    switch (self.viewSource) {
+        case CommentDetailViewSourceServiceOrStore:
+        {
+            _pageIdentifier = @"pv_prod_evaluation_dtl";
+        }
+            break;
+        case CommentDetailViewSourceStrategy:
+        {
+            _pageIdentifier = @"pv_stgy_evaluate";
+        }
+            break;
+        case CommentDetailViewSourceStrategyDetail:
+        {
+            _pageIdentifier = @"pv_stgy_dtl";
+        }
+            break;
+        default:
+            break;
+    }
     // Do any additional setup after loading the view from its nib.
     self.detailView.delegate = self;
     self.viewModel = [[CommentDetailViewModel alloc] initWithView:self.detailView];
@@ -107,10 +131,10 @@
         [self.keyboardAdhesiveView expand];
         if (self.viewSource == CommentDetailViewSourceStrategy || self.viewSource == CommentDetailViewSourceStrategyDetail) {
             self.isComment = YES;
-            self.commentIdentifier = model.identifier;
         } else {
             self.isComment = NO;
         };
+        self.commentIdentifier = model.identifier;
     } target:self];
 }
 
@@ -126,6 +150,11 @@
             self.isComment = NO;
         }
     } target:self];
+}
+
+- (void)didClickedRelationInfoOnCommentDetailView:(CommentDetailView *)detailView {
+    ParentingStrategyDetailCellModel *model = self.headerModel;
+    [KTCSegueMaster makeSegueWithModel:model.relatedInfoModel fromController:self];
 }
 
 - (void)commentDetailViewDidPulledDownToRefresh:(CommentDetailView *)detailView {

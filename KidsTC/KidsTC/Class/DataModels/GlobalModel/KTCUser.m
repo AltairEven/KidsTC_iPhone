@@ -50,10 +50,8 @@ static KTCUser *_sharedInstance = nil;
 }
 
 - (void)setUserRole:(KTCUserRole *)userRole {
-    if (_userRole.role != userRole.role) {
-        _userRole = userRole;
-        [[NSNotificationCenter defaultCenter] postNotificationName:UserRoleHasChangedNotification object:userRole];
-    }
+    _userRole = userRole;
+    [[NSNotificationCenter defaultCenter] postNotificationName:UserRoleHasChangedNotification object:userRole];
 }
 
 - (NSString *)userName {
@@ -159,13 +157,15 @@ static KTCUser *_sharedInstance = nil;
 }
 
 - (void)clearLoginInfo {
+    //解绑推送
+    [[KTCPushNotificationService sharedService] bindAccount:NO];
+    
     [SFHFKeychainUtils deleteItemForUsername:self.uid andServiceName:KEYCHAIN_SERVICE_UIDSKEY error:nil];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:USERDEFAULT_UID_KEY];
     _uid = nil;
     _skey = nil;
     _hasLogin = NO;
     [[HttpIcsonCookieManager sharedManager] setupCookies]; //设置cookie
-    [[KTCPushNotificationService sharedService] bindAccount:NO];
 }
 
 @end
