@@ -95,7 +95,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ActivityListItemModel *model = [self.listModels objectAtIndex:indexPath.row];
+    ActivityListItemModel *model = [self.listModels objectAtIndex:indexPath.section];
     return [model cellHeight];
 }
 

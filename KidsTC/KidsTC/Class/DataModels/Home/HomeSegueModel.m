@@ -44,7 +44,12 @@ NSString *const kHomeSegueParameterKeySearchSort = @"kHomeSegueParameterKeySearc
         case HomeSegueDestinationH5:
         {
             if ([data isKindOfClass:[NSDictionary class]]) {
-                _segueParam = [NSDictionary dictionaryWithObject:[data objectForKey:@"linkurl"] forKey:kHomeSegueParameterKeyLinkUrl];
+                NSString *linkUrlString = [data objectForKey:@"linkurl"];
+                if (linkUrlString && [linkUrlString isKindOfClass:[NSString class]]) {
+                    _segueParam = [NSDictionary dictionaryWithObject:linkUrlString forKey:kHomeSegueParameterKeyLinkUrl];
+                } else {
+                    _destination = HomeSegueDestinationNone;
+                }
             } else {
                 _destination = HomeSegueDestinationNone;
             }

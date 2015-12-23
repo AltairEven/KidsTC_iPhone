@@ -56,6 +56,7 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
 @property (nonatomic, copy)  NSString *verify;
 @property (nonatomic, weak) ASIHTTPRequest *flashScreenASIRequest;
 @property (nonatomic, strong) HttpRequestWrapper *flashScreenRequest;
+@property (nonatomic, assign) BOOL canShowAdvertisement;
 
 @end
 
@@ -96,13 +97,13 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
     KTCTabBarController *tabbar = [KTCTabBarController shareTabBarController];
     [tabbar  createViewControllers];
     self.window.rootViewController = tabbar;
-    [self.window makeKeyAndVisible];
     //show user role select
     [self showUserRoleSelectWithFinishController:tabbar];
-    
     //处理通知
     [KTCPushNotificationService sharedService].delegate = self;
     [[KTCPushNotificationService sharedService] launchServiceWithOption:launchOptions];
+    
+    [self.window makeKeyAndVisible];
     
     //map
     [[KTCMapService sharedService] startService];
@@ -235,21 +236,22 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
     if (!model) {
         return;
     }
+    self.canShowAdvertisement = NO;
     //获取当前VC
     
-    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
-    if (window.windowLevel != UIWindowLevelNormal)
-    {
-        NSArray *windows = [[UIApplication sharedApplication] windows];
-        for(UIWindow * tmpWin in windows)
-        {
-            if (tmpWin.windowLevel == UIWindowLevelNormal)
-            {
-                window = tmpWin;
-                break;
-            }
-        }
-    }
+//    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
+//    if (window.windowLevel != UIWindowLevelNormal)
+//    {
+//        NSArray *windows = [[UIApplication sharedApplication] windows];
+//        for(UIWindow * tmpWin in windows)
+//        {
+//            if (tmpWin.windowLevel == UIWindowLevelNormal)
+//            {
+//                window = tmpWin;
+//                break;
+//            }
+//        }
+//    }
     UINavigationController *controller = [KTCTabBarController shareTabBarController].selectedViewController;
     
     //展示消息跳转页面
@@ -337,6 +339,7 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
     if (userRoleValue) {
         UserRole role = (UserRole)[userRoleValue integerValue];
         if (role != UserRoleUnknown) {
+            self.canShowAdvertisement = YES;
             [[KTCUser currentUser] setUserRole:[KTCUserRole instanceWithRole:role sex:(KTCSex)[userSexValue integerValue]]];
             //show loading
             [self showLoading];
@@ -360,8 +363,8 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
     [self.welcomeWindow setBackgroundColor:[UIColor clearColor]];
     self.welcomeWindow.rootViewController = loadingVC;
     self.welcomeWindow.windowLevel = UIWindowLevelAlert + 1;
-    [self.window setHidden:YES];
-    [self.window setAlpha:0.7];
+//    [self.window setHidden:YES];
+//    [self.window setAlpha:0.7];
     [UIApplication sharedApplication].statusBarHidden = YES;
     [self.welcomeWindow makeKeyAndVisible];
     
@@ -373,25 +376,34 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
 
 
 - (void)showAdvertisement {
-    NSArray *adImages = [[KTCAdvertisementManager sharedManager] advertisementImages];
-    if ([adImages count] > 0) {
-        BigAdvertisementViewController *adVC = [[BigAdvertisementViewController alloc] initWithImages:adImages];
+    if (!self.canShowAdvertisement) {
+        return;
+    }
+    NSArray *adItems = [[KTCAdvertisementManager sharedManager] advertisementImages];
+    if ([adItems count] > 0) {
+        BigAdvertisementViewController *adVC = [[BigAdvertisementViewController alloc] initWithAdvertisementItems:adItems];
         if (!self.welcomeWindow) {
             self.welcomeWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
             [self.welcomeWindow setBackgroundColor:[UIColor clearColor]];
             self.welcomeWindow.windowLevel = UIWindowLevelAlert + 1;
         }
         self.welcomeWindow.rootViewController = adVC;
-        [self.window setHidden:YES];
-        [self.window setAlpha:0.7];
         [UIApplication sharedApplication].statusBarHidden = YES;
         if (![self.welcomeWindow isKeyWindow]) {
             [self.welcomeWindow makeKeyAndVisible];
         }
+//        [self.window setHidden:YES];
+//        [self.window setAlpha:0.7];
         __weak AppDelegate *weakSelf = self;
         
-        [adVC setCompletionBlock:^(){
+        [adVC setCompletionBlock:^(HomeSegueModel *segueModel){
             [weakSelf showRealWindow];
+            if (segueModel) {
+                UINavigationController *controller = [KTCTabBarController shareTabBarController].selectedViewController;
+                
+                //展示消息跳转页面
+                [KTCSegueMaster makeSegueWithModel:segueModel fromController:controller.topViewController];
+            }
         }];
         [[KTCAdvertisementManager sharedManager] setAlreadyShowed];
     } else {
@@ -411,6 +423,8 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
             [weakSelf showRealWindow];
             [CheckFirstInstalDataManager setIsFirstTimeValue:NO];
         }];
+    } else {
+        [self showRealWindow];
     }
 }
 
@@ -419,10 +433,12 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
     __weak UIWindow *weakWindow = self.window;
     [UIApplication sharedApplication].statusBarHidden = NO;
     [UIView animateWithDuration:0.5 animations:^{
+        [weakWelcome setAlpha:0];
         [weakWindow setHidden:NO];
         [weakWindow setAlpha:1];
     } completion:^(BOOL finished) {
         [weakWelcome setHidden:YES];
+        [weakWelcome setAlpha:1];
         weakWelcome.rootViewController = nil;
     }];
 }

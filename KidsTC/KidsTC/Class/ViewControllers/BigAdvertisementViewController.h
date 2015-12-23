@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KTCAdvertisementItem.h"
 
-typedef void(^ BigAdShowingCompleted)();
+typedef void(^ BigAdShowingCompleted)(HomeSegueModel *segueModel);
 
 @interface BigAdvertisementViewController : UIViewController
 
 @property (nonatomic, strong) BigAdShowingCompleted completionBlock;
 
-- (instancetype)initWithImages:(NSArray<UIImage *> *)images;
+- (instancetype)initWithAdvertisementItems:(NSArray<KTCAdvertisementItem *> *)adItems;
 
 @end

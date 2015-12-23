@@ -34,10 +34,10 @@
 }
 
 - (CGFloat)cellHeight {
-    CGFloat height = 50; //price
+    CGFloat height = 40; //price
     CGFloat cellWidth = SCREEN_WIDTH;
     height += cellWidth * self.ratio; // image
-    height += [GConfig heightForLabelWithWidth:cellWidth LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:15] topGap:10 bottomGap:10 andText:self.activityContent];
+    height += [GConfig heightForLabelWithWidth:cellWidth - 20 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:14] topGap:10 bottomGap:10 andText:self.activityContent];
     
     return height;
 }

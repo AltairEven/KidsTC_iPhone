@@ -15,36 +15,50 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIButton *skipButton;
 
+@property (nonatomic, strong) NSArray *adItems;
+
 @property (nonatomic, strong) NSArray *imagesArray;
 
 @property (nonatomic, assign) NSUInteger maxCountDownTime;
 
 @property (nonatomic, strong) ATCountDown *countDownTimer;
 
+@property (nonatomic, assign) NSUInteger currentIndex;
+
 - (void)handleTimeCountDownWithLeftTime:(NSTimeInterval)timeInterval;
 
-- (void)handleTimeCountDownCompletion;
+- (void)handleTimeCountDownCompletionWithSegueModel:(HomeSegueModel *)model;
 
 - (IBAction)didClickedSkipButton:(id)sender;
+
+- (void)didTappedOnAdvertisementImage:(id)sender;
 
 @end
 
 @implementation BigAdvertisementViewController
 
-- (instancetype)initWithImages:(NSArray<UIImage *> *)images {
-    if (!images || ![images isKindOfClass:[NSArray class]]) {
+- (instancetype)initWithAdvertisementItems:(NSArray<KTCAdvertisementItem *> *)adItems {
+    if (!adItems || ![adItems isKindOfClass:[NSArray class]]) {
         return nil;
     }
     self = [self initWithNibName:@"BigAdvertisementViewController" bundle:nil];
     if (self) {
-        self.imagesArray = images;
-        self.maxCountDownTime = [images count] * SingleImageDisplayingTime;
+        self.adItems = adItems;
+        NSUInteger count = [adItems count];
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        for (KTCAdvertisementItem *item in adItems) {
+            [tempArray addObject:item.image];
+        }
+        self.imagesArray = [NSArray arrayWithArray:tempArray];
+        self.maxCountDownTime = count * SingleImageDisplayingTime;
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTappedOnAdvertisementImage:)];
+    [self.imageView addGestureRecognizer:tap];
     [self.imageView setAnimationImages:self.imagesArray];
     [self.imageView setAnimationDuration:self.maxCountDownTime];
     self.countDownTimer = [[ATCountDown alloc] initWithLeftTimeInterval:self.maxCountDownTime];
@@ -53,15 +67,19 @@
     self.skipButton.layer.masksToBounds = YES;
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self.imageView startAnimating];
     __weak BigAdvertisementViewController *weakSelf = self;
     [weakSelf.countDownTimer startCountDownWithCurrentTimeLeft:^(NSTimeInterval currentTimeLeft) {
         [weakSelf handleTimeCountDownWithLeftTime:currentTimeLeft];
     } completion:^{
-        [weakSelf handleTimeCountDownCompletion];
+        [weakSelf handleTimeCountDownCompletionWithSegueModel:nil];
     }];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
 }
 
 - (void)dealloc {
@@ -71,18 +89,26 @@
 
 
 - (void)handleTimeCountDownWithLeftTime:(NSTimeInterval)timeInterval {
-    
+    self.currentIndex = timeInterval / SingleImageDisplayingTime;
 }
 
-- (void)handleTimeCountDownCompletion {
+- (void)handleTimeCountDownCompletionWithSegueModel:(HomeSegueModel *)model {
+    [self.countDownTimer stopCountDown];
     __weak BigAdvertisementViewController *weakSelf = self;
     if (weakSelf.completionBlock) {
-        weakSelf.completionBlock();
+        weakSelf.completionBlock(model);
     }
 }
 
 - (IBAction)didClickedSkipButton:(id)sender {
-    [self handleTimeCountDownCompletion];
+    [self handleTimeCountDownCompletionWithSegueModel:nil];
+}
+
+- (void)didTappedOnAdvertisementImage:(id)sender {
+    if (self.currentIndex < [self.adItems count]) {
+        KTCAdvertisementItem *item = [self.adItems objectAtIndex:self.currentIndex];
+        [self handleTimeCountDownCompletionWithSegueModel:item.segueModel];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

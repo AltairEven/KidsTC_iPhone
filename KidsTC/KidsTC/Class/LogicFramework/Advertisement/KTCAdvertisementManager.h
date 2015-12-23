@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "KTCAdvertisementItem.h"
 
 @interface KTCAdvertisementManager : NSObject
 

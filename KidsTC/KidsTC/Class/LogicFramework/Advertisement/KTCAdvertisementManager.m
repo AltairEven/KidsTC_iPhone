@@ -14,7 +14,9 @@
 static NSString *const kAdImageShowingFormatStatusKey = @"kAdImageShowingFormatStatusKey";
 static NSString *const kAdImageShowingFormatMD5Key = @"kAdImageShowingFormatMD5Key";
 static NSString *const kAdImageShowingFormatExpireTimeKey = @"kAdImageShowingFormatExpireTimeKey";
-static NSString *const kAdImageShowingFormatImagesKey = @"kAdImageShowingFormatImagesKey";
+static NSString *const kAdImageShowingFormatAdsKey = @"kAdImageShowingFormatAdsKey";
+static NSString *const kAdImageShowingFormatUrlStringKey = @"kAdImageShowingFormatUrlStringKey";
+static NSString *const kAdImageShowingFormatDownloadStatusKey = @"kAdImageShowingFormatDownloadStatusKey";
 
 static KTCAdvertisementManager *_sharedInstance = nil;
 
@@ -45,6 +47,8 @@ static KTCAdvertisementManager *_sharedInstance = nil;
 - (void)setImage:(NSString *)urlString downloaded:(BOOL)hasDownloaded;
 
 - (NSArray *)allLocalImageUrlStringsWithFinishState:(BOOL)finished;
+
+- (NSArray *)allAdInfoWithFinishState:(BOOL)finished;
 
 + (NSString *)imagePathWithName:(NSString *)name;
 
@@ -95,15 +99,25 @@ static KTCAdvertisementManager *_sharedInstance = nil;
             //已过期
             return;
         }
-        NSArray *images = [adInfo objectForKey:@"imgs"];
-        if (!images || ![images isKindOfClass:[NSArray class]]) {
+        NSArray *infos = [adInfo objectForKey:@"ads"];
+        if (!infos || ![infos isKindOfClass:[NSArray class]]) {
             //无效数据
             return;
         }
         
         //非过期，非无效，则创建本地文件，开始下载
         [self createShowingFormatWithRawData:data];
-        NSArray *needDownload = [self filterNeedDownloadImagesWithRemoteUrlStrings:images];
+        
+        //获取将要下载的图片链接
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        for (NSDictionary *adItem in infos) {
+            NSString *urlString = [adItem objectForKey:@"img"];
+            if (urlString && [urlString isKindOfClass:[NSString class]]) {
+                [tempArray addObject:urlString];
+            }
+        }
+        NSArray *needDownload = [self filterNeedDownloadImagesWithRemoteUrlStrings:[NSArray arrayWithArray:tempArray]];
+        //下载
         [self downloadAdImagesWithUrlStrings:needDownload];
     } else {
         //服务端没有返回有效数据，则开始下载本地未完成的图片文件
@@ -130,16 +144,23 @@ static KTCAdvertisementManager *_sharedInstance = nil;
         NSTimeInterval expireTime = [[adInfo objectForKey:@"expireTime"] doubleValue];
         [tempDic setObject:[NSNumber numberWithDouble:expireTime] forKey:kAdImageShowingFormatExpireTimeKey];
         //图片
-        NSArray *images = [adInfo objectForKey:@"imgs"];
-        if (!images || ![images isKindOfClass:[NSArray class]]) {
+        NSArray *ads = [adInfo objectForKey:@"ads"];
+        if (!ads || ![ads isKindOfClass:[NSArray class]]) {
             return;
         }
         NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-        for (NSString *imageUrlString in images) {
-            NSDictionary *imageDic = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:imageUrlString];
-            [tempArray addObject:imageDic];
+        for (NSDictionary *adDic in ads) {
+            NSString *imageUrlString = [adDic objectForKey:@"img"];
+            if ([imageUrlString isKindOfClass:[NSString class]] && [imageUrlString length] > 0) {
+                //设置下载状态key
+                NSMutableDictionary *tempAdDic = [NSMutableDictionary dictionaryWithDictionary:adDic];
+                [tempAdDic setObject:[NSNumber numberWithBool:NO] forKey:kAdImageShowingFormatDownloadStatusKey];
+                [tempAdDic removeObjectForKey:@"img"];
+                [tempAdDic setObject:imageUrlString forKey:kAdImageShowingFormatUrlStringKey];
+                [tempArray addObject:[NSDictionary dictionaryWithDictionary:tempAdDic]];
+            }
         }
-        [tempDic setObject:[NSArray arrayWithArray:tempArray] forKey:kAdImageShowingFormatImagesKey];
+        [tempDic setObject:[NSArray arrayWithArray:tempArray] forKey:kAdImageShowingFormatAdsKey];
     }
     //先创建目录
     if ([self createFileDirectory]) {
@@ -150,6 +171,9 @@ static KTCAdvertisementManager *_sharedInstance = nil;
 }
 
 - (NSArray *)filterNeedDownloadImagesWithRemoteUrlStrings:(NSArray *)urlStrings {
+    if (!urlStrings || [urlStrings count] == 0) {
+        return nil;
+    }
     NSArray *localImages = [self allLocalImageUrlStringsWithFinishState:YES];
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
     for (NSString *localString in localImages) {
@@ -195,6 +219,11 @@ static KTCAdvertisementManager *_sharedInstance = nil;
 }
 
 - (void)downloadUnfinishedImages {
+    BOOL hasDisplayed = [[self.localData objectForKey:kAdImageShowingFormatStatusKey] boolValue];
+    if (hasDisplayed) {
+        //显示过就不继续下载了
+        return;
+    }
     NSArray *imageUrlStrings = [self allLocalImageUrlStringsWithFinishState:NO];
     [self downloadAdImagesWithUrlStrings:imageUrlStrings];
 }
@@ -255,17 +284,19 @@ static KTCAdvertisementManager *_sharedInstance = nil;
         return nil;
     }
     //获取本地未过期数据
-    NSArray *localImageFileNames = [self allLocalImageUrlStringsWithFinishState:YES];
-    if (!localImageFileNames) {
+    NSArray *localAdInfos = [self allAdInfoWithFinishState:YES];
+    if (!localAdInfos) {
         //没有本地数据，直接返回
         return nil;
     }
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-    for (NSString *fileName in localImageFileNames) {
+    for (NSDictionary *adInfo in localAdInfos) {
+        NSString *fileName = [adInfo objectForKey:kAdImageShowingFormatUrlStringKey];
         NSString *filePath = [NSString stringWithFormat:@"%@/%@", FILE_CACHE_PATH(AdImageLocalDirectory), [GToolUtil hashString:fileName]];
         UIImage *image = [UIImage imageWithContentsOfFile:filePath];
-        if (image) {
-            [tempArray addObject:image];
+        KTCAdvertisementItem *item = [[KTCAdvertisementItem alloc] initWithImage:image segueRawData:adInfo];
+        if (item) {
+            [tempArray addObject:item];
         }
     }
     
@@ -293,19 +324,43 @@ static KTCAdvertisementManager *_sharedInstance = nil;
         return nil;
     }
     
-    NSArray *imagesArray = [self.localData objectForKey:kAdImageShowingFormatImagesKey];
-    if (!imagesArray || ![imagesArray isKindOfClass:[NSArray class]]) {
+    NSArray *adsArray = [self.localData objectForKey:kAdImageShowingFormatAdsKey];
+    if (!adsArray || ![adsArray isKindOfClass:[NSArray class]]) {
         //没有图片数据
         return nil;
     }
     
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-    for (NSDictionary *imageDic in imagesArray) {
-        BOOL hasDownloaded = [[[imageDic allValues] firstObject] boolValue];
+    for (NSDictionary *adDic in adsArray) {
+        BOOL hasDownloaded = [[adDic objectForKey:kAdImageShowingFormatDownloadStatusKey] boolValue];
         if (hasDownloaded == finished) {
             //已下载的图片url string
-            NSString *urlString = [[imageDic allKeys] firstObject];
+            NSString *urlString = [adDic objectForKey:kAdImageShowingFormatUrlStringKey];
             [tempArray addObject:urlString];
+        }
+    }
+    
+    return [NSArray arrayWithArray:tempArray];
+}
+
+- (NSArray *)allAdInfoWithFinishState:(BOOL)finished {
+    if (!self.localData) {
+        //没有显示数据
+        return nil;
+    }
+    
+    NSArray *adsArray = [self.localData objectForKey:kAdImageShowingFormatAdsKey];
+    if (!adsArray || ![adsArray isKindOfClass:[NSArray class]]) {
+        //没有图片数据
+        return nil;
+    }
+    
+    NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+    for (NSDictionary *adDic in adsArray) {
+        BOOL hasDownloaded = [[adDic objectForKey:kAdImageShowingFormatDownloadStatusKey] boolValue];
+        if (hasDownloaded == finished) {
+            //已下载的图片url string
+            [tempArray addObject:[NSDictionary dictionaryWithDictionary:adDic]];
         }
     }
     
@@ -328,24 +383,26 @@ static KTCAdvertisementManager *_sharedInstance = nil;
     //加锁
     [self.dataLock lock];
     NSMutableDictionary *tempDic = [NSMutableDictionary dictionaryWithDictionary:self.localData];
-    NSArray *imagesArray = [tempDic objectForKey:kAdImageShowingFormatImagesKey];
-    if (!imagesArray || ![imagesArray isKindOfClass:[NSArray class]]) {
+    NSArray *adsArray = [tempDic objectForKey:kAdImageShowingFormatAdsKey];
+    if (!adsArray || ![adsArray isKindOfClass:[NSArray class]]) {
         //没有图片数据
         //解锁
         [self.dataLock unlock];
         return;
     }
-    NSMutableArray *tempImages = [[NSMutableArray alloc] init];
-    for (NSDictionary *imageDic in imagesArray) {
-        if ([imageDic objectForKey:urlString]) {
+    NSMutableArray *tempAds = [[NSMutableArray alloc] init];
+    for (NSDictionary *adDic in adsArray) {
+        if ([[adDic objectForKey:kAdImageShowingFormatUrlStringKey] isEqualToString:urlString]) {
             //url string 相同，则设置hasDownloaded
-            [tempImages addObject:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:hasDownloaded] forKey:urlString]];
+            NSMutableDictionary *mutableAd = [NSMutableDictionary dictionaryWithDictionary:adDic];
+            [mutableAd setObject:[NSNumber numberWithBool:hasDownloaded] forKey:kAdImageShowingFormatDownloadStatusKey];
+            [tempAds addObject:[NSDictionary dictionaryWithDictionary:mutableAd]];
         } else {
             //url string 不同，则继续遍历
-            [tempImages addObject:imageDic];
+            [tempAds addObject:adDic];
         }
     }
-    [tempDic setObject:[NSArray arrayWithArray:tempImages] forKey:kAdImageShowingFormatImagesKey];
+    [tempDic setObject:[NSArray arrayWithArray:tempAds] forKey:kAdImageShowingFormatAdsKey];
     self.localData = [NSDictionary dictionaryWithDictionary:tempDic];
     //同步本地文件
     [self synchronizeShowingFormatFile];
