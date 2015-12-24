@@ -24,6 +24,28 @@ static AUITheme *_sharedInstance = nil;
     return _sharedInstance;
 }
 
+- (id)copyWithZone:(NSZone *)zone {
+    AUITheme *theme = [[AUITheme allocWithZone:zone] init];
+    theme.globalThemeColor = [self.globalThemeColor copy];
+    theme.globalBGColor = [self.globalBGColor copy];
+    theme.globalCellBGColor = [self.globalCellBGColor copy];
+    theme.darkTextColor = [self.darkTextColor copy];
+    theme.lightTextColor = [self.lightTextColor copy];
+    theme.highlightTextColor = [self.highlightTextColor copy];
+    theme.buttonBGColor_Normal = [self.buttonBGColor_Normal copy];
+    theme.buttonBGColor_Highlight = [self.buttonBGColor_Highlight copy];
+    theme.buttonBGColor_Disable = [self.buttonBGColor_Disable copy];
+    theme.navibarBGColor = [self.navibarBGColor copy];
+    theme.navibarTitleColor_Normal = [self.navibarTitleColor_Normal copy];
+    theme.navibarTitleColor_Highlight = [self.navibarTitleColor_Highlight copy];
+    theme.naviBackImage_Normal = [UIImage imageWithCGImage:self.naviBackImage_Normal.CGImage];
+    theme.naviBackImage_Highlight = [UIImage imageWithCGImage:self.naviBackImage_Highlight.CGImage];
+    theme.tabbarBGColor = [self.tabbarBGColor copy];
+    theme.tabbarItmeElements = [self.tabbarItmeElements copy];
+    
+    return theme;
+}
+
 #pragma mark Global
 
 - (UIColor *)globalThemeColor {
@@ -203,6 +225,22 @@ static AUITheme *_sharedInstance = nil;
         _tabbar4Image_Highlight = [UIImage imageNamed:@"tabbar_userCenter_h"];
     }
     return _tabbar4Image_Highlight;
+}
+
+@end
+
+
+@implementation AUITabbarItemElement
+
+- (id)copyWithZone:(NSZone *)zone {
+    AUITabbarItemElement *element = [[AUITabbarItemElement allocWithZone:zone] init];
+    element.tabbarItemTitle = self.tabbarItemTitle;
+    element.tabbarItemImage_Normal = [UIImage imageWithCGImage:self.tabbarItemImage_Normal.CGImage];
+    element.tabbarItemImage_Highlight = [UIImage imageWithCGImage:self.tabbarItemImage_Highlight.CGImage];
+    element.tabbarTitleColor_Normal = [self.tabbarTitleColor_Normal copy];
+    element.tabbarTitleColor_Highlight = [self.tabbarTitleColor_Highlight copy];
+    
+    return element;
 }
 
 @end

@@ -793,6 +793,7 @@
 		8F25A0E11C2A75C10076A6FA /* SoftwareSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F25A0DF1C2A75C10076A6FA /* SoftwareSettingViewController.m */; };
 		8F25A0E21C2A75C10076A6FA /* SoftwareSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F25A0E01C2A75C10076A6FA /* SoftwareSettingViewController.xib */; };
 		8F25A0E51C2A8A350076A6FA /* KTCAdvertisementItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F25A0E41C2A8A350076A6FA /* KTCAdvertisementItem.m */; };
+		8F25A0E91C2BD1200076A6FA /* KTCThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F25A0E81C2BD1200076A6FA /* KTCThemeManager.m */; };
 		8F2C55BB1BFF167B00C2B6BF /* CommonShareService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2C55BA1BFF167B00C2B6BF /* CommonShareService.m */; };
 		8F38D1E91C085F080061C329 /* CommentFoundingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F38D1E81C085F080061C329 /* CommentFoundingView.m */; };
 		8F38D1EB1C085F1E0061C329 /* CommentFoundingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F38D1EA1C085F1E0061C329 /* CommentFoundingView.xib */; };
@@ -2300,6 +2301,8 @@
 		8F25A0E01C2A75C10076A6FA /* SoftwareSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SoftwareSettingViewController.xib; sourceTree = "<group>"; };
 		8F25A0E31C2A8A350076A6FA /* KTCAdvertisementItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCAdvertisementItem.h; sourceTree = "<group>"; };
 		8F25A0E41C2A8A350076A6FA /* KTCAdvertisementItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCAdvertisementItem.m; sourceTree = "<group>"; };
+		8F25A0E71C2BD1200076A6FA /* KTCThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCThemeManager.h; sourceTree = "<group>"; };
+		8F25A0E81C2BD1200076A6FA /* KTCThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCThemeManager.m; sourceTree = "<group>"; };
 		8F2C55B91BFF167B00C2B6BF /* CommonShareService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonShareService.h; sourceTree = "<group>"; };
 		8F2C55BA1BFF167B00C2B6BF /* CommonShareService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonShareService.m; sourceTree = "<group>"; };
 		8F38D1E71C085F080061C329 /* CommentFoundingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentFoundingView.h; sourceTree = "<group>"; };
@@ -3231,6 +3234,7 @@
 		1E3D87FA1B4BF49F00275C35 /* LogicFramework */ = {
 			isa = PBXGroup;
 			children = (
+				8F25A0E61C2BD0D90076A6FA /* Theme */,
 				8F50DEC41C1F15FB0069E6A4 /* Advertisement */,
 				8FA114D91C190B73003FA52F /* OnlineCustomerService */,
 				8FA361491C12DB990094A9AA /* SegueMaster */,
@@ -5333,6 +5337,15 @@
 			path = Map;
 			sourceTree = "<group>";
 		};
+		8F25A0E61C2BD0D90076A6FA /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				8F25A0E71C2BD1200076A6FA /* KTCThemeManager.h */,
+				8F25A0E81C2BD1200076A6FA /* KTCThemeManager.m */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
 		8F2C55B81BFF163A00C2B6BF /* Share */ = {
 			isa = PBXGroup;
 			children = (
@@ -6009,6 +6022,7 @@
 				1E8017191BB1052500B6C352 /* UINavigationBar+BackgroundColor.m in Sources */,
 				1E0B7B081B6F6C1400A58AD4 /* SaiDanCommentView.m in Sources */,
 				1E943E8F1B71E7CD0029FE74 /* CheckFirstInstalDataManager.m in Sources */,
+				8F25A0E91C2BD1200076A6FA /* KTCThemeManager.m in Sources */,
 				1E0B7AE71B6F693000A58AD4 /* MC_PhotoAlbumViewController.mm in Sources */,
 				1E827B521B8DC047008F3F08 /* NotificationCenterView.m in Sources */,
 				1E3D8D5C1B4BF4A100275C35 /* HttpRequestClient.m in Sources */,

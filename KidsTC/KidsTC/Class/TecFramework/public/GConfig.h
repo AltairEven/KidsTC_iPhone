@@ -10,7 +10,7 @@
 #import "Constants.h"
 #import <CoreLocation/CoreLocation.h>
 #import "KTCLocation.h"
-#import "AUITheme.h"
+#import "KTCThemeManager.h"
 
 //#define DEBUG 0
 

@@ -177,20 +177,12 @@ NSString *const kHomeViewDataFinishLoadingNotification = @"kHomeViewDataFinishLo
     [weakSelf.loadHomeDataRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         weakSelf.updating = NO;
         [weakSelf loadHomeDataSucceed:responseData];
-        if (!weakSelf.alreadyFirstLoaded) {
-            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kHomeViewDataFinishLoadingNotification object:nil]];
-            weakSelf.alreadyFirstLoaded = YES;
-        }
         if (succeed) {
             succeed(responseData);
         }
     } failure:^(HttpRequestClient *client, NSError *error) {
         weakSelf.updating = NO;
         [weakSelf loadHomeDataFailed:error];
-        if (!weakSelf.alreadyFirstLoaded) {
-            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kHomeViewDataFinishLoadingNotification object:nil]];
-            weakSelf.alreadyFirstLoaded = YES;
-        }
         if (failure) {
             failure(error);
         }
@@ -211,22 +203,23 @@ NSString *const kHomeViewDataFinishLoadingNotification = @"kHomeViewDataFinishLo
     [weakSelf.loadHomeDataRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         weakSelf.updating = NO;
         [weakSelf loadHomeDataSucceed:responseData];
-        if (!weakSelf.alreadyFirstLoaded) {
-            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kHomeViewDataFinishLoadingNotification object:nil]];
-            weakSelf.alreadyFirstLoaded = YES;
-        }
         if (succeed) {
             succeed(responseData);
         }
-    } failure:^(HttpRequestClient *client, NSError *error) {
-        weakSelf.updating = NO;
-        [weakSelf loadHomeDataFailed:error];
         if (!weakSelf.alreadyFirstLoaded) {
             [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kHomeViewDataFinishLoadingNotification object:nil]];
             weakSelf.alreadyFirstLoaded = YES;
         }
+        [weakSelf writeFileWithRemoteData:responseData];
+    } failure:^(HttpRequestClient *client, NSError *error) {
+        weakSelf.updating = NO;
+        [weakSelf loadHomeDataFailed:error];
         if (failure) {
             failure(error);
+        }
+        if (!weakSelf.alreadyFirstLoaded) {
+            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kHomeViewDataFinishLoadingNotification object:nil]];
+            weakSelf.alreadyFirstLoaded = YES;
         }
     }];
 }
@@ -261,6 +254,9 @@ NSString *const kHomeViewDataFinishLoadingNotification = @"kHomeViewDataFinishLo
 - (void)startUpdateDataWithSucceed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
     if ([self loadLocalFileToModel]) {
         [self.view reloadData];
+        if (succeed) {
+            succeed(nil);
+        }
         if (!self.alreadyFirstLoaded) {
             [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kHomeViewDataFinishLoadingNotification object:nil]];
             self.alreadyFirstLoaded = YES;

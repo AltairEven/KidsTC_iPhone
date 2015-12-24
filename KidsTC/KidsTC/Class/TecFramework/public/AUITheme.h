@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface AUITheme : NSObject
+@class AUITabbarItemElement;
+
+@interface AUITheme : NSObject <NSCopying>
 
 + (instancetype)theme;
 
@@ -48,6 +50,8 @@
 
 @property (nonatomic, strong) UIColor *tabbarBGColor; //tab栏背景色
 
+@property (nonatomic, strong) NSArray<AUITabbarItemElement *> *tabbarItmeElements; //tabbar item元素
+
 @property (nonatomic, strong) UIColor *tabbarTitleColor_Normal; //tab栏标题颜色（普通）
 
 @property (nonatomic, strong) UIColor *tabbarTitleColor_Highlight; //tab栏标题颜色（高亮）
@@ -67,5 +71,19 @@
 @property (nonatomic, strong) UIImage *tabbar4Image_Normal; //tabbar按钮4图片（普通）
 
 @property (nonatomic, strong) UIImage *tabbar4Image_Highlight; //tabbar按钮4图片（高亮）
+
+@end
+
+@interface AUITabbarItemElement : NSObject <NSCopying>
+
+@property (nonatomic, copy) NSString *tabbarItemTitle; //tabbar按钮标题
+
+@property (nonatomic, strong) UIImage *tabbarItemImage_Normal; //tabbar按钮图片（普通）
+
+@property (nonatomic, strong) UIImage *tabbarItemImage_Highlight; //tabbar按钮图片（高亮）
+
+@property (nonatomic, strong) UIColor *tabbarTitleColor_Normal; //tab栏标题颜色（普通）
+
+@property (nonatomic, strong) UIColor *tabbarTitleColor_Highlight; //tab栏标题颜色（高亮）
 
 @end

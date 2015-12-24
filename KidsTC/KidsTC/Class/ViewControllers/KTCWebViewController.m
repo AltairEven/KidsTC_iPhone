@@ -31,7 +31,7 @@
 #define Hook_Comment (@"evaluate::")
 #define Hook_Share (@"share::")
 
-@interface KTCWebViewController () <UIWebViewDelegate, AUIKeyboardAdhesiveViewDelegate, MC_ImagePickerViewControllerDelegate, MWPhotoBrowserDelegate>
+@interface KTCWebViewController () <UIWebViewDelegate, AUIKeyboardAdhesiveViewDelegate, MC_ImagePickerViewControllerDelegate, MWPhotoBrowserDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) KTCCommentManager *commentManager;
 
@@ -56,6 +56,12 @@
 - (void)makeMWPhotoFromImageUrlArray:(NSArray *)urlArray;
 
 //other
+@property (weak, nonatomic) IBOutlet UIButton *backToTopButton;
+@property (nonatomic, strong) UIButton *closeButton;
+
+- (IBAction)didClickedBackToTopButton:(id)sender;
+
+- (void)buildLeftBarButtonsWithCloseHidden:(BOOL)hidden;
 
 - (BOOL)isValidateComment;
 
@@ -68,6 +74,8 @@
 - (void)pushToServiceDetailWithParams:(NSDictionary *)params;
 
 - (void)commentWithParams:(NSDictionary *)params;
+
+- (void)didClickedShareButton;
 
 - (void)shareWithParams:(NSDictionary *)params;
 
@@ -108,14 +116,23 @@
     
     self.webView.multipleTouchEnabled = NO;
     self.webView.delegate = self;
+    self.webView.scrollView.delegate = self;
     if (self.webUrlString)
     {
         [self loadUrl:self.webUrlString];
     }
     
-    [self setupRightBarButton:@"" target:self action:@selector(closeWebPage) frontImage:@"navigation_close" andBackImage:@"navigation_close"];
-    
     [[HttpIcsonCookieManager sharedManager] setIcsonCookieWithName:@"population_type" andValue:[[KTCUser currentUser].userRole userRoleIdentifierString]];
+    
+    self.backToTopButton.layer.cornerRadius = 20;
+    self.backToTopButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.backToTopButton.layer.borderWidth = 2;
+    self.backToTopButton.layer.masksToBounds = YES;
+    [self.backToTopButton setHidden:YES];
+    
+    [self setupRightBarButton:@"" target:self action:@selector(didClickedShareButton) frontImage:@"share_n" andBackImage:@"share_n"];
+
+    
 }
 
 - (void)viewDidUnload
@@ -127,6 +144,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self buildLeftBarButtonsWithCloseHidden:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -295,10 +313,22 @@
         self.title = @"童成网";
         _navigationTitle = title;
     }
+    [self.closeButton setHidden:![self.webView canGoBack]];
 }
 
 - (void)webView:(UIWebView *)webView_ didFailLoadWithError:(NSError *)error
 {
+    [self.closeButton setHidden:![self.webView canGoBack]];
+}
+
+#pragma mark UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView == self.webView.scrollView && scrollView.contentOffset.y > 200) {
+        [self.backToTopButton setHidden:NO];
+    } else {
+        [self.backToTopButton setHidden:YES];
+    }
 }
 
 #pragma mark AUIKeyboardAdhesiveViewDelegate
@@ -465,6 +495,42 @@
 
 #pragma mark Private methods
 
+- (void)buildLeftBarButtonsWithCloseHidden:(BOOL)hidden {
+    CGFloat buttonWidth = 28;
+    CGFloat buttonHeight = 28;
+    CGFloat buttonGap = 15;
+    
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(-15, 0, buttonWidth * 2 + buttonGap, buttonHeight)];
+    [bgView setBackgroundColor:[UIColor clearColor]];
+    
+    CGFloat xPosition = 0;
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [backButton setFrame:CGRectMake(xPosition, 0, buttonWidth, buttonHeight)];
+    [backButton setBackgroundColor:[UIColor clearColor]];
+    [backButton setImage:[UIImage imageNamed:@"navigation_back_n"] forState:UIControlStateNormal];
+    [backButton setImage:[UIImage imageNamed:@"navigation_back_n"] forState:UIControlStateHighlighted];
+    [backButton addTarget:self action:@selector(goBackController:) forControlEvents:UIControlEventTouchUpInside];
+    [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -5, 0, 5)];
+    [bgView addSubview:backButton];
+    
+    xPosition += buttonWidth + buttonGap;
+    self.closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.closeButton setFrame:CGRectMake(xPosition, 0, buttonWidth, buttonHeight)];
+    [self.closeButton setBackgroundColor:[UIColor clearColor]];
+    [self.closeButton setImage:[UIImage imageNamed:@"navigation_close"] forState:UIControlStateNormal];
+    [self.closeButton setImage:[UIImage imageNamed:@"navigation_close"] forState:UIControlStateHighlighted];
+    [self.closeButton addTarget:self action:@selector(closeWebPage) forControlEvents:UIControlEventTouchUpInside];
+    [bgView addSubview:self.closeButton];
+    [self.closeButton setHidden:YES];
+    
+    UIBarButtonItem *lItem = [[UIBarButtonItem alloc] initWithCustomView:bgView];
+    self.navigationItem.leftBarButtonItem = lItem;
+}
+
+- (IBAction)didClickedBackToTopButton:(id)sender {
+    [self.webView.scrollView scrollRectToVisible:CGRectMake(0, 0, self.webView.scrollView.frame.size.width, self.webView.scrollView.frame.size.height) animated:YES];
+}
+
 - (void)makeMWPhotoFromImageUrlArray:(NSArray *)urlArray {
     NSMutableArray *temp = [[NSMutableArray alloc] init];
     for (NSURL *url in urlArray) {
@@ -484,7 +550,7 @@
     }
     NSString *serviceId = [params objectForKey:@"id"];
     NSString *channelId = [params objectForKey:@"chid"];
-    if ([serviceId length] == 0 || [channelId length] == 0) {
+    if ([serviceId length] == 0) {
         return;
     }
     ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithServiceId:serviceId channelId:channelId];
@@ -605,6 +671,9 @@
 }
 
 #pragma mark Share
+
+- (void)didClickedShareButton {
+}
 
 - (void)shareWithParams:(NSDictionary *)params {
     NSString *title = [params objectForKey:@"title"];
