@@ -73,7 +73,7 @@ static NSString *const kCellIdentifier = @"cellIdentifier";
     [weakSelf.tableView addGifFooterWithRefreshingBlock:^{
         BOOL noMore = [[weakSelf.noMoreDataDic objectForKey:[NSString stringWithFormat:@"%d", weakSelf.currentLsitStatus]] boolValue];
         if (noMore) {
-            [weakSelf.tableView.gifFooter noticeNoMoreData];
+            [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
             return;
         }
         [weakSelf pullUpToLoadMore];
@@ -218,12 +218,12 @@ static NSString *const kCellIdentifier = @"cellIdentifier";
             [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:NO];
         }
         if ([[self.noMoreDataDic objectForKey:[NSString stringWithFormat:@"%d", self.currentLsitStatus]] boolValue]) {
-            [self.tableView.gifFooter noticeNoMoreData];
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
         } else {
-            [self.tableView.gifFooter resetNoMoreData];
+            [self.tableView.mj_footer resetNoMoreData];
         }
     }
-    [self.tableView.gifFooter setHidden:[[self.hideFooterDic objectForKey:[NSString stringWithFormat:@"%d", self.currentLsitStatus]] boolValue]];
+    [self.tableView.mj_footer setHidden:[[self.hideFooterDic objectForKey:[NSString stringWithFormat:@"%d", self.currentLsitStatus]] boolValue]];
     if ([self.listModels count] == 0) {
         self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
     } else {
@@ -232,11 +232,11 @@ static NSString *const kCellIdentifier = @"cellIdentifier";
 }
 
 - (void)endRefresh {
-    [self.tableView.header endRefreshing];
+    [self.tableView.mj_header endRefreshing];
 }
 
 - (void)endLoadMore {
-    [self.tableView.gifFooter endRefreshing];
+    [self.tableView.mj_footer endRefreshing];
 }
 
 - (void)noMoreData:(BOOL)noMore forListStatus:(AppointmentOrderListStatus)status {
@@ -244,7 +244,7 @@ static NSString *const kCellIdentifier = @"cellIdentifier";
 }
 
 - (void)hideLoadMoreFooter:(BOOL)hidden forListStatus:(AppointmentOrderListStatus)status {
-    [self.tableView.gifFooter setHidden:hidden];
+    [self.tableView.mj_footer setHidden:hidden];
     [self.hideFooterDic setObject:[NSNumber numberWithBool:hidden] forKey:[NSString stringWithFormat:@"%d", status]];
 }
 /*

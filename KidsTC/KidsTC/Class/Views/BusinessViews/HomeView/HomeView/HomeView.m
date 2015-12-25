@@ -629,7 +629,7 @@ static NSString *const kNoticeCellIdentifier = @"kNoticeCellIdentifier";
 
 - (void)pullToRefreshTable {
     self.tableView.backgroundView = nil;
-    [self.tableView.gifFooter resetNoMoreData];
+    [self.tableView.mj_footer resetNoMoreData];
     self.noMoreData = NO;
     if (self.delegate && [self.delegate respondsToSelector:@selector(homeViewDidPulledDownToRefresh:)]) {
         [self.delegate homeViewDidPulledDownToRefresh:self];
@@ -708,28 +708,28 @@ static NSString *const kNoticeCellIdentifier = @"kNoticeCellIdentifier";
 }
 
 - (void)startRefresh {
-    [self.tableView.header beginRefreshing];
+    [self.tableView.mj_header beginRefreshing];
 }
 
 - (void)endRefresh {
-    [self.tableView.header endRefreshing];
+    [self.tableView.mj_header endRefreshing];
 }
 
 - (void)startLoadMore {
-    [self.tableView.legendFooter beginRefreshing];
+    [self.tableView.mj_footer beginRefreshing];
 }
 
 - (void)endLoadMore {
-    [self.tableView.legendFooter endRefreshing];
+    [self.tableView.mj_footer endRefreshing];
 }
 
 - (void)noMoreData:(BOOL)noMore {
-    [self.tableView.legendFooter noticeNoMoreData];
+    [self.tableView.mj_footer endRefreshingWithNoMoreData];
     self.noMoreData = YES;
 }
 
 - (void)hideLoadMoreFooter:(BOOL)hidden {
-    [self.tableView.legendFooter setHidden:hidden];
+    [self.tableView.mj_footer setHidden:hidden];
 }
 
 - (void)scrollHomeViewToFloorIndex:(NSUInteger)index {

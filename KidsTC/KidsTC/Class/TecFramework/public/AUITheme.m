@@ -8,6 +8,10 @@
 
 #import "AUITheme.h"
 
+NSString *const kAUIThemeTabItemKeyHome = @"kAUIThemeTabItemKeyHome";
+NSString *const kAUIThemeTabItemKeyNews = @"kAUIThemeTabItemKeyNews";
+NSString *const kAUIThemeTabItemKeyStrategy = @"kAUIThemeTabItemKeyStrategy";
+NSString *const kAUIThemeTabItemKeyUserCenter = @"kAUIThemeTabItemKeyUserCenter";
 
 @interface AUITheme ()
 
@@ -34,6 +38,7 @@
     theme.tabbarBGColor = RGBA(252, 248, 245, 1);
     
     AUITabbarItemElement *element1 = [[AUITabbarItemElement alloc] init];
+    element1.type = AUITabbarItemTypeHome;
     element1.tabbarItemTitle = @"首页";
     element1.tabbarTitleColor_Normal = RGBA(175, 158, 139, 1);
     element1.tabbarTitleColor_Highlight = RGBA(255, 136, 136, 1);
@@ -41,6 +46,7 @@
     element1.tabbarItemImage_Highlight = [UIImage imageNamed:@"tabbar_home_h"];
     
     AUITabbarItemElement *element2 = [[AUITabbarItemElement alloc] init];
+    element2.type = AUITabbarItemTypeNews;
     element2.tabbarItemTitle = @"知识库";
     element2.tabbarTitleColor_Normal = RGBA(175, 158, 139, 1);
     element2.tabbarTitleColor_Highlight = RGBA(255, 136, 136, 1);
@@ -48,6 +54,7 @@
     element2.tabbarItemImage_Highlight = [UIImage imageNamed:@"tabbar_discovery_h"];
     
     AUITabbarItemElement *element3 = [[AUITabbarItemElement alloc] init];
+    element3.type = AUITabbarItemTypeStrategy;
     element3.tabbarItemTitle = @"亲子攻略";
     element3.tabbarTitleColor_Normal = RGBA(175, 158, 139, 1);
     element3.tabbarTitleColor_Highlight = RGBA(255, 136, 136, 1);
@@ -55,6 +62,7 @@
     element3.tabbarItemImage_Highlight = [UIImage imageNamed:@"tabbar_parantingStrategy_h"];
     
     AUITabbarItemElement *element4 = [[AUITabbarItemElement alloc] init];
+    element4.type = AUITabbarItemTypeUserCenter;
     element4.tabbarItemTitle = @"我";
     element4.tabbarTitleColor_Normal = RGBA(175, 158, 139, 1);
     element4.tabbarTitleColor_Highlight = RGBA(255, 136, 136, 1);

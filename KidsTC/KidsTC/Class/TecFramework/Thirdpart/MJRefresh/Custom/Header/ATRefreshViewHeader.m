@@ -21,8 +21,6 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.stateHidden = YES;
-        self.updatedTimeHidden = YES;
         self.pullingPercent = 2;
         self.refreshView = [[HeaderRefreshView alloc] init];
         [self.refreshView setDuration:0.5];
@@ -37,26 +35,26 @@
     [super layoutSubviews];
 }
 
-- (void)setState:(MJRefreshHeaderState)state
+- (void)setState:(MJRefreshState)state
 {
     if (self.state == state) return;
     
     // 旧状态
-    MJRefreshHeaderState oldState = self.state;
+    MJRefreshState oldState = self.state;
     
     switch (state) {
-        case MJRefreshHeaderStateIdle: {
-            if (oldState == MJRefreshHeaderStateRefreshing) {
+        case MJRefreshStateIdle: {
+            if (oldState == MJRefreshStateRefreshing) {
                 [self.refreshView stopAnimation];
             }
             break;
         }
             
-        case MJRefreshHeaderStatePulling: {
+        case MJRefreshStatePulling: {
             break;
         }
             
-        case MJRefreshHeaderStateRefreshing: {
+        case MJRefreshStateRefreshing: {
             [self.refreshView startAnimation];
             break;
         }

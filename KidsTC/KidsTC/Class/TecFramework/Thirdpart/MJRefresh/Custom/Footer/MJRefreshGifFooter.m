@@ -40,26 +40,22 @@
     // 指示器
     self.gifView.frame = self.bounds;
     
-    if (self.stateHidden) {
+    if (self.isSingleImage) {
         self.gifView.contentMode = UIViewContentModeCenter;
+        self.gifView.frame = CGRectMake(self.bounds.size.width / 8, 15, 10, 10);
     } else {
-        if (self.isSingleImage) {
-            self.gifView.contentMode = UIViewContentModeCenter;
-            self.gifView.frame = CGRectMake(self.bounds.size.width / 8, 15, 10, 10);
-        } else {
-            self.gifView.contentMode = UIViewContentModeRight;
-        }
-        self.gifView.mj_w = self.mj_w * 0.5 - 90;
+        self.gifView.contentMode = UIViewContentModeRight;
     }
+    self.gifView.mj_w = self.mj_w * 0.5 - 90;
 }
 
 #pragma mark - 公共方法
-- (void)setState:(MJRefreshFooterState)state
+- (void)setState:(MJRefreshState)state
 {
     if (self.state == state) return;
     
     switch (state) {
-        case MJRefreshFooterStateIdle:
+        case MJRefreshStateIdle:
             self.gifView.hidden = YES;
             if (self.isSingleImage) {
                 [self stopAnimaton];
@@ -68,7 +64,7 @@
             }
             break;
             
-        case MJRefreshFooterStateRefreshing:
+        case MJRefreshStateRefreshing:
             self.gifView.hidden = NO;
             if (self.isSingleImage) {
                 [self startAnimation];
@@ -77,7 +73,7 @@
             }
             break;
             
-        case MJRefreshFooterStateNoMoreData:
+        case MJRefreshStateNoMoreData:
             self.gifView.hidden = YES;
             if (self.isSingleImage) {
                 [self stopAnimaton];

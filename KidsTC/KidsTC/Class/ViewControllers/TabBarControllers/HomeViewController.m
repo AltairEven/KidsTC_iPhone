@@ -15,7 +15,7 @@
 #import "KTCSegueMaster.h"
 
 
-@interface HomeViewController () <HomeViewDelegate, AUIFloorNavigationViewDataSource, AUIFloorNavigationViewDelegate>
+@interface HomeViewController () <HomeViewDelegate, AUIFloorNavigationViewDataSource, AUIFloorNavigationViewDelegate, UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet HomeView *homeView;
 @property (weak, nonatomic) IBOutlet AUIFloorNavigationView *floorNavigationView;
@@ -23,6 +23,8 @@
 @property (nonatomic, strong) HomeViewModel *viewModel;
 
 @property (nonatomic, copy) NSString *sysNo;
+
+@property (nonatomic, strong) UIWebView *testWebView;
 
 - (void)userRoleHasChanged:(id)info;
 
@@ -65,6 +67,18 @@
             [weakSelf.floorNavigationView setSelectedIndex:0];
         } failure:nil];
     }
+    
+//    self.testWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+//    self.testWebView.delegate = self;
+//    [self.testWebView setScalesPageToFit:YES];
+//    [self.testWebView.scrollView setScrollEnabled:NO];
+//    [self.testWebView setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.3]];
+//    self.testWebView.opaque = NO;
+//    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+//    [self.testWebView setFrame:appDelegate.window.frame];
+//    [self.testWebView layoutIfNeeded];
+//    [appDelegate.window addSubview:self.testWebView];
+//    [self.testWebView setHidden:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -75,6 +89,9 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    NSString *url = @"http://demo.sc.chinaz.com//Files/DownLoad/webjs1/201410/jiaoben2890/#";
+//    NSString *url = @"http://m.kidstc.com/event/detail/7C-B4-EA-88-F0-DE-9E-9F%7C100.html";
+    [self.testWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
 }
 
 
@@ -214,6 +231,16 @@
     [self.homeView scrollHomeViewToFloorIndex:floorModel.floorIndex];
 }
 
+#pragma mark UIWebViewDelegate
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [self.testWebView setHidden:NO];
+    [self.testWebView.superview bringSubviewToFront:self.testWebView];
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    NSLog(@"load webview error:%@", error);
+}
 
 #pragma mark Private method
 

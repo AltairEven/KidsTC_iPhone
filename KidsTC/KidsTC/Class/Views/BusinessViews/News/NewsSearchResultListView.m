@@ -65,7 +65,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     }];
     [weakSelf.tableView addGifFooterWithRefreshingBlock:^{
         if (weakSelf.noMoreData) {
-            [weakSelf.tableView.gifFooter noticeNoMoreData];
+            [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
             return;
         }
         [weakSelf pullUpToLoadMore];
@@ -132,9 +132,9 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
         self.listModels = [self.dataSource itemModelsForNewsSearchResultListView:self];
         [self.tableView reloadData];
         if (self.noMoreData) {
-            [self.tableView.gifFooter noticeNoMoreData];
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
         } else {
-            [self.tableView.gifFooter resetNoMoreData];
+            [self.tableView.mj_footer resetNoMoreData];
         }
     }
     if ([self.listModels count] == 0) {
@@ -145,28 +145,28 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 }
 
 - (void)startRefresh {
-    [self.tableView.header beginRefreshing];
+    [self.tableView.mj_header beginRefreshing];
 }
 
 - (void)endRefresh {
-    [self.tableView.header endRefreshing];
+    [self.tableView.mj_header endRefreshing];
 }
 
 - (void)endLoadMore {
-    [self.tableView.gifFooter endRefreshing];
+    [self.tableView.mj_footer endRefreshing];
 }
 
 - (void)noMoreData:(BOOL)noMore {
     self.noMoreData = noMore;
     if (self.noMoreData) {
-        [self.tableView.gifFooter noticeNoMoreData];
+        [self.tableView.mj_footer endRefreshingWithNoMoreData];
     } else {
-        [self.tableView.gifFooter resetNoMoreData];
+        [self.tableView.mj_footer resetNoMoreData];
     }
 }
 
 - (void)hideLoadMoreFooter:(BOOL)hidden {
-    [self.tableView.gifFooter setHidden:hidden];
+    [self.tableView.mj_footer setHidden:hidden];
 }
 
 /*

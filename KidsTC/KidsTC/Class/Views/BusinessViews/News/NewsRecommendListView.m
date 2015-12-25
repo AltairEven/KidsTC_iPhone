@@ -144,16 +144,16 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 }
 
 - (void)startLoadMore {
-    [self.tableView.header beginRefreshing];
+    [self.tableView.mj_header beginRefreshing];
 }
 
 - (void)endLoadMore {
-    [self.tableView.header endRefreshing];
+    [self.tableView.mj_header endRefreshing];
 }
 
 - (void)noMoreEarlierData:(BOOL)noMore {
     self.noMoreData = noMore;
-    [self.tableView.header setHidden:noMore];
+    [self.tableView.mj_header setHidden:noMore];
 }
 
 /*

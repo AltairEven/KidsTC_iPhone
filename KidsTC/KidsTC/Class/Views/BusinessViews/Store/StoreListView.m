@@ -76,7 +76,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
             [weakSelf pullToRefreshTable];
         }];
     } else {
-        [self.tableView removeHeader];
+        self.tableView.mj_header = nil;
     }
 }
 
@@ -88,7 +88,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
             [weakSelf pullToLoadMoreData];
         }];
     } else {
-        [self.tableView removeFooter];
+        self.tableView.mj_footer = nil;
     }
 }
 
@@ -127,7 +127,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 
 - (void)pullToRefreshTable {
     self.tableView.backgroundView = nil;
-    [self.tableView.gifFooter resetNoMoreData];
+    [self.tableView.mj_footer resetNoMoreData];
     self.noMoreData = NO;
     if (self.delegate && [self.delegate respondsToSelector:@selector(storeListViewDidPulledDownToRefresh:)]) {
         [self.delegate storeListViewDidPulledDownToRefresh:self];
@@ -157,24 +157,24 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 }
 
 - (void)startRefresh {
-    [self.tableView.header beginRefreshing];
+    [self.tableView.mj_header beginRefreshing];
 }
 
 - (void)endRefresh {
-    [self.tableView.header endRefreshing];
+    [self.tableView.mj_header endRefreshing];
 }
 
 - (void)endLoadMore {
-    [self.tableView.gifFooter endRefreshing];
+    [self.tableView.mj_footer endRefreshing];
 }
 
 - (void)noMoreLoad {
-    [self.tableView.gifFooter noticeNoMoreData];
+    [self.tableView.mj_footer endRefreshingWithNoMoreData];
     self.noMoreData = YES;
 }
 
 - (void)hideLoadMoreFooter:(BOOL)hidden {
-    [self.tableView.gifFooter setHidden:hidden];
+    [self.tableView.mj_footer setHidden:hidden];
 }
 /*
 // Only override drawRect: if you perform custom drawing.

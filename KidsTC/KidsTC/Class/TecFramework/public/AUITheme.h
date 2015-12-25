@@ -8,6 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
+
+extern NSString *const kAUIThemeTabItemKeyHome;
+extern NSString *const kAUIThemeTabItemKeyNews;
+extern NSString *const kAUIThemeTabItemKeyStrategy;
+extern NSString *const kAUIThemeTabItemKeyUserCenter;
+
+typedef enum {
+    AUITabbarItemTypeHome,
+    AUITabbarItemTypeNews,
+    AUITabbarItemTypeStrategy,
+    AUITabbarItemTypeUserCenter
+}AUITabbarItemType;
+
 @class AUITabbarItemElement;
 
 @interface AUITheme : NSObject <NSCopying>
@@ -75,6 +88,8 @@
 @end
 
 @interface AUITabbarItemElement : NSObject <NSCopying>
+
+@property (nonatomic, assign) AUITabbarItemType type; //tab类型
 
 @property (nonatomic, copy) NSString *tabbarItemTitle; //tabbar按钮标题
 

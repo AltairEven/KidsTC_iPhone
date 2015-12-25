@@ -113,7 +113,7 @@ static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIden
             [weakSelf pullToRefreshTable];
         }];
     } else {
-        [self.tableView removeHeader];
+        self.tableView.mj_header = nil;
     }
 }
 
@@ -123,16 +123,15 @@ static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIden
         __weak CommentDetailView *weakSelf = self;
         [self.tableView addGifFooterWithRefreshingBlock:^{
             if (weakSelf.noMoreData) {
-                [weakSelf.tableView.gifFooter noticeNoMoreData];
+                [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
                 return;
             }
             [weakSelf pullToLoadMoreData];
         }];
     } else {
-        [self.tableView removeFooter];
+        self.tableView.mj_footer = nil;
     }
-    [self.tableView.gifFooter setHidden:YES];
-    [self.tableView.gifFooter setTitle:@"没有更多的评论了" forState:MJRefreshFooterStateNoMoreData];
+    [self.tableView.mj_footer setHidden:YES];
 }
 
 #pragma mark UITableViewDataSource & UITableViewDelegate
@@ -254,7 +253,7 @@ static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIden
 #pragma mark Private methods
 
 - (void)pullToRefreshTable {
-    [self.tableView.gifFooter resetNoMoreData];
+    [self.tableView.mj_footer resetNoMoreData];
     self.noMoreData = NO;
     if (self.delegate && [self.delegate respondsToSelector:@selector(commentDetailViewDidPulledDownToRefresh:)]) {
         [self.delegate commentDetailViewDidPulledDownToRefresh:self];
@@ -279,34 +278,34 @@ static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIden
 - (void)reloadData {
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(detailModelForCommentDetailView:)]) {
         self.detailModel = [self.dataSource detailModelForCommentDetailView:self];
-        [self.tableView.gifFooter setHidden:NO];
+        [self.tableView.mj_footer setHidden:NO];
     }
     [self.tableView reloadData];
 }
 
 - (void)startRefresh {
-    [self.tableView.header beginRefreshing];
+    [self.tableView.mj_header beginRefreshing];
 }
 
 - (void)endRefresh {
-    [self.tableView.header endRefreshing];
+    [self.tableView.mj_header endRefreshing];
 }
 
 - (void)endLoadMore {
-    [self.tableView.gifFooter endRefreshing];
+    [self.tableView.mj_footer endRefreshing];
 }
 
 - (void)noMoreData:(BOOL)noMore {
     self.noMoreData = noMore;
     if (noMore) {
-        [self.tableView.gifFooter noticeNoMoreData];
+        [self.tableView.mj_footer endRefreshingWithNoMoreData];
     } else {
-        [self.tableView.gifFooter resetNoMoreData];
+        [self.tableView.mj_footer resetNoMoreData];
     }
 }
 
 - (void)hideLoadMoreFooter:(BOOL)hidden {
-    [self.tableView.gifFooter setHidden:hidden];
+    [self.tableView.mj_footer setHidden:hidden];
 }
 
 /*

@@ -64,7 +64,7 @@ static NSString *const kCellIdentifier = @"cellIdentifier";
     }];
     [weakSelf.tableView addGifFooterWithRefreshingBlock:^{
         if (weakSelf.noMoreData) {
-            [weakSelf.tableView.gifFooter noticeNoMoreData];
+            [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
             return;
         }
         [weakSelf pullUpToLoadMore];
@@ -162,24 +162,24 @@ static NSString *const kCellIdentifier = @"cellIdentifier";
 }
 
 - (void)endRefresh {
-    [self.tableView.header endRefreshing];
+    [self.tableView.mj_header endRefreshing];
 }
 
 - (void)endLoadMore {
-    [self.tableView.gifFooter endRefreshing];
+    [self.tableView.mj_footer endRefreshing];
 }
 
 - (void)noMoreData:(BOOL)noMore {
     self.noMoreData = noMore;
     if (noMore) {
-        [self.tableView.gifFooter noticeNoMoreData];
+        [self.tableView.mj_footer endRefreshingWithNoMoreData];
     } else {
-        [self.tableView.gifFooter resetNoMoreData];
+        [self.tableView.mj_footer resetNoMoreData];
     }
 }
 
 - (void)hideLoadMoreFooter:(BOOL)hidden {
-    [self.tableView.gifFooter setHidden:hidden];
+    [self.tableView.mj_footer setHidden:hidden];
 }
 
 

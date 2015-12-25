@@ -65,7 +65,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     }];
     [weakSelf.tableView addGifFooterWithRefreshingBlock:^{
         if (weakSelf.noMoreData) {
-            [weakSelf.tableView.gifFooter noticeNoMoreData];
+            [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
             return;
         }
         [weakSelf pullUpToLoadMore];
@@ -139,11 +139,11 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     }
     [self.tableView reloadData];
     if (self.noMoreData) {
-        [self.tableView.gifFooter noticeNoMoreData];
+        [self.tableView.mj_footer endRefreshingWithNoMoreData];
     } else {
-        [self.tableView.gifFooter resetNoMoreData];
+        [self.tableView.mj_footer resetNoMoreData];
     }
-    [self.tableView.gifFooter setHidden:self.noMoreData];
+    [self.tableView.mj_footer setHidden:self.noMoreData];
     if ([self.listModels count] == 0) {
         self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
     } else {
@@ -152,15 +152,15 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 }
 
 - (void)startRefresh {
-    [self.tableView.header beginRefreshing];
+    [self.tableView.mj_header beginRefreshing];
 }
 
 - (void)endRefresh {
-    [self.tableView.header endRefreshing];
+    [self.tableView.mj_header endRefreshing];
 }
 
 - (void)endLoadMore {
-    [self.tableView.gifFooter endRefreshing];
+    [self.tableView.mj_footer endRefreshing];
 }
 
 - (void)noMoreData:(BOOL)noMore {
@@ -168,7 +168,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 }
 
 - (void)hideLoadMoreFooter:(BOOL)hidden {
-    [self.tableView.gifFooter setHidden:hidden];
+    [self.tableView.mj_footer setHidden:hidden];
 }
 
 /*

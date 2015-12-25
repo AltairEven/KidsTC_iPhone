@@ -78,10 +78,10 @@ static KTCBrowseHistoryView *_sharedInstance = nil;
         [self.tableView registerNib:self.storeCellNib forCellReuseIdentifier:kStoreCellIdentifier];
     }
     __weak KTCBrowseHistoryView *weakSelf = self;
-    [weakSelf.tableView addLegendFooterWithRefreshingBlock:^{
+    [weakSelf.tableView addGifFooterWithRefreshingBlock:^{
         BOOL noMore = [[weakSelf.noMoreDataDic objectForKey:[NSString stringWithFormat:@"%lu", (unsigned long)weakSelf.currentTag]] boolValue];
         if (noMore) {
-            [weakSelf.tableView.legendFooter noticeNoMoreData];
+            [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
             return;
         }
         [weakSelf pullToLoadMoreData];
@@ -283,7 +283,7 @@ static KTCBrowseHistoryView *_sharedInstance = nil;
 }
 
 - (void)endLoadMore {
-    [self.tableView.legendFooter endRefreshing];
+    [self.tableView.mj_footer endRefreshing];
 }
 
 - (void)noMoreData:(BOOL)noMore forTag:(KTCBrowseHistoryViewTag)tag {
@@ -291,7 +291,7 @@ static KTCBrowseHistoryView *_sharedInstance = nil;
 }
 
 - (void)hideLoadMoreFooter:(BOOL)hidden forTag:(KTCBrowseHistoryViewTag)tag {
-    [self.tableView.legendFooter setHidden:hidden];
+    [self.tableView.mj_footer setHidden:hidden];
     [self.hideFooterDic setObject:[NSNumber numberWithBool:hidden] forKey:[NSString stringWithFormat:@"%lu", (unsigned long)tag]];
 }
 

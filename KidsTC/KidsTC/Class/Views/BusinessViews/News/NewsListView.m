@@ -88,7 +88,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     [weakSelf.tableView addGifFooterWithRefreshingBlock:^{
         BOOL noMore = [[weakSelf.noMoreDataDic objectForKey:[NSString stringWithFormat:@"%lu", (unsigned long)weakSelf.currentNewsTagIndex]] boolValue];
         if (noMore) {
-            [weakSelf.tableView.gifFooter noticeNoMoreData];
+            [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
             return;
         }
         [weakSelf pullToLoadMoreData];
@@ -282,12 +282,12 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 //            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
 //        }
         if ([[self.noMoreDataDic objectForKey:[NSString stringWithFormat:@"%lu", (unsigned long)self.currentNewsTagIndex]] boolValue]) {
-            [self.tableView.gifFooter noticeNoMoreData];
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
         } else {
-            [self.tableView.gifFooter resetNoMoreData];
+            [self.tableView.mj_footer resetNoMoreData];
         }
     }
-    [self.tableView.gifFooter setHidden:[[self.hideFooterDic objectForKey:[NSString stringWithFormat:@"%lu", (unsigned long)self.currentNewsTagIndex]] boolValue]];
+    [self.tableView.mj_footer setHidden:[[self.hideFooterDic objectForKey:[NSString stringWithFormat:@"%lu", (unsigned long)self.currentNewsTagIndex]] boolValue]];
     if ([self.listModels count] == 0) {
         self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
     } else {
@@ -296,15 +296,15 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 }
 
 - (void)startRefresh {
-    [self.tableView.header beginRefreshing];
+    [self.tableView.mj_header beginRefreshing];
 }
 
 - (void)endRefresh {
-    [self.tableView.header endRefreshing];
+    [self.tableView.mj_header endRefreshing];
 }
 
 - (void)endLoadMore {
-    [self.tableView.gifFooter endRefreshing];
+    [self.tableView.mj_footer endRefreshing];
 }
 
 - (void)noMoreData:(BOOL)noMore forNewsTagIndex:(NSUInteger)index {
@@ -312,7 +312,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 }
 
 - (void)hideLoadMoreFooter:(BOOL)hidden forNewsTagIndex:(NSUInteger)index {
-    [self.tableView.gifFooter setHidden:hidden];
+    [self.tableView.mj_footer setHidden:hidden];
     [self.hideFooterDic setObject:[NSNumber numberWithBool:hidden] forKey:[NSString stringWithFormat:@"%lu", (unsigned long)index]];
 }
 

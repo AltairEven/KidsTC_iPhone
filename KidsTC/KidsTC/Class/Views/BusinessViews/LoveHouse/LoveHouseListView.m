@@ -60,7 +60,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     __weak LoveHouseListView *weakSelf = self;
     [weakSelf.tableView addGifFooterWithRefreshingBlock:^{
         if (weakSelf.noMoreData) {
-            [weakSelf.tableView.gifFooter noticeNoMoreData];
+            [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
             return ;
         }
         [weakSelf didPullUpToLoadMore];
@@ -134,25 +134,25 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 }
 
 - (void)startLoadMore {
-    [self.tableView.gifFooter resetNoMoreData];
-    [self.tableView.gifFooter beginRefreshing];
+    [self.tableView.mj_footer resetNoMoreData];
+    [self.tableView.mj_footer beginRefreshing];
 }
 
 - (void)endLoadMore {
-    [self.tableView.gifFooter endRefreshing];
+    [self.tableView.mj_footer endRefreshing];
 }
 
 - (void)noMoreData:(BOOL)noMore {
     self.noMoreData = noMore;
     if (noMore) {
-        [self.tableView.gifFooter noticeNoMoreData];
+        [self.tableView.mj_footer endRefreshingWithNoMoreData];
     } else {
-        [self.tableView.gifFooter resetNoMoreData];
+        [self.tableView.mj_footer resetNoMoreData];
     }
 }
 
 - (void)hideLoadMoreFooter:(BOOL)hidden {
-    [self.tableView.gifFooter setHidden:hidden];
+    [self.tableView.mj_footer setHidden:hidden];
 }
 
 /*
