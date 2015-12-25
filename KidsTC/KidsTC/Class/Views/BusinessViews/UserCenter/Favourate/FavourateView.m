@@ -100,7 +100,7 @@ static NSString *const kNewsCellIdentifier = @"kNewsCellIdentifier";
     
     //pull to refresh
     __weak FavourateView *weakSelf = self;
-    [weakSelf.tableView addRefreshViewHeaderWithRefreshingBlock:^{
+    [weakSelf.tableView addGifHeaderWithRefreshingBlock:^{
         [weakSelf pullDownToRefresh];
     }];
     [weakSelf.tableView addGifFooterWithRefreshingBlock:^{

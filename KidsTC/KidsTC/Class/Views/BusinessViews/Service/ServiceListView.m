@@ -71,7 +71,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     _enableUpdate = enableUpdate;
     if (enableUpdate) {
         __weak ServiceListView *weakSelf = self;
-        [self.tableView addRefreshViewHeaderWithRefreshingBlock:^{
+        [self.tableView addGifHeaderWithRefreshingBlock:^{
             [weakSelf pullToRefreshTable];
         }];
     } else {

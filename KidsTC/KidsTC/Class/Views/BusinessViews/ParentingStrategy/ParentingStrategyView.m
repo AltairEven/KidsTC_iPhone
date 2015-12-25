@@ -60,7 +60,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
         [self.tableView registerNib:self.cellNib forCellReuseIdentifier:kCellIdentifier];
     }
     __weak ParentingStrategyView *weakSelf = self;
-    [weakSelf.tableView addRefreshViewHeaderWithRefreshingBlock:^{
+    [weakSelf.tableView addGifHeaderWithRefreshingBlock:^{
         [weakSelf pullDownToRefresh];
     }];
     [weakSelf.tableView addGifFooterWithRefreshingBlock:^{

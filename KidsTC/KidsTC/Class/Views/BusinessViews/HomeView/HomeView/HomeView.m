@@ -187,7 +187,7 @@ static NSString *const kNoticeCellIdentifier = @"kNoticeCellIdentifier";
     self.cellModelsDic = [[NSMutableDictionary alloc] init];
     
     __weak HomeView *weakSelf = self;
-    [self.tableView addRefreshViewHeaderWithRefreshingBlock:^{
+    [self.tableView addGifHeaderWithRefreshingBlock:^{
         [weakSelf pullToRefreshTable];
     }];
 //    [self.tableView addLegendFooterWithRefreshingBlock:^{

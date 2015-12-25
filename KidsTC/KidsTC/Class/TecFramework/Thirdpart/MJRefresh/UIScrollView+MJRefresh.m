@@ -13,7 +13,7 @@
 #import <objc/runtime.h>
 #import "UIImage+GImageExtension.h" //add by Altair, 20151225
 #import "ATRefreshViewHeader.h" //add by Altair, 20151225
-#import "MJRefreshGifFooter.h" //add by Altair, 20151225
+#import "MJChiBaoZiHeader.h" //add by Altair, 20151225
 
 @implementation NSObject (MJRefresh)
 
@@ -32,37 +32,31 @@
 @implementation UIScrollView (MJRefresh)
 
 #pragma mark - header
+
+#pragma mark Altair Edit Start
 - (ATRefreshViewHeader *)addRefreshViewHeaderWithRefreshingBlock:(void (^)())block {
-    ATRefreshViewHeader *header = [self addRefreshViewHeader];
-    header.refreshingBlock = block;
-    return header;
-}
-
-
-- (ATRefreshViewHeader *)addRefreshViewHeader {
     ATRefreshViewHeader *header = [[ATRefreshViewHeader alloc] init];
+    header.refreshingBlock = block;
     self.mj_header = header;
-    
     return header;
 }
 
-- (MJRefreshFooter *)addGifFooterWithRefreshingBlock:(void (^)())block
-{
-    MJRefreshFooter *footer = [self addGifFooter];
-    footer.refreshingBlock = block;
-    return footer;
+- (MJRefreshHeader *)addGifHeaderWithRefreshingBlock:(void (^)())block {
+    MJChiBaoZiHeader *header = [[MJChiBaoZiHeader alloc] init];
+    header.refreshingBlock = block;
+    self.mj_header = header;
+    return header;
 }
 
-
-- (MJRefreshFooter *)addGifFooter
-{
+- (MJRefreshFooter *)addGifFooterWithRefreshingBlock:(void (^)())block {
     MJRefreshBackGifFooter *footer = [[MJRefreshBackGifFooter alloc] init];
-    //add by Altair, 21050423
-    [footer setSingleRotateImage:[[UIImage imageNamed:@"pull_up_acticity"] imageByScalingToSize:CGSizeMake(30, 30)]];
+    [footer setSingleRotateImage:[UIImage imageNamed:@"pull_up_acticity"]];
+    footer.refreshingBlock = block;
     self.mj_footer = footer;
-    
     return footer;
 }
+#pragma mark Altair Edit End
+
 
 static const char MJRefreshHeaderKey = '\0';
 - (void)setMj_header:(MJRefreshHeader *)mj_header

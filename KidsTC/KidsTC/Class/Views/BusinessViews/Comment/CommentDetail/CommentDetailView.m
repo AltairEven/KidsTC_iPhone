@@ -109,7 +109,7 @@ static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIden
     _enableUpdate = enableUpdate;
     if (enableUpdate) {
         __weak CommentDetailView *weakSelf = self;
-        [self.tableView addRefreshViewHeaderWithRefreshingBlock:^{
+        [self.tableView addGifHeaderWithRefreshingBlock:^{
             [weakSelf pullToRefreshTable];
         }];
     } else {

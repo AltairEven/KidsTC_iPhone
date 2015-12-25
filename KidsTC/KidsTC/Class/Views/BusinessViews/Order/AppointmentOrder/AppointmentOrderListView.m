@@ -67,7 +67,7 @@ static NSString *const kCellIdentifier = @"cellIdentifier";
         [self.tableView registerNib:self.cellNib forCellReuseIdentifier:kCellIdentifier];
     }
     __weak AppointmentOrderListView *weakSelf = self;
-    [weakSelf.tableView addRefreshViewHeaderWithRefreshingBlock:^{
+    [weakSelf.tableView addGifHeaderWithRefreshingBlock:^{
         [weakSelf pullDownToRefresh];
     }];
     [weakSelf.tableView addGifFooterWithRefreshingBlock:^{

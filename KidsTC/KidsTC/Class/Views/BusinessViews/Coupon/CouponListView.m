@@ -71,7 +71,7 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
         [self.tableView registerNib:self.contentNib forCellReuseIdentifier:kContentCellIdentifier];
     }
     __weak CouponListView *weakSelf = self;
-    [weakSelf.tableView addRefreshViewHeaderWithRefreshingBlock:^{
+    [weakSelf.tableView addGifHeaderWithRefreshingBlock:^{
         [weakSelf pullDownToRefresh];
     }];
     [weakSelf.tableView addGifFooterWithRefreshingBlock:^{

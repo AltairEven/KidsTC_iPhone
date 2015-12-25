@@ -67,7 +67,7 @@ static NSString *const kContentCellIdentifier = @"kCommentCellIdentifier";
         [self.tableView registerNib:self.contentNib forCellReuseIdentifier:kContentCellIdentifier];
     }
     __weak CommentListView *weakSelf = self;
-    [weakSelf.tableView addRefreshViewHeaderWithRefreshingBlock:^{
+    [weakSelf.tableView addGifHeaderWithRefreshingBlock:^{
         [weakSelf pullDownToRefresh];
     }];
     [weakSelf.tableView addGifFooterWithRefreshingBlock:^{

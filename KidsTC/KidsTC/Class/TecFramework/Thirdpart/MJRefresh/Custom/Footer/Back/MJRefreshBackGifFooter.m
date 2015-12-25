@@ -109,7 +109,8 @@
     } else {
         if (self.isSingleImage) {
             self.gifView.contentMode = UIViewContentModeCenter;
-            self.gifView.frame = CGRectMake(self.bounds.size.width / 8, 15, 10, 10);
+            CGFloat yPosition = self.stateLabel.frame.origin.y - (self.singleRefreshImage.size.height / 2 - self.stateLabel.frame.size.height) / 2;
+            self.gifView.frame = CGRectMake(self.bounds.size.width / 8, yPosition, 10, 10);
         } else {
             self.gifView.contentMode = UIViewContentModeRight;
         }

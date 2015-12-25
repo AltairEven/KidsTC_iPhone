@@ -11,7 +11,7 @@
 #import "MJRefreshConst.h"
 
 @class MJRefreshHeader, MJRefreshFooter;
-@class ATRefreshViewHeader, MJRefreshGifFooter;
+@class ATRefreshViewHeader;
 
 @interface UIScrollView (MJRefresh)
 
@@ -21,6 +21,12 @@
  * @param block 进入刷新状态就会自动调用这个block
  */
 - (ATRefreshViewHeader *)addRefreshViewHeaderWithRefreshingBlock:(void (^)())block;
+/**
+ * 添加一个gif图片的下拉刷新控件
+ *
+ * @param block 进入刷新状态就会自动调用这个block
+ */
+- (MJRefreshHeader *)addGifHeaderWithRefreshingBlock:(void (^)())block;
 /**
  * 添加一个gif图片的上拉刷新控件
  *

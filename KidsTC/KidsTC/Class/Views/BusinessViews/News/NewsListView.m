@@ -82,7 +82,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
         [self.tableView registerNib:self.cellNib forCellReuseIdentifier:kCellIdentifier];
     }
     __weak NewsListView *weakSelf = self;
-    [weakSelf.tableView addRefreshViewHeaderWithRefreshingBlock:^{
+    [weakSelf.tableView addGifHeaderWithRefreshingBlock:^{
         [weakSelf pullToRefreshTable];
     }];
     [weakSelf.tableView addGifFooterWithRefreshingBlock:^{

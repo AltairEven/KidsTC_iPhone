@@ -58,7 +58,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
         [self.tableView registerNib:self.cellNib forCellReuseIdentifier:kCellIdentifier];
     }
     __weak NewsRecommendListView *weakSelf = self;
-    [self.tableView addRefreshViewHeaderWithRefreshingBlock:^{
+    [self.tableView addGifHeaderWithRefreshingBlock:^{
         if (weakSelf.noMoreData) {
             return ;
         }
