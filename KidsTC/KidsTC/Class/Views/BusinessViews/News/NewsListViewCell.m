@@ -24,13 +24,13 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    [self.bgView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.bgView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
     
     self.tagLabel.layer.cornerRadius = 3;
     self.tagLabel.layer.masksToBounds = YES;
-    self.tagLabel.layer.borderColor = [AUITheme theme].globalThemeColor.CGColor;
+    self.tagLabel.layer.borderColor = [[KTCThemeManager manager] currentTheme].globalThemeColor.CGColor;
     self.tagLabel.layer.borderWidth = BORDER_WIDTH;
-    [self.tagLabel setTextColor:[AUITheme theme].globalThemeColor];
+    [self.tagLabel setTextColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -71,14 +71,14 @@
     if (model.isHot) {
         [self.tagLabel setHidden:NO];
         self.leftMargin.constant = 10;
-        self.tagLabel.layer.borderColor = [AUITheme theme].globalThemeColor.CGColor;
-        [self.tagLabel setTextColor:[AUITheme theme].globalThemeColor];
+        self.tagLabel.layer.borderColor = [[KTCThemeManager manager] currentTheme].globalThemeColor.CGColor;
+        [self.tagLabel setTextColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
         [self.tagLabel setText:@" 热 "];
     } else if (model.isRecommend) {
         [self.tagLabel setHidden:NO];
         self.leftMargin.constant = 10;
-        self.tagLabel.layer.borderColor = [AUITheme theme].highlightTextColor.CGColor;
-        [self.tagLabel setTextColor:[AUITheme theme].highlightTextColor];
+        self.tagLabel.layer.borderColor = [[KTCThemeManager manager] currentTheme].highlightTextColor.CGColor;
+        [self.tagLabel setTextColor:[[KTCThemeManager manager] currentTheme].highlightTextColor];
         [self.tagLabel setText:@" 推荐 "];
     } else {
         [self.tagLabel setHidden:YES];

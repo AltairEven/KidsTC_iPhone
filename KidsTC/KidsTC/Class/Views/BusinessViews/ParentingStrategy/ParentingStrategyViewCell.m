@@ -33,9 +33,9 @@
     
     self.recommendLabel.layer.cornerRadius = 3;
     self.recommendLabel.layer.masksToBounds = YES;
-    self.recommendLabel.layer.borderColor = [AUITheme theme].highlightTextColor.CGColor;
+    self.recommendLabel.layer.borderColor = [[KTCThemeManager manager] currentTheme].highlightTextColor.CGColor;
     self.recommendLabel.layer.borderWidth = 1;
-    [self.recommendLabel setTextColor:[AUITheme theme].highlightTextColor];
+    [self.recommendLabel setTextColor:[[KTCThemeManager manager] currentTheme].highlightTextColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

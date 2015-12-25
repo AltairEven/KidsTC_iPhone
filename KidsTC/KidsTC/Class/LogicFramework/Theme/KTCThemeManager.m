@@ -30,7 +30,7 @@ static KTCThemeManager *_sharedInstance = nil;
 
 - (AUITheme *)currentTheme {
     if (!_currentTheme) {
-        _currentTheme = [AUITheme theme];
+        _currentTheme = [AUITheme defaultTheme];
     }
     return _currentTheme;
 }

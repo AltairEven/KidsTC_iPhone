@@ -92,7 +92,7 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
 
 - (void)buildSubviews {
     self.tableView.backgroundView = nil;
-    [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
+    [self.tableView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -117,17 +117,17 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
     //price views
     [self.InsuranceView setFontSize:13];
     
-    [self.servicePriceView setContentColor:[AUITheme theme].buttonBGColor_Normal];
+    [self.servicePriceView setContentColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal];
     [self.servicePriceView setUnitFont:[UIFont systemFontOfSize:15] priceFont:[UIFont systemFontOfSize:15]];
     [self.servicePriceView sizeToFitParameters];
     
-    [self.productTotalPriceView setContentColor:[AUITheme theme].globalThemeColor];
+    [self.productTotalPriceView setContentColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
     [self.productTotalPriceView setUnitFont:[UIFont systemFontOfSize:13] priceFont:[UIFont systemFontOfSize:13]];
-    [self.promotionPriceView setContentColor:[AUITheme theme].globalThemeColor];
+    [self.promotionPriceView setContentColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
     [self.promotionPriceView setUnitFont:[UIFont systemFontOfSize:13] priceFont:[UIFont systemFontOfSize:13]];
-    [self.scorePriceView setContentColor:[AUITheme theme].globalThemeColor];
+    [self.scorePriceView setContentColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
     [self.scorePriceView setUnitFont:[UIFont systemFontOfSize:13] priceFont:[UIFont systemFontOfSize:13]];
-    [self.totalPriceView setContentColor:[AUITheme theme].globalThemeColor];
+    [self.totalPriceView setContentColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
     [self.totalPriceView setUnitFont:[UIFont systemFontOfSize:13] priceFont:[UIFont systemFontOfSize:13]];
     
     if (!self.consumptionCodeCellNib) {
@@ -139,9 +139,9 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
     [self.leftButton setBackgroundColor:RGBA(200, 200, 200, 1) forState:UIControlStateHighlighted];
     [self.leftButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     
-    [self.rightButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
-    [self.rightButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
-    [self.rightButton setBackgroundColor:[AUITheme theme].buttonBGColor_Disable forState:UIControlStateDisabled];
+    [self.rightButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.rightButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    [self.rightButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Disable forState:UIControlStateDisabled];
     [self.rightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.buttonBGView setHidden:YES];
     self.buttonBGHeight.constant = 0;
@@ -215,7 +215,7 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
             
             [self.totalPriceView setPrice:self.detailModel.price];
             
-            [self.settlementCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+            [self.settlementCell.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
             cell = self.settlementCell;
         }
             break;
@@ -237,7 +237,7 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
         default:
             break;
     }
-    [cell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [cell.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
     return cell;
 }
 

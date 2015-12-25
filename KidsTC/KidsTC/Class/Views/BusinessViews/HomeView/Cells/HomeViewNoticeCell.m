@@ -23,7 +23,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    [self.bgView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.bgView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
     self.noticeView.dataSource = self;
     self.noticeView.delegate = self;
     [self.noticeView setEnableClicking:YES];

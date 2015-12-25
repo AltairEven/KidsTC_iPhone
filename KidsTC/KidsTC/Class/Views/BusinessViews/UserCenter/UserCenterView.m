@@ -78,7 +78,7 @@
 }
 
 - (void)buildSubviews {
-    [self.bottomView setBackgroundColor:[AUITheme theme].globalBGColor];
+    [self.bottomView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
     self.faceImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
     self.faceImageView.tag = 0;
     [self.faceImageView setImage:[UIImage imageNamed:@"userCenter_noLoginFace"]];
@@ -108,7 +108,7 @@
     self.waitcommentCountLabel.layer.masksToBounds = YES;
     
     self.tableView.backgroundView = nil;
-    [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
+    [self.tableView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -117,7 +117,7 @@
     [self.tableFooterView setBackgroundColor:[UIColor clearColor]];
     
     self.userActivityLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 50, 15)];
-    [self.userActivityLable setTextColor:[AUITheme theme].globalThemeColor];
+    [self.userActivityLable setTextColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
     [self.userActivityLable setFont:[UIFont systemFontOfSize:12]];
     [self.userActivityLable setBackgroundColor:[UIColor clearColor]];
     [self.userActivityLable setLineBreakMode:NSLineBreakByCharWrapping];
@@ -131,9 +131,9 @@
     
     self.userActivityButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.userActivityButton setFrame:CGRectMake(20, 30, SCREEN_WIDTH - 40, 40)];
-    [self.userActivityButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
-    [self.userActivityButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
-    [self.userActivityButton setTitleColor:[AUITheme theme].navibarTitleColor_Normal forState:UIControlStateNormal];
+    [self.userActivityButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.userActivityButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    [self.userActivityButton setTitleColor:[[KTCThemeManager manager] currentTheme].navibarTitleColor_Normal forState:UIControlStateNormal];
     [self.userActivityButton addTarget:self action:@selector(didClickedUserActivityButton) forControlEvents:UIControlEventTouchUpInside];
     [self.userActivityButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
     self.userActivityButton.layer.cornerRadius = 3;
@@ -146,15 +146,15 @@
     self.messageBadgeLabel.layer.masksToBounds = YES;
     [self.messageBadgeLabel setHidden:YES];
     
-    [self.appointCountLabel setBackgroundColor:[AUITheme theme].globalThemeColor];
-    [self.waitpayCountLabel setBackgroundColor:[AUITheme theme].globalThemeColor];
-    [self.waitcommentCountLabel setBackgroundColor:[AUITheme theme].globalThemeColor];
-    [self.messageBadgeLabel setBackgroundColor:[AUITheme theme].globalThemeColor];
-    [self.allOrderCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
-    [self.myCommentCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
-    [self.myFavourateCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
-    [self.couponCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
-    [self.messageCenterCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.appointCountLabel setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
+    [self.waitpayCountLabel setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
+    [self.waitcommentCountLabel setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
+    [self.messageBadgeLabel setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
+    [self.allOrderCell.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+    [self.myCommentCell.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+    [self.myFavourateCell.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+    [self.couponCell.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+    [self.messageCenterCell.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
 }
 
 /*

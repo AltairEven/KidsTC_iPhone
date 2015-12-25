@@ -20,7 +20,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    [self.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
     
     self.cellImageView.layer.cornerRadius = 5;
     self.cellImageView.layer.masksToBounds = YES;

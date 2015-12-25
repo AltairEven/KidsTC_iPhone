@@ -56,11 +56,11 @@
     
     self.stepperView.stepperDelegate = self;
     
-    [self.refundAmountView setContentColor:[AUITheme theme].globalThemeColor];
+    [self.refundAmountView setContentColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
     [self.refundAmountView setUnitFont:[UIFont systemFontOfSize:16]];
     [self.refundAmountView setPriceFont:[UIFont systemFontOfSize:20]];
     
-    [self.backPointNumberLabel setTextColor:[AUITheme theme].globalThemeColor];
+    [self.backPointNumberLabel setTextColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
     
     self.reasonButton.layer.cornerRadius = 3;
     self.reasonButton.layer.masksToBounds = YES;
@@ -75,8 +75,8 @@
     [self.descriptionTextView setPlaceHolderStr:@"请详细说明退款原因"];
     self.descriptionTextView.delegate = self;
     
-    [self.submitButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
-    [self.submitButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    [self.submitButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.submitButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
 }
 
 #pragma mark StepperViewDelegate

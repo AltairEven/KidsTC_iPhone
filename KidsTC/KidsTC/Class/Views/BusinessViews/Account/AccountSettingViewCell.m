@@ -21,7 +21,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    [self.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
     [self.cellImageView setHidden:YES];
     [self.subTitleLabel setHidden:YES];
     

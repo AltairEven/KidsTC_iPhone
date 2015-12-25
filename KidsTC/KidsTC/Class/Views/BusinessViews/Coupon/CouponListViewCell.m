@@ -23,12 +23,12 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    [self.contentView setBackgroundColor:[AUITheme theme].globalBGColor];
+    [self.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
     
     UIImage *bgImage = [[UIImage imageNamed:@"coupon_cellBG"] resizableImageWithCapInsets:UIEdgeInsetsMake(20, 30, 28, 30) resizingMode:UIImageResizingModeTile];
     [self.cellBGView setImage:bgImage];
     
-    [self.discountPriceView setContentColor:[AUITheme theme].buttonBGColor_Normal];
+    [self.discountPriceView setContentColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal];
     [self.discountPriceView setUnitFont:[UIFont systemFontOfSize:25]];
     [self.discountPriceView setPriceFont:[UIFont systemFontOfSize:SCREEN_WIDTH / 10]];
 }

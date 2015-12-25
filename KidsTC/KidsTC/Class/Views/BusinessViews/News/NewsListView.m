@@ -58,7 +58,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 }
 
 - (void)buildSubviews {
-    [self setBackgroundColor:[AUITheme theme].globalBGColor];
+    [self setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
     
     [self.segmentView setScrollEnable:YES];
     self.segmentView.dataSource = self;
@@ -71,7 +71,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     [self.segmentView setSelectedIndex:self.currentNewsTagIndex];
     
     self.tableView.backgroundView = nil;
-    [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
+    [self.tableView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     

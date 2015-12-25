@@ -62,9 +62,9 @@
 }
 
 - (void)buildSubviews {
-    [self.headerBar setBackgroundColor:[AUITheme theme].navibarBGColor];
-    [self.headerLabel setTextColor:[AUITheme theme].navibarTitleColor_Normal];
-    [self.filterBGView setBackgroundColor:[AUITheme theme].globalBGColor];
+    [self.headerBar setBackgroundColor:[[KTCThemeManager manager] currentTheme].navibarBGColor];
+    [self.headerLabel setTextColor:[[KTCThemeManager manager] currentTheme].navibarTitleColor_Normal];
+    [self.filterBGView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
     [self.areaBGView setHidden:YES];
 //    self.areaTable.delegate = self;
 //    self.areaTable.dataSource = self;
@@ -84,13 +84,13 @@
     
     _currentAreaSelectedIndex = NSUIntegerMax;
     
-    [self.hotSortButton setBackgroundColor:[AUITheme theme].globalCellBGColor forState:UIControlStateNormal];
-    [self.hotSortButton setBackgroundColor:[AUITheme theme].globalCellBGColor forState:UIControlStateHighlighted];
-    [self.hotSortButton setBackgroundColor:[AUITheme theme].globalCellBGColor forState:UIControlStateSelected];
+    [self.hotSortButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor forState:UIControlStateNormal];
+    [self.hotSortButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor forState:UIControlStateHighlighted];
+    [self.hotSortButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor forState:UIControlStateSelected];
     
-    [self.timeSortButton setBackgroundColor:[AUITheme theme].globalCellBGColor forState:UIControlStateNormal];
-    [self.timeSortButton setBackgroundColor:[AUITheme theme].globalCellBGColor forState:UIControlStateHighlighted];
-    [self.timeSortButton setBackgroundColor:[AUITheme theme].globalCellBGColor forState:UIControlStateSelected];
+    [self.timeSortButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor forState:UIControlStateNormal];
+    [self.timeSortButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor forState:UIControlStateHighlighted];
+    [self.timeSortButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor forState:UIControlStateSelected];
 }
 
 

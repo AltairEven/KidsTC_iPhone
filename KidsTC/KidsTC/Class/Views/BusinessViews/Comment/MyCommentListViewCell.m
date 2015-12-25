@@ -42,8 +42,8 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    [self.bgView setBackgroundColor:[AUITheme theme].globalCellBGColor];
-    [self.headerBGView setBackgroundColor:[AUITheme theme].globalBGColor];
+    [self.bgView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+    [self.headerBGView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
     [self drawTriangleForHeader];
     [self.separaterView setBackgroundColor:BorderColor];
     [GConfig resetLineView:self.separaterView withLayoutAttribute:NSLayoutAttributeHeight];
@@ -84,7 +84,7 @@
     CAShapeLayer *maskBorderLayer = [CAShapeLayer layer];
     //    [maskBorderLayer setFrame:CGRectMake(0, 0, width, height)];
     maskBorderLayer.path = [bezierPath CGPath];
-    maskBorderLayer.fillColor = [AUITheme theme].globalCellBGColor.CGColor;
+    maskBorderLayer.fillColor = [[KTCThemeManager manager] currentTheme].globalCellBGColor.CGColor;
     maskBorderLayer.strokeColor = BorderColor.CGColor;//边框颜色
     maskBorderLayer.lineWidth = BORDER_WIDTH; //边框宽度
     [self.headerBGView.layer addSublayer:maskBorderLayer];

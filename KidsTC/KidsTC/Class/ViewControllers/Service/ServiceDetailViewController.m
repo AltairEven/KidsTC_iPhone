@@ -293,7 +293,7 @@
         case KTCActionViewTagHome:
         {
             [self.navigationController popToRootViewControllerAnimated:YES];
-            [[KTCTabBarController shareTabBarController] setSelectedIndex:KTCTabHome];
+            [[KTCTabBarController shareTabBarController] setSelectedIndex:0];
         }
             break;
         case KTCActionViewTagSearch:
@@ -443,10 +443,10 @@
 }
 
 - (void)buildCountDownView {
-    [self.label1 setTextColor:[AUITheme theme].globalThemeColor];
-    [self.gapView setBackgroundColor:[AUITheme theme].globalThemeColor];
+    [self.label1 setTextColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
+    [self.gapView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
     [GConfig resetLineView:self.gapView withLayoutAttribute:NSLayoutAttributeWidth];
-    [self.countdownLabel setTextColor:[AUITheme theme].globalThemeColor];
+    [self.countdownLabel setTextColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
     [self hideCountdown:YES];
 }
 

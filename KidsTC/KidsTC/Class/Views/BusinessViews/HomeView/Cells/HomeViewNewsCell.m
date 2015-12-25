@@ -25,7 +25,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    [self.bgView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.bgView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
     self.tagLabel.layer.cornerRadius = 3;
     self.tagLabel.layer.masksToBounds = YES;
     self.tagLabel.layer.borderWidth = BORDER_WIDTH;
@@ -50,14 +50,14 @@
     if (model.isHot) {
         [self.tagLabel setHidden:NO];
         self.leftMargin.constant = 10;
-        self.tagLabel.layer.borderColor = [AUITheme theme].globalThemeColor.CGColor;
-        [self.tagLabel setTextColor:[AUITheme theme].globalThemeColor];
+        self.tagLabel.layer.borderColor = [[KTCThemeManager manager] currentTheme].globalThemeColor.CGColor;
+        [self.tagLabel setTextColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
         [self.tagLabel setText:@" 热 "];
     } else if (model.isRecommend) {
         [self.tagLabel setHidden:NO];
         self.leftMargin.constant = 10;
-        self.tagLabel.layer.borderColor = [AUITheme theme].highlightTextColor.CGColor;
-        [self.tagLabel setTextColor:[AUITheme theme].highlightTextColor];
+        self.tagLabel.layer.borderColor = [[KTCThemeManager manager] currentTheme].highlightTextColor.CGColor;
+        [self.tagLabel setTextColor:[[KTCThemeManager manager] currentTheme].highlightTextColor];
         [self.tagLabel setText:@" 推荐 "];
     } else {
         [self.tagLabel setHidden:YES];

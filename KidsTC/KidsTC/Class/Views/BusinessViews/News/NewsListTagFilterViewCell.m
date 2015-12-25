@@ -22,9 +22,9 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    [self.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
     
-    [self.tagView setBackgroundColor:[AUITheme theme].globalThemeColor];
+    [self.tagView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
     [self.tagView setHidden:YES];
     
     [self.contentView bringSubviewToFront:self.tagView];

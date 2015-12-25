@@ -17,7 +17,7 @@
 	if(self = [super initWithRootViewController:_rootViewController])
 	{
         UINavigationBar *navigationBar = [UINavigationBar appearance];
-        UIColor *color = [AUITheme theme].navibarBGColor;
+        UIColor *color = [[KTCThemeManager manager] currentTheme].navibarBGColor;
         [navigationBar setBarTintColor:color];
         CGFloat white = 0.0;
         [color getWhite:&white alpha:NULL];

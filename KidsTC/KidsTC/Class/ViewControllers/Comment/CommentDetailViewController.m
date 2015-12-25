@@ -104,7 +104,7 @@
     [super viewDidAppear:animated];
     if (!self.keyboardAdhesiveView) {
         self.keyboardAdhesiveView = [[AUIKeyboardAdhesiveView alloc] initWithAvailableFuntions:nil];
-        [self.keyboardAdhesiveView.headerView setBackgroundColor:[AUITheme theme].globalThemeColor];
+        [self.keyboardAdhesiveView.headerView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
         [self.keyboardAdhesiveView setTextLimitLength:100];
         self.keyboardAdhesiveView.delegate = self;
     }

@@ -112,10 +112,10 @@ static NSString *const kNoticeCellIdentifier = @"kNoticeCellIdentifier";
 
 - (void)buildSubviews {
     self.topView.delegate = self;
-    [self.topView setBackgroundColor:[AUITheme theme].navibarBGColor];
+    [self.topView setBackgroundColor:[[KTCThemeManager manager] currentTheme].navibarBGColor];
     
     self.tableView.backgroundView = nil;
-    [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
+    [self.tableView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     

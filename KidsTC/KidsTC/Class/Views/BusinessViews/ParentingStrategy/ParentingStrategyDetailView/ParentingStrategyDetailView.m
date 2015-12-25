@@ -58,10 +58,10 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 
 - (void)buildSubviews {
     self.tableView.backgroundView = nil;
-    [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
+    [self.tableView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    [self setBackgroundColor:[AUITheme theme].globalBGColor];
+    [self setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
    
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20)];
     if (!self.cellNib) {
@@ -71,7 +71,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     
     //header
     self.headerView = [[UIView alloc] init];
-    [self.headerView setBackgroundColor:[AUITheme theme].globalBGColor];
+    [self.headerView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
     //main image
     self.mainImageView = [[UIImageView alloc] init];
     [self.headerView addSubview:self.mainImageView];
@@ -81,7 +81,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 30)];
     [self.titleLabel setBackgroundColor:[UIColor clearColor]];
-    [self.titleLabel setTextColor:[AUITheme theme].globalThemeColor];
+    [self.titleLabel setTextColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
     [self.titleLabel setFont:[UIFont systemFontOfSize:20]];
     [self.titleLabel setTextAlignment:NSTextAlignmentCenter];
     [self.titleBGView addSubview:self.titleLabel];
@@ -164,7 +164,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     CGFloat viewHeight = [self tableView:self.tableView heightForHeaderInSection:section];
     UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, viewHeight)];
-    [bgView setBackgroundColor:[AUITheme theme].globalBGColor];
+    [bgView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
     //sign
     CGFloat leftMargin = 30;
     CGFloat circleDiameter = 20;
@@ -182,7 +182,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     CGFloat lineXPosition = (circleDiameter - width) / 2;
     CGFloat yPosition = viewHeight - lineHeight;
     UIView *bottomLineView = [[UIView alloc] initWithFrame:CGRectMake(lineXPosition, yPosition, width, lineHeight)];
-    [bottomLineView setBackgroundColor:[AUITheme theme].globalThemeColor];
+    [bottomLineView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
     [signBGView addSubview:bottomLineView];
     //标题
     ParentingStrategyDetailCellModel *model = [self.detailModel.cellModels objectAtIndex:section];
@@ -190,8 +190,8 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
         //圆圈
         yPosition = (viewHeight - circleDiameter) / 2;
         UIView *circleView = [[UIView alloc] initWithFrame:CGRectMake(0, yPosition, circleDiameter, circleDiameter)];
-        [circleView setBackgroundColor:[AUITheme theme].globalBGColor];
-        circleView.layer.borderColor = [AUITheme theme].globalThemeColor.CGColor;
+        [circleView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+        circleView.layer.borderColor = [[KTCThemeManager manager] currentTheme].globalThemeColor.CGColor;
         circleView.layer.borderWidth = width;
         circleView.layer.cornerRadius = circleDiameter / 2;
         circleView.layer.masksToBounds = YES;
@@ -201,7 +201,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
         CGFloat xPosition = leftMargin + circleDiameter + 10;
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(xPosition, circleView.frame.origin.y, SCREEN_WIDTH - (10 + xPosition), circleDiameter)];
         CGPoint center =  CGPointMake(label.center.x, label.center.y);
-        [label setTextColor:[AUITheme theme].globalThemeColor];
+        [label setTextColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
         [label setFont:[UIFont systemFontOfSize:17]];
         [label setLineBreakMode:NSLineBreakByCharWrapping];
         [label setText:model.title];
@@ -213,7 +213,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     //上方竖线
     if (section > 0) {
         UIView *topLineView = [[UIView alloc] initWithFrame:CGRectMake(lineXPosition, 0, width, lineHeight)];
-        [topLineView setBackgroundColor:[AUITheme theme].globalThemeColor];
+        [topLineView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
         [signBGView addSubview:topLineView];
     }
     return bgView;
@@ -277,7 +277,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
         [self.descriptionBGView setFrame:CGRectMake(20, yPosition, SCREEN_WIDTH - 40, strategyDescriptionViewHeight)];
         NSString *wholeString = [NSString stringWithFormat:@"攻略描述：%@", self.detailModel.strategyDescription];
         NSMutableAttributedString *labelString = [[NSMutableAttributedString alloc] initWithString:wholeString];
-        NSDictionary *attribute = [NSDictionary dictionaryWithObject:[AUITheme theme].globalThemeColor forKey:NSForegroundColorAttributeName];
+        NSDictionary *attribute = [NSDictionary dictionaryWithObject:[[KTCThemeManager manager] currentTheme].globalThemeColor forKey:NSForegroundColorAttributeName];
         [labelString setAttributes:attribute range:NSMakeRange(0, 5)];
         [self.descriptionLabel setAttributedText:labelString];
         [self.descriptionLabel sizeOfSizeToFitWithMaximumNumberOfLines:0];
@@ -311,8 +311,8 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setFrame:CGRectMake(xPosition, yPosition, 10, 10)];
         [button.titleLabel setFont:[UIFont systemFontOfSize:15]];
-//        [button setTitleColor:[AUITheme theme].globalThemeColor forState:UIControlStateNormal];
-        [button setTitleColor:[AUITheme theme].highlightTextColor forState:UIControlStateNormal];
+//        [button setTitleColor:[[KTCThemeManager manager] currentTheme].globalThemeColor forState:UIControlStateNormal];
+        [button setTitleColor:[[KTCThemeManager manager] currentTheme].highlightTextColor forState:UIControlStateNormal];
         [button setTitle:title forState:UIControlStateNormal];
         [button setBackgroundColor:[UIColor clearColor]];
         [button sizeToFit];
@@ -323,8 +323,8 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
         
         [button.layer setCornerRadius:10];
         [button.layer setBorderWidth:1];
-//        [button.layer setBorderColor:[AUITheme theme].globalThemeColor.CGColor];
-        [button.layer setBorderColor:[AUITheme theme].highlightTextColor.CGColor];
+//        [button.layer setBorderColor:[[KTCThemeManager manager] currentTheme].globalThemeColor.CGColor];
+        [button.layer setBorderColor:[[KTCThemeManager manager] currentTheme].highlightTextColor.CGColor];
         [button.layer setMasksToBounds:YES];
         
         CGFloat nextCellWidth = 0;

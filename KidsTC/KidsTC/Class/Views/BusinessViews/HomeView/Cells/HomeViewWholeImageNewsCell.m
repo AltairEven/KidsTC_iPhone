@@ -26,7 +26,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    [self.bgView setBackgroundColor:[AUITheme theme].globalThemeColor];
+    [self.bgView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
     
     self.bannerScrollView.dataSource = self;
     self.bannerScrollView.delegate = self;

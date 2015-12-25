@@ -12,7 +12,7 @@
 
 @interface AUITheme : NSObject <NSCopying>
 
-+ (instancetype)theme;
++ (instancetype)defaultTheme;
 
 //global
 
@@ -78,12 +78,12 @@
 
 @property (nonatomic, copy) NSString *tabbarItemTitle; //tabbar按钮标题
 
-@property (nonatomic, strong) UIImage *tabbarItemImage_Normal; //tabbar按钮图片（普通）
-
-@property (nonatomic, strong) UIImage *tabbarItemImage_Highlight; //tabbar按钮图片（高亮）
-
 @property (nonatomic, strong) UIColor *tabbarTitleColor_Normal; //tab栏标题颜色（普通）
 
 @property (nonatomic, strong) UIColor *tabbarTitleColor_Highlight; //tab栏标题颜色（高亮）
+
+@property (nonatomic, strong) UIImage *tabbarItemImage_Normal; //tabbar按钮图片（普通）
+
+@property (nonatomic, strong) UIImage *tabbarItemImage_Highlight; //tabbar按钮图片（高亮）
 
 @end

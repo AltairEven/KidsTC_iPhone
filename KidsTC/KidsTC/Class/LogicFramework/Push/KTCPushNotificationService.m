@@ -273,11 +273,12 @@ static KTCPushNotificationService *sharedInstance = nil;
     }
     NSUInteger count = [[countDic objectForKey:@"count"] integerValue];
     _unreadCount = count;
+    NSUInteger tabCount = [[KTCTabBarController shareTabBarController] tabCount];
     if (count == 0) {
-        [[KTCTabBarController shareTabBarController] setBadge:nil ForTab:KTCTabUserCenter];
+        [[KTCTabBarController shareTabBarController] setBadge:nil forTabIndex:tabCount - 1];
     } else {
 //        NSString *badgeString = [NSString stringWithFormat:@"%lu", (unsigned long)count];
-        [[KTCTabBarController shareTabBarController] setBadge:@"" ForTab:KTCTabUserCenter];
+        [[KTCTabBarController shareTabBarController] setBadge:@"" forTabIndex:tabCount - 1];
     }
     return count;
 }

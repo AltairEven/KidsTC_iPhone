@@ -102,7 +102,7 @@ typedef void (^ SelectionBlock) (KTCAreaItem *);
 
 - (void)buildSubviews {
     self.tableView.backgroundView = nil;
-    [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
+    [self.tableView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
@@ -121,7 +121,7 @@ typedef void (^ SelectionBlock) (KTCAreaItem *);
     if (!self.tableView.tableHeaderView) {
         //table header
         self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(20.0f, 0.0f, self.tableView.bounds.size.width, 0.5f)];
-        [self.tableView.tableHeaderView setBackgroundColor:[AUITheme theme].globalBGColor];
+        [self.tableView.tableHeaderView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
     }
     self.dataArray = [[[KTCArea area] areaItems] copy];
     [self.tableView reloadData];

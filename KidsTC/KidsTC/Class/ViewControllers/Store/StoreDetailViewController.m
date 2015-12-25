@@ -305,7 +305,7 @@
         case KTCActionViewTagHome:
         {
             [self.navigationController popToRootViewControllerAnimated:YES];
-            [[KTCTabBarController shareTabBarController] setSelectedIndex:KTCTabHome];
+            [[KTCTabBarController shareTabBarController] setSelectedIndex:0];
         }
             break;
         case KTCActionViewTagSearch:

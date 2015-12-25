@@ -18,8 +18,8 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    [self.bgView setBackgroundColor:[AUITheme theme].globalCellBGColor];
-    [self.consumptionCodeLabel setTextColor:[AUITheme theme].globalThemeColor];
+    [self.bgView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+    [self.consumptionCodeLabel setTextColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -47,7 +47,7 @@
 
 - (void)buildSubviews {
     self.tableView.backgroundView = nil;
-    [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
+    [self.tableView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 5)];
@@ -69,7 +69,7 @@
     }
     KTCSearchResultFilterModel *filter = [self.filterModel.subArray objectAtIndex:indexPath.row];
     [cell.textLabel setText:filter.name];
-    [cell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [cell.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
     return cell;
 }
 

@@ -68,11 +68,11 @@
 #pragma mark Private methods
 
 - (void)setupSubviews {
-    [self.view setBackgroundColor:[AUITheme theme].globalBGColor];
+    [self.view setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
     
-    [self.phoneLabel setTextColor:[AUITheme theme].globalThemeColor];
+    [self.phoneLabel setTextColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
     
-    self.phoneField.layer.borderColor = [AUITheme theme].globalThemeColor.CGColor;
+    self.phoneField.layer.borderColor = [[KTCThemeManager manager] currentTheme].globalThemeColor.CGColor;
     self.phoneField.layer.borderWidth = BORDER_WIDTH;
     self.phoneField.layer.cornerRadius = 5;
     self.phoneField.layer.masksToBounds = YES;
@@ -81,9 +81,9 @@
     [self.phoneField setLeftViewMode:UITextFieldViewModeAlways];
     [self.phoneField setRightViewMode:UITextFieldViewModeAlways];
     
-    [self.codeLabel setTextColor:[AUITheme theme].globalThemeColor];
+    [self.codeLabel setTextColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
     
-    self.verifyField.layer.borderColor = [AUITheme theme].globalThemeColor.CGColor;
+    self.verifyField.layer.borderColor = [[KTCThemeManager manager] currentTheme].globalThemeColor.CGColor;
     self.verifyField.layer.borderWidth = BORDER_WIDTH;
     self.verifyField.layer.cornerRadius = 5;
     self.verifyField.layer.masksToBounds = YES;
@@ -92,18 +92,18 @@
     [self.verifyField setLeftViewMode:UITextFieldViewModeAlways];
     [self.verifyField setRightViewMode:UITextFieldViewModeAlways];
     
-    self.codeButton.layer.borderColor = [AUITheme theme].globalThemeColor.CGColor;
+    self.codeButton.layer.borderColor = [[KTCThemeManager manager] currentTheme].globalThemeColor.CGColor;
     self.codeButton.layer.borderWidth = BORDER_WIDTH;
     self.codeButton.layer.cornerRadius = 5;
     self.codeButton.layer.masksToBounds = YES;
     [self.codeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
-    [self.codeButton setTitleColor:[AUITheme theme].globalThemeColor forState:UIControlStateNormal];
-    [self.codeButton setTitleColor:[AUITheme theme].lightTextColor forState:UIControlStateDisabled];
+    [self.codeButton setTitleColor:[[KTCThemeManager manager] currentTheme].globalThemeColor forState:UIControlStateNormal];
+    [self.codeButton setTitleColor:[[KTCThemeManager manager] currentTheme].lightTextColor forState:UIControlStateDisabled];
     [self.codeButton setBackgroundColor:[UIColor clearColor] forState:UIControlStateNormal];
     [self.codeButton setBackgroundColor:[UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1] forState:UIControlStateDisabled];
     
-    [self.bindButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
-    [self.bindButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    [self.bindButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.bindButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
     self.bindButton.layer.cornerRadius = 5;
     self.bindButton.layer.masksToBounds = YES;
 }
@@ -218,9 +218,9 @@
 - (void)setCodeButtonEnableState:(BOOL)enabled {
     [self.codeButton setEnabled:enabled];
     if (enabled) {
-        self.codeButton.layer.borderColor = [AUITheme theme].globalThemeColor.CGColor;
+        self.codeButton.layer.borderColor = [[KTCThemeManager manager] currentTheme].globalThemeColor.CGColor;
     } else {
-        self.codeButton.layer.borderColor = [AUITheme theme].lightTextColor.CGColor;
+        self.codeButton.layer.borderColor = [[KTCThemeManager manager] currentTheme].lightTextColor.CGColor;
     }
 }
 

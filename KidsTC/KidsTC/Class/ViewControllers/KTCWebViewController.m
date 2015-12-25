@@ -226,7 +226,7 @@
         [self.navigationController popViewControllerAnimated:NO];
         KTCTabBarController *rootVc = [KTCTabBarController shareTabBarController];
         [rootVc allPopToRoot];
-        [rootVc setButtonSelected:KTCTabHome];
+        [rootVc setButtonSelected:0];
         [[UIApplication sharedApplication] openURL:requestUrl];
         
         return NO;
@@ -568,7 +568,7 @@
     if (!self.keyboardAdhesiveView) {
         AUIKeyboardAdhesiveViewExtensionFunction *photoFunc = [AUIKeyboardAdhesiveViewExtensionFunction funtionWithType:AUIKeyboardAdhesiveViewExtensionFunctionTypeImageUpload];
         self.keyboardAdhesiveView = [[AUIKeyboardAdhesiveView alloc] initWithAvailableFuntions:[NSArray arrayWithObject:photoFunc]];
-        [self.keyboardAdhesiveView.headerView setBackgroundColor:[AUITheme theme].globalThemeColor];
+        [self.keyboardAdhesiveView.headerView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
         [self.keyboardAdhesiveView setTextLimitLength:100];
         [self.keyboardAdhesiveView setUploadImageLimitCount:4];
         self.keyboardAdhesiveView.delegate = self;

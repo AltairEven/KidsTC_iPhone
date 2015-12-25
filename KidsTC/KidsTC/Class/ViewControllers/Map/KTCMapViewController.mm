@@ -195,7 +195,7 @@
     if ([overlay isKindOfClass:[BMKPolyline class]]) {
         BMKPolylineView* polylineView = [[BMKPolylineView alloc] initWithOverlay:overlay];
         polylineView.fillColor = [[UIColor alloc] initWithRed:0 green:1 blue:1 alpha:1];
-        polylineView.strokeColor = [AUITheme theme].highlightTextColor;
+        polylineView.strokeColor = [[KTCThemeManager manager] currentTheme].highlightTextColor;
         polylineView.lineWidth = 5.0;
         return polylineView;
     }
@@ -314,7 +314,7 @@
     if (self.type == KTCMapTypeStoreGuide) {
         [self.searchField setPlaceholder:@"请搜索或长按地图选择起始点"];
     }
-    [self.searchField setBackgroundColor:[[AUITheme theme].globalThemeColor colorWithAlphaComponent:0.5]];
+    [self.searchField setBackgroundColor:[[[KTCThemeManager manager] currentTheme].globalThemeColor colorWithAlphaComponent:0.5]];
     [self.searchField setLeftView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)]];
     [self.searchField setRightView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)]];
     [self.searchField setLeftViewMode:UITextFieldViewModeAlways];
@@ -322,7 +322,7 @@
     
     self.pickerView = [[AUIPickerView alloc] initWithDataSource:self delegate:self];
     
-    [self.routeTypeButton setBackgroundColor:[AUITheme theme].globalThemeColor forState:UIControlStateNormal];
+    [self.routeTypeButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalThemeColor forState:UIControlStateNormal];
     self.routeTypeButton.layer.cornerRadius = 20;
     self.routeTypeButton.layer.masksToBounds = YES;
 }

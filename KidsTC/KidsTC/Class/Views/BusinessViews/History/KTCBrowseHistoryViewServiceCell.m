@@ -21,13 +21,13 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    [self.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
     
     self.cellImageView.layer.cornerRadius = 5;
     self.cellImageView.layer.masksToBounds = YES;
     
     //price view
-    [self.priceView setContentColor:[AUITheme theme].globalThemeColor];
+    [self.priceView setContentColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
     [self.priceView setUnitFont:[UIFont systemFontOfSize:10]];
     [self.priceView setPriceFont:[UIFont systemFontOfSize:15]];
 }

@@ -21,9 +21,9 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    [self.bgView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.bgView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
     //price view
-    [self.priceView setContentColor:[AUITheme theme].buttonBGColor_Normal];
+    [self.priceView setContentColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal];
     [self.priceView setUnitFont:[UIFont systemFontOfSize:12]];
     [self.priceView setPriceFont:[UIFont systemFontOfSize:16]];
 }

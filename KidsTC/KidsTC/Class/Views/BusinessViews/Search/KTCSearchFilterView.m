@@ -78,12 +78,12 @@ static NSString *const kLevel2CellIdentifier = @"kLevel2CellIdentifier";
 }
 
 - (void)buildSubviews {
-    [self.filterBGView setBackgroundColor:[AUITheme theme].globalBGColor];
-    [self.lvl1BGView setBackgroundColor:[AUITheme theme].globalBGColor];
-    [self.lvl2BGView setBackgroundColor:[AUITheme theme].globalBGColor];
-    [self.peopleBGView setBackgroundColor:[AUITheme theme].globalCellBGColor];
-    [self.peopleTag setBackgroundColor:[AUITheme theme].globalThemeColor];
-    [self.peopleDot setBackgroundColor:[AUITheme theme].globalThemeColor];
+    [self.filterBGView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self.lvl1BGView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self.lvl2BGView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self.peopleBGView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+    [self.peopleTag setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
+    [self.peopleDot setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
     
     self.peopleDot.layer.cornerRadius = 2.5;
     self.peopleDot.layer.masksToBounds = YES;
@@ -109,8 +109,8 @@ static NSString *const kLevel2CellIdentifier = @"kLevel2CellIdentifier";
     self.currentLevel1Index = -1;
     self.currentLevel2Index = -1;
     
-    [self.confirmButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
-    [self.confirmButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    [self.confirmButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.confirmButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
 }
 
 - (void)setPeopleButtonSelected:(BOOL)peopleButtonSelected {

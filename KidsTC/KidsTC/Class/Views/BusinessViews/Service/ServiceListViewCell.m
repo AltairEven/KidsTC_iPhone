@@ -26,15 +26,15 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    [self.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
     
     self.serviceImageView.layer.cornerRadius = 5;
     self.serviceImageView.layer.masksToBounds = YES;
     
-    [self.saledCountLabel setTextColor:[AUITheme theme].globalThemeColor];
+    [self.saledCountLabel setTextColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
     
     //price view
-    [self.promotionPriceView setContentColor:[AUITheme theme].buttonBGColor_Normal];
+    [self.promotionPriceView setContentColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal];
     [self.promotionPriceView setUnitFont:[UIFont systemFontOfSize:16]];
     [self.promotionPriceView setPriceFont:[UIFont systemFontOfSize:20]];
     

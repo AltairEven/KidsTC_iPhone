@@ -24,9 +24,9 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    [self.contentView setBackgroundColor:[AUITheme theme].globalBGColor];
+    [self.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
     
-    [self.replyButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.replyButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal forState:UIControlStateNormal];
     self.replyButton.layer.cornerRadius = 5;
     self.replyButton.layer.masksToBounds = YES;
     

@@ -11,7 +11,7 @@
 @implementation NewsRecommendCellViewSmallImageView
 
 - (void)awakeFromNib {
-    [self setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
 }
 
 - (CGFloat)viewHeight {

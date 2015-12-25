@@ -40,10 +40,10 @@
 
 - (void)buildSubviews {
     self.hideNameButton.selected = NO;
-    [self.hideNameButton setBackgroundColor:[AUITheme theme].globalBGColor forState:UIControlStateNormal];
+    [self.hideNameButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor forState:UIControlStateNormal];
     
-    [self.submitButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
-    [self.submitButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    [self.submitButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.submitButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
 }
 
 /*

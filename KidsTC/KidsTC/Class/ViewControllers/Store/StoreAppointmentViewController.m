@@ -119,8 +119,8 @@
     //button
     self.appointmentButton.layer.cornerRadius = 5;
     self.appointmentButton.layer.masksToBounds = YES;
-    [self.appointmentButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
-    [self.appointmentButton setBackgroundColor:[AUITheme theme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    [self.appointmentButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.appointmentButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
 }
 
 - (void)buildActivitysViewWithActivityLogoItems:(NSArray *)items {

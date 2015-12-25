@@ -9,46 +9,33 @@
 #import <UIKit/UIKit.h>
 #import "GKeyboardDelegate.h"
 
-
-typedef enum {
-    KTCTabHome = 0,
-    KTCTabNews = 1,
-    KTCTabParentingStrategy = 2,
-    KTCTabUserCenter = 3
-} KTCTabEnum;
-
-@class HomeViewController;
-@class ParentingStrategyViewController;
-@class UserCenterViewController;
-@class NewsViewController;
-
-@interface KTCTabBarController : UITabBarController <UITabBarControllerDelegate>
+@interface KTCTabBarController : UITabBarController
 {
-    KTCTabEnum _selectTabBarButtonIndex;
-    
+    NSUInteger _selectTabBarButtonIndex;
 }
 
 @property (nonatomic, assign) id<GKeyboardDelegate> keyboardDelegate;
-@property (nonatomic, strong) HomeViewController *homeVC;
-@property (nonatomic, strong) NewsViewController *newsListVC;
-@property (nonatomic, strong) ParentingStrategyViewController *parentingStrategyVC;
-@property (nonatomic, strong) UserCenterViewController *userCenterVC;
 
-@property (nonatomic, strong) UINavigationController *homeTab;
-@property (nonatomic, strong) UINavigationController *newsTab;
-@property (nonatomic, strong) UINavigationController *parentingStrategyTab;
-@property (nonatomic, strong) UINavigationController *userCenterTab;
+@property (nonatomic, strong, readonly) NSArray<UIViewController *> *rootViewControllers;
+
+@property (nonatomic, readonly) NSUInteger tabCount;
 
 + (KTCTabBarController *)shareTabBarController;
--(KTCTabEnum)selectedButton;
--(void)createViewControllers;
-- (void)setButtonSelected:(KTCTabEnum) index;
+
+- (NSUInteger)selectedButton;
+
+- (void)createViewControllers;
+
+- (void)setButtonSelected:(NSUInteger)index;
 
 - (void)allPopToRoot;
+
 - (void)logout;
+
 - (void)gotoTabIndex:(int) index;
+
 - (void)makeTabBarHidden:(BOOL)hidden;
 
-- (void)setBadge:(NSString *)badgeString ForTab:(KTCTabEnum)tabEnum;
+- (void)setBadge:(NSString *)badgeString forTabIndex:(NSUInteger)index;
 
 @end

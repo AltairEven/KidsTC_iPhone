@@ -121,7 +121,7 @@
 
 
 - (void)buildSubviews {
-    [self.collectionView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.collectionView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     

@@ -43,7 +43,7 @@
 
 - (void)buildSubviews {
     //top
-    self.topView.backgroundColor = [AUITheme theme].navibarBGColor;
+    self.topView.backgroundColor = [[KTCThemeManager manager] currentTheme].navibarBGColor;
     
     //header
     [self.tabControl addTarget:self action:@selector(tabControlDidChangedSelectedIndex:) forControlEvents:UIControlEventValueChanged];
@@ -52,16 +52,16 @@
     [self.tabControl setTintColor:[UIColor whiteColor]];
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:15],NSFontAttributeName,[UIColor whiteColor], NSForegroundColorAttributeName, nil];
     [self.tabControl setTitleTextAttributes:attributes forState:UIControlStateNormal];
-    NSDictionary *highlightedAttributes = [NSDictionary dictionaryWithObject:[AUITheme theme].buttonBGColor_Normal forKey:NSForegroundColorAttributeName];
+    NSDictionary *highlightedAttributes = [NSDictionary dictionaryWithObject:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal forKey:NSForegroundColorAttributeName];
     [self.tabControl setTitleTextAttributes:highlightedAttributes forState:UIControlStateHighlighted];
     
     self.roleSelectButton.layer.cornerRadius = 14;
     self.roleSelectButton.layer.masksToBounds = YES;
-    self.roleSelectButton.layer.borderColor = [AUITheme theme].navibarTitleColor_Normal.CGColor;
+    self.roleSelectButton.layer.borderColor = [[KTCThemeManager manager] currentTheme].navibarTitleColor_Normal.CGColor;
     self.roleSelectButton.layer.borderWidth = 1;
     [self.roleSelectButton setHidden:YES];
     //list
-    [self.listBG setBackgroundColor:[AUITheme theme].globalBGColor];
+    [self.listBG setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
     self.recommendListView.delegate = self;
     
     self.newsListView.delegate = self;

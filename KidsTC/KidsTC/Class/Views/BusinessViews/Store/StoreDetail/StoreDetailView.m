@@ -122,7 +122,7 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
 
 - (void)buildSubviews {
     self.tableView.backgroundView = nil;
-    [self.tableView setBackgroundColor:[AUITheme theme].globalBGColor];
+    [self.tableView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -173,7 +173,7 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
     self.serviceLinearView.dataSource = self;
     self.serviceLinearView.delegate = self;
     
-    [self.recommendCell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.recommendCell.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
     self.recommenderFaceImageView.layer.cornerRadius = 30;
     self.recommenderFaceImageView.layer.masksToBounds = YES;
 }
@@ -393,7 +393,7 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
         default:
             break;
     }
-    [cell.contentView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [cell.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
     return cell;
 }
 
@@ -681,7 +681,7 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
     NSString *appointmentCount = [NSString stringWithFormat:@"%lu", (unsigned long)self.detailModel.appointmentNumber];
     NSString *wholeString = [NSString stringWithFormat:@"%@预约", appointmentCount];
     NSMutableAttributedString *labelString = [[NSMutableAttributedString alloc] initWithString:wholeString];
-    NSDictionary *attribute = [NSDictionary dictionaryWithObject:[AUITheme theme].highlightTextColor forKey:NSForegroundColorAttributeName];
+    NSDictionary *attribute = [NSDictionary dictionaryWithObject:[[KTCThemeManager manager] currentTheme].highlightTextColor forKey:NSForegroundColorAttributeName];
     [labelString setAttributes:attribute range:NSMakeRange(0, [appointmentCount length])];
     [self.appointmentLabel setAttributedText:labelString];
     [self.appointmentLabel sizeOfSizeToFitWithMaximumNumberOfLines:1];
@@ -749,7 +749,7 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
 }
 
 - (void)configNearbyCell {
-    [self.nearbyBGView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.nearbyBGView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
     
     CGFloat gap = 0.5;
     CGFloat singleWidth = (SCREEN_WIDTH - gap * 2) / 3;

@@ -42,11 +42,11 @@
 - (void)buildSubviews {
     self.inputField.delegate = self;
     
-    self.backgroundColor = [AUITheme theme].navibarBGColor;
+    self.backgroundColor = [[KTCThemeManager manager] currentTheme].navibarBGColor;
     
     self.roleButton.layer.cornerRadius = 14;
     self.roleButton.layer.masksToBounds = YES;
-    self.roleButton.layer.borderColor = [AUITheme theme].navibarTitleColor_Normal.CGColor;
+    self.roleButton.layer.borderColor = [[KTCThemeManager manager] currentTheme].navibarTitleColor_Normal.CGColor;
     self.roleButton.layer.borderWidth = 1;
 }
 

@@ -35,12 +35,12 @@
 - (void)awakeFromNib {
     // Initialization code
     [super awakeFromNib];
-    [self.headerBGView setBackgroundColor:[AUITheme theme].globalCellBGColor];
-    [self.infoBGView setBackgroundColor:[AUITheme theme].globalCellBGColor];
-    [self.buttonBGView setBackgroundColor:[AUITheme theme].globalCellBGColor];
+    [self.headerBGView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+    [self.infoBGView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+    [self.buttonBGView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
     
-    [self.rightButton setBackgroundColor:[AUITheme theme].buttonBGColor_Normal forState:UIControlStateNormal];
-    [self.rightButton setBackgroundColor:[AUITheme theme].buttonBGColor_Disable forState:UIControlStateDisabled];
+    [self.rightButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.rightButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Disable forState:UIControlStateDisabled];
     
     //price view
     [self.priceView setContentColor:[UIColor darkGrayColor]];

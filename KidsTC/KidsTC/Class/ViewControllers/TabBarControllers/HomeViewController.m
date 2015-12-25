@@ -167,17 +167,17 @@
     HomeFloorModel *floorModel = [self.viewModel.homeModel.allNaviControlledFloors objectAtIndex:index];
     
     UIView *itemView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-    [itemView setBackgroundColor:[AUITheme theme].globalBGColor];
+    [itemView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
     UILabel *label = [[UILabel alloc] initWithFrame:itemView.frame];
     [label setText:floorModel.floorName];
     [label setFont:[UIFont systemFontOfSize:13]];
-    [label setTextColor:[AUITheme theme].globalThemeColor];
+    [label setTextColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
     [label setTextAlignment:NSTextAlignmentCenter];
     [itemView addSubview:label];
     
     itemView.layer.cornerRadius = 20;
     itemView.layer.borderWidth = 2;
-    itemView.layer.borderColor = [AUITheme theme].globalThemeColor.CGColor;
+    itemView.layer.borderColor = [[KTCThemeManager manager] currentTheme].globalThemeColor.CGColor;
     itemView.layer.masksToBounds = YES;
     
     return itemView;
@@ -187,17 +187,17 @@
     HomeFloorModel *floorModel = [self.viewModel.homeModel.allNaviControlledFloors objectAtIndex:index];
     
     UIView *highlightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-    [highlightView setBackgroundColor:[AUITheme theme].globalThemeColor];
+    [highlightView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
     UILabel *label = [[UILabel alloc] initWithFrame:highlightView.frame];
     [label setText:floorModel.floorName];
     [label setFont:[UIFont systemFontOfSize:13]];
-    [label setTextColor:[AUITheme theme].navibarTitleColor_Normal];
+    [label setTextColor:[[KTCThemeManager manager] currentTheme].navibarTitleColor_Normal];
     [label setTextAlignment:NSTextAlignmentCenter];
     [highlightView addSubview:label];
     
     highlightView.layer.cornerRadius = 20;
     highlightView.layer.borderWidth = 2;
-    highlightView.layer.borderColor = [AUITheme theme].globalBGColor.CGColor;
+    highlightView.layer.borderColor = [[KTCThemeManager manager] currentTheme].globalBGColor.CGColor;
     highlightView.layer.masksToBounds = YES;
     
     return highlightView;
@@ -205,7 +205,7 @@
 
 - (UIView *)floorNavigationView:(AUIFloorNavigationView *)navigationView viewForItemGapAtIndex:(NSUInteger)index {
     UIView *gapView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 30)];
-    [gapView setBackgroundColor:[AUITheme theme].globalBGColor];
+    [gapView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
     return gapView;
 }
 

@@ -17,7 +17,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    [self.contentView setBackgroundColor:[AUITheme theme].globalBGColor];
+    [self.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
