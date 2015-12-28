@@ -600,7 +600,7 @@ static NSString *const kNoticeCellIdentifier = @"kNoticeCellIdentifier";
 #pragma mark UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (self.tableView.contentOffset.y > 100) {
+    if (self.tableView.contentOffset.y > SCREEN_HEIGHT) {
         [self.backToTopButton setHidden:NO];
     } else {
         [self.backToTopButton setHidden:YES];

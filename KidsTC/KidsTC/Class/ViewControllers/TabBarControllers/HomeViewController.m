@@ -221,7 +221,7 @@
 }
 
 - (UIView *)floorNavigationView:(AUIFloorNavigationView *)navigationView viewForItemGapAtIndex:(NSUInteger)index {
-    UIView *gapView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 30)];
+    UIView *gapView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 20)];
     [gapView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
     return gapView;
 }

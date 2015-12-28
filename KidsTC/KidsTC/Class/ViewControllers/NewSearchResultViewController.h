@@ -10,6 +10,10 @@
 
 @interface NewSearchResultViewController : GViewController
 
-- (instancetype)initWithKeyWord:(NSString *)keyword;
+@property (nonatomic, strong) KTCSearchNewsCondition *searchCondition;
+
+@property (nonatomic, assign) BOOL needRefresh;
+
+- (instancetype)initWithSearchCondition:(KTCSearchNewsCondition *)condition;
 
 @end

@@ -102,31 +102,61 @@ NSString *const kSearchHotKeyCondition = @"kSearchHotKeyCondition";
 #pragma mark Private methods
 
 - (void)loadHotKeySucceed:(NSDictionary *)data {
-    NSArray *hotArray = [data objectForKey:@"data"];
-    if ([hotArray isKindOfClass:[NSArray class]]) {
+    NSDictionary *dataDic = [data objectForKey:@"data"];
+    if (!dataDic || ![dataDic isKindOfClass:[NSDictionary class]]) {
+        //无效数据，或数据格式不正确
+        return;
+    }
+    //服务
+    NSArray *serviceHotArray = [dataDic objectForKey:@"product"];
+    if ([serviceHotArray isKindOfClass:[NSArray class]]) {
         NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-        for (NSDictionary *hotDic in hotArray) {
+        for (NSDictionary *hotDic in serviceHotArray) {
             NSString *name = [hotDic objectForKey:@"name"];
             NSDictionary *searchParam = [hotDic objectForKey:@"search_parms"];
-            if (self.searchType == KTCSearchTypeService) {
-                KTCSearchServiceCondition *condition = [KTCSearchServiceCondition conditionFromRawData:searchParam];
-                if (!condition) {
-                    condition = [[KTCSearchServiceCondition alloc] init];
-                    condition.keyWord = name;
-                }
-                NSDictionary *hotKey = [NSDictionary dictionaryWithObjectsAndKeys:name, kSearchHotKeyName, condition, kSearchHotKeyCondition, nil];
-                [tempArray addObject:hotKey];
-            } else if (self.searchType == KTCSearchTypeStore) {
-                KTCSearchStoreCondition *condition = [KTCSearchStoreCondition conditionFromRawData:searchParam];
-                if (!condition) {
-                    condition = [[KTCSearchStoreCondition alloc] init];
-                    condition.keyWord = name;
-                }
-                NSDictionary *hotKey = [NSDictionary dictionaryWithObjectsAndKeys:name, kSearchHotKeyName, condition, kSearchHotKeyCondition, nil];
-                [tempArray addObject:hotKey];
+            KTCSearchServiceCondition *condition = [KTCSearchServiceCondition conditionFromRawData:searchParam];
+            if (!condition) {
+                condition = [[KTCSearchServiceCondition alloc] init];
+                condition.keyWord = name;
             }
+            NSDictionary *hotKey = [NSDictionary dictionaryWithObjectsAndKeys:name, kSearchHotKeyName, condition, kSearchHotKeyCondition, nil];
+            [tempArray addObject:hotKey];
         }
         [self.hotSearchDic setObject:[NSArray arrayWithArray:tempArray] forKey:[NSNumber numberWithInteger:KTCSearchTypeService]];
+    }
+    //门店
+    NSArray *storeHotArray = [dataDic objectForKey:@"store"];
+    if ([storeHotArray isKindOfClass:[NSArray class]]) {
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        for (NSDictionary *hotDic in storeHotArray) {
+            NSString *name = [hotDic objectForKey:@"name"];
+            NSDictionary *searchParam = [hotDic objectForKey:@"search_parms"];
+            KTCSearchStoreCondition *condition = [KTCSearchStoreCondition conditionFromRawData:searchParam];
+            if (!condition) {
+                condition = [[KTCSearchStoreCondition alloc] init];
+                condition.keyWord = name;
+            }
+            NSDictionary *hotKey = [NSDictionary dictionaryWithObjectsAndKeys:name, kSearchHotKeyName, condition, kSearchHotKeyCondition, nil];
+            [tempArray addObject:hotKey];
+        }
+        [self.hotSearchDic setObject:[NSArray arrayWithArray:tempArray] forKey:[NSNumber numberWithInteger:KTCSearchTypeStore]];
+    }
+    //知识库
+    NSArray *newsHotArray = [dataDic objectForKey:@"article"];
+    if ([newsHotArray isKindOfClass:[NSArray class]]) {
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        for (NSDictionary *hotDic in newsHotArray) {
+            NSString *name = [hotDic objectForKey:@"name"];
+            NSDictionary *searchParam = [hotDic objectForKey:@"search_parms"];
+            KTCSearchNewsCondition *condition = [KTCSearchNewsCondition conditionFromRawData:searchParam];
+            if (!condition) {
+                condition = [[KTCSearchNewsCondition alloc] init];
+                condition.keyWord = name;
+            }
+            NSDictionary *hotKey = [NSDictionary dictionaryWithObjectsAndKeys:name, kSearchHotKeyName, condition, kSearchHotKeyCondition, nil];
+            [tempArray addObject:hotKey];
+        }
+        [self.hotSearchDic setObject:[NSArray arrayWithArray:tempArray] forKey:[NSNumber numberWithInteger:KTCSearchTypeNews]];
     }
     [self.view reloadData];
 }

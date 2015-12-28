@@ -199,3 +199,73 @@
 }
 
 @end
+
+
+@implementation KTCSearchNewsCondition
+
++ (instancetype)conditionFromCategory:(IcsonBaseCategory *)category {
+    if (!category) {
+        return nil;
+    }
+    NSArray *conditions = [category.conditions allObjects];
+    KTCSearchNewsCondition *newsCondition = [[KTCSearchNewsCondition alloc] init];
+    for (IcsonCategoryCondition *condition in conditions) {
+        if ([condition.key isEqualToString:@"a"]) {
+            newsCondition.age = [KTCAgeItem ageItemWithName:@"" identifier:condition.conditionItem];
+            continue;
+        }
+        if ([condition.key isEqualToString:@"c"]) {
+            newsCondition.categoryIdentifier = condition.conditionItem;
+            continue;
+        }
+        if ([condition.key isEqualToString:@"k"]) {
+            newsCondition.keyWord = condition.conditionItem;
+            continue;
+        }
+        if ([condition.key isEqualToString:@"s"]) {
+            newsCondition.area = [KTCAreaItem areaItemWithName:@"" identifier:condition.conditionItem];
+            continue;
+        }
+//        if ([condition.key isEqualToString:@"st"]) {
+//            newsCondition.sortType = (KTCSearchResultStoreSortType)[condition.conditionItem integerValue];
+//            continue;
+//        }
+    }
+    
+    return newsCondition;
+}
+
++ (instancetype)conditionFromRawData:(NSDictionary *)data {
+    if (!data || ![data isKindOfClass:[NSDictionary class]]) {
+        return nil;
+    }
+    KTCSearchNewsCondition *condition = [[KTCSearchNewsCondition alloc] init];
+    if ([data isKindOfClass:[NSDictionary class]]) {
+        if ([data objectForKey:@"a"]) {
+            KTCAgeItem *ageItem = [[KTCAgeItem alloc] init];
+            ageItem.identifier = [NSString stringWithFormat:@"%@", [data objectForKey:@"a"]];
+            condition.age = ageItem;
+        }
+        if ([data objectForKey:@"c"]) {
+            condition.categoryIdentifier = [NSString stringWithFormat:@"%@", [data objectForKey:@"c"]];
+        }
+        if ([data objectForKey:@"k"]) {
+            condition.keyWord = [NSString stringWithFormat:@"%@", [data objectForKey:@"k"]];
+        }
+        if ([data objectForKey:@"s"]) {
+            KTCAreaItem *areaItem = [[KTCAreaItem alloc] init];
+            areaItem.identifier = [NSString stringWithFormat:@"%@", [data objectForKey:@"s"]];
+            condition.area = areaItem;
+        }
+//        if ([data objectForKey:@"st"]) {
+//            condition.sortType = (KTCSearchResultStoreSortType)[[data objectForKey:@"st"] integerValue];
+//        }
+//        if ([data objectForKey:@"mapaddr"]) {
+//            condition.coordinateString = [data objectForKey:@"mapaddr"];
+//        }
+    }
+    
+    return condition;
+}
+
+@end

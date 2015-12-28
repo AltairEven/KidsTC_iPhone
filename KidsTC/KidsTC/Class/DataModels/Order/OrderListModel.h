@@ -11,7 +11,7 @@
 typedef enum {
     OrderListTypeAll = 1,
     OrderListTypeWaitingPayment,
-    OrderListTypeWaitingUser,
+    OrderListTypeWaitingUse,
     OrderListTypeWaitingComment,
     OrderListTypeHasCommented
 }OrderListType;

@@ -65,3 +65,7 @@ typedef enum {
 + (KTCSearchStoreCondition *)conditionFromServiceCondition:(KTCSearchServiceCondition *)condition;
 
 @end
+
+@interface KTCSearchNewsCondition : KTCSearchCondition
+
+@end

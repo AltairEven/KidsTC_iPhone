@@ -261,4 +261,17 @@ static KTCTabBarController* _shareTabBarController = nil;
     [self.tabBar setBadgeWithValue:badgeString atIndex:(int)index];
 }
 
+- (void)resetTheme:(AUITheme *)theme {
+    if (!theme) {
+        return;
+    }
+//    UINavigationController *naviController = [[GNavController alloc] initWithRootViewController:viewController];
+//    naviController.tabBarItem.title = element.tabbarItemTitle;
+//    [naviController.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObject:element.tabbarTitleColor_Normal forKey:NSForegroundColorAttributeName] forState:UIControlStateNormal];
+//    [naviController.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObject:element.tabbarTitleColor_Highlight forKey:NSForegroundColorAttributeName] forState:UIControlStateHighlighted];
+//    naviController.tabBarItem.image = [element.tabbarItemImage_Normal imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//    naviController.tabBarItem.selectedImage = [element.tabbarItemImage_Highlight imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//    [tempArray addObject:naviController];
+}
+
 @end

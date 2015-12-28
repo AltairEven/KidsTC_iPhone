@@ -38,4 +38,6 @@
 
 - (void)setBadge:(NSString *)badgeString forTabIndex:(NSUInteger)index;
 
+- (void)resetTheme:(AUITheme *)theme;
+
 @end

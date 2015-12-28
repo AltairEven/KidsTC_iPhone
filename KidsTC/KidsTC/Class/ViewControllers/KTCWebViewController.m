@@ -7,13 +7,7 @@
 //
 
 #import "KTCWebViewController.h"
-//#import "WXApi.h"
-//#import "HttpCookieWrapper.h"
-//#import "UIAlertView+Blocks.h"
 #import "KTCTabBarController.h"
-//#import "UIDevice+IdentifierAddition.h"
-//#import "WeChatModel.h"
-//#import "WebCookieCache.h"
 #import "ServiceDetailViewController.h"
 #import "AUIKeyboardAdhesiveView.h"
 #import "CommonShareViewController.h"
@@ -24,6 +18,7 @@
 #import "NSString+UrlEncode.h"
 #import "HttpIcsonCookieManager.h"
 
+#define HackCloseWindowFramePrefix (@"HackCloseWindowFramePrefix")
 
 #define Hook_Prefix (@"hook::")
 #define Hook_ProductDetail (@"productdetail::")
@@ -218,17 +213,10 @@
     self.photoDictionary = nil;
     self.produceInfo = nil;
     self.mwPhotosArray = nil;
-    /*
-     @"wap2app://app.launch/param?" 走二维码扫描逻辑。待方案优化。
-     iOS 5 和之前版本，不支持跳转到当前APP。
-     */
-    if ([requestUrl.host hasSuffix:@"itunes.apple.com"] || [urlString hasPrefix:@"wap2app://app.launch/param?"]) {
-        [self.navigationController popViewControllerAnimated:NO];
-        KTCTabBarController *rootVc = [KTCTabBarController shareTabBarController];
-        [rootVc allPopToRoot];
-        [rootVc setButtonSelected:0];
-        [[UIApplication sharedApplication] openURL:requestUrl];
-        
+
+    
+    if ([requestUrl.host hasSuffix:HackCloseWindowFramePrefix]) {
+        [self closeWebPage];
         return NO;
     } else if ([urlString hasPrefix:Hook_Prefix]) {
         NSString *hookString = [urlString substringFromIndex:[Hook_Prefix length]];
@@ -313,12 +301,10 @@
         self.title = @"童成网";
         _navigationTitle = title;
     }
-    [self.closeButton setHidden:![self.webView canGoBack]];
 }
 
 - (void)webView:(UIWebView *)webView_ didFailLoadWithError:(NSError *)error
 {
-    [self.closeButton setHidden:![self.webView canGoBack]];
 }
 
 #pragma mark UIScrollViewDelegate
@@ -673,6 +659,11 @@
 #pragma mark Share
 
 - (void)didClickedShareButton {
+    NSString *test = [self.webView stringByEvaluatingJavaScriptFromString:@"var script = document.createElement('script');script.type = 'text/javascript';script.text = \"function myFunction() { var field = document.getElementsByName('word')[0]; field.value='WWDC2015'; document.forms[0].submit();}\";document.getElementsByTagName('head')[0].appendChild(script);"];  //添加到head标签中
+    
+    test = [self.webView stringByEvaluatingJavaScriptFromString:@"myFunction();"];
+    
+    NSLog(@"%@", test);
 }
 
 - (void)shareWithParams:(NSDictionary *)params {
@@ -703,6 +694,7 @@
 
 - (void)goBackController:(id)sender
 {
+    [self.closeButton setHidden:![self.webView canGoBack]];
     if([self.webView canGoBack])
     {
         [self.webView goBack];

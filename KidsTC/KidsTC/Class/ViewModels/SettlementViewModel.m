@@ -58,8 +58,10 @@
         _dataModel = [[SettlementModel alloc] initWithRawData:[dataArray firstObject]];
         _dataModel.soleId = [data objectForKey:@"soleid"];
         
-        [_dataModel setUsedCoupon:self.lastDataModel.usedCoupon];
-        [_dataModel setUsedScore:self.lastDataModel.usedScore];
+        if (self.lastDataModel) {
+            [_dataModel setUsedCoupon:self.lastDataModel.usedCoupon];
+            [_dataModel setUsedScore:self.lastDataModel.usedScore];
+        }
     }
     [self.view reloadData];
 }

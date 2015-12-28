@@ -17,8 +17,6 @@
 
 @property (weak, nonatomic) IBOutlet NewsSearchResultListView *listView;
 
-@property (nonatomic, copy) NSString *keyword;
-
 @property (nonatomic, strong) NSMutableArray *resultArray;
 
 @property (nonatomic, assign) NSUInteger pageIndex;
@@ -37,10 +35,10 @@
 
 @implementation NewSearchResultViewController
 
-- (instancetype)initWithKeyWord:(NSString *)keyword {
+- (instancetype)initWithSearchCondition:(KTCSearchNewsCondition *)condition {
     self = [super initWithNibName:@"NewSearchResultViewController" bundle:nil];
     if (self) {
-        self.keyword = keyword;
+        self.searchCondition = condition;
         self.resultArray = [[NSMutableArray alloc] init];
     }
     return self;
@@ -54,11 +52,25 @@
     self.listView.delegate = self;
     __weak NewSearchResultViewController *weakSelf = self;
     self.pageIndex = 1;
-    [[KTCSearchService sharedService] startNewsSearchWithKeyWord:weakSelf.keyword pageIndex:weakSelf.pageIndex pageSize:PageSize success:^(NSDictionary *responseData) {
+    [[KTCSearchService sharedService] startNewsSearchWithKeyWord:weakSelf.searchCondition.keyWord pageIndex:weakSelf.pageIndex pageSize:PageSize success:^(NSDictionary *responseData) {
         [weakSelf loadNewsSucceedWithData:responseData];
     } failure:^(NSError *error) {
         [weakSelf loadMoreNewsFailedWithError:error];
     }];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.needRefresh) {
+        __weak NewSearchResultViewController *weakSelf = self;
+        self.pageIndex = 1;
+        [[KTCSearchService sharedService] startNewsSearchWithKeyWord:weakSelf.searchCondition.keyWord pageIndex:weakSelf.pageIndex pageSize:PageSize success:^(NSDictionary *responseData) {
+            [weakSelf loadNewsSucceedWithData:responseData];
+        } failure:^(NSError *error) {
+            [weakSelf loadMoreNewsFailedWithError:error];
+        }];
+        self.needRefresh = NO;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -75,7 +87,7 @@
 - (void)didPullDownToRefreshForNewsSearchResultListView:(NewsSearchResultListView *)view {
     self.pageIndex = 1;
     __weak NewSearchResultViewController *weakSelf = self;
-    [[KTCSearchService sharedService] startNewsSearchWithKeyWord:weakSelf.keyword pageIndex:weakSelf.pageIndex pageSize:PageSize success:^(NSDictionary *responseData) {
+    [[KTCSearchService sharedService] startNewsSearchWithKeyWord:weakSelf.searchCondition.keyWord pageIndex:weakSelf.pageIndex pageSize:PageSize success:^(NSDictionary *responseData) {
         [weakSelf loadNewsSucceedWithData:responseData];
     } failure:^(NSError *error) {
         [weakSelf loadMoreNewsFailedWithError:error];
@@ -84,7 +96,7 @@
 
 - (void)didPullUpToLoadMoreForNewsSearchResultListView:(NewsSearchResultListView *)view {
     __weak NewSearchResultViewController *weakSelf = self;
-    [[KTCSearchService sharedService] startNewsSearchWithKeyWord:weakSelf.keyword pageIndex:weakSelf.pageIndex + 1 pageSize:PageSize success:^(NSDictionary *responseData) {
+    [[KTCSearchService sharedService] startNewsSearchWithKeyWord:weakSelf.searchCondition.keyWord pageIndex:weakSelf.pageIndex + 1 pageSize:PageSize success:^(NSDictionary *responseData) {
         [weakSelf loadMoreNewsSucceedWithData:responseData];
     } failure:^(NSError *error) {
         [weakSelf loadMoreNewsFailedWithError:error];

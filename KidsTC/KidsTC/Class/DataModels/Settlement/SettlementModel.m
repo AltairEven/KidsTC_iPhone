@@ -83,17 +83,23 @@
         } else {
             _needPay = YES;
         }
+        CouponFullCutModel *usedCoupon = [[CouponFullCutModel alloc] initWithRawData:[data objectForKey:@"maxCoupon"]];
+        if (usedCoupon.discount > self.promotionModel.cutAmount) {
+            self.usedCoupon = usedCoupon;
+        }
     }
     return self;
 }
 
 - (void)setUsedCoupon:(CouponFullCutModel *)usedCoupon {
     NSInteger selectedIndex = -1;
-    for (NSUInteger index = 0; index < [self.usableCoupons count]; index ++) {
-        CouponFullCutModel *model = [self.usableCoupons objectAtIndex:index];
-        if ([model.couponId isEqualToString:usedCoupon.couponId]) {
-            selectedIndex = index;
-            break;
+    if (usedCoupon) {
+        for (NSUInteger index = 0; index < [self.usableCoupons count]; index ++) {
+            CouponFullCutModel *model = [self.usableCoupons objectAtIndex:index];
+            if ([model.couponId isEqualToString:usedCoupon.couponId]) {
+                selectedIndex = index;
+                break;
+            }
         }
     }
     if (selectedIndex >= 0) {

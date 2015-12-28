@@ -99,12 +99,25 @@
             resultVC.needRefresh = YES;
             [self.navigationController popToViewController:controller animated:YES];
             break;
+        } else if ([controller isKindOfClass:[NewSearchResultViewController class]]) {
+            needPush = NO;
+            NewSearchResultViewController *resultVC = (NewSearchResultViewController *)controller;
+            resultVC.searchCondition = [searchParam objectForKey:kSearchHotKeyCondition];
+            resultVC.needRefresh = YES;
+            [self.navigationController popToViewController:controller animated:YES];
+            break;
         }
     }
     if (needPush) {
-        KTCSearchResultViewController *controller = [[KTCSearchResultViewController alloc] initWithSearchType:self.searchView.type condition:[searchParam objectForKey:kSearchHotKeyCondition]];
-        [controller setHidesBottomBarWhenPushed:YES];
-        [self.navigationController pushViewController:controller animated:YES];
+        if (self.viewModel.searchType == KTCSearchTypeNews) {
+            NewSearchResultViewController *controller = [[NewSearchResultViewController alloc] initWithSearchCondition:[searchParam objectForKey:kSearchHotKeyCondition]];
+            [controller setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:controller animated:YES];
+        } else {
+            KTCSearchResultViewController *controller = [[KTCSearchResultViewController alloc] initWithSearchType:self.searchView.type condition:[searchParam objectForKey:kSearchHotKeyCondition]];
+            [controller setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
     }
 }
 
@@ -135,10 +148,7 @@
             break;
         case KTCSearchTypeNews:
         {
-            NewSearchResultViewController *controller = [[NewSearchResultViewController alloc] initWithKeyWord:kw];
-            [controller setHidesBottomBarWhenPushed:YES];
-            [self.navigationController pushViewController:controller animated:YES];
-            return;
+            condition = [[KTCSearchNewsCondition alloc] init];
         }
             break;
         default:
@@ -156,12 +166,25 @@
             resultVC.needRefresh = YES;
             [self.navigationController popToViewController:controller animated:YES];
             break;
+        } else if ([controller isKindOfClass:[NewSearchResultViewController class]]) {
+            needPush = NO;
+            NewSearchResultViewController *resultVC = (NewSearchResultViewController *)controller;
+            resultVC.searchCondition = (KTCSearchNewsCondition *)condition;
+            resultVC.needRefresh = YES;
+            [self.navigationController popToViewController:controller animated:YES];
+            break;
         }
     }
     if (needPush) {
-        KTCSearchResultViewController *controller = [[KTCSearchResultViewController alloc] initWithSearchType:self.searchView.type condition:condition];
-        [controller setHidesBottomBarWhenPushed:YES];
-        [self.navigationController pushViewController:controller animated:YES];
+        if (self.viewModel.searchType == KTCSearchTypeNews) {
+            NewSearchResultViewController *controller = [[NewSearchResultViewController alloc] initWithSearchCondition:(KTCSearchNewsCondition *)condition];
+            [controller setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:controller animated:YES];
+        } else {
+            KTCSearchResultViewController *controller = [[KTCSearchResultViewController alloc] initWithSearchType:self.searchView.type condition:condition];
+            [controller setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
     }
 }
 
