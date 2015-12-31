@@ -15,7 +15,7 @@
 
 - (HomeModel *)homeModelForHomeView:(HomeView *)homeView;
 
-- (HomeModel *)customerRecommendModelForHomeView:(HomeView *)homeView;
+- (NSArray *)customerRecommendModesArrayForHomeView:(HomeView *)homeView;
 
 @end
 

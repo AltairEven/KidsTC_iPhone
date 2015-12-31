@@ -25,6 +25,7 @@
 #import "HomeViewNoticeCell.h"
 #import "HomeViewBigImageTwoDescCell.h"
 #import "HomeViewTwoThreeFourCell.h"
+#import "HomeViewRecommendCell.h"
 
 static NSString *const kNormalTitleCellIdentifier = @"kNormalTitleCellIdentifier";
 static NSString *const kCountDownTitleCellIdentifier = @"kCountDownTitleCellIdentifier";
@@ -42,8 +43,9 @@ static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIden
 static NSString *const kNoticeCellIdentifier = @"kNoticeCellIdentifier";
 static NSString *const kBigImageTwoDescCellIdentifier = @"kBigImageTwoDescCellIdentifier";
 static NSString *const kTwoThreeFourCellIdentifier = @"kTwoThreeFourCellIdentifier";
+static NSString *const kRecommendCellIdentifier = @"kRecommendCellIdentifier";
 
-@interface HomeView () <HomeTopViewDelegate, UITableViewDataSource, UITableViewDelegate, HomeViewBannerCellDelegate, HomeViewThemeCellDelegate, HomeViewThreeCellDelegate, HomeViewTwinklingElfCellDelegate, HomeViewHorizontalListCellDelegate, UIScrollViewDelegate, HomeViewThreeImageNewsCellDelegate, HomeViewWholeImageNewsCellDelegate, HomeViewNoticeCellDelegate, HomeViewBigImageTwoDescCellDelegate, HomeViewTwoThreeFourCellDelegate>
+@interface HomeView () <HomeTopViewDelegate, UITableViewDataSource, UITableViewDelegate, HomeViewBannerCellDelegate, HomeViewThemeCellDelegate, HomeViewThreeCellDelegate, HomeViewTwinklingElfCellDelegate, HomeViewHorizontalListCellDelegate, UIScrollViewDelegate, HomeViewThreeImageNewsCellDelegate, HomeViewWholeImageNewsCellDelegate, HomeViewNoticeCellDelegate, HomeViewBigImageTwoDescCellDelegate, HomeViewTwoThreeFourCellDelegate, HomeViewRecommendCellDelegate>
 
 //top
 @property (weak, nonatomic) IBOutlet HomeTopView *topView;
@@ -68,6 +70,7 @@ static NSString *const kTwoThreeFourCellIdentifier = @"kTwoThreeFourCellIdentifi
 @property (nonatomic, strong) UINib *noticeCellNib;
 @property (nonatomic, strong) UINib *bigImageTwoDescCellNib;
 @property (nonatomic, strong) UINib *twoThreeFourCellNib;
+@property (nonatomic, strong) UINib *recommendCellNib;
 
 @property (nonatomic, strong) UIView *splitFooterView;
 @property (weak, nonatomic) IBOutlet UIButton *backToTopButton;
@@ -76,7 +79,7 @@ static NSString *const kTwoThreeFourCellIdentifier = @"kTwoThreeFourCellIdentifi
 
 @property (nonatomic, strong) HomeModel *homeModel;
 
-@property (nonatomic, strong) HomeModel *customerRecommendModel;
+@property (nonatomic, strong) NSArray *customerRecommendModels;
 
 @property (nonatomic, strong) NSArray *totalSectionModels;
 
@@ -197,6 +200,10 @@ static NSString *const kTwoThreeFourCellIdentifier = @"kTwoThreeFourCellIdentifi
         self.twoThreeFourCellNib = [UINib nibWithNibName:NSStringFromClass([HomeViewTwoThreeFourCell class]) bundle:nil];
         [self.tableView registerNib:self.twoThreeFourCellNib forCellReuseIdentifier:kTwoThreeFourCellIdentifier];
     }
+    if (!self.recommendCellNib) {
+        self.recommendCellNib = [UINib nibWithNibName:NSStringFromClass([HomeViewRecommendCell class]) bundle:nil];
+        [self.tableView registerNib:self.recommendCellNib forCellReuseIdentifier:kRecommendCellIdentifier];
+    }
     
     self.cellModelsDic = [[NSMutableDictionary alloc] init];
     
@@ -204,14 +211,14 @@ static NSString *const kTwoThreeFourCellIdentifier = @"kTwoThreeFourCellIdentifi
     [self.tableView addGifHeaderWithRefreshingBlock:^{
         [weakSelf pullToRefreshTable];
     }];
-//    [self.tableView addLegendFooterWithRefreshingBlock:^{
-//        if (weakSelf.noMoreData) {
-//            [weakSelf.tableView.legendFooter noticeNoMoreData];
-//            return;
-//        }
-//        [weakSelf pullToLoadMoreData];
-//    }];
-//    [self hideLoadMoreFooter:YES];
+    [self.tableView addGifFooterWithRefreshingBlock:^{
+        if (weakSelf.noMoreData) {
+            [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
+            return;
+        }
+        [weakSelf pullToLoadMoreData];
+    }];
+    [self hideLoadMoreFooter:YES];
     
     self.backToTopButton.layer.cornerRadius = 20;
     self.backToTopButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
@@ -338,6 +345,14 @@ static NSString *const kTwoThreeFourCellIdentifier = @"kTwoThreeFourCellIdentifi
     }
 }
 
+#pragma mark HomeViewRecommendCellDelegate
+
+- (void)homeViewRecommendCell:(HomeViewRecommendCell *)recommendCell didSelectedItemAtIndex:(NSUInteger)index {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(homeView:didClickedAtCoordinate:)]) {
+        HomeSectionModel *model = [self.totalSectionModels objectAtIndex:recommendCell.indexPath.section];
+        [self.delegate homeView:self didClickedAtCoordinate:HomeClickMakeCoordinate(model.floorIndex, recommendCell.indexPath.section, NO, index)];
+    }
+}
 
 #pragma mark UITableViewDataSource & UITableViewDelegate
 
@@ -579,6 +594,20 @@ static NSString *const kTwoThreeFourCellIdentifier = @"kTwoThreeFourCellIdentifi
             return cell;
         }
             break;
+        case HomeContentCellTypeRecommend:
+        {
+            HomeViewRecommendCell *cell = [tableView dequeueReusableCellWithIdentifier:kRecommendCellIdentifier];
+            if (!cell) {
+                cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewRecommendCell" owner:nil options:nil] objectAtIndex:0];
+            }
+            
+            cell.indexPath = indexPath;
+            cell.delegate = self;
+            [cell configWithModel:(HomeRecommendCellModel *)contentModel];
+            
+            return cell;
+        }
+            break;
         default:
             break;
     }
@@ -589,7 +618,6 @@ static NSString *const kTwoThreeFourCellIdentifier = @"kTwoThreeFourCellIdentifi
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat height = 0;
-    
     HomeSectionModel *model = [self.totalSectionModels objectAtIndex:indexPath.section];
     if (model.hasTitle && indexPath.row == 0) {
         height = [model.titleModel cellHeight];
@@ -611,41 +639,41 @@ static NSString *const kTwoThreeFourCellIdentifier = @"kTwoThreeFourCellIdentifi
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     CGFloat height = 0.01;
-//    if ([[self.homeModel allSectionModels] count] == section + 1) {
-//        height = 40;
-//    }
+    if ([[self.homeModel allSectionModels] count] == section + 1) {
+        height = 40;
+    }
     return height;
 }
 
 
-//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-//    if ([[self.homeModel allSectionModels] count] != section + 1) {
-//        return nil;
-//    }
-//    if (!self.splitFooterView) {
-//        CGFloat lableWidth = 80;
-//        CGFloat viewHeight = 40;
-//        self.splitFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, viewHeight)];
-//        UILabel *splitLabel = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH / 2) - (lableWidth / 2), 0, lableWidth, viewHeight)];
-//        [splitLabel setFont:[UIFont systemFontOfSize:13]];
-//        [splitLabel setTextAlignment:NSTextAlignmentCenter];
-//        [splitLabel setTextColor:[UIColor lightGrayColor]];
-//        [splitLabel setText:@"为您推荐"];
-//        [self.splitFooterView addSubview:splitLabel];
-//        
-//        CGFloat margin = 5;
-//        CGFloat lineWidth = (SCREEN_WIDTH - lableWidth - margin * 2) / 2;
-//        UIView *leftLine = [[UIView alloc] initWithFrame:CGRectMake(margin, viewHeight / 2, lineWidth, 1)];
-//        [leftLine setBackgroundColor:[UIColor lightGrayColor]];
-//        [self.splitFooterView addSubview:leftLine];
-//        CGFloat xPosition =SCREEN_WIDTH / 2 + lableWidth / 2 + margin;
-//        UIView *rightLine = [[UIView alloc] initWithFrame:CGRectMake(xPosition, viewHeight / 2, lineWidth, 1)];
-//        [rightLine setBackgroundColor:[UIColor lightGrayColor]];
-//        [self.splitFooterView addSubview:rightLine];
-//    }
-//    
-//    return self.splitFooterView;
-//}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    if ([[self.homeModel allSectionModels] count] != section + 1) {
+        return nil;
+    }
+    if (!self.splitFooterView) {
+        CGFloat lableWidth = 80;
+        CGFloat viewHeight = 40;
+        self.splitFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, viewHeight)];
+        UILabel *splitLabel = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH / 2) - (lableWidth / 2), 0, lableWidth, viewHeight)];
+        [splitLabel setFont:[UIFont systemFontOfSize:13]];
+        [splitLabel setTextAlignment:NSTextAlignmentCenter];
+        [splitLabel setTextColor:[UIColor lightGrayColor]];
+        [splitLabel setText:@"为您推荐"];
+        [self.splitFooterView addSubview:splitLabel];
+        
+        CGFloat margin = 5;
+        CGFloat lineWidth = (SCREEN_WIDTH - lableWidth - margin * 2) / 2;
+        UIView *leftLine = [[UIView alloc] initWithFrame:CGRectMake(margin, viewHeight / 2, lineWidth, 1)];
+        [leftLine setBackgroundColor:[UIColor lightGrayColor]];
+        [self.splitFooterView addSubview:leftLine];
+        CGFloat xPosition =SCREEN_WIDTH / 2 + lableWidth / 2 + margin;
+        UIView *rightLine = [[UIView alloc] initWithFrame:CGRectMake(xPosition, viewHeight / 2, lineWidth, 1)];
+        [rightLine setBackgroundColor:[UIColor lightGrayColor]];
+        [self.splitFooterView addSubview:rightLine];
+    }
+    
+    return self.splitFooterView;
+}
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -720,8 +748,14 @@ static NSString *const kTwoThreeFourCellIdentifier = @"kTwoThreeFourCellIdentifi
     if (!indexPath) {
         return 0;
     }
-    HomeSectionModel *sectionModel = [self.homeModel.allSectionModels objectAtIndex:indexPath.section];
-    return sectionModel.floorIndex;
+    NSUInteger index = 0;
+    if (indexPath.section < [self.homeModel.allSectionModels count]) {
+        HomeSectionModel *sectionModel = [self.homeModel.allSectionModels objectAtIndex:indexPath.section];
+        index = sectionModel.floorIndex;
+    } else {
+        index = [self.homeModel.allSectionModels count] - 1;
+    }
+    return index;
 }
 
 - (CGPoint)offsetFromFloorIndex:(NSUInteger)index {
@@ -760,11 +794,11 @@ static NSString *const kTwoThreeFourCellIdentifier = @"kTwoThreeFourCellIdentifi
         if ([self.dataSource respondsToSelector:@selector(homeModelForHomeView:)]) {
             self.homeModel= [self.dataSource homeModelForHomeView:self];
         }
-        if ([self.dataSource respondsToSelector:@selector(customerRecommendModelForHomeView:)]) {
-            self.customerRecommendModel = [self.dataSource customerRecommendModelForHomeView:self];
+        if ([self.dataSource respondsToSelector:@selector(customerRecommendModesArrayForHomeView:)]) {
+            self.customerRecommendModels = [self.dataSource customerRecommendModesArrayForHomeView:self];
         }
         NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[self.homeModel allSectionModels]];
-        [array addObjectsFromArray:[self.customerRecommendModel allSectionModels]];
+        [array addObjectsFromArray:self.customerRecommendModels];
         self.totalSectionModels = [NSArray arrayWithArray:array];
         [self.tableView reloadData];
     }
@@ -792,8 +826,12 @@ static NSString *const kTwoThreeFourCellIdentifier = @"kTwoThreeFourCellIdentifi
 }
 
 - (void)noMoreData:(BOOL)noMore {
-    [self.tableView.mj_footer endRefreshingWithNoMoreData];
-    self.noMoreData = YES;
+    if (noMore) {
+        [self.tableView.mj_footer endRefreshingWithNoMoreData];
+    } else {
+        [self.tableView.mj_footer resetNoMoreData];
+    }
+    self.noMoreData = noMore;
 }
 
 - (void)hideLoadMoreFooter:(BOOL)hidden {

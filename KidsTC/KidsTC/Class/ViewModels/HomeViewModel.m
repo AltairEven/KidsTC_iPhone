@@ -34,6 +34,8 @@ NSString *const kHomeViewDataFinishLoadingNotification = @"kHomeViewDataFinishLo
 
 @property (nonatomic, strong) NSMutableArray *customerRecommendModelsArray;
 
+@property (nonatomic, assign) NSUInteger currentRecommendPage;
+
 - (void)loadHomeDataSucceed:(NSDictionary *)data;
 
 - (void)loadHomeDataFailed:(NSError *)error;
@@ -65,10 +67,6 @@ NSString *const kHomeViewDataFinishLoadingNotification = @"kHomeViewDataFinishLo
 
 - (HomeModel *)homeModelForHomeView:(HomeView *)homeView {
     return self.homeModel;
-}
-
-- (HomeModel *)customerRecommendModelForHomeView:(HomeView *)homeView {
-    return nil;
 }
 
 - (NSArray *)customerRecommendModesArrayForHomeView:(HomeView *)homeView {
@@ -139,16 +137,16 @@ NSString *const kHomeViewDataFinishLoadingNotification = @"kHomeViewDataFinishLo
 }
 
 - (void)loadCustomerRecommendSucceed:(NSDictionary *)data {
-    NSArray *contentArray = [data objectForKey:@"data"];
     if (!self.customerRecommendModelsArray) {
         self.customerRecommendModelsArray = [[NSMutableArray alloc] init];
     }
+    NSArray *contentArray = [data objectForKey:@"data"];
     if (contentArray && [contentArray isKindOfClass:[NSArray class]]) {
-        for (NSDictionary *singleSection in contentArray) {
-            HomeSectionModel *model = [[HomeSectionModel alloc] initWithRawData:singleSection];
-            if (model) {
-                [self.customerRecommendModelsArray addObject:model];
-            }
+        HomeRecommendCellModel *model = [[HomeRecommendCellModel alloc] initWithRawData:contentArray];
+        if (model) {
+            HomeSectionModel *sectionModel = [[HomeSectionModel alloc] init];
+            [sectionModel setContentModel:model];
+            [self.customerRecommendModelsArray addObject:sectionModel];
         }
     }
     [self.view reloadData];
@@ -197,6 +195,7 @@ NSString *const kHomeViewDataFinishLoadingNotification = @"kHomeViewDataFinishLo
     [self.loadHomeDataRequest cancel];
     [self.loadCustomerRecommendRequest cancel];
     [self.customerRecommendModelsArray removeAllObjects];
+    self.currentRecommendPage = 0;
     self.updating = YES;
     NSDictionary *param = [NSDictionary dictionaryWithObject:[[KTCUser currentUser].userRole userRoleIdentifierString] forKey:@"type"];
     __weak HomeViewModel *weakSelf = self;
@@ -226,19 +225,28 @@ NSString *const kHomeViewDataFinishLoadingNotification = @"kHomeViewDataFinishLo
 
 
 - (void)getCustomerRecommendWithSucceed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
-    if (!self.loadCustomerRecommendRequest) {
-        self.loadCustomerRecommendRequest = [HttpRequestClient clientWithUrlAliasName:@"GET_PAGE_HOME"];
-        [self.loadCustomerRecommendRequest setTimeoutSeconds:5];
-    }
-    [self.loadHomeDataRequest cancel];
-    self.updating = YES;
+    self.currentRecommendPage ++;
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
+                           [NSNumber numberWithInteger:KTCSearchTypeService], @"type",
+                           [NSNumber numberWithInteger:self.currentRecommendPage], @"page",
+                           [NSNumber numberWithInteger:10], @"pageSize", nil];
+    KTCSearchServiceCondition *condition = [[KTCSearchServiceCondition alloc] init];
+    KTCAgeItem *ageItem = [[KTCAgeItem alloc] init];
+    ageItem.identifier = [NSString stringWithFormat:@"%d", [KTCUser currentUser].userRole.role];
+    condition.age = ageItem;
+    condition.sortType = KTCSearchResultServiceSortTypeSaleCount;
+    
     __weak HomeViewModel *weakSelf = self;
-    [weakSelf.loadCustomerRecommendRequest startHttpRequestWithParameter:nil success:^(HttpRequestClient *client, NSDictionary *responseData) {
-        weakSelf.updating = NO;
+    [[KTCSearchService sharedService] startServiceSearchWithParamDic:param Condition:condition success:^(NSDictionary *responseData) {
         [weakSelf loadCustomerRecommendSucceed:responseData];
-    } failure:^(HttpRequestClient *client, NSError *error) {
-        weakSelf.updating = NO;
+        if (succeed) {
+            succeed(responseData);
+        }
+    } failure:^(NSError *error) {
         [weakSelf loadCustomerRecommendFailed:error];
+        if (failure) {
+            failure(error);
+        }
     }];
 }
 

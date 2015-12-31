@@ -19,6 +19,9 @@
 #import "ServiceDetailViewController.h"
 #import "StoreDetailViewController.h"
 #import "ParentingStrategyDetailViewController.h"
+#import "CouponListViewController.h"
+#import "OrderDetailViewController.h"
+#import "OrderListViewController.h"
 
 @implementation KTCSegueMaster
 
@@ -132,6 +135,40 @@
             ParentingStrategyDetailViewController *controller = [[ParentingStrategyDetailViewController alloc] initWithStrategyIdentifier:strategyId];
             [controller setHidesBottomBarWhenPushed:YES];
             toController = controller;
+        }
+            break;
+        case HomeSegueDestinationCouponList:
+        {
+            [GToolUtil checkLogin:^(NSString *uid) {
+                CouponListViewTag viewTag = (CouponListViewTag)[[model.segueParam objectForKey:@"type"] integerValue];
+                CouponListViewController *controller = [[CouponListViewController alloc] initWithCouponListViewTag:viewTag];
+                [controller setHidesBottomBarWhenPushed:YES];
+                [fromVC.navigationController pushViewController:controller animated:YES];
+            } target:fromVC.navigationController];
+            return nil;
+        }
+            break;
+        case HomeSegueDestinationOrderDetail:
+        {
+            [GToolUtil checkLogin:^(NSString *uid) {
+                NSString *orderId = @"";
+                if ([model.segueParam objectForKey:@"sid"]) {
+                    orderId = [model.segueParam objectForKey:@"sid"];
+                }
+                OrderDetailViewController *controller = [[OrderDetailViewController alloc] initWithOrderId:orderId pushSource:OrderDetailPushSourceSettlement];
+                [controller setHidesBottomBarWhenPushed:YES];
+                [fromVC.navigationController pushViewController:controller animated:YES];
+            } target:fromVC.navigationController];
+        }
+            break;
+        case HomeSegueDestinationOrderList:
+        {
+            [GToolUtil checkLogin:^(NSString *uid) {
+                OrderListType type = (OrderListType)[[model.segueParam objectForKey:@"type"] integerValue];
+                OrderListViewController *controller = [[OrderListViewController alloc] initWithOrderListType:type];
+                [controller setHidesBottomBarWhenPushed:YES];
+                [fromVC.navigationController pushViewController:controller animated:YES];
+            } target:fromVC.navigationController];
         }
             break;
         default:

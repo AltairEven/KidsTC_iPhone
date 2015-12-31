@@ -158,7 +158,22 @@
 }
 
 - (void)homeView:(HomeView *)homeView didClickedAtCoordinate:(HomeClickCoordinate)coordinate {
-    HomeSegueModel *segueModel = [self.viewModel.homeModel segueModelAtHomeClickCoordinate:coordinate];
+    HomeSegueModel *segueModel = nil;
+    if (coordinate.sectionIndex >= [self.viewModel.homeModel.allSectionModels count]) {
+        //推荐
+        HomeSectionModel *sectionModel = [[self.viewModel sectionModelsArray] objectAtIndex:coordinate.sectionIndex];
+        if (coordinate.isTitle) {
+            segueModel = sectionModel.titleModel.segueModel;
+        } else if (coordinate.contentIndex >= 0) {
+            NSArray *elementsArray = [sectionModel.contentModel elementModelsArray];
+            if ([elementsArray count] > coordinate.contentIndex) {
+                segueModel = ((HomeElementBaseModel *)[elementsArray objectAtIndex:coordinate.contentIndex]).segueModel;
+            }
+        }
+    } else {
+        //首页
+        segueModel = [self.viewModel.homeModel segueModelAtHomeClickCoordinate:coordinate];
+    }
     [KTCSegueMaster makeSegueWithModel:segueModel fromController:self];
 }
 

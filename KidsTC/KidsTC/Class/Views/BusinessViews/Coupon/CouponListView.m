@@ -204,6 +204,11 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
 
 #pragma mark Public methods
 
+- (void)setViewTag:(CouponListViewTag)tag {
+    _currentViewTag = tag;
+    [self.segmentView setSelectedIndex:self.currentViewTag];
+}
+
 - (void)reloadSegmentHeader {
     [self.segmentView reloadData];
     [self.segmentView setSelectedIndex:self.currentViewTag];

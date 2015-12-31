@@ -28,6 +28,10 @@
     return self;
 }
 
+- (void)setContentModel:(HomeContentCellModel *)contentModel {
+    _contentModel = contentModel;
+}
+
 
 - (void)parseRawData:(NSDictionary *)data {
     _hasTitle = [[data objectForKey:@"hasTitle"] boolValue];

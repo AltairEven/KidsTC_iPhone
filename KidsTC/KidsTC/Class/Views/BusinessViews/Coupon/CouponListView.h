@@ -41,6 +41,8 @@ typedef enum {
 
 @property (nonatomic, readonly) CouponListViewTag currentViewTag;
 
+- (void)setViewTag:(CouponListViewTag)tag;
+
 - (void)reloadSegmentHeader;
 
 - (void)reloadDataforViewTag:(CouponListViewTag)tag;

@@ -25,24 +25,8 @@ typedef enum {
 
 + (instancetype)sharedService;
 
+//hot search
 - (void)synchronizeHotSearchKeysWithSuccess:(void(^)(NSDictionary *responseData))success failure:(void(^)(NSError *error))failure;
-
-- (void)startServiceSearchWithParamDic:(NSDictionary *)param
-                             Condition:(KTCSearchServiceCondition *)condition
-                               success:(void(^)(NSDictionary *responseData))success
-                               failure:(void(^)(NSError *error))failure;
-
-- (void)startStoreSearchWithParamDic:(NSDictionary *)param
-                           Condition:(KTCSearchStoreCondition *)condition
-                             success:(void(^)(NSDictionary *responseData))success
-                             failure:(void(^)(NSError *error))failure;
-
-- (void)startNewsSearchWithKeyWord:(NSString *)keyword
-                         pageIndex:(NSUInteger)index
-                          pageSize:(NSUInteger)size
-                           success:(void(^)(NSDictionary *responseData))success
-                           failure:(void(^)(NSError *error))failure;
-
 
 - (NSArray *)hotSearchConditionsOfSearchType:(KTCSearchType)type;
 
@@ -50,9 +34,28 @@ typedef enum {
 
 - (void)stopSyncHotSearchKeys;
 
+//service
+- (void)startServiceSearchWithParamDic:(NSDictionary *)param
+                             Condition:(KTCSearchServiceCondition *)condition
+                               success:(void(^)(NSDictionary *responseData))success
+                               failure:(void(^)(NSError *error))failure;
+
 - (void)stopServiceSearch;
 
+//store
+- (void)startStoreSearchWithParamDic:(NSDictionary *)param
+                           Condition:(KTCSearchStoreCondition *)condition
+                             success:(void(^)(NSDictionary *responseData))success
+                             failure:(void(^)(NSError *error))failure;
+
 - (void)stopStoreSearch;
+
+//news
+- (void)startNewsSearchWithKeyWord:(NSString *)keyword
+                         pageIndex:(NSUInteger)index
+                          pageSize:(NSUInteger)size
+                           success:(void(^)(NSDictionary *responseData))success
+                           failure:(void(^)(NSError *error))failure;
 
 - (void)stopNewsSearch;
 

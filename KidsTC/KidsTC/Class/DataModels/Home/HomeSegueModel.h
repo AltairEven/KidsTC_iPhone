@@ -46,6 +46,8 @@ extern NSString *const kHomeSegueParameterKeySearchSort;
 
 @property (nonatomic, strong, readonly) NSDictionary *segueParam;
 
-- (instancetype)initWithDestination:(HomeSegueDestination)destinaton paramRawData:(NSDictionary *)data;
+- (instancetype)initWithDestination:(HomeSegueDestination)destination;
+
+- (instancetype)initWithDestination:(HomeSegueDestination)destination paramRawData:(NSDictionary *)data;
 
 @end

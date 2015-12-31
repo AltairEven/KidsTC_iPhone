@@ -7,7 +7,10 @@
 //
 
 #import "GViewController.h"
+#import "CouponListViewModel.h"
 
 @interface CouponListViewController : GViewController
+
+- (instancetype)initWithCouponListViewTag:(CouponListViewTag)tag;
 
 @end

@@ -1,17 +1,17 @@
 //
-//  HotActivityGroupView.m
-//  ICSON
+//  HomeRecommendView.m
+//  KidsTC
 //
-//  Created by 钱烨 on 4/10/15.
-//  Copyright (c) 2015 肖晓春. All rights reserved.
+//  Created by Altair on 12/31/15.
+//  Copyright © 2015 KidsTC. All rights reserved.
 //
 
-#import "HotActivityGroupView.h"
-#import "HotActivityGroupViewCell.h"
-#import "HotActivityLayout.h"
+#import "HomeRecommendView.h"
+#import "HomeRecommendViewCell.h"
+#import "HomeRecommenLayout.h"
 
 
-@interface HotActivityGroupView () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface HomeRecommendView () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
@@ -21,12 +21,12 @@
 
 - (CGSize)sizeToFit;
 
-- (void)setDataForCell:(HotActivityGroupViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+- (void)setDataForCell:(HomeRecommendViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 
 
 @end
 
-@implementation HotActivityGroupView
+@implementation HomeRecommendView
 @synthesize viewHeight = _viewHeight;
 
 #pragma mark Initialization
@@ -39,7 +39,7 @@
     if (!bLoad)
     {
         bLoad = YES;
-        HotActivityGroupView *view = [GConfig getObjectFromNibWithView:self];
+        HomeRecommendView *view = [GConfig getObjectFromNibWithView:self];
         [view buildSubviews];
         return view;
     }
@@ -49,17 +49,13 @@
 
 
 - (void)buildSubviews {
+    [self.collectionView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
+    
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     
-    [self.collectionView registerClass:[HotActivityGroupViewCell class] forCellWithReuseIdentifier:kHotActivityCellIdentifier];
+    [self.collectionView registerClass:[HomeRecommendViewCell class] forCellWithReuseIdentifier:kHomeRecommendCellIdentifier];
 }
-
-- (void)setRatio:(CGFloat)ratio {
-    _ratio = ratio;
-    [(HotActivityLayout *)self.collectionView.collectionViewLayout setRatio:self.ratio];
-}
-
 
 
 #pragma mark Public Methods
@@ -81,11 +77,11 @@
 }
 
 
-- (void)setDataForCell:(HotActivityGroupViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+- (void)setDataForCell:(HomeRecommendViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     if (self.dataSource) {
-        if ([self.dataSource respondsToSelector:@selector(imageUrlOfCellAtIndexPath:onHotActivityView:)]) {
-            NSURL *url = [self.dataSource imageUrlOfCellAtIndexPath:indexPath onHotActivityView:self];
-            [cell.activityImageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder_200_200"]];
+        if ([self.dataSource respondsToSelector:@selector(elementOfCellAtIndexPath:onRecommendView:)]) {
+            HomeRecommendElement *element = [self.dataSource elementOfCellAtIndexPath:indexPath onRecommendView:self];
+            [cell configWithModel:element];
         }
     }
 }
@@ -96,8 +92,8 @@
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     NSInteger number = 0;
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(numberOfSectionsInGroupView:)]) {
-        number = [self.dataSource numberOfSectionsInGroupView:self];
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(numberOfSectionsInRecommendView:)]) {
+        number = [self.dataSource numberOfSectionsInRecommendView:self];
     }
     return number;
 }
@@ -105,8 +101,8 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     NSInteger number = 0;
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(groupView:numberOfItemsInSection:)]) {
-        number = [self.dataSource groupView:self numberOfItemsInSection:section];
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(recommendView:numberOfItemsInSection:)]) {
+        number = [self.dataSource recommendView:self numberOfItemsInSection:section];
     }
     return number;
 }
@@ -114,7 +110,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    HotActivityGroupViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kHotActivityCellIdentifier forIndexPath:indexPath];
+    HomeRecommendViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeRecommendCellIdentifier forIndexPath:indexPath];
     if (cell) {
         [self setDataForCell:cell atIndexPath:indexPath];
     }
@@ -122,8 +118,8 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(hotActivityGroupView:didSelectItemAtIndexPath:)]) {
-        [self.delegate hotActivityGroupView:self didSelectItemAtIndexPath:indexPath];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(recommendView:didSelectItemAtIndexPath:)]) {
+        [self.delegate recommendView:self didSelectItemAtIndexPath:indexPath];
     }
 }
 

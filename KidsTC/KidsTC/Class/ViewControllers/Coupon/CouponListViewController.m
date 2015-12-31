@@ -7,7 +7,6 @@
 //
 
 #import "CouponListViewController.h"
-#import "CouponListViewModel.h"
 #import "KTCWebViewController.h"
 
 static NSString *const kCouponUseRuleUrlString = @"http://m.kidstc.com/tools/coupon_desc";
@@ -18,11 +17,21 @@ static NSString *const kCouponUseRuleUrlString = @"http://m.kidstc.com/tools/cou
 
 @property (nonatomic, strong) CouponListViewModel *viewModel;
 
+@property (nonatomic, assign) CouponListViewTag firstLoadViewTag;
+
 - (void)didClickedCouponRule;
 
 @end
 
 @implementation CouponListViewController
+
+- (instancetype)initWithCouponListViewTag:(CouponListViewTag)tag {
+    self = [super initWithNibName:@"CouponListViewController" bundle:nil];
+    if (self) {
+        self.firstLoadViewTag = tag;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     _navigationTitle = @"优惠券";
@@ -30,7 +39,7 @@ static NSString *const kCouponUseRuleUrlString = @"http://m.kidstc.com/tools/cou
     // Do any additional setup after loading the view from its nib.
     self.listView.delegate = self;
     self.viewModel = [[CouponListViewModel alloc] initWithView:self.listView];
-    [self.viewModel startUpdateDataWithViewTag:CouponListViewTagUnused];
+    [self.viewModel startUpdateDataWithViewTag:self.firstLoadViewTag];
     [self.listView reloadSegmentHeader];
     [self setupRightBarButton:@"" target:self action:@selector(didClickedCouponRule) frontImage:@"navigation_question" andBackImage:@"navigation_question"];
 }

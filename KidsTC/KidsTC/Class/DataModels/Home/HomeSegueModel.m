@@ -29,10 +29,18 @@ NSString *const kHomeSegueParameterKeySearchSort = @"kHomeSegueParameterKeySearc
 
 @implementation HomeSegueModel
 
-- (instancetype)initWithDestination:(HomeSegueDestination)destinaton paramRawData:(NSDictionary *)data {
+- (instancetype)initWithDestination:(HomeSegueDestination)destination {
     self = [super init];
     if (self) {
-        _destination = destinaton;
+        _destination = destination;
+    }
+    return self;
+}
+
+- (instancetype)initWithDestination:(HomeSegueDestination)destination paramRawData:(NSDictionary *)data {
+    self = [super init];
+    if (self) {
+        _destination = destination;
         [self fillSegueParamWithData:data];
     }
     return self;
@@ -68,6 +76,9 @@ NSString *const kHomeSegueParameterKeySearchSort = @"kHomeSegueParameterKeySearc
         case HomeSegueDestinationServiceDetail:
         case HomeSegueDestinationStoreDetail:
         case HomeSegueDestinationStrategyDetail:
+        case HomeSegueDestinationCouponList:
+        case HomeSegueDestinationOrderDetail:
+        case HomeSegueDestinationOrderList:
         {
             if ([data isKindOfClass:[NSDictionary class]]) {
                 _segueParam = [NSDictionary dictionaryWithDictionary:data];

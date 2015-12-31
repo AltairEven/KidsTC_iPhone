@@ -296,6 +296,11 @@ static KTCSearchService *_sharedInstance;
     
 }
 
+
+- (void)stopSearchRecommendation {
+    
+}
+
 @end
 
 

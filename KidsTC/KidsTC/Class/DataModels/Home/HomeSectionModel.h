@@ -23,6 +23,7 @@
 #import "HomeNoticeCellModel.h"
 #import "HomeBigImageTwoDescCellModel.h"
 #import "HomeTwoThreeFourCellModel.h"
+#import "HomeRecommendCellModel.h"
 
 @interface HomeSectionModel : NSObject
 
@@ -39,5 +40,7 @@
 @property (nonatomic, strong, readonly) HomeContentCellModel *contentModel;
 
 - (instancetype)initWithRawData:(NSDictionary *)data;
+
+- (void)setContentModel:(HomeContentCellModel *)contentModel;
 
 @end

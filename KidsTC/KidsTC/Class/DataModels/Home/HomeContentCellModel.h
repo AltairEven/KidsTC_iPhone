@@ -21,7 +21,8 @@ typedef enum {
     HomeContentCellTypeWholeImageNews = 11,
     HomeContentCellTypeNotice = 12,
     HomeContentCellTypeBigImageTwoDesc = 13,
-    HomeContentCellTypeTwoThreeFour = 14
+    HomeContentCellTypeTwoThreeFour = 14,
+    HomeContentCellTypeRecommend = 15
 }HomeContentCellType;
 
 @interface HomeContentCellModel : HomeCellModel
