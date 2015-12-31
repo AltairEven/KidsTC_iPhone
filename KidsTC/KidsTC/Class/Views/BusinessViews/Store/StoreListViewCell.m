@@ -31,7 +31,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    [self.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+    [self.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
     [GConfig resetLineView:self.separateView withLayoutAttribute:NSLayoutAttributeHeight];
     
     self.stroeImageView.layer.cornerRadius = 5;
@@ -88,7 +88,7 @@
         NSString *commentCountString = [NSString stringWithFormat:@"%lu", (unsigned long)model.commentCount];
         NSString *wholeString = [NSString stringWithFormat:@"%@条热评", commentCountString];
         NSMutableAttributedString *labelString = [[NSMutableAttributedString alloc] initWithString:wholeString];
-        NSDictionary *attribute = [NSDictionary dictionaryWithObject:[[KTCThemeManager manager] currentTheme].globalThemeColor forKey:NSForegroundColorAttributeName];
+        NSDictionary *attribute = [NSDictionary dictionaryWithObject:[[KTCThemeManager manager] defaultTheme].globalThemeColor forKey:NSForegroundColorAttributeName];
         [labelString setAttributes:attribute range:NSMakeRange(0, [commentCountString length])];
         [self.commentCountLabel setAttributedText:labelString];
     } else {

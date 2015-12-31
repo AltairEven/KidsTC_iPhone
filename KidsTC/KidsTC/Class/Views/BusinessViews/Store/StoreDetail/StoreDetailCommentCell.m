@@ -26,7 +26,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    [self.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+    [self.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
     
     self.imageGridView.delegate = self;
     [self.imageGridView resetBeforeLayoutWithWidth:SCREEN_WIDTH - 90];

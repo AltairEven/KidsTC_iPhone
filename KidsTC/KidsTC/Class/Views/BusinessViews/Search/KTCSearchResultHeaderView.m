@@ -48,7 +48,7 @@
     
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:15],NSFontAttributeName,[UIColor redColor], NSForegroundColorAttributeName, nil];
     [self.segmentControl setTitleTextAttributes:attributes forState:UIControlStateNormal];
-    NSDictionary *highlightedAttributes = [NSDictionary dictionaryWithObject:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal forKey:NSForegroundColorAttributeName];
+    NSDictionary *highlightedAttributes = [NSDictionary dictionaryWithObject:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Normal forKey:NSForegroundColorAttributeName];
     [self.segmentControl setTitleTextAttributes:highlightedAttributes forState:UIControlStateHighlighted];
 }
 

@@ -30,9 +30,13 @@
     self.homeBannersArray = [NSArray arrayWithArray:tempArray];
 }
 
+- (void)setRatio:(CGFloat)ratio {
+    [super setRatio:ratio];
+}
+
 
 - (CGFloat)cellHeight {
-    cellHeight = self.ratio * SCREEN_WIDTH;
+    cellHeight = cellRatio * SCREEN_WIDTH;
     return cellHeight;
 }
 

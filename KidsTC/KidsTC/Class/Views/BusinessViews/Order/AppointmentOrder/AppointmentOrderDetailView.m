@@ -63,11 +63,11 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    [self.commentButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal forState:UIControlStateNormal];
-    [self.commentButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    [self.commentButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.commentButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
     
     self.cancelAppointmentButton.layer.borderWidth = BORDER_WIDTH;
-    self.cancelAppointmentButton.layer.borderColor = [[KTCThemeManager manager] currentTheme].globalThemeColor.CGColor;
+    self.cancelAppointmentButton.layer.borderColor = [[KTCThemeManager manager] defaultTheme].globalThemeColor.CGColor;
     [self.cancelAppointmentButton.layer setMasksToBounds:YES];
     
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
@@ -75,8 +75,8 @@
 //    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
 //    self.getCodeButton = [UIButton buttonWithType:UIButtonTypeCustom];
 //    [self.getCodeButton setFrame:CGRectMake(15, 10, SCREEN_WIDTH - 30, 40)];
-//    [self.getCodeButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal forState:UIControlStateNormal];
-//    [self.getCodeButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+//    [self.getCodeButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Normal forState:UIControlStateNormal];
+//    [self.getCodeButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
 //    [self.getCodeButton setTitle:@"获取消费码" forState:UIControlStateNormal];
 //    [self.getCodeButton addTarget:self action:@selector(didClickedGetCodeButton:) forControlEvents:UIControlEventTouchUpInside];
 //    
@@ -108,7 +108,7 @@
             [self.appointmentTimeDesLabel setText:self.orderModel.appointmentTimeDes];
             [self.commentButton setHidden:![self.orderModel canComment]];
             [self.cancelAppointmentButton setHidden:![self.orderModel canCancel]];
-            [self.storeInfoCell.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+            [self.storeInfoCell.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
             return self.storeInfoCell;
         }
             break;
@@ -117,7 +117,7 @@
             [self.orderStatusDesLabel setText:self.orderModel.statusDescription];
             [self.phoneLabel setText:self.orderModel.phoneNumber];
             [self.appointmentNameLabel setText:self.orderModel.appointmentName];
-            [self.orderInfoCell.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+            [self.orderInfoCell.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
             return self.orderInfoCell;
         }
             break;
@@ -199,7 +199,7 @@
     }
     if (!self.orderModel) {
         self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
-        [self.tableView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+        [self.tableView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     } else {
         self.tableView.backgroundView = nil;
     }

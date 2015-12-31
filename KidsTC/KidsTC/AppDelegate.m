@@ -136,9 +136,14 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
     
     //版本检查更新
     [self checkVersion];
+    //搜索热词
+    [[KTCSearchService sharedService] synchronizeHotSearchKeysWithSuccess:nil failure:nil];
     //广告
     [self showAdvertisement];
     [[KTCAdvertisementManager sharedManager] synchronizeAdvertisement];
+    //主题
+    [[KTCThemeManager manager] loadLocalTheme];
+    [[KTCThemeManager manager] synchronizeTheme];
 //
 //    //更新三级地址信息
 //    [[AddressManager sharedManager] validateADListDataWithSuccess:^(AddressManager *manager) {

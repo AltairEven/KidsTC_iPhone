@@ -27,6 +27,10 @@
         if (item) {
             [tempArray addObject:item];
         }
+        NSString *imageUrlString = [singleData objectForKey:@"imageUrl"];
+        if ([imageUrlString isKindOfClass:[NSString class]] && [imageUrlString length] > 0) {
+            self.imageUrl = [NSURL URLWithString:imageUrlString];
+        }
     }
     self.noticeItemsArray = [NSArray arrayWithArray:tempArray];
 }
@@ -47,7 +51,7 @@
 - (void)parseHomeData:(NSDictionary *)data {
     [super parseHomeData:data];
     
-    self.content = [NSString stringWithFormat:@"%@", [data objectForKey:@"content"]];
+    self.content = [NSString stringWithFormat:@"%@", [data objectForKey:@"title"]];
 }
 
 @end

@@ -60,8 +60,8 @@
 }
 
 - (void)buildSubView {
-    [self.gotoButton setTitleColor:[[KTCThemeManager manager] currentTheme].globalThemeColor forState:UIControlStateNormal];
-    [self.nearbyButton setTitleColor:[[KTCThemeManager manager] currentTheme].globalThemeColor forState:UIControlStateNormal];
+    [self.gotoButton setTitleColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor forState:UIControlStateNormal];
+    [self.nearbyButton setTitleColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor forState:UIControlStateNormal];
 }
 
 - (void)setItemModel:(KTCAnnotationTipWelfareItem *)itemModel {

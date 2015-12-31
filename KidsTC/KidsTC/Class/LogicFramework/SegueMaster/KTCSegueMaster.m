@@ -18,6 +18,7 @@
 #import "StoreListViewController.h"
 #import "ServiceDetailViewController.h"
 #import "StoreDetailViewController.h"
+#import "ParentingStrategyDetailViewController.h"
 
 @implementation KTCSegueMaster
 
@@ -118,6 +119,17 @@
                 storeId = [model.segueParam objectForKey:@"sid"];
             }
             StoreDetailViewController *controller = [[StoreDetailViewController alloc] initWithStoreId:storeId];
+            [controller setHidesBottomBarWhenPushed:YES];
+            toController = controller;
+        }
+            break;
+        case HomeSegueDestinationStrategyDetail:
+        {
+            NSString *strategyId = @"";
+            if ([model.segueParam objectForKey:@"sid"]) {
+                strategyId = [model.segueParam objectForKey:@"sid"];
+            }
+            ParentingStrategyDetailViewController *controller = [[ParentingStrategyDetailViewController alloc] initWithStrategyIdentifier:strategyId];
             [controller setHidesBottomBarWhenPushed:YES];
             toController = controller;
         }

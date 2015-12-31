@@ -8,15 +8,28 @@
 
 #import "KTCSearchService.h"
 
+NSString *const kSearchHotKeysHasChangedNotification = @"kSearchHotKeysHasChangedNotification";
+
+NSString *const kSearchHotKeyName = @"kSearchHotKeyName";
+NSString *const kSearchHotKeyCondition = @"kSearchHotKeyCondition";
+
 static KTCSearchService *_sharedInstance;
 
 @interface KTCSearchService ()
+
+@property (nonatomic, strong) HttpRequestClient *hotSearchRequest;
 
 @property (nonatomic, strong) HttpRequestClient *serviceSearchRequest;
 
 @property (nonatomic, strong) HttpRequestClient *storeSearchRequest;
 
 @property (nonatomic, strong) HttpRequestClient *newsSearchRequest;
+
+@property (nonatomic, strong) NSMutableDictionary *hotSearchDic;
+
+- (void)loadHotKeySucceed:(NSDictionary *)data;
+
+- (void)loadHotKeyFailed:(NSError *)error;
 
 @end
 
@@ -26,9 +39,123 @@ static KTCSearchService *_sharedInstance;
     static dispatch_once_t token;
     dispatch_once(&token, ^{
         _sharedInstance = [[KTCSearchService alloc] init];
+        _sharedInstance.hotSearchDic = [[NSMutableDictionary alloc] init];
     });
     return _sharedInstance;
 }
+
+#pragma mark Hot Search
+
+- (void)synchronizeHotSearchKeysWithSuccess:(void (^)(NSDictionary *))success failure:(void (^)(NSError *))failure {
+    if (!self.hotSearchRequest) {
+        self.hotSearchRequest = [HttpRequestClient clientWithUrlAliasName:@"SEARCH_GET_HOTKEY"];
+    } else {
+        [self stopSyncHotSearchKeys];
+    }
+    __weak KTCSearchService *weakSelf = self;
+    [weakSelf.hotSearchRequest startHttpRequestWithParameter:nil success:^(HttpRequestClient *client, NSDictionary *responseData) {
+        [weakSelf loadHotKeySucceed:responseData];
+        if (success) {
+            success(responseData);
+        }
+    } failure:^(HttpRequestClient *client, NSError *error) {
+        [weakSelf loadHotKeyFailed:error];
+        if (failure) {
+            failure(error);
+        }
+    }];
+}
+
+- (void)loadHotKeySucceed:(NSDictionary *)data {
+    NSDictionary *dataDic = [data objectForKey:@"data"];
+    if (!dataDic || ![dataDic isKindOfClass:[NSDictionary class]]) {
+        //无效数据，或数据格式不正确
+        return;
+    }
+    //服务
+    NSArray *serviceHotArray = [dataDic objectForKey:@"product"];
+    if ([serviceHotArray isKindOfClass:[NSArray class]]) {
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        for (NSDictionary *hotDic in serviceHotArray) {
+            NSString *name = [hotDic objectForKey:@"name"];
+            NSDictionary *searchParam = [hotDic objectForKey:@"search_parms"];
+            KTCSearchServiceCondition *condition = [KTCSearchServiceCondition conditionFromRawData:searchParam];
+            if (!condition) {
+                condition = [[KTCSearchServiceCondition alloc] init];
+            }
+            if ([condition.keyWord length] == 0) {
+                condition.keyWord = name;
+            }
+            NSDictionary *hotKey = [NSDictionary dictionaryWithObjectsAndKeys:name, kSearchHotKeyName, condition, kSearchHotKeyCondition, nil];
+            [tempArray addObject:hotKey];
+        }
+        [self.hotSearchDic setObject:[NSArray arrayWithArray:tempArray] forKey:[NSNumber numberWithInteger:KTCSearchTypeService]];
+    }
+    //门店
+    NSArray *storeHotArray = [dataDic objectForKey:@"store"];
+    if ([storeHotArray isKindOfClass:[NSArray class]]) {
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        for (NSDictionary *hotDic in storeHotArray) {
+            NSString *name = [hotDic objectForKey:@"name"];
+            NSDictionary *searchParam = [hotDic objectForKey:@"search_parms"];
+            KTCSearchStoreCondition *condition = [KTCSearchStoreCondition conditionFromRawData:searchParam];
+            if (!condition) {
+                condition = [[KTCSearchStoreCondition alloc] init];
+            }
+            if ([condition.keyWord length] == 0) {
+                condition.keyWord = name;
+            }
+            NSDictionary *hotKey = [NSDictionary dictionaryWithObjectsAndKeys:name, kSearchHotKeyName, condition, kSearchHotKeyCondition, nil];
+            [tempArray addObject:hotKey];
+        }
+        [self.hotSearchDic setObject:[NSArray arrayWithArray:tempArray] forKey:[NSNumber numberWithInteger:KTCSearchTypeStore]];
+    }
+    //知识库
+    NSArray *newsHotArray = [dataDic objectForKey:@"article"];
+    if ([newsHotArray isKindOfClass:[NSArray class]]) {
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        for (NSDictionary *hotDic in newsHotArray) {
+            NSString *name = [hotDic objectForKey:@"name"];
+            NSDictionary *searchParam = [hotDic objectForKey:@"search_parms"];
+            KTCSearchNewsCondition *condition = [KTCSearchNewsCondition conditionFromRawData:searchParam];
+            if (!condition) {
+                condition = [[KTCSearchNewsCondition alloc] init];
+            }
+            if ([condition.keyWord length] == 0) {
+                condition.keyWord = name;
+            }
+            NSDictionary *hotKey = [NSDictionary dictionaryWithObjectsAndKeys:name, kSearchHotKeyName, condition, kSearchHotKeyCondition, nil];
+            [tempArray addObject:hotKey];
+        }
+        [self.hotSearchDic setObject:[NSArray arrayWithArray:tempArray] forKey:[NSNumber numberWithInteger:KTCSearchTypeNews]];
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSearchHotKeysHasChangedNotification object:nil];
+}
+
+- (void)loadHotKeyFailed:(NSError *)error {
+    
+}
+
+- (NSArray *)hotSearchConditionsOfSearchType:(KTCSearchType)type {
+    NSArray *hotSearchArray = [self.hotSearchDic objectForKey:[NSNumber numberWithInteger:type]];
+    return hotSearchArray;
+}
+
+- (KTCSearchCondition *)mostHotSearchConditionOfSearchType:(KTCSearchType)type {
+    NSDictionary *searchParam = [[self hotSearchConditionsOfSearchType:type] firstObject];
+    if ([searchParam count] == 0) {
+        return nil;
+    }
+    return [searchParam objectForKey:kSearchHotKeyCondition];
+}
+
+- (void)stopSyncHotSearchKeys {
+    [self.hotSearchRequest cancel];
+}
+
+
+
+#pragma mark Service
 
 /*
   a,c,k,s,st
@@ -75,6 +202,12 @@ static KTCSearchService *_sharedInstance;
         }
     }];
 }
+
+- (void)stopServiceSearch {
+    [self.serviceSearchRequest cancel];
+}
+
+#pragma mark Store
 
 - (void)startStoreSearchWithParamDic:(NSDictionary *)param
                            Condition:(KTCSearchStoreCondition *)condition
@@ -127,6 +260,12 @@ static KTCSearchService *_sharedInstance;
     }];
 }
 
+- (void)stopStoreSearch {
+    [self.storeSearchRequest cancel];
+}
+
+#pragma mark News
+
 - (void)startNewsSearchWithKeyWord:(NSString *)keyword
                          pageIndex:(NSUInteger)index
                           pageSize:(NSUInteger)size
@@ -151,14 +290,6 @@ static KTCSearchService *_sharedInstance;
             failure(error);
         }
     }];
-}
-
-- (void)stopServiceSearch {
-    [self.serviceSearchRequest cancel];
-}
-
-- (void)stopStoreSearch {
-    [self.storeSearchRequest cancel];
 }
 
 - (void)stopNewsSearch {

@@ -36,11 +36,11 @@
 
 
 - (void)buildSubviews {
-    [self.favourateButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor forState:UIControlStateNormal];
-    [self.commentButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor forState:UIControlStateNormal];
-    [self.appointmentButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal forState:UIControlStateNormal];
-    [self.appointmentButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
-    [self.appointmentButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Disable forState:UIControlStateDisabled];
+    [self.favourateButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor forState:UIControlStateNormal];
+    [self.commentButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor forState:UIControlStateNormal];
+    [self.appointmentButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.appointmentButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    [self.appointmentButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Disable forState:UIControlStateDisabled];
 }
 
 - (void)setFavourite:(BOOL)isFavourite {

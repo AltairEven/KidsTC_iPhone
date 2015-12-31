@@ -37,7 +37,7 @@
 
 - (void)configWithModel:(HomeTwoColumnCellModel *)model {
     if (model) {
-        self.groupView.ratio = model.ratio;
+        self.groupView.ratio = [model cellRatio];
         _imageUrlsArray = [model imageUrlsArray];
     }
     [self.groupView reloadData];

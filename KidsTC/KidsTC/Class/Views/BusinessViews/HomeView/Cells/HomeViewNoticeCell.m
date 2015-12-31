@@ -13,6 +13,7 @@
 @interface HomeViewNoticeCell () <AUINoticeViewDataSource, AUINoticeViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *bgView;
+@property (weak, nonatomic) IBOutlet UIImageView *cellImageView;
 @property (weak, nonatomic) IBOutlet AUINoticeView *noticeView;
 
 @property (nonatomic, strong) HomeNoticeCellModel *cellModel;
@@ -23,7 +24,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    [self.bgView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+    [self.bgView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
     self.noticeView.dataSource = self;
     self.noticeView.delegate = self;
     [self.noticeView setEnableClicking:YES];
@@ -38,6 +39,7 @@
 }
 
 - (void)configWithModel:(HomeNoticeCellModel *)model {
+    [self.cellImageView setImageWithURL:model.imageUrl];
     self.cellModel = model;
     [self.noticeView reloadData];
 }
@@ -62,7 +64,9 @@
 }
 
 - (void)auiNoticeView:(AUINoticeView *)noticeView didClickedAtIndex:(NSUInteger)index {
-    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(homeNoticeCell:didClickedAtIndex:)]) {
+        [self.delegate homeNoticeCell:self didClickedAtIndex:index];
+    }
 }
 
 @end

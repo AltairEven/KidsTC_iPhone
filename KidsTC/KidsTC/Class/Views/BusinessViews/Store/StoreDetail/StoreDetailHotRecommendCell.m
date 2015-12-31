@@ -22,13 +22,13 @@
 @implementation StoreDetailHotRecommendCell
 
 - (void)awakeFromNib {
-    [self.bgView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+    [self.bgView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
     // Initialization code
-    [self.priceView setContentColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal];
+    [self.priceView setContentColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Normal];
     [self.priceView setUnitFont:[UIFont systemFontOfSize:16]];
     [self.priceView setPriceFont:[UIFont systemFontOfSize:20]];
     
-    [self.countLabel setTextColor:[[KTCThemeManager manager] currentTheme].highlightTextColor];
+    [self.countLabel setTextColor:[[KTCThemeManager manager] defaultTheme].highlightTextColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

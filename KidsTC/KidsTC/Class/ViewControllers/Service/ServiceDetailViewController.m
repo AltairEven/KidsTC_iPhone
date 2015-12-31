@@ -443,10 +443,10 @@
 }
 
 - (void)buildCountDownView {
-    [self.label1 setTextColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
-    [self.gapView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
+    [self.label1 setTextColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
+    [self.gapView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
     [GConfig resetLineView:self.gapView withLayoutAttribute:NSLayoutAttributeWidth];
-    [self.countdownLabel setTextColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
+    [self.countdownLabel setTextColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
     [self hideCountdown:YES];
 }
 

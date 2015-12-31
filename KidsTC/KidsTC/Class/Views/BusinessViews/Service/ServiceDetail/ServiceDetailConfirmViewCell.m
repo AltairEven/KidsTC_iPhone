@@ -22,7 +22,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    [self.bgView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+    [self.bgView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -30,9 +30,9 @@
 
     // Configure the view for the selected state
     if (selected) {
-        [self.bgView setBackgroundColor:[[[KTCThemeManager manager] currentTheme].globalThemeColor colorWithAlphaComponent:0.2]];
+        [self.bgView setBackgroundColor:[[[KTCThemeManager manager] defaultTheme].globalThemeColor colorWithAlphaComponent:0.2]];
     } else {
-        [self.bgView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+        [self.bgView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
     }
 }
 

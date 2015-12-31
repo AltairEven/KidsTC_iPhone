@@ -26,19 +26,19 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    [self.bgView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+    [self.bgView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
-    [self.priceView setContentColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal];
+    [self.priceView setContentColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Normal];
     [self.priceView setUnitFont:[UIFont systemFontOfSize:20]];
     [self.priceView setPriceFont:[UIFont systemFontOfSize:30]];
     
     self.progressView.layer.cornerRadius = 5;
-    self.progressView.layer.borderColor = [[KTCThemeManager manager] currentTheme].buttonBGColor_Normal.CGColor;
+    self.progressView.layer.borderColor = [[KTCThemeManager manager] defaultTheme].buttonBGColor_Normal.CGColor;
     self.progressView.layer.borderWidth = BORDER_WIDTH;
     self.progressView.layer.masksToBounds = YES;
 }
@@ -66,7 +66,7 @@
         } else {
             NSString *wholeString = [NSString stringWithFormat:@"已售%.f%%，剩余%lu", itemModel.percent, (unsigned long)itemModel.leftNumber];
             NSMutableAttributedString *labelString = [[NSMutableAttributedString alloc] initWithString:wholeString];
-            NSDictionary *attribute = [NSDictionary dictionaryWithObject:[[KTCThemeManager manager] currentTheme].highlightTextColor forKey:NSForegroundColorAttributeName];
+            NSDictionary *attribute = [NSDictionary dictionaryWithObject:[[KTCThemeManager manager] defaultTheme].highlightTextColor forKey:NSForegroundColorAttributeName];
             NSUInteger commaIndex = [wholeString rangeOfString:@"，"].location;
             NSRange percentRange = NSMakeRange(2, commaIndex - 2);
             NSRange leftRange = NSMakeRange(commaIndex + 3, [wholeString length] - commaIndex - 3);

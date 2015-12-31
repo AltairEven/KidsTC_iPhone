@@ -46,7 +46,7 @@
 - (void)buildSubviews {
     self.buttonArray = [[NSMutableArray alloc] init];
     
-    [self setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
 }
 
 
@@ -72,7 +72,7 @@
         [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
         [button setBackgroundColor:[UIColor clearColor] forState:UIControlStateNormal];
-        [button setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal forState:UIControlStateSelected];
+        [button setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Normal forState:UIControlStateSelected];
         [button setTitle:[self.titlesArray objectAtIndex:index] forState:UIControlStateNormal];
         
         button.layer.cornerRadius = 10;

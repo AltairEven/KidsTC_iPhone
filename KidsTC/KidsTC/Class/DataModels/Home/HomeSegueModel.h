@@ -11,16 +11,20 @@
 typedef enum {
     HomeSegueDestinationNone = 0, //无跳转
     HomeSegueDestinationH5 = 1, //H5
-    HomeSegueDestinationNewsRecommend, //资讯推荐列表
-    HomeSegueDestinationNewsList, //资讯列表
-    HomeSegueDestinationActivity, //活动页面
-    HomeSegueDestinationLoveHouse, //爱心小屋
-    HomeSegueDestinationHospital, //医院
-    HomeSegueDestinationStrategyList, //攻略列表
-    HomeSegueDestinationServiceList, //服务列表
-    HomeSegueDestinationStoreList, //门店列表
-    HomeSegueDestinationServiceDetail, //服务详情
-    HomeSegueDestinationStoreDetail //服务列表
+    HomeSegueDestinationNewsRecommend = 2, //资讯推荐列表
+    HomeSegueDestinationNewsList = 3, //资讯列表
+    HomeSegueDestinationActivity = 4, //活动页面
+    HomeSegueDestinationLoveHouse = 5, //爱心小屋
+    HomeSegueDestinationHospital = 6, //医院
+    HomeSegueDestinationStrategyList = 7, //攻略列表
+    HomeSegueDestinationServiceList = 8, //服务列表
+    HomeSegueDestinationStoreList = 9, //门店列表
+    HomeSegueDestinationServiceDetail = 10, //服务详情
+    HomeSegueDestinationStoreDetail = 11, //门店详情
+    HomeSegueDestinationStrategyDetail = 12, //攻略详情
+    HomeSegueDestinationCouponList = 13, //优惠券列表
+    HomeSegueDestinationOrderDetail = 14, //订单详情
+    HomeSegueDestinationOrderList = 15 //订单列表
 }HomeSegueDestination;
 
 //H5

@@ -45,9 +45,9 @@
     
     [self.buyButton setTitle:@"已售完" forState:UIControlStateDisabled];
     [self.buyButton setTitle:@"立即购买" forState:UIControlStateDisabled];
-    [self.buyButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal forState:UIControlStateNormal];
-    [self.buyButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
-    [self.buyButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Disable forState:UIControlStateDisabled];
+    [self.buyButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.buyButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    [self.buyButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Disable forState:UIControlStateDisabled];
 }
 
 /*

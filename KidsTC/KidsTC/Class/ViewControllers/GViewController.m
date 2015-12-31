@@ -284,8 +284,8 @@ typedef enum {
 		[rightButton setTitle:title forState:UIControlStateNormal];
 		[rightButton setTitle:title forState:UIControlStateHighlighted];
 		rightButton.titleLabel.font = [UIFont systemFontOfSize:15.0f];
-        [rightButton setTitleColor:[[KTCThemeManager manager] currentTheme].navibarTitleColor_Normal forState:UIControlStateNormal];
-        [rightButton setTitleColor:[[KTCThemeManager manager] currentTheme].navibarTitleColor_Highlight forState:UIControlStateHighlighted];
+        [rightButton setTitleColor:[[KTCThemeManager manager] defaultTheme].navibarTitleColor_Normal forState:UIControlStateNormal];
+        [rightButton setTitleColor:[[KTCThemeManager manager] defaultTheme].navibarTitleColor_Highlight forState:UIControlStateHighlighted];
         
         if (title.length > 3) {
             CGSize size = [title sizeWithAttributes:[NSDictionary dictionaryWithObject:[UIFont systemFontOfSize:15.0] forKey:NSFontAttributeName]];

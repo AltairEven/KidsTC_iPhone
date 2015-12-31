@@ -36,7 +36,7 @@
     [super viewDidLoad];
     _navigationTitle = @"修改昵称";
     // Do any additional setup after loading the view from its nib.
-    [self.view setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self.view setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     
     [self.nickNameFiled setLeftView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 40)]];
     [self.nickNameFiled setRightView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 40)]];

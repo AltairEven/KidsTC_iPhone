@@ -42,11 +42,9 @@
 - (void)buildSubviews {
     self.inputField.delegate = self;
     
-    self.backgroundColor = [[KTCThemeManager manager] currentTheme].navibarBGColor;
-    
     self.roleButton.layer.cornerRadius = 14;
     self.roleButton.layer.masksToBounds = YES;
-    self.roleButton.layer.borderColor = [[KTCThemeManager manager] currentTheme].navibarTitleColor_Normal.CGColor;
+    self.roleButton.layer.borderColor = [[KTCThemeManager manager] defaultTheme].navibarTitleColor_Normal.CGColor;
     self.roleButton.layer.borderWidth = 1;
 }
 
@@ -74,8 +72,19 @@
     }
 }
 
+
+#pragma mark Public methods
+
 - (void)setRoleWithImage:(UIImage *)image {
     [self.roleButton setImage:image forState:UIControlStateNormal];
+}
+
+- (void)resetInputFieldContent:(NSString *)content isPlaceHolder:(BOOL)isPlaceHolder {
+    if (isPlaceHolder) {
+        [self.inputField setPlaceholder:content];
+    } else {
+        [self.inputField setText:content];
+    }
 }
 
 /*

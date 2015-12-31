@@ -60,9 +60,9 @@ NSString *const kCommentCellIdentifier = @"kCommentCellIdentifier";
 }
 
 - (void)buildSubviews {
-    [self setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     
-    [self.webView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self.webView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     [self.webView.scrollView setScrollEnabled:NO];
     [self.webView.scrollView setShowsVerticalScrollIndicator:NO];
     [self.webView.scrollView setShowsHorizontalScrollIndicator:NO];
@@ -80,7 +80,7 @@ NSString *const kCommentCellIdentifier = @"kCommentCellIdentifier";
     }
     
     self.tableView.backgroundView = nil;
-    [self.tableView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self.tableView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     [self.tableView setScrollEnabled:NO];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -247,7 +247,7 @@ NSString *const kCommentCellIdentifier = @"kCommentCellIdentifier";
         [bgView setBackgroundColor:[UIColor clearColor]];
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+        [button setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
         [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         [button setTitle:@"查看全部评论" forState:UIControlStateNormal];
         [button.titleLabel setFont:[UIFont systemFontOfSize:15]];

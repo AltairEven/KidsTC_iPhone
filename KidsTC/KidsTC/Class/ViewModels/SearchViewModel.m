@@ -9,22 +9,11 @@
 #import "SearchViewModel.h"
 #import "KTCSearchCondition.h"
 
-NSString *const kSearchHotKeyName = @"kSearchHotKeyName";
-NSString *const kSearchHotKeyCondition = @"kSearchHotKeyCondition";
-
 @interface SearchViewModel () <KTCSearchViewDataSource>
 
 @property (nonatomic, weak) KTCSearchView *view;
 
-@property (nonatomic, strong) HttpRequestClient *loadHotKeyRequest;
-
-@property (nonatomic, strong) NSMutableDictionary *hotSearchDic;
-
 @property (nonatomic, strong) NSMutableDictionary *historySearchDic;
-
-- (void)loadHotKeySucceed:(NSDictionary *)data;
-
-- (void)loadHotKeyFailed:(NSError *)error;
 
 @end
 
@@ -40,7 +29,6 @@ NSString *const kSearchHotKeyCondition = @"kSearchHotKeyCondition";
         KTCSearchTypeItem *item3 = [KTCSearchTypeItem itemWithType:KTCSearchTypeNews Name:@"知识库" image:[UIImage imageNamed:@"bizicon_news_n"]];
         [self.view setCategoryArray:[NSArray arrayWithObjects:item1, item2, item3, nil]];
         
-        self.hotSearchDic = [[NSMutableDictionary alloc] init];
         self.historySearchDic = [[NSMutableDictionary alloc] init];
         
         if (type != KTCSearchTypeNone) {
@@ -57,25 +45,9 @@ NSString *const kSearchHotKeyCondition = @"kSearchHotKeyCondition";
 }
 
 - (void)startUpdateDataWithSucceed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
-    if (!self.loadHotKeyRequest) {
-        self.loadHotKeyRequest = [HttpRequestClient clientWithUrlAliasName:@"SEARCH_GET_HOTKEY"];
-    }
-    __weak SearchViewModel *weakSelf = self;
-    [weakSelf.loadHotKeyRequest startHttpRequestWithParameter:nil success:^(HttpRequestClient *client, NSDictionary *responseData) {
-        [weakSelf loadHotKeySucceed:responseData];
-        if (succeed) {
-            succeed(responseData);
-        }
-    } failure:^(HttpRequestClient *client, NSError *error) {
-        [weakSelf loadHotKeyFailed:error];
-        if (failure) {
-            failure(error);
-        }
-    }];
 }
 
 - (void)stopUpdateData {
-    [self.loadHotKeyRequest cancel];
 }
 
 - (void)setSearchType:(KTCSearchType)searchType {
@@ -86,7 +58,7 @@ NSString *const kSearchHotKeyCondition = @"kSearchHotKeyCondition";
 #pragma KTCSearchViewDataSource
 
 - (NSArray *)hotKeysArrayForKTCSearchView:(KTCSearchView *)searchView {
-    NSArray *hotSearchArray = [self.hotSearchDic objectForKey:[NSNumber numberWithInteger:self.searchType]];
+    NSArray *hotSearchArray = [[KTCSearchService sharedService] hotSearchConditionsOfSearchType:self.searchType];
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
     for (NSDictionary *hotDic in hotSearchArray) {
         NSString *title = [hotDic objectForKey:kSearchHotKeyName];
@@ -100,70 +72,6 @@ NSString *const kSearchHotKeyCondition = @"kSearchHotKeyCondition";
 }
 
 #pragma mark Private methods
-
-- (void)loadHotKeySucceed:(NSDictionary *)data {
-    NSDictionary *dataDic = [data objectForKey:@"data"];
-    if (!dataDic || ![dataDic isKindOfClass:[NSDictionary class]]) {
-        //无效数据，或数据格式不正确
-        return;
-    }
-    //服务
-    NSArray *serviceHotArray = [dataDic objectForKey:@"product"];
-    if ([serviceHotArray isKindOfClass:[NSArray class]]) {
-        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-        for (NSDictionary *hotDic in serviceHotArray) {
-            NSString *name = [hotDic objectForKey:@"name"];
-            NSDictionary *searchParam = [hotDic objectForKey:@"search_parms"];
-            KTCSearchServiceCondition *condition = [KTCSearchServiceCondition conditionFromRawData:searchParam];
-            if (!condition) {
-                condition = [[KTCSearchServiceCondition alloc] init];
-                condition.keyWord = name;
-            }
-            NSDictionary *hotKey = [NSDictionary dictionaryWithObjectsAndKeys:name, kSearchHotKeyName, condition, kSearchHotKeyCondition, nil];
-            [tempArray addObject:hotKey];
-        }
-        [self.hotSearchDic setObject:[NSArray arrayWithArray:tempArray] forKey:[NSNumber numberWithInteger:KTCSearchTypeService]];
-    }
-    //门店
-    NSArray *storeHotArray = [dataDic objectForKey:@"store"];
-    if ([storeHotArray isKindOfClass:[NSArray class]]) {
-        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-        for (NSDictionary *hotDic in storeHotArray) {
-            NSString *name = [hotDic objectForKey:@"name"];
-            NSDictionary *searchParam = [hotDic objectForKey:@"search_parms"];
-            KTCSearchStoreCondition *condition = [KTCSearchStoreCondition conditionFromRawData:searchParam];
-            if (!condition) {
-                condition = [[KTCSearchStoreCondition alloc] init];
-                condition.keyWord = name;
-            }
-            NSDictionary *hotKey = [NSDictionary dictionaryWithObjectsAndKeys:name, kSearchHotKeyName, condition, kSearchHotKeyCondition, nil];
-            [tempArray addObject:hotKey];
-        }
-        [self.hotSearchDic setObject:[NSArray arrayWithArray:tempArray] forKey:[NSNumber numberWithInteger:KTCSearchTypeStore]];
-    }
-    //知识库
-    NSArray *newsHotArray = [dataDic objectForKey:@"article"];
-    if ([newsHotArray isKindOfClass:[NSArray class]]) {
-        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-        for (NSDictionary *hotDic in newsHotArray) {
-            NSString *name = [hotDic objectForKey:@"name"];
-            NSDictionary *searchParam = [hotDic objectForKey:@"search_parms"];
-            KTCSearchNewsCondition *condition = [KTCSearchNewsCondition conditionFromRawData:searchParam];
-            if (!condition) {
-                condition = [[KTCSearchNewsCondition alloc] init];
-                condition.keyWord = name;
-            }
-            NSDictionary *hotKey = [NSDictionary dictionaryWithObjectsAndKeys:name, kSearchHotKeyName, condition, kSearchHotKeyCondition, nil];
-            [tempArray addObject:hotKey];
-        }
-        [self.hotSearchDic setObject:[NSArray arrayWithArray:tempArray] forKey:[NSNumber numberWithInteger:KTCSearchTypeNews]];
-    }
-    [self.view reloadData];
-}
-
-- (void)loadHotKeyFailed:(NSError *)error {
-    
-}
 
 #pragma mark Public methods
 
@@ -226,11 +134,6 @@ NSString *const kSearchHotKeyCondition = @"kSearchHotKeyCondition";
         }
     }
     return [NSDictionary dictionaryWithDictionary:tempDic];
-}
-
-- (NSArray *)hotSearchArrayOfSearchType:(KTCSearchType)type {
-    NSArray *hotSearchArray = [self.hotSearchDic objectForKey:[NSNumber numberWithInteger:type]];
-    return hotSearchArray;
 }
 
 @end

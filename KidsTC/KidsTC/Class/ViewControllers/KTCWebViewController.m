@@ -554,7 +554,7 @@
     if (!self.keyboardAdhesiveView) {
         AUIKeyboardAdhesiveViewExtensionFunction *photoFunc = [AUIKeyboardAdhesiveViewExtensionFunction funtionWithType:AUIKeyboardAdhesiveViewExtensionFunctionTypeImageUpload];
         self.keyboardAdhesiveView = [[AUIKeyboardAdhesiveView alloc] initWithAvailableFuntions:[NSArray arrayWithObject:photoFunc]];
-        [self.keyboardAdhesiveView.headerView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
+        [self.keyboardAdhesiveView.headerView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
         [self.keyboardAdhesiveView setTextLimitLength:100];
         [self.keyboardAdhesiveView setUploadImageLimitCount:4];
         self.keyboardAdhesiveView.delegate = self;

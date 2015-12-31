@@ -31,7 +31,7 @@ NSString *const kTwinklingElfCellIdentifier = @"TwinklingElfCell";
             return nil;
         }
         self = [arrayOfViews objectAtIndex:0];
-        [self setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+        [self setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
     }
     return self;
 }

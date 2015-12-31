@@ -10,7 +10,12 @@
 
 @interface HomeCellModel : NSObject {
     CGFloat cellHeight;
+    CGFloat cellRatio;
 }
+
+- (void)setRatio:(CGFloat)ratio;
+
+- (CGFloat)cellRatio;
 
 - (CGFloat)cellHeight;
 

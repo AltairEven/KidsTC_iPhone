@@ -30,7 +30,7 @@
     {
         bLoad = YES;
         NewsRecommendCellView *view = [GConfig getObjectFromNibWithView:self];
-        [view setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+        [view setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
         [view buildSubviews];
         return view;
     }

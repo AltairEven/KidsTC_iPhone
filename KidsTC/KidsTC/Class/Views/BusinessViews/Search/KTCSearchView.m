@@ -253,6 +253,10 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     }
 }
 
+- (void)setTopInputFiledContent:(NSString *)content isPlaceHolder:(BOOL)isPlaceHolder {
+    [self.headerView setInputFiledContent:content isPlaceHolder:isPlaceHolder];
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

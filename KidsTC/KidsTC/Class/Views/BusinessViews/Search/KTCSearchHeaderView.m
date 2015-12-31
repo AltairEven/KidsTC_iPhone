@@ -42,7 +42,7 @@
 }
 
 - (void)buildSubviews {
-    self.backgroundColor = [[KTCThemeManager manager] currentTheme].navibarBGColor;
+    self.backgroundColor = [[KTCThemeManager manager] defaultTheme].navibarBGColor;
     
     [self.searchFieldBG.layer setCornerRadius:5];
     [self.searchFieldBG.layer setMasksToBounds:YES];
@@ -58,7 +58,7 @@
     [self.textField setLeftView:self.categoryButton];
     self.textField.leftViewMode = UITextFieldViewModeAlways;
     [self.textField setReturnKeyType:UIReturnKeySearch];
-    [self.textField setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Highlight];
+    [self.textField setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Highlight];
     [self.textField setTextColor:[UIColor whiteColor]];
     self.textField.delegate = self;
     [GConfig resetLineView:self.separator withLayoutAttribute:NSLayoutAttributeHeight];
@@ -121,6 +121,14 @@
 
 - (NSString *)keywords {
     return self.textField.text;
+}
+
+- (void)setInputFiledContent:(NSString *)content isPlaceHolder:(BOOL)isPlaceHolder {
+    if (isPlaceHolder) {
+        [self.textField setPlaceholder:content];
+    } else {
+        [self.textField setText:content];
+    }
 }
 
 @end

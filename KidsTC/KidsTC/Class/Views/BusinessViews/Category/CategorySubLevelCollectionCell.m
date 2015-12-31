@@ -31,7 +31,7 @@ NSString *const kCategorySubLevelCollectionCellIdentifier = @"CategorySubLevelCo
             return nil;
         }
         self = [arrayOfViews objectAtIndex:0];
-        [self.bgView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+        [self.bgView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
     }
     return self;
 }

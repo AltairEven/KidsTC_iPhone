@@ -78,12 +78,12 @@ static NSString *const kLevel2CellIdentifier = @"kLevel2CellIdentifier";
 }
 
 - (void)buildSubviews {
-    [self.filterBGView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
-    [self.lvl1BGView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
-    [self.lvl2BGView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
-    [self.peopleBGView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
-    [self.peopleTag setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
-    [self.peopleDot setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
+    [self.filterBGView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
+    [self.lvl1BGView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
+    [self.lvl2BGView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
+    [self.peopleBGView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
+    [self.peopleTag setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
+    [self.peopleDot setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
     
     self.peopleDot.layer.cornerRadius = 2.5;
     self.peopleDot.layer.masksToBounds = YES;
@@ -109,8 +109,8 @@ static NSString *const kLevel2CellIdentifier = @"kLevel2CellIdentifier";
     self.currentLevel1Index = -1;
     self.currentLevel2Index = -1;
     
-    [self.confirmButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal forState:UIControlStateNormal];
-    [self.confirmButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    [self.confirmButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.confirmButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
 }
 
 - (void)setPeopleButtonSelected:(BOOL)peopleButtonSelected {

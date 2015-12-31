@@ -38,7 +38,7 @@
     _navigationTitle = @"门店详情";
     // Do any additional setup after loading the view from its nib.
     
-    [self.view setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self.view setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     __weak StoreMoreDetailViewController *weakSelf = self;
     [weakSelf.loadDetailRequest startHttpRequestWithParameter:[NSDictionary dictionaryWithObject:self.storeId forKey:@"storeno"] success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [weakSelf loadDetailSucceed:responseData];

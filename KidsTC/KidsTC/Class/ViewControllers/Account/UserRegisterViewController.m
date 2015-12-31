@@ -97,7 +97,7 @@
 - (void)buildSubviews {
     self.phoneField.delegate = self;
     self.passwordField.delegate = self;
-    [self.bgView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self.bgView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     
     [GConfig resetLineView:self.gapLine1 withLayoutAttribute:NSLayoutAttributeHeight];
     [GConfig resetLineView:self.gapLine2 withLayoutAttribute:NSLayoutAttributeHeight];
@@ -122,14 +122,14 @@
     
     self.getCodeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.getCodeButton setFrame:CGRectMake(0, 0, 100, 30)];
-    self.getCodeButton.layer.borderColor = [[KTCThemeManager manager] currentTheme].globalThemeColor.CGColor;
+    self.getCodeButton.layer.borderColor = [[KTCThemeManager manager] defaultTheme].globalThemeColor.CGColor;
     self.getCodeButton.layer.borderWidth = BORDER_WIDTH;
     self.getCodeButton.layer.cornerRadius = 5;
     self.getCodeButton.layer.masksToBounds = YES;
     [self.getCodeButton.titleLabel setFont:[UIFont systemFontOfSize:13]];
     [self.getCodeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
-    [self.getCodeButton setTitleColor:[[KTCThemeManager manager] currentTheme].globalThemeColor forState:UIControlStateNormal];
-    [self.getCodeButton setTitleColor:[[KTCThemeManager manager] currentTheme].lightTextColor forState:UIControlStateDisabled];
+    [self.getCodeButton setTitleColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor forState:UIControlStateNormal];
+    [self.getCodeButton setTitleColor:[[KTCThemeManager manager] defaultTheme].lightTextColor forState:UIControlStateDisabled];
     [self.getCodeButton setBackgroundColor:[UIColor clearColor] forState:UIControlStateNormal];
     [self.getCodeButton setBackgroundColor:[UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1] forState:UIControlStateDisabled];
     [self.getCodeButton addTarget:self action:@selector(didClickedGetCodeButton) forControlEvents:UIControlEventTouchUpInside];
@@ -157,8 +157,8 @@
     [self.showPasswordButton setHidden:YES];
     
     
-    [self.confirmButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal forState:UIControlStateNormal];
-    [self.confirmButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    [self.confirmButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.confirmButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
 }
 
 - (void)didClickedGetCodeButton {
@@ -290,9 +290,9 @@
 - (void)setGetCodeButtonEnableState:(BOOL)enabled {
     [self.getCodeButton setEnabled:enabled];
     if (enabled) {
-        self.getCodeButton.layer.borderColor = [[KTCThemeManager manager] currentTheme].globalThemeColor.CGColor;
+        self.getCodeButton.layer.borderColor = [[KTCThemeManager manager] defaultTheme].globalThemeColor.CGColor;
     } else {
-        self.getCodeButton.layer.borderColor = [[KTCThemeManager manager] currentTheme].lightTextColor.CGColor;
+        self.getCodeButton.layer.borderColor = [[KTCThemeManager manager] defaultTheme].lightTextColor.CGColor;
     }
 }
 

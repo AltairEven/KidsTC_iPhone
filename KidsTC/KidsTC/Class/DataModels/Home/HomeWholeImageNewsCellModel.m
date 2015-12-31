@@ -20,18 +20,28 @@
 
 - (void)parseRawData:(NSArray *)dataArray {
     [super parseRawData:dataArray];
-    self.newsModel = [[HomeNewsBaseModel alloc] initWithHomeData:[dataArray firstObject]];
-    self.newsModels = [NSArray arrayWithObject:self.newsModel];
+    NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+    for (NSDictionary *dataDic in dataArray) {
+        HomeNewsBaseModel *newsModel = [[HomeNewsBaseModel alloc] initWithHomeData:dataDic];
+        if (newsModel) {
+            [tempArray addObject:newsModel];
+        }
+    }
+    self.newsModels = [NSArray arrayWithArray:tempArray];
+}
+
+- (void)setRatio:(CGFloat)ratio {
+    [super setRatio:ratio];
 }
 
 
 - (CGFloat)cellHeight {
-    cellHeight = self.ratio * SCREEN_WIDTH;
+    cellHeight = cellRatio * SCREEN_WIDTH;
     return cellHeight;
 }
 
 - (NSArray *)elementModelsArray {
-    return [NSArray arrayWithObject:self.newsModel];
+    return self.newsModels;
 }
 
 @end

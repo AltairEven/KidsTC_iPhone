@@ -28,6 +28,10 @@
 
 - (void)userRoleHasChanged:(id)info;
 
+- (void)themeDidChanged:(NSNotification *)notify;
+
+- (void)resetHotSearchKeyWord;
+
 @end
 
 @implementation HomeViewController
@@ -45,6 +49,8 @@
     _pageIdentifier = @"pv_home";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userRoleHasChanged:) name:UserRoleHasChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(themeDidChanged:) name:kThemeDidChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetHotSearchKeyWord) name:kSearchHotKeysHasChangedNotification object:nil];
     // Do any additional setup after loading the view from its nib.
     self.homeView.delegate = self;
     self.floorNavigationView.dataSource = self;
@@ -67,6 +73,9 @@
             [weakSelf.floorNavigationView setSelectedIndex:0];
         } failure:nil];
     }
+    
+    //热门搜索词
+    [self resetHotSearchKeyWord];
     
 //    self.testWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
 //    self.testWebView.delegate = self;
@@ -107,6 +116,7 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UserRoleHasChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kThemeDidChangedNotification object:nil];
 }
 
 #pragma mark HomeViewDelegate
@@ -184,17 +194,17 @@
     HomeFloorModel *floorModel = [self.viewModel.homeModel.allNaviControlledFloors objectAtIndex:index];
     
     UIView *itemView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-    [itemView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [itemView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     UILabel *label = [[UILabel alloc] initWithFrame:itemView.frame];
     [label setText:floorModel.floorName];
     [label setFont:[UIFont systemFontOfSize:13]];
-    [label setTextColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
+    [label setTextColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
     [label setTextAlignment:NSTextAlignmentCenter];
     [itemView addSubview:label];
     
     itemView.layer.cornerRadius = 20;
     itemView.layer.borderWidth = 2;
-    itemView.layer.borderColor = [[KTCThemeManager manager] currentTheme].globalThemeColor.CGColor;
+    itemView.layer.borderColor = [[KTCThemeManager manager] defaultTheme].globalThemeColor.CGColor;
     itemView.layer.masksToBounds = YES;
     
     return itemView;
@@ -204,17 +214,17 @@
     HomeFloorModel *floorModel = [self.viewModel.homeModel.allNaviControlledFloors objectAtIndex:index];
     
     UIView *highlightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-    [highlightView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
+    [highlightView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
     UILabel *label = [[UILabel alloc] initWithFrame:highlightView.frame];
     [label setText:floorModel.floorName];
     [label setFont:[UIFont systemFontOfSize:13]];
-    [label setTextColor:[[KTCThemeManager manager] currentTheme].navibarTitleColor_Normal];
+    [label setTextColor:[[KTCThemeManager manager] defaultTheme].navibarTitleColor_Normal];
     [label setTextAlignment:NSTextAlignmentCenter];
     [highlightView addSubview:label];
     
     highlightView.layer.cornerRadius = 20;
     highlightView.layer.borderWidth = 2;
-    highlightView.layer.borderColor = [[KTCThemeManager manager] currentTheme].globalBGColor.CGColor;
+    highlightView.layer.borderColor = [[KTCThemeManager manager] defaultTheme].globalBGColor.CGColor;
     highlightView.layer.masksToBounds = YES;
     
     return highlightView;
@@ -222,7 +232,7 @@
 
 - (UIView *)floorNavigationView:(AUIFloorNavigationView *)navigationView viewForItemGapAtIndex:(NSUInteger)index {
     UIView *gapView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 20)];
-    [gapView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [gapView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     return gapView;
 }
 
@@ -250,6 +260,28 @@
         [self.floorNavigationView reloadData];
         [self.floorNavigationView setSelectedIndex:0];
     } failure:nil];
+}
+
+- (void)themeDidChanged:(NSNotification *)notify {
+    if (!notify || ![notify.name isEqualToString:kThemeDidChangedNotification]) {
+        return;
+    }
+    if (!notify || ![notify.object isKindOfClass:[AUITheme class]]) {
+        return;
+    }
+    [self.homeView resetTopViewWithBGColor:((AUITheme *)notify.object).navibarBGColor];
+}
+
+- (void)resetHotSearchKeyWord {
+    KTCSearchServiceCondition *hotSearchCondition = (KTCSearchServiceCondition *)[[KTCSearchService sharedService] mostHotSearchConditionOfSearchType:KTCSearchTypeService];
+    NSString *hotSearchKeyWord = @"";
+    if (hotSearchCondition) {
+        hotSearchKeyWord = hotSearchCondition.keyWord;
+    }
+    if ([hotSearchKeyWord length] == 0) {
+        hotSearchKeyWord = @"宝爸宝妈都在这里找";
+    }
+    [self.homeView resetTopViewWithInputContent:hotSearchKeyWord isPlaceHolder:YES];
 }
 
 

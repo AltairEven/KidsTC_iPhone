@@ -20,9 +20,9 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    [self.bgView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
-    [self.tagView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
-    [self.dot setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
+    [self.bgView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
+    [self.tagView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
+    [self.dot setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
     
     self.dot.layer.cornerRadius = 2.5;
     self.dot.layer.masksToBounds = YES;

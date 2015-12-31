@@ -67,6 +67,7 @@ NSString *const kHomeSegueParameterKeySearchSort = @"kHomeSegueParameterKeySearc
         case HomeSegueDestinationStoreList:
         case HomeSegueDestinationServiceDetail:
         case HomeSegueDestinationStoreDetail:
+        case HomeSegueDestinationStrategyDetail:
         {
             if ([data isKindOfClass:[NSDictionary class]]) {
                 _segueParam = [NSDictionary dictionaryWithDictionary:data];

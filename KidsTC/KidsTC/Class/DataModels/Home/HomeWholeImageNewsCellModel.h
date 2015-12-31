@@ -13,6 +13,4 @@
 
 @property (nonatomic, strong) NSArray<HomeNewsBaseModel *> *newsModels;
 
-@property (nonatomic, strong) HomeNewsBaseModel *newsModel;
-
 @end

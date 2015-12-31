@@ -51,10 +51,10 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 }
 
 - (void)buildSubviews {
-    [self setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     
     self.ageSelectTable.backgroundView = nil;
-    [self.ageSelectTable setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self.ageSelectTable setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     self.ageSelectTable.delegate = self;
     self.ageSelectTable.dataSource = self;
     if ([self.ageSelectTable respondsToSelector:@selector(setSeparatorInset:)]) {

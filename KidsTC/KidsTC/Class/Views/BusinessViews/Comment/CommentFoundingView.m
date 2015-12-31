@@ -64,7 +64,7 @@
 
 - (void)buildSubviews {
     self.tableView.backgroundView = nil;
-    [self.tableView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self.tableView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -79,9 +79,9 @@
     UIView *footBG = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
     self.submitButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.submitButton setFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 40)];
-    [self.submitButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal forState:UIControlStateNormal];
-    [self.submitButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
-    [self.submitButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Disable forState:UIControlStateDisabled];
+    [self.submitButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.submitButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    [self.submitButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Disable forState:UIControlStateDisabled];
     [self.submitButton setTitle:@"发表评价" forState:UIControlStateNormal];
     [self.submitButton addTarget:self action:@selector(didClickedSubmitButton) forControlEvents:UIControlEventTouchUpInside];
     [footBG addSubview:self.submitButton];
@@ -171,7 +171,7 @@
         default:
             break;
     }
-    [cell.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+    [cell.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
     return cell;
 }
 

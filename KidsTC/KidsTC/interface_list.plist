@@ -179,6 +179,13 @@
 			<key>url</key>
 			<string>http://api.kidstc.com/json.php?mod=userCenter&amp;&amp;act=get_center_count</string>
 		</dict>
+		<key>GET_HOME_THEME</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=main&amp;&amp;act=get_home_theme</string>
+		</dict>
 		<key>GET_LAUNCH</key>
 		<dict>
 			<key>method</key>
@@ -533,6 +540,6 @@
 	<key>errno</key>
 	<integer>0</integer>
 	<key>version</key>
-	<string>28</string>
+	<string>29</string>
 </dict>
 </plist>

@@ -68,12 +68,12 @@
 }
 
 - (void)buildSubviews {
-    [self.headerBar setBackgroundColor:[[KTCThemeManager manager] currentTheme].navibarBGColor];
-    [self.headerLabel setTextColor:[[KTCThemeManager manager] currentTheme].navibarTitleColor_Normal];
-    [self.filterBGView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self.headerBar setBackgroundColor:[[KTCThemeManager manager] defaultTheme].navibarBGColor];
+    [self.headerLabel setTextColor:[[KTCThemeManager manager] defaultTheme].navibarTitleColor_Normal];
+    [self.filterBGView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     
     self.areaTable.backgroundView = nil;
-    [self.areaTable setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self.areaTable setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     self.areaTable.delegate = self;
     self.areaTable.dataSource = self;
     self.areaTable.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
@@ -125,7 +125,7 @@
     [cell.textLabel setFont:[UIFont systemFontOfSize:15]];
     [cell.textLabel setText:[self.areaNameArray objectAtIndex:indexPath.row]];
     UIView *bgView = [[UIView alloc] initWithFrame:cell.frame];
-    [bgView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
+    [bgView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
     [cell setSelectedBackgroundView:bgView];
     
     return cell;
@@ -152,11 +152,11 @@
             UIButton *button = [self.categoryButtonsArray objectAtIndex:buttonIndex];
             if (buttonIndex == index) {
                 [button setSelected:YES];
-                [button.layer setBorderColor:[[KTCThemeManager manager] currentTheme].globalThemeColor.CGColor];
+                [button.layer setBorderColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor.CGColor];
                 [button.layer setBorderWidth:1];
             } else {
                 [button setSelected:NO];
-                [button.layer setBorderColor:[[KTCThemeManager manager] currentTheme].lightTextColor.CGColor];
+                [button.layer setBorderColor:[[KTCThemeManager manager] defaultTheme].lightTextColor.CGColor];
                 [button.layer setBorderWidth:0.5];
             }
         }
@@ -245,8 +245,8 @@
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setFrame:CGRectMake(xPosition, yPosition, 10, 10)];
         [button.titleLabel setFont:[UIFont systemFontOfSize:15]];
-        [button setTitleColor:[[KTCThemeManager manager] currentTheme].darkTextColor forState:UIControlStateNormal];
-        [button setTitleColor:[[KTCThemeManager manager] currentTheme].globalThemeColor forState:UIControlStateSelected];
+        [button setTitleColor:[[KTCThemeManager manager] defaultTheme].darkTextColor forState:UIControlStateNormal];
+        [button setTitleColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor forState:UIControlStateSelected];
         [button setTitle:title forState:UIControlStateNormal];
         [button setBackgroundColor:[UIColor clearColor] forState:UIControlStateNormal];
         [button setBackgroundColor:[UIColor clearColor] forState:UIControlStateSelected];
@@ -261,7 +261,7 @@
         
         [button.layer setCornerRadius:buttonHeight / 2];
         [button.layer setBorderWidth:0.5];
-        [button.layer setBorderColor:[[KTCThemeManager manager] currentTheme].lightTextColor.CGColor];
+        [button.layer setBorderColor:[[KTCThemeManager manager] defaultTheme].lightTextColor.CGColor];
         [button.layer setMasksToBounds:YES];
         
         [self.categoryButtonsArray addObject:button];

@@ -34,4 +34,6 @@
 
 - (void)endEditing;
 
+- (void)setInputFiledContent:(NSString *)content isPlaceHolder:(BOOL)isPlaceHolder;
+
 @end

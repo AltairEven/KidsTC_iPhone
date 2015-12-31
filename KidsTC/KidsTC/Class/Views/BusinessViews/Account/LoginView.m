@@ -54,13 +54,13 @@
 - (void)buildSubviews {
     self.userNameField.delegate = self;
     self.passwordField.delegate = self;
-    [self setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
 
-    [self.loginButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal forState:UIControlStateNormal];
-    [self.loginButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    [self.loginButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.loginButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
     
-    [self.findPasswordButton setTitleColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal forState:UIControlStateNormal];
-    [self.findPasswordButton setTitleColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    [self.findPasswordButton setTitleColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.findPasswordButton setTitleColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
     
     [self.thirdPartyLoginView setViewGap:30];
     

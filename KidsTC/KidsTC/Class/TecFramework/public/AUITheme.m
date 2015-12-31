@@ -33,8 +33,8 @@ NSString *const kAUIThemeTabItemKeyUserCenter = @"kAUIThemeTabItemKeyUserCenter"
     theme.navibarBGColor = RGBA(255, 136, 136, 1);
     theme.navibarTitleColor_Normal = RGBA(255, 255, 255, 1);
     theme.navibarTitleColor_Highlight = RGBA(230, 230, 230, 1);
-    theme.naviBackImage_Normal = [UIImage imageNamed:@"navi_back"];
-    theme.naviBackImage_Highlight = [UIImage imageNamed:@"navi_back"];
+    theme.naviBackImage_Normal = [UIImage imageNamed:@"navigation_back_n"];
+    theme.naviBackImage_Highlight = [UIImage imageNamed:@"navigation_back_h"];
     theme.tabbarBGColor = RGBA(252, 248, 245, 1);
     
     AUITabbarItemElement *element1 = [[AUITabbarItemElement alloc] init];

@@ -21,6 +21,8 @@
 
 - (void)searchWithKeyword:(NSString *)kw;
 
+- (void)resetHotSearchKeyWord;
+
 @end
 
 @implementation KTCSearchViewController
@@ -36,11 +38,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _pageIdentifier = @"pv_search";
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetHotSearchKeyWord) name:kSearchHotKeysHasChangedNotification object:nil];
     // Do any additional setup after loading the view from its nib.
     self.searchView.delegate = self;
     self.viewModel = [[SearchViewModel alloc] initWithView:self.searchView defaultSearchType:self.defaultSearchType];
     [self.viewModel setSearchType:self.searchView.type];
     [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
+    [self resetHotSearchKeyWord];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -68,6 +72,10 @@
     [self.viewModel updateLocalSearchHistory];
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kSearchHotKeysHasChangedNotification object:nil];
+}
+
 #pragma mark KTCSearchViewDelegate
 
 - (void)didClickedCategoryButtonOnKTCSearchView:(KTCSearchView *)searchView {
@@ -84,11 +92,15 @@
 
 - (void)didClickedSearchButtonOnKTCSearchView:(KTCSearchView *)searchView {
     NSString *kw = [self.searchView keywords];
+    if ([kw length] == 0) {
+        KTCSearchCondition *condition = [[KTCSearchService sharedService] mostHotSearchConditionOfSearchType:self.viewModel.searchType];
+        kw = condition.keyWord;
+    }
     [self searchWithKeyword:kw];
 }
 
 - (void)searchView:(KTCSearchView *)searchView didSelectedHotKeyAtIndex:(NSUInteger)index {
-    NSDictionary *searchParam = [[self.viewModel hotSearchArrayOfSearchType:self.viewModel.searchType] objectAtIndex:index];
+    NSDictionary *searchParam = [[[KTCSearchService sharedService] hotSearchConditionsOfSearchType:self.viewModel.searchType] objectAtIndex:index];
     BOOL needPush = YES;
     for (UIViewController *controller in self.navigationController.viewControllers) {
         if ([controller isKindOfClass:[KTCSearchResultViewController class]]) {
@@ -186,6 +198,18 @@
             [self.navigationController pushViewController:controller animated:YES];
         }
     }
+}
+
+- (void)resetHotSearchKeyWord {
+    KTCSearchServiceCondition *hotSearchCondition = (KTCSearchServiceCondition *)[[KTCSearchService sharedService] mostHotSearchConditionOfSearchType:KTCSearchTypeService];
+    NSString *hotSearchKeyWord = @"";
+    if (hotSearchCondition) {
+        hotSearchKeyWord = hotSearchCondition.keyWord;
+    }
+    if ([hotSearchKeyWord length] == 0) {
+        hotSearchKeyWord = @"宝爸宝妈都在这里找";
+    }
+    [self.searchView setTopInputFiledContent:hotSearchKeyWord isPlaceHolder:YES];
 }
 
 - (void)didReceiveMemoryWarning {

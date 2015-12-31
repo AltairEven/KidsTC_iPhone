@@ -107,7 +107,7 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
 }
 
 - (void)buildSubviews {
-    [self.scrollView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self.scrollView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     self.scrollView.delegate = self;
     
     self.bannerScrollView.dataSource = self;
@@ -115,7 +115,7 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
     
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
     //price view
-    [self.priceView setContentColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
+    [self.priceView setContentColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
     [self.priceView setUnitFont:[UIFont systemFontOfSize:15]];
     [self.priceView setPriceFont:[UIFont systemFontOfSize:25]];
     
@@ -124,26 +124,26 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
     [self.originalPriceView setPriceFont:[UIFont systemFontOfSize:12]];
     [self.originalPriceView setSlashed:YES];
     
-    [self.priceDescriptionLabel setTextColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
+    [self.priceDescriptionLabel setTextColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
     //segment view
     //moreinfo view
     //cells
-    [self.topCell.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+    [self.topCell.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
     
-    [self.priceCell.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+    [self.priceCell.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
     
     [self.InsuranceView setFontSize:13];
-    [self.InsuranceCell.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+    [self.InsuranceCell.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
     
-    [self.couponCell.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+    [self.couponCell.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
     
-    [self.noticeTitleCell.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+    [self.noticeTitleCell.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
     [self.noticeTitleLabel setText:@"购买须知"];
-    [self.noticeTitleCellTagView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
+    [self.noticeTitleCellTagView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
     
-    [self.noticeCell.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+    [self.noticeCell.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
     
-    [self.recommendCell.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+    [self.recommendCell.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
     self.recommendFaceImageView.layer.cornerRadius = 30;
     self.recommendFaceImageView.layer.masksToBounds = YES;
     
@@ -403,7 +403,7 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
         //table view initialization, init after scroll view built
         self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableViewHeight) style:UITableViewStyleGrouped];
         self.tableView.backgroundView = nil;
-        [self.tableView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+        [self.tableView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
         [self.tableView setScrollEnabled:NO];
         [self.tableView setShowsHorizontalScrollIndicator:NO];
         [self.tableView setShowsVerticalScrollIndicator:NO];
@@ -480,7 +480,7 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
     
     NSString *wholeString = [NSString stringWithFormat:@"%@评价|已售%@", commentCount, saleCount];
     NSMutableAttributedString *labelString = [[NSMutableAttributedString alloc] initWithString:wholeString];
-    NSDictionary *attribute = [NSDictionary dictionaryWithObject:[[KTCThemeManager manager] currentTheme].highlightTextColor forKey:NSForegroundColorAttributeName];
+    NSDictionary *attribute = [NSDictionary dictionaryWithObject:[[KTCThemeManager manager] defaultTheme].highlightTextColor forKey:NSForegroundColorAttributeName];
     [labelString setAttributes:attribute range:NSMakeRange(0, [commentCount length])];
     [labelString addAttributes:attribute range:NSMakeRange([labelString length] - [saleCount length], [saleCount length])];
     [self.commentNSaleLabel setAttributedText:labelString];

@@ -66,4 +66,8 @@
 
 - (void)resetTopRoleWithImage:(UIImage *)image;
 
+- (void)resetTopViewWithBGColor:(UIColor *)bgColor;
+
+- (void)resetTopViewWithInputContent:(NSString *)content isPlaceHolder:(BOOL)isPlaceHolder;
+
 @end

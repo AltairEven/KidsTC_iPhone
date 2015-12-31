@@ -106,10 +106,25 @@
             _contentModel = [[HomeWholeImageNewsCellModel alloc] initWithRawData:[data objectForKey:@"contents"]];
         }
             break;
+        case HomeContentCellTypeNotice:
+        {
+            _contentModel = [[HomeNoticeCellModel alloc] initWithRawData:[data objectForKey:@"contents"]];
+        }
+            break;
+        case HomeContentCellTypeBigImageTwoDesc:
+        {
+            _contentModel = [[HomeBigImageTwoDescCellModel alloc] initWithRawData:[data objectForKey:@"contents"]];
+        }
+            break;
+        case HomeContentCellTypeTwoThreeFour:
+        {
+            _contentModel = [[HomeTwoThreeFourCellModel alloc] initWithRawData:[data objectForKey:@"contents"]];
+        }
+            break;
         default:
             break;
     }
-    _contentModel.ratio = [[data objectForKey:@"ratio"] floatValue];
+    [_contentModel setRatio:[[data objectForKey:@"ratio"] floatValue]];
     _marginTop = [[data objectForKey:@"marginTop"] floatValue];
 }
 

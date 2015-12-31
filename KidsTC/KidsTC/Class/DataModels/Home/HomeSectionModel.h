@@ -20,6 +20,9 @@
 #import "HomeImageNewsCellModel.h"
 #import "HomeThreeImageNewsCellModel.h"
 #import "HomeWholeImageNewsCellModel.h"
+#import "HomeNoticeCellModel.h"
+#import "HomeBigImageTwoDescCellModel.h"
+#import "HomeTwoThreeFourCellModel.h"
 
 @interface HomeSectionModel : NSObject
 

@@ -35,17 +35,17 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    [self.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     
     self.shadowView.layer.cornerRadius = 10;
     self.shadowView.layer.masksToBounds = YES;
     
-    [self.cellBGView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+    [self.cellBGView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
     self.cellBGView.layer.cornerRadius = 10;
     self.cellBGView.layer.masksToBounds = YES;
     
-    [self.relatedInfoButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal forState:UIControlStateNormal];
-    [self.relatedInfoButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    [self.relatedInfoButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.relatedInfoButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
     self.relatedInfoButton.layer.cornerRadius = 10;
     self.relatedInfoButton.layer.masksToBounds = YES;
 }

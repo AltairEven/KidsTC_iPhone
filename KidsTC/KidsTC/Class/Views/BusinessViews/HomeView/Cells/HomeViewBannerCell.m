@@ -38,7 +38,7 @@
 
 - (void)configWithModel:(HomeBannerCellModel *)model {
     if (model) {
-        self.ratio = model.ratio;
+        self.ratio = [model cellRatio];
         self.imageUrlsArray = [model imageUrlsArray];
         [self.bannerScrollView reloadData];
     }

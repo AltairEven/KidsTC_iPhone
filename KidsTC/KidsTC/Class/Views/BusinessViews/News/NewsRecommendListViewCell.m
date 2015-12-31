@@ -21,7 +21,7 @@
 - (void)awakeFromNib {
     // Initialization code
     self.cellView.delegate = self;
-    [self.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     
     self.cellView.layer.borderWidth = BORDER_WIDTH;
     self.cellView.layer.borderColor = RGBA(230, 230, 230, 1).CGColor;

@@ -46,7 +46,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 
 - (void)buildSubviews {
     self.tableView.backgroundView = nil;
-    [self.tableView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self.tableView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];

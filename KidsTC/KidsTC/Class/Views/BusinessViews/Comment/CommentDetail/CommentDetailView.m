@@ -68,7 +68,7 @@ static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIden
 
 - (void)buildSubviews {
     self.tableView.backgroundView = nil;
-    [self.tableView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self.tableView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -90,7 +90,7 @@ static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIden
     self.enbaleLoadMore = YES;
     
     //bottom
-    [self.bottomView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
+    [self.bottomView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTappedOnBottomView)];
     [self.bottomView addGestureRecognizer:tap];
     

@@ -74,7 +74,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 
 - (void)buildSubviews {
     self.tableView.backgroundView = nil;
-    [self.tableView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self.tableView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -83,15 +83,15 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
         self.cellNib = [UINib nibWithNibName:NSStringFromClass([SettlementPayTypeCell class]) bundle:nil];
         [self.tableView registerNib:self.cellNib forCellReuseIdentifier:kCellIdentifier];
     }
-    [self.orderPriceView setContentColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal];
+    [self.orderPriceView setContentColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Normal];
     [self.orderPriceView setUnitFont:[UIFont systemFontOfSize:16]];
     [self.orderPriceView setPriceFont:[UIFont systemFontOfSize:20]];
     
-    [self.productTotalPriceView setContentColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal];
+    [self.productTotalPriceView setContentColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Normal];
     [self.productTotalPriceView setUnitFont:[UIFont systemFontOfSize:13] priceFont:[UIFont systemFontOfSize:13]];
-    [self.promotionPriceView setContentColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal];
+    [self.promotionPriceView setContentColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Normal];
     [self.promotionPriceView setUnitFont:[UIFont systemFontOfSize:13] priceFont:[UIFont systemFontOfSize:13]];
-    [self.scorePriceView setContentColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal];
+    [self.scorePriceView setContentColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Normal];
     [self.scorePriceView setUnitFont:[UIFont systemFontOfSize:13] priceFont:[UIFont systemFontOfSize:13]];
     
     self.scoreField.delegate = self;
@@ -142,7 +142,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
             [self.orderNameLabel setText:self.model.serviceName];
             [self.orderPriceView setPrice:self.model.price];
             [self.countLabel setText:[NSString stringWithFormat:@"x%lu", (unsigned long)self.model.count]];
-            [self.orderCell.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+            [self.orderCell.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
             return self.orderCell;
         }
             break;
@@ -154,7 +154,8 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
                     [self.couponDescriptionLabel setText:self.model.usedCoupon.couponTitle];
                 } else {
                     [self.couponDescriptionLabel setTextColor:[UIColor darkGrayColor]];
-                    [self.couponDescriptionLabel setText:@"未使用"];
+                    NSString *canUseCountString = [NSString stringWithFormat:@"%lu张可使用", (unsigned long)[self.model.usableCoupons count]];
+                    [self.couponDescriptionLabel setText:canUseCountString];
                 }
                 [self setCell:self.couponCell enabled:self.model.needPay];
                 return self.couponCell;
@@ -210,7 +211,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
             
             CGFloat scorePrice = self.model.usedScore * ScoreCoefficient;
             [self.scorePriceView setPrice:scorePrice];
-            [self.settlementCell.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+            [self.settlementCell.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
             return self.settlementCell;
         }
             break;
@@ -306,7 +307,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
             
             UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, SCREEN_WIDTH - 20, 15)];
             [titleLabel setFont:[UIFont systemFontOfSize:13]];
-            [titleLabel setTextColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal];
+            [titleLabel setTextColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Normal];
             [titleLabel setText:@"提示：商品促销优惠与优惠券不可共用"];
             [view addSubview:titleLabel];
         }
@@ -459,7 +460,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 - (void)setCell:(UITableViewCell *)cell enabled:(BOOL)enabled {
     [cell setUserInteractionEnabled:enabled];
     if (enabled) {
-        [cell.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+        [cell.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
     } else {
         [cell.contentView setBackgroundColor:RGBA(250, 250, 250, 1)];
     }

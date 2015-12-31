@@ -12,6 +12,8 @@
 
 @interface HomeNoticeCellModel : HomeContentCellModel
 
+@property (nonatomic, strong) NSURL *imageUrl;
+
 @property (nonatomic, strong) NSArray<HomeNoticeItem *> *noticeItemsArray;
 
 @end

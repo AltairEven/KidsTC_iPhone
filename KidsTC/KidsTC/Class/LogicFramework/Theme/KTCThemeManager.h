@@ -9,12 +9,26 @@
 #import <Foundation/Foundation.h>
 #import "AUITheme.h"
 
+extern NSString *const kThemeDidChangedNotification;
+
 @interface KTCThemeManager : NSObject
 
+@property (nonatomic, strong, readonly) AUITheme *defaultTheme;
+
 @property (nonatomic, strong, readonly) AUITheme *currentTheme;
+
+@property (nonatomic, assign) BOOL autoLoad; //default YES
 
 + (instancetype)manager;
 
 - (void)setTheme:(AUITheme *)theme;
+
+- (void)reloadTheme;
+
+- (void)synchronizeTheme;
+
+- (void)loadLocalTheme;
+
+- (void)removeLocalData;
 
 @end

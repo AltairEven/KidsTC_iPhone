@@ -19,14 +19,14 @@ typedef enum {
     HomeContentCellTypeImageNews = 7,
     HomeContentCellTypeThreeImageNews = 8,
     HomeContentCellTypeWholeImageNews = 11,
-    HomeContentCellTypeNotice = 12
+    HomeContentCellTypeNotice = 12,
+    HomeContentCellTypeBigImageTwoDesc = 13,
+    HomeContentCellTypeTwoThreeFour = 14
 }HomeContentCellType;
 
 @interface HomeContentCellModel : HomeCellModel
 
 @property (nonatomic, assign) HomeContentCellType type;
-
-@property (nonatomic, assign) CGFloat ratio;
 
 - (instancetype)initWithRawData:(NSArray *)dataArray;
 

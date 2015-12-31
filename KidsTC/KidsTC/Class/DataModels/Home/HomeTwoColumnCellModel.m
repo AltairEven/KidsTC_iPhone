@@ -35,9 +35,9 @@
     if (count > 0) {
         NSUInteger left = count % 2;
         if (left > 0) {
-            cellHeight = self.ratio * (SCREEN_WIDTH / 2) * ((count / 2) + 1);
+            cellHeight = cellRatio * (SCREEN_WIDTH / 2) * ((count / 2) + 1);
         } else {
-            cellHeight = self.ratio * (SCREEN_WIDTH / 2) * count / 2;
+            cellHeight = cellRatio * (SCREEN_WIDTH / 2) * count / 2;
         }
     }
     

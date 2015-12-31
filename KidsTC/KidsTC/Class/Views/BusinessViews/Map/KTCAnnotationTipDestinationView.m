@@ -53,7 +53,7 @@
 }
 
 - (void)buildSubviews {
-    [self.confirmButton setTitleColor:[[KTCThemeManager manager] currentTheme].globalThemeColor forState:UIControlStateNormal];
+    [self.confirmButton setTitleColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor forState:UIControlStateNormal];
 }
 
 /*

@@ -60,26 +60,26 @@
 
 - (void)buildSubviews {
     self.tableView.backgroundView = nil;
-    [self.tableView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self.tableView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
-    [footerView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [footerView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     UIButton *clearHistoryButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [clearHistoryButton setFrame:CGRectMake(40, 10, SCREEN_WIDTH - 80, 30)];
     [clearHistoryButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
     [clearHistoryButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [clearHistoryButton setTitle:@"清除历史记录" forState:UIControlStateNormal];
-    [clearHistoryButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal forState:UIControlStateNormal];
-    [clearHistoryButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    [clearHistoryButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [clearHistoryButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
     [clearHistoryButton addTarget:self action:@selector(didClickedClearHistoryButton) forControlEvents:UIControlEventTouchUpInside];
     [footerView addSubview:clearHistoryButton];
     self.tableView.tableFooterView = footerView;
     
-    [self.hotKeyScrollView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self.hotKeyScrollView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     
-    [self.hotKeyView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self.hotKeyView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
 }
 
 
@@ -152,7 +152,7 @@
         default:
             break;
     }
-    [cell.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [cell.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     return cell;
 }
 
@@ -216,7 +216,7 @@
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             [button setFrame:CGRectMake(xPosition, yPosition, 10, 10)];
             [button.titleLabel setFont:[UIFont systemFontOfSize:15]];
-            [button setTitleColor:[[KTCThemeManager manager] currentTheme].globalThemeColor forState:UIControlStateNormal];
+            [button setTitleColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor forState:UIControlStateNormal];
             [button setTitle:title forState:UIControlStateNormal];
             [button setBackgroundColor:[UIColor clearColor]];
             button.tag = index;
@@ -229,7 +229,7 @@
         
             [button.layer setCornerRadius:5];
             [button.layer setBorderWidth:0.5];
-            [button.layer setBorderColor:[[KTCThemeManager manager] currentTheme].globalThemeColor.CGColor];
+            [button.layer setBorderColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor.CGColor];
             [button.layer setMasksToBounds:YES];
             xPosition += button.frame.size.width + 10;
         }
@@ -265,7 +265,7 @@
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setFrame:CGRectMake(xPosition, yPosition, 10, 10)];
         [button.titleLabel setFont:[UIFont systemFontOfSize:15]];
-        [button setTitleColor:[[KTCThemeManager manager] currentTheme].globalThemeColor forState:UIControlStateNormal];
+        [button setTitleColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor forState:UIControlStateNormal];
         [button setTitle:title forState:UIControlStateNormal];
         [button setBackgroundColor:[UIColor clearColor]];
         button.tag = index;
@@ -278,7 +278,7 @@
         
         [button.layer setCornerRadius:5];
         [button.layer setBorderWidth:0.5];
-        [button.layer setBorderColor:[[KTCThemeManager manager] currentTheme].globalThemeColor.CGColor];
+        [button.layer setBorderColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor.CGColor];
         [button.layer setMasksToBounds:YES];
         
         CGFloat nextCellWidth = 0;

@@ -23,12 +23,12 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    [self.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+    [self.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
     
     self.cellImageView.layer.cornerRadius = 5;
     self.cellImageView.layer.masksToBounds = YES;
     
-    [self.distanceLabel setTextColor:[[KTCThemeManager manager] currentTheme].highlightTextColor];
+    [self.distanceLabel setTextColor:[[KTCThemeManager manager] defaultTheme].highlightTextColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

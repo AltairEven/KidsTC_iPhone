@@ -45,14 +45,14 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 
 - (void)buildSubviews {
     self.tableView.backgroundView = nil;
-    [self.tableView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self.tableView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
     UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setFrame:CGRectMake(15, 10, SCREEN_WIDTH - 30, 40)];
-    [button setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal];
+    [button setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Normal];
     [button setTitle:@"退出账号" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(didClickedLogoutButton) forControlEvents:UIControlEventTouchUpInside];
     self.tableView.tableFooterView = bgView;

@@ -57,11 +57,11 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
 }
 
 - (void)buildSubviews {
-    [self setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
-    [self.gapView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
+    [self.gapView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     
     self.tableView.backgroundView = nil;
-    [self.tableView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self.tableView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
@@ -176,7 +176,7 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
     if ([self.listModels count] > 0) {
-        [view setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+        [view setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     }
     return view;
 }

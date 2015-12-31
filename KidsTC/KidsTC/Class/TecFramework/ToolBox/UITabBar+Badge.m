@@ -40,8 +40,8 @@
     }
     UILabel *badgeLabel = [[UILabel alloc] initWithFrame:frame];
     [badgeLabel setFont:[UIFont systemFontOfSize:10]];
-    [badgeLabel setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
-    [badgeLabel setTextColor:[[KTCThemeManager manager] currentTheme].navibarTitleColor_Normal];
+    [badgeLabel setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
+    [badgeLabel setTextColor:[[KTCThemeManager manager] defaultTheme].navibarTitleColor_Normal];
     [badgeLabel setTextAlignment:NSTextAlignmentCenter];
     [badgeLabel setText:value];
     badgeLabel.tag = BadgeIdexStart + index;

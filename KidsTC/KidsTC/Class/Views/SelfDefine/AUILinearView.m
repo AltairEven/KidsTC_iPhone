@@ -239,7 +239,7 @@ NSString *const kLinearViewCellIdentifier = @"kLinearViewCellIdentifier";
 }
 
 - (void)initLinearView {
-    self.backgroundColor = [[KTCThemeManager manager] currentTheme].globalBGColor;
+    self.backgroundColor = [[KTCThemeManager manager] defaultTheme].globalBGColor;
     AUILinearViewLayout *linearViewLayout = [[AUILinearViewLayout alloc] init];
     linearViewLayout.linearView = self;
     

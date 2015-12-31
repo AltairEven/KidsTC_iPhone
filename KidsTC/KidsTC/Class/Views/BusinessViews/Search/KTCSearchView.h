@@ -55,4 +55,6 @@
 
 - (void)setCurrentSearchTypeItemIndex:(NSUInteger)index;
 
+- (void)setTopInputFiledContent:(NSString *)content isPlaceHolder:(BOOL)isPlaceHolder;
+
 @end

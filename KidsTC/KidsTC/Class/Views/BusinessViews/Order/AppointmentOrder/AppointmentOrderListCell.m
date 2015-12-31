@@ -26,10 +26,10 @@
 - (void)awakeFromNib {
     // Initialization code
     [GConfig resetLineView:self.gapLine withLayoutAttribute:NSLayoutAttributeHeight];
-    [self.headerBG setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
-    [self.infoBG setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+    [self.headerBG setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
+    [self.infoBG setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
     
-    [self.orderStatusDesLabel setTextColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
+    [self.orderStatusDesLabel setTextColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

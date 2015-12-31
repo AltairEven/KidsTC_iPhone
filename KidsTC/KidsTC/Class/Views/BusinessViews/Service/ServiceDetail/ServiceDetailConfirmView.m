@@ -75,7 +75,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     }
     
     self.tableView.backgroundView = nil;
-    [self.tableView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self.tableView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -91,7 +91,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     
     [self.stepperView enableInput:NO];
     self.stepperView.stepperDelegate = self;
-    [self.infoBGView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self.infoBGView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
 }
 
 - (void)setStockNumber:(NSUInteger)stockNumber {

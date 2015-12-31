@@ -65,26 +65,6 @@ typedef enum {
 
 @property (nonatomic, strong) NSArray<AUITabbarItemElement *> *tabbarItmeElements; //tabbar item元素
 
-@property (nonatomic, strong) UIColor *tabbarTitleColor_Normal; //tab栏标题颜色（普通）
-
-@property (nonatomic, strong) UIColor *tabbarTitleColor_Highlight; //tab栏标题颜色（高亮）
-
-@property (nonatomic, strong) UIImage *tabbar1Image_Normal; //tabbar按钮1图片（普通）
-
-@property (nonatomic, strong) UIImage *tabbar1Image_Highlight; //tabbar按钮1图片（高亮）
-
-@property (nonatomic, strong) UIImage *tabbar2Image_Normal; //tabbar按钮2图片（普通）
-
-@property (nonatomic, strong) UIImage *tabbar2Image_Highlight; //tabbar按钮2图片（高亮）
-
-@property (nonatomic, strong) UIImage *tabbar3Image_Normal; //tabbar按钮3图片（普通）
-
-@property (nonatomic, strong) UIImage *tabbar3Image_Highlight; //tabbar按钮3图片（高亮）
-
-@property (nonatomic, strong) UIImage *tabbar4Image_Normal; //tabbar按钮4图片（普通）
-
-@property (nonatomic, strong) UIImage *tabbar4Image_Highlight; //tabbar按钮4图片（高亮）
-
 @end
 
 @interface AUITabbarItemElement : NSObject <NSCopying>

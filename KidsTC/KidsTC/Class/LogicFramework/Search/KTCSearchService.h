@@ -9,6 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "KTCSearchCondition.h"
 
+extern NSString *const kSearchHotKeysHasChangedNotification;
+
+extern NSString *const kSearchHotKeyName;
+extern NSString *const kSearchHotKeyCondition;
+
 typedef enum {
     KTCSearchTypeNone = 0,
     KTCSearchTypeService = 1,
@@ -19,6 +24,8 @@ typedef enum {
 @interface KTCSearchService : NSObject
 
 + (instancetype)sharedService;
+
+- (void)synchronizeHotSearchKeysWithSuccess:(void(^)(NSDictionary *responseData))success failure:(void(^)(NSError *error))failure;
 
 - (void)startServiceSearchWithParamDic:(NSDictionary *)param
                              Condition:(KTCSearchServiceCondition *)condition
@@ -35,6 +42,13 @@ typedef enum {
                           pageSize:(NSUInteger)size
                            success:(void(^)(NSDictionary *responseData))success
                            failure:(void(^)(NSError *error))failure;
+
+
+- (NSArray *)hotSearchConditionsOfSearchType:(KTCSearchType)type;
+
+- (KTCSearchCondition *)mostHotSearchConditionOfSearchType:(KTCSearchType)type;
+
+- (void)stopSyncHotSearchKeys;
 
 - (void)stopServiceSearch;
 

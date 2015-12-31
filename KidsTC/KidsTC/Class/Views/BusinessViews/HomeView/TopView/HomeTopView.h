@@ -23,4 +23,6 @@
 
 - (void)setRoleWithImage:(UIImage *)image;
 
+- (void)resetInputFieldContent:(NSString *)content isPlaceHolder:(BOOL)isPlaceHolder;
+
 @end

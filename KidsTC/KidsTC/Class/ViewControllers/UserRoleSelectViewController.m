@@ -69,7 +69,7 @@ typedef enum {
     _navigationTitle = @"状态更改";
     _pageIdentifier = @"pv_stage_switch";
     // Do any additional setup after loading the view from its nib.
-    [self.view setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self.view setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     
     [self buildFirstAndSecondView];
     [self.linearView reloadData];
@@ -212,9 +212,9 @@ typedef enum {
     
     self.ageSelectDoneButton.layer.cornerRadius = 25;
     self.ageSelectDoneButton.layer.masksToBounds = YES;
-    [self.ageSelectDoneButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal forState:UIControlStateNormal];
-    [self.ageSelectDoneButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
-    [self.ageSelectDoneButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Disable forState:UIControlStateDisabled];
+    [self.ageSelectDoneButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.ageSelectDoneButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    [self.ageSelectDoneButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Disable forState:UIControlStateDisabled];
     
     self.linearView.dataSource = self;
     self.linearView.delegate = self;
@@ -223,12 +223,12 @@ typedef enum {
     //second
     self.backButton.layer.cornerRadius = 25;
     self.backButton.layer.masksToBounds = YES;
-    [self.backButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal forState:UIControlStateNormal];
-    [self.backButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    [self.backButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.backButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
     self.doneButton.layer.cornerRadius = 25;
     self.doneButton.layer.masksToBounds = YES;
-    [self.doneButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal forState:UIControlStateNormal];
-    [self.doneButton setBackgroundColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
+    [self.doneButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Normal forState:UIControlStateNormal];
+    [self.doneButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
     
     [self.leftImageView setUserInteractionEnabled:YES];
     UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickedSexImage:)];

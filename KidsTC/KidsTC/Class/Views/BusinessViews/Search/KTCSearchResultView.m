@@ -111,7 +111,7 @@ static NSString *const kStoreCellIdentifier = @"kStoreCellIdentifier";
 
 - (void)buildSubviews {
     //top
-    self.topView.backgroundColor = [[KTCThemeManager manager] currentTheme].navibarBGColor;
+    self.topView.backgroundColor = [[KTCThemeManager manager] defaultTheme].navibarBGColor;
     //lines
     [GConfig resetLineView:self.line1 withLayoutAttribute:NSLayoutAttributeHeight];
     [GConfig resetLineView:self.line2 withLayoutAttribute:NSLayoutAttributeHeight];
@@ -124,7 +124,7 @@ static NSString *const kStoreCellIdentifier = @"kStoreCellIdentifier";
     [self.segmentControl setTintColor:[UIColor whiteColor]];
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:15],NSFontAttributeName,[UIColor whiteColor], NSForegroundColorAttributeName, nil];
     [self.segmentControl setTitleTextAttributes:attributes forState:UIControlStateNormal];
-    NSDictionary *highlightedAttributes = [NSDictionary dictionaryWithObject:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal forKey:NSForegroundColorAttributeName];
+    NSDictionary *highlightedAttributes = [NSDictionary dictionaryWithObject:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Normal forKey:NSForegroundColorAttributeName];
     [self.segmentControl setTitleTextAttributes:highlightedAttributes forState:UIControlStateHighlighted];
     //sort
     self.sortView.dataSource = self;

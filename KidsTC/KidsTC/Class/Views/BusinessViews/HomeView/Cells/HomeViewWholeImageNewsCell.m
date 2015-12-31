@@ -26,7 +26,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    [self.bgView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
+    [self.bgView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
     
     self.bannerScrollView.dataSource = self;
     self.bannerScrollView.delegate = self;
@@ -83,7 +83,7 @@
 }
 
 - (CGFloat)heightForBannerScrollView:(AUIBannerScrollView *)scrollView {
-    return self.cellModel.ratio * SCREEN_WIDTH;
+    return [self.cellModel cellRatio] * SCREEN_WIDTH;
 }
 
 - (void)auiBannerScrollView:(AUIBannerScrollView *)scrollView didScrolledToIndex:(NSUInteger)index {

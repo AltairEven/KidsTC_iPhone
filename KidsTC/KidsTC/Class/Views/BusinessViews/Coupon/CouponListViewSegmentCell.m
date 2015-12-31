@@ -19,8 +19,8 @@
 - (void)awakeFromNib {
     // Initialization code
     [self.tagView setHidden:YES];
-    [self.contentView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
-    [self.tagView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
+    [self.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
+    [self.tagView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -28,7 +28,7 @@
 
     // Configure the view for the selected state
     if (selected) {
-        [self.titleLabel setTextColor:[[KTCThemeManager manager] currentTheme].buttonBGColor_Normal];
+        [self.titleLabel setTextColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Normal];
         [self.tagView setHidden:NO];
     } else {
         [self.titleLabel setTextColor:[UIColor darkGrayColor]];

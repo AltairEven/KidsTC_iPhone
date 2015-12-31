@@ -61,10 +61,10 @@ static KTCBrowseHistoryView *_sharedInstance = nil;
 }
 
 - (void)buildSubviews {
-    [self.tableBGView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+    [self.tableBGView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
     
     self.tableView.backgroundView = nil;
-    [self.tableView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalCellBGColor];
+    [self.tableView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -92,14 +92,14 @@ static KTCBrowseHistoryView *_sharedInstance = nil;
     self.noMoreDataDic = [[NSMutableDictionary alloc] init];
     self.hideFooterDic = [[NSMutableDictionary alloc] init];
     
-    [self.activityIndicator setColor:[[KTCThemeManager manager] currentTheme].globalThemeColor];
+    [self.activityIndicator setColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
     
-    [self.serviceButton setBackgroundColor:[[[KTCThemeManager manager] currentTheme].globalThemeColor colorWithAlphaComponent:0.7] forState:UIControlStateNormal];
+    [self.serviceButton setBackgroundColor:[[[KTCThemeManager manager] defaultTheme].globalThemeColor colorWithAlphaComponent:0.7] forState:UIControlStateNormal];
     [self.serviceButton setBackgroundColor:[UIColor whiteColor] forState:UIControlStateSelected];
     [self.serviceButton setImage:[UIImage imageNamed:@"bizicon_service_n"] forState:UIControlStateNormal];
     [self.serviceButton setImage:[UIImage imageNamed:@"bizicon_service_h"] forState:UIControlStateSelected];
     
-    [self.storeButton setBackgroundColor:[[[KTCThemeManager manager] currentTheme].globalThemeColor colorWithAlphaComponent:0.7] forState:UIControlStateNormal];
+    [self.storeButton setBackgroundColor:[[[KTCThemeManager manager] defaultTheme].globalThemeColor colorWithAlphaComponent:0.7] forState:UIControlStateNormal];
     [self.storeButton setBackgroundColor:[UIColor whiteColor] forState:UIControlStateSelected];
     [self.storeButton setImage:[UIImage imageNamed:@"bizicon_store_n"] forState:UIControlStateNormal];
     [self.storeButton setImage:[UIImage imageNamed:@"bizicon_store_h"] forState:UIControlStateSelected];

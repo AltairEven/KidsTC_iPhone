@@ -23,6 +23,8 @@
 #import "HomeViewThreeImageNewsCell.h"
 #import "HomeViewWholeImageNewsCell.h"
 #import "HomeViewNoticeCell.h"
+#import "HomeViewBigImageTwoDescCell.h"
+#import "HomeViewTwoThreeFourCell.h"
 
 static NSString *const kNormalTitleCellIdentifier = @"kNormalTitleCellIdentifier";
 static NSString *const kCountDownTitleCellIdentifier = @"kCountDownTitleCellIdentifier";
@@ -38,8 +40,10 @@ static NSString *const kImageNewsCellIdentifier = @"kImageNewsCellIdentifier";
 static NSString *const kThreeImageNewsCellIdentifier = @"kThreeImageNewsCellIdentifier";
 static NSString *const kWholeImageNewsCellIdentifier = @"kWholeImageNewsCellIdentifier";
 static NSString *const kNoticeCellIdentifier = @"kNoticeCellIdentifier";
+static NSString *const kBigImageTwoDescCellIdentifier = @"kBigImageTwoDescCellIdentifier";
+static NSString *const kTwoThreeFourCellIdentifier = @"kTwoThreeFourCellIdentifier";
 
-@interface HomeView () <HomeTopViewDelegate, UITableViewDataSource, UITableViewDelegate, HomeViewBannerCellDelegate, HomeViewThemeCellDelegate, HomeViewThreeCellDelegate, HomeViewTwinklingElfCellDelegate, HomeViewHorizontalListCellDelegate, UIScrollViewDelegate, HomeViewThreeImageNewsCellDelegate, HomeViewWholeImageNewsCellDelegate>
+@interface HomeView () <HomeTopViewDelegate, UITableViewDataSource, UITableViewDelegate, HomeViewBannerCellDelegate, HomeViewThemeCellDelegate, HomeViewThreeCellDelegate, HomeViewTwinklingElfCellDelegate, HomeViewHorizontalListCellDelegate, UIScrollViewDelegate, HomeViewThreeImageNewsCellDelegate, HomeViewWholeImageNewsCellDelegate, HomeViewNoticeCellDelegate, HomeViewBigImageTwoDescCellDelegate, HomeViewTwoThreeFourCellDelegate>
 
 //top
 @property (weak, nonatomic) IBOutlet HomeTopView *topView;
@@ -62,6 +66,8 @@ static NSString *const kNoticeCellIdentifier = @"kNoticeCellIdentifier";
 @property (nonatomic, strong) UINib *threeImageNewsCellNib;
 @property (nonatomic, strong) UINib *wholeImageNewsCellNib;
 @property (nonatomic, strong) UINib *noticeCellNib;
+@property (nonatomic, strong) UINib *bigImageTwoDescCellNib;
+@property (nonatomic, strong) UINib *twoThreeFourCellNib;
 
 @property (nonatomic, strong) UIView *splitFooterView;
 @property (weak, nonatomic) IBOutlet UIButton *backToTopButton;
@@ -115,7 +121,7 @@ static NSString *const kNoticeCellIdentifier = @"kNoticeCellIdentifier";
     [self.topView setBackgroundColor:[[KTCThemeManager manager] currentTheme].navibarBGColor];
     
     self.tableView.backgroundView = nil;
-    [self.tableView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self.tableView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -182,6 +188,14 @@ static NSString *const kNoticeCellIdentifier = @"kNoticeCellIdentifier";
     if (!self.noticeCellNib) {
         self.noticeCellNib = [UINib nibWithNibName:NSStringFromClass([HomeViewNoticeCell class]) bundle:nil];
         [self.tableView registerNib:self.noticeCellNib forCellReuseIdentifier:kNoticeCellIdentifier];
+    }
+    if (!self.bigImageTwoDescCellNib) {
+        self.bigImageTwoDescCellNib = [UINib nibWithNibName:NSStringFromClass([HomeViewBigImageTwoDescCell class]) bundle:nil];
+        [self.tableView registerNib:self.bigImageTwoDescCellNib forCellReuseIdentifier:kBigImageTwoDescCellIdentifier];
+    }
+    if (!self.twoThreeFourCellNib) {
+        self.twoThreeFourCellNib = [UINib nibWithNibName:NSStringFromClass([HomeViewTwoThreeFourCell class]) bundle:nil];
+        [self.tableView registerNib:self.twoThreeFourCellNib forCellReuseIdentifier:kTwoThreeFourCellIdentifier];
     }
     
     self.cellModelsDic = [[NSMutableDictionary alloc] init];
@@ -294,6 +308,33 @@ static NSString *const kNoticeCellIdentifier = @"kNoticeCellIdentifier";
     if (self.delegate && [self.delegate respondsToSelector:@selector(homeView:didClickedAtCoordinate:)]) {
         HomeSectionModel *model = [self.totalSectionModels objectAtIndex:newsCell.indexPath.section];
         [self.delegate homeView:self didClickedAtCoordinate:HomeClickMakeCoordinate(model.floorIndex, newsCell.indexPath.section, NO, index)];
+    }
+}
+
+#pragma mark HomeViewNoticeCellDelegate
+
+- (void)homeNoticeCell:(HomeViewNoticeCell *)cell didClickedAtIndex:(NSUInteger)index {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(homeView:didClickedAtCoordinate:)]) {
+        HomeSectionModel *model = [self.totalSectionModels objectAtIndex:cell.indexPath.section];
+        [self.delegate homeView:self didClickedAtCoordinate:HomeClickMakeCoordinate(model.floorIndex, cell.indexPath.section, NO, index)];
+    }
+}
+
+#pragma mark HomeViewBigImageTwoDescCellDelegate
+
+- (void)bigImageTwoDescCell:(HomeViewBigImageTwoDescCell *)cell didClickedAtIndex:(NSUInteger)index {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(homeView:didClickedAtCoordinate:)]) {
+        HomeSectionModel *model = [self.totalSectionModels objectAtIndex:cell.indexPath.section];
+        [self.delegate homeView:self didClickedAtCoordinate:HomeClickMakeCoordinate(model.floorIndex, cell.indexPath.section, NO, index)];
+    }
+}
+
+#pragma mark HomeViewTwoThreeFourCellDelegate
+
+- (void)homeCell:(HomeViewTwoThreeFourCell *)cell didClickedAtIndex:(NSUInteger)index {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(homeView:didClickedAtCoordinate:)]) {
+        HomeSectionModel *model = [self.totalSectionModels objectAtIndex:cell.indexPath.section];
+        [self.delegate homeView:self didClickedAtCoordinate:HomeClickMakeCoordinate(model.floorIndex, cell.indexPath.section, NO, index)];
     }
 }
 
@@ -491,6 +532,7 @@ static NSString *const kNoticeCellIdentifier = @"kNoticeCellIdentifier";
                 cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewWholeImageNewsCell" owner:nil options:nil] objectAtIndex:0];
             }
             [cell configWithModel:(HomeWholeImageNewsCellModel *)contentModel];
+            cell.delegate = self;
             cell.indexPath = indexPath;
             return cell;
         }
@@ -502,15 +544,41 @@ static NSString *const kNoticeCellIdentifier = @"kNoticeCellIdentifier";
                 cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewNoticeCell" owner:nil options:nil] objectAtIndex:0];
             }
             
-            NSDictionary *notice1 = [NSDictionary dictionaryWithObject:@"这是第1条这是第1条这是第1条这是第1条这是第1条这是第1条这是第1条这是第1条这是第1条这是第1条这是第1条这是第1条" forKey:@"content"];
-            NSDictionary *notice2 = [NSDictionary dictionaryWithObject:@"这是第2条这是第2条这是第2条这是第2条这是第2条这是第2条这是第2条这是第2条这是第2条这是第2条这是第2条这是第2条" forKey:@"content"];
-            NSDictionary *notice3 = [NSDictionary dictionaryWithObject:@"这是第3条这是第3条这是第3条这是第3条这是第3条这是第3条这是第3条这是第3条这是第3条这是第3条这是第3条这是第3条" forKey:@"content"];
-            NSArray *dataArray = [NSArray arrayWithObjects:notice1, notice2, notice3, nil];
-            HomeNoticeCellModel *model = [[HomeNoticeCellModel alloc] initWithRawData:dataArray];
-            [cell configWithModel:model];
+            cell.indexPath = indexPath;
+            cell.delegate = self;
+            [cell configWithModel:(HomeNoticeCellModel *)contentModel];
             
             return cell;
         }
+            break;
+        case HomeContentCellTypeBigImageTwoDesc:
+        {
+            HomeViewBigImageTwoDescCell *cell = [tableView dequeueReusableCellWithIdentifier:kBigImageTwoDescCellIdentifier];
+            if (!cell) {
+                cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewBigImageTwoDescCell" owner:nil options:nil] objectAtIndex:0];
+            }
+            
+            cell.indexPath = indexPath;
+            cell.delegate = self;
+            [cell configWithCellModel:(HomeBigImageTwoDescCellModel *)contentModel];
+            
+            return cell;
+        }
+            break;
+        case HomeContentCellTypeTwoThreeFour:
+        {
+            HomeViewTwoThreeFourCell *cell = [tableView dequeueReusableCellWithIdentifier:kTwoThreeFourCellIdentifier];
+            if (!cell) {
+                cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewTwoThreeFourCell" owner:nil options:nil] objectAtIndex:0];
+            }
+            
+            cell.indexPath = indexPath;
+            cell.delegate = self;
+            [cell configWithCellModel:(HomeTwoThreeFourCellModel *)contentModel];
+            
+            return cell;
+        }
+            break;
         default:
             break;
     }
@@ -741,7 +809,13 @@ static NSString *const kNoticeCellIdentifier = @"kNoticeCellIdentifier";
     [self.topView setRoleWithImage:image];
 }
 
+- (void)resetTopViewWithBGColor:(UIColor *)bgColor {
+    [self.topView setBackgroundColor:bgColor];
+}
 
+- (void)resetTopViewWithInputContent:(NSString *)content isPlaceHolder:(BOOL)isPlaceHolder {
+    [self.topView resetInputFieldContent:content isPlaceHolder:isPlaceHolder];
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

@@ -10,6 +10,13 @@
 
 @implementation HomeCellModel
 
+- (void)setRatio:(CGFloat)ratio {
+    cellRatio = ratio;
+}
+
+- (CGFloat)cellRatio {
+    return cellRatio;
+}
 
 - (CGFloat)cellHeight {
     return 0;

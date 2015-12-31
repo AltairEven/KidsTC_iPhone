@@ -39,9 +39,13 @@
     }
 }
 
+- (void)setRatio:(CGFloat)ratio {
+    [super setRatio:ratio];
+}
+
 
 - (CGFloat)cellHeight {
-    cellHeight = self.ratio * (SCREEN_WIDTH / 3);
+    cellHeight = cellRatio * (SCREEN_WIDTH / 3);
     return cellHeight;
 }
 

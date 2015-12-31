@@ -18,16 +18,8 @@
 static KTCTabBarController* _shareTabBarController = nil;
 
 @interface KTCTabBarController () <UITabBarControllerDelegate>
-//
-//@property (nonatomic, strong) HomeViewController *homeVC;
-//@property (nonatomic, strong) NewsViewController *newsListVC;
-//@property (nonatomic, strong) ParentingStrategyViewController *parentingStrategyVC;
-//@property (nonatomic, strong) UserCenterViewController *userCenterVC;
-//
-//@property (nonatomic, strong) UINavigationController *homeTab;
-//@property (nonatomic, strong) UINavigationController *newsTab;
-//@property (nonatomic, strong) UINavigationController *parentingStrategyTab;
-//@property (nonatomic, strong) UINavigationController *userCenterTab;
+
+- (void)didReceivedThemeChangedNotification:(NSNotification *)notify;
 
 @end
 
@@ -39,7 +31,7 @@ static KTCTabBarController* _shareTabBarController = nil;
     {
         if (!_shareTabBarController) {
             _shareTabBarController = [[self alloc] init];
-            [_shareTabBarController.tabBar setBarTintColor:[[KTCThemeManager manager] currentTheme].tabbarBGColor];
+            [_shareTabBarController.tabBar setBarTintColor:[[KTCThemeManager manager] defaultTheme].tabbarBGColor];
         }
         
         return _shareTabBarController;
@@ -63,7 +55,7 @@ static KTCTabBarController* _shareTabBarController = nil;
 {
     self.delegate = self;
     
-    NSArray *tabBarItemElements = [[[KTCThemeManager manager] currentTheme] tabbarItmeElements];
+    NSArray *tabBarItemElements = [[[KTCThemeManager manager] defaultTheme] tabbarItmeElements];
     
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
     for (AUITabbarItemElement *element in tabBarItemElements) {
@@ -116,11 +108,16 @@ static KTCTabBarController* _shareTabBarController = nil;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceivedThemeChangedNotification:) name:kThemeDidChangedNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kThemeDidChangedNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -261,17 +258,28 @@ static KTCTabBarController* _shareTabBarController = nil;
     [self.tabBar setBadgeWithValue:badgeString atIndex:(int)index];
 }
 
-- (void)resetTheme:(AUITheme *)theme {
-    if (!theme) {
+- (void)didReceivedThemeChangedNotification:(NSNotification *)notify {
+    if (!notify || ![notify.name isEqualToString:kThemeDidChangedNotification]) {
         return;
     }
-//    UINavigationController *naviController = [[GNavController alloc] initWithRootViewController:viewController];
-//    naviController.tabBarItem.title = element.tabbarItemTitle;
-//    [naviController.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObject:element.tabbarTitleColor_Normal forKey:NSForegroundColorAttributeName] forState:UIControlStateNormal];
-//    [naviController.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObject:element.tabbarTitleColor_Highlight forKey:NSForegroundColorAttributeName] forState:UIControlStateHighlighted];
-//    naviController.tabBarItem.image = [element.tabbarItemImage_Normal imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-//    naviController.tabBarItem.selectedImage = [element.tabbarItemImage_Highlight imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-//    [tempArray addObject:naviController];
+    [self resetTheme:notify.object];
+}
+
+- (void)resetTheme:(AUITheme *)theme {
+    if (!theme || ![theme isKindOfClass:[AUITheme class]]) {
+        return;
+    }
+    [self.tabBar setBarTintColor:theme.tabbarBGColor];
+    
+    for (NSUInteger index = 0; index < [self.viewControllers count]; index ++) {
+        UINavigationController *naviController = [self.viewControllers objectAtIndex:index];
+        AUITabbarItemElement *element = [theme.tabbarItmeElements objectAtIndex:index];
+        naviController.tabBarItem.title = element.tabbarItemTitle;
+        [naviController.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObject:element.tabbarTitleColor_Normal forKey:NSForegroundColorAttributeName] forState:UIControlStateNormal];
+        [naviController.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObject:element.tabbarTitleColor_Highlight forKey:NSForegroundColorAttributeName] forState:UIControlStateHighlighted];
+        naviController.tabBarItem.image = [element.tabbarItemImage_Normal imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        naviController.tabBarItem.selectedImage = [element.tabbarItemImage_Highlight imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    }
 }
 
 @end

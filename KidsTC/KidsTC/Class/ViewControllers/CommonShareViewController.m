@@ -64,7 +64,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self.displayBGView setBackgroundColor:[[KTCThemeManager manager] currentTheme].globalBGColor];
+    [self.displayBGView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     [self.tapView setHidden:YES];
 }
 
