@@ -37,7 +37,7 @@
 
 - (void)configWithCellModel:(HomeBigImageTwoDescCellModel *)model {
     HomeBigImageTwoDescItem *item = [model.cellItemsArray firstObject];
-    [self.cellImageView setImageWithURL:item.imageUrl];
+    [self.cellImageView setImageWithURL:item.imageUrl placeholderImage:PLACEHOLDERIMAGE_BIG];
     [self.titleLabel setText:item.title];
     [self.subTitleLabel setText:item.subTitle];
 }

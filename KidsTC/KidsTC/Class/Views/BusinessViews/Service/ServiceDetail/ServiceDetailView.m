@@ -309,7 +309,7 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
 - (UIImageView *)bannerImageViewOnScrollView:(AUIBannerScrollView *)scrollView withViewFrame:(CGRect)frame atIndex:(NSUInteger)index {
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
     NSURL *imageUrl = [self.detailModel.imageUrls objectAtIndex:index];
-    [imageView setImageWithURL:imageUrl];
+    [imageView setImageWithURL:imageUrl placeholderImage:PLACEHOLDERIMAGE_BIG];
     return imageView;
 }
 

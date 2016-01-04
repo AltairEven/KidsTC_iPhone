@@ -9,6 +9,9 @@
 #import "KTCWebViewController.h"
 #import "KTCTabBarController.h"
 #import "ServiceDetailViewController.h"
+#import "StoreDetailViewController.h"
+#import "ParentingStrategyDetailViewController.h"
+#import "CouponListViewController.h"
 #import "AUIKeyboardAdhesiveView.h"
 #import "CommonShareViewController.h"
 #import "KTCCommentManager.h"
@@ -22,9 +25,14 @@
 
 #define Hook_Prefix (@"hook::")
 #define Hook_ProductDetail (@"productdetail::")
+#define Hook_StoreDetail (@"storeDetail::")
+#define Hook_StrategyDetail (@"strategyDetail::")
+#define Hook_Home (@"home::")
+#define Hook_CouponList (@"couponList::")
 #define Hook_Login (@"login::")
 #define Hook_Comment (@"evaluate::")
 #define Hook_Share (@"share::")
+#define Hook_SaveShare (@"saveShare::")
 
 @interface KTCWebViewController () <UIWebViewDelegate, AUIKeyboardAdhesiveViewDelegate, MC_ImagePickerViewControllerDelegate, MWPhotoBrowserDelegate, UIScrollViewDelegate>
 
@@ -45,6 +53,8 @@
 @property (nonatomic, strong) NSDictionary *produceInfo;
 
 @property (nonatomic, strong) NSArray *mwPhotosArray;
+
+@property (nonatomic, strong) NSDictionary *shareParam;
 
 - (void)getNeedUploadPhotosArray:(void(^)(NSArray *photosArray))finished;
 
@@ -68,11 +78,17 @@
 
 - (void)pushToServiceDetailWithParams:(NSDictionary *)params;
 
+- (void)pushToStoreDetailWithParams:(NSDictionary *)params;
+
+- (void)pushToStrategyDetailWithParams:(NSDictionary *)params;
+
+- (void)pushToCouponListWithParams:(NSDictionary *)params;
+
 - (void)commentWithParams:(NSDictionary *)params;
 
 - (void)didClickedShareButton;
 
-- (void)shareWithParams:(NSDictionary *)params;
+- (void)shareWithParams:(NSDictionary *)params withLocalImage:(BOOL)withLocal;
 
 @end
 
@@ -125,7 +141,9 @@
     self.backToTopButton.layer.masksToBounds = YES;
     [self.backToTopButton setHidden:YES];
     
-    [self setupRightBarButton:@"" target:self action:@selector(didClickedShareButton) frontImage:@"share_n" andBackImage:@"share_n"];
+    if (!self.hideShare) {
+        [self setupRightBarButton:@"" target:self action:@selector(didClickedShareButton) frontImage:@"share_n" andBackImage:@"share_n"];
+    }
 
     
 }
@@ -230,6 +248,24 @@
             NSDictionary *params = [GToolUtil parsetUrl:jumpString];
             [self pushToServiceDetailWithParams:params];
             return NO;
+        } else if ([hookString hasPrefix:Hook_StoreDetail]) {
+            NSString *jumpString = [hookString substringFromIndex:[Hook_StoreDetail length]];
+            NSDictionary *params = [GToolUtil parsetUrl:jumpString];
+            [self pushToStoreDetailWithParams:params];
+            return NO;
+        } else if ([hookString hasPrefix:Hook_StrategyDetail]) {
+            NSString *jumpString = [hookString substringFromIndex:[Hook_StrategyDetail length]];
+            NSDictionary *params = [GToolUtil parsetUrl:jumpString];
+            [self pushToStrategyDetailWithParams:params];
+            return NO;
+        } else if ([hookString hasPrefix:Hook_Home]) {
+            [[KTCTabBarController shareTabBarController] setButtonSelected:0];
+            return NO;
+        } else if ([hookString hasPrefix:Hook_CouponList]) {
+            NSString *jumpString = [hookString substringFromIndex:[Hook_CouponList length]];
+            NSDictionary *params = [GToolUtil parsetUrl:jumpString];
+            [self pushToCouponListWithParams:params];
+            return NO;
         } else if ([hookString hasPrefix:Hook_Comment]) {
             NSString *paramString = [hookString substringFromIndex:[Hook_Comment length]];
             NSDictionary *params = [GToolUtil parsetUrl:paramString];
@@ -275,7 +311,49 @@
             if ([tempDic count] == 0) {
                 return YES;
             }
-            [self shareWithParams:[NSDictionary dictionaryWithDictionary:tempDic]];
+            [self shareWithParams:[NSDictionary dictionaryWithDictionary:tempDic] withLocalImage:NO];
+            return NO;
+        } else if ([hookString hasPrefix:Hook_SaveShare]) {
+            NSMutableDictionary *tempDic = [[NSMutableDictionary alloc] init];
+            NSArray *paramsArray = [hookString componentsSeparatedByString:@";"];
+            for (NSString *string in paramsArray) {
+                NSRange titleRange = [string rangeOfString:@"share::title="];
+                NSRange descRange = [string rangeOfString:@"desc="];
+                NSRange picRange = [string rangeOfString:@"pic="];
+                NSRange urlRange = [string rangeOfString:@"url="];
+                if (titleRange.location != NSNotFound) {
+                    NSString *title = [string substringFromIndex:titleRange.length];
+                    title = [title URLDecodedString];
+                    [tempDic setObject:title forKey:@"title"];
+                    continue;
+                }
+                if (descRange.location != NSNotFound) {
+                    NSString *desc = [string substringFromIndex:descRange.length];
+                    desc = [desc URLDecodedString];
+                    [tempDic setObject:desc forKey:@"desc"];
+                    continue;
+                }
+                if (picRange.location != NSNotFound) {
+                    NSString *pic = [string substringFromIndex:picRange.length];
+                    [tempDic setObject:pic forKey:@"pic"];
+                    continue;
+                }
+                if (urlRange.location != NSNotFound) {
+                    NSString *url = [string substringFromIndex:urlRange.length];
+                    [tempDic setObject:url forKey:@"url"];
+                    NSDictionary *urlParamsDic = [GToolUtil parsetUrl:url];
+                    if ([urlParamsDic objectForKey:@"id"]) {
+                        NSString *identifier = [NSString stringWithFormat:@"%@", [urlParamsDic objectForKey:@"id"]];
+                        [tempDic setObject:identifier forKey:@"id"];
+                        
+                    }
+                    continue;
+                }
+            }
+            if ([tempDic count] == 0) {
+                return YES;
+            }
+            self.shareParam = [NSDictionary dictionaryWithDictionary:tempDic];
             return NO;
         }
     }
@@ -544,6 +622,62 @@
     [self.navigationController pushViewController:controller animated:YES];
 }
 
+- (void)pushToStoreDetailWithParams:(NSDictionary *)params {
+    if (!params) {
+        return;
+    }
+    NSString *storeId = [params objectForKey:@"id"];
+    if ([storeId length] == 0) {
+        return;
+    }
+    StoreDetailViewController *controller = [[StoreDetailViewController alloc] initWithStoreId:storeId];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)pushToStrategyDetailWithParams:(NSDictionary *)params {
+    if (!params) {
+        return;
+    }
+    NSString *strategyId = [params objectForKey:@"id"];
+    if ([strategyId length] == 0) {
+        return;
+    }
+    ParentingStrategyDetailViewController *controller = [[ParentingStrategyDetailViewController alloc] initWithStrategyIdentifier:strategyId];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)pushToCouponListWithParams:(NSDictionary *)params {
+    CouponStatus status = (CouponStatus)[[params objectForKey:@"status"] integerValue];
+    CouponListViewTag tag = CouponListViewTagUnused;
+    switch (status) {
+        case CouponStatusUnused:
+        {
+            tag = CouponListViewTagUnused;
+        }
+            break;
+        case CouponStatusHasUsed:
+        {
+            tag = CouponListViewTagHasUsed;
+        }
+            break;
+        case CouponStatusHasOverTime:
+        {
+            tag = CouponListViewTagHasOverTime;
+        }
+            break;
+        default:
+        {
+            tag = CouponListViewTagUnused;
+        }
+            break;
+    }
+    CouponListViewController *controller = [[CouponListViewController alloc] initWithCouponListViewTag:tag];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
 #pragma mark Comment
 
 - (void)commentWithParams:(NSDictionary *)params {
@@ -659,21 +793,28 @@
 #pragma mark Share
 
 - (void)didClickedShareButton {
-    NSString *test = [self.webView stringByEvaluatingJavaScriptFromString:@"var script = document.createElement('script');script.type = 'text/javascript';script.text = \"function myFunction() { var field = document.getElementsByName('word')[0]; field.value='WWDC2015'; document.forms[0].submit();}\";document.getElementsByTagName('head')[0].appendChild(script);"];  //添加到head标签中
-    
-    test = [self.webView stringByEvaluatingJavaScriptFromString:@"myFunction();"];
-    
-    NSLog(@"%@", test);
+    self.shareParam = nil;
+    if (self.shareParam) {
+        [self shareWithParams:self.shareParam withLocalImage:NO];
+        return;
+    }
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:_navigationTitle, @"title", @"童成与您分享", @"desc", self.currentUrlString, @"url", nil];
+    [self shareWithParams:param withLocalImage:YES];
 }
 
-- (void)shareWithParams:(NSDictionary *)params {
+- (void)shareWithParams:(NSDictionary *)params withLocalImage:(BOOL)withLocal {
     NSString *title = [params objectForKey:@"title"];
     NSString *desc = [params objectForKey:@"desc"];
     NSString *thumbUrlString = [params objectForKey:@"pic"];
     NSString *linkUrlString = [params objectForKey:@"url"];
     NSString *identifier = [params objectForKey:@"id"];
     
-    CommonShareObject *shareObject = [CommonShareObject shareObjectWithTitle:title description:desc thumbImageUrl:[NSURL URLWithString:thumbUrlString] urlString:linkUrlString];
+    CommonShareObject *shareObject = nil;
+    if (withLocal) {
+        shareObject = [CommonShareObject shareObjectWithTitle:title description:desc thumbImage:[UIImage imageNamed:@"defaultShareImage"] urlString:linkUrlString];
+    } else {
+        shareObject = [CommonShareObject shareObjectWithTitle:title description:desc thumbImageUrl:[NSURL URLWithString:thumbUrlString] urlString:linkUrlString];
+    }
     shareObject.identifier = identifier;
     shareObject.followingContent = @"【童成网】";
     CommonShareViewController *controller = [CommonShareViewController instanceWithShareObject:shareObject sourceType:KTCShareServiceTypeNews];

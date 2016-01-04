@@ -85,8 +85,6 @@ static NSString *const kErrMsgKey = @"kErrMsgKey";
 
 #define BORDER_WIDTH (0.5)
 
-#define DEFAULT_IMAGE ([UIImage imageNamed:@"default_placeholder"])
-
 #define COLOR_BG_QIANG RGBA(119, 168, 235, 1)
 #define COLOR_BG_TUAN RGBA(18, 192, 123, 1)
 #define COLOR_BG_MORNING RGBA(247, 191, 42, 1)
@@ -308,8 +306,8 @@ static const NSTimeInterval kUpdateImmuneTimeThreshold = 60.0f * 60 * 24 * 3;
 
 
 
-#define PLACEHOLDERIMAGE_SMALL ([UIImage imageNamed:@"placeholder_200_200"])
-#define PLACEHOLDERIMAGE_BIG ([UIImage imageNamed:@"placeholder_400_400"])
+#define PLACEHOLDERIMAGE_SMALL ([UIImage imageNamed:@"placeholder_50_50"])
+#define PLACEHOLDERIMAGE_BIG ([UIImage imageNamed:@"placeholder_100_100"])
 
 typedef enum{
 	GOrderStatusPartlyReturn = -5,

@@ -65,7 +65,7 @@
             for (NSUInteger index = 0; index < [urlStringsArray count]; index ++) {
                 NSString *urlString  = [urlStringsArray objectAtIndex:index];
                 UIImageView *tempImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 65, 65)];
-                [tempImageView setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:PLACEHOLDERIMAGE_SMALL];
+                [tempImageView setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:PLACEHOLDERIMAGE_BIG];
                 PhotoItem *zoomItem = [[PhotoItem alloc] initWithImageView:tempImageView];
                 zoomItem.urlString = urlString;
                 zoomItem.tag = index;

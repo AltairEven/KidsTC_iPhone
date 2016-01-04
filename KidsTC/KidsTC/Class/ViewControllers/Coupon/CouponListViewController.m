@@ -39,6 +39,7 @@ static NSString *const kCouponUseRuleUrlString = @"http://m.kidstc.com/tools/cou
     // Do any additional setup after loading the view from its nib.
     self.listView.delegate = self;
     self.viewModel = [[CouponListViewModel alloc] initWithView:self.listView];
+    [self.listView setViewTag:self.firstLoadViewTag];
     [self.viewModel startUpdateDataWithViewTag:self.firstLoadViewTag];
     [self.listView reloadSegmentHeader];
     [self setupRightBarButton:@"" target:self action:@selector(didClickedCouponRule) frontImage:@"navigation_question" andBackImage:@"navigation_question"];

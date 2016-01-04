@@ -73,7 +73,7 @@
     UIImageView *imageView = nil;
     imageView = [[UIImageView alloc] initWithFrame:frame];
     HomeNewsBaseModel *model = [self.cellModel.newsModels objectAtIndex:index];
-    [imageView setImageWithURL:model.imageUrl placeholderImage:[UIImage imageNamed:@"placeholder_400_400"]];
+    [imageView setImageWithURL:model.imageUrl placeholderImage:PLACEHOLDERIMAGE_BIG];
     return imageView;
 }
 

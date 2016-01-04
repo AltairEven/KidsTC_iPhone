@@ -189,6 +189,9 @@ static KTCSearchService *_sharedInstance;
         if (condition.sortType > 0) {
             [requestParam setObject:[NSString stringWithFormat:@"%d", condition.sortType] forKey:@"st"];
         }
+        if (condition.userRole > 0) {
+            [requestParam setObject:[NSString stringWithFormat:@"%d", condition.userRole] forKey:@"pt"];
+        }
     }
     
     __weak KTCSearchService *weakSelf = self;

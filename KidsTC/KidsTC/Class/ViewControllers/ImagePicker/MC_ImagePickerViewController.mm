@@ -846,6 +846,7 @@ typedef NS_ENUM(NSInteger, ChosenTag){
     [self.selectedAllImageArray  addObject:image];
     [self.chosenPhotoURLs addObject:url];
     [self.selectedAllURLArray addObject:url];
+    [self.selectedAllImageViewArray addObject:photoSelectedImageview];
     
     
     NSDictionary *dataDic = [NSDictionary dictionaryWithObjectsAndKeys:self.chosenPhotos, PickedInfoImageArray, self.chosenPhotoURLs, PickedInfoImageURLArray,self.selectedImageViewsArray,PickedInfoImageViewArray,self.takePicturesArray,PickedInfoTakePicturesArray ,self.selectedAllImageViewArray,PickedInfoSelectAllPictureArray,self.selectedAllURLArray,PickedInfoSelectAllURLArray,self.selectedAllImageArray,PickedInfoSelectAllImageArray,self.takePicturesURLArray,PickedInfoTakePicturesURLArray, nil];

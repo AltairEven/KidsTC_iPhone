@@ -84,6 +84,7 @@
 
 - (void)KTCSearchView:(KTCSearchView *)searchView didChangedToSearchType:(KTCSearchType)type {
     [self.viewModel setSearchType:type];
+    [self resetHotSearchKeyWord];
 }
 
 - (void)didClickedCancelButtonOnKTCSearchView:(KTCSearchView *)searchView {
@@ -201,13 +202,13 @@
 }
 
 - (void)resetHotSearchKeyWord {
-    KTCSearchServiceCondition *hotSearchCondition = (KTCSearchServiceCondition *)[[KTCSearchService sharedService] mostHotSearchConditionOfSearchType:KTCSearchTypeService];
+    KTCSearchServiceCondition *hotSearchCondition = (KTCSearchServiceCondition *)[[KTCSearchService sharedService] mostHotSearchConditionOfSearchType:self.viewModel.searchType];
     NSString *hotSearchKeyWord = @"";
     if (hotSearchCondition) {
         hotSearchKeyWord = hotSearchCondition.keyWord;
     }
     if ([hotSearchKeyWord length] == 0) {
-        hotSearchKeyWord = @"宝爸宝妈都在这里找";
+        hotSearchKeyWord = @"请输入关键词";
     }
     [self.searchView setTopInputFiledContent:hotSearchKeyWord isPlaceHolder:YES];
 }

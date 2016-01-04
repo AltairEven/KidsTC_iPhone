@@ -41,6 +41,8 @@ typedef enum {
 
 @property (nonatomic, copy) NSString *categoryIdentifier;
 
+@property (nonatomic, assign) UserRole userRole;
+
 + (instancetype)conditionFromCategory:(IcsonBaseCategory *)category;
 
 + (instancetype)conditionFromRawData:(NSDictionary *)data;

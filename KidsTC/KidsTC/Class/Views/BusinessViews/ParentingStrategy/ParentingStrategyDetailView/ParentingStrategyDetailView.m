@@ -260,7 +260,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     CGFloat yPosition = 0;
     //main image
     [self.mainImageView setFrame:CGRectMake(0, yPosition, SCREEN_WIDTH, mainImageViewHeight)];
-    [self.mainImageView setImageWithURL:self.detailModel.mainImageUrl];
+    [self.mainImageView setImageWithURL:self.detailModel.mainImageUrl placeholderImage:PLACEHOLDERIMAGE_BIG];
     yPosition += mainImageViewHeight;
     //title
     [self.titleBGView setFrame:CGRectMake(0, yPosition, SCREEN_WIDTH, titleViewHeight)];

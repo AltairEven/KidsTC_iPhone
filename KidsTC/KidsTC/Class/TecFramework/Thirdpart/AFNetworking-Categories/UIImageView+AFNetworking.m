@@ -152,6 +152,9 @@ static NSUInteger _cacheLength = 0;
     } else {
         if (placeholderImage) {
             self.image = placeholderImage;
+            [self setContentMode:UIViewContentModeCenter];
+        } else {
+            [self setContentMode:UIViewContentModeScaleToFill];
         }
         
         //add by Altair, 20150429, for non web image
@@ -168,6 +171,7 @@ static NSUInteger _cacheLength = 0;
                     success(urlRequest, operation.response, responseObject);
                 } else if (responseObject) {
                     strongSelf.image = responseObject;
+                    [strongSelf setContentMode:UIViewContentModeScaleToFill];
                 }
 
                 if (operation == strongSelf.af_imageRequestOperation){

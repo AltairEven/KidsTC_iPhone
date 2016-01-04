@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "6.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "dropdown_loading_01@2x.png",
+      "filename" : "6-1.png",
       "scale" : "2x"
     },
     {

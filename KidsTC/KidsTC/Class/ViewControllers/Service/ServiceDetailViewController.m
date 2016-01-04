@@ -177,6 +177,7 @@
 
 - (void)didClickedCustomerServiceButtonOnServiceDetailBottomView:(ServiceDetailBottomView *)bottomView {
     KTCWebViewController *controller = [[KTCWebViewController alloc] init];
+    [controller setHideShare:YES];
     [controller setWebUrlString:[OnlineCustomerService onlineCustomerServiceLinkUrlString]];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
@@ -392,11 +393,13 @@
 
 - (void)getHistoryDataForTag:(KTCBrowseHistoryViewTag)tag needMore:(BOOL)need {
     KTCBrowseHistoryType type = [KTCBrowseHistoryView typeOfViewTag:tag];
+    [[KTCBrowseHistoryView historyView] endLoadMore];
     NSArray *array = [[KTCBrowseHistoryManager sharedManager] resultForType:type];
     if ([array count] == 0) {
         [[KTCBrowseHistoryManager sharedManager] getUserBrowseHistoryWithType:type needMore:NO succeed:^(NSArray *modelsArray) {
             [[KTCBrowseHistoryView historyView] reloadDataForTag:tag];
             [[KTCBrowseHistoryView historyView] startLoadingAnimation:NO];
+            [[KTCBrowseHistoryView historyView] noMoreData:NO forTag:tag];
         } failure:^(NSError *error) {
             [[KTCBrowseHistoryView historyView] reloadDataForTag:tag];
             [[KTCBrowseHistoryView historyView] startLoadingAnimation:NO];
@@ -408,6 +411,7 @@
         } failure:^(NSError *error) {
             [[KTCBrowseHistoryView historyView] reloadDataForTag:tag];
             [[KTCBrowseHistoryView historyView] startLoadingAnimation:NO];
+            [[KTCBrowseHistoryView historyView] noMoreData:YES forTag:tag];
         }];
     } else {
         [[KTCBrowseHistoryView historyView] reloadDataForTag:tag];

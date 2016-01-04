@@ -54,7 +54,7 @@
     UIImageView *imageView = nil;
     imageView = [[UIImageView alloc] initWithFrame:frame];
     NSURL *imageUrl = [self.imageUrlsArray objectAtIndex:index];
-    [imageView setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"placeholder_400_400"]];
+    [imageView setImageWithURL:imageUrl placeholderImage:PLACEHOLDERIMAGE_BIG];
     return imageView;
 }
 

@@ -17,8 +17,8 @@
     
     // 设置普通状态的动画图片
     NSMutableArray *idleImages = [NSMutableArray array];
-    for (NSUInteger i = 1; i<=60; i++) {
-        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"dropdown_anim__000%zd", i]];
+    for (NSUInteger i = 1; i<=5; i++) {
+        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"dropdown_anim__00%zd", i]];
         [idleImages addObject:image];
     }
      [self setImages:idleImages duration:0.5 forState:MJRefreshStateIdle];

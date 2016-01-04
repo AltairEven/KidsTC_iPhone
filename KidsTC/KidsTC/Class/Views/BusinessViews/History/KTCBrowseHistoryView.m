@@ -78,14 +78,25 @@ static KTCBrowseHistoryView *_sharedInstance = nil;
         [self.tableView registerNib:self.storeCellNib forCellReuseIdentifier:kStoreCellIdentifier];
     }
     __weak KTCBrowseHistoryView *weakSelf = self;
-    [weakSelf.tableView addGifFooterWithRefreshingBlock:^{
+    
+    MJRefreshBackNormalFooter *footer = [[MJRefreshBackNormalFooter alloc] init];
+    footer.refreshingBlock = ^{
         BOOL noMore = [[weakSelf.noMoreDataDic objectForKey:[NSString stringWithFormat:@"%lu", (unsigned long)weakSelf.currentTag]] boolValue];
         if (noMore) {
             [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
             return;
         }
         [weakSelf pullToLoadMoreData];
-    }];
+    };
+    self.tableView.mj_footer = footer;
+//    [weakSelf.tableView addGifFooterWithRefreshingBlock:^{
+//        BOOL noMore = [[weakSelf.noMoreDataDic objectForKey:[NSString stringWithFormat:@"%lu", (unsigned long)weakSelf.currentTag]] boolValue];
+//        if (noMore) {
+//            [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
+//            return;
+//        }
+//        [weakSelf pullToLoadMoreData];
+//    }];
     [self hideLoadMoreFooter:YES forTag:KTCBrowseHistoryViewTagService];
     [self hideLoadMoreFooter:YES forTag:KTCBrowseHistoryViewTagStore];
     //data

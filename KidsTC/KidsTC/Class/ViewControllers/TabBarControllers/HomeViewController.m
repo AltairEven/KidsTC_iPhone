@@ -16,8 +16,8 @@
 #import "HomeActivityService.h"
 #import "KTCWebViewController.h"
 
-#define ActivityWebViewClosePrefix (@"hook::close::")
-#define ActivityWebViewJumpPrefix (@"hook::jump::")
+#define ActivityWebViewClosePrefix (@"hook::close_activity::")
+#define ActivityWebViewJumpPrefix (@"hook::jump_activity::")
 
 
 @interface HomeViewController () <HomeViewDelegate, AUIFloorNavigationViewDataSource, AUIFloorNavigationViewDelegate, UIWebViewDelegate>
@@ -285,12 +285,20 @@
         [self.activityWebView removeFromSuperview];
         return NO;
     } else if ([urlString hasPrefix:ActivityWebViewJumpPrefix]) {
-        NSString *linkString = [urlString substringFromIndex:[ActivityWebViewJumpPrefix length]];
+        [self.activityWebView setHidden:YES];
+        [self.activityWebView removeFromSuperview];
+        
+        NSString *paramString = [urlString substringFromIndex:[ActivityWebViewJumpPrefix length]];
+        NSDictionary *params = [GToolUtil parsetUrl:paramString];
+        NSString *linkString = @"";
+        if (params) {
+            linkString = [params objectForKey:@"url"];
+        }
         if ([linkString length] == 0) {
             linkString = self.activityService.currentActivity.linkUrlString;
         }
         
-        if ([linkString length] == 0) {
+        if ([linkString length] != 0) {
             KTCWebViewController *controller = [[KTCWebViewController alloc] init];
             [controller setWebUrlString:self.activityService.currentActivity.linkUrlString];
             [controller setHidesBottomBarWhenPushed:YES];
@@ -359,6 +367,18 @@
             [self.activityWebView layoutIfNeeded];
             [appDelegate.window addSubview:self.activityWebView];
             [self.activityWebView setHidden:YES];
+            //set user agent
+            NSString *userAgent = [self.activityWebView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
+            NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+            NSString *appVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+            NSString *extInfo = [NSString stringWithFormat:@"KidsTC/Iphone/%@", appVersion];
+            if ([userAgent rangeOfString:extInfo].location == NSNotFound)
+            {
+                NSString *newUserAgent = [NSString stringWithFormat:@"%@ %@", userAgent, extInfo];
+                // Set user agent (the only problem is that we can't modify the User-Agent later in the program)
+                NSDictionary *dictionnary = [[NSDictionary alloc] initWithObjectsAndKeys:newUserAgent, @"UserAgent", nil];
+                [[NSUserDefaults standardUserDefaults] registerDefaults:dictionnary];
+            }
             //未显示过的活动
             NSURL *url = [NSURL URLWithString:[self.activityService.currentActivity pageUrlString]];
             if (url) {

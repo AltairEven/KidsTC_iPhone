@@ -110,7 +110,7 @@
             __weak UIImageView *weakView = imageView;
             //异步加载图片
             NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:string]];
-            [imageView setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"placeholder_400_400"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+            [imageView setImageWithURLRequest:request placeholderImage:PLACEHOLDERIMAGE_BIG success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
                 //原始图片
                 CGSize originalSize = [image size];
                 if (viewStandardHeight != originalSize.height) {

@@ -39,7 +39,7 @@
 
 - (void)configWithModel:(StoreDetailHotRecommendModel *)model {
     if (model) {
-        [self.cellImageView setImageWithURL:model.imageUrl placeholderImage:PLACEHOLDERIMAGE_SMALL];
+        [self.cellImageView setImageWithURL:model.imageUrl placeholderImage:PLACEHOLDERIMAGE_BIG];
         [self.titleLabel setText:model.serviceName];
         [self.priceView setPrice:model.price];
         [self.countLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)model.saleCount]];

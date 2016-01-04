@@ -212,6 +212,7 @@
 
 - (void)contectOnlineCustomerService {
     KTCWebViewController *controller = [[KTCWebViewController alloc] init];
+    [controller setHideShare:YES];
     [controller setWebUrlString:[OnlineCustomerService onlineCustomerServiceLinkUrlString]];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];

@@ -85,7 +85,7 @@
     if (self.dataSource) {
         if ([self.dataSource respondsToSelector:@selector(imageUrlOfCellAtIndexPath:onHotActivityView:)]) {
             NSURL *url = [self.dataSource imageUrlOfCellAtIndexPath:indexPath onHotActivityView:self];
-            [cell.activityImageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder_200_200"]];
+            [cell.activityImageView setImageWithURL:url placeholderImage:PLACEHOLDERIMAGE_SMALL];
         }
     }
 }

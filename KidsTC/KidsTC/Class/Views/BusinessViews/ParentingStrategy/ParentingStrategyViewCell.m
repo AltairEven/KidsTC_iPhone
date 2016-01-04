@@ -56,7 +56,7 @@
             break;
         }
     }
-    [self.cellImageView setImageWithURL:model.imageUrl];
+    [self.cellImageView setImageWithURL:model.imageUrl placeholderImage:PLACEHOLDERIMAGE_BIG];
     [self.titleLabel setText:model.title];
     [self.editorLabel setText:model.editorName];
     [self.viewCountLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)model.viewCount]];

@@ -235,6 +235,7 @@ NSString *const kHomeViewDataFinishLoadingNotification = @"kHomeViewDataFinishLo
     ageItem.identifier = [NSString stringWithFormat:@"%d", [KTCUser currentUser].userRole.role];
     condition.age = ageItem;
     condition.sortType = KTCSearchResultServiceSortTypeSaleCount;
+    condition.userRole = [KTCUser currentUser].userRole.role;
     
     __weak HomeViewModel *weakSelf = self;
     [[KTCSearchService sharedService] startServiceSearchWithParamDic:param Condition:condition success:^(NSDictionary *responseData) {
