@@ -777,6 +777,8 @@
 		8F12062A1C1A622700662E01 /* KTCAnnotationTipStoreItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F1206211C1A622700662E01 /* KTCAnnotationTipStoreItemView.xib */; };
 		8F12062B1C1A622700662E01 /* KTCAnnotationTipWelfareItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1206231C1A622700662E01 /* KTCAnnotationTipWelfareItemView.m */; };
 		8F12062C1C1A622700662E01 /* KTCAnnotationTipWelfareItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F1206241C1A622700662E01 /* KTCAnnotationTipWelfareItemView.xib */; };
+		8F201FF71C3A22250002AFB3 /* HomeActivityService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F201FF61C3A22250002AFB3 /* HomeActivityService.m */; };
+		8F201FF91C3A25E50002AFB3 /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F201FF81C3A25E50002AFB3 /* interface_list.plist */; };
 		8F25A0E11C2A75C10076A6FA /* SoftwareSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F25A0DF1C2A75C10076A6FA /* SoftwareSettingViewController.m */; };
 		8F25A0E21C2A75C10076A6FA /* SoftwareSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F25A0E01C2A75C10076A6FA /* SoftwareSettingViewController.xib */; };
 		8F25A0E51C2A8A350076A6FA /* KTCAdvertisementItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F25A0E41C2A8A350076A6FA /* KTCAdvertisementItem.m */; };
@@ -804,6 +806,7 @@
 		8F25A1311C2D3AED0076A6FA /* MJChiBaoZiHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F25A1301C2D3AED0076A6FA /* MJChiBaoZiHeader.m */; };
 		8F25A1361C3164B60076A6FA /* HomeBigImageTwoDescCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F25A1351C3164B60076A6FA /* HomeBigImageTwoDescCellModel.m */; };
 		8F2C55BB1BFF167B00C2B6BF /* CommonShareService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2C55BA1BFF167B00C2B6BF /* CommonShareService.m */; };
+		8F375B6C1C38D05400743453 /* AdditionalTabBarItemManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F375B6B1C38D05400743453 /* AdditionalTabBarItemManager.m */; };
 		8F38D1E91C085F080061C329 /* CommentFoundingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F38D1E81C085F080061C329 /* CommentFoundingView.m */; };
 		8F38D1EB1C085F1E0061C329 /* CommentFoundingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F38D1EA1C085F1E0061C329 /* CommentFoundingView.xib */; };
 		8F38D1EE1C089AB70061C329 /* CommentFoundingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F38D1ED1C089AB70061C329 /* CommentFoundingModel.m */; };
@@ -924,7 +927,6 @@
 		8FC36E2D1C325E4C0079D458 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 8FC36E251C325E4C0079D458 /* unzip.c */; };
 		8FC36E2E1C325E4C0079D458 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 8FC36E271C325E4C0079D458 /* zip.c */; };
 		8FC36E2F1C325E4C0079D458 /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC36E2A1C325E4C0079D458 /* SSZipArchive.m */; };
-		8FC36E331C3376880079D458 /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8FC36E321C3376880079D458 /* interface_list.plist */; };
 		8FC75DA81C0EEBBC00D1E5F0 /* CommentEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC75DA71C0EEBBC00D1E5F0 /* CommentEditView.m */; };
 		8FC75DAA1C0EEBCB00D1E5F0 /* CommentEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FC75DA91C0EEBCB00D1E5F0 /* CommentEditView.xib */; };
 		8FC75DAE1C0EED8200D1E5F0 /* CommentEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC75DAC1C0EED8200D1E5F0 /* CommentEditViewController.m */; };
@@ -2296,6 +2298,9 @@
 		8F1206221C1A622700662E01 /* KTCAnnotationTipWelfareItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCAnnotationTipWelfareItemView.h; sourceTree = "<group>"; };
 		8F1206231C1A622700662E01 /* KTCAnnotationTipWelfareItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCAnnotationTipWelfareItemView.m; sourceTree = "<group>"; };
 		8F1206241C1A622700662E01 /* KTCAnnotationTipWelfareItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTCAnnotationTipWelfareItemView.xib; sourceTree = "<group>"; };
+		8F201FF51C3A22250002AFB3 /* HomeActivityService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeActivityService.h; sourceTree = "<group>"; };
+		8F201FF61C3A22250002AFB3 /* HomeActivityService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeActivityService.m; sourceTree = "<group>"; };
+		8F201FF81C3A25E50002AFB3 /* interface_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = interface_list.plist; sourceTree = "<group>"; };
 		8F205F7D1C1BC67E00A74386 /* MTAFeedback.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTAFeedback.h; sourceTree = "<group>"; };
 		8F25A0DE1C2A75C10076A6FA /* SoftwareSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoftwareSettingViewController.h; sourceTree = "<group>"; };
 		8F25A0DF1C2A75C10076A6FA /* SoftwareSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoftwareSettingViewController.m; sourceTree = "<group>"; };
@@ -2350,6 +2355,8 @@
 		8F25A1351C3164B60076A6FA /* HomeBigImageTwoDescCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeBigImageTwoDescCellModel.m; sourceTree = "<group>"; };
 		8F2C55B91BFF167B00C2B6BF /* CommonShareService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonShareService.h; sourceTree = "<group>"; };
 		8F2C55BA1BFF167B00C2B6BF /* CommonShareService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonShareService.m; sourceTree = "<group>"; };
+		8F375B6A1C38D05400743453 /* AdditionalTabBarItemManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdditionalTabBarItemManager.h; sourceTree = "<group>"; };
+		8F375B6B1C38D05400743453 /* AdditionalTabBarItemManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdditionalTabBarItemManager.m; sourceTree = "<group>"; };
 		8F38D1E71C085F080061C329 /* CommentFoundingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentFoundingView.h; sourceTree = "<group>"; };
 		8F38D1E81C085F080061C329 /* CommentFoundingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentFoundingView.m; sourceTree = "<group>"; };
 		8F38D1EA1C085F1E0061C329 /* CommentFoundingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentFoundingView.xib; sourceTree = "<group>"; };
@@ -2547,7 +2554,6 @@
 		8FC36E281C325E4C0079D458 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
 		8FC36E291C325E4C0079D458 /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipArchive.h; sourceTree = "<group>"; };
 		8FC36E2A1C325E4C0079D458 /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
-		8FC36E321C3376880079D458 /* interface_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = interface_list.plist; sourceTree = "<group>"; };
 		8FC75DA61C0EEBBC00D1E5F0 /* CommentEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentEditView.h; sourceTree = "<group>"; };
 		8FC75DA71C0EEBBC00D1E5F0 /* CommentEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentEditView.m; sourceTree = "<group>"; };
 		8FC75DA91C0EEBCB00D1E5F0 /* CommentEditView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentEditView.xib; sourceTree = "<group>"; };
@@ -3268,7 +3274,7 @@
 		1E3D7E781B4BD83D00275C35 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8FC36E321C3376880079D458 /* interface_list.plist */,
+				8F201FF81C3A25E50002AFB3 /* interface_list.plist */,
 				1E943EBD1B7375F60029FE74 /* Area.plist */,
 				1E0B7B591B709A2100A58AD4 /* Category.plist */,
 				1E3D7E791B4BD83D00275C35 /* Info.plist */,
@@ -3311,6 +3317,8 @@
 		1E3D87FA1B4BF49F00275C35 /* LogicFramework */ = {
 			isa = PBXGroup;
 			children = (
+				8F201FF41C3A22060002AFB3 /* HomeActivity */,
+				8F375B691C38D01A00743453 /* AdditionalTabBarItem */,
 				8F25A0E61C2BD0D90076A6FA /* Theme */,
 				8F50DEC41C1F15FB0069E6A4 /* Advertisement */,
 				8FA114D91C190B73003FA52F /* OnlineCustomerService */,
@@ -5417,6 +5425,15 @@
 			path = Map;
 			sourceTree = "<group>";
 		};
+		8F201FF41C3A22060002AFB3 /* HomeActivity */ = {
+			isa = PBXGroup;
+			children = (
+				8F201FF51C3A22250002AFB3 /* HomeActivityService.h */,
+				8F201FF61C3A22250002AFB3 /* HomeActivityService.m */,
+			);
+			path = HomeActivity;
+			sourceTree = "<group>";
+		};
 		8F25A0E61C2BD0D90076A6FA /* Theme */ = {
 			isa = PBXGroup;
 			children = (
@@ -5515,6 +5532,15 @@
 				8FA3615A1C1552CE0094A9AA /* KTCShareService.m */,
 			);
 			path = Share;
+			sourceTree = "<group>";
+		};
+		8F375B691C38D01A00743453 /* AdditionalTabBarItem */ = {
+			isa = PBXGroup;
+			children = (
+				8F375B6A1C38D05400743453 /* AdditionalTabBarItemManager.h */,
+				8F375B6B1C38D05400743453 /* AdditionalTabBarItemManager.m */,
+			);
+			path = AdditionalTabBarItem;
 			sourceTree = "<group>";
 		};
 		8F50DEC41C1F15FB0069E6A4 /* Advertisement */ = {
@@ -5864,6 +5890,7 @@
 				8F7E45061C09E18C001EF3B5 /* OrderRefundViewController.xib in Resources */,
 				1E0B77A41B68C49000A58AD4 /* AccountSettingViewController.xib in Resources */,
 				8F1206281C1A622700662E01 /* KTCAnnotationTipDestinationView.xib in Resources */,
+				8F201FF91C3A25E50002AFB3 /* interface_list.plist in Resources */,
 				1E827BCF1B941337008F3F08 /* ImageError@3x.png in Resources */,
 				1EC4A1261B5DE49400206BB9 /* KTCSearchResultHeaderView.xib in Resources */,
 				1E943EDA1B78A8900029FE74 /* FavourateSegmentViewCell.xib in Resources */,
@@ -6021,7 +6048,6 @@
 				1E827BD91B941337008F3F08 /* ImageSelectedSmallOn.png in Resources */,
 				1E827B8B1B93E7B3008F3F08 /* AUIPhotoBrowserViewController.xib in Resources */,
 				1E943EF81B7AFC9F0029FE74 /* AppointmentListViewHeaderTabCell.xib in Resources */,
-				8FC36E331C3376880079D458 /* interface_list.plist in Resources */,
 				1EC4A1111B5CCD2700206BB9 /* KTCSearchView.xib in Resources */,
 				1E943F531B7DDFDF0029FE74 /* logo_828_1472.png in Resources */,
 				1E7994D91BC614DD0099CFF9 /* ParentingStrategyDetailView.xib in Resources */,
@@ -6349,6 +6375,7 @@
 				1E943EFB1B7B19360029FE74 /* AppointmentOrderListViewModel.m in Sources */,
 				8F85AD8A1C0C6CE100890526 /* NotificationCenterViewModel.m in Sources */,
 				8F25A1201C2D1C9C0076A6FA /* MJRefreshBackStateFooter.m in Sources */,
+				8F201FF71C3A22250002AFB3 /* HomeActivityService.m in Sources */,
 				8FABCB3F1C0FEA80005BF7AD /* FavouriteStoreItemModel.m in Sources */,
 				1E943EF31B7AE7800029FE74 /* AppointmentOrderModel.m in Sources */,
 				1EC73C621B611630008B39EA /* SettlementView.m in Sources */,
@@ -6632,6 +6659,7 @@
 				1E0B7AAD1B6F67B800A58AD4 /* GPreViewSetScrollView.m in Sources */,
 				1E7995681BCCD7BA0099CFF9 /* AUITheme.m in Sources */,
 				1E827CD11B9BF0E3008F3F08 /* CouponListViewModel.m in Sources */,
+				8F375B6C1C38D05400743453 /* AdditionalTabBarItemManager.m in Sources */,
 				1EC73BEB1B5E5FF3008B39EA /* HomeViewThreeCell.m in Sources */,
 				8F9996041BF5A6740055F016 /* WeChatModel.m in Sources */,
 				1E7600351B55FFF300DF0972 /* ServiceMoreDetailHotSalesItemModel.m in Sources */,

@@ -31,6 +31,7 @@
 #import "KTCSegueMaster.h"
 #import "KTCAdvertisementManager.h"
 #import "BigAdvertisementViewController.h"
+#import "AdditionalTabBarItemManager.h"
 
 static BOOL _alreadyLaunched = NO;
 
@@ -144,6 +145,8 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
     //主题
     [[KTCThemeManager manager] loadLocalTheme];
     [[KTCThemeManager manager] synchronizeTheme];
+    //新增TAB
+    [[AdditionalTabBarItemManager sharedManager] synchronizeAdditionalTabBarItem];
 //
 //    //更新三级地址信息
 //    [[AddressManager sharedManager] validateADListDataWithSuccess:^(AddressManager *manager) {

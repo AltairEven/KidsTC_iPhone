@@ -39,7 +39,7 @@
 }
 
 - (void)configWithModel:(HomeNoticeCellModel *)model {
-    [self.cellImageView setImageWithURL:model.imageUrl];
+    [self.cellImageView setImageWithURL:model.imageUrl placeholderImage:[UIImage imageNamed:@"home_notice"]];
     self.cellModel = model;
     [self.noticeView reloadData];
 }

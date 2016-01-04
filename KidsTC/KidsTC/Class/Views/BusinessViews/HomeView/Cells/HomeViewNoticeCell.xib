@@ -17,7 +17,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rd5-Kl-aha" userLabel="bgView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1W7-rk-rxr">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_notice" translatesAutoresizingMaskIntoConstraints="NO" id="1W7-rk-rxr">
                                 <rect key="frame" x="10" y="7" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="gKp-OZ-LTQ"/>
@@ -54,4 +54,7 @@
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="home_notice" width="30" height="30"/>
+    </resources>
 </document>

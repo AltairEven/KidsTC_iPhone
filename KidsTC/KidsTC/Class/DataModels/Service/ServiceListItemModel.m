@@ -23,6 +23,7 @@
             self.channelId = [NSString stringWithFormat:@"%@", [data objectForKey:@"channelId"]];
         }
         self.imageUrl = [NSURL URLWithString:[data objectForKey:@"imgUrl"]];
+        self.status = (ServiceStatus)[[data objectForKey:@"status"] integerValue];
         self.serviceName = [data objectForKey:@"serveName"];
         self.starNumber = [[data objectForKey:@"level"] integerValue];
         self.promotionPrice = [[data objectForKey:@"price"] floatValue];

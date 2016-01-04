@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -20,6 +20,10 @@
                             <constraint firstAttribute="width" constant="80" id="CW5-tu-Ci0"/>
                             <constraint firstAttribute="height" constant="80" id="zV9-Ja-0g8"/>
                         </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oTS-jp-hOM">
+                        <rect key="frame" x="10" y="10" width="80" height="80"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z3a-KO-X3S">
                         <rect key="frame" x="100" y="15" width="195" height="0.0"/>
@@ -89,13 +93,16 @@
                     <constraint firstItem="i8R-hT-Bt5" firstAttribute="leading" secondItem="Z3a-KO-X3S" secondAttribute="leading" id="8jR-py-qoX"/>
                     <constraint firstAttribute="bottom" secondItem="zQu-oX-MNm" secondAttribute="bottom" id="BZM-GB-aSM"/>
                     <constraint firstItem="BEU-jj-gFe" firstAttribute="centerY" secondItem="Z3a-KO-X3S" secondAttribute="centerY" id="By8-m2-cJC"/>
+                    <constraint firstItem="oTS-jp-hOM" firstAttribute="height" secondItem="byB-Qq-gS3" secondAttribute="height" id="CEq-rT-cj3"/>
                     <constraint firstItem="5yv-vy-q1F" firstAttribute="bottom" secondItem="i8R-hT-Bt5" secondAttribute="bottom" id="Gb4-gY-Kr7"/>
                     <constraint firstItem="5yv-vy-q1F" firstAttribute="bottom" secondItem="78e-79-WjN" secondAttribute="bottom" id="LR6-7P-MRW"/>
                     <constraint firstItem="HCM-Ni-vWs" firstAttribute="leading" secondItem="KVn-bJ-8OY" secondAttribute="leading" id="LV2-h3-eUS"/>
                     <constraint firstAttribute="trailing" secondItem="zQu-oX-MNm" secondAttribute="trailing" id="P0B-kh-WSM"/>
+                    <constraint firstItem="oTS-jp-hOM" firstAttribute="width" secondItem="byB-Qq-gS3" secondAttribute="width" id="Q2Y-dL-ha7"/>
                     <constraint firstItem="Z3a-KO-X3S" firstAttribute="leading" secondItem="byB-Qq-gS3" secondAttribute="trailing" constant="10" id="VFw-bC-uYI"/>
                     <constraint firstItem="99B-t6-5Lm" firstAttribute="bottom" secondItem="KVn-bJ-8OY" secondAttribute="bottom" id="Wkx-X4-71J"/>
                     <constraint firstItem="HCM-Ni-vWs" firstAttribute="bottom" secondItem="byB-Qq-gS3" secondAttribute="bottom" id="YIW-DT-4xc"/>
+                    <constraint firstItem="oTS-jp-hOM" firstAttribute="centerY" secondItem="byB-Qq-gS3" secondAttribute="centerY" id="bGK-Hd-fJ7"/>
                     <constraint firstItem="i8R-hT-Bt5" firstAttribute="centerY" secondItem="byB-Qq-gS3" secondAttribute="centerY" id="daA-xe-Dpj"/>
                     <constraint firstAttribute="trailing" secondItem="HCM-Ni-vWs" secondAttribute="trailing" id="gMf-1Q-qci"/>
                     <constraint firstItem="byB-Qq-gS3" firstAttribute="bottom" secondItem="KVn-bJ-8OY" secondAttribute="bottom" constant="5" id="iv8-ra-i4I"/>
@@ -103,6 +110,7 @@
                     <constraint firstItem="5yv-vy-q1F" firstAttribute="leading" secondItem="78e-79-WjN" secondAttribute="trailing" constant="5" id="jQK-xL-pLB"/>
                     <constraint firstAttribute="trailing" secondItem="5yv-vy-q1F" secondAttribute="trailing" constant="10" id="oj9-Ce-8rc"/>
                     <constraint firstItem="Z3a-KO-X3S" firstAttribute="top" secondItem="byB-Qq-gS3" secondAttribute="top" constant="5" id="p8d-JF-gwj"/>
+                    <constraint firstItem="oTS-jp-hOM" firstAttribute="centerX" secondItem="byB-Qq-gS3" secondAttribute="centerX" id="pNd-1z-udx"/>
                     <constraint firstItem="byB-Qq-gS3" firstAttribute="top" secondItem="brt-gF-dLW" secondAttribute="top" constant="10" id="q25-DU-Iu6"/>
                     <constraint firstAttribute="trailing" secondItem="BEU-jj-gFe" secondAttribute="trailing" constant="10" id="ssR-rg-eSQ"/>
                     <constraint firstItem="zQu-oX-MNm" firstAttribute="width" secondItem="HCM-Ni-vWs" secondAttribute="width" id="svK-Oj-eX1"/>
@@ -118,6 +126,7 @@
                 <outlet property="separateView" destination="HCM-Ni-vWs" id="5xV-d3-yNk"/>
                 <outlet property="serviceImageView" destination="byB-Qq-gS3" id="ugb-Kc-rBi"/>
                 <outlet property="serviceNameLabel" destination="Z3a-KO-X3S" id="B8p-hs-Nsb"/>
+                <outlet property="serviceStatusImageView" destination="oTS-jp-hOM" id="drb-P3-nQj"/>
                 <outlet property="starsView" destination="i8R-hT-Bt5" id="46x-Th-Qem"/>
             </connections>
             <point key="canvasLocation" x="85" y="150"/>

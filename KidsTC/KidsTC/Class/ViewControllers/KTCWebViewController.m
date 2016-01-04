@@ -295,10 +295,10 @@
     NSString *title=[webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     if (title)
     {
-        self.title = title;
+        self.navigationItem.title = title;
         _navigationTitle = title;
     } else {
-        self.title = @"童成网";
+        self.navigationItem.title = @"童成网";
         _navigationTitle = title;
     }
 }
@@ -694,13 +694,17 @@
 
 - (void)goBackController:(id)sender
 {
-    [self.closeButton setHidden:![self.webView canGoBack]];
+    if (!self.isRootVC) {
+        [self.closeButton setHidden:![self.webView canGoBack]];
+    }
+    
     if([self.webView canGoBack])
     {
         [self.webView goBack];
-    }
-    else
-    {
+    } else if (self.isRootVC) {
+        //只有一个webViewController
+        [[KTCTabBarController shareTabBarController] setButtonSelected:0];
+    } else {
         /*
          缓存Cookies, 用于再次进入WebView时保留QQ登录态。
          */

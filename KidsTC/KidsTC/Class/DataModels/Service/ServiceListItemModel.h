@@ -11,6 +11,14 @@
 #import "ActivityLogoItem.h"
 #import "PromotionLogoItem.h"
 
+typedef enum {
+    ServiceStatusReadyForSale = 1,
+    ServiceStatusHasSoldOut = 2,
+    ServiceStatusNoStore = 3,
+    ServiceStatusNotBegin = 4,
+    ServiceStatusHasTakenOff = 5
+}ServiceStatus;
+
 @interface ServiceListItemModel : NSObject
 
 @property (nonatomic, copy) NSString *identifier;
@@ -18,6 +26,8 @@
 @property (nonatomic, copy) NSString *channelId;
 
 @property (nonatomic, strong) NSURL *imageUrl;
+
+@property (nonatomic, assign) ServiceStatus status;
 
 @property (nonatomic, copy) NSString *serviceName;
 

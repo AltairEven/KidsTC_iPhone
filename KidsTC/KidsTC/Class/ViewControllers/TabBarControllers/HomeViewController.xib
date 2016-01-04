@@ -2,11 +2,12 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9531"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController">
             <connections>
+                <outlet property="activityThumbView" destination="yLJ-Pg-2ku" id="EnB-CN-0uL"/>
                 <outlet property="floorNavigationView" destination="PlG-we-FlD" id="GtH-O2-2Ly"/>
                 <outlet property="homeView" destination="xCg-Dv-bsY" id="yhW-8a-JQb"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -29,6 +30,14 @@
                         <constraint firstAttribute="width" constant="30" id="sPP-Dm-Pdg"/>
                     </constraints>
                 </view>
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yLJ-Pg-2ku">
+                    <rect key="frame" x="280" y="328" width="40" height="40"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="ZVc-ob-akh"/>
+                        <constraint firstAttribute="width" constant="40" id="rcq-g4-BYo"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -36,8 +45,10 @@
                 <constraint firstItem="xCg-Dv-bsY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="6j2-Ce-xOZ"/>
                 <constraint firstItem="xCg-Dv-bsY" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="BIY-Lu-6cr"/>
                 <constraint firstAttribute="trailing" secondItem="PlG-we-FlD" secondAttribute="trailing" constant="10" id="K1i-Kl-9Iq"/>
+                <constraint firstAttribute="bottom" secondItem="yLJ-Pg-2ku" secondAttribute="bottom" constant="200" id="Yyj-iX-BWS"/>
                 <constraint firstAttribute="bottom" secondItem="PlG-we-FlD" secondAttribute="bottom" constant="80" id="bw0-df-FRc"/>
                 <constraint firstAttribute="bottom" secondItem="xCg-Dv-bsY" secondAttribute="bottom" id="hw7-k0-3dW"/>
+                <constraint firstAttribute="trailing" secondItem="yLJ-Pg-2ku" secondAttribute="trailing" id="i7e-CL-R1a"/>
             </constraints>
             <point key="canvasLocation" x="416" y="321"/>
         </view>

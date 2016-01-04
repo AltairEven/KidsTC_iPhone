@@ -16,8 +16,6 @@
 
 @property (nonatomic, assign) id<GKeyboardDelegate> keyboardDelegate;
 
-@property (nonatomic, strong, readonly) NSArray<UIViewController *> *rootViewControllers;
-
 @property (nonatomic, readonly) NSUInteger tabCount;
 
 + (KTCTabBarController *)shareTabBarController;

@@ -69,7 +69,7 @@ NSString *const kAUIThemeTabItemKeyUserCenter = @"kAUIThemeTabItemKeyUserCenter"
     element4.tabbarItemImage_Normal = [UIImage imageNamed:@"tabbar_userCenter_n"];
     element4.tabbarItemImage_Highlight = [UIImage imageNamed:@"tabbar_userCenter_h"];
     
-    theme.tabbarItmeElements = [NSArray arrayWithObjects:element1, element2, element3, element4, nil];
+    theme.tabbarItemElements = [NSArray arrayWithObjects:element1, element2, element3, element4, nil];
     return theme;
 }
 
@@ -90,7 +90,7 @@ NSString *const kAUIThemeTabItemKeyUserCenter = @"kAUIThemeTabItemKeyUserCenter"
     theme.naviBackImage_Normal = [UIImage imageWithCGImage:self.naviBackImage_Normal.CGImage];
     theme.naviBackImage_Highlight = [UIImage imageWithCGImage:self.naviBackImage_Highlight.CGImage];
     theme.tabbarBGColor = [self.tabbarBGColor copy];
-    theme.tabbarItmeElements = [self.tabbarItmeElements copy];
+    theme.tabbarItemElements = [self.tabbarItemElements copy];
     
     return theme;
 }

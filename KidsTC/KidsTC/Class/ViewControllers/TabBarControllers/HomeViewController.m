@@ -13,6 +13,11 @@
 #import "AUIFloorNavigationView.h"
 #import "UserRoleSelectViewController.h"
 #import "KTCSegueMaster.h"
+#import "HomeActivityService.h"
+#import "KTCWebViewController.h"
+
+#define ActivityWebViewClosePrefix (@"hook::close::")
+#define ActivityWebViewJumpPrefix (@"hook::jump::")
 
 
 @interface HomeViewController () <HomeViewDelegate, AUIFloorNavigationViewDataSource, AUIFloorNavigationViewDelegate, UIWebViewDelegate>
@@ -20,17 +25,27 @@
 @property (weak, nonatomic) IBOutlet HomeView *homeView;
 @property (weak, nonatomic) IBOutlet AUIFloorNavigationView *floorNavigationView;
 
+@property (weak, nonatomic) IBOutlet UIImageView *activityThumbView;
+
 @property (nonatomic, strong) HomeViewModel *viewModel;
 
 @property (nonatomic, copy) NSString *sysNo;
 
-@property (nonatomic, strong) UIWebView *testWebView;
+@property (nonatomic, strong) HomeActivityService *activityService;
+
+@property (nonatomic, strong) UIWebView *activityWebView;
 
 - (void)userRoleHasChanged:(id)info;
 
 - (void)themeDidChanged:(NSNotification *)notify;
 
 - (void)resetHotSearchKeyWord;
+
+- (void)createActivityViews;
+
+- (void)didClickedOnActivityThumbView:(id)sender;
+
+- (void)resetRightViews;
 
 @end
 
@@ -76,18 +91,14 @@
     
     //热门搜索词
     [self resetHotSearchKeyWord];
+    //活动
+    self.activityService = [[HomeActivityService alloc] init];
+    [self.activityService synchronizeActivitySuccess:^(HomeActivity *activity) {
+        [weakSelf createActivityViews];
+    } failure:^(NSError *error) {
+        [weakSelf createActivityViews];
+    }];
     
-//    self.testWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-//    self.testWebView.delegate = self;
-//    [self.testWebView setScalesPageToFit:YES];
-//    [self.testWebView.scrollView setScrollEnabled:NO];
-//    [self.testWebView setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.3]];
-//    self.testWebView.opaque = NO;
-//    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//    [self.testWebView setFrame:appDelegate.window.frame];
-//    [self.testWebView layoutIfNeeded];
-//    [appDelegate.window addSubview:self.testWebView];
-//    [self.testWebView setHidden:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -98,9 +109,17 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    NSString *url = @"http://demo.sc.chinaz.com//Files/DownLoad/webjs1/201410/jiaoben2890/#";
-//    NSString *url = @"http://m.kidstc.com/event/detail/7C-B4-EA-88-F0-DE-9E-9F%7C100.html";
-    [self.testWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+    if (self.activityService.currentActivity) {
+        if (![self.activityService.currentActivity hasDisplayedWebPage]) {
+            //未显示过的活动
+            NSURL *url = [NSURL URLWithString:[self.activityService.currentActivity pageUrlString]];
+            if (url) {
+                NSURLRequest *request = [NSURLRequest requestWithURL:url];
+                [self.activityWebView loadRequest:request];
+            }
+        }
+        [self resetRightViews];
+    }
 }
 
 
@@ -258,9 +277,36 @@
 
 #pragma mark UIWebViewDelegate
 
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    NSURL * requestUrl = [request URL];
+    NSString *urlString = [requestUrl absoluteString];
+    if ([urlString hasPrefix:ActivityWebViewClosePrefix]) {
+        [self.activityWebView setHidden:YES];
+        [self.activityWebView removeFromSuperview];
+        return NO;
+    } else if ([urlString hasPrefix:ActivityWebViewJumpPrefix]) {
+        NSString *linkString = [urlString substringFromIndex:[ActivityWebViewJumpPrefix length]];
+        if ([linkString length] == 0) {
+            linkString = self.activityService.currentActivity.linkUrlString;
+        }
+        
+        if ([linkString length] == 0) {
+            KTCWebViewController *controller = [[KTCWebViewController alloc] init];
+            [controller setWebUrlString:self.activityService.currentActivity.linkUrlString];
+            [controller setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+        return NO;
+    }
+    return YES;
+}
+
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-    [self.testWebView setHidden:NO];
-    [self.testWebView.superview bringSubviewToFront:self.testWebView];
+    if (![webView isLoading]) {
+        [self.activityWebView setHidden:NO];
+        [self.activityWebView.superview bringSubviewToFront:self.activityWebView];
+        [self.activityService setHasDisplayedWebPage];
+    }
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
@@ -297,6 +343,64 @@
         hotSearchKeyWord = @"宝爸宝妈都在这里找";
     }
     [self.homeView resetTopViewWithInputContent:hotSearchKeyWord isPlaceHolder:YES];
+}
+
+- (void)createActivityViews {
+    if (self.activityService.currentActivity) {
+        if (![self.activityService.currentActivity hasDisplayedWebPage]) {
+            self.activityWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+            self.activityWebView.delegate = self;
+            [self.activityWebView setScalesPageToFit:YES];
+            [self.activityWebView.scrollView setScrollEnabled:NO];
+            [self.activityWebView setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.3]];
+            self.activityWebView.opaque = NO;
+            AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            [self.activityWebView setFrame:appDelegate.window.frame];
+            [self.activityWebView layoutIfNeeded];
+            [appDelegate.window addSubview:self.activityWebView];
+            [self.activityWebView setHidden:YES];
+            //未显示过的活动
+            NSURL *url = [NSURL URLWithString:[self.activityService.currentActivity pageUrlString]];
+            if (url) {
+                NSURLRequest *request = [NSURLRequest requestWithURL:url];
+                [self.activityWebView loadRequest:request];
+            }
+        }
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickedOnActivityThumbView:)];
+        [self.activityThumbView addGestureRecognizer:tap];
+        
+        [self resetRightViews];
+    }
+}
+
+- (void)didClickedOnActivityThumbView:(id)sender {
+    if ([self.activityService.currentActivity.linkUrlString length] > 0) {
+        KTCWebViewController *controller = [[KTCWebViewController alloc] init];
+        [controller setWebUrlString:self.activityService.currentActivity.linkUrlString];
+        [controller setHidesBottomBarWhenPushed:YES];
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+}
+
+- (void)resetRightViews {
+    if (self.activityService.currentActivity.thumbImage) {
+        [self.activityThumbView setImage:self.activityService.currentActivity.thumbImage];
+        [self.activityThumbView setHidden:NO];
+        
+        [self.floorNavigationView setHidden:YES];
+        [self.floorNavigationView setEnableCollapse:NO];
+    } else if ([self.activityService.currentActivity.thumbImageUrlString length] > 0) {
+        [self.activityThumbView setImageWithURL:[NSURL URLWithString:self.activityService.currentActivity.thumbImageUrlString] placeholderImage:nil];
+        [self.activityThumbView setHidden:NO];
+        
+        [self.floorNavigationView setHidden:YES];
+        [self.floorNavigationView setEnableCollapse:NO];
+    } else {
+        [self.activityThumbView setHidden:YES];
+        
+        [self.floorNavigationView setHidden:NO];
+        [self.floorNavigationView setEnableCollapse:YES];
+    }
 }
 
 

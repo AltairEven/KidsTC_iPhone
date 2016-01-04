@@ -179,10 +179,24 @@
 			<key>url</key>
 			<string>http://api.kidstc.com/json.php?mod=userCenter&amp;&amp;act=get_center_count</string>
 		</dict>
+		<key>GET_HOME_PAGE_ACTIVITY</key>
+		<dict>
+			<key>method</key>
+			<string>get</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=main&amp;act=get_home_page_activity</string>
+		</dict>
+		<key>GET_HOME_TAB</key>
+		<dict>
+			<key>method</key>
+			<string>get</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=main&amp;&amp;act=get_home_tab</string>
+		</dict>
 		<key>GET_HOME_THEME</key>
 		<dict>
 			<key>method</key>
-			<string>post</string>
+			<string>get</string>
 			<key>url</key>
 			<string>http://api.kidstc.com/json.php?mod=main&amp;&amp;act=get_home_theme</string>
 		</dict>
@@ -540,6 +554,6 @@
 	<key>errno</key>
 	<integer>0</integer>
 	<key>version</key>
-	<string>29</string>
+	<string>32</string>
 </dict>
 </plist>

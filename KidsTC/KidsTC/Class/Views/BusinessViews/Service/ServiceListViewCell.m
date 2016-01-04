@@ -17,6 +17,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *separateView;
 @property (weak, nonatomic) IBOutlet UIView *activityBGView;
+@property (weak, nonatomic) IBOutlet UIImageView *serviceStatusImageView;
 
 - (void)buildActivitysViewWithActivityLogoItems:(NSArray *)items;
 
@@ -86,6 +87,15 @@
     }
     if (model.imageUrl) {
         [self.serviceImageView setImageWithURL:model.imageUrl];
+    }
+    if (model.status == ServiceStatusHasSoldOut) {
+        [self.serviceStatusImageView setImage:[UIImage imageNamed:@"servicelist_soldout"]];
+        [self.serviceStatusImageView setHidden:NO];
+    } else if (model.status == ServiceStatusNoStore || model.status == ServiceStatusNotBegin || model.status == ServiceStatusHasTakenOff) {
+        [self.serviceStatusImageView setImage:[UIImage imageNamed:@"servicelist_notsaling"]];
+        [self.serviceStatusImageView setHidden:NO];
+    } else {
+        [self.serviceStatusImageView setHidden:YES];
     }
     [self.serviceNameLabel setText:model.serviceName];
     [self.starsView setStarNumber:model.starNumber];

@@ -18,7 +18,8 @@ typedef enum {
     AUITabbarItemTypeHome,
     AUITabbarItemTypeNews,
     AUITabbarItemTypeStrategy,
-    AUITabbarItemTypeUserCenter
+    AUITabbarItemTypeUserCenter,
+    AUITabbarItemTypeAdditional//附加tabBarItem
 }AUITabbarItemType;
 
 @class AUITabbarItemElement;
@@ -63,7 +64,7 @@ typedef enum {
 
 @property (nonatomic, strong) UIColor *tabbarBGColor; //tab栏背景色
 
-@property (nonatomic, strong) NSArray<AUITabbarItemElement *> *tabbarItmeElements; //tabbar item元素
+@property (nonatomic, strong) NSArray<AUITabbarItemElement *> *tabbarItemElements; //tabbar item元素
 
 @end
 
@@ -80,5 +81,7 @@ typedef enum {
 @property (nonatomic, strong) UIImage *tabbarItemImage_Normal; //tabbar按钮图片（普通）
 
 @property (nonatomic, strong) UIImage *tabbarItemImage_Highlight; //tabbar按钮图片（高亮）
+
+@property (nonatomic, strong) NSDictionary *userInfo; //自定义信息
 
 @end

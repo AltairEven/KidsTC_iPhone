@@ -329,7 +329,7 @@ static KTCThemeManager *_sharedInstance = nil;
     AUITheme *theme = [AUITheme defaultTheme];
     theme.navibarBGColor = naviBGColor;
     theme.tabbarBGColor = tabBGColor;
-    theme.tabbarItmeElements = [NSArray arrayWithObjects:homeElement, newsElement, strategyElement, meElement, nil];
+    theme.tabbarItemElements = [NSArray arrayWithObjects:homeElement, newsElement, strategyElement, meElement, nil];
     
     return theme;
 }

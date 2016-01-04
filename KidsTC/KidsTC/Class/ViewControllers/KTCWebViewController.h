@@ -25,6 +25,7 @@
 @property (copy, nonatomic) NSString *webUrlString;
 @property (nonatomic, assign) id<KTCWebViewControllerDelegate> delegate;
 @property (nonatomic, readonly, strong) NSString *currentUrlString;
+@property (nonatomic, assign) BOOL isRootVC;
 
 /*
  关闭web页面
