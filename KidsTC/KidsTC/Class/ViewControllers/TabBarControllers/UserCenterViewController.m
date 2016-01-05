@@ -100,6 +100,8 @@
                 AppointmentOrderListViewController *controller = [[AppointmentOrderListViewController alloc] initWithNibName:@"AppointmentOrderListViewController" bundle:nil];
                 controller.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:controller animated:YES];
+                //MTA
+                [MTA trackCustomKeyValueEvent:@"event_skip_acct_appoints" props:nil];
             }
                 break;
             case UserCenterTagWaitingPay:
@@ -107,6 +109,8 @@
                 OrderListViewController *controller = [[OrderListViewController alloc] initWithOrderListType:OrderListTypeWaitingPayment];
                 controller.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:controller animated:YES];
+                //MTA
+                [MTA trackCustomKeyValueEvent:@"event_skip_acct_orders" props:nil];
             }
                 break;
             case UserCenterTagWaitingComment:
@@ -114,6 +118,8 @@
                 OrderListViewController *controller = [[OrderListViewController alloc] initWithOrderListType:OrderListTypeWaitingComment];
                 controller.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:controller animated:YES];
+                //MTA
+                [MTA trackCustomKeyValueEvent:@"event_skip_acct_orders" props:nil];
             }
                 break;
             case UserCenterTagAllOrder:
@@ -121,6 +127,8 @@
                 OrderListViewController *controller = [[OrderListViewController alloc] initWithOrderListType:OrderListTypeAll];
                 controller.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:controller animated:YES];
+                //MTA
+                [MTA trackCustomKeyValueEvent:@"event_skip_acct_orders" props:nil];
             }
                 break;
             case UserCenterTagMyComment:

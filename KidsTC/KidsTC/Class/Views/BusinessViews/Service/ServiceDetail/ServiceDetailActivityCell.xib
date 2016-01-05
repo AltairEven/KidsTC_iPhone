@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="DKx-pY-0b9" userLabel="ActiveCell" customClass="ServiceDetailActivityCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DKx-pY-0b9" id="Wu6-sU-6Ey">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder_50_50" translatesAutoresizingMaskIntoConstraints="NO" id="oap-rh-zYQ">
+                        <rect key="frame" x="10" y="7" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="PsU-al-Grp"/>
+                            <constraint firstAttribute="width" constant="30" id="hSI-9b-PhU"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="到店有礼" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dqF-i3-BG9">
+                        <rect key="frame" x="50" y="13" width="260" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="dqF-i3-BG9" firstAttribute="top" secondItem="oap-rh-zYQ" secondAttribute="top" constant="6" id="4Ue-Tm-UdA"/>
+                    <constraint firstItem="oap-rh-zYQ" firstAttribute="centerY" secondItem="dqF-i3-BG9" secondAttribute="centerY" id="4lS-aX-0VP"/>
+                    <constraint firstAttribute="trailing" secondItem="dqF-i3-BG9" secondAttribute="trailing" constant="10" id="74H-bm-PPE"/>
+                    <constraint firstAttribute="centerY" secondItem="oap-rh-zYQ" secondAttribute="centerY" id="7Bq-ZH-MBa"/>
+                    <constraint firstItem="oap-rh-zYQ" firstAttribute="top" secondItem="Wu6-sU-6Ey" secondAttribute="top" constant="7" id="Txm-CS-ezy"/>
+                    <constraint firstItem="oap-rh-zYQ" firstAttribute="leading" secondItem="Wu6-sU-6Ey" secondAttribute="leading" constant="10" id="VCg-H5-iPW"/>
+                    <constraint firstItem="dqF-i3-BG9" firstAttribute="top" secondItem="Wu6-sU-6Ey" secondAttribute="top" constant="13" id="dKx-Pq-lKm"/>
+                    <constraint firstItem="dqF-i3-BG9" firstAttribute="leading" secondItem="oap-rh-zYQ" secondAttribute="trailing" constant="10" id="gMh-9B-S1i"/>
+                    <constraint firstItem="oap-rh-zYQ" firstAttribute="centerY" secondItem="dqF-i3-BG9" secondAttribute="centerY" id="kG2-aJ-DBe"/>
+                    <constraint firstItem="oap-rh-zYQ" firstAttribute="leading" secondItem="Wu6-sU-6Ey" secondAttribute="leading" constant="10" id="wZR-IR-fJR"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="4lS-aX-0VP"/>
+                        <exclude reference="7Bq-ZH-MBa"/>
+                        <exclude reference="Txm-CS-ezy"/>
+                        <exclude reference="4Ue-Tm-UdA"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="activeImageView" destination="oap-rh-zYQ" id="fqz-Gw-IX2"/>
+                <outlet property="descriptionLabel" destination="dqF-i3-BG9" id="xUN-TD-udz"/>
+            </connections>
+            <point key="canvasLocation" x="190" y="71"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="placeholder_50_50" width="50" height="50"/>
+    </resources>
+</document>

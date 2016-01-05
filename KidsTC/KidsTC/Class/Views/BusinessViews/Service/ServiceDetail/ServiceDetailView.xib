@@ -49,7 +49,7 @@
             <point key="canvasLocation" x="-115" y="176"/>
         </view>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="375" id="Dgb-dr-ZCx" userLabel="TopCell">
+        <tableViewCell alpha="0.0" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="375" id="Dgb-dr-ZCx" userLabel="TopCell">
             <rect key="frame" x="0.0" y="0.0" width="411" height="375"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Dgb-dr-ZCx" id="AJI-nM-mK0">

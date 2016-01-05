@@ -620,6 +620,8 @@
     ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithServiceId:serviceId channelId:channelId];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
+    //MTA
+    [MTA trackCustomEvent:@"event_skip_kbs_service" args:nil];
 }
 
 - (void)pushToStoreDetailWithParams:(NSDictionary *)params {
@@ -633,6 +635,8 @@
     StoreDetailViewController *controller = [[StoreDetailViewController alloc] initWithStoreId:storeId];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
+    //MTA
+    [MTA trackCustomEvent:@"event_skip_kbs_store" args:nil];
 }
 
 - (void)pushToStrategyDetailWithParams:(NSDictionary *)params {

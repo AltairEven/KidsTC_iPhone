@@ -54,6 +54,8 @@
 
 @property (nonatomic, copy) NSString *couponUrlString;
 
+@property (nonatomic, strong) NSArray<ActivityLogoItem *> *activeModelsArray;
+
 @property (nonatomic, copy) NSArray<ServiceDetailNoticeItem *> *noticeArray;
 
 @property (nonatomic, strong) NSURL *recommenderFaceImageUrl;
@@ -107,6 +109,8 @@
 - (CGFloat)insuranceCellHeight;
 
 - (CGFloat)couponCellHeight;
+
+- (CGFloat)activityCellHeight;
 
 - (CGFloat)noticeTitleCellHeight;
 

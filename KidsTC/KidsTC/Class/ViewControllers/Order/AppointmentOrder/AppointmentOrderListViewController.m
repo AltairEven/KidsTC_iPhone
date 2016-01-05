@@ -55,6 +55,8 @@
             [controller setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:controller animated:YES];
         }
+        //MTA
+        [MTA trackCustomKeyValueEvent:@"event_result_appoints_dtl" props:nil];
     }
 }
 

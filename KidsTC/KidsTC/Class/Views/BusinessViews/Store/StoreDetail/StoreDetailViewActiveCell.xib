@@ -57,6 +57,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="placeholder_50_50" width="998" height="998"/>
+        <image name="placeholder_50_50" width="50" height="50"/>
     </resources>
 </document>

@@ -117,13 +117,20 @@
                 if (error.userInfo) {
                     NSString *errMsg = [error.userInfo objectForKey:@"data"];
                     if ([errMsg isKindOfClass:[NSString class]] && [errMsg length] > 0) {
-                        
                         [[iToast makeText:errMsg] show];
                     } else {
                         [[iToast makeText:@"照片上传失败，请重新提交"] show];
                     }
                 } else {
                     [[iToast makeText:@"照片上传失败，请重新提交"] show];
+                }
+                //MTA
+                if (self.commentModel.orderId) {
+                    NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:self.commentModel.orderId, @"id", @"false", @"result", nil];
+                    [MTA trackCustomKeyValueEvent:@"event_result_prod_evaluation_submit" props:trackParam];
+                } else {
+                    NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:@"false", @"result", nil];
+                    [MTA trackCustomKeyValueEvent:@"event_result_prod_evaluation_submit" props:trackParam];
                 }
             }];
         }];
@@ -333,9 +340,25 @@
     [weakSelf.commentManager addCommentWithObject:object succeed:^(NSDictionary *data) {
         [[GAlertLoadingView sharedAlertLoadingView] hide];
         [weakSelf submitCommentSucceed:data];
+        //MTA
+        if (self.commentModel.orderId) {
+            NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:self.commentModel.orderId, @"id", @"true", @"result", nil];
+            [MTA trackCustomKeyValueEvent:@"event_result_prod_evaluation_submit" props:trackParam];
+        } else {
+            NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:@"true", @"result", nil];
+            [MTA trackCustomKeyValueEvent:@"event_result_prod_evaluation_submit" props:trackParam];
+        }
     } failure:^(NSError *error) {
         [[GAlertLoadingView sharedAlertLoadingView] hide];
         [weakSelf submitCommentFailed:error];
+        //MTA
+        if (self.commentModel.orderId) {
+            NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:self.commentModel.orderId, @"id", @"false", @"result", nil];
+            [MTA trackCustomKeyValueEvent:@"event_result_prod_evaluation_submit" props:trackParam];
+        } else {
+            NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:@"false", @"result", nil];
+            [MTA trackCustomKeyValueEvent:@"event_result_prod_evaluation_submit" props:trackParam];
+        }
     }];
 }
 

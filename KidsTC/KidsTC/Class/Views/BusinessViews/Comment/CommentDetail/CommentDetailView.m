@@ -173,7 +173,7 @@ static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIden
                 if (!cell) {
                     cell =  [[[NSBundle mainBundle] loadNibNamed:@"CommentDetailViewStrategyHeaderCell" owner:nil options:nil] objectAtIndex:0];
                 }
-//                ((ParentingStrategyDetailCellModel *)self.detailModel.headerModel).commentCount = [self.detailModel.replyModels count];
+                ((ParentingStrategyDetailCellModel *)self.detailModel.headerModel).commentCount = self.detailModel.totalReplyCount;
                 [cell configWithDetailCellModel:self.detailModel.headerModel];
                 cell.delegate = self;
                 return cell;
@@ -186,7 +186,7 @@ static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIden
                     cell =  [[[NSBundle mainBundle] loadNibNamed:@"CommentDetailViewNormalHeaderCell" owner:nil options:nil] objectAtIndex:0];
                 }
                 cell.delegate = self;
-                ((CommentListItemModel *)self.detailModel.headerModel).replyNumber = [self.detailModel.replyModels count];
+                ((CommentListItemModel *)self.detailModel.headerModel).replyNumber = self.detailModel.totalReplyCount;
                 [cell configWithModel:self.detailModel.headerModel];
                 return cell;
             }

@@ -136,6 +136,8 @@
     ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithServiceId:model.identifier channelId:model.channelId];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
+    //MTA
+    [MTA trackCustomEvent:@"event_skip_search_result_dtl_service" args:nil];
 }
 
 - (void)searchResultView:(KTCSearchResultView *)resultView didSelectedStoreAtIndex:(NSUInteger)index {
@@ -143,6 +145,8 @@
     StoreDetailViewController *controller = [[StoreDetailViewController alloc] initWithStoreId:model.identifier];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
+    //MTA
+    [MTA trackCustomEvent:@"event_skip_search_result_dtl_store" args:nil];
 }
 
 - (void)searchResultView:(KTCSearchResultView *)resultView needRefreshTableWithSearchType:(KTCSearchType)type {

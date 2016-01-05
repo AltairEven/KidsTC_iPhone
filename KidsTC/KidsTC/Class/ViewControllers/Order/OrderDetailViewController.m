@@ -56,7 +56,13 @@
     [self.viewModel setOrderId:self.orderId];
     __weak OrderDetailViewController *weakSelf = self;
     [weakSelf.viewModel startUpdateDataWithSucceed:^(NSDictionary *data) {
+        //MTA
+        NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:self.orderId, @"id", @"true", @"result", nil];
+        [MTA trackCustomKeyValueEvent:@"event_result_orders_dtl" props:trackParam];
     } failure:^(NSError *error) {
+        //MTA
+        NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:self.orderId, @"id", @"false", @"result", nil];
+        [MTA trackCustomKeyValueEvent:@"event_result_orders_dtl" props:trackParam];
     }];
     [weakSelf setupRightBarButton:@"" target:self action:@selector(didClickedContectCSButton) frontImage:@"customerService_n" andBackImage:@"customerService_n"];
 }
@@ -99,6 +105,9 @@
                 if (self.delegate && [self.delegate respondsToSelector:@selector(orderStatusChanged:needRefresh:)]) {
                     [self.delegate orderStatusChanged:self.orderId needRefresh:YES];
                 }
+                //MTA
+                NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:self.orderId, @"id", @"true", @"result", nil];
+                [MTA trackCustomKeyValueEvent:@"event_result_order_dtl_cancel" props:trackParam];
             }];
             [controller addAction:cancelAction];
             [controller addAction:confirmAction];
@@ -111,6 +120,8 @@
             controller.delegate = self;
             [controller setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:controller animated:YES];
+            //MTA
+            [MTA trackCustomKeyValueEvent:@"event_skip_order_dtl_evaluate" props:nil];
         }
             break;
         case OrderDetailActionTagRefund:
@@ -119,6 +130,8 @@
             controller.delegate = self;
             [controller setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:controller animated:YES];
+            //MTA
+            [MTA trackCustomKeyValueEvent:@"event_skip_order_dtl_refund" props:nil];
         }
             break;
         case OrderDetailActionTagGotoService:
@@ -126,6 +139,8 @@
             ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithServiceId:self.viewModel.detailModel.serviceId channelId:@""];
             [controller setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:controller animated:YES];
+            //MTA
+            [MTA trackCustomEvent:@"event_result_orders_dtl" args:nil];
         }
             break;
         case OrderDetailActionTagGetCode:

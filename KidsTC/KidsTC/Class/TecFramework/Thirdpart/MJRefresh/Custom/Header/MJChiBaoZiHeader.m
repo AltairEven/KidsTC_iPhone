@@ -8,20 +8,25 @@
 
 #import "MJChiBaoZiHeader.h"
 
+@interface MJChiBaoZiHeader ()
+
+@property (nonatomic, assign) BOOL hasRefreshed;
+
+@end
+
 @implementation MJChiBaoZiHeader
 #pragma mark - 重写方法
 #pragma mark 基本设置
 - (void)prepare
 {
     [super prepare];
-    
     // 设置普通状态的动画图片
     NSMutableArray *idleImages = [NSMutableArray array];
     for (NSUInteger i = 1; i<=5; i++) {
         UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"dropdown_anim__00%zd", i]];
         [idleImages addObject:image];
     }
-     [self setImages:idleImages duration:0.5 forState:MJRefreshStateIdle];
+    [self setImages:idleImages duration:0.5 forState:MJRefreshStateIdle];
     
     // 设置即将刷新状态的动画图片（一松开就会刷新的状态）
     NSMutableArray *refreshingImages = [NSMutableArray array];
@@ -37,4 +42,34 @@
     [self.stateLabel setHidden:YES];
     [self.lastUpdatedTimeLabel setHidden:YES];
 }
+
+- (void)beginRefreshing {
+    [super beginRefreshing];
+    self.hasRefreshed = YES;
+}
+
+- (void)endRefreshing {
+    [super endRefreshing];
+    [UIView animateWithDuration:0.4 animations:^{
+        [self.gifView setCenter:CGPointMake(-50, self.gifView.center.y)];
+    } completion:^(BOOL finished) {
+        self.hasRefreshed = NO;
+    }];
+}
+
+- (void)scrollViewContentOffsetDidChange:(NSDictionary *)change {
+    [super scrollViewContentOffsetDidChange:change];
+    if (!self.hasRefreshed) {
+        CGPoint new = [change[@"new"] CGPointValue];
+        CGFloat newRate = (fabs(new.y)) / MJRefreshHeaderHeight;
+        if (newRate > 1) {
+            newRate = 1;
+        }
+        
+        CGFloat width = SCREEN_WIDTH;
+        [self.gifView setCenter:CGPointMake(width - (newRate * width / 2), self.gifView.center.y)];
+    }
+}
+
+
 @end

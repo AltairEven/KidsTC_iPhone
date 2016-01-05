@@ -201,6 +201,8 @@
     ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithServiceId:serviceModel.serviceId channelId:serviceModel.channelId];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
+    //MTA
+    [MTA trackCustomEvent:@"event_skip_store_server" args:nil];
 }
 
 
@@ -274,6 +276,8 @@
             ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithServiceId:model.identifier channelId:model.channelId];
             [controller setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:controller animated:YES];
+            //MTA
+            [MTA trackCustomEvent:@"event_skip_historys_dtl_store" args:nil];
         }
             break;
         case KTCBrowseHistoryTypeStore:

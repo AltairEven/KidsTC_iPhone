@@ -206,6 +206,9 @@
 }
 
 - (void)configHotKeyCell {
+    for (UIView *subView in self.hotKeyScrollView.subviews) {
+        [subView removeFromSuperview];
+    }
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(hotKeysArrayForKTCSearchHistoryView:)]) {
         NSArray *array = [self.dataSource hotKeysArrayForKTCSearchHistoryView:self];
         CGFloat xPosition = 0;

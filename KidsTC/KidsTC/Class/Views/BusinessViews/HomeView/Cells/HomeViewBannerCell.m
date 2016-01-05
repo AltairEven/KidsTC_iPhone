@@ -53,14 +53,19 @@
 - (UIImageView *)bannerImageViewOnScrollView:(AUIBannerScrollView *)scrollView withViewFrame:(CGRect)frame atIndex:(NSUInteger)index {
     UIImageView *imageView = nil;
     imageView = [[UIImageView alloc] initWithFrame:frame];
-    NSURL *imageUrl = [self.imageUrlsArray objectAtIndex:index];
-    [imageView setImageWithURL:imageUrl placeholderImage:PLACEHOLDERIMAGE_BIG];
+    if ([self.imageUrlsArray count] > index) {
+        NSURL *imageUrl = [self.imageUrlsArray objectAtIndex:index];
+        [imageView setImageWithURL:imageUrl placeholderImage:PLACEHOLDERIMAGE_BIG];
+    }
     return imageView;
 }
 
 - (NSURL *)bannerImageUrlForScrollView:(AUIBannerScrollView *)scrollView atIndex:(NSUInteger)index {
-    NSURL *imageUrl = [self.imageUrlsArray objectAtIndex:index];
-    return imageUrl;
+    if ([self.imageUrlsArray count] > index) {
+        NSURL *imageUrl = [self.imageUrlsArray objectAtIndex:index];
+        return imageUrl;
+    }
+    return nil;
 }
 
 - (CGFloat)heightForBannerScrollView:(AUIBannerScrollView *)scrollView {

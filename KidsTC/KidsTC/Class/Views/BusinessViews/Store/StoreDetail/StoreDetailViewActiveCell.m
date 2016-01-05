@@ -13,6 +13,7 @@
 - (void)awakeFromNib {
     // Initialization code
     [self.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
+    [self.descriptionLabel setTextColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

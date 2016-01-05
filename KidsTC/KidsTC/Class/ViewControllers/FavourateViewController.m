@@ -52,6 +52,8 @@
             ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithServiceId:model.identifier channelId:model.channelId];
             [controller setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:controller animated:YES];
+            //MTA
+            [MTA trackCustomEvent:@"event_skip_acct_favors_dtl_service" args:nil];
         }
             break;
         case FavourateViewSegmentTagStore:
@@ -60,6 +62,8 @@
             StoreDetailViewController *controller = [[StoreDetailViewController alloc] initWithStoreId:model.identifier];
             [controller setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:controller animated:YES];
+            //MTA
+            [MTA trackCustomEvent:@"event_skip_acct_favors_dtl_store" args:nil];
         }
             break;
         case FavourateViewSegmentTagStrategy:

@@ -18,6 +18,8 @@
     if (self) {
         if ([data objectForKey:@"orderId"]) {
             self.orderId = [NSString stringWithFormat:@"%@", [data objectForKey:@"orderId"]];
+        } else {
+            return nil;
         }
         self.imageUrl = [NSURL URLWithString:[data objectForKey:@"imgUrl"]];
         self.orderName = [data objectForKey:@"name"];

@@ -50,6 +50,22 @@
         self.couponName = [coupons firstObject];
     }
     self.couponUrlString = [data objectForKey:@"couponLink"];
+    
+    //activity
+    NSArray *fullCut = [data objectForKey:@"fullCut"];
+    if ([fullCut isKindOfClass:[NSArray class]] && [fullCut count] > 0) {
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        for (NSString *fullCutTitle in fullCut) {
+            if ([fullCutTitle isKindOfClass:[NSString class]]) {
+                ActivityLogoItem *item = [[ActivityLogoItem alloc] initWithType:ActivityLogoItemTypeDiscount description:fullCutTitle];
+                if (item) {
+                    [tempArray addObject:item];
+                }
+            }
+        }
+        self.activeModelsArray = [NSArray arrayWithArray:tempArray];
+    }
+    
     self.countdownTime = [[data objectForKey:@"countDownTime"] integerValue];
     self.showCountdown = [[data objectForKey:@"showCountDown"] integerValue];
     self.supportedInsurances = [Insurance InsurancesWithRawData:[data objectForKey:@"insurance"]];
@@ -164,6 +180,10 @@
 }
 
 - (CGFloat)couponCellHeight {
+    return 40;
+}
+
+- (CGFloat)activityCellHeight {
     return 40;
 }
 

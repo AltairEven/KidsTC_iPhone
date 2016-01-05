@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "HomeSegueModel.h"
 
+#define NotificationSegueTag (100001)
+
 @interface KTCSegueMaster : NSObject
 
 + (UIViewController *)makeSegueWithModel:(HomeSegueModel *)model fromController:(UIViewController *)fromVC;

@@ -12,12 +12,25 @@
 #import "AUIBannerScrollView.h"
 #import "AUISegmentView.h"
 #import "ServiceDetailSegmentCell.h"
+#import "ServiceDetailActivityCell.h"
+
+typedef enum {
+    ServiceDetailTableCellTagTop,
+    ServiceDetailTableCellTagPrice,
+    ServiceDetailTableCellTagInsurance,
+    ServiceDetailTableCellTagCoupon,
+    ServiceDetailTableCellTagNoticeTitle,
+    ServiceDetailTableCellTagNotice,
+    ServiceDetailTableCellTagRecommend,
+    ServiceDetailTableCellTagActivity
+}ServiceDetailTableCellTag;
 
 #define BannerRatio (1)
 #define SectionGap (10)
 #define SegmentViewHeight (40)
 
 static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
+static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
 
 @interface ServiceDetailView () <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, AUIBannerScrollViewDataSource, AUISegmentViewDataSource, AUISegmentViewDelegate, ServiceDetailMoreInfoViewDelegate>
 
@@ -57,6 +70,7 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
 
 
 @property (nonatomic, strong) UINib *segmentCellNib;
+@property (nonatomic, strong) UINib *activityCellNib;
 
 @property (nonatomic, strong) ServiceDetailModel *detailModel;
 @property (nonatomic, strong) NSMutableArray *cellArray;
@@ -147,6 +161,11 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
     self.recommendFaceImageView.layer.cornerRadius = 30;
     self.recommendFaceImageView.layer.masksToBounds = YES;
     
+    if (!self.activityCellNib) {
+        self.activityCellNib = [UINib nibWithNibName:NSStringFromClass([ServiceDetailActivityCell class]) bundle:nil];
+        [self.tableView registerNib:self.activityCellNib forCellReuseIdentifier:kActivityCellIdentifier];
+    }
+    
     self.cellArray = [[NSMutableArray alloc] init];
 }
 
@@ -167,37 +186,37 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
     NSArray *rowArray = [self.cellArray objectAtIndex:indexPath.section];
     UITableViewCell *cell = [rowArray objectAtIndex:indexPath.row];
     switch (cell.tag) {
-        case 0:
+        case ServiceDetailTableCellTagTop:
         {
             [self configTopCell];
         }
             break;
-        case 1:
+        case ServiceDetailTableCellTagPrice:
         {
             [self configPriceCell];
         }
             break;
-        case 2:
+        case ServiceDetailTableCellTagInsurance:
         {
             [self configInsuranceCell];
         }
             break;
-        case 3:
+        case ServiceDetailTableCellTagCoupon:
         {
             [self configCouponCell];
         }
             break;
-        case 4:
+        case ServiceDetailTableCellTagNoticeTitle:
         {
             [self configNoticeTitleCell];
         }
             break;
-        case 5:
+        case ServiceDetailTableCellTagNotice:
         {
             [self configNoticeCell];
         }
             break;
-        case 6:
+        case ServiceDetailTableCellTagRecommend:
         {
             [self configRecommendCell];
         }
@@ -215,39 +234,44 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
     
     CGFloat height = 0;
     switch (cell.tag) {
-        case 0:
+        case ServiceDetailTableCellTagTop:
         {
             height = [self.detailModel topCellHeight];
         }
             break;
-        case 1:
+        case ServiceDetailTableCellTagPrice:
         {
             height = [self.detailModel priceCellHeight];
         }
             break;
-        case 2:
+        case ServiceDetailTableCellTagInsurance:
         {
             height = [self.detailModel insuranceCellHeight];
         }
             break;
-        case 3:
+        case ServiceDetailTableCellTagCoupon:
         {
             height = [self.detailModel couponCellHeight];
         }
             break;
-        case 4:
+        case ServiceDetailTableCellTagNoticeTitle:
         {
             height = [self.detailModel noticeTitleCellHeight];
         }
             break;
-        case 5:
+        case ServiceDetailTableCellTagNotice:
         {
             height = [self.detailModel noticeCellHeight];
         }
             break;
-        case 6:
+        case ServiceDetailTableCellTagRecommend:
         {
             height = [self.detailModel recommendCellHeight];
+        }
+            break;
+        case ServiceDetailTableCellTagActivity:
+        {
+            height = [self.detailModel activityCellHeight];
         }
             break;
         default:
@@ -343,7 +367,7 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
             break;
         case 1:
         {
-            [cell.titleLabel setText:@"商户"];
+            [cell.titleLabel setText:@"门店"];
         }
             break;
         case 2:
@@ -572,12 +596,25 @@ static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
             }
             [self.cellArray addObject:[NSArray arrayWithArray:section1]];
             
+            NSMutableArray *section2 = [[NSMutableArray alloc] init];
             if (self.detailModel.hasCoupon) {
-                NSArray *section2 = [NSArray arrayWithObject:self.couponCell];
-                [self.cellArray addObject:section2];
+                [section2 addObject:self.couponCell];
                 self.tableViewHeight += SectionGap;
                 self.tableViewHeight += [self.detailModel couponCellHeight];
             }
+            if ([self.detailModel.activeModelsArray count] > 0) {
+                for (NSUInteger index = 0; index < [self.detailModel.activeModelsArray count]; index ++) {
+                    ServiceDetailActivityCell *cell =  [[[NSBundle mainBundle] loadNibNamed:@"ServiceDetailActivityCell" owner:nil options:nil] objectAtIndex:0];
+                    if (cell) {
+                        ActivityLogoItem *item = [self.detailModel.activeModelsArray objectAtIndex:index];
+                        [cell configWithModel:item];
+                        [section2 addObject:cell];
+                        cell.tag = ServiceDetailTableCellTagActivity;
+                    }
+                }
+            }
+            [self.cellArray addObject:[NSArray arrayWithArray:section2]];
+            
             if ([self.detailModel.noticeArray count] > 0) {
                 NSArray *section3 = [NSArray arrayWithObjects:self.noticeTitleCell, self.noticeCell, nil];
                 [self.cellArray addObject:section3];

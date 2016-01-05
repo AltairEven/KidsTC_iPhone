@@ -28,6 +28,8 @@ typedef enum {
 
 @property (nonatomic, assign) CGSize viewSize;
 
+@property (nonatomic, assign) CGSize expandViewSize;
+
 @property (nonatomic, assign) NSUInteger itemCount;
 
 @property (nonatomic, strong) NSArray *itemContainerView;
@@ -270,6 +272,7 @@ typedef enum {
             self.itemHighlightedViewsArray = [NSArray arrayWithArray:tempItemHighlightViewArray];
             self.gapViewsArray = [NSArray arrayWithArray:tempGapViewArray];
             
+            self.expandViewSize = CGSizeMake(width, height);
             [self buildViewWithNewSize:CGSizeMake(width, height)];
         }
         _isCollapsed = NO;
@@ -315,6 +318,9 @@ typedef enum {
             UIView *showingViewWhenCollapsed = [self.itemContainerView objectAtIndex:self.selectedIndex];
             [self bringSubviewToFront:showingViewWhenCollapsed];
             [self bringSubviewToFront:self.collapseView];
+            [self resizeViewWithNewSize:CGSizeMake(self.collapseView.frame.size.width, self.collapseView.frame.size.height)];
+            [self.collapseView setCenter:CGPointMake(self.viewSize.width / 2, self.viewSize.height / 2)];
+            [showingViewWhenCollapsed setCenter:CGPointMake(self.viewSize.width / 2, self.viewSize.height / 2)];
         }];
     } else {
         [self.collapseView setHidden:NO];
@@ -324,16 +330,33 @@ typedef enum {
         UIView *showingViewWhenCollapsed = [self.itemContainerView objectAtIndex:self.selectedIndex];
         [self bringSubviewToFront:showingViewWhenCollapsed];
         [self bringSubviewToFront:self.collapseView];
+        [self resizeViewWithNewSize:CGSizeMake(self.collapseView.frame.size.width, self.collapseView.frame.size.height)];
+        [self.collapseView setCenter:CGPointMake(self.viewSize.width / 2, self.viewSize.height / 2)];
+        [showingViewWhenCollapsed setCenter:CGPointMake(self.viewSize.width / 2, self.viewSize.height / 2)];
     }
     //timer
     [self.alphaTimer invalidate];
     self.alphaTimer = [NSTimer timerWithTimeInterval:ALPHATIMER_INTERVAL target:self selector:@selector(backToTranslucent) userInfo:nil repeats:NO];
     [[NSRunLoop currentRunLoop] addTimer:self.alphaTimer forMode:NSDefaultRunLoopMode];
     [[NSRunLoop currentRunLoop] addTimer:self.alphaTimer forMode:NSRunLoopCommonModes];
+    //size
 }
 
 - (void)expandAll:(BOOL)animated {
     [self.collapseView setHidden:YES];
+    //size
+    CGPoint collapseCenter;
+    if (self.animateDirection == AUIFloorNavigationViewAnimateDirectionUp) {
+        collapseCenter = CGPointMake(self.expandViewSize.width / 2, self.expandViewSize.width / 2);
+    } else {
+        collapseCenter = CGPointMake(self.expandViewSize.width / 2, self.expandViewSize.height - self.expandViewSize.width / 2);
+    }
+    [self.collapseView setCenter:collapseCenter];
+    for (NSUInteger index = 0; index < [self.itemContainerView count]; index ++) {
+        UIView *containerView = [self.itemContainerView objectAtIndex:index];
+        [containerView setCenter:collapseCenter];
+    }
+    [self resizeViewWithNewSize:self.expandViewSize];
     
     if (animated) {
         [UIView animateWithDuration:ANIMATION_DURATION delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{

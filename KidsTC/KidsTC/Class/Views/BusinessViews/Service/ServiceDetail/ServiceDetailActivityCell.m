@@ -1,14 +1,14 @@
 //
-//  StoreDetailViewCouponCell.m
+//  ServiceDetailActivityCell.m
 //  KidsTC
 //
-//  Created by Altair on 12/3/15.
-//  Copyright © 2015 KidsTC. All rights reserved.
+//  Created by Altair on 1/5/16.
+//  Copyright © 2016 KidsTC. All rights reserved.
 //
 
-#import "StoreDetailViewCouponCell.h"
+#import "ServiceDetailActivityCell.h"
 
-@implementation StoreDetailViewCouponCell
+@implementation ServiceDetailActivityCell
 
 - (void)awakeFromNib {
     // Initialization code
@@ -20,6 +20,11 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)configWithModel:(ActivityLogoItem *)model {
+    [self.activeImageView setImage:model.image];
+    [self.descriptionLabel setText:model.itemDescription];
 }
 
 @end

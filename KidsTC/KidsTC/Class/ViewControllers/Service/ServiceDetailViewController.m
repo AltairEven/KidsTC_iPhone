@@ -149,6 +149,8 @@
     StoreDetailViewController *controller = [[StoreDetailViewController alloc] initWithStoreId:model.identifier];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
+    //MTA
+    [MTA trackCustomEvent:@"event_skip_server_store" args:nil];
 }
 
 - (void)serviceDetailView:(ServiceDetailView *)detailView didClickedCommentCellAtIndex:(NSUInteger)index {
@@ -225,11 +227,17 @@
         [weakSelf.viewModel addToSettlementWithBuyCount:number storeId:store.identifier succeed:^(NSDictionary *data) {
             [[GAlertLoadingView sharedAlertLoadingView] hide];
             [weakSelf goSettlement];
+            //MTA
+            NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:@"true", @"result", nil];
+            [MTA trackCustomKeyValueEvent:@"event_result_server_addtocart" props:trackParam];
         } failure:^(NSError *error) {
             [[GAlertLoadingView sharedAlertLoadingView] hide];
             if ([[error userInfo] count] > 0) {
                 [[iToast makeText:[[error userInfo] objectForKey:@"data"]] show];
             }
+            //MTA
+            NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:@"false", @"result", nil];
+            [MTA trackCustomKeyValueEvent:@"event_result_server_addtocart" props:trackParam];
         }];
     } target:self];
 }
@@ -263,6 +271,8 @@
             ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithServiceId:model.identifier channelId:model.channelId];
             [controller setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:controller animated:YES];
+            //MTA
+            [MTA trackCustomEvent:@"event_skip_historys_dtl_service" args:nil];
         }
             break;
         case KTCBrowseHistoryTypeStore:

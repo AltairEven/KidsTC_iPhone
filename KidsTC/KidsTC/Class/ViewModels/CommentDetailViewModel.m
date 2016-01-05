@@ -176,6 +176,9 @@
         [self.view noMoreData:YES];
         [self.view hideLoadMoreFooter:YES];
     }
+    
+    self.detailModel.totalReplyCount = [[data objectForKey:@"count"] integerValue];
+    
     [self.view reloadData];
     [self stopUpdateData];
 }

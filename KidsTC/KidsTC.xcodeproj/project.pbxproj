@@ -806,6 +806,8 @@
 		8F25A1311C2D3AED0076A6FA /* MJChiBaoZiHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F25A1301C2D3AED0076A6FA /* MJChiBaoZiHeader.m */; };
 		8F25A1361C3164B60076A6FA /* HomeBigImageTwoDescCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F25A1351C3164B60076A6FA /* HomeBigImageTwoDescCellModel.m */; };
 		8F2C55BB1BFF167B00C2B6BF /* CommonShareService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2C55BA1BFF167B00C2B6BF /* CommonShareService.m */; };
+		8F30D5E01C3B7175004EE892 /* ServiceDetailActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F30D5DE1C3B7175004EE892 /* ServiceDetailActivityCell.m */; };
+		8F30D5E11C3B7175004EE892 /* ServiceDetailActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F30D5DF1C3B7175004EE892 /* ServiceDetailActivityCell.xib */; };
 		8F375B6C1C38D05400743453 /* AdditionalTabBarItemManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F375B6B1C38D05400743453 /* AdditionalTabBarItemManager.m */; };
 		8F38D1E91C085F080061C329 /* CommentFoundingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F38D1E81C085F080061C329 /* CommentFoundingView.m */; };
 		8F38D1EB1C085F1E0061C329 /* CommentFoundingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F38D1EA1C085F1E0061C329 /* CommentFoundingView.xib */; };
@@ -2355,6 +2357,9 @@
 		8F25A1351C3164B60076A6FA /* HomeBigImageTwoDescCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeBigImageTwoDescCellModel.m; sourceTree = "<group>"; };
 		8F2C55B91BFF167B00C2B6BF /* CommonShareService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonShareService.h; sourceTree = "<group>"; };
 		8F2C55BA1BFF167B00C2B6BF /* CommonShareService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonShareService.m; sourceTree = "<group>"; };
+		8F30D5DD1C3B7175004EE892 /* ServiceDetailActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceDetailActivityCell.h; sourceTree = "<group>"; };
+		8F30D5DE1C3B7175004EE892 /* ServiceDetailActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceDetailActivityCell.m; sourceTree = "<group>"; };
+		8F30D5DF1C3B7175004EE892 /* ServiceDetailActivityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceDetailActivityCell.xib; sourceTree = "<group>"; };
 		8F375B6A1C38D05400743453 /* AdditionalTabBarItemManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdditionalTabBarItemManager.h; sourceTree = "<group>"; };
 		8F375B6B1C38D05400743453 /* AdditionalTabBarItemManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdditionalTabBarItemManager.m; sourceTree = "<group>"; };
 		8F38D1E71C085F080061C329 /* CommentFoundingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentFoundingView.h; sourceTree = "<group>"; };
@@ -4206,6 +4211,9 @@
 				1E1CFA291BD8E1880005653D /* ServiceDetailSegmentCell.h */,
 				1E1CFA2A1BD8E1880005653D /* ServiceDetailSegmentCell.m */,
 				1E1CFA2B1BD8E1880005653D /* ServiceDetailSegmentCell.xib */,
+				8F30D5DD1C3B7175004EE892 /* ServiceDetailActivityCell.h */,
+				8F30D5DE1C3B7175004EE892 /* ServiceDetailActivityCell.m */,
+				8F30D5DF1C3B7175004EE892 /* ServiceDetailActivityCell.xib */,
 				1E1CFA1F1BD72F4C0005653D /* ServiceDetailMoreInfoView.h */,
 				1E1CFA201BD72F4C0005653D /* ServiceDetailMoreInfoView.m */,
 				1E1CFA221BD72F5E0005653D /* ServiceDetailMoreInfoView.xib */,
@@ -5847,6 +5855,7 @@
 				1E79951D1BC758560099CFF9 /* NewsView.xib in Resources */,
 				1E0B77A91B68CD3500A58AD4 /* LoginView.xib in Resources */,
 				1E827CC41B9BE667008F3F08 /* CouponListView.xib in Resources */,
+				8F30D5E11C3B7175004EE892 /* ServiceDetailActivityCell.xib in Resources */,
 				1E827BD61B941337008F3F08 /* ImageSelectedSmallOff.png in Resources */,
 				1E7995431BC8E52F0099CFF9 /* HomeViewCountDownMoreTitleCell.xib in Resources */,
 				1E0B7A9D1B6F67B800A58AD4 /* GCountDownView.xib in Resources */,
@@ -6672,6 +6681,7 @@
 				1E827BA71B9412C6008F3F08 /* MWTapDetectingImageView.m in Sources */,
 				1E0B7B0C1B6F6C1400A58AD4 /* SaiDanOrderView.m in Sources */,
 				1E3D8D731B4BF4A100275C35 /* OneConfig.m in Sources */,
+				8F30D5E01C3B7175004EE892 /* ServiceDetailActivityCell.m in Sources */,
 				1E7995861BCE2C590099CFF9 /* HospitalListView.m in Sources */,
 				1E3D8D541B4BF4A100275C35 /* FMDatabasePool.m in Sources */,
 				1E0B77ED1B6B6C5000A58AD4 /* KTCSearchResultFilterLevel2Cell.m in Sources */,

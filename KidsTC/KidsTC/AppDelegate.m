@@ -261,6 +261,7 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
 //        }
 //    }
     UINavigationController *controller = [KTCTabBarController shareTabBarController].selectedViewController;
+    controller.topViewController.view.tag = NotificationSegueTag;
     
     //展示消息跳转页面
     [KTCSegueMaster makeSegueWithModel:model.segueModel fromController:controller.topViewController];

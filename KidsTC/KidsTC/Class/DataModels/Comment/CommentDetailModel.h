@@ -35,6 +35,8 @@ typedef enum {
 
 @property (nonatomic, assign) CGFloat headerCellHeight;
 
+@property (nonatomic, assign) NSUInteger totalReplyCount;
+
 - (void)fillWithReplyRawData:(NSArray *)dataArray;
 
 @end
