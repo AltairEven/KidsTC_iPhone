@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,52 +11,52 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="159"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="159.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wGg-8g-pGY" userLabel="View1">
-                        <rect key="frame" x="0.0" y="0.0" width="160" height="159"/>
+                        <rect key="frame" x="0.0" y="0.0" width="159.5" height="159"/>
                         <subviews>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sk5-DM-Ha6">
-                                <rect key="frame" x="0.0" y="0.0" width="160" height="159"/>
+                                <rect key="frame" x="10" y="5" width="144.5" height="149"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="sk5-DM-Ha6" firstAttribute="leading" secondItem="wGg-8g-pGY" secondAttribute="leading" id="1e7-4J-wfP"/>
-                            <constraint firstAttribute="bottom" secondItem="sk5-DM-Ha6" secondAttribute="bottom" id="CNf-yI-PHA"/>
-                            <constraint firstAttribute="trailing" secondItem="sk5-DM-Ha6" secondAttribute="trailing" id="MbN-HO-2aJ"/>
-                            <constraint firstItem="sk5-DM-Ha6" firstAttribute="top" secondItem="wGg-8g-pGY" secondAttribute="top" id="MiJ-Sm-peK"/>
+                            <constraint firstItem="sk5-DM-Ha6" firstAttribute="leading" secondItem="wGg-8g-pGY" secondAttribute="leading" constant="10" id="1e7-4J-wfP"/>
+                            <constraint firstAttribute="bottom" secondItem="sk5-DM-Ha6" secondAttribute="bottom" constant="5" id="CNf-yI-PHA"/>
+                            <constraint firstAttribute="trailing" secondItem="sk5-DM-Ha6" secondAttribute="trailing" constant="5" id="MbN-HO-2aJ"/>
+                            <constraint firstItem="sk5-DM-Ha6" firstAttribute="top" secondItem="wGg-8g-pGY" secondAttribute="top" constant="5" id="MiJ-Sm-peK"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kan-VL-MQu" userLabel="View2">
-                        <rect key="frame" x="161" y="0.0" width="159" height="79"/>
+                        <rect key="frame" x="160.5" y="0.0" width="159.5" height="79"/>
                         <subviews>
                             <imageView tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dRK-Ya-Qk7">
-                                <rect key="frame" x="0.0" y="0.0" width="159" height="79"/>
+                                <rect key="frame" x="5" y="5" width="144.5" height="69"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="dRK-Ya-Qk7" firstAttribute="leading" secondItem="Kan-VL-MQu" secondAttribute="leading" id="C6n-bC-waG"/>
-                            <constraint firstAttribute="trailing" secondItem="dRK-Ya-Qk7" secondAttribute="trailing" id="E0r-CT-Uhz"/>
-                            <constraint firstAttribute="bottom" secondItem="dRK-Ya-Qk7" secondAttribute="bottom" id="Kua-jD-Kv6"/>
-                            <constraint firstItem="dRK-Ya-Qk7" firstAttribute="top" secondItem="Kan-VL-MQu" secondAttribute="top" id="Wl6-59-6FF"/>
+                            <constraint firstItem="dRK-Ya-Qk7" firstAttribute="leading" secondItem="Kan-VL-MQu" secondAttribute="leading" constant="5" id="C6n-bC-waG"/>
+                            <constraint firstAttribute="trailing" secondItem="dRK-Ya-Qk7" secondAttribute="trailing" constant="10" id="E0r-CT-Uhz"/>
+                            <constraint firstAttribute="bottom" secondItem="dRK-Ya-Qk7" secondAttribute="bottom" constant="5" id="Kua-jD-Kv6"/>
+                            <constraint firstItem="dRK-Ya-Qk7" firstAttribute="top" secondItem="Kan-VL-MQu" secondAttribute="top" constant="5" id="Wl6-59-6FF"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lF2-ck-jWb" userLabel="View3">
-                        <rect key="frame" x="161" y="80" width="159" height="79"/>
+                        <rect key="frame" x="160.5" y="80" width="159.5" height="79"/>
                         <subviews>
                             <imageView tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fPz-gl-zoa">
-                                <rect key="frame" x="0.0" y="0.0" width="159" height="79"/>
+                                <rect key="frame" x="5" y="5" width="144.5" height="69"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="fPz-gl-zoa" firstAttribute="top" secondItem="lF2-ck-jWb" secondAttribute="top" id="5aE-8f-mvx"/>
-                            <constraint firstItem="fPz-gl-zoa" firstAttribute="leading" secondItem="lF2-ck-jWb" secondAttribute="leading" id="eux-k0-9UM"/>
-                            <constraint firstAttribute="trailing" secondItem="fPz-gl-zoa" secondAttribute="trailing" id="iNt-GG-ofs"/>
-                            <constraint firstAttribute="bottom" secondItem="fPz-gl-zoa" secondAttribute="bottom" id="rKj-2K-VQh"/>
+                            <constraint firstItem="fPz-gl-zoa" firstAttribute="top" secondItem="lF2-ck-jWb" secondAttribute="top" constant="5" id="5aE-8f-mvx"/>
+                            <constraint firstItem="fPz-gl-zoa" firstAttribute="leading" secondItem="lF2-ck-jWb" secondAttribute="leading" constant="5" id="eux-k0-9UM"/>
+                            <constraint firstAttribute="trailing" secondItem="fPz-gl-zoa" secondAttribute="trailing" constant="10" id="iNt-GG-ofs"/>
+                            <constraint firstAttribute="bottom" secondItem="fPz-gl-zoa" secondAttribute="bottom" constant="5" id="rKj-2K-VQh"/>
                         </constraints>
                     </view>
                 </subviews>

@@ -59,8 +59,6 @@
     [super viewDidLoad];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTappedOnAdvertisementImage:)];
     [self.imageView addGestureRecognizer:tap];
-    [self.imageView setAnimationImages:self.imagesArray];
-    [self.imageView setAnimationDuration:self.maxCountDownTime];
     self.countDownTimer = [[ATCountDown alloc] initWithLeftTimeInterval:self.maxCountDownTime];
     
     self.skipButton.layer.cornerRadius = 10;
@@ -69,7 +67,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.imageView startAnimating];
     __weak BigAdvertisementViewController *weakSelf = self;
     [weakSelf.countDownTimer startCountDownWithCurrentTimeLeft:^(NSTimeInterval currentTimeLeft) {
         [weakSelf handleTimeCountDownWithLeftTime:currentTimeLeft];
@@ -89,7 +86,9 @@
 
 
 - (void)handleTimeCountDownWithLeftTime:(NSTimeInterval)timeInterval {
-    self.currentIndex = timeInterval / SingleImageDisplayingTime;
+    NSTimeInterval left = [self.imagesArray count] * SingleImageDisplayingTime - timeInterval;
+    self.currentIndex = left / SingleImageDisplayingTime;
+    [self.imageView setImage:[self.imagesArray objectAtIndex:self.currentIndex]];
 }
 
 - (void)handleTimeCountDownCompletionWithSegueModel:(HomeSegueModel *)model {
@@ -107,7 +106,9 @@
 - (void)didTappedOnAdvertisementImage:(id)sender {
     if (self.currentIndex < [self.adItems count]) {
         KTCAdvertisementItem *item = [self.adItems objectAtIndex:self.currentIndex];
-        [self handleTimeCountDownCompletionWithSegueModel:item.segueModel];
+        if (item.segueModel) {
+            [self handleTimeCountDownCompletionWithSegueModel:item.segueModel];
+        }
     }
 }
 

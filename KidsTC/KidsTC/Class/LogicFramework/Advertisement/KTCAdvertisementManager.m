@@ -93,7 +93,7 @@ static KTCAdvertisementManager *_sharedInstance = nil;
     if (adInfo && [adInfo isKindOfClass:[NSDictionary class]]) {
         //由于服务端返回数据，说明远端配置已经更改，故删除本地数据
         [self removeLocalData];
-        
+
         NSTimeInterval expireTime = [[adInfo objectForKey:@"expireTime"] doubleValue];
         if ([[NSDate date] timeIntervalSince1970] > expireTime) {
             //已过期

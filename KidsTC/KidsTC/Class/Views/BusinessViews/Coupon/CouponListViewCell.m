@@ -43,6 +43,21 @@
     if (model) {
         CouponFullCutModel *cellModel = (CouponFullCutModel *)model;
         
+        switch (model.status) {
+            case CouponStatusUnused:
+            {
+                UIImage *bgImage = [[UIImage imageNamed:@"coupon_cellBG"] resizableImageWithCapInsets:UIEdgeInsetsMake(20, 30, 28, 30) resizingMode:UIImageResizingModeTile];
+                [self.cellBGView setImage:bgImage];
+            }
+                break;
+            default:
+            {
+                UIImage *bgImage = [[UIImage imageNamed:@"coupon_cellBG_d"] resizableImageWithCapInsets:UIEdgeInsetsMake(20, 30, 28, 30) resizingMode:UIImageResizingModeTile];
+                [self.cellBGView setImage:bgImage];
+            }
+                break;
+        }
+        
         [self.discountPriceView setPrice:cellModel.discount];
         
         NSString *name = [NSString stringWithFormat:@"%@", cellModel.couponTitle];

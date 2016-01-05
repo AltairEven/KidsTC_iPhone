@@ -202,7 +202,7 @@
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
     //MTA
-    [MTA trackCustomEvent:@"event_skip_store_server" args:nil];
+    [MTA trackCustomEvent:@"event_skip_store_servers_dtl" args:nil];
 }
 
 

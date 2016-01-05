@@ -808,6 +808,7 @@
 		8F2C55BB1BFF167B00C2B6BF /* CommonShareService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2C55BA1BFF167B00C2B6BF /* CommonShareService.m */; };
 		8F30D5E01C3B7175004EE892 /* ServiceDetailActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F30D5DE1C3B7175004EE892 /* ServiceDetailActivityCell.m */; };
 		8F30D5E11C3B7175004EE892 /* ServiceDetailActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F30D5DF1C3B7175004EE892 /* ServiceDetailActivityCell.xib */; };
+		8F30D5E31C3BF70B004EE892 /* coupon_cellBG_d.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F30D5E21C3BF70B004EE892 /* coupon_cellBG_d.png */; };
 		8F375B6C1C38D05400743453 /* AdditionalTabBarItemManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F375B6B1C38D05400743453 /* AdditionalTabBarItemManager.m */; };
 		8F38D1E91C085F080061C329 /* CommentFoundingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F38D1E81C085F080061C329 /* CommentFoundingView.m */; };
 		8F38D1EB1C085F1E0061C329 /* CommentFoundingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F38D1EA1C085F1E0061C329 /* CommentFoundingView.xib */; };
@@ -2360,6 +2361,7 @@
 		8F30D5DD1C3B7175004EE892 /* ServiceDetailActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceDetailActivityCell.h; sourceTree = "<group>"; };
 		8F30D5DE1C3B7175004EE892 /* ServiceDetailActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceDetailActivityCell.m; sourceTree = "<group>"; };
 		8F30D5DF1C3B7175004EE892 /* ServiceDetailActivityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceDetailActivityCell.xib; sourceTree = "<group>"; };
+		8F30D5E21C3BF70B004EE892 /* coupon_cellBG_d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coupon_cellBG_d.png; sourceTree = "<group>"; };
 		8F375B6A1C38D05400743453 /* AdditionalTabBarItemManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdditionalTabBarItemManager.h; sourceTree = "<group>"; };
 		8F375B6B1C38D05400743453 /* AdditionalTabBarItemManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdditionalTabBarItemManager.m; sourceTree = "<group>"; };
 		8F38D1E71C085F080061C329 /* CommentFoundingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentFoundingView.h; sourceTree = "<group>"; };
@@ -4736,6 +4738,7 @@
 			children = (
 				1E827CD81B9C3E76008F3F08 /* coupon_cellBG.png */,
 				1E827CEE1B9D3E9F008F3F08 /* coupon_cellBG_h.png */,
+				8F30D5E21C3BF70B004EE892 /* coupon_cellBG_d.png */,
 			);
 			path = Coupon;
 			sourceTree = "<group>";
@@ -6079,6 +6082,7 @@
 				1EFFADFD1BEAFB02001D4245 /* UserRoleSelectViewController.xib in Resources */,
 				1E0B7B611B70A9A900A58AD4 /* ProjectResources.bundle in Resources */,
 				1E8EFD061B68782300D00808 /* CommentListViewSegmentCell.xib in Resources */,
+				8F30D5E31C3BF70B004EE892 /* coupon_cellBG_d.png in Resources */,
 				1E79956F1BCD25860099CFF9 /* LoveHouseListView.xib in Resources */,
 				1E15F9781BDDCFA4000C74E7 /* StoreDetailHotRecommendCell.xib in Resources */,
 				1E80170E1BB006EF00B6C352 /* HomeViewNewsCell.xib in Resources */,
@@ -6885,8 +6889,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: YE QIAN (L4HESQKF9M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: YE QIAN (L4HESQKF9M)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Tongcheng Information Technology Co., Ltd. (F8C2RFLJQX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Tongcheng Information Technology Co., Ltd. (F8C2RFLJQX)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6913,9 +6917,9 @@
 					"-ObjC",
 					"-licucore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kidstc.iPhoneDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kidstc.iPhoneKidsTC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f437d461-e830-43e7-a75d-a132e4f9fec0";
+				PROVISIONING_PROFILE = "9c12f2ec-516b-4672-8913-1762d50ce75c";
 			};
 			name = Debug;
 		};
@@ -6924,8 +6928,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: YE QIAN (L4HESQKF9M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: YE QIAN (L4HESQKF9M)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Tongcheng Information Technology Co., Ltd. (F8C2RFLJQX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Tongcheng Information Technology Co., Ltd. (F8C2RFLJQX)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6951,9 +6955,9 @@
 					"-ObjC",
 					"-licucore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kidstc.iPhoneDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kidstc.iPhoneKidsTC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f437d461-e830-43e7-a75d-a132e4f9fec0";
+				PROVISIONING_PROFILE = "9c12f2ec-516b-4672-8913-1762d50ce75c";
 			};
 			name = Release;
 		};

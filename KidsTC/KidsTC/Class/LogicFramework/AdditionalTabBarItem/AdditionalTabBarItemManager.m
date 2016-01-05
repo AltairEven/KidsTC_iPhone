@@ -284,8 +284,16 @@ static AdditionalTabBarItemManager *_sharedInstance = nil;
     //创建主题元素
     AUITabbarItemElement *element = [[AUITabbarItemElement alloc] init];
     element.type = AUITabbarItemTypeAdditional;
-    element.tabbarItemImage_Normal = [additionalInfo objectForKey:kAdditionalTabBarItemInfoNormalImageKey];
-    element.tabbarItemImage_Highlight = [additionalInfo objectForKey:kAdditionalTabBarItemInfoSelectedImageKey];
+    
+    UIImage *normalImage = [additionalInfo objectForKey:kAdditionalTabBarItemInfoNormalImageKey] ;
+    CGFloat width = SCREEN_WIDTH / 5;
+    CGFloat height = normalImage.size.height / normalImage.size.width * width;
+    element.tabbarItemImage_Normal = [normalImage imageByScalingToSize:CGSizeMake(width, height)];
+    
+    UIImage *selectedImage = [additionalInfo objectForKey:kAdditionalTabBarItemInfoSelectedImageKey];
+    height = selectedImage.size.height / selectedImage.size.width * width;
+    element.tabbarItemImage_Highlight = [selectedImage imageByScalingToSize:CGSizeMake(width, height)];
+    
     element.userInfo = [NSDictionary dictionaryWithObject:[additionalInfo objectForKey:kAdditionalTabBarItemInfoPageUrlStringKey] forKey:kAdditionalTabBarItemInfoPageUrlStringKey];
     //插入主题元素
     AUITheme *infoTheme = [originalTheme copy];

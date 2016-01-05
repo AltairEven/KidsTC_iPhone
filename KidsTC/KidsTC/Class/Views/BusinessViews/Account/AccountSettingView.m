@@ -98,7 +98,7 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
             break;
         case AccountSettingViewTagRole:
         {
-            [cell resetWithMainTitle:@"状态" subTitle:self.settingModel.userRole.roleName showImage:NO showArrow:YES];
+            [cell resetWithMainTitle:@"阶段" subTitle:self.settingModel.userRole.roleName showImage:NO showArrow:YES];
         }
             break;
         case AccountSettingViewTagNickName:

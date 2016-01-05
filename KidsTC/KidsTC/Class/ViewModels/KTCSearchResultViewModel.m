@@ -79,6 +79,35 @@
 
 - (void)setSearchServiceCondition:(KTCSearchServiceCondition *)searchServiceCondition {
     _searchServiceCondition = searchServiceCondition;
+    //area
+    NSInteger index = 0;
+    BOOL hasFiltered = NO;
+    for (; index < [self.areaFilterModel.subArray count]; index ++) {
+        KTCSearchResultFilterModel *areaFilter = [self.areaFilterModel.subArray objectAtIndex:index];
+        if ([searchServiceCondition.area.identifier isEqualToString:areaFilter.identifier]) {
+            hasFiltered = YES;
+            break;
+        }
+    }
+    if (hasFiltered) {
+        KTCSearchResultFilterCoordinate areaCoord = FilterCoordinateMake(0, index);
+        self.serviceAreaFilterCoordinate = areaCoord;
+    }
+    //age
+    index = 0;
+    hasFiltered = NO;
+    for (; index < [self.ageFilterModel.subArray count]; index ++) {
+        KTCSearchResultFilterModel *ageFilter = [self.ageFilterModel.subArray objectAtIndex:index];
+        if ([searchServiceCondition.age.identifier isEqualToString:ageFilter.identifier]) {
+            hasFiltered = YES;
+            break;
+        }
+    }
+    if (hasFiltered) {
+        KTCSearchResultFilterCoordinate ageCoord = FilterCoordinateMake(0, index);
+        self.serviceAreaFilterCoordinate = ageCoord;
+    }
+    //category
     NSArray *lvl1Categories = [[IcsonCategoryManager sharedManager] getCategoryArrayWithLevel:CategoryLevel1 Error:nil];
     KTCSearchResultFilterCoordinate cateCoord = FilterCoordinateMake(-1, -1);
     for (NSUInteger index = 0; index < [lvl1Categories count]; index ++) {
@@ -97,6 +126,35 @@
 
 - (void)setSearchStoreCondition:(KTCSearchStoreCondition *)searchStoreCondition {
     _searchStoreCondition = searchStoreCondition;
+    //area
+    NSInteger index = 0;
+    BOOL hasFiltered = NO;
+    for (; index < [self.areaFilterModel.subArray count]; index ++) {
+        KTCSearchResultFilterModel *areaFilter = [self.areaFilterModel.subArray objectAtIndex:index];
+        if ([searchStoreCondition.area.identifier isEqualToString:areaFilter.identifier]) {
+            hasFiltered = YES;
+            break;
+        }
+    }
+    if (hasFiltered) {
+        KTCSearchResultFilterCoordinate areaCoord = FilterCoordinateMake(0, index);
+        self.storeAreaFilterCoordinate = areaCoord;
+    }
+    //age
+    index = 0;
+    hasFiltered = NO;
+    for (; index < [self.ageFilterModel.subArray count]; index ++) {
+        KTCSearchResultFilterModel *ageFilter = [self.ageFilterModel.subArray objectAtIndex:index];
+        if ([searchStoreCondition.age.identifier isEqualToString:ageFilter.identifier]) {
+            hasFiltered = YES;
+            break;
+        }
+    }
+    if (hasFiltered) {
+        KTCSearchResultFilterCoordinate ageCoord = FilterCoordinateMake(0, index);
+        self.storeAgeFilterCoordinate = ageCoord;
+    }
+    //category
     NSArray *lvl1Categories = [[IcsonCategoryManager sharedManager] getCategoryArrayWithLevel:CategoryLevel1 Error:nil];
     KTCSearchResultFilterCoordinate cateCoord = FilterCoordinateMake(-1, -1);
     for (NSUInteger index = 0; index < [lvl1Categories count]; index ++) {
@@ -332,7 +390,10 @@
         default:
             break;
     }
+    [self.view setAreaFilterModel:self.areaFilterModel];
     [self.view setSortFilterModel:self.sortFilterModel];
+    [self.view setPeopleFilterModel:self.ageFilterModel];
+    [self.view setCategoriesFilterModelArray:self.categoryFilterModels];
     [self.view setAreaFilterCoordinate:areaFilterCoordinate];
     [self.view setSortFilterCoordinate:sortFilterCoordinate];
     [self.view setAgeFilterCoordinate:ageFilterCoordinate];

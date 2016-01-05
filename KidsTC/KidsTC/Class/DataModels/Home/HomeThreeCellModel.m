@@ -34,7 +34,8 @@
 }
 
 - (CGFloat)cellHeight {
-    cellHeight = cellRatio * ((SCREEN_WIDTH - 1) / 2);
+    CGFloat width = (SCREEN_WIDTH - 30) / 2;
+    cellHeight = cellRatio * width + 10;
     return cellHeight;
 }
 

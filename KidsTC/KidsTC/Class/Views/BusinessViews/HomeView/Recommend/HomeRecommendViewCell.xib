@@ -41,13 +41,13 @@
                                     <constraint firstAttribute="height" constant="20" id="wn0-AJ-w2u"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已售" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f9u-i7-pcb">
-                                <rect key="frame" x="258" y="53" width="22" height="13.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="已售" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f9u-i7-pcb">
+                                <rect key="frame" x="90" y="53" width="190" height="13.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X5z-lT-d0F">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X5z-lT-d0F">
                                 <rect key="frame" x="282" y="60" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -64,6 +64,7 @@
                             <constraint firstItem="S71-Pi-ker" firstAttribute="leading" secondItem="xDs-Jm-ebj" secondAttribute="trailing" constant="10" id="MBm-5U-7Xx"/>
                             <constraint firstItem="FEA-Ew-vUV" firstAttribute="leading" secondItem="nwW-Hn-M9Z" secondAttribute="leading" constant="10" id="Nrr-gm-QSC"/>
                             <constraint firstItem="X5z-lT-d0F" firstAttribute="bottom" secondItem="S71-Pi-ker" secondAttribute="bottom" id="PXi-eb-1ZL"/>
+                            <constraint firstItem="f9u-i7-pcb" firstAttribute="leading" secondItem="S71-Pi-ker" secondAttribute="trailing" constant="10" id="erC-z5-xae"/>
                             <constraint firstItem="S71-Pi-ker" firstAttribute="centerY" secondItem="xDs-Jm-ebj" secondAttribute="centerY" id="gB5-64-Y2K"/>
                             <constraint firstAttribute="height" constant="70" id="i7q-nq-1b1"/>
                             <constraint firstItem="X5z-lT-d0F" firstAttribute="leading" secondItem="f9u-i7-pcb" secondAttribute="trailing" constant="2" id="jcB-Ns-3rJ"/>

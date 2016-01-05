@@ -89,7 +89,7 @@
     
     self.faceImageView.layer.cornerRadius = self.faceImageView.frame.size.width / 2;
     self.faceImageView.layer.borderWidth = 4;
-    self.faceImageView.layer.borderColor = RGBA(255, 220, 143, 0.7).CGColor;
+    self.faceImageView.layer.borderColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8].CGColor;
     self.faceImageView.layer.masksToBounds = YES;
     
     UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTappedOnView:)];

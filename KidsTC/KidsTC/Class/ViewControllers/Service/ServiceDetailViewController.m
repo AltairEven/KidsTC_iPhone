@@ -150,7 +150,7 @@
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
     //MTA
-    [MTA trackCustomEvent:@"event_skip_server_store" args:nil];
+    [MTA trackCustomEvent:@"event_skip_server_stores_dtl" args:nil];
 }
 
 - (void)serviceDetailView:(ServiceDetailView *)detailView didClickedCommentCellAtIndex:(NSUInteger)index {

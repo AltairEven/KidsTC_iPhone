@@ -33,10 +33,11 @@
 - (void)configWithCellModel:(HomeTwoThreeFourCellModel *)model {
     NSUInteger count = [model.itemsArray count];
     
-    CGFloat margin = 10;
-    CGFloat xPosition = margin;
-    CGFloat yPosition = margin;
-    CGFloat width = (SCREEN_WIDTH - (count + 1) * margin) / count;
+    CGFloat hMargin = 10;
+    CGFloat vMargin = 5;
+    CGFloat xPosition = hMargin;
+    CGFloat yPosition = vMargin;
+    CGFloat width = (SCREEN_WIDTH - (count + 1) * hMargin) / count;
     CGFloat height = width * [model cellRatio];
     
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
@@ -49,7 +50,7 @@
         UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickedOnImage:)];
         [imageView addGestureRecognizer:gesture];
         [tempArray addObject:imageView];
-        xPosition += width + margin;
+        xPosition += width + hMargin;
     }
     [self.stackView setSubViews:[NSArray arrayWithArray:tempArray]];
 }

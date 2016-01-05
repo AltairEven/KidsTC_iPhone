@@ -18,7 +18,7 @@
 //#define NSLog(...) {}
 //#endif
 
-#define KIDSTC_DEBUG
+//#define KIDSTC_DEBUG
 
 
 //static NSString *const kAppEnterForegroundNotification = @"enterForeground";

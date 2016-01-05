@@ -145,40 +145,61 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
 }
 - (UIImage *)imageByScalingToSize:(CGSize)targetSize {
 	
-	UIImage *sourceImage = self;
-	UIImage *newImage = nil;
-	
-	//   CGSize imageSize = sourceImage.size;
-	//   CGFloat width = imageSize.width;
-	//   CGFloat height = imageSize.height;
-	
-	CGFloat targetWidth = targetSize.width;
-	CGFloat targetHeight = targetSize.height;
-	
-	//   CGFloat scaleFactor = 0.0;
-	CGFloat scaledWidth = targetWidth;
-	CGFloat scaledHeight = targetHeight;
-	
-	CGPoint thumbnailPoint = CGPointMake(0.0,0.0);
-	
-	// this is actually the interesting part:
-	
-	UIGraphicsBeginImageContext(targetSize);
-	
-	CGRect thumbnailRect = CGRectZero;
-	thumbnailRect.origin = thumbnailPoint;
-	thumbnailRect.size.width  = scaledWidth;
-	thumbnailRect.size.height = scaledHeight;
-	
-	[sourceImage drawInRect:thumbnailRect];
-	
-	newImage = UIGraphicsGetImageFromCurrentImageContext();
-	UIGraphicsEndImageContext();
-	
-	if(newImage == nil) NSLog(@"could not scale image");
-	
-	
-	return newImage ;
+//	UIImage *sourceImage = self;
+//	UIImage *newImage = nil;
+//	
+//	//   CGSize imageSize = sourceImage.size;
+//	//   CGFloat width = imageSize.width;
+//	//   CGFloat height = imageSize.height;
+//	
+//	CGFloat targetWidth = targetSize.width;
+//	CGFloat targetHeight = targetSize.height;
+//	
+//	//   CGFloat scaleFactor = 0.0;
+//	CGFloat scaledWidth = targetWidth;
+//	CGFloat scaledHeight = targetHeight;
+//	
+//	CGPoint thumbnailPoint = CGPointMake(0.0,0.0);
+//	
+//	// this is actually the interesting part:
+//	
+//	UIGraphicsBeginImageContext(targetSize);
+//	
+//	CGRect thumbnailRect = CGRectZero;
+//	thumbnailRect.origin = thumbnailPoint;
+//	thumbnailRect.size.width  = scaledWidth;
+//	thumbnailRect.size.height = scaledHeight;
+//	
+//	[sourceImage drawInRect:thumbnailRect];
+//	
+//	newImage = UIGraphicsGetImageFromCurrentImageContext();
+//	UIGraphicsEndImageContext();
+//	
+//	if(newImage == nil) NSLog(@"could not scale image");
+//	
+//	
+//	return newImage ;
+
+    
+    // 创建一个bitmap的context
+    // 并把它设置成为当前正在使用的context
+    //Determine whether the screen is retina
+    CGFloat screenScale = [[UIScreen mainScreen] scale];
+    if(screenScale == 2.0){
+        UIGraphicsBeginImageContextWithOptions(targetSize, NO, 2.0);
+    } else if (screenScale == 3.0){
+        UIGraphicsBeginImageContextWithOptions(targetSize, NO, 3.0);
+    } else {
+        UIGraphicsBeginImageContext(targetSize);
+    }
+    // 绘制改变大小的图片
+    [self drawInRect:CGRectMake(0, 0, targetSize.width, targetSize.height)];
+    // 从当前context中创建一个改变大小后的图片
+    UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    // 使当前的context出堆栈
+    UIGraphicsEndImageContext();
+    // 返回新的改变大小后的图片
+    return scaledImage;
 }
 
 - (UIImage *)imageRotatedByRadians:(CGFloat)radians

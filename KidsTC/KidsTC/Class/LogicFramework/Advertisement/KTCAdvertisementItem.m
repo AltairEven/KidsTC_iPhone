@@ -19,11 +19,11 @@
         self.image = image;
         HomeSegueDestination dest = (HomeSegueDestination)[[data objectForKey:@"linkType"] integerValue];
         if (dest != HomeSegueDestinationNone) {
-            NSDictionary *paramData = [data objectForKey:@"params"];
-//            NSString *paramString = [data objectForKey:@"params"];
-//            NSData *paramData = [paramString dataUsingEncoding:NSUTF8StringEncoding];
-//            NSDictionary *paramDic = [NSJSONSerialization JSONObjectWithData:paramData options:NSJSONReadingAllowFragments error:nil];
-            self.segueModel = [[HomeSegueModel alloc] initWithDestination:dest paramRawData:paramData];
+//            NSDictionary *paramData = [data objectForKey:@"params"];
+            NSString *paramString = [data objectForKey:@"params"];
+            NSData *paramData = [paramString dataUsingEncoding:NSUTF8StringEncoding];
+            NSDictionary *paramDic = [NSJSONSerialization JSONObjectWithData:paramData options:NSJSONReadingAllowFragments error:nil];
+            self.segueModel = [[HomeSegueModel alloc] initWithDestination:dest paramRawData:paramDic];
         }
     }
     return self;

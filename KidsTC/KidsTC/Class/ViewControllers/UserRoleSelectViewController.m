@@ -66,7 +66,7 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _navigationTitle = @"状态更改";
+    _navigationTitle = @"请选择阶段";
     _pageIdentifier = @"pv_stage_switch";
     // Do any additional setup after loading the view from its nib.
     [self.view setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];

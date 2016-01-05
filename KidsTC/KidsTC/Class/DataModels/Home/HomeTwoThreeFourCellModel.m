@@ -36,8 +36,9 @@
 - (void)setRatio:(CGFloat)ratio {
     [super setRatio:ratio];
     NSUInteger count = [self.itemsArray count];
-    CGFloat margin = 10;
-    cellHeight = cellRatio * (SCREEN_WIDTH - (count + 1) * margin) / count  + 2 * margin;
+    CGFloat hMargin = 10;
+    CGFloat vMargin = 10;
+    cellHeight = cellRatio * (SCREEN_WIDTH - (count + 1) * hMargin) / count  + 2 * vMargin;
 }
 
 

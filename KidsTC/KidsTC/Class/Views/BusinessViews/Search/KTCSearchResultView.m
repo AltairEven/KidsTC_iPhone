@@ -162,7 +162,12 @@ static NSString *const kStoreCellIdentifier = @"kStoreCellIdentifier";
         if (self.displayingFilter) {
             [self dismissFilterView];
         }
-        self.currentAreaName = nil;
+        if (self.areaFilterModel && [self.areaFilterModel.subArray count] > self.areaFilterCoordinate.level2Index) {
+            KTCSearchResultFilterModel *filterModel = [self.areaFilterModel.subArray objectAtIndex:self.areaFilterCoordinate.level2Index];
+            self.currentAreaName = filterModel.name;
+        } else {
+            self.currentAreaName = nil;
+        }
         [self.sortView reloadData];
     }
 }
@@ -175,6 +180,23 @@ static NSString *const kStoreCellIdentifier = @"kStoreCellIdentifier";
         }
         self.currentSortString = nil;
         [self.sortView reloadData];
+    }
+}
+
+
+- (void)setAreaFilterCoordinate:(KTCSearchResultFilterCoordinate)areaFilterCoordinate {
+    _areaFilterCoordinate = areaFilterCoordinate;
+    if (self.areaFilterModel && [self.areaFilterModel.subArray count] > areaFilterCoordinate.level2Index && areaFilterCoordinate.level2Index >= 0) {
+        KTCSearchResultFilterModel *filterModel = [self.areaFilterModel.subArray objectAtIndex:areaFilterCoordinate.level2Index];
+        self.currentAreaName = filterModel.name;
+    }
+}
+
+- (void)setSortFilterCoordinate:(KTCSearchResultFilterCoordinate)sortFilterCoordinate {
+    _sortFilterCoordinate = sortFilterCoordinate;
+    if (self.sortFilterModel && [self.areaFilterModel.subArray count] > sortFilterCoordinate.level2Index&& sortFilterCoordinate.level2Index >= 0) {
+        KTCSearchResultFilterModel *filterModel = [self.areaFilterModel.subArray objectAtIndex:sortFilterCoordinate.level2Index];
+        self.currentAreaName = filterModel.name;
     }
 }
 
@@ -525,6 +547,7 @@ static NSString *const kStoreCellIdentifier = @"kStoreCellIdentifier";
         default:
             break;
     }
+    [self.sortView reloadData];
 }
 
 - (void)reloadDataForSearchType:(KTCSearchType)type {
