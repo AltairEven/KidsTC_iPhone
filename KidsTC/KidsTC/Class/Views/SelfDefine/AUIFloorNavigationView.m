@@ -321,6 +321,9 @@ typedef enum {
             [self resizeViewWithNewSize:CGSizeMake(self.collapseView.frame.size.width, self.collapseView.frame.size.height)];
             [self.collapseView setCenter:CGPointMake(self.viewSize.width / 2, self.viewSize.height / 2)];
             [showingViewWhenCollapsed setCenter:CGPointMake(self.viewSize.width / 2, self.viewSize.height / 2)];
+            for (UIView *containerView in self.itemContainerView) {
+                [containerView setCenter:CGPointMake(self.viewSize.width / 2, self.viewSize.height / 2)];
+            }
         }];
     } else {
         [self.collapseView setHidden:NO];
@@ -333,6 +336,9 @@ typedef enum {
         [self resizeViewWithNewSize:CGSizeMake(self.collapseView.frame.size.width, self.collapseView.frame.size.height)];
         [self.collapseView setCenter:CGPointMake(self.viewSize.width / 2, self.viewSize.height / 2)];
         [showingViewWhenCollapsed setCenter:CGPointMake(self.viewSize.width / 2, self.viewSize.height / 2)];
+        for (UIView *containerView in self.itemContainerView) {
+            [containerView setCenter:CGPointMake(self.viewSize.width / 2, self.viewSize.height / 2)];
+        }
     }
     //timer
     [self.alphaTimer invalidate];
