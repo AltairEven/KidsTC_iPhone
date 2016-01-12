@@ -15,14 +15,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder_50_50" translatesAutoresizingMaskIntoConstraints="NO" id="oap-rh-zYQ">
-                        <rect key="frame" x="10" y="7" width="30" height="30"/>
+                        <rect key="frame" x="10" y="12" width="20" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="PsU-al-Grp"/>
-                            <constraint firstAttribute="width" constant="30" id="hSI-9b-PhU"/>
+                            <constraint firstAttribute="height" constant="20" id="PsU-al-Grp"/>
+                            <constraint firstAttribute="width" constant="20" id="hSI-9b-PhU"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="到店有礼" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dqF-i3-BG9">
-                        <rect key="frame" x="50" y="13" width="260" height="18"/>
+                        <rect key="frame" x="40" y="13" width="270" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>

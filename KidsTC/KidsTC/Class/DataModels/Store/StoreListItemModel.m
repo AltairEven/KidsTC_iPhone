@@ -72,6 +72,10 @@
         if ([data objectForKey:@"phone"]) {
             self.phoneNumber = [NSString stringWithFormat:@"%@", [data objectForKey:@"phone"]];
         }
+        //location
+        CLLocationCoordinate2D coord = [GToolUtil coordinateFromString:@"121.4812701835353,31.239205868246547"];
+        CLLocation *loc = [[CLLocation alloc] initWithLatitude:coord.latitude longitude:coord.longitude];
+        self.location = [[KTCLocation alloc] initWithLocation:loc locationDescription:self.storeName];
     }
     return self;
 }

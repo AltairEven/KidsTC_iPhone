@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GNavController : UINavigationController <UINavigationControllerDelegate>
+@interface GNavController : UINavigationController <UINavigationControllerDelegate> {
+    UIView *alphaView;
+}
+
+//- (void)setNavigationBarAlpha:(CGFloat)alpha;
 
 @end

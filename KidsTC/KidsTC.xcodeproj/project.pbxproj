@@ -50,7 +50,6 @@
 		1E0B7A7C1B6F67B800A58AD4 /* AUISegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B79C61B6F67B800A58AD4 /* AUISegmentView.m */; };
 		1E0B7A7D1B6F67B800A58AD4 /* AUIStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B79C81B6F67B800A58AD4 /* AUIStackView.m */; };
 		1E0B7A7F1B6F67B800A58AD4 /* AutoFlashImagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B79CC1B6F67B800A58AD4 /* AutoFlashImagesView.m */; };
-		1E0B7A801B6F67B800A58AD4 /* CoudanTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B79CE1B6F67B800A58AD4 /* CoudanTableView.m */; };
 		1E0B7A811B6F67B800A58AD4 /* CountDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B79D01B6F67B800A58AD4 /* CountDownView.m */; };
 		1E0B7A821B6F67B800A58AD4 /* CouponGiftView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B79D21B6F67B800A58AD4 /* CouponGiftView.m */; };
 		1E0B7A831B6F67B800A58AD4 /* CouponGiftView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E0B79D31B6F67B800A58AD4 /* CouponGiftView.xib */; };
@@ -123,7 +122,6 @@
 		1E0B7AC81B6F67B800A58AD4 /* ShakingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B7A5F1B6F67B800A58AD4 /* ShakingView.m */; };
 		1E0B7AC91B6F67B800A58AD4 /* SystemBarWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B7A621B6F67B800A58AD4 /* SystemBarWindow.m */; };
 		1E0B7ACA1B6F67B800A58AD4 /* TiledImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B7A651B6F67B800A58AD4 /* TiledImageView.m */; };
-		1E0B7ACB1B6F67B800A58AD4 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B7A671B6F67B800A58AD4 /* TTTAttributedLabel.m */; };
 		1E0B7ACC1B6F67B800A58AD4 /* TuanHeaderNumberLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B7A691B6F67B800A58AD4 /* TuanHeaderNumberLabel.m */; };
 		1E0B7ACD1B6F67B800A58AD4 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B7A6B1B6F67B800A58AD4 /* UIAlertView+Blocks.m */; };
 		1E0B7ACE1B6F67B800A58AD4 /* UILabel+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E0B7A6D1B6F67B800A58AD4 /* UILabel+Additions.m */; };
@@ -779,6 +777,7 @@
 		8F12062C1C1A622700662E01 /* KTCAnnotationTipWelfareItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F1206241C1A622700662E01 /* KTCAnnotationTipWelfareItemView.xib */; };
 		8F201FF71C3A22250002AFB3 /* HomeActivityService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F201FF61C3A22250002AFB3 /* HomeActivityService.m */; };
 		8F201FF91C3A25E50002AFB3 /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F201FF81C3A25E50002AFB3 /* interface_list.plist */; };
+		8F23E02D1C434B32005F7A07 /* bigShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F23E02C1C434B32005F7A07 /* bigShadow.png */; };
 		8F25A0E11C2A75C10076A6FA /* SoftwareSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F25A0DF1C2A75C10076A6FA /* SoftwareSettingViewController.m */; };
 		8F25A0E21C2A75C10076A6FA /* SoftwareSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F25A0E01C2A75C10076A6FA /* SoftwareSettingViewController.xib */; };
 		8F25A0E51C2A8A350076A6FA /* KTCAdvertisementItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F25A0E41C2A8A350076A6FA /* KTCAdvertisementItem.m */; };
@@ -835,6 +834,7 @@
 		8F6513961BFC96B9003BE006 /* KTCActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6513951BFC96B9003BE006 /* KTCActionView.m */; };
 		8F65D9D51C10335D007CA5BC /* KTCBrowseHistoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F65D9D41C10335D007CA5BC /* KTCBrowseHistoryManager.m */; };
 		8F70F9F01C00749600A175F0 /* AlipayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F70F9EF1C00749600A175F0 /* AlipayManager.m */; };
+		8F758C961C43932400D68BF1 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F758C951C43932300D68BF1 /* TTTAttributedLabel.m */; };
 		8F7A574E1C1D66B500BD9497 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F7A574D1C1D66B500BD9497 /* GameKit.framework */; };
 		8F7A57501C1D66BA00BD9497 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F7A574F1C1D66BA00BD9497 /* StoreKit.framework */; };
 		8F7E44F91C09D616001EF3B5 /* OrderRefundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7E44F81C09D616001EF3B5 /* OrderRefundView.m */; };
@@ -935,6 +935,8 @@
 		8FC75DAE1C0EED8200D1E5F0 /* CommentEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC75DAC1C0EED8200D1E5F0 /* CommentEditViewController.m */; };
 		8FC75DAF1C0EED8200D1E5F0 /* CommentEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FC75DAD1C0EED8200D1E5F0 /* CommentEditViewController.xib */; };
 		8FC75DB51C0EF16400D1E5F0 /* CommentEditingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC75DB41C0EF16400D1E5F0 /* CommentEditingModel.m */; };
+		8FCD6CF91C43ADF2000C5E65 /* KTCStoreMapViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8FCD6CF71C43ADF2000C5E65 /* KTCStoreMapViewController.mm */; };
+		8FCD6CFA1C43ADF2000C5E65 /* KTCStoreMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FCD6CF81C43ADF2000C5E65 /* KTCStoreMapViewController.xib */; };
 		8FD213C21C08A29B0073F2CA /* CommentFoundingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FD213C01C08A29B0073F2CA /* CommentFoundingViewController.m */; };
 		8FD213C31C08A29B0073F2CA /* CommentFoundingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FD213C11C08A29B0073F2CA /* CommentFoundingViewController.xib */; };
 		8FD213C61C0949E60073F2CA /* CommentScoreConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FD213C51C0949E60073F2CA /* CommentScoreConfigModel.m */; };
@@ -1037,8 +1039,6 @@
 		1E0B79C81B6F67B800A58AD4 /* AUIStackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIStackView.m; sourceTree = "<group>"; };
 		1E0B79CB1B6F67B800A58AD4 /* AutoFlashImagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoFlashImagesView.h; sourceTree = "<group>"; };
 		1E0B79CC1B6F67B800A58AD4 /* AutoFlashImagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoFlashImagesView.m; sourceTree = "<group>"; };
-		1E0B79CD1B6F67B800A58AD4 /* CoudanTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoudanTableView.h; sourceTree = "<group>"; };
-		1E0B79CE1B6F67B800A58AD4 /* CoudanTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoudanTableView.m; sourceTree = "<group>"; };
 		1E0B79CF1B6F67B800A58AD4 /* CountDownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountDownView.h; sourceTree = "<group>"; };
 		1E0B79D01B6F67B800A58AD4 /* CountDownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountDownView.m; sourceTree = "<group>"; };
 		1E0B79D11B6F67B800A58AD4 /* CouponGiftView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponGiftView.h; sourceTree = "<group>"; };
@@ -1179,8 +1179,6 @@
 		1E0B7A621B6F67B800A58AD4 /* SystemBarWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemBarWindow.m; sourceTree = "<group>"; };
 		1E0B7A641B6F67B800A58AD4 /* TiledImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiledImageView.h; sourceTree = "<group>"; };
 		1E0B7A651B6F67B800A58AD4 /* TiledImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TiledImageView.m; sourceTree = "<group>"; };
-		1E0B7A661B6F67B800A58AD4 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
-		1E0B7A671B6F67B800A58AD4 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
 		1E0B7A681B6F67B800A58AD4 /* TuanHeaderNumberLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TuanHeaderNumberLabel.h; sourceTree = "<group>"; };
 		1E0B7A691B6F67B800A58AD4 /* TuanHeaderNumberLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TuanHeaderNumberLabel.m; sourceTree = "<group>"; };
 		1E0B7A6A1B6F67B800A58AD4 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
@@ -2305,6 +2303,7 @@
 		8F201FF61C3A22250002AFB3 /* HomeActivityService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeActivityService.m; sourceTree = "<group>"; };
 		8F201FF81C3A25E50002AFB3 /* interface_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = interface_list.plist; sourceTree = "<group>"; };
 		8F205F7D1C1BC67E00A74386 /* MTAFeedback.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTAFeedback.h; sourceTree = "<group>"; };
+		8F23E02C1C434B32005F7A07 /* bigShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bigShadow.png; sourceTree = "<group>"; };
 		8F25A0DE1C2A75C10076A6FA /* SoftwareSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoftwareSettingViewController.h; sourceTree = "<group>"; };
 		8F25A0DF1C2A75C10076A6FA /* SoftwareSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoftwareSettingViewController.m; sourceTree = "<group>"; };
 		8F25A0E01C2A75C10076A6FA /* SoftwareSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SoftwareSettingViewController.xib; sourceTree = "<group>"; };
@@ -2406,6 +2405,8 @@
 		8F65D9D41C10335D007CA5BC /* KTCBrowseHistoryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCBrowseHistoryManager.m; sourceTree = "<group>"; };
 		8F70F9EE1C00749600A175F0 /* AlipayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlipayManager.h; sourceTree = "<group>"; };
 		8F70F9EF1C00749600A175F0 /* AlipayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlipayManager.m; sourceTree = "<group>"; };
+		8F758C941C43932300D68BF1 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
+		8F758C951C43932300D68BF1 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
 		8F7A574D1C1D66B500BD9497 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		8F7A574F1C1D66BA00BD9497 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		8F7E44F71C09D616001EF3B5 /* OrderRefundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderRefundView.h; sourceTree = "<group>"; };
@@ -2569,6 +2570,9 @@
 		8FC75DAD1C0EED8200D1E5F0 /* CommentEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentEditViewController.xib; sourceTree = "<group>"; };
 		8FC75DB31C0EF16400D1E5F0 /* CommentEditingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentEditingModel.h; sourceTree = "<group>"; };
 		8FC75DB41C0EF16400D1E5F0 /* CommentEditingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentEditingModel.m; sourceTree = "<group>"; };
+		8FCD6CF61C43ADF2000C5E65 /* KTCStoreMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCStoreMapViewController.h; sourceTree = "<group>"; };
+		8FCD6CF71C43ADF2000C5E65 /* KTCStoreMapViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = KTCStoreMapViewController.mm; sourceTree = "<group>"; };
+		8FCD6CF81C43ADF2000C5E65 /* KTCStoreMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTCStoreMapViewController.xib; sourceTree = "<group>"; };
 		8FD213BF1C08A29B0073F2CA /* CommentFoundingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentFoundingViewController.h; sourceTree = "<group>"; };
 		8FD213C01C08A29B0073F2CA /* CommentFoundingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentFoundingViewController.m; sourceTree = "<group>"; };
 		8FD213C11C08A29B0073F2CA /* CommentFoundingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentFoundingViewController.xib; sourceTree = "<group>"; };
@@ -2730,8 +2734,6 @@
 				1E827B7E1B918637008F3F08 /* AUIImageGridView.m */,
 				1E0B79CB1B6F67B800A58AD4 /* AutoFlashImagesView.h */,
 				1E0B79CC1B6F67B800A58AD4 /* AutoFlashImagesView.m */,
-				1E0B79CD1B6F67B800A58AD4 /* CoudanTableView.h */,
-				1E0B79CE1B6F67B800A58AD4 /* CoudanTableView.m */,
 				1E0B79CF1B6F67B800A58AD4 /* CountDownView.h */,
 				1E0B79D01B6F67B800A58AD4 /* CountDownView.m */,
 				1E0B79D11B6F67B800A58AD4 /* CouponGiftView.h */,
@@ -2864,8 +2866,6 @@
 				1E0B7A631B6F67B800A58AD4 /* TearAwayView */,
 				1E0B7A641B6F67B800A58AD4 /* TiledImageView.h */,
 				1E0B7A651B6F67B800A58AD4 /* TiledImageView.m */,
-				1E0B7A661B6F67B800A58AD4 /* TTTAttributedLabel.h */,
-				1E0B7A671B6F67B800A58AD4 /* TTTAttributedLabel.m */,
 				1E0B7A681B6F67B800A58AD4 /* TuanHeaderNumberLabel.h */,
 				1E0B7A691B6F67B800A58AD4 /* TuanHeaderNumberLabel.m */,
 				1E0B7A6A1B6F67B800A58AD4 /* UIAlertView+Blocks.h */,
@@ -3623,6 +3623,7 @@
 		1E3D89711B4BF4A000275C35 /* Thirdpart */ = {
 			isa = PBXGroup;
 			children = (
+				8F758C931C43932300D68BF1 /* TTTAttributedLabel */,
 				8FC36E1E1C325E4C0079D458 /* SSZipArchive */,
 				8F85AD8B1C0C91E400890526 /* XGPush */,
 				1EFFADFE1BEB7925001D4245 /* libWeiboSDK */,
@@ -4503,6 +4504,9 @@
 				1E827B621B8EB90B008F3F08 /* KTCMapViewController.h */,
 				1E827B631B8EB90B008F3F08 /* KTCMapViewController.mm */,
 				1E827B641B8EB90B008F3F08 /* KTCMapViewController.xib */,
+				8FCD6CF61C43ADF2000C5E65 /* KTCStoreMapViewController.h */,
+				8FCD6CF71C43ADF2000C5E65 /* KTCStoreMapViewController.mm */,
+				8FCD6CF81C43ADF2000C5E65 /* KTCStoreMapViewController.xib */,
 				8F3DB9FD1C21A0AB0098A299 /* RouteAnnotation.h */,
 				8F3DB9FE1C21A0AB0098A299 /* RouteAnnotation.m */,
 				8F3DBA001C21A2410098A299 /* KTCMapUtil.h */,
@@ -5346,6 +5350,7 @@
 		1EC73C101B5F992E008B39EA /* TempResources */ = {
 			isa = PBXGroup;
 			children = (
+				8F23E02B1C434B32005F7A07 /* Share */,
 				1E827CD71B9C3E76008F3F08 /* Coupon */,
 				1E943F491B7DDFDF0029FE74 /* Loading */,
 				8FA3615C1C1566B50094A9AA /* EmptyBG */,
@@ -5443,6 +5448,14 @@
 				8F201FF61C3A22250002AFB3 /* HomeActivityService.m */,
 			);
 			path = HomeActivity;
+			sourceTree = "<group>";
+		};
+		8F23E02B1C434B32005F7A07 /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				8F23E02C1C434B32005F7A07 /* bigShadow.png */,
+			);
+			path = Share;
 			sourceTree = "<group>";
 		};
 		8F25A0E61C2BD0D90076A6FA /* Theme */ = {
@@ -5572,6 +5585,15 @@
 				8F65D9D41C10335D007CA5BC /* KTCBrowseHistoryManager.m */,
 			);
 			path = History;
+			sourceTree = "<group>";
+		};
+		8F758C931C43932300D68BF1 /* TTTAttributedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				8F758C941C43932300D68BF1 /* TTTAttributedLabel.h */,
+				8F758C951C43932300D68BF1 /* TTTAttributedLabel.m */,
+			);
+			path = TTTAttributedLabel;
 			sourceTree = "<group>";
 		};
 		8F85AD7F1C0C496000890526 /* PushNotification */ = {
@@ -6049,6 +6071,7 @@
 				1E827CC91B9BE696008F3F08 /* CouponListViewCell.xib in Resources */,
 				8FA3616C1C1570910094A9AA /* mapapi.bundle in Resources */,
 				1E3D8F631B4D1DFE00275C35 /* OrderListViewController.xib in Resources */,
+				8FCD6CFA1C43ADF2000C5E65 /* KTCStoreMapViewController.xib in Resources */,
 				1E1CFA2D1BD8E1880005653D /* ServiceDetailSegmentCell.xib in Resources */,
 				1E15F97D1BDDD194000C74E7 /* StoreDetailCommentCell.xib in Resources */,
 				8F25A0E21C2A75C10076A6FA /* SoftwareSettingViewController.xib in Resources */,
@@ -6073,6 +6096,7 @@
 				1E15F9941BDF7785000C74E7 /* CommentDetailView.xib in Resources */,
 				1E827BE71B941337008F3F08 /* UIBarButtonItemArrowRight@3x.png in Resources */,
 				1E1CFA231BD72F5E0005653D /* ServiceDetailMoreInfoView.xib in Resources */,
+				8F23E02D1C434B32005F7A07 /* bigShadow.png in Resources */,
 				1E827BD21B941337008F3F08 /* ImageSelectedOff@3x.png in Resources */,
 				1E8017371BB3CDC900B6C352 /* NewsViewController.xib in Resources */,
 				8FEAED761C12C23400DF6E5E /* NewsRecommedListViewController.xib in Resources */,
@@ -6407,7 +6431,6 @@
 				8F3DB9FF1C21A0AB0098A299 /* RouteAnnotation.m in Sources */,
 				1E0B7AC51B6F67B800A58AD4 /* RollingCell.m in Sources */,
 				8F85ADBA1C0EBC8100890526 /* NewsSearchResultListView.m in Sources */,
-				1E0B7A801B6F67B800A58AD4 /* CoudanTableView.m in Sources */,
 				1EC73BA91B5E25A4008B39EA /* HomeTopView.m in Sources */,
 				1E0B7AAC1B6F67B800A58AD4 /* GPageControl.m in Sources */,
 				1E7994E11BC622900099CFF9 /* ParentingStrategyDetailModel.m in Sources */,
@@ -6442,7 +6465,6 @@
 				1E0B7A7C1B6F67B800A58AD4 /* AUISegmentView.m in Sources */,
 				1E3D8D811B4BF4A100275C35 /* AlixPayResult.m in Sources */,
 				8FBAEAF51C31701B00A8AFF0 /* HomeViewBigImageTwoDescCell.m in Sources */,
-				1E0B7ACB1B6F67B800A58AD4 /* TTTAttributedLabel.m in Sources */,
 				1EC73BA31B5E25A4008B39EA /* HotActivityGroupViewCell.m in Sources */,
 				8F85AD861C0C6C8200890526 /* NotificationCenterViewController.m in Sources */,
 				1E7995AC1BCF49250099CFF9 /* NewsRecommendCellViewSmallImageView.m in Sources */,
@@ -6650,6 +6672,7 @@
 				1EC4A10D1B5CCCFF00206BB9 /* KTCSearchHistoryView.m in Sources */,
 				8FABCB6E1C102B2A005BF7AD /* BrowseHistoryStoreListItemModel.m in Sources */,
 				1E3D8CDC1B4BF4A100275C35 /* IcsonCounty.m in Sources */,
+				8FCD6CF91C43ADF2000C5E65 /* KTCStoreMapViewController.mm in Sources */,
 				1E80170D1BB006EF00B6C352 /* HomeViewNewsCell.m in Sources */,
 				1E0B7AA21B6F67B800A58AD4 /* GEventPageViewCell2.m in Sources */,
 				1EC73BAE1B5E25A4008B39EA /* TwinklingElvesView.m in Sources */,
@@ -6731,6 +6754,7 @@
 				1E8EFCF71B68697700D00808 /* ServiceCommentListViewHeaderCell.m in Sources */,
 				1E943F7F1B831DAF0029FE74 /* ServiceListViewController.m in Sources */,
 				1E0B7B691B70BAE900A58AD4 /* CategoryViewModel.m in Sources */,
+				8F758C961C43932400D68BF1 /* TTTAttributedLabel.m in Sources */,
 				1E7600471B57AA0600DF0972 /* StoreDetailView.m in Sources */,
 				1EC73C681B61186E008B39EA /* SettlementPayTypeCell.m in Sources */,
 				8FABCB281C0FCBAB005BF7AD /* FavouriteViewServiceCell.m in Sources */,

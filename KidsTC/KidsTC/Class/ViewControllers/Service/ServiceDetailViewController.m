@@ -24,6 +24,8 @@
 #import "KTCBrowseHistoryView.h"
 #import "KTCBrowseHistoryManager.h"
 #import "OnlineCustomerService.h"
+#import "KTCSegueMaster.h"
+#import "KTCStoreMapViewController.h"
 
 
 @interface ServiceDetailViewController () <ServiceDetailViewDelegate, ServiceDetailBottomViewDelegate, ServiceDetailConfirmViewDelegate, KTCActionViewDelegate, KTCBrowseHistoryViewDataSource, KTCBrowseHistoryViewDelegate>
@@ -171,6 +173,30 @@
                                       [NSNumber numberWithInteger:self.viewModel.detailModel.commentPictureNumber], CommentListTabNumberKeyPicture, nil];
     
     CommentListViewController *controller = [[CommentListViewController alloc] initWithIdentifier:self.serviceId relationType:self.viewModel.detailModel.relationType commentNumberDic:commentNumberDic];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+
+- (void)serviceDetailView:(ServiceDetailView *)detailView didScrolledAtOffset:(CGPoint)offset {
+}
+
+
+- (void)serviceDetailView:(ServiceDetailView *)detailView didSelectedLinkWithSegueModel:(HomeSegueModel *)model {
+    [KTCSegueMaster makeSegueWithModel:model fromController:self];
+}
+
+- (void)didClickedStoreBriefOnServiceDetailView:(ServiceDetailView *)detailView {
+    NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+    for (NSUInteger index = 0; index < [self.viewModel.detailModel.storeItemsArray count]; index ++) {
+        StoreListItemModel *model = [self.viewModel.detailModel.storeItemsArray objectAtIndex:index];
+        if (model.location) {
+            CLLocationCoordinate2D coord = model.location.location.coordinate;
+            model.location = [[KTCLocation alloc] initWithLocation:[[CLLocation alloc] initWithLatitude:coord.latitude + 0.002 * (index + 1) longitude:coord.longitude + 0.002 * (index + 1)] locationDescription:model.location.locationDescription];
+            [tempArray addObject:model.location];
+        }
+    }
+    KTCStoreMapViewController *controller = [[KTCStoreMapViewController alloc] initWithLocations:[NSArray arrayWithArray:tempArray]];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
 }

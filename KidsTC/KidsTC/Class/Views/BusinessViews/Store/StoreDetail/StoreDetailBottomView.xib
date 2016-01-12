@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,17 +11,17 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mfb-FL-pbX">
-                    <rect key="frame" x="0.0" y="0.0" width="80" height="60"/>
+                <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bn4-S6-jdq">
+                    <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                     <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="60" id="IaB-i5-SFp"/>
-                        <constraint firstAttribute="width" constant="80" id="MgL-Nn-80D"/>
+                        <constraint firstAttribute="width" constant="60" id="2Mb-m4-fXh"/>
+                        <constraint firstAttribute="height" constant="60" id="Hlc-Ls-1AM"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <inset key="titleEdgeInsets" minX="-8" minY="35" maxX="20" maxY="0.0"/>
-                    <inset key="imageEdgeInsets" minX="25" minY="0.0" maxX="0.0" maxY="15"/>
-                    <state key="normal" title="收藏" image="favourate_n">
+                    <inset key="titleEdgeInsets" minX="-30" minY="35" maxX="0.0" maxY="0.0"/>
+                    <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="5" maxY="15"/>
+                    <state key="normal" title="垂询" image="phone2">
                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </state>
@@ -32,15 +32,35 @@
                         <color key="titleColor" red="1" green="0.08740861472" blue="0.1398824568" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
-                        <action selector="didClickedButton:" destination="tFu-1g-bOw" eventType="touchUpInside" id="T5T-6U-NUi"/>
+                        <action selector="didClickedButton:" destination="tFu-1g-bOw" eventType="touchUpInside" id="ut3-y6-F0c"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZLE-km-IZk">
+                    <rect key="frame" x="60" y="0.0" width="60" height="60"/>
+                    <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <inset key="titleEdgeInsets" minX="-30" minY="35" maxX="0.0" maxY="0.0"/>
+                    <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="5" maxY="15"/>
+                    <state key="normal" title="位置" image="located">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected">
+                        <color key="titleColor" red="1" green="0.08740861472" blue="0.1398824568" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" red="1" green="0.08740861472" blue="0.1398824568" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="didClickedButton:" destination="tFu-1g-bOw" eventType="touchUpInside" id="2IJ-AE-ILe"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IXG-yu-Cdm">
-                    <rect key="frame" x="80" y="0.0" width="80" height="60"/>
+                    <rect key="frame" x="120" y="0.0" width="60" height="60"/>
                     <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <inset key="titleEdgeInsets" minX="-8" minY="35" maxX="20" maxY="0.0"/>
-                    <inset key="imageEdgeInsets" minX="25" minY="0.0" maxX="0.0" maxY="15"/>
+                    <inset key="titleEdgeInsets" minX="-30" minY="35" maxX="0.0" maxY="0.0"/>
+                    <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="5" maxY="15"/>
                     <state key="normal" title="评价" image="storedetail_comment">
                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -55,8 +75,28 @@
                         <action selector="didClickedButton:" destination="tFu-1g-bOw" eventType="touchUpInside" id="5xU-fd-AY1"/>
                     </connections>
                 </button>
+                <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mfb-FL-pbX">
+                    <rect key="frame" x="180" y="0.0" width="60" height="60"/>
+                    <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <inset key="titleEdgeInsets" minX="-30" minY="35" maxX="0.0" maxY="0.0"/>
+                    <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="5" maxY="15"/>
+                    <state key="normal" title="收藏" image="favourate_n">
+                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected">
+                        <color key="titleColor" red="1" green="0.08740861472" blue="0.1398824568" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" red="1" green="0.08740861472" blue="0.1398824568" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="didClickedButton:" destination="tFu-1g-bOw" eventType="touchUpInside" id="T5T-6U-NUi"/>
+                    </connections>
+                </button>
                 <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ui9-fc-pQB">
-                    <rect key="frame" x="160" y="0.0" width="160" height="60"/>
+                    <rect key="frame" x="240" y="0.0" width="80" height="60"/>
                     <color key="backgroundColor" red="1" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="预约门店">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -75,16 +115,24 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="IXG-yu-Cdm" firstAttribute="leading" secondItem="Mfb-FL-pbX" secondAttribute="trailing" id="8MU-bz-Nx2"/>
-                <constraint firstItem="Mfb-FL-pbX" firstAttribute="top" secondItem="IXG-yu-Cdm" secondAttribute="top" id="Erf-rQ-7ri"/>
-                <constraint firstItem="Mfb-FL-pbX" firstAttribute="width" secondItem="IXG-yu-Cdm" secondAttribute="width" id="LMi-px-4fP"/>
+                <constraint firstItem="Mfb-FL-pbX" firstAttribute="height" secondItem="bn4-S6-jdq" secondAttribute="height" id="0aX-V4-uop"/>
+                <constraint firstItem="bn4-S6-jdq" firstAttribute="top" secondItem="tFu-1g-bOw" secondAttribute="top" id="7pe-BM-EI8"/>
+                <constraint firstItem="ZLE-km-IZk" firstAttribute="top" secondItem="bn4-S6-jdq" secondAttribute="top" id="8no-xZ-2Rf"/>
+                <constraint firstItem="Mfb-FL-pbX" firstAttribute="width" secondItem="bn4-S6-jdq" secondAttribute="width" id="AIm-aR-3DG"/>
+                <constraint firstItem="ui9-fc-pQB" firstAttribute="leading" secondItem="Mfb-FL-pbX" secondAttribute="trailing" id="AXk-nr-pbZ"/>
+                <constraint firstItem="IXG-yu-Cdm" firstAttribute="width" secondItem="bn4-S6-jdq" secondAttribute="width" id="Dwr-1P-gOD"/>
                 <constraint firstItem="Mfb-FL-pbX" firstAttribute="top" secondItem="tFu-1g-bOw" secondAttribute="top" id="RNh-Zd-USy"/>
+                <constraint firstItem="IXG-yu-Cdm" firstAttribute="top" secondItem="bn4-S6-jdq" secondAttribute="top" id="SmV-WW-osw"/>
                 <constraint firstAttribute="trailing" secondItem="ui9-fc-pQB" secondAttribute="trailing" id="Tt0-kO-kdh"/>
-                <constraint firstItem="Mfb-FL-pbX" firstAttribute="leading" secondItem="tFu-1g-bOw" secondAttribute="leading" id="VtP-JM-Vvr"/>
-                <constraint firstItem="ui9-fc-pQB" firstAttribute="top" secondItem="IXG-yu-Cdm" secondAttribute="top" id="Wg7-Fj-6YM"/>
-                <constraint firstItem="ui9-fc-pQB" firstAttribute="height" secondItem="IXG-yu-Cdm" secondAttribute="height" id="XMA-Rc-i5M"/>
-                <constraint firstItem="Mfb-FL-pbX" firstAttribute="height" secondItem="IXG-yu-Cdm" secondAttribute="height" id="fjp-in-2uW"/>
-                <constraint firstItem="ui9-fc-pQB" firstAttribute="leading" secondItem="IXG-yu-Cdm" secondAttribute="trailing" id="teF-Cy-DLZ"/>
+                <constraint firstItem="bn4-S6-jdq" firstAttribute="leading" secondItem="tFu-1g-bOw" secondAttribute="leading" id="dK1-vt-Siy"/>
+                <constraint firstItem="IXG-yu-Cdm" firstAttribute="height" secondItem="bn4-S6-jdq" secondAttribute="height" id="f4y-O9-OrO"/>
+                <constraint firstItem="Mfb-FL-pbX" firstAttribute="leading" secondItem="IXG-yu-Cdm" secondAttribute="trailing" id="fCi-sL-6pO"/>
+                <constraint firstItem="IXG-yu-Cdm" firstAttribute="leading" secondItem="ZLE-km-IZk" secondAttribute="trailing" id="hO1-Gw-i06"/>
+                <constraint firstItem="ZLE-km-IZk" firstAttribute="width" secondItem="bn4-S6-jdq" secondAttribute="width" id="qa2-pQ-DLE"/>
+                <constraint firstItem="ui9-fc-pQB" firstAttribute="height" secondItem="bn4-S6-jdq" secondAttribute="height" id="rl7-eK-WJZ"/>
+                <constraint firstItem="ui9-fc-pQB" firstAttribute="top" secondItem="bn4-S6-jdq" secondAttribute="top" id="vOO-9f-wl5"/>
+                <constraint firstItem="ZLE-km-IZk" firstAttribute="height" secondItem="bn4-S6-jdq" secondAttribute="height" id="wko-dA-Z5i"/>
+                <constraint firstItem="ZLE-km-IZk" firstAttribute="leading" secondItem="bn4-S6-jdq" secondAttribute="trailing" id="x68-y0-76T"/>
             </constraints>
             <connections>
                 <outlet property="appointmentButton" destination="ui9-fc-pQB" id="gNh-ID-eeW"/>
@@ -96,6 +144,8 @@
     </objects>
     <resources>
         <image name="favourate_n" width="28" height="28"/>
+        <image name="located" width="23" height="23"/>
+        <image name="phone2" width="28" height="28"/>
         <image name="storedetail_comment" width="28" height="28"/>
     </resources>
 </document>

@@ -34,6 +34,8 @@
 
 @property (nonatomic, strong) NSArray <ActivityLogoItem *> *activityLogoItems;
 
+@property (nonatomic, strong) KTCLocation *location;
+
 - (instancetype)initWithRawData:(NSDictionary *)data;
 
 - (CGFloat)cellHeight;

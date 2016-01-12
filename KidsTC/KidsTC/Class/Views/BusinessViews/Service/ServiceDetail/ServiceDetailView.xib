@@ -44,6 +44,10 @@
                 <outlet property="scrollView" destination="Zag-Ac-xUj" id="Oja-ZQ-KA2"/>
                 <outlet property="serviceDescriptionLabel" destination="DOn-mU-Dnq" id="Y5x-mT-6fX"/>
                 <outlet property="serviceNameLabel" destination="GnX-9g-l0a" id="fuP-vE-df2"/>
+                <outlet property="storeBriefAlphaView" destination="hqn-Hn-lH0" id="8Pm-jm-7wt"/>
+                <outlet property="storeBriefBGView" destination="35k-9T-UTu" id="KyO-1T-q1o"/>
+                <outlet property="storeBriefButton" destination="ato-es-Ejm" id="OGa-4k-nrv"/>
+                <outlet property="storeBriefLabel" destination="oRi-L7-Hsc" id="n4o-hF-6i0"/>
                 <outlet property="topCell" destination="Dgb-dr-ZCx" id="VOB-oZ-tm5"/>
             </connections>
             <point key="canvasLocation" x="-115" y="176"/>
@@ -66,13 +70,67 @@
                                     <constraint firstAttribute="height" secondItem="7dk-sl-uzs" secondAttribute="width" multiplier="1:1" id="l6H-1N-t3l"/>
                                 </constraints>
                             </view>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hqn-Hn-lH0" userLabel="alphaView">
+                                <rect key="frame" x="0.0" y="381" width="411" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="aQr-7q-p70"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="35k-9T-UTu" userLabel="storeBriefBGView">
+                                <rect key="frame" x="0.0" y="381" width="411" height="30"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unlocated" translatesAutoresizingMaskIntoConstraints="NO" id="g0f-z4-OfG">
+                                        <rect key="frame" x="10" y="5" width="20" height="20"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="Uyf-TL-LPB"/>
+                                            <constraint firstAttribute="width" constant="20" id="zRe-bl-d2C"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRi-L7-Hsc">
+                                        <rect key="frame" x="40" y="15.5" width="0.0" height="0.0"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ato-es-Ejm">
+                                        <rect key="frame" x="321" y="0.0" width="80" height="30"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="H0H-Qn-F4v"/>
+                                            <constraint firstAttribute="height" constant="30" id="r99-li-rXl"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <inset key="titleEdgeInsets" minX="-20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <inset key="imageEdgeInsets" minX="60" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="点击查看" image="arrow_r"/>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="didClickedStoreBriefButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="78t-up-V3L"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="g0f-z4-OfG" firstAttribute="centerY" secondItem="35k-9T-UTu" secondAttribute="centerY" id="44V-0t-mE1"/>
+                                    <constraint firstAttribute="trailing" secondItem="ato-es-Ejm" secondAttribute="trailing" constant="10" id="Eh0-Uk-YHC"/>
+                                    <constraint firstItem="oRi-L7-Hsc" firstAttribute="centerY" secondItem="g0f-z4-OfG" secondAttribute="centerY" id="HHJ-VS-u3n"/>
+                                    <constraint firstItem="g0f-z4-OfG" firstAttribute="leading" secondItem="35k-9T-UTu" secondAttribute="leading" constant="10" id="TFc-20-V9n"/>
+                                    <constraint firstItem="oRi-L7-Hsc" firstAttribute="leading" secondItem="g0f-z4-OfG" secondAttribute="trailing" constant="10" id="dRO-Tx-si1"/>
+                                    <constraint firstItem="ato-es-Ejm" firstAttribute="centerY" secondItem="35k-9T-UTu" secondAttribute="centerY" id="wGY-Q6-CTS"/>
+                                </constraints>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BCV欢乐水世界 点“凉”整个夏天  最多两行啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GnX-9g-l0a">
                                 <rect key="frame" x="10" y="421" width="391" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DOn-mU-Dnq" userLabel="ServiceDescriptionLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DOn-mU-Dnq" userLabel="ServiceDescriptionLabel" customClass="TTTAttributedLabel">
                                 <rect key="frame" x="10" y="472" width="391" height="16"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -83,6 +141,13 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="GnX-9g-l0a" secondAttribute="trailing" constant="10" id="2BP-2l-9TO"/>
+                            <constraint firstAttribute="trailing" secondItem="hqn-Hn-lH0" secondAttribute="trailing" id="2dD-wE-ZsE"/>
+                            <constraint firstItem="35k-9T-UTu" firstAttribute="width" secondItem="hqn-Hn-lH0" secondAttribute="width" id="7N6-Xi-WWf"/>
+                            <constraint firstItem="35k-9T-UTu" firstAttribute="leading" secondItem="hqn-Hn-lH0" secondAttribute="leading" id="7bn-tN-QeL"/>
+                            <constraint firstItem="hqn-Hn-lH0" firstAttribute="leading" secondItem="ogq-mj-n43" secondAttribute="leading" id="CKe-BU-NgN"/>
+                            <constraint firstItem="35k-9T-UTu" firstAttribute="top" secondItem="hqn-Hn-lH0" secondAttribute="top" id="FIj-om-H87"/>
+                            <constraint firstItem="hqn-Hn-lH0" firstAttribute="bottom" secondItem="7dk-sl-uzs" secondAttribute="bottom" id="GCH-W1-vlX"/>
+                            <constraint firstItem="35k-9T-UTu" firstAttribute="height" secondItem="hqn-Hn-lH0" secondAttribute="height" id="Haf-JQ-m2O"/>
                             <constraint firstItem="GnX-9g-l0a" firstAttribute="top" secondItem="7dk-sl-uzs" secondAttribute="bottom" constant="10" id="KMt-IZ-dcX"/>
                             <constraint firstItem="GnX-9g-l0a" firstAttribute="leading" secondItem="ogq-mj-n43" secondAttribute="leading" constant="10" id="M7B-4v-bay"/>
                             <constraint firstItem="DOn-mU-Dnq" firstAttribute="top" secondItem="GnX-9g-l0a" secondAttribute="bottom" constant="10" id="OsP-WY-Sdn"/>
@@ -187,14 +252,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="activitylogo_coupon" translatesAutoresizingMaskIntoConstraints="NO" id="biJ-hX-eon">
-                        <rect key="frame" x="10" y="7" width="30" height="30"/>
+                        <rect key="frame" x="10" y="12" width="20" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="30" id="ctG-w8-RK5"/>
-                            <constraint firstAttribute="height" constant="30" id="j2o-M1-k23"/>
+                            <constraint firstAttribute="width" constant="20" id="ctG-w8-RK5"/>
+                            <constraint firstAttribute="height" constant="20" id="j2o-M1-k23"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iBt-xD-fX4">
-                        <rect key="frame" x="50" y="13" width="249" height="18"/>
+                        <rect key="frame" x="40" y="13" width="259" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.93978821999999995" green="0.4733254321" blue="0.40583982359999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -337,5 +402,6 @@
     <resources>
         <image name="activitylogo_coupon" width="30" height="30"/>
         <image name="arrow_r" width="15" height="15"/>
+        <image name="unlocated" width="30" height="30"/>
     </resources>
 </document>

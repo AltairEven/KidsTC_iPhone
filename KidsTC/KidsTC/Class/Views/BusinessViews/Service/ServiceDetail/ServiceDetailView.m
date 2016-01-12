@@ -13,6 +13,7 @@
 #import "AUISegmentView.h"
 #import "ServiceDetailSegmentCell.h"
 #import "ServiceDetailActivityCell.h"
+#import "TTTAttributedLabel.h"
 
 typedef enum {
     ServiceDetailTableCellTagTop,
@@ -32,7 +33,7 @@ typedef enum {
 static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
 static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
 
-@interface ServiceDetailView () <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, AUIBannerScrollViewDataSource, AUISegmentViewDataSource, AUISegmentViewDelegate, ServiceDetailMoreInfoViewDelegate>
+@interface ServiceDetailView () <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, AUIBannerScrollViewDataSource, AUISegmentViewDataSource, AUISegmentViewDelegate, ServiceDetailMoreInfoViewDelegate, TTTAttributedLabelDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) UITableView *tableView;
@@ -48,8 +49,12 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
 @property (strong, nonatomic) IBOutlet UITableViewCell *recommendCell;
 //top
 @property (weak, nonatomic) IBOutlet AUIBannerScrollView *bannerScrollView;
+@property (weak, nonatomic) IBOutlet UIView *storeBriefAlphaView;
+@property (weak, nonatomic) IBOutlet UIView *storeBriefBGView;
+@property (weak, nonatomic) IBOutlet UILabel *storeBriefLabel;
+@property (weak, nonatomic) IBOutlet UIButton *storeBriefButton;
 @property (weak, nonatomic) IBOutlet UILabel *serviceNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *serviceDescriptionLabel;
+@property (weak, nonatomic) IBOutlet TTTAttributedLabel *serviceDescriptionLabel;
 //price
 @property (weak, nonatomic) IBOutlet RichPriceView *priceView;
 @property (weak, nonatomic) IBOutlet RichPriceView *originalPriceView;
@@ -97,6 +102,8 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
 
 - (void)configRecommendCell;
 
+- (IBAction)didClickedStoreBriefButton:(id)sender;
+
 @end
 
 @implementation ServiceDetailView
@@ -121,6 +128,7 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
 }
 
 - (void)buildSubviews {
+    
     [self.scrollView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     self.scrollView.delegate = self;
     
@@ -128,6 +136,11 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
     [self.bannerScrollView setRecyclable:YES];
     
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
+    //description
+    [self.serviceDescriptionLabel setDelegate:self];
+    NSDictionary *linkAttr = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor redColor], NSForegroundColorAttributeName, [NSNumber numberWithBool:YES], NSUnderlineStyleAttributeName, nil];
+    [self.serviceDescriptionLabel setLinkAttributes:linkAttr];
+    [self.serviceDescriptionLabel setTextColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
     //price view
     [self.priceView setContentColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
     [self.priceView setUnitFont:[UIFont systemFontOfSize:15]];
@@ -271,7 +284,11 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
             break;
         case ServiceDetailTableCellTagActivity:
         {
-            height = [self.detailModel activityCellHeight];
+            NSUInteger index = indexPath.row;
+            if ([self.detailModel hasCoupon]) {
+                index = index - 1;
+            }
+            height = [self.detailModel activityCellHeightAtIndex:indexPath.row];
         }
             break;
         default:
@@ -319,6 +336,9 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
             //segment view移动
             [self.segmentView setFrame:CGRectMake(0, self.tableViewHeight, self.segmentView.frame.size.width, self.segmentView.frame.size.height)];
             [self.moreInfoView setScrollEnabled:NO];
+        }
+        if (self.delegate && [self.delegate respondsToSelector:@selector(serviceDetailView:didScrolledAtOffset:)]) {
+            [self.delegate serviceDetailView:self didScrolledAtOffset:self.scrollView.contentOffset];
         }
     }
 }
@@ -420,6 +440,17 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
     }
 }
 
+#pragma mark TTTAttributedLabelDelegate
+
+- (void)attributedLabel:(TTTAttributedLabel *)label
+   didSelectLinkWithAddress:(NSDictionary *)addressComponents {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(serviceDetailView:didSelectedLinkWithSegueModel:)]) {
+        NSDictionary *param = [NSDictionary dictionaryWithObject:@"www.baidu.com" forKey:@"linkurl"];
+        HomeSegueModel *model = [[HomeSegueModel alloc] initWithDestination:HomeSegueDestinationH5 paramRawData:param];
+        [self.delegate serviceDetailView:self didSelectedLinkWithSegueModel:model];
+    }
+}
+
 #pragma mark Private methods
 
 - (void)initTableView {
@@ -478,9 +509,23 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
 - (void)configTopCell {
     //banner
     [self.bannerScrollView reloadData];
+    //store brief
+    NSUInteger storeCount = [self.detailModel.storeItemsArray count];
+    if (storeCount > 1) {
+        [self.storeBriefAlphaView setHidden:NO];
+        [self.storeBriefBGView setHidden:NO];
+        NSString *title = [NSString stringWithFormat:@"%lu家门店通用", (unsigned long)storeCount];
+        [self.storeBriefLabel setText:title];
+    } else {
+        [self.storeBriefAlphaView setHidden:YES];
+        [self.storeBriefBGView setHidden:YES];
+    }
     //others
     [self.serviceNameLabel setText:self.detailModel.serviceName];
     [self.serviceDescriptionLabel setText:self.detailModel.serviceDescription];
+    if ([self.detailModel.serviceDescription length] > 3) {
+        [self.serviceDescriptionLabel addLinkToAddress:nil withRange:NSMakeRange(0, 3)];
+    }
 }
 
 - (void)configPriceCell {
@@ -573,6 +618,12 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
     [labelString setAttributes:attribute range:NSMakeRange(0, [recommderName length] + 1)];
     [self.recommendLabel setAttributedText:labelString];
     
+}
+
+- (IBAction)didClickedStoreBriefButton:(id)sender {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedStoreBriefOnServiceDetailView:)]) {
+        [self.delegate didClickedStoreBriefOnServiceDetailView:self];
+    }
 }
 
 #pragma mark Public methods

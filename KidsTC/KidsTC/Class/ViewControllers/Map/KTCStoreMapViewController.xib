@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="KTCStoreMapViewController">
+            <connections>
+                <outlet property="backButton" destination="eRk-cj-7fi" id="yzD-uO-aul"/>
+                <outlet property="mapView" destination="L8F-8g-Yas" id="Ho1-lh-70s"/>
+                <outlet property="routeTypeButton" destination="aTX-co-MO9" id="Zxo-Fy-3jD"/>
+                <outlet property="searchField" destination="5yd-33-dC1" id="C8W-qG-ER4"/>
+                <outlet property="topView" destination="u4O-9r-5aS" id="IAt-bj-H96"/>
+                <outlet property="view" destination="kKD-Eo-2D8" id="hbo-OW-7Ud"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="kKD-Eo-2D8">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u4O-9r-5aS" userLabel="topView">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eRk-cj-7fi">
+                            <rect key="frame" x="0.0" y="25" width="40" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="Jnr-1f-RY1"/>
+                                <constraint firstAttribute="width" constant="40" id="cgZ-Jb-dCm"/>
+                            </constraints>
+                            <state key="normal" image="navigation_back_h">
+                                <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="didClickedBackButton:" destination="-1" eventType="touchUpInside" id="pYj-W6-hev"/>
+                            </connections>
+                        </button>
+                        <textField opaque="NO" clipsSubviews="YES" alpha="0.69999998807907104" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请搜索您所在位置或长按地图选择" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="5yd-33-dC1">
+                            <rect key="frame" x="45" y="23" width="540" height="35"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="klU-1l-F1S"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                        </textField>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="64" id="8AY-CC-MnH"/>
+                        <constraint firstItem="5yd-33-dC1" firstAttribute="centerY" secondItem="eRk-cj-7fi" secondAttribute="centerY" id="KyU-mb-uPs"/>
+                        <constraint firstItem="eRk-cj-7fi" firstAttribute="top" secondItem="u4O-9r-5aS" secondAttribute="top" constant="25" id="L5S-ma-zkg"/>
+                        <constraint firstItem="eRk-cj-7fi" firstAttribute="leading" secondItem="u4O-9r-5aS" secondAttribute="leading" id="L9g-xr-boQ"/>
+                        <constraint firstItem="5yd-33-dC1" firstAttribute="leading" secondItem="eRk-cj-7fi" secondAttribute="trailing" constant="5" id="Ocf-Av-gmD"/>
+                        <constraint firstAttribute="trailing" secondItem="5yd-33-dC1" secondAttribute="trailing" constant="15" id="S3G-Sz-eiv"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L8F-8g-Yas" customClass="BMKMapView">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aTX-co-MO9" userLabel="routeTypeButton">
+                    <rect key="frame" x="540" y="540" width="40" height="40"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Hng-yg-i2h"/>
+                        <constraint firstAttribute="width" constant="40" id="Pd2-Tp-oS7"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="didClickedRouteTypeButton:" destination="-1" eventType="touchUpInside" id="P5b-am-Zay"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="L8F-8g-Yas" secondAttribute="bottom" id="2uW-Lg-Iei"/>
+                <constraint firstItem="L8F-8g-Yas" firstAttribute="leading" secondItem="kKD-Eo-2D8" secondAttribute="leading" id="Fkz-x7-8Cx"/>
+                <constraint firstAttribute="trailing" secondItem="L8F-8g-Yas" secondAttribute="trailing" id="Jvg-eT-4oq"/>
+                <constraint firstAttribute="trailing" secondItem="aTX-co-MO9" secondAttribute="trailing" constant="20" id="ReI-Vs-UcA"/>
+                <constraint firstAttribute="bottom" secondItem="aTX-co-MO9" secondAttribute="bottom" constant="20" id="SqP-FO-TLY"/>
+                <constraint firstItem="u4O-9r-5aS" firstAttribute="top" secondItem="kKD-Eo-2D8" secondAttribute="top" id="Wut-UP-NyG"/>
+                <constraint firstAttribute="trailing" secondItem="u4O-9r-5aS" secondAttribute="trailing" id="dS9-xj-nAc"/>
+                <constraint firstItem="L8F-8g-Yas" firstAttribute="top" secondItem="kKD-Eo-2D8" secondAttribute="top" id="tDM-XY-FZe"/>
+                <constraint firstItem="u4O-9r-5aS" firstAttribute="leading" secondItem="kKD-Eo-2D8" secondAttribute="leading" id="zCd-1P-kLr"/>
+            </constraints>
+            <point key="canvasLocation" x="392" y="354"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="navigation_back_h" width="28" height="28"/>
+    </resources>
+</document>

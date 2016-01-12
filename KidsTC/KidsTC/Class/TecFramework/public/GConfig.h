@@ -12,28 +12,13 @@
 #import "KTCLocation.h"
 #import "KTCThemeManager.h"
 
-//#define DEBUG 0
 
-//#if DEBUG == 0
-//#define NSLog(...) {}
-//#endif
+#define KIDSTC_DEBUG
 
-//#define KIDSTC_DEBUG
-
-
-//static NSString *const kAppEnterForegroundNotification = @"enterForeground";
 
 // Apple Id in App Store 
 static NSString * const kAppIDInAppStore = @"1063632560";
-//static NSString * const kWeChatAppID = @"wx6964eb0b10aa369b";
-//#if WX_DEBUG
-//static NSString * const kWeChatAppID = @"wxf8b4f85f3a794e77";
-//#else
-//static NSString * const kWeChatAppID = @"wx75fa1a06d38fde4e";
-//#endif //WX_DEBUG
 
-//static NSString *const kWeChatSourceKey = @"comefrom";
-//static NSString *const kWeChatSourceValue = @"weixin";
 
 static NSString *const kCustomerServicePhoneNumber = @"021-51135015";
 

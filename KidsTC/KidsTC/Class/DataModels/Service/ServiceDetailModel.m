@@ -183,7 +183,16 @@
     return 40;
 }
 
-- (CGFloat)activityCellHeight {
+- (CGFloat)activityCellHeightAtIndex:(NSUInteger)index {
+    if ([self.activeModelsArray count] > index) {
+        CGFloat maxWidth = SCREEN_WIDTH - 50;
+        ActivityLogoItem *item = [self.activeModelsArray objectAtIndex:index];
+        CGFloat height = [GConfig heightForLabelWithWidth:maxWidth LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:15] topGap:13 bottomGap:13 andText:item.itemDescription];
+        if (height < 40) {
+            height = 40;
+        }
+        return height;
+    }
     return 40;
 }
 

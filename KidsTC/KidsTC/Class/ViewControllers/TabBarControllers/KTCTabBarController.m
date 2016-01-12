@@ -7,7 +7,6 @@
 //
 
 #import "KTCTabBarController.h"
-#import "GNavController.h"
 #import "HomeViewController.h"
 #import "NewsViewController.h"
 #import "ParentingStrategyViewController.h"

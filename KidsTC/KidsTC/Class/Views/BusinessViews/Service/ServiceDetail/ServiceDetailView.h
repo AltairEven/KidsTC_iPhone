@@ -32,6 +32,12 @@
 
 - (void)didClickedMoreCommentOnServiceDetailView:(ServiceDetailView *)detailView;
 
+- (void)serviceDetailView:(ServiceDetailView *)detailView didScrolledAtOffset:(CGPoint)offset;
+
+- (void)serviceDetailView:(ServiceDetailView *)detailView didSelectedLinkWithSegueModel:(HomeSegueModel *)model;
+
+- (void)didClickedStoreBriefOnServiceDetailView:(ServiceDetailView *)detailView;
+
 @end
 
 @interface ServiceDetailView : UIView

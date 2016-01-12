@@ -12,6 +12,7 @@
 #import "Insurance.h"
 #import "CommonShareObject.h"
 #import "KTCCommentManager.h"
+#import "HomeSegueModel.h"
 
 @class ServiceDetailNoticeItem;
 @class ServiceDetailPhoneItem;
@@ -110,7 +111,7 @@
 
 - (CGFloat)couponCellHeight;
 
-- (CGFloat)activityCellHeight;
+- (CGFloat)activityCellHeightAtIndex:(NSUInteger)index;
 
 - (CGFloat)noticeTitleCellHeight;
 

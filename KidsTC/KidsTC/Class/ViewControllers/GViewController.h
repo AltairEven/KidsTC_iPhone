@@ -14,6 +14,7 @@
 #import <UIKit/UIKit.h>
 #import "GConfig.h"
 #import "GConnectUselessView.h"
+#import "GNavController.h"
 
 @class BaseViewModel;
 

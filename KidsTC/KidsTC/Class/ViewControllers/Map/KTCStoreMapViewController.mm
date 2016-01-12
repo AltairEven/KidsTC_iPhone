@@ -1,12 +1,12 @@
 //
-//  KTCMapViewController.m
+//  KTCStoreMapViewController.m
 //  KidsTC
 //
-//  Created by 钱烨 on 8/27/15.
-//  Copyright (c) 2015 KidsTC. All rights reserved.
+//  Created by Altair on 1/11/16.
+//  Copyright © 2016 KidsTC. All rights reserved.
 //
 
-#import "KTCMapViewController.h"
+#import "KTCStoreMapViewController.h"
 #import "KTCAnnotationTipConfirmLocationView.h"
 #import "KTCAnnotationTipDestinationView.h"
 #import "KTCMapService.h"
@@ -14,7 +14,7 @@
 #import "RouteAnnotation.h"
 #import "KTCMapUtil.h"
 
-@interface KTCMapViewController () <BMKMapViewDelegate, UITextFieldDelegate, KTCAnnotationTipConfirmViewDelegate, KTCAnnotationTipDestinationViewDelegate, AUIPickerViewDataSource, AUIPickerViewDelegate>
+@interface KTCStoreMapViewController () <BMKMapViewDelegate, UITextFieldDelegate, KTCAnnotationTipConfirmViewDelegate, KTCAnnotationTipDestinationViewDelegate, AUIPickerViewDataSource, AUIPickerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
@@ -26,15 +26,13 @@
 
 @property (nonatomic, strong) BMKPointAnnotation* startAnnotation;
 
-@property (nonatomic, strong) BMKPointAnnotation* destinationAnnotation;
-
-@property (nonatomic, assign) KTCMapType type;
-
 @property (nonatomic, strong) KTCLocation *startLocation;
 
-@property (nonatomic, strong) KTCLocation *destLocation;
-
 @property (nonatomic, strong) NSArray *pickerDataArray;
+
+@property (nonatomic, strong) NSArray<KTCLocation *> *storeLocations;
+
+@property (nonatomic, strong) KTCLocation *destinationLocation;
 
 - (void)initializeMapView;
 
@@ -47,13 +45,9 @@
 
 - (void)setStartAnnotationCoordinate:(CLLocationCoordinate2D)coordinate;
 
-- (void)setDestinationAnnotationCoordinate:(CLLocationCoordinate2D)coordinate;
+- (void)resetStoreAnnotations;
 
 - (void)startSearchWithAddress:(NSString *)address;
-
-- (void)startSearchWithCoordinate:(CLLocationCoordinate2D)coordinate;
-
-- (void)fullFillPickerViewWithReverseGeoCodeSearchResult:(BMKReverseGeoCodeResult *)result;
 
 - (void)selectRouteSearchType;
 
@@ -65,15 +59,12 @@
 
 @end
 
-@implementation KTCMapViewController
+@implementation KTCStoreMapViewController
 
-- (instancetype)initWithMapType:(KTCMapType)type destination:(KTCLocation *)destination {
-    self = [super initWithNibName:@"KTCMapViewController" bundle:nil];
+- (instancetype)initWithLocations:(NSArray<KTCLocation *> *)locations {
+    self = [super initWithNibName:@"KTCStoreMapViewController" bundle:nil];
     if (self) {
-        self.type = type;
-        if (type == KTCMapTypeStoreGuide) {
-            self.destLocation = destination;
-        }
+        self.storeLocations = locations;
     }
     return self;
 }
@@ -96,7 +87,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.mapView viewWillDisappear];
-//    self.mapView.delegate = nil;
+    //    self.mapView.delegate = nil;
     [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
@@ -112,16 +103,8 @@
 - (void)mapViewDidFinishLoading:(BMKMapView *)mapView {
     //指南针必须在加载完成后设置
     [self.mapView setCompassPosition:CGPointMake(SCREEN_WIDTH - 50, 70)];
-    if (self.type == KTCMapTypeLocate) {
-        [self setStartAnnotationCoordinate:[GConfig sharedConfig].currentLocation.location.coordinate];
-        [self.mapView setZoomLevel:18];
-    } else {
-        [self setStartAnnotationCoordinate:[GConfig sharedConfig].currentLocation.location.coordinate];
-        if (self.destLocation) {
-            [self setDestinationAnnotationCoordinate:self.destLocation.location.coordinate];
-        }
-        [KTCMapUtil resetMapView:self.mapView toFitStart:self.startLocation.location.coordinate andDestination:self.destLocation.location.coordinate];
-    }
+    [self setStartAnnotationCoordinate:[GConfig sharedConfig].currentLocation.location.coordinate];
+    [self resetStoreAnnotations];
 }
 
 - (void)mapView:(BMKMapView *)mapView onClickedMapBlank:(CLLocationCoordinate2D)coordinate {
@@ -135,8 +118,9 @@
         [self.routeTypeButton setHidden:YES];
         [KTCMapUtil cleanMap:self.mapView];
         [self setStartAnnotationCoordinate:coordinate];
-        [self setDestinationAnnotationCoordinate:self.destLocation.location.coordinate];
+        [self resetStoreAnnotations];
     }
+    [self.mapView selectAnnotation:self.startAnnotation animated:YES];
 }
 
 - (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id <BMKAnnotation>)annotation {
@@ -155,7 +139,7 @@
     if (annotation == self.startAnnotation) {
         ((BMKPinAnnotationView*)annotationView).image = [KTCMapUtil startAnnotationImage];
     } else {
-        ((BMKPinAnnotationView*)annotationView).image = [KTCMapUtil endAnnotationImage];
+        ((BMKPinAnnotationView*)annotationView).image = [KTCMapUtil poiAnnotationImage];
     }
     
     // 设置位置
@@ -166,11 +150,7 @@
     //泡泡
     if (annotation == self.startAnnotation) {
         KTCAnnotationTipConfirmLocationView *tipView = [[KTCAnnotationTipConfirmLocationView alloc] initWithFrame:CGRectMake(0, 0, 100, 50)];
-        if (self.type == KTCMapTypeStoreGuide) {
-            [tipView.tipLabel setText:@"从这里去店"];
-        } else {
-            [tipView.tipLabel setText:@"这里是我的位置"];
-        }
+        [tipView.tipLabel setText:@"从这里去店"];
         tipView.annotation = annotation;
         tipView.delegate = self;
         annotationView.paopaoView = [[BMKActionPaopaoView alloc] initWithCustomView:tipView];
@@ -178,14 +158,12 @@
         annotationView.draggable = YES;
     } else {
         KTCAnnotationTipDestinationView *tipView = [[KTCAnnotationTipDestinationView alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
-        [tipView setContentText:self.destLocation.locationDescription];
+        KTCLocation *location = [self.storeLocations objectAtIndex:((RouteAnnotation *)annotation).tag];
+        [tipView setContentText:location.locationDescription];
         annotationView.paopaoView = [[BMKActionPaopaoView alloc] initWithCustomView:tipView];
         // 设置是否可以拖拽
         annotationView.draggable = NO;
         tipView.delegate = self;
-    }
-    if ([annotation isKindOfClass:[RouteAnnotation class]]) {
-        return [RouteAnnotation routeAnnotationView:mapView viewForAnnotation:(RouteAnnotation*)annotation];
     }
     
     return annotationView;
@@ -204,8 +182,8 @@
 
 - (void)mapView:(BMKMapView *)mapView didSelectAnnotationView:(BMKAnnotationView *)view
 {
-//    [mapView bringSubviewToFront:view];
-//    [mapView setNeedsDisplay];
+    //    [mapView bringSubviewToFront:view];
+    //    [mapView setNeedsDisplay];
 }
 
 - (void)mapView:(BMKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
@@ -224,10 +202,6 @@
 
 - (void)didClickedConfirmButtonOnAnnotationTipConfirmView:(KTCAnnotationTipConfirmLocationView *)view {
     [self.mapView deselectAnnotation:view.annotation animated:YES];
-    if (self.type == KTCMapTypeLocate) {
-        [self startSearchWithCoordinate:view.annotation.coordinate];
-    } else {
-    }
 }
 
 #pragma mark KTCAnnotationTipDestinationViewDelegate
@@ -276,14 +250,6 @@
 }
 
 - (void)pickerView:(AUIPickerView *)pickerView didConfirmedWithSelectedIndexArrayOfAllComponent:(NSArray *)indexArray {
-    NSString *pickedString = [self.pickerDataArray objectAtIndex:[[indexArray firstObject] integerValue]];
-    if (self.type == KTCMapTypeLocate) {
-        //如果地图用于定位，则给全局变量赋值完以后pop
-        [self.startLocation setLocationDescription:pickedString];
-        [[KTCMapService sharedService] stopUpdateLocation];
-        [[GConfig sharedConfig] setCurrentLocation:[self.startLocation copy]];
-        [self goBackController:nil];
-    }
 }
 
 #pragma mark Private methods
@@ -295,14 +261,6 @@
     [self.mapView setIsSelectedAnnotationViewFront:YES];
     
     [self.mapView setMapScaleBarPosition:CGPointMake(5, SCREEN_HEIGHT - 50)];
-    
-    if (self.type == KTCMapTypeLocate) {
-        [self.mapView setCenterCoordinate:[[GConfig sharedConfig] currentLocation].location.coordinate];
-    } else {
-        if (self.destLocation) {
-            [self.mapView setCenterCoordinate:self.destLocation.location.coordinate];
-        }
-    }
 }
 
 - (void)initOtherSubviews {
@@ -311,9 +269,7 @@
     [self.backButton setAlpha:0.7];
     
     self.searchField.delegate = self;
-    if (self.type == KTCMapTypeStoreGuide) {
-        [self.searchField setPlaceholder:@"请搜索或长按地图选择起始点"];
-    }
+    [self.searchField setPlaceholder:@"请搜索或长按地图选择起始点"];
     [self.searchField setBackgroundColor:[[[KTCThemeManager manager] defaultTheme].globalThemeColor colorWithAlphaComponent:0.5]];
     [self.searchField setLeftView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)]];
     [self.searchField setRightView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)]];
@@ -353,58 +309,37 @@
     }
 }
 
-- (void)setDestinationAnnotationCoordinate:(CLLocationCoordinate2D)coordinate {
-    if (!self.destinationAnnotation) {
-        self.destinationAnnotation = [[BMKPointAnnotation alloc]init];
+- (void)resetStoreAnnotations {
+    NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+    [tempArray addObject:self.startLocation.location];
+    for (NSUInteger index = 0; index < [self.storeLocations count]; index ++) {
+        KTCLocation *location = [self.storeLocations objectAtIndex:index];
+        if (CLLocationCoordinate2DIsValid(location.location.coordinate)) {
+            RouteAnnotation *annotation = [[RouteAnnotation alloc]init];
+            if (CLLocationCoordinate2DIsValid(location.location.coordinate)) {
+                [annotation setCoordinate:location.location.coordinate];
+                annotation.tag = index;
+                [self.mapView addAnnotation:annotation];
+                [tempArray addObject:location.location];
+            }
+        }
     }
-    NSArray *annos = [self.mapView annotations];
-    if ([annos indexOfObject:self.destinationAnnotation] == NSNotFound) {
-        [self.mapView addAnnotation:self.destinationAnnotation];
-    }
-    if (CLLocationCoordinate2DIsValid(coordinate)) {
-        [self.destinationAnnotation setCoordinate:coordinate];
-    }
+    [KTCMapUtil resetMapView:self.mapView toFitLocations:[NSArray arrayWithArray:tempArray]];
 }
 
 - (void)startSearchWithAddress:(NSString *)address {
     NSString *searchText = [address stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     if ([searchText length] > 0) {
         [[GAlertLoadingView sharedAlertLoadingView] show];
-        __weak KTCMapViewController *weakSelf = self;
+        __weak KTCStoreMapViewController *weakSelf = self;
         [[KTCMapService sharedService] getCoordinateWithCity:@"上海" address:address succeed:^(BMKGeoCodeResult *result) {
             [weakSelf setStartAnnotationCoordinate:result.location];
+            [weakSelf.mapView selectAnnotation:weakSelf.startAnnotation animated:YES];
             [[GAlertLoadingView sharedAlertLoadingView] hide];
         } failure:^(NSError *error) {
             [[iToast makeText:@"查询失败"] show];
             [[GAlertLoadingView sharedAlertLoadingView] hide];
         }];
-    }
-}
-
-- (void)startSearchWithCoordinate:(CLLocationCoordinate2D)coordinate {
-    if (CLLocationCoordinate2DIsValid(coordinate)) {
-        [[GAlertLoadingView sharedAlertLoadingView] show];
-        __weak KTCMapViewController *weakSelf = self;
-        [[KTCMapService sharedService] getAddressDescriptionWithCoordinate:coordinate succeed:^(BMKReverseGeoCodeResult *result) {
-            [weakSelf fullFillPickerViewWithReverseGeoCodeSearchResult:result];
-            [[GAlertLoadingView sharedAlertLoadingView] hide];
-        } failure:^(NSError *error) {
-            [[GAlertLoadingView sharedAlertLoadingView] hide];
-        }];
-    }
-}
-
-- (void)fullFillPickerViewWithReverseGeoCodeSearchResult:(BMKReverseGeoCodeResult *)result {
-    self.startLocation = [[KTCLocation alloc] initWithLocation:[[CLLocation alloc] initWithLatitude:result.location.latitude longitude:result.location.longitude] locationDescription:result.address];
-    NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-    for (BMKPoiInfo *poi in result.poiList) {
-        [tempArray addObject:poi.address];
-    }
-    self.pickerDataArray = [NSArray arrayWithArray:tempArray];
-    if ([self.pickerDataArray count] > 0) {
-        [self.pickerView show];
-    } else {
-        [[iToast makeText:@"查询失败"] show];
     }
 }
 
@@ -453,8 +388,8 @@
 - (void)startRouteSearchWithType:(KTCRouteSearchType)type {
     [self resetRouteTypeButtonWithType:type];
     [[GAlertLoadingView sharedAlertLoadingView] show];
-    __weak KTCMapViewController *weakSelf = self;
-    [[KTCMapService sharedService] startRouteSearchWithType:type startCoordinate:self.startLocation.location.coordinate endCoordinate:self.destLocation.location.coordinate succeed:^(id result) {
+    __weak KTCStoreMapViewController *weakSelf = self;
+    [[KTCMapService sharedService] startRouteSearchWithType:type startCoordinate:self.startLocation.location.coordinate endCoordinate:self.destinationLocation.location.coordinate succeed:^(id result) {
         [weakSelf drawRouteLineDetailWithSearchResult:result];
         [[GAlertLoadingView sharedAlertLoadingView] hide];
     } failure:^(NSError *error) {
@@ -468,18 +403,16 @@
     //解析
     if ([result isKindOfClass:[BMKDrivingRouteResult class]]) {
         //驾车
-        routeLineDic = [KTCMapUtil drawRoutePolyLineOnMapView:self.mapView withStartCoord:self.startLocation.location.coordinate endCoord:self.destLocation.location.coordinate andDrivingRouteResult:result autoResetToFit:YES];
+        routeLineDic = [KTCMapUtil drawRoutePolyLineOnMapView:self.mapView withStartCoord:self.startLocation.location.coordinate endCoord:self.destinationLocation.location.coordinate andDrivingRouteResult:result autoResetToFit:YES];
     } else if ([result isKindOfClass:[BMKTransitRouteResult class]]) {
         //公交
-        routeLineDic = [KTCMapUtil drawRoutePolyLineOnMapView:self.mapView withStartCoord:self.startLocation.location.coordinate endCoord:self.destLocation.location.coordinate andTransitRouteResult:result autoResetToFit:YES];
+        routeLineDic = [KTCMapUtil drawRoutePolyLineOnMapView:self.mapView withStartCoord:self.startLocation.location.coordinate endCoord:self.destinationLocation.location.coordinate andTransitRouteResult:result autoResetToFit:YES];
     } else if ([result isKindOfClass:[BMKWalkingRouteResult class]]) {
         //步行
-        routeLineDic = [KTCMapUtil drawRoutePolyLineOnMapView:self.mapView withStartCoord:self.startLocation.location.coordinate endCoord:self.destLocation.location.coordinate andWalkingRouteResult:result autoResetToFit:YES];
+        routeLineDic = [KTCMapUtil drawRoutePolyLineOnMapView:self.mapView withStartCoord:self.startLocation.location.coordinate endCoord:self.destinationLocation.location.coordinate andWalkingRouteResult:result autoResetToFit:YES];
     }
     return routeLineDic;
 }
-
-#pragma mark Super methods
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -10,6 +10,10 @@
 #import "GViewController.h"
 #import "UINavigationBar+BackgroundColor.h"
 
+@interface GNavController ()
+
+@end
+
 @implementation GNavController
 
 -(id)initWithRootViewController:(GViewController*)_rootViewController
@@ -18,6 +22,13 @@
 	{
         UINavigationBar *navigationBar = [UINavigationBar appearance];
         UIColor *color = [[KTCThemeManager manager] defaultTheme].navibarBGColor;
+//        CGRect frame = self.navigationBar.frame;
+//        alphaView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height+20)];
+//        alphaView.backgroundColor = color;
+//        [self.view insertSubview:alphaView belowSubview:self.navigationBar];
+//        [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"bigShadow.png"] forBarMetrics:UIBarMetricsCompact];
+//        self.navigationBar.layer.masksToBounds = YES;
+//        [self.navigationBar setTranslucent:YES];
         [navigationBar setBarTintColor:color];
         CGFloat white = 0.0;
         [color getWhite:&white alpha:NULL];
@@ -26,7 +37,7 @@
         } else {
             [navigationBar setBarStyle:UIBarStyleBlack];
         }
-//        self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor], NSFontAttributeName : [UIFont systemFontOfSize:18]};
+        self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor], NSFontAttributeName : [UIFont systemFontOfSize:18]};
 	}
 
 	return self;
@@ -72,6 +83,12 @@
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
+}
+
+
+
+- (void)setNavigationBarAlpha:(CGFloat)alpha {
+    alphaView.alpha = alpha;
 }
 
 //- (BOOL)prefersStatusBarHidden
