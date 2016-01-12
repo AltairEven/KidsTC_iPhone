@@ -22,8 +22,6 @@
 
 - (void)didClickedCouponButtonOnStoreDetailView:(StoreDetailView *)detailView;
 
-- (void)didClickedTelephoneOnStoreDetailView:(StoreDetailView *)detailView;
-
 - (void)didClickedAddressOnStoreDetailView:(StoreDetailView *)detailView;
 
 - (void)didClickedActiveOnStoreDetailView:(StoreDetailView *)detailView atIndex:(NSUInteger)index;

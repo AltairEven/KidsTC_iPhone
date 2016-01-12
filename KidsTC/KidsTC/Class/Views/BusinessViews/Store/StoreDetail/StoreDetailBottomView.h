@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 typedef enum {
-    StoreDetailBottomSubviewTagFavourate = 100,
+    StoreDetailBottomSubviewTagPhone = 100,
+    StoreDetailBottomSubviewTagFavourate,
     StoreDetailBottomSubviewTagComment,
     StoreDetailBottomSubviewTagAppointment
 }StoreDetailBottomSubviewTag;
@@ -25,8 +26,9 @@ typedef enum {
 @interface StoreDetailBottomView : UIView
 
 @property (nonatomic, assign) id<StoreDetailBottomViewDelegate> delegate;
-@property (weak, nonatomic) IBOutlet UIButton *favourateButton;
+@property (weak, nonatomic) IBOutlet UIButton *phoneButton;
 @property (weak, nonatomic) IBOutlet UIButton *commentButton;
+@property (weak, nonatomic) IBOutlet UIButton *favourateButton;
 @property (weak, nonatomic) IBOutlet UIButton *appointmentButton;
 
 

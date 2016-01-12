@@ -210,6 +210,21 @@
 
 - (void)storeDetailBottomView:(StoreDetailBottomView *)bottomView didClickedButtonWithTag:(StoreDetailBottomSubviewTag)tag {
     switch (tag) {
+        case StoreDetailBottomSubviewTagPhone:
+        {
+            [self didClickedTelephoneOnStoreDetailView:self.detailView];
+        }
+            break;
+        case StoreDetailBottomSubviewTagComment:
+        {
+            [GToolUtil checkLogin:^(NSString *uid) {
+                CommentFoundingViewController *controller = [[CommentFoundingViewController alloc] initWithCommentFoundingModel:[CommentFoundingModel modelFromStore:self.viewModel.detailModel]];
+                controller.delegate = self;
+                [controller setHidesBottomBarWhenPushed:YES];
+                [self.navigationController pushViewController:controller animated:YES];
+            } target:self];
+        }
+            break;
         case StoreDetailBottomSubviewTagFavourate:
         {
             [GToolUtil checkLogin:^(NSString *uid) {
@@ -221,16 +236,6 @@
                         [[iToast makeText:[[error userInfo] objectForKey:@"data"]] show];
                     }
                 }];
-            } target:self];
-        }
-            break;
-        case StoreDetailBottomSubviewTagComment:
-        {
-            [GToolUtil checkLogin:^(NSString *uid) {
-                CommentFoundingViewController *controller = [[CommentFoundingViewController alloc] initWithCommentFoundingModel:[CommentFoundingModel modelFromStore:self.viewModel.detailModel]];
-                controller.delegate = self;
-                [controller setHidesBottomBarWhenPushed:YES];
-                [self.navigationController pushViewController:controller animated:YES];
             } target:self];
         }
             break;

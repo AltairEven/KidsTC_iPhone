@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -19,20 +19,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="100" height="159"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eHf-lZ-ct4">
-                                <rect key="frame" x="5" y="10" width="90" height="90"/>
+                                <rect key="frame" x="5" y="5" width="90" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="height" secondItem="eHf-lZ-ct4" secondAttribute="width" multiplier="1:1" id="Xdy-oo-lK2"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xi9-Eo-0yi">
-                                <rect key="frame" x="5" y="110" width="90" height="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xi9-Eo-0yi">
+                                <rect key="frame" x="5" y="105" width="90" height="0.0"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Mm-wI-wuH" customClass="RichPriceView">
-                                <rect key="frame" x="5" y="131" width="30" height="20"/>
+                                <rect key="frame" x="5" y="110" width="30" height="20"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="5Cq-x9-pIY"/>
@@ -48,7 +48,7 @@
                             <constraint firstItem="5Mm-wI-wuH" firstAttribute="leading" secondItem="Xi9-Eo-0yi" secondAttribute="leading" id="O3y-L7-dOW"/>
                             <constraint firstItem="eHf-lZ-ct4" firstAttribute="leading" secondItem="uah-JP-nTg" secondAttribute="leading" constant="5" id="c5n-DW-jYW"/>
                             <constraint firstItem="Xi9-Eo-0yi" firstAttribute="leading" secondItem="eHf-lZ-ct4" secondAttribute="leading" id="kQ3-5d-6SV"/>
-                            <constraint firstItem="eHf-lZ-ct4" firstAttribute="top" secondItem="uah-JP-nTg" secondAttribute="top" constant="10" id="pnS-Y3-3Rm"/>
+                            <constraint firstItem="eHf-lZ-ct4" firstAttribute="top" secondItem="uah-JP-nTg" secondAttribute="top" constant="5" id="pnS-Y3-3Rm"/>
                             <constraint firstItem="Xi9-Eo-0yi" firstAttribute="top" secondItem="eHf-lZ-ct4" secondAttribute="bottom" constant="10" id="s6G-Zf-Ds2"/>
                         </constraints>
                     </view>

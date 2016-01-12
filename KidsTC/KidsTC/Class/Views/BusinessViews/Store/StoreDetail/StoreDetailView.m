@@ -22,17 +22,16 @@
 
 typedef enum {
     StoreDetailViewSectionTop = 0,
-    StoreDetailViewSectionPhone = 1,
-    StoreDetailViewSectionAddress = 2,
-    StoreDetailViewSectionCoupon = 3,
-    StoreDetailViewSectionActivity = 4,
-    StoreDetailViewSectionHotRecommend = 5,
-    StoreDetailViewSectionRecommend = 6,
-    StoreDetailViewSectionBrief = 7,
-    StoreDetailViewSectionComment = 8,
-    StoreDetailViewSectionNearby = 9,
-    StoreDetailViewSectionBrother = 10,
-    StoreDetailViewSectionService = 11
+    StoreDetailViewSectionAddress = 1,
+    StoreDetailViewSectionCoupon = 2,
+    StoreDetailViewSectionActivity = 3,
+    StoreDetailViewSectionHotRecommend = 4,
+    StoreDetailViewSectionRecommend = 5,
+    StoreDetailViewSectionBrief = 6,
+    StoreDetailViewSectionComment = 7,
+    StoreDetailViewSectionNearby = 8,
+    StoreDetailViewSectionBrother = 19,
+    StoreDetailViewSectionService = 10
 }StoreDetailViewSection;
 
 
@@ -48,7 +47,6 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UITableViewCell *topCell;
-@property (strong, nonatomic) IBOutlet UITableViewCell *telCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *addressCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *briefCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *nearbyCell;
@@ -130,7 +128,7 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
     [self.bannerScrollView setRecyclable:YES];
     
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
-    UIView *footBG = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
+    UIView *footBG = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 65)];
     self.tableView.tableFooterView = footBG;
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
@@ -189,11 +187,6 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
     NSUInteger number = 0;
     switch (sectionEnum) {
         case StoreDetailViewSectionTop:
-        {
-            number = 1;
-        }
-            break;
-        case StoreDetailViewSectionPhone:
         {
             number = 1;
         }
@@ -291,11 +284,6 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
         case StoreDetailViewSectionTop:
         {
             cell = self.topCell;
-        }
-            break;
-        case StoreDetailViewSectionPhone:
-        {
-            cell = self.telCell;
         }
             break;
         case StoreDetailViewSectionAddress:
@@ -407,11 +395,6 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
             height = [self.detailModel topCellHeight];
         }
             break;
-        case StoreDetailViewSectionPhone:
-        {
-            height = self.telCell.frame.size.height;
-        }
-            break;
         case StoreDetailViewSectionAddress:
         {
             height = self.addressCell.frame.size.height;
@@ -518,13 +501,6 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
     if (self.delegate) {
         StoreDetailViewSection sectionEnum = (StoreDetailViewSection)[[self.sectionIdentifiersArray objectAtIndex:indexPath.section] integerValue];
         switch (sectionEnum) {
-            case StoreDetailViewSectionPhone:
-            {
-                if ([self.delegate respondsToSelector:@selector(didClickedTelephoneOnStoreDetailView:)]) {
-                    [self.delegate didClickedTelephoneOnStoreDetailView:self];
-                }
-            }
-                break;
             case StoreDetailViewSectionAddress:
             {
                 if ([self.delegate respondsToSelector:@selector(didClickedAddressOnStoreDetailView:)]) {
@@ -629,7 +605,7 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
 }
 
 - (CGFloat)segmentView:(AUISegmentView *)segmentView cellWidthAtIndex:(NSUInteger)index {
-    return 120;
+    return (SCREEN_WIDTH - 10) / 1.6;
 }
 
 - (void)segmentView:(AUISegmentView *)segmentView didSelectedAtIndex:(NSUInteger)index {
@@ -826,10 +802,6 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
         if (self.detailModel) {
             NSMutableArray *tempSections = [[NSMutableArray alloc] init];
             [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionTop]];
-            if ([self.detailModel.phoneNumber length] > 0) {
-                [self.telephoneLabel setText:self.detailModel.phoneNumber];
-                [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionPhone]];
-            }
             if ([self.detailModel.storeAddress length] > 0) {
                 [self.addressLabel setText:self.detailModel.storeAddress];
                 [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionAddress]];
