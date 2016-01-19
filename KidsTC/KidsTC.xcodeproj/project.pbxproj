@@ -843,7 +843,6 @@
 		8F7F76F41C4A290E0035413A /* TextSegueModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7F76F31C4A290E0035413A /* TextSegueModel.m */; };
 		8F7F76F81C4A46950035413A /* StoreDetailServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7F76F61C4A46950035413A /* StoreDetailServiceCell.m */; };
 		8F7F76F91C4A46950035413A /* StoreDetailServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F7F76F71C4A46950035413A /* StoreDetailServiceCell.xib */; };
-		8F7F76FB1C4E0D8B0035413A /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F7F76FA1C4E0D8B0035413A /* interface_list.plist */; };
 		8F7F76FF1C4E161E0035413A /* CouponUsableServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7F76FD1C4E161E0035413A /* CouponUsableServiceViewController.m */; };
 		8F7F77001C4E161E0035413A /* CouponUsableServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F7F76FE1C4E161E0035413A /* CouponUsableServiceViewController.xib */; };
 		8F85AD7D1C0C43F000890526 /* NotificationCenterViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85AD7B1C0C43F000890526 /* NotificationCenterViewCell.m */; };
@@ -871,6 +870,9 @@
 		8F8671691C107E29005C838B /* StoreDetailViewCouponCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F8671671C107E29005C838B /* StoreDetailViewCouponCell.xib */; };
 		8F8A08D21BF9E31300134A9A /* BindPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8A08D01BF9E31300134A9A /* BindPhoneViewController.m */; };
 		8F8A08D31BF9E31300134A9A /* BindPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F8A08D11BF9E31300134A9A /* BindPhoneViewController.xib */; };
+		8F8B0B1E1C4E21D7000E9A26 /* CashierViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8B0B1C1C4E21D7000E9A26 /* CashierViewController.m */; };
+		8F8B0B1F1C4E21D7000E9A26 /* CashierViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F8B0B1D1C4E21D7000E9A26 /* CashierViewController.xib */; };
+		8F8B0B231C4E35FD000E9A26 /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F8B0B221C4E35FD000E9A26 /* interface_list.plist */; };
 		8F8DCD361C28FC4500C26296 /* HomeNoticeCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8DCD351C28FC4500C26296 /* HomeNoticeCellModel.m */; };
 		8F974A641C34FF3800F10975 /* HomeRecommenLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F974A631C34FF3800F10975 /* HomeRecommenLayout.m */; };
 		8F974A671C34FF6E00F10975 /* HomeRecommendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F974A661C34FF6E00F10975 /* HomeRecommendView.m */; };
@@ -2423,7 +2425,6 @@
 		8F7F76F51C4A46950035413A /* StoreDetailServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreDetailServiceCell.h; sourceTree = "<group>"; };
 		8F7F76F61C4A46950035413A /* StoreDetailServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreDetailServiceCell.m; sourceTree = "<group>"; };
 		8F7F76F71C4A46950035413A /* StoreDetailServiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreDetailServiceCell.xib; sourceTree = "<group>"; };
-		8F7F76FA1C4E0D8B0035413A /* interface_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = interface_list.plist; sourceTree = "<group>"; };
 		8F7F76FC1C4E161E0035413A /* CouponUsableServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponUsableServiceViewController.h; sourceTree = "<group>"; };
 		8F7F76FD1C4E161E0035413A /* CouponUsableServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponUsableServiceViewController.m; sourceTree = "<group>"; };
 		8F7F76FE1C4E161E0035413A /* CouponUsableServiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CouponUsableServiceViewController.xib; sourceTree = "<group>"; };
@@ -2468,6 +2469,10 @@
 		8F8A08CF1BF9E31300134A9A /* BindPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindPhoneViewController.h; sourceTree = "<group>"; };
 		8F8A08D01BF9E31300134A9A /* BindPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindPhoneViewController.m; sourceTree = "<group>"; };
 		8F8A08D11BF9E31300134A9A /* BindPhoneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindPhoneViewController.xib; sourceTree = "<group>"; };
+		8F8B0B1B1C4E21D7000E9A26 /* CashierViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashierViewController.h; sourceTree = "<group>"; };
+		8F8B0B1C1C4E21D7000E9A26 /* CashierViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashierViewController.m; sourceTree = "<group>"; };
+		8F8B0B1D1C4E21D7000E9A26 /* CashierViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CashierViewController.xib; sourceTree = "<group>"; };
+		8F8B0B221C4E35FD000E9A26 /* interface_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = interface_list.plist; sourceTree = "<group>"; };
 		8F8DCD341C28FC4500C26296 /* HomeNoticeCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeNoticeCellModel.h; sourceTree = "<group>"; };
 		8F8DCD351C28FC4500C26296 /* HomeNoticeCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeNoticeCellModel.m; sourceTree = "<group>"; };
 		8F974A621C34FF3800F10975 /* HomeRecommenLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeRecommenLayout.h; sourceTree = "<group>"; };
@@ -3289,7 +3294,7 @@
 		1E3D7E781B4BD83D00275C35 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8F7F76FA1C4E0D8B0035413A /* interface_list.plist */,
+				8F8B0B221C4E35FD000E9A26 /* interface_list.plist */,
 				1E943EBD1B7375F60029FE74 /* Area.plist */,
 				1E0B7B591B709A2100A58AD4 /* Category.plist */,
 				1E3D7E791B4BD83D00275C35 /* Info.plist */,
@@ -5056,6 +5061,9 @@
 				1EA8B6A51B633CE100F90688 /* SettlementViewController.h */,
 				1EA8B6A61B633CE100F90688 /* SettlementViewController.m */,
 				1EA8B6A71B633CE100F90688 /* SettlementViewController.xib */,
+				8F8B0B1B1C4E21D7000E9A26 /* CashierViewController.h */,
+				8F8B0B1C1C4E21D7000E9A26 /* CashierViewController.m */,
+				8F8B0B1D1C4E21D7000E9A26 /* CashierViewController.xib */,
 			);
 			path = Settlement;
 			sourceTree = "<group>";
@@ -5956,7 +5964,6 @@
 				1E15F9C11BE8953C000C74E7 /* AccountSettingViewCell.xib in Resources */,
 				1E8017091BB006D100B6C352 /* HomeViewWholeImageNewsCell.xib in Resources */,
 				1E8EFD201B68BBA100D00808 /* AccountSettingView.xib in Resources */,
-				8F7F76FB1C4E0D8B0035413A /* interface_list.plist in Resources */,
 				1E7995901BCE2DEC0099CFF9 /* HospitalListViewCell.xib in Resources */,
 				8FABCB381C0FCC07005BF7AD /* FavouriteViewNewsCell.xib in Resources */,
 				1E0B7A831B6F67B800A58AD4 /* CouponGiftView.xib in Resources */,
@@ -5987,6 +5994,7 @@
 				1EC73C691B61186E008B39EA /* SettlementPayTypeCell.xib in Resources */,
 				8FD6B77D1C27FC79006B8D90 /* HomeViewNoticeCell.xib in Resources */,
 				1EC73BE71B5E588A008B39EA /* HomeViewBannerCell.xib in Resources */,
+				8F8B0B231C4E35FD000E9A26 /* interface_list.plist in Resources */,
 				1E8EFD0B1B687D4200D00808 /* CommentListViewController.xib in Resources */,
 				1E0B7B071B6F6C1400A58AD4 /* SaiDanAndCommentView.xib in Resources */,
 				1E0B77EE1B6B6C5000A58AD4 /* KTCSearchResultFilterLevel2Cell.xib in Resources */,
@@ -6154,6 +6162,7 @@
 				1E827BE61B941337008F3F08 /* UIBarButtonItemArrowRight@2x.png in Resources */,
 				8FEFF4F81BFCC54F001C098F /* KTCActionView.xib in Resources */,
 				1E943F111B7B5B850029FE74 /* OrderDetailConsumptionCodeCell.xib in Resources */,
+				8F8B0B1F1C4E21D7000E9A26 /* CashierViewController.xib in Resources */,
 				1E3D8F311B4CD3EC00275C35 /* ParentingStrategyViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -6637,6 +6646,7 @@
 				1E943F7A1B831AB60029FE74 /* StoreListViewController.m in Sources */,
 				1E0B7AC71B6F67B800A58AD4 /* SearchListViewCell.m in Sources */,
 				1E827CF61B9D7860008F3F08 /* PromotionFullCutModel.m in Sources */,
+				8F8B0B1E1C4E21D7000E9A26 /* CashierViewController.m in Sources */,
 				1E0B77CE1B6A14A200A58AD4 /* NSDate+Helpers.m in Sources */,
 				1E827CF31B9D7739008F3F08 /* PromotionBaseModel.m in Sources */,
 				8F70F9F01C00749600A175F0 /* AlipayManager.m in Sources */,

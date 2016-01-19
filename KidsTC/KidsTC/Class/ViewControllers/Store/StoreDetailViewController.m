@@ -125,6 +125,12 @@
 
 - (void)didClickedAddressOnStoreDetailView:(StoreDetailView *)detailView {
     KTCStoreMapViewController *controller = [[KTCStoreMapViewController alloc] initWithStoreItems:self.viewModel.detailModel.brotherStores];
+    for (StoreListItemModel *model in self.viewModel.detailModel.brotherStores) {
+        if ([model.identifier isEqualToString:self.viewModel.detailModel.storeId]) {
+            [controller setSelectedStore:model];
+            break;
+        }
+    }
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
 }

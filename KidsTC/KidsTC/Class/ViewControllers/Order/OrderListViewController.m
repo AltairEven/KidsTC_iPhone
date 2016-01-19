@@ -11,6 +11,7 @@
 #import "CommentFoundingViewController.h"
 #import "KTCPaymentService.h"
 #import "OrderRefundViewController.h"
+#import "CashierViewController.h"
 
 @interface OrderListViewController () <OrderListViewDelegate, CommentFoundingViewControllerDelegate, OrderRefundViewControllerDelegate, OrderDetailViewControllerDelegate>
 
@@ -79,21 +80,9 @@
 
 - (void)orderListView:(OrderListView *)listView didClickedPayButtonAtIndex:(NSUInteger)index {
     OrderListModel *model = [self.viewModel.orderModels objectAtIndex:index];
-    __weak OrderListViewController *weakSelf = self;
-    [[KTCPaymentService sharedService] startPaymentWithOrderIdentifier:model.orderId succeed:^{
-        [weakSelf.viewModel startUpdateDataWithSucceed:nil failure:nil];
-        NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:model.orderId, @"id", @"true", @"result", nil];
-        [MTA trackCustomKeyValueEvent:@"event_result_orders_pay" props:trackParam];
-    } failure:^(NSError *error) {
-        NSString *errMsg = @"支付失败";
-        NSString *text = [[error userInfo] objectForKey:kErrMsgKey];
-        if ([text isKindOfClass:[NSString class]] && [text length] > 0) {
-            errMsg = text;
-        }
-        [[iToast makeText:errMsg] show];
-        NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:model.orderId, @"id", @"false", @"result", nil];
-        [MTA trackCustomKeyValueEvent:@"event_result_orders_pay" props:trackParam];
-    }];
+    CashierViewController *controller = [[CashierViewController alloc] initWithOrderIdentifier:model.orderId];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)orderListView:(OrderListView *)listView didClickedCommentButtonAtIndex:(NSUInteger)index {
@@ -132,6 +121,12 @@
     if (need) {
         self.needRefresh = YES;
     }
+}
+
+#pragma mark CashierViewControllerDelegate
+
+- (void)needRefreshStatusForOrderWithIdentifier:(NSString *)orderId {
+    self.needRefresh = YES;
 }
 
 

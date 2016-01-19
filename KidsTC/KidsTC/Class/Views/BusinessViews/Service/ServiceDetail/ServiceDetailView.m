@@ -535,7 +535,7 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
     if (storeCount > 1) {
         [self.storeBriefAlphaView setHidden:NO];
         [self.storeBriefBGView setHidden:NO];
-        NSString *title = [NSString stringWithFormat:@"全程%lu家门店通用", (unsigned long)storeCount];
+        NSString *title = [NSString stringWithFormat:@"全城%lu家门店通用", (unsigned long)storeCount];
         [self.storeBriefLabel setText:title];
     } else {
         StoreListItemModel *itemModel = [self.detailModel.storeItemsArray firstObject];

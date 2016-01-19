@@ -291,6 +291,13 @@
 			<key>url</key>
 			<string>http://api.kidstc.com/json.php?mod=order&amp;&amp;act=cancle_order</string>
 		</dict>
+		<key>ORDER_CHANGE_PAY_CHANNEL</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=order&amp;&amp;act=change_pay_channel</string>
+		</dict>
 		<key>ORDER_CREATE_APPOINTMENTORDER</key>
 		<dict>
 			<key>method</key>
@@ -311,6 +318,13 @@
 			<string>post</string>
 			<key>url</key>
 			<string>http://api.kidstc.com/json.php?mod=order&amp;&amp;act=get_order_detail</string>
+		</dict>
+		<key>ORDER_GET_PAY_CHANNEL</key>
+		<dict>
+			<key>method</key>
+			<string>get</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=order&amp;&amp;act=get_pay_channel</string>
 		</dict>
 		<key>ORDER_GET_REFUND_TYPE</key>
 		<dict>
@@ -561,6 +575,6 @@
 	<key>errno</key>
 	<integer>0</integer>
 	<key>version</key>
-	<string>33</string>
+	<string>34</string>
 </dict>
 </plist>

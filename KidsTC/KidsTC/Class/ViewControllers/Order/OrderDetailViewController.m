@@ -15,8 +15,9 @@
 #import "OrderRefundViewController.h"
 #import "OnlineCustomerService.h"
 #import "KTCWebViewController.h"
+#import "CashierViewController.h"
 
-@interface OrderDetailViewController () <OrderDetailViewDelegate, CommentFoundingViewControllerDelegate, OrderRefundViewControllerDelegate>
+@interface OrderDetailViewController () <OrderDetailViewDelegate, CommentFoundingViewControllerDelegate, OrderRefundViewControllerDelegate, CashierViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet OrderDetailView *detailView;
 
@@ -76,24 +77,9 @@
     switch (tag) {
         case OrderDetailActionTagPay:
         {
-            __weak OrderDetailViewController *weakSelf = self;
-            [[KTCPaymentService sharedService] startPaymentWithOrderIdentifier:weakSelf.orderId succeed:^{
-                [weakSelf.viewModel startUpdateDataWithSucceed:nil failure:nil];
-                if (self.delegate && [self.delegate respondsToSelector:@selector(orderStatusChanged:needRefresh:)]) {
-                    [self.delegate orderStatusChanged:self.orderId needRefresh:YES];
-                }
-                NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:self.orderId, @"id", @"true", @"result", nil];
-                [MTA trackCustomKeyValueEvent:@"event_result_order_dtl_pay" props:trackParam];
-            } failure:^(NSError *error) {
-                NSString *errMsg = @"支付失败";
-                NSString *text = [[error userInfo] objectForKey:kErrMsgKey];
-                if ([text isKindOfClass:[NSString class]] && [text length] > 0) {
-                    errMsg = text;
-                }
-                [[iToast makeText:errMsg] show];
-                NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:self.orderId, @"id", @"false", @"result", nil];
-                [MTA trackCustomKeyValueEvent:@"event_result_order_dtl_pay" props:trackParam];
-            }];
+            CashierViewController *controller = [[CashierViewController alloc] initWithOrderIdentifier:self.viewModel.orderId];
+            [controller setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:controller animated:YES];
         }
             break;
         case OrderDetailActionTagCancel:
@@ -196,6 +182,21 @@
         [[GAlertLoadingView sharedAlertLoadingView] hide];
     }];
 }
+
+#pragma mark CashierViewControllerDelegate
+
+- (void)needRefreshStatusForOrderWithIdentifier:(NSString *)orderId {
+    [[GAlertLoadingView sharedAlertLoadingView] showInView:self.view];
+    [self.viewModel startUpdateDataWithSucceed:^(NSDictionary *data) {
+        [[GAlertLoadingView sharedAlertLoadingView] hide];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(orderStatusChanged:needRefresh:)]) {
+            [self.delegate orderStatusChanged:self.orderId needRefresh:YES];
+        }
+    } failure:^(NSError *error) {
+        [[GAlertLoadingView sharedAlertLoadingView] hide];
+    }];
+}
+
 
 #pragma mark Private methods
 

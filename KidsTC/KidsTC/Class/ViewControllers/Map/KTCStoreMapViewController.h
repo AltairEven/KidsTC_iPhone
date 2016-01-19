@@ -12,6 +12,8 @@
 
 @interface KTCStoreMapViewController : GViewController
 
+@property (nonatomic, strong) StoreListItemModel *selectedStore;
+
 - (instancetype)initWithStoreItems:(NSArray<StoreListItemModel *> *)storeItems;
 
 @end
