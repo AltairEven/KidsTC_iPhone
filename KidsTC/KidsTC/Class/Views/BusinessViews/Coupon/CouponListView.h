@@ -31,6 +31,8 @@ typedef enum {
 
 - (void)couponListView:(CouponListView *)listView DidPullUpToLoadMoreforViewTag:(CouponListViewTag)tag;
 
+- (void)couponListView:(CouponListView *)listView didSelectedAtIndex:(NSUInteger)index ofViewTag:(CouponListViewTag)tag;
+
 @end
 
 @interface CouponListView : UIView

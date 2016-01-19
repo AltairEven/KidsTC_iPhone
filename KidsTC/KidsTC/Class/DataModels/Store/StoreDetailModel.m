@@ -26,8 +26,24 @@
         }
         self.imageUrls = [NSArray arrayWithArray:tempArray];
     }
-    self.bannerRatio = 1;
+    self.bannerRatio = 0.6;
     self.storeName = [data objectForKey:@"storeName"];
+    self.storeShortName = [data objectForKey:@"simpleName"];
+    if (![self.storeShortName isKindOfClass:[NSString class]] || [self.storeShortName length] == 0) {
+        self.storeShortName = @"门店详情";
+    }
+    self.storeBrief = [data objectForKey:@"breif"];
+    NSArray *promotionLinks = [data objectForKey:@"promotionLink"];
+    if ([promotionLinks isKindOfClass:[NSArray class]]) {
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        for (NSDictionary *rawData in promotionLinks) {
+            TextSegueModel *model = [[TextSegueModel alloc] initWithLinkParam:rawData promotionWords:self.storeBrief];
+            if (model) {
+                [tempArray addObject:model];
+            }
+        }
+        self.promotionSegueModels = [NSArray arrayWithArray:tempArray];
+    }
     self.starNumber = [[data objectForKey:@"level"] integerValue];
     NSArray *coupons = [data objectForKey:@"coupons"];
     if ([coupons isKindOfClass:[NSArray class]] && [coupons count] > 0) {
@@ -71,6 +87,18 @@
         }
     }
     self.activeModelsArray = [NSArray arrayWithArray:tempArray];
+    //services
+    NSArray *services = [data objectForKey:@"serve"];
+    if ([services isKindOfClass:[NSArray class]]) {
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        for (NSDictionary *serviceDic in services) {
+            StoreOwnedServiceModel *model = [[StoreOwnedServiceModel alloc] initWithRawData:serviceDic];
+            if (model) {
+                [tempArray addObject:model];
+            }
+        }
+        self.serviceModelsArray = [NSArray arrayWithArray:tempArray];
+    }
     //hot recommend
     NSArray *tuans = [data objectForKey:@"tuan"];
     if ([tuans isKindOfClass:[NSArray class]]) {
@@ -81,7 +109,7 @@
                 [tempArray addObject:model];
             }
         }
-        self.hotRecommendServiceArray = [NSArray arrayWithArray:tempArray];
+        self.hotRecommedServiceArray = [NSArray arrayWithArray:tempArray];
     }
     //recommend
     NSDictionary *recommendDic = [data objectForKey:@"note"];
@@ -91,7 +119,6 @@
         self.recommendString = [recommendDic objectForKey:@"note"];
     }
     //brief
-    self.storeBrief = [data objectForKey:@"breif"];
     self.detailUrlString = [data objectForKey:@"detailUrl"];
     //comments
     NSArray *comments = [data objectForKey:@"commentList"];
@@ -129,18 +156,6 @@
         }
         self.brotherStores = [NSArray arrayWithArray:tempArray];
     }
-    //services
-    NSArray *services = [data objectForKey:@"serve"];
-    if ([services isKindOfClass:[NSArray class]]) {
-        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-        for (NSDictionary *serviceDic in services) {
-            StoreOwnedServiceModel *model = [[StoreOwnedServiceModel alloc] initWithRawData:serviceDic];
-            if (model) {
-                [tempArray addObject:model];
-            }
-        }
-        self.serviceModelsArray = [NSArray arrayWithArray:tempArray];
-    }
     //comments number
     NSDictionary *commentDic = [data objectForKey:@"comment"];
     if ([commentDic isKindOfClass:[NSDictionary class]] && [commentDic count] > 0) {
@@ -171,8 +186,9 @@
 
 - (CGFloat)topCellHeight {
     CGFloat height = self.bannerRatio * SCREEN_WIDTH;
-    height += [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 20 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:17] topGap:10 bottomGap:10 maxLine:2 andText:self.storeName];
-    height += 40;
+    height += 30;
+    height += [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 20 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:17] topGap:10 bottomGap:10 maxLine:0 andText:self.storeBrief];
+    height += 25;
     return height;
 }
 

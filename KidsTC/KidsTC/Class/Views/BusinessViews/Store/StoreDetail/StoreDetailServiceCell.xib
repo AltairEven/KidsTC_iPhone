@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="KGk-i7-Jjw" customClass="StoreDetailServiceCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DFz-jT-17w" userLabel="bgView">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Zhb-og-0gL">
+                                <rect key="frame" x="10" y="10" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="Jb8-Q3-aGb"/>
+                                    <constraint firstAttribute="height" constant="80" id="ShM-ZH-v1W"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label会卡死的客户结案时间快点哈开始等哈看时间段按时大街上打开圣诞节安徽省的空间啊手动" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fta-yT-e5m">
+                                <rect key="frame" x="100" y="13" width="210" height="31.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="适用年龄：8~100岁" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uba-mV-89B">
+                                <rect key="frame" x="100" y="50.5" width="210" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="全城8家门店通用" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RDC-PS-qFp">
+                                <rect key="frame" x="100" y="72.5" width="92" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="童成专享价" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Xi-dq-9y1">
+                                <rect key="frame" x="220" y="72.5" width="60" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0eb-Tt-KmR" customClass="RichPriceView">
+                                <rect key="frame" x="280" y="67" width="30" height="20"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="66Y-IC-E3k"/>
+                                    <constraint firstAttribute="width" constant="30" id="KF7-FX-7XB"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="0eb-Tt-KmR" secondAttribute="trailing" constant="10" id="2CE-tr-PaB"/>
+                            <constraint firstItem="RDC-PS-qFp" firstAttribute="leading" secondItem="Zhb-og-0gL" secondAttribute="trailing" constant="10" id="AQI-4C-7rY"/>
+                            <constraint firstAttribute="trailing" secondItem="Fta-yT-e5m" secondAttribute="trailing" constant="10" id="Aqs-L4-jap"/>
+                            <constraint firstItem="Zhb-og-0gL" firstAttribute="leading" secondItem="DFz-jT-17w" secondAttribute="leading" constant="10" id="D3T-jz-Caj"/>
+                            <constraint firstItem="Zhb-og-0gL" firstAttribute="centerY" secondItem="DFz-jT-17w" secondAttribute="centerY" id="PEF-yQ-91f"/>
+                            <constraint firstAttribute="trailing" secondItem="uba-mV-89B" secondAttribute="trailing" constant="10" id="Vcf-HI-Tbr"/>
+                            <constraint firstItem="uba-mV-89B" firstAttribute="leading" secondItem="Zhb-og-0gL" secondAttribute="trailing" constant="10" id="WVm-BY-fv3"/>
+                            <constraint firstItem="7Xi-dq-9y1" firstAttribute="bottom" secondItem="0eb-Tt-KmR" secondAttribute="bottom" id="bA0-eH-E64"/>
+                            <constraint firstItem="uba-mV-89B" firstAttribute="bottom" secondItem="Zhb-og-0gL" secondAttribute="bottom" constant="-25" id="c49-OQ-luY"/>
+                            <constraint firstItem="Fta-yT-e5m" firstAttribute="leading" secondItem="Zhb-og-0gL" secondAttribute="trailing" constant="10" id="dvz-WL-5cu"/>
+                            <constraint firstItem="RDC-PS-qFp" firstAttribute="bottom" secondItem="Zhb-og-0gL" secondAttribute="bottom" constant="-3" id="hVf-3w-fUj"/>
+                            <constraint firstItem="0eb-Tt-KmR" firstAttribute="leading" secondItem="7Xi-dq-9y1" secondAttribute="trailing" id="w8r-Ov-cHf"/>
+                            <constraint firstItem="0eb-Tt-KmR" firstAttribute="bottom" secondItem="Zhb-og-0gL" secondAttribute="bottom" constant="-3" id="ws1-qo-nb5"/>
+                            <constraint firstItem="Fta-yT-e5m" firstAttribute="top" secondItem="Zhb-og-0gL" secondAttribute="top" constant="3" id="y1j-O8-10T"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="DFz-jT-17w" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="PCd-X9-OfN"/>
+                    <constraint firstItem="DFz-jT-17w" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="WPl-GY-RhD"/>
+                    <constraint firstAttribute="trailing" secondItem="DFz-jT-17w" secondAttribute="trailing" id="z6u-sy-6Pi"/>
+                    <constraint firstAttribute="bottom" secondItem="DFz-jT-17w" secondAttribute="bottom" id="zLq-du-1KH"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="bgView" destination="DFz-jT-17w" id="IZB-aY-SvC"/>
+                <outlet property="cellImageView" destination="Zhb-og-0gL" id="7RF-nk-oLr"/>
+                <outlet property="priceDesLabel" destination="7Xi-dq-9y1" id="QLW-LD-oTp"/>
+                <outlet property="priceView" destination="0eb-Tt-KmR" id="GmV-zW-00x"/>
+                <outlet property="serviceDesAlign" destination="c49-OQ-luY" id="SPu-5i-bI1"/>
+                <outlet property="serviceDesLabel" destination="uba-mV-89B" id="JOE-kO-mxk"/>
+                <outlet property="serviceNameLabel" destination="Fta-yT-e5m" id="Tm1-Ke-mDc"/>
+                <outlet property="storeDesLabel" destination="RDC-PS-qFp" id="lyA-Lc-8IO"/>
+            </connections>
+            <point key="canvasLocation" x="293" y="317"/>
+        </tableViewCell>
+    </objects>
+</document>

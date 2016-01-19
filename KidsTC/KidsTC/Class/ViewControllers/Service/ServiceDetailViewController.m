@@ -51,6 +51,7 @@
 @property (weak, nonatomic) IBOutlet UIView *gapView;
 
 - (void)buildRightBarButtons;
+- (void)resetTitle;
 
 - (void)loadConfirmView;
 - (void)setupBottomView;
@@ -191,12 +192,10 @@
     for (NSUInteger index = 0; index < [self.viewModel.detailModel.storeItemsArray count]; index ++) {
         StoreListItemModel *model = [self.viewModel.detailModel.storeItemsArray objectAtIndex:index];
         if (model.location) {
-            CLLocationCoordinate2D coord = model.location.location.coordinate;
-            model.location = [[KTCLocation alloc] initWithLocation:[[CLLocation alloc] initWithLatitude:coord.latitude + 0.002 * (index + 1) longitude:coord.longitude + 0.002 * (index + 1)] locationDescription:model.location.locationDescription];
             [tempArray addObject:model.location];
         }
     }
-    KTCStoreMapViewController *controller = [[KTCStoreMapViewController alloc] initWithLocations:[NSArray arrayWithArray:tempArray]];
+    KTCStoreMapViewController *controller = [[KTCStoreMapViewController alloc] initWithStoreItems:self.viewModel.detailModel.storeItemsArray];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
 }
@@ -383,6 +382,11 @@
     self.navigationItem.rightBarButtonItem = rItem;
 }
 
+- (void)resetTitle {
+    _navigationTitle = self.viewModel.detailModel.serviceBriefName;
+    self.navigationItem.title = _navigationTitle;
+}
+
 - (void)loadConfirmView {
     [self.confirmView setStockNumber:self.viewModel.detailModel.stockNumber];
     [self.confirmView setUnitPrice:self.viewModel.detailModel.currentPrice];
@@ -554,9 +558,11 @@
         [[GAlertLoadingView sharedAlertLoadingView] hide];
         [weakSelf loadConfirmView];
         [weakSelf setupBottomView];
+        [weakSelf resetTitle];
     } failure:^(NSError *error) {
         [weakSelf.detailView reloadData];
         [[GAlertLoadingView sharedAlertLoadingView] hide];
+        [weakSelf resetTitle];
     }];
 }
 

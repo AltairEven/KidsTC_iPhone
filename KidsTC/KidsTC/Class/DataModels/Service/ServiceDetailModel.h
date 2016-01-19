@@ -12,10 +12,11 @@
 #import "Insurance.h"
 #import "CommonShareObject.h"
 #import "KTCCommentManager.h"
-#import "HomeSegueModel.h"
+#import "TextSegueModel.h"
 
 @class ServiceDetailNoticeItem;
 @class ServiceDetailPhoneItem;
+@class ServicePromotionSegueModel;
 
 @interface ServiceDetailModel : NSObject
 
@@ -27,9 +28,15 @@
 
 @property (nonatomic, strong) NSArray *imageUrls;
 
+@property (nonatomic, strong) NSArray *narrowImageUrls;
+
 @property (nonatomic, copy) NSString *serviceName;
 
+@property (nonatomic, copy) NSString *serviceBriefName;
+
 @property (nonatomic, copy) NSString *serviceDescription;
+
+@property (nonatomic, strong) NSArray<TextSegueModel *> *promotionSegueModels;
 
 @property (nonatomic, assign) CGFloat starNumber;
 
@@ -50,6 +57,8 @@
 @property (nonatomic, assign) BOOL showCountdown;
 
 @property (nonatomic, strong) NSArray *supportedInsurances;
+
+@property (nonatomic, copy) NSString *serviceContent;
 
 @property (nonatomic, copy) NSString *couponName;
 
@@ -112,6 +121,8 @@
 - (CGFloat)couponCellHeight;
 
 - (CGFloat)activityCellHeightAtIndex:(NSUInteger)index;
+
+- (CGFloat)contentCellHeight;
 
 - (CGFloat)noticeTitleCellHeight;
 

@@ -53,6 +53,8 @@
             break;
         case HomeSegueDestinationNewsList:
         {
+//            KTCSearchNewsCondition *condition = [KTCSearchNewsCondition conditionFromRawData:model.segueParam];
+//            NewSearchResultViewController *controller = [[NewSearchResultViewController alloc] initWithSearchCondition:condition];
             NewSearchResultViewController *controller = [[NewSearchResultViewController alloc] initWithNibName:@"NewSearchResultViewController" bundle:nil];
             [controller setHidesBottomBarWhenPushed:YES];
             toController = controller;

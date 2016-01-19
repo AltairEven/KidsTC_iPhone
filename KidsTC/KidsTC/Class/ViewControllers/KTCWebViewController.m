@@ -317,7 +317,7 @@
             NSMutableDictionary *tempDic = [[NSMutableDictionary alloc] init];
             NSArray *paramsArray = [hookString componentsSeparatedByString:@";"];
             for (NSString *string in paramsArray) {
-                NSRange titleRange = [string rangeOfString:@"share::title="];
+                NSRange titleRange = [string rangeOfString:@"saveShare::title="];
                 NSRange descRange = [string rangeOfString:@"desc="];
                 NSRange picRange = [string rangeOfString:@"pic="];
                 NSRange urlRange = [string rangeOfString:@"url="];
@@ -797,7 +797,6 @@
 #pragma mark Share
 
 - (void)didClickedShareButton {
-    self.shareParam = nil;
     if (self.shareParam) {
         [self shareWithParams:self.shareParam withLocalImage:NO];
         return;

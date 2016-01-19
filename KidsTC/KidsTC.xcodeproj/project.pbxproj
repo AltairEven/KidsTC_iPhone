@@ -178,8 +178,6 @@
 		1E15F9801BDE166B000C74E7 /* StoreDetailHotRecommendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E15F97F1BDE166B000C74E7 /* StoreDetailHotRecommendModel.m */; };
 		1E15F9831BDF1B9E000C74E7 /* StoreOwnedServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E15F9821BDF1B9E000C74E7 /* StoreOwnedServiceModel.m */; };
 		1E15F9891BDF21D5000C74E7 /* StoreDetailNearbyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E15F9881BDF21D5000C74E7 /* StoreDetailNearbyModel.m */; };
-		1E15F98D1BDF2B32000C74E7 /* StoreDetailServiceLinearCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E15F98B1BDF2B32000C74E7 /* StoreDetailServiceLinearCell.m */; };
-		1E15F98E1BDF2B32000C74E7 /* StoreDetailServiceLinearCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E15F98C1BDF2B32000C74E7 /* StoreDetailServiceLinearCell.xib */; };
 		1E15F9921BDF7777000C74E7 /* CommentDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E15F9911BDF7777000C74E7 /* CommentDetailView.m */; };
 		1E15F9941BDF7785000C74E7 /* CommentDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E15F9931BDF7785000C74E7 /* CommentDetailView.xib */; };
 		1E15F9981BDF799B000C74E7 /* CommentDetailViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E15F9961BDF799B000C74E7 /* CommentDetailViewCell.m */; };
@@ -843,6 +841,9 @@
 		8F7E45051C09E18C001EF3B5 /* OrderRefundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7E45031C09E18C001EF3B5 /* OrderRefundViewController.m */; };
 		8F7E45061C09E18C001EF3B5 /* OrderRefundViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F7E45041C09E18C001EF3B5 /* OrderRefundViewController.xib */; };
 		8F7E45091C09E1F0001EF3B5 /* OrderRefundViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7E45081C09E1F0001EF3B5 /* OrderRefundViewModel.m */; };
+		8F7F76F41C4A290E0035413A /* TextSegueModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7F76F31C4A290E0035413A /* TextSegueModel.m */; };
+		8F7F76F81C4A46950035413A /* StoreDetailServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7F76F61C4A46950035413A /* StoreDetailServiceCell.m */; };
+		8F7F76F91C4A46950035413A /* StoreDetailServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F7F76F71C4A46950035413A /* StoreDetailServiceCell.xib */; };
 		8F85AD7D1C0C43F000890526 /* NotificationCenterViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85AD7B1C0C43F000890526 /* NotificationCenterViewCell.m */; };
 		8F85AD7E1C0C43F000890526 /* NotificationCenterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD7C1C0C43F000890526 /* NotificationCenterViewCell.xib */; };
 		8F85AD821C0C498F00890526 /* PushNotificationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85AD811C0C498F00890526 /* PushNotificationModel.m */; };
@@ -1283,9 +1284,6 @@
 		1E15F9821BDF1B9E000C74E7 /* StoreOwnedServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreOwnedServiceModel.m; sourceTree = "<group>"; };
 		1E15F9871BDF21D5000C74E7 /* StoreDetailNearbyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreDetailNearbyModel.h; sourceTree = "<group>"; };
 		1E15F9881BDF21D5000C74E7 /* StoreDetailNearbyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreDetailNearbyModel.m; sourceTree = "<group>"; };
-		1E15F98A1BDF2B32000C74E7 /* StoreDetailServiceLinearCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreDetailServiceLinearCell.h; sourceTree = "<group>"; };
-		1E15F98B1BDF2B32000C74E7 /* StoreDetailServiceLinearCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreDetailServiceLinearCell.m; sourceTree = "<group>"; };
-		1E15F98C1BDF2B32000C74E7 /* StoreDetailServiceLinearCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreDetailServiceLinearCell.xib; sourceTree = "<group>"; };
 		1E15F9901BDF7777000C74E7 /* CommentDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentDetailView.h; sourceTree = "<group>"; };
 		1E15F9911BDF7777000C74E7 /* CommentDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentDetailView.m; sourceTree = "<group>"; };
 		1E15F9931BDF7785000C74E7 /* CommentDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentDetailView.xib; sourceTree = "<group>"; };
@@ -2419,6 +2417,11 @@
 		8F7E45041C09E18C001EF3B5 /* OrderRefundViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderRefundViewController.xib; sourceTree = "<group>"; };
 		8F7E45071C09E1F0001EF3B5 /* OrderRefundViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderRefundViewModel.h; sourceTree = "<group>"; };
 		8F7E45081C09E1F0001EF3B5 /* OrderRefundViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderRefundViewModel.m; sourceTree = "<group>"; };
+		8F7F76F21C4A290E0035413A /* TextSegueModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextSegueModel.h; sourceTree = "<group>"; };
+		8F7F76F31C4A290E0035413A /* TextSegueModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextSegueModel.m; sourceTree = "<group>"; };
+		8F7F76F51C4A46950035413A /* StoreDetailServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreDetailServiceCell.h; sourceTree = "<group>"; };
+		8F7F76F61C4A46950035413A /* StoreDetailServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreDetailServiceCell.m; sourceTree = "<group>"; };
+		8F7F76F71C4A46950035413A /* StoreDetailServiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreDetailServiceCell.xib; sourceTree = "<group>"; };
 		8F85AD7A1C0C43F000890526 /* NotificationCenterViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationCenterViewCell.h; sourceTree = "<group>"; };
 		8F85AD7B1C0C43F000890526 /* NotificationCenterViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationCenterViewCell.m; sourceTree = "<group>"; };
 		8F85AD7C1C0C43F000890526 /* NotificationCenterViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationCenterViewCell.xib; sourceTree = "<group>"; };
@@ -4260,9 +4263,9 @@
 				1E15F9791BDDD194000C74E7 /* StoreDetailCommentCell.h */,
 				1E15F97A1BDDD194000C74E7 /* StoreDetailCommentCell.m */,
 				1E15F97B1BDDD194000C74E7 /* StoreDetailCommentCell.xib */,
-				1E15F98A1BDF2B32000C74E7 /* StoreDetailServiceLinearCell.h */,
-				1E15F98B1BDF2B32000C74E7 /* StoreDetailServiceLinearCell.m */,
-				1E15F98C1BDF2B32000C74E7 /* StoreDetailServiceLinearCell.xib */,
+				8F7F76F51C4A46950035413A /* StoreDetailServiceCell.h */,
+				8F7F76F61C4A46950035413A /* StoreDetailServiceCell.m */,
+				8F7F76F71C4A46950035413A /* StoreDetailServiceCell.xib */,
 			);
 			path = StoreDetail;
 			sourceTree = "<group>";
@@ -4937,6 +4940,8 @@
 				1E943EB51B72361A0029FE74 /* KTCArea.m */,
 				8F9996061BF5BE590055F016 /* KTCUserRole.h */,
 				8F9996071BF5BE590055F016 /* KTCUserRole.m */,
+				8F7F76F21C4A290E0035413A /* TextSegueModel.h */,
+				8F7F76F31C4A290E0035413A /* TextSegueModel.m */,
 			);
 			path = GlobalModel;
 			sourceTree = "<group>";
@@ -6014,7 +6019,6 @@
 				1EA8B6A31B63367D00F90688 /* SettlementBottomView.xib in Resources */,
 				8F8A08D31BF9E31300134A9A /* BindPhoneViewController.xib in Resources */,
 				1EC73C641B61164A008B39EA /* SettlementView.xib in Resources */,
-				1E15F98E1BDF2B32000C74E7 /* StoreDetailServiceLinearCell.xib in Resources */,
 				1E827BE41B941337008F3F08 /* UIBarButtonItemArrowLeft@3x.png in Resources */,
 				1E7995191BC758560099CFF9 /* NewsRecommendListView.xib in Resources */,
 				1E827BDA1B941337008F3F08 /* ImageSelectedSmallOn@2x.png in Resources */,
@@ -6112,6 +6116,7 @@
 				1E80170E1BB006EF00B6C352 /* HomeViewNewsCell.xib in Resources */,
 				8F85ADB71C0D5BB600890526 /* MyCommentListViewController.xib in Resources */,
 				1E7995281BC7656C0099CFF9 /* ParentingStrategyDetailViewController.xib in Resources */,
+				8F7F76F91C4A46950035413A /* StoreDetailServiceCell.xib in Resources */,
 				1E7994E71BC650830099CFF9 /* ActivityView.xib in Resources */,
 				1E943F061B7B231F0029FE74 /* AppointmentOrderDetailViewController.xib in Resources */,
 				1E7994DE1BC615280099CFF9 /* ParentingStrategyDetailViewCell.xib in Resources */,
@@ -6217,6 +6222,7 @@
 				1E79951C1BC758560099CFF9 /* NewsView.m in Sources */,
 				1E3D8D8F1B4BF4A100275C35 /* ASICloudFilesObjectRequest.m in Sources */,
 				1E0B7A871B6F67B800A58AD4 /* DelayTipsView.m in Sources */,
+				8F7F76F41C4A290E0035413A /* TextSegueModel.m in Sources */,
 				1E827CA91B94144E008F3F08 /* UIImage+GIF.m in Sources */,
 				1E0B7AB51B6F67B800A58AD4 /* GShoppingCartTableCell.m in Sources */,
 				1EA8B6CC1B6607F800F90688 /* CategoryView.m in Sources */,
@@ -6609,6 +6615,7 @@
 				1EC73BAD1B5E25A4008B39EA /* TwinklingElvesLayout.m in Sources */,
 				1E827CBF1B9BDE8F008F3F08 /* CouponBaseModel.m in Sources */,
 				1E3D8D451B4BF4A100275C35 /* DDFileLogger.m in Sources */,
+				8F7F76F81C4A46950035413A /* StoreDetailServiceCell.m in Sources */,
 				1E3D8D821B4BF4A100275C35 /* ASIAuthenticationDialog.m in Sources */,
 				8FC75DA81C0EEBBC00D1E5F0 /* CommentEditView.m in Sources */,
 				1E8EFD051B68782300D00808 /* CommentListViewSegmentCell.m in Sources */,
@@ -6749,7 +6756,6 @@
 				1E3D8CD81B4BF4A100275C35 /* AdministrativeDivision.m in Sources */,
 				1E7995271BC7656C0099CFF9 /* ParentingStrategyDetailViewController.m in Sources */,
 				1E80173A1BB3E49800B6C352 /* NewsRecommendListViewModel.m in Sources */,
-				1E15F98D1BDF2B32000C74E7 /* StoreDetailServiceLinearCell.m in Sources */,
 				1E0B7AA71B6F67B800A58AD4 /* GLabel.m in Sources */,
 				1E8EFCF71B68697700D00808 /* ServiceCommentListViewHeaderCell.m in Sources */,
 				1E943F7F1B831DAF0029FE74 /* ServiceListViewController.m in Sources */,

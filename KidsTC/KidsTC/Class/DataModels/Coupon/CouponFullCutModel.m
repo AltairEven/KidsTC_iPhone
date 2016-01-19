@@ -16,6 +16,9 @@
         if ([data objectForKey:@"code"]) {
             self.couponId = [NSString stringWithFormat:@"%@", [data objectForKey:@"code"]];
         }
+        if ([data objectForKey:@"batchId"]) {
+            self.batchId = [NSString stringWithFormat:@"%@", [data objectForKey:@"batchId"]];
+        }
         self.couponTitle = [data objectForKey:@"name"];
         self.couponDescription = [data objectForKey:@"desc"];
         self.fetchTime = [data objectForKey:@"fetchTime"];

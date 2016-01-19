@@ -22,7 +22,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </webView>
                 <button hidden="YES" opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EWU-w5-pR1">
-                    <rect key="frame" x="270" y="498" width="40" height="40"/>
+                    <rect key="frame" x="270" y="448" width="40" height="40"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="knw-vl-rgy"/>
@@ -40,7 +40,7 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="EWU-w5-pR1" secondAttribute="trailing" constant="10" id="HWJ-xJ-bOV"/>
                 <constraint firstAttribute="bottom" secondItem="EAs-Xj-rMf" secondAttribute="bottom" id="Tba-Gz-Kd2"/>
-                <constraint firstAttribute="bottom" secondItem="EWU-w5-pR1" secondAttribute="bottom" constant="30" id="dwp-JC-gCa"/>
+                <constraint firstAttribute="bottom" secondItem="EWU-w5-pR1" secondAttribute="bottom" constant="80" id="dwp-JC-gCa"/>
                 <constraint firstItem="EAs-Xj-rMf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="kZw-lQ-pvY"/>
                 <constraint firstItem="EAs-Xj-rMf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="uWP-Or-35L"/>
                 <constraint firstAttribute="trailing" secondItem="EAs-Xj-rMf" secondAttribute="trailing" id="zYN-jD-Csg"/>

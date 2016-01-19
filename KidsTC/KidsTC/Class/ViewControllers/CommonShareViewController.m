@@ -66,6 +66,9 @@
     // Do any additional setup after loading the view from its nib.
     [self.displayBGView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
     [self.tapView setHidden:YES];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickedCancelButton:)];
+    [self.tapView addGestureRecognizer:tap];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

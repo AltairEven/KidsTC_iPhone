@@ -7,14 +7,13 @@
 //
 
 #import "KTCAnnotationTipStoreItemView.h"
-#import "FiveStarsView.h"
 #import "StoreListItemModel.h"
 #import "StoreDetailModel.h"
 
 @interface KTCAnnotationTipStoreItemView ()
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet FiveStarsView *starsView;
+@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 - (IBAction)didClickedGotoButton:(id)sender;
@@ -58,7 +57,11 @@
 - (void)setStoreItem:(KTCAnnotationTipStoreItem *)storeItem {
     _storeItem = storeItem;
     [self.nameLabel setText:storeItem.storeName];
-    [self.starsView setStarNumber:storeItem.starNumber];
+    if ([storeItem.address length] > 0) {
+        [self.addressLabel setText:storeItem.address];
+    } else {
+        [self.addressLabel setText:@""];
+    }
     [self.imageView setImageWithURL:storeItem.imageUrl placeholderImage:PLACEHOLDERIMAGE_SMALL];
 }
 
@@ -95,6 +98,7 @@
     item.imageUrl = model.imageUrl;
     item.storeName = model.storeName;
     item.starNumber = model.starNumber;
+    item.address = model.location.moreDescription;
     return item;
 }
 

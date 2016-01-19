@@ -15,21 +15,19 @@
                     <rect key="frame" x="0.0" y="0.0" width="600" height="560"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pc0-5J-3zh">
-                            <rect key="frame" x="10" y="250" width="490" height="18"/>
+                            <rect key="frame" x="5" y="245" width="505" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="99G-8P-Thh" customClass="FiveStarsView">
-                            <rect key="frame" x="10" y="290" width="30" height="20"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="30" id="Mwy-ho-ce4"/>
-                                <constraint firstAttribute="height" constant="20" id="hCL-vh-9b3"/>
-                            </constraints>
-                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ax5-71-pCg">
+                            <rect key="frame" x="5" y="268" width="505" height="16"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NK9-lx-DNK">
-                            <rect key="frame" x="510" y="240" width="80" height="80"/>
+                            <rect key="frame" x="515" y="240" width="80" height="80"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="80" id="7z7-rv-AhS"/>
                                 <constraint firstAttribute="width" constant="80" id="KsD-xu-Wem"/>
@@ -38,13 +36,14 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="99G-8P-Thh" firstAttribute="leading" secondItem="bnQ-WB-Uwv" secondAttribute="leading" constant="10" id="14y-96-3KK"/>
-                        <constraint firstItem="NK9-lx-DNK" firstAttribute="leading" secondItem="Pc0-5J-3zh" secondAttribute="trailing" constant="10" id="K2r-Tr-SsQ"/>
-                        <constraint firstItem="Pc0-5J-3zh" firstAttribute="leading" secondItem="bnQ-WB-Uwv" secondAttribute="leading" constant="10" id="MVA-t1-5A0"/>
+                        <constraint firstItem="Ax5-71-pCg" firstAttribute="top" secondItem="Pc0-5J-3zh" secondAttribute="bottom" constant="5" id="0Cb-ie-FKm"/>
+                        <constraint firstItem="Ax5-71-pCg" firstAttribute="leading" secondItem="Pc0-5J-3zh" secondAttribute="leading" id="DDw-ed-GOX"/>
+                        <constraint firstItem="NK9-lx-DNK" firstAttribute="leading" secondItem="Pc0-5J-3zh" secondAttribute="trailing" constant="5" id="K2r-Tr-SsQ"/>
+                        <constraint firstItem="Pc0-5J-3zh" firstAttribute="leading" secondItem="bnQ-WB-Uwv" secondAttribute="leading" constant="5" id="MVA-t1-5A0"/>
                         <constraint firstItem="NK9-lx-DNK" firstAttribute="centerY" secondItem="bnQ-WB-Uwv" secondAttribute="centerY" id="NH3-jg-Iye"/>
-                        <constraint firstAttribute="trailing" secondItem="NK9-lx-DNK" secondAttribute="trailing" constant="10" id="W4s-DB-9uF"/>
-                        <constraint firstItem="Pc0-5J-3zh" firstAttribute="top" secondItem="NK9-lx-DNK" secondAttribute="top" constant="10" id="gEi-Zg-wpg"/>
-                        <constraint firstItem="99G-8P-Thh" firstAttribute="bottom" secondItem="NK9-lx-DNK" secondAttribute="bottom" constant="-10" id="xM4-hQ-xAJ"/>
+                        <constraint firstAttribute="trailing" secondItem="NK9-lx-DNK" secondAttribute="trailing" constant="5" id="W4s-DB-9uF"/>
+                        <constraint firstItem="NK9-lx-DNK" firstAttribute="leading" secondItem="Ax5-71-pCg" secondAttribute="trailing" constant="5" id="Xk5-Zl-AI1"/>
+                        <constraint firstItem="Pc0-5J-3zh" firstAttribute="top" secondItem="NK9-lx-DNK" secondAttribute="top" constant="5" id="gEi-Zg-wpg"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vbe-8L-E2T" userLabel="actionBGView">
@@ -92,9 +91,9 @@
                 <constraint firstAttribute="trailing" secondItem="bnQ-WB-Uwv" secondAttribute="trailing" id="hnQ-e7-M5a"/>
             </constraints>
             <connections>
+                <outlet property="addressLabel" destination="Ax5-71-pCg" id="seW-lT-1UN"/>
                 <outlet property="imageView" destination="NK9-lx-DNK" id="fzI-8N-REX"/>
                 <outlet property="nameLabel" destination="Pc0-5J-3zh" id="pUK-T3-nOF"/>
-                <outlet property="starsView" destination="99G-8P-Thh" id="p3t-mN-WvO"/>
             </connections>
         </view>
     </objects>

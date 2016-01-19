@@ -184,6 +184,9 @@ static NSString *const kContentCellIdentifier = @"kContentCellIdentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(couponListView:didSelectedAtIndex:ofViewTag:)]) {
+        [self.delegate couponListView:self didSelectedAtIndex:indexPath.section ofViewTag:self.currentViewTag];
+    }
 }
 
 #pragma mark Private methods

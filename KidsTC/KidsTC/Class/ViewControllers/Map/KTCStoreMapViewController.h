@@ -8,8 +8,10 @@
 
 #import "GViewController.h"
 
+@class StoreListItemModel;
+
 @interface KTCStoreMapViewController : GViewController
 
-- (instancetype)initWithLocations:(NSArray<KTCLocation *> *)locations;
+- (instancetype)initWithStoreItems:(NSArray<StoreListItemModel *> *)storeItems;
 
 @end

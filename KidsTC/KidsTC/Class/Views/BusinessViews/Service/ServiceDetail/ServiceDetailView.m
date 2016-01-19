@@ -16,17 +16,18 @@
 #import "TTTAttributedLabel.h"
 
 typedef enum {
-    ServiceDetailTableCellTagTop,
+    ServiceDetailTableCellTagTop = 0,
     ServiceDetailTableCellTagPrice,
     ServiceDetailTableCellTagInsurance,
     ServiceDetailTableCellTagCoupon,
+    ServiceDetailTableCellTagContent,
     ServiceDetailTableCellTagNoticeTitle,
     ServiceDetailTableCellTagNotice,
     ServiceDetailTableCellTagRecommend,
     ServiceDetailTableCellTagActivity
 }ServiceDetailTableCellTag;
 
-#define BannerRatio (1)
+#define BannerRatio (0.6)
 #define SectionGap (10)
 #define SegmentViewHeight (40)
 
@@ -44,6 +45,7 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
 @property (strong, nonatomic) IBOutlet UITableViewCell *priceCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *InsuranceCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *couponCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *contentCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *noticeTitleCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *noticeCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *recommendCell;
@@ -64,6 +66,8 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
 @property (weak, nonatomic) IBOutlet InsuranceView *InsuranceView;
 //coupon
 @property (weak, nonatomic) IBOutlet UILabel *couponTitleLabel;
+//content
+@property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 //notice
 @property (weak, nonatomic) IBOutlet UIView *noticeTitleCellTagView;
 @property (weak, nonatomic) IBOutlet UILabel *noticeTitleLabel;
@@ -96,13 +100,15 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
 
 - (void)configCouponCell;
 
+- (void)configContentCell;
+
 - (void)configNoticeTitleCell;
 
 - (void)configNoticeCell;
 
 - (void)configRecommendCell;
 
-- (IBAction)didClickedStoreBriefButton:(id)sender;
+- (void)didTappedOnStoreBrief;
 
 @end
 
@@ -135,6 +141,10 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
     self.bannerScrollView.dataSource = self;
     [self.bannerScrollView setRecyclable:YES];
     
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTappedOnStoreBrief)];
+    [self.storeBriefBGView addGestureRecognizer:tap];
+    
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
     //description
     [self.serviceDescriptionLabel setDelegate:self];
@@ -163,6 +173,8 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
     [self.InsuranceCell.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
     
     [self.couponCell.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
+    
+    [self.contentCell.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
     
     [self.noticeTitleCell.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
     [self.noticeTitleLabel setText:@"购买须知"];
@@ -219,6 +231,11 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
             [self configCouponCell];
         }
             break;
+        case ServiceDetailTableCellTagContent:
+        {
+            [self configContentCell];
+        }
+            break;
         case ServiceDetailTableCellTagNoticeTitle:
         {
             [self configNoticeTitleCell];
@@ -265,6 +282,11 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
         case ServiceDetailTableCellTagCoupon:
         {
             height = [self.detailModel couponCellHeight];
+        }
+            break;
+        case ServiceDetailTableCellTagContent:
+        {
+            height = [self.detailModel contentCellHeight];
         }
             break;
         case ServiceDetailTableCellTagNoticeTitle:
@@ -347,18 +369,18 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
 #pragma mark AUIBannerScrollViewDataSource
 
 - (NSUInteger)numberOfBannersOnScrollView:(AUIBannerScrollView *)scrollView {
-    return [self.detailModel.imageUrls count];
+    return [self.detailModel.narrowImageUrls count];
 }
 
 - (UIImageView *)bannerImageViewOnScrollView:(AUIBannerScrollView *)scrollView withViewFrame:(CGRect)frame atIndex:(NSUInteger)index {
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
-    NSURL *imageUrl = [self.detailModel.imageUrls objectAtIndex:index];
+    NSURL *imageUrl = [self.detailModel.narrowImageUrls objectAtIndex:index];
     [imageView setImageWithURL:imageUrl placeholderImage:PLACEHOLDERIMAGE_BIG];
     return imageView;
 }
 
 - (NSURL *)bannerImageUrlForScrollView:(AUIBannerScrollView *)scrollView atIndex:(NSUInteger)index {
-    NSURL *imageUrl = [self.detailModel.imageUrls objectAtIndex:index];
+    NSURL *imageUrl = [self.detailModel.narrowImageUrls objectAtIndex:index];
     return imageUrl;
 }
 
@@ -445,9 +467,8 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
 - (void)attributedLabel:(TTTAttributedLabel *)label
    didSelectLinkWithAddress:(NSDictionary *)addressComponents {
     if (self.delegate && [self.delegate respondsToSelector:@selector(serviceDetailView:didSelectedLinkWithSegueModel:)]) {
-        NSDictionary *param = [NSDictionary dictionaryWithObject:@"www.baidu.com" forKey:@"linkurl"];
-        HomeSegueModel *model = [[HomeSegueModel alloc] initWithDestination:HomeSegueDestinationH5 paramRawData:param];
-        [self.delegate serviceDetailView:self didSelectedLinkWithSegueModel:model];
+        TextSegueModel *model = [addressComponents objectForKey:@"promotionSegueModel"];
+        [self.delegate serviceDetailView:self didSelectedLinkWithSegueModel:model.segueModel];
     }
 }
 
@@ -514,17 +535,26 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
     if (storeCount > 1) {
         [self.storeBriefAlphaView setHidden:NO];
         [self.storeBriefBGView setHidden:NO];
-        NSString *title = [NSString stringWithFormat:@"%lu家门店通用", (unsigned long)storeCount];
+        NSString *title = [NSString stringWithFormat:@"全程%lu家门店通用", (unsigned long)storeCount];
         [self.storeBriefLabel setText:title];
     } else {
-        [self.storeBriefAlphaView setHidden:YES];
-        [self.storeBriefBGView setHidden:YES];
+        StoreListItemModel *itemModel = [self.detailModel.storeItemsArray firstObject];
+        if (itemModel.location) {
+            [self.storeBriefAlphaView setHidden:NO];
+            [self.storeBriefBGView setHidden:NO];
+            [self.storeBriefLabel setText:itemModel.storeName];
+        } else {
+            [self.storeBriefAlphaView setHidden:YES];
+            [self.storeBriefBGView setHidden:YES];
+        }
     }
     //others
     [self.serviceNameLabel setText:self.detailModel.serviceName];
     [self.serviceDescriptionLabel setText:self.detailModel.serviceDescription];
-    if ([self.detailModel.serviceDescription length] > 3) {
-        [self.serviceDescriptionLabel addLinkToAddress:nil withRange:NSMakeRange(0, 3)];
+    if (self.detailModel.promotionSegueModels) {
+        for (TextSegueModel *model in self.detailModel.promotionSegueModels) {
+            [self.serviceDescriptionLabel addLinkToAddress:[NSDictionary dictionaryWithObject:model forKey:@"promotionSegueModel"] withRange:model.linkRange];
+        }
     }
 }
 
@@ -561,6 +591,10 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
 
 - (void)configCouponCell {
     [self.couponTitleLabel setText:self.detailModel.couponName];
+}
+
+- (void)configContentCell {
+    [self.contentLabel setText:self.detailModel.serviceContent];
 }
 
 - (void)configNoticeTitleCell {
@@ -620,7 +654,7 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
     
 }
 
-- (IBAction)didClickedStoreBriefButton:(id)sender {
+- (void)didTappedOnStoreBrief {
     if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedStoreBriefOnServiceDetailView:)]) {
         [self.delegate didClickedStoreBriefOnServiceDetailView:self];
     }
@@ -666,15 +700,22 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
             }
             [self.cellArray addObject:[NSArray arrayWithArray:section2]];
             
-            if ([self.detailModel.noticeArray count] > 0) {
-                NSArray *section3 = [NSArray arrayWithObjects:self.noticeTitleCell, self.noticeCell, nil];
+            if ([self.detailModel.serviceContent length] > 0) {
+                NSArray *section3 = [NSArray arrayWithObject:self.contentCell];
                 [self.cellArray addObject:section3];
+                self.tableViewHeight += SectionGap;
+                self.tableViewHeight += [self.detailModel contentCellHeight];
+            }
+            
+            if ([self.detailModel.noticeArray count] > 0) {
+                NSArray *section4 = [NSArray arrayWithObjects:self.noticeTitleCell, self.noticeCell, nil];
+                [self.cellArray addObject:section4];
                 self.tableViewHeight += SectionGap;
                 self.tableViewHeight += [self.detailModel noticeTitleCellHeight] + [self.detailModel noticeCellHeight];
             }
             if ([self.detailModel.recommendString length] > 0) {
-                NSArray *section4 = [NSArray arrayWithObject:self.recommendCell];
-                [self.cellArray addObject:section4];
+                NSArray *section5 = [NSArray arrayWithObject:self.recommendCell];
+                [self.cellArray addObject:section5];
                 self.tableViewHeight += SectionGap;
                 self.tableViewHeight += [self.detailModel recommendCellHeight];
             }

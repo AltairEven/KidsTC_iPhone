@@ -33,9 +33,24 @@
         }
         self.imageUrls = [NSArray arrayWithArray:tempArray];
     }
+    NSArray *narrowimageUrlStrings = [data objectForKey:@"narrowImg"];
+    if ([narrowimageUrlStrings isKindOfClass:[NSArray class]]) {
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        for (NSString *urlString in narrowimageUrlStrings) {
+            NSURL *url = [NSURL URLWithString:urlString];
+            if (url) {
+                [tempArray addObject:url];
+            }
+        }
+        self.narrowImageUrls = [NSArray arrayWithArray:tempArray];
+    }
     self.relationType = (CommentRelationType)[[data objectForKey:@"productType"] integerValue];
     
     self.serviceName = [data objectForKey:@"serveName"];
+    self.serviceBriefName = [data objectForKey:@"simpleName"];
+    if (![self.serviceBriefName isKindOfClass:[NSString class]] || [self.serviceBriefName length] == 0) {
+        self.serviceBriefName = @"服务详情";
+    }
     self.starNumber = [[data objectForKey:@"level"] floatValue];
     self.commentsNumber = [[data objectForKey:@"evaluate"] integerValue];
     self.saleCount = [[data objectForKey:@"saleCount"] integerValue];
@@ -44,6 +59,10 @@
     self.priceDescription = [data objectForKey:@"priceSortName"];
     if ([self.priceDescription length] > 0) {
         self.priceDescription = [NSString stringWithFormat:@"%@: ", self.priceDescription];
+    }
+    self.serviceContent = [data objectForKey:@"content"];
+    if (![self.serviceContent isKindOfClass:[NSString class]]) {
+        self.serviceContent = @"";
     }
     NSArray *coupons = [data objectForKey:@"coupons"];
     if ([coupons isKindOfClass:[NSArray class]] && [coupons count] > 0) {
@@ -92,6 +111,17 @@
     }
     
     self.serviceDescription = [data objectForKey:@"promote"];
+    NSArray *promotionLinks = [data objectForKey:@"promotionLink"];
+    if ([promotionLinks isKindOfClass:[NSArray class]]) {
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        for (NSDictionary *rawData in promotionLinks) {
+            TextSegueModel *model = [[TextSegueModel alloc] initWithLinkParam:rawData promotionWords:self.serviceDescription];
+            if (model) {
+                [tempArray addObject:model];
+            }
+        }
+        self.promotionSegueModels = [NSArray arrayWithArray:tempArray];
+    }
     
     self.introductionUrlString = [data objectForKey:@"detailUrl"];
     
@@ -162,11 +192,11 @@
 
 - (CGFloat)topCellHeight {
     //image
-    CGFloat height = SCREEN_WIDTH * 1;
+    CGFloat height = SCREEN_WIDTH * 0.6;
     //service name
-    height += [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 10 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:17] topGap:10 bottomGap:10 maxLine:2 andText:self.serviceName];
+    height += [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 10 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:17] topGap:10 bottomGap:10 maxLine:3 andText:self.serviceName];
     //service description
-    height += [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 10 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:13] topGap:10 bottomGap:10 maxLine:3 andText:self.serviceDescription];
+    height += [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 10 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:13] topGap:10 bottomGap:0 maxLine:3 andText:self.serviceDescription];
     
     return height;
 }
@@ -194,6 +224,12 @@
         return height;
     }
     return 40;
+}
+
+- (CGFloat)contentCellHeight {
+    CGFloat height = [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 20 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:14] topGap:10 bottomGap:10 maxLine:0 andText:self.serviceContent];
+    
+    return height;
 }
 
 - (CGFloat)noticeTitleCellHeight {
@@ -284,3 +320,4 @@
 }
 
 @end
+

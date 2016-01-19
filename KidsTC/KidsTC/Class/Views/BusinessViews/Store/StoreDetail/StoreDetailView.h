@@ -26,6 +26,10 @@
 
 - (void)didClickedActiveOnStoreDetailView:(StoreDetailView *)detailView atIndex:(NSUInteger)index;
 
+- (void)didClickedAllServiceOnStoreDetailView:(StoreDetailView *)detailView;
+
+- (void)storeDetailView:(StoreDetailView *)detailView didClickedServiceAtIndex:(NSUInteger)index;
+
 - (void)didClickedAllHotRecommendOnStoreDetailView:(StoreDetailView *)detailView;
 
 - (void)storeDetailView:(StoreDetailView *)detailView didSelectedHotRecommendAtIndex:(NSUInteger)index;
@@ -36,9 +40,7 @@
 
 - (void)storeDetailView:(StoreDetailView *)detailView didClickedReviewAtIndex:(NSUInteger)index;
 
-- (void)didClickedMoreBrothersStoreOnStoreDetailView:(StoreDetailView *)detailView;
-
-- (void)storeDetailView:(StoreDetailView *)detailView didClickedServiceAtIndex:(NSUInteger)index;
+- (void)storeDetailView:(StoreDetailView *)detailView didSelectedLinkWithSegueModel:(HomeSegueModel *)model;
 
 @end
 

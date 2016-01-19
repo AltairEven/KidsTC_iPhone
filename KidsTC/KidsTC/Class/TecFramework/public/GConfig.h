@@ -122,7 +122,7 @@ static const NSTimeInterval kUpdateImmuneTimeThreshold = 60.0f * 60 * 24 * 3;
 #define URL_ADDRESS_GETDETAILS [[GConfig sharedConfig] getURLStringWithAliasName:@"URL_ADDRESS_GETDETAILS"]
 #define URL_ADDRESS_GETTOWNS [[GConfig sharedConfig] getURLStringWithAliasName:@"URL_ADDRESS_GETTOWNS"]
 
-#define URL_APP_STORE_UPDATE ([NSString stringWithFormat: @"http://itunes.apple.com/cn/app/id%@?mt=8", kAppIDInAppStore])
+#define URL_APP_STORE_UPDATE ([NSString stringWithFormat: @"http://itunes.apple.com/cn/app/id%@", kAppIDInAppStore])
 
 #define URL_ADD_PRODUCT_NONMEMBER [[GConfig sharedConfig] getURLStringWithAliasName:@"URL_ADD_PRODUCT_NONMEMBER"]
 #define URL_ALIPAY_LOGIN [[GConfig sharedConfig] getURLStringWithAliasName:@"URL_ALIPAY_LOGIN"]

@@ -43,6 +43,8 @@
 
 @property (nonatomic, assign) NSUInteger starNumber;
 
+@property (nonatomic, copy) NSString *address;
+
 + (instancetype)annotationStoreItemFromStoreListItemModel:(StoreListItemModel *)model;
 
 + (instancetype)annotationStoreItemFromStoreDetailModel:(StoreDetailModel *)model;

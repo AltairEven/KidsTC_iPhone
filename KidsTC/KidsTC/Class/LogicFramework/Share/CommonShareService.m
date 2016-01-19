@@ -100,13 +100,16 @@ static CommonShareService *_sharedInstance = nil;
             [self.loadImageRequest setUrlString:[object.thumbImageUrl absoluteString]];
         }
         __weak CommonShareService *weakSelf = self;
+        [[GAlertLoadingView sharedAlertLoadingView] show];
         [weakSelf.loadImageRequest downloadImageWithSuccess:^(HttpRequestClient *client, UIImage *image) {
             UIImage *compressedImage = [image imageByScalingToSize:CGSizeMake(100, 100)];
             CommonShareObject *refreshedObject = [object copyObject];
             refreshedObject.thumbImage = compressedImage;
             [weakSelf shareWithType:type object:refreshedObject succeed:succeed failure:failure];
+            [[GAlertLoadingView sharedAlertLoadingView] hide];
         } failure:^(HttpRequestClient *client, NSError *error) {
             NSLog(@"Download share thumb image failed.");
+            [[GAlertLoadingView sharedAlertLoadingView] hide];
         }];
     } else {
         return [self shareWithType:type object:object succeed:succeed failure:failure];

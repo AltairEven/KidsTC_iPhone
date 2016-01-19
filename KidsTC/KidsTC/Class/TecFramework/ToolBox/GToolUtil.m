@@ -1073,6 +1073,9 @@ NSInteger sortImageDictionaryWithIdx(id v1, id v2, void *context)
 
 
 + (CLLocationCoordinate2D)coordinateFromString:(NSString *)string {
+    if (![string isKindOfClass:[NSString class]]) {
+        return CLLocationCoordinate2DMake(0, 0);
+    }
     if ([string length] == 0) {
         return CLLocationCoordinate2DMake(0, 0);
     }

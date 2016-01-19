@@ -8,13 +8,15 @@
 
 #import "KTCStoreMapViewController.h"
 #import "KTCAnnotationTipConfirmLocationView.h"
-#import "KTCAnnotationTipDestinationView.h"
+#import "KTCAnnotationTipStoreItemView.h"
 #import "KTCMapService.h"
 #import "AUIPickerView.h"
 #import "RouteAnnotation.h"
 #import "KTCMapUtil.h"
+#import "StoreDetailViewController.h"
+#import "StoreListItemModel.h"
 
-@interface KTCStoreMapViewController () <BMKMapViewDelegate, UITextFieldDelegate, KTCAnnotationTipConfirmViewDelegate, KTCAnnotationTipDestinationViewDelegate, AUIPickerViewDataSource, AUIPickerViewDelegate>
+@interface KTCStoreMapViewController () <BMKMapViewDelegate, UITextFieldDelegate, KTCAnnotationTipConfirmViewDelegate, KTCAnnotationTipStoreItemViewDelegate, AUIPickerViewDataSource, AUIPickerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
@@ -30,7 +32,7 @@
 
 @property (nonatomic, strong) NSArray *pickerDataArray;
 
-@property (nonatomic, strong) NSArray<KTCLocation *> *storeLocations;
+@property (nonatomic, strong) NSArray<StoreListItemModel *> *storeItems;
 
 @property (nonatomic, strong) KTCLocation *destinationLocation;
 
@@ -61,10 +63,10 @@
 
 @implementation KTCStoreMapViewController
 
-- (instancetype)initWithLocations:(NSArray<KTCLocation *> *)locations {
+- (instancetype)initWithStoreItems:(NSArray<StoreListItemModel *> *)storeItems {
     self = [super initWithNibName:@"KTCStoreMapViewController" bundle:nil];
     if (self) {
-        self.storeLocations = locations;
+        self.storeItems = storeItems;
     }
     return self;
 }
@@ -157,13 +159,17 @@
         // 设置是否可以拖拽
         annotationView.draggable = YES;
     } else {
-        KTCAnnotationTipDestinationView *tipView = [[KTCAnnotationTipDestinationView alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
-        KTCLocation *location = [self.storeLocations objectAtIndex:((RouteAnnotation *)annotation).tag];
-        [tipView setContentText:location.locationDescription];
-        annotationView.paopaoView = [[BMKActionPaopaoView alloc] initWithCustomView:tipView];
-        // 设置是否可以拖拽
-        annotationView.draggable = NO;
-        tipView.delegate = self;
+        //泡泡
+        NSUInteger index = ((RouteAnnotation *)annotation).tag;
+        if ([self.storeItems count] > index) {
+            StoreListItemModel *item = [self.storeItems objectAtIndex:index];
+            KTCAnnotationTipStoreItemView *tipView = [[KTCAnnotationTipStoreItemView alloc] initWithFrame:CGRectMake(0, 0, 200, 120)];
+            [tipView setStoreItem:[KTCAnnotationTipStoreItem annotationStoreItemFromStoreListItemModel:item]];
+            annotationView.paopaoView = [[BMKActionPaopaoView alloc] initWithCustomView:tipView];
+            // 设置是否可以拖拽
+            annotationView.draggable = NO;
+            tipView.delegate = self;
+        }
     }
     
     return annotationView;
@@ -206,8 +212,18 @@
 
 #pragma mark KTCAnnotationTipDestinationViewDelegate
 
-- (void)didClickedConfirmButtonOnAnnotationTipDestinationView:(KTCAnnotationTipDestinationView *)view {
+- (void)didClickedGotoButtonOnAnnotationTipStoreItemView:(KTCAnnotationTipStoreItemView *)view {
     [self selectRouteSearchType];
+}
+
+- (void)didClickedGoDetailButtonOnAnnotationTipStoreItemView:(KTCAnnotationTipStoreItemView *)view {
+    if (view.storeItem) {
+        StoreDetailViewController *controller = [[StoreDetailViewController alloc] initWithStoreId:view.storeItem.identifier];
+        [controller setHidesBottomBarWhenPushed:YES];
+        [self.navigationController pushViewController:controller animated:YES];
+        //MTA
+        [MTA trackCustomEvent:@"event_skip_server_stores_dtl" args:nil];
+    }
 }
 
 #pragma mark UITextFieldDelegate
@@ -311,16 +327,16 @@
 
 - (void)resetStoreAnnotations {
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-    [tempArray addObject:self.startLocation.location];
-    for (NSUInteger index = 0; index < [self.storeLocations count]; index ++) {
-        KTCLocation *location = [self.storeLocations objectAtIndex:index];
-        if (CLLocationCoordinate2DIsValid(location.location.coordinate)) {
+//    [tempArray addObject:self.startLocation.location];
+    for (NSUInteger index = 0; index < [self.storeItems count]; index ++) {
+        StoreListItemModel *storeItem = [self.storeItems objectAtIndex:index];
+        if (CLLocationCoordinate2DIsValid(storeItem.location.location.coordinate)) {
             RouteAnnotation *annotation = [[RouteAnnotation alloc]init];
-            if (CLLocationCoordinate2DIsValid(location.location.coordinate)) {
-                [annotation setCoordinate:location.location.coordinate];
+            if (CLLocationCoordinate2DIsValid(storeItem.location.location.coordinate)) {
+                [annotation setCoordinate:storeItem.location.location.coordinate];
                 annotation.tag = index;
                 [self.mapView addAnnotation:annotation];
-                [tempArray addObject:location.location];
+                [tempArray addObject:storeItem.location.location];
             }
         }
     }

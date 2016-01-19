@@ -9,14 +9,14 @@
 #import "StoreDetailView.h"
 #import "AUIBannerScrollView.h"
 #import "FiveStarsView.h"
-#import "AUISegmentView.h"
 #import "StoreDetailViewActiveCell.h"
 #import "StoreDetailViewCouponCell.h"
 #import "StoreListViewCell.h"
 #import "StoreDetailTitleCell.h"
 #import "StoreDetailHotRecommendCell.h"
 #import "StoreDetailCommentCell.h"
-#import "StoreDetailServiceLinearCell.h"
+#import "StoreDetailServiceCell.h"
+#import "TTTAttributedLabel.h"
 
 
 
@@ -25,13 +25,13 @@ typedef enum {
     StoreDetailViewSectionAddress = 1,
     StoreDetailViewSectionCoupon = 2,
     StoreDetailViewSectionActivity = 3,
-    StoreDetailViewSectionHotRecommend = 4,
-    StoreDetailViewSectionRecommend = 5,
-    StoreDetailViewSectionBrief = 6,
+    StoreDetailViewSectionService = 4,
+    StoreDetailViewSectionHotRecommend = 5,
+    StoreDetailViewSectionRecommend = 6,
     StoreDetailViewSectionComment = 7,
-    StoreDetailViewSectionNearby = 8,
-    StoreDetailViewSectionBrother = 19,
-    StoreDetailViewSectionService = 10
+    StoreDetailViewSectionDetailInfo = 8,
+    StoreDetailViewSectionStrategy = 9,
+    StoreDetailViewSectionNearby = 10
 }StoreDetailViewSection;
 
 
@@ -41,40 +41,36 @@ static NSString *const kCouponCellIdentifier = @"kCouponCellIdentifier";
 static NSString *const kHotRecommendCellIdentifier = @"kHotRecommendCellIdentifier";
 static NSString *const kCommentCellIdentifier = @"kCommentCellIdentifier";
 static NSString *const kBrotherStoreCellIdentifier = @"kBrotherStoreCellIdentifier";
-static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdentifier";
+static NSString *const kServiceCellIdentifier = @"kServiceCellIdentifier";
 
-@interface StoreDetailView () <UITableViewDataSource, UITableViewDelegate, AUIBannerScrollViewDataSource, AUISegmentViewDataSource, AUISegmentViewDelegate, StoreDetailCommentCellDelegate>
+@interface StoreDetailView () <UITableViewDataSource, UITableViewDelegate, AUIBannerScrollViewDataSource, StoreDetailCommentCellDelegate, TTTAttributedLabelDelegate, UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UITableViewCell *topCell;
-@property (strong, nonatomic) IBOutlet UITableViewCell *addressCell;
-@property (strong, nonatomic) IBOutlet UITableViewCell *briefCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *nearbyCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *recommendCell;
-@property (strong, nonatomic) IBOutlet UITableViewCell *serviceLinearCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *detailInfoCell;
 
 //banner
 @property (weak, nonatomic) IBOutlet AUIBannerScrollView *bannerScrollView;
 //top
+@property (weak, nonatomic) IBOutlet UIView *storeAddressBriefBGView;
+@property (weak, nonatomic) IBOutlet UILabel *storeAddressBriefLabel;
+@property (weak, nonatomic) IBOutlet UILabel *broStoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *storeName;
+@property (weak, nonatomic) IBOutlet TTTAttributedLabel *storeBriefLabel;
 @property (weak, nonatomic) IBOutlet FiveStarsView *starView;
 @property (weak, nonatomic) IBOutlet UILabel *appointmentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *reviewLabel;
-//tel
-@property (weak, nonatomic) IBOutlet UILabel *telephoneLabel;
-//address
-@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 //commend
 @property (weak, nonatomic) IBOutlet UIView *recommendBGView;
 @property (weak, nonatomic) IBOutlet UIImageView *recommenderFaceImageView;
 @property (weak, nonatomic) IBOutlet UILabel *recommendLabel;
-//description
-@property (weak, nonatomic) IBOutlet UILabel *storeBriefLabel;
+//detail info
+@property (weak, nonatomic) IBOutlet UIWebView *detailInfoView;
 //nearby
 @property (weak, nonatomic) IBOutlet UIView *nearbyBGView;
 //brothers
-//service
-@property (weak, nonatomic) IBOutlet AUISegmentView *serviceLinearView;
 
 @property (nonatomic, strong) UINib *titleCellNib;
 @property (nonatomic, strong) UINib *activityCellNib;
@@ -82,7 +78,7 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
 @property (nonatomic, strong) UINib *hotRecommendCellNib;
 @property (nonatomic, strong) UINib *commentCellNib;
 @property (nonatomic, strong) UINib *brotherStoreCellNib;
-@property (nonatomic, strong) UINib *serviceLinearCellNib;
+@property (nonatomic, strong) UINib *serviceCellNib;
 
 @property (nonatomic, strong) StoreDetailModel *detailModel;
 
@@ -94,6 +90,8 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
 - (void)configTopCell;
 - (void)configRecommendCell;
 - (void)configNearbyCell;
+
+- (void)didTappedOnAddressBrief;
 - (IBAction)didClickedCouponButton:(id)sender;
 
 @end
@@ -127,6 +125,14 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
     self.bannerScrollView.dataSource = self;
     [self.bannerScrollView setRecyclable:YES];
     
+    [self.storeBriefLabel setDelegate:self];
+    NSDictionary *linkAttr = [NSDictionary dictionaryWithObjectsAndKeys:[[KTCThemeManager manager] defaultTheme].globalThemeColor, NSForegroundColorAttributeName, [NSNumber numberWithBool:YES], NSUnderlineStyleAttributeName, nil];
+    [self.storeBriefLabel setLinkAttributes:linkAttr];
+    [self.storeBriefLabel setTextColor:[UIColor darkGrayColor]];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTappedOnAddressBrief)];
+    [self.storeAddressBriefBGView addGestureRecognizer:tap];
+    
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
     UIView *footBG = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 65)];
     self.tableView.tableFooterView = footBG;
@@ -149,6 +155,10 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
         self.couponCellNib = [UINib nibWithNibName:NSStringFromClass([StoreDetailViewCouponCell class]) bundle:nil];
         [self.tableView registerNib:self.couponCellNib forCellReuseIdentifier:kCouponCellIdentifier];
     }
+    if (!self.serviceCellNib) {
+        self.serviceCellNib = [UINib nibWithNibName:NSStringFromClass([StoreDetailServiceCell class]) bundle:nil];
+        [self.tableView registerNib:self.serviceCellNib forCellReuseIdentifier:kServiceCellIdentifier];
+    }
     if (!self.hotRecommendCellNib) {
         self.hotRecommendCellNib = [UINib nibWithNibName:NSStringFromClass([StoreDetailHotRecommendCell class]) bundle:nil];
         [self.tableView registerNib:self.hotRecommendCellNib forCellReuseIdentifier:kHotRecommendCellIdentifier];
@@ -161,19 +171,26 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
         self.brotherStoreCellNib = [UINib nibWithNibName:NSStringFromClass([StoreListViewCell class]) bundle:nil];
         [self.tableView registerNib:self.brotherStoreCellNib forCellReuseIdentifier:kBrotherStoreCellIdentifier];
     }
-    if (!self.serviceLinearCellNib) {
-        self.serviceLinearCellNib = [UINib nibWithNibName:NSStringFromClass([StoreDetailServiceLinearCell class]) bundle:nil];
-        [self.serviceLinearView registerNib:self.serviceLinearCellNib forCellReuseIdentifier:kServiceLinearCellIdentifier];
-    }
-    
-    [self.serviceLinearView setScrollEnable:YES];
-    [self.serviceLinearView setShowSeparator:NO];
-    self.serviceLinearView.dataSource = self;
-    self.serviceLinearView.delegate = self;
     
     [self.recommendCell.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
     self.recommenderFaceImageView.layer.cornerRadius = 30;
     self.recommenderFaceImageView.layer.masksToBounds = YES;
+    
+    self.detailInfoView.delegate = self;
+//    self.detailInfoView.scrollView.scrollEnabled = NO;
+    self.detailInfoView.scrollView.showsHorizontalScrollIndicator = NO;
+    self.detailInfoView.scrollView.showsVerticalScrollIndicator = NO;
+    NSString *userAgent = [self.detailInfoView stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString *appVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    NSString *extInfo = [NSString stringWithFormat:@"KidsTC/Iphone/%@", appVersion];
+    if ([userAgent rangeOfString:extInfo].location == NSNotFound)
+    {
+        NSString *newUserAgent = [NSString stringWithFormat:@"%@ %@", userAgent, extInfo];
+        // Set user agent (the only problem is that we can't modify the User-Agent later in the program)
+        NSDictionary *dictionnary = [[NSDictionary alloc] initWithObjectsAndKeys:newUserAgent, @"UserAgent", nil];
+        [[NSUserDefaults standardUserDefaults] registerDefaults:dictionnary];
+    }
 }
 
 #pragma mark UITableViewDataSource & UITableViewDelegate
@@ -191,11 +208,6 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
             number = 1;
         }
             break;
-        case StoreDetailViewSectionAddress:
-        {
-            number = 1;
-        }
-            break;
         case StoreDetailViewSectionCoupon:
         {
             number = 1;
@@ -206,9 +218,23 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
             number = [self.detailModel.activeModelsArray count];
         }
             break;
+        case StoreDetailViewSectionService:
+        {
+            NSUInteger count = [self.detailModel.serviceModelsArray count];
+            if (count > 3) {
+                //最多3个
+                count = 3;
+            }
+            if (count > 0) {
+                //include title
+                count ++;
+            }
+            number = count;
+        }
+            break;
         case StoreDetailViewSectionHotRecommend:
         {
-            NSUInteger count = [self.detailModel.hotRecommendServiceArray count];
+            NSUInteger count = [self.detailModel.hotRecommedServiceArray count];
             if (count > 0) {
                 //include title
                 count ++;
@@ -221,7 +247,21 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
             number = 1;
         }
             break;
-        case StoreDetailViewSectionBrief:
+        case StoreDetailViewSectionComment:
+        {
+            NSUInteger count = [self.detailModel.commentItemsArray count];
+            if (count > 2) {
+                count = 2;
+            } else if (count == 0) {
+                count = 2;
+            } else {
+                //include title
+                count ++;
+            }
+            number = count;
+        }
+            break;
+        case StoreDetailViewSectionDetailInfo:
         {
             //include title
             if ([self.detailModel.storeBrief length] > 0) {
@@ -231,29 +271,7 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
             }
         }
             break;
-        case StoreDetailViewSectionComment:
-        {
-//            NSUInteger count = [self.detailModel.commentItemsArray count];
-//            if (count > 0) {
-//                //include title
-//                count ++;
-//            }
-            number = 2;
-        }
-            break;
         case StoreDetailViewSectionNearby:
-        {
-            //include title
-            number = 2;
-        }
-            break;
-        case StoreDetailViewSectionBrother:
-        {
-            //include title
-            number = 2;
-        }
-            break;
-        case StoreDetailViewSectionService:
         {
             //include title
             number = 2;
@@ -286,11 +304,6 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
             cell = self.topCell;
         }
             break;
-        case StoreDetailViewSectionAddress:
-        {
-            cell = self.addressCell;
-        }
-            break;
         case StoreDetailViewSectionCoupon:
         {
             cell = [self createTableCellWithIdentifier:kCouponCellIdentifier forTableView:tableView atIndexPath:indexPath];
@@ -303,6 +316,17 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
             [((StoreDetailViewActiveCell *)cell) configWithModel:[self.detailModel.activeModelsArray objectAtIndex:indexPath.row]];
         }
             break;
+        case StoreDetailViewSectionService:
+        {
+            if (indexPath.row == 0) {
+                cell = [self createTableCellWithIdentifier:kTitleCellIdentifier forTableView:tableView atIndexPath:indexPath];
+                [self configTitleCell:(StoreDetailTitleCell *)cell WithSection:StoreDetailViewSectionService];
+            } else {
+                cell = [self createTableCellWithIdentifier:kServiceCellIdentifier forTableView:tableView atIndexPath:indexPath];
+                [((StoreDetailServiceCell *)cell) configWithModel:[self.detailModel.serviceModelsArray objectAtIndex:indexPath.row - 1]];
+            }
+        }
+            break;
         case StoreDetailViewSectionHotRecommend:
         {
             if (indexPath.row == 0) {
@@ -310,23 +334,13 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
                 [self configTitleCell:(StoreDetailTitleCell *)cell WithSection:StoreDetailViewSectionHotRecommend];
             } else {
                 cell = [self createTableCellWithIdentifier:kHotRecommendCellIdentifier forTableView:tableView atIndexPath:indexPath];
-                [((StoreDetailHotRecommendCell *)cell) configWithModel:[self.detailModel.hotRecommendServiceArray objectAtIndex:indexPath.row - 1]];
+                [((StoreDetailHotRecommendCell *)cell) configWithModel:[self.detailModel.hotRecommedServiceArray objectAtIndex:indexPath.row - 1]];
             }
         }
             break;
         case StoreDetailViewSectionRecommend:
         {
             cell = self.recommendCell;
-        }
-            break;
-        case StoreDetailViewSectionBrief:
-        {
-            if (indexPath.row == 0) {
-                cell = [self createTableCellWithIdentifier:kTitleCellIdentifier forTableView:tableView atIndexPath:indexPath];
-                [self configTitleCell:(StoreDetailTitleCell *)cell WithSection:StoreDetailViewSectionBrief];
-            } else {
-                cell = self.briefCell;
-            }
         }
             break;
         case StoreDetailViewSectionComment:
@@ -346,6 +360,16 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
             }
         }
             break;
+        case StoreDetailViewSectionDetailInfo:
+        {
+            if (indexPath.row == 0) {
+                cell = [self createTableCellWithIdentifier:kTitleCellIdentifier forTableView:tableView atIndexPath:indexPath];
+                [self configTitleCell:(StoreDetailTitleCell *)cell WithSection:StoreDetailViewSectionDetailInfo];
+            } else {
+                cell = self.detailInfoCell;
+            }
+        }
+            break;
         case StoreDetailViewSectionNearby:
         {
             if (indexPath.row == 0) {
@@ -353,28 +377,6 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
                 [self configTitleCell:(StoreDetailTitleCell *)cell WithSection:StoreDetailViewSectionNearby];
             } else {
                 cell = self.nearbyCell;
-            }
-        }
-            break;
-        case StoreDetailViewSectionBrother:
-        {
-            if (indexPath.row == 0) {
-                cell = [self createTableCellWithIdentifier:kTitleCellIdentifier forTableView:tableView atIndexPath:indexPath];
-                [self configTitleCell:(StoreDetailTitleCell *)cell WithSection:StoreDetailViewSectionBrother];
-            } else {
-                cell = [self createTableCellWithIdentifier:kBrotherStoreCellIdentifier forTableView:tableView atIndexPath:indexPath];
-                StoreListItemModel *model = [self.detailModel.brotherStores firstObject];
-                [((StoreListViewCell *)cell) configWithItemModel:model];
-            }
-        }
-            break;
-        case StoreDetailViewSectionService:
-        {
-            if (indexPath.row == 0) {
-                cell = [self createTableCellWithIdentifier:kTitleCellIdentifier forTableView:tableView atIndexPath:indexPath];
-                [self configTitleCell:(StoreDetailTitleCell *)cell WithSection:StoreDetailViewSectionService];
-            } else {
-                cell = self.serviceLinearCell;
             }
         }
             break;
@@ -395,11 +397,6 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
             height = [self.detailModel topCellHeight];
         }
             break;
-        case StoreDetailViewSectionAddress:
-        {
-            height = self.addressCell.frame.size.height;
-        }
-            break;
         case StoreDetailViewSectionCoupon:
         {
             height = [self.detailModel couponCellHeight];
@@ -408,6 +405,15 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
         case StoreDetailViewSectionActivity:
         {
             height = [self.detailModel activityCellHeightAtIndex:indexPath.row];
+        }
+            break;
+        case StoreDetailViewSectionService:
+        {
+            if (indexPath.row == 0) {
+                height = [StoreDetailTitleCell cellHeight];
+            } else {
+                height = [StoreDetailServiceCell cellHeight];
+            }
         }
             break;
         case StoreDetailViewSectionHotRecommend:
@@ -424,15 +430,6 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
             height = [self.detailModel recommendCellHeight];
         }
             break;
-        case StoreDetailViewSectionBrief:
-        {
-            if (indexPath.row == 0) {
-                height = [StoreDetailTitleCell cellHeight];
-            } else {
-                height = [self.detailModel briefCellHeight];
-            }
-        }
-            break;
         case StoreDetailViewSectionComment:
         {
             if (indexPath.row == 0) {
@@ -447,31 +444,21 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
             }
         }
             break;
+        case StoreDetailViewSectionDetailInfo:
+        {
+            if (indexPath.row == 0) {
+                height = [StoreDetailTitleCell cellHeight];
+            } else {
+                height = self.detailInfoView.scrollView.contentSize.height;
+            }
+        }
+            break;
         case StoreDetailViewSectionNearby:
         {
             if (indexPath.row == 0) {
                 height = [StoreDetailTitleCell cellHeight];
             } else {
                 height = [self.detailModel nearbyCellHeight];
-            }
-        }
-            break;
-        case StoreDetailViewSectionBrother:
-        {
-            if (indexPath.row == 0) {
-                height = [StoreDetailTitleCell cellHeight];
-            } else {
-                StoreListItemModel *model = [self.detailModel.brotherStores objectAtIndex:indexPath.row - 1];
-                height = [model cellHeight];
-            }
-        }
-            break;
-        case StoreDetailViewSectionService:
-        {
-            if (indexPath.row == 0) {
-                height = [StoreDetailTitleCell cellHeight];
-            } else {
-                height = [StoreDetailServiceLinearCell cellHeight];
             }
         }
             break;
@@ -501,10 +488,19 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
     if (self.delegate) {
         StoreDetailViewSection sectionEnum = (StoreDetailViewSection)[[self.sectionIdentifiersArray objectAtIndex:indexPath.section] integerValue];
         switch (sectionEnum) {
-            case StoreDetailViewSectionAddress:
+            case StoreDetailViewSectionService:
             {
-                if ([self.delegate respondsToSelector:@selector(didClickedAddressOnStoreDetailView:)]) {
-                    [self.delegate didClickedAddressOnStoreDetailView:self];
+                if (indexPath.row == 0) {
+                    if ([self.detailModel.serviceModelsArray count] <= 3) {
+                        return;
+                    }
+                    if ([self.delegate respondsToSelector:@selector(didClickedAllServiceOnStoreDetailView:)]) {
+                        [self.delegate didClickedAllServiceOnStoreDetailView:self];
+                    }
+                } else {
+                    if ([self.delegate respondsToSelector:@selector(storeDetailView:didClickedServiceAtIndex:)]) {
+                        [self.delegate storeDetailView:self didClickedServiceAtIndex:indexPath.row - 1];
+                    }
                 }
             }
                 break;
@@ -535,16 +531,12 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
                 }
             }
                 break;
-            case StoreDetailViewSectionBrief:
-            {
-                if (indexPath.row == 0 && [self.delegate respondsToSelector:@selector(didClickedMoreDetailOnStoreDetailView:)]) {
-                    [self.delegate didClickedMoreDetailOnStoreDetailView:self];
-                }
-            }
-                break;
             case StoreDetailViewSectionComment:
             {
                 if (indexPath.row == 0) {
+                    if (self.detailModel.commentAllNumber == 0) {
+                        return;
+                    }
                     if ([self.delegate respondsToSelector:@selector(didClickedMoreReviewOnStoreDetailView:)]) {
                         [self.delegate didClickedMoreReviewOnStoreDetailView:self];
                     }
@@ -555,10 +547,10 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
                 }
             }
                 break;
-            case StoreDetailViewSectionBrother:
+            case StoreDetailViewSectionDetailInfo:
             {
-                if ([self.delegate respondsToSelector:@selector(didClickedMoreBrothersStoreOnStoreDetailView:)]) {
-                    [self.delegate didClickedMoreBrothersStoreOnStoreDetailView:self];
+                if (indexPath.row == 0 && [self.delegate respondsToSelector:@selector(didClickedMoreDetailOnStoreDetailView:)]) {
+                    [self.delegate didClickedMoreDetailOnStoreDetailView:self];
                 }
             }
                 break;
@@ -592,33 +584,35 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
     return self.detailModel.bannerRatio * SCREEN_WIDTH;
 }
 
-#pragma mark AUISegmentViewDataSource, & AUISegmentViewDelegate
-
-- (NSUInteger)numberOfCellsForSegmentView:(AUISegmentView *)segmentView {
-    return [self.detailModel.serviceModelsArray count];
-}
-
-- (UITableViewCell *)segmentView:(AUISegmentView *)segmentView cellAtIndex:(NSUInteger)index {
-    StoreDetailServiceLinearCell *cell =  [[[NSBundle mainBundle] loadNibNamed:@"StoreDetailServiceLinearCell" owner:nil options:nil] objectAtIndex:0];
-    [cell configWithModel:[self.detailModel.serviceModelsArray objectAtIndex:index]];
-    return cell;
-}
-
-- (CGFloat)segmentView:(AUISegmentView *)segmentView cellWidthAtIndex:(NSUInteger)index {
-    return (SCREEN_WIDTH - 10) / 1.6;
-}
-
-- (void)segmentView:(AUISegmentView *)segmentView didSelectedAtIndex:(NSUInteger)index {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(storeDetailView:didClickedServiceAtIndex:)]) {
-        [self.delegate storeDetailView:self didClickedServiceAtIndex:index];
-    }
-}
-
 #pragma mark StoreDetailCommentCellDelegate
 
 - (void)storeDetailCommentCell:(StoreDetailCommentCell *)cell didClickedImageAtIndex:(NSInteger)index {
     if ([self.delegate respondsToSelector:@selector(storeDetailView:didClickedReviewAtIndex:)]) {
         [self.delegate storeDetailView:self didClickedReviewAtIndex:cell.indexPath.row - 1];
+    }
+}
+
+#pragma mark TTTAttributedLabelDelegate
+
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithAddress:(NSDictionary *)addressComponents {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(storeDetailView:didSelectedLinkWithSegueModel:)]) {
+        TextSegueModel *model = [addressComponents objectForKey:@"promotionSegueModel"];
+        [self.delegate storeDetailView:self didSelectedLinkWithSegueModel:model.segueModel];
+    }
+}
+
+
+#pragma mark UIWebViewDelegate
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    NSUInteger sectionIndex = [self.sectionIdentifiersArray indexOfObject:[NSNumber numberWithInteger:StoreDetailViewSectionDetailInfo]];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:sectionIndex];
+    if (indexPath) {
+        [self.tableView reloadData];
+    }
+    if (![self.detailInfoView isLoading]) {
+        [self.detailInfoView.scrollView setContentOffset:CGPointMake(self.detailInfoView.scrollView.contentOffset.x, 0)];
+        [self.detailInfoView.scrollView setScrollEnabled:NO];
     }
 }
 
@@ -636,6 +630,9 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
         if ([identifier isEqualToString:kActivityCellIdentifier]) {
             cell =  [[[NSBundle mainBundle] loadNibNamed:@"StoreDetailViewActiveCell" owner:nil options:nil] objectAtIndex:0];
         }
+        if ([identifier isEqualToString:kServiceCellIdentifier]) {
+            cell =  [[[NSBundle mainBundle] loadNibNamed:@"StoreDetailServiceCell" owner:nil options:nil] objectAtIndex:0];
+        }
         if ([identifier isEqualToString:kHotRecommendCellIdentifier]) {
             cell =  [[[NSBundle mainBundle] loadNibNamed:@"StoreDetailHotRecommendCell" owner:nil options:nil] objectAtIndex:0];
         }
@@ -650,7 +647,29 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
 }
 
 - (void)configTopCell {
+    if ([self.detailModel.storeAddress length] > 0) {
+        [self.storeAddressBriefBGView setHidden:NO];
+        [self.storeAddressBriefLabel setText:self.detailModel.storeAddress];
+    } else {
+        [self.storeAddressBriefBGView setHidden:YES];
+    }
+    
+    NSString *title = @"点击查看";
+    NSUInteger count = [self.detailModel.brotherStores count];
+    if (count > 0) {
+        title = [NSString stringWithFormat:@"共%lu家兄弟门店", (unsigned long)count];
+    }
+    [self.broStoreLabel setText:title];
+    
     [self.storeName setText:self.detailModel.storeName];
+    
+    [self.storeBriefLabel setText:self.detailModel.storeBrief];
+    
+    if (self.detailModel.promotionSegueModels) {
+        for (TextSegueModel *model in self.detailModel.promotionSegueModels) {
+            [self.storeBriefLabel addLinkToAddress:[NSDictionary dictionaryWithObject:model forKey:@"promotionSegueModel"] withRange:model.linkRange];
+        }
+    }
     
     [self.starView setStarNumber:self.detailModel.starNumber];
     
@@ -674,34 +693,37 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
 
 - (void)configTitleCell:(StoreDetailTitleCell *)cell WithSection:(StoreDetailViewSection)section {
     switch (section) {
+        case StoreDetailViewSectionService:
+        {
+            NSString *subTitle = nil;
+            if ([self.detailModel.serviceModelsArray count] > 3) {
+                subTitle = @"更多";
+            }
+            [cell resetWithMainTitle:@"优惠服务" subTitle:subTitle];
+        }
+            break;
         case StoreDetailViewSectionHotRecommend:
         {
             [cell resetWithMainTitle:@"门店热推" subTitle:@"查看更多"];
         }
             break;
-        case StoreDetailViewSectionBrief:
-        {
-            [cell resetWithMainTitle:@"门店简介" subTitle:@"详细信息"];
-        }
-            break;
         case StoreDetailViewSectionComment:
         {
-            [cell resetWithMainTitle:@"用户评论" subTitle:@"查看更多"];
+            NSString *subTitle = nil;
+            if (self.detailModel.commentAllNumber > 0) {
+                subTitle = [NSString stringWithFormat:@"%lu人已评论", (unsigned long)self.detailModel.commentAllNumber];
+            }
+            [cell resetWithMainTitle:@"用户评论" subTitle:subTitle];
+        }
+            break;
+        case StoreDetailViewSectionDetailInfo:
+        {
+            [cell resetWithMainTitle:@"门店介绍" subTitle:nil];
         }
             break;
         case StoreDetailViewSectionNearby:
         {
             [cell resetWithMainTitle:@"门店附近" subTitle:nil];
-        }
-            break;
-        case StoreDetailViewSectionBrother:
-        {
-            [cell resetWithMainTitle:@"兄弟门店" subTitle:@"查看更多"];
-        }
-            break;
-        case StoreDetailViewSectionService:
-        {
-            [cell resetWithMainTitle:@"门店服务" subTitle:nil];
         }
             break;
         default:
@@ -788,6 +810,12 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
     }
 }
 
+- (void)didTappedOnAddressBrief {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedAddressOnStoreDetailView:)]) {
+        [self.delegate didClickedAddressOnStoreDetailView:self];
+    }
+}
+
 - (IBAction)didClickedCouponButton:(id)sender {
     if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedCouponButtonOnStoreDetailView:)]) {
         [self.delegate didClickedCouponButtonOnStoreDetailView:self];
@@ -802,38 +830,29 @@ static NSString *const kServiceLinearCellIdentifier = @"kServiceLinearCellIdenti
         if (self.detailModel) {
             NSMutableArray *tempSections = [[NSMutableArray alloc] init];
             [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionTop]];
-            if ([self.detailModel.storeAddress length] > 0) {
-                [self.addressLabel setText:self.detailModel.storeAddress];
-                [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionAddress]];
-            }
             if ([self.detailModel hasCoupon]) {
                 [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionCoupon]];
             }
             if ([self.detailModel.activeModelsArray count] > 0) {
                 [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionActivity]];
             }
-            if ([self.detailModel.hotRecommendServiceArray count] > 0) {
+            if ([self.detailModel.serviceModelsArray count] > 0) {
+                [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionService]];
+            }
+            if ([self.detailModel.hotRecommedServiceArray count] > 0) {
                 [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionHotRecommend]];
             }
             if ([self.detailModel.recommendString length] > 0) {
                 [self configRecommendCell];
                 [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionRecommend]];
             }
-            if ([self.detailModel.storeBrief length] > 0) {
-                [self.storeBriefLabel setText:self.detailModel.storeBrief];
-            }
-            [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionBrief]];
             [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionComment]];
+            [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionDetailInfo]];
+            self.detailInfoView.scrollView.scrollEnabled = YES;
+            [self.detailInfoView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.detailModel.detailUrlString]]];
             if ([self.detailModel.nearbyFacilities count] > 0) {
                 [self configNearbyCell];
                 [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionNearby]];
-            }
-            if ([self.detailModel.brotherStores count] > 0) {
-                [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionBrother]];
-            }
-            if ([self.detailModel.serviceModelsArray count] > 0) {
-                [self.serviceLinearView reloadData];
-                [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionService]];
             }
             self.sectionIdentifiersArray = [NSArray arrayWithArray:tempSections];
             

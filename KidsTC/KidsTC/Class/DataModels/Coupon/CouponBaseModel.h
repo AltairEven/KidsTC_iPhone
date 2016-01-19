@@ -26,6 +26,8 @@ typedef enum {
 
 @property (nonatomic, copy) NSString *couponId;
 
+@property (nonatomic, copy) NSString *batchId;
+
 @property (nonatomic, copy) NSString *couponTitle;
 
 @property (nonatomic, copy) NSString *couponDescription;

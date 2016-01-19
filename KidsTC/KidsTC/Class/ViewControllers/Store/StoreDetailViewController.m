@@ -26,7 +26,8 @@
 #import "KTCWebViewController.h"
 #import "KTCBrowseHistoryView.h"
 #import "KTCBrowseHistoryManager.h"
-#import "KTCMapViewController.h"
+#import "KTCStoreMapViewController.h"
+#import "KTCSegueMaster.h"
 #import "CommentDetailViewController.h"
 
 @interface StoreDetailViewController () <StoreDetailViewDelegate, StoreDetailBottomViewDelegate, KTCActionViewDelegate, KTCBrowseHistoryViewDataSource, KTCBrowseHistoryViewDelegate, CommentFoundingViewControllerDelegate>
@@ -36,7 +37,9 @@
 
 @property (nonatomic, copy) NSString *storeId;
 @property (nonatomic, strong) StoreDetailViewModel *viewModel;
+
 - (void)buildRightBarButtons;
+- (void)resetTitle;
 
 - (void)setupBottomView;
 
@@ -121,13 +124,9 @@
 }
 
 - (void)didClickedAddressOnStoreDetailView:(StoreDetailView *)detailView {
-    CLLocation *location = [[CLLocation alloc] initWithLatitude:self.viewModel.detailModel.storeCoordinate.latitude longitude:self.viewModel.detailModel.storeCoordinate.longitude];
-    KTCLocation *destination = [[KTCLocation alloc] initWithLocation:location locationDescription:self.viewModel.detailModel.storeName];
-    if (destination) {
-        KTCMapViewController *controller = [[KTCMapViewController alloc] initWithMapType:KTCMapTypeStoreGuide destination:destination];
-        [controller setHidesBottomBarWhenPushed:YES];
-        [self.navigationController pushViewController:controller animated:YES];
-    }
+    KTCStoreMapViewController *controller = [[KTCStoreMapViewController alloc] initWithStoreItems:self.viewModel.detailModel.brotherStores];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)didClickedActiveOnStoreDetailView:(StoreDetailView *)detailView atIndex:(NSUInteger)index {
@@ -143,7 +142,7 @@
 }
 
 - (void)storeDetailView:(StoreDetailView *)detailView didSelectedHotRecommendAtIndex:(NSUInteger)index {
-    StoreDetailHotRecommendModel *tuanModel = [self.viewModel.detailModel.hotRecommendServiceArray objectAtIndex:index];
+    StoreDetailHotRecommendModel *tuanModel = [self.viewModel.detailModel.hotRecommedServiceArray objectAtIndex:index];
     ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithServiceId:tuanModel.serviceId channelId:tuanModel.channelId];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
@@ -203,6 +202,11 @@
     [self.navigationController pushViewController:controller animated:YES];
     //MTA
     [MTA trackCustomEvent:@"event_skip_store_servers_dtl" args:nil];
+}
+
+
+- (void)storeDetailView:(StoreDetailView *)detailView didSelectedLinkWithSegueModel:(HomeSegueModel *)model {
+    [KTCSegueMaster makeSegueWithModel:model fromController:self];
 }
 
 
@@ -344,6 +348,11 @@
 
 #pragma mark Privated methods
 
+- (void)resetTitle {
+    _navigationTitle = self.viewModel.detailModel.storeShortName;
+    self.navigationItem.title = _navigationTitle;
+}
+
 
 - (void)setupBottomView {
     if ([[KTCUser currentUser] hasLogin]) {
@@ -449,12 +458,14 @@
 
 - (void)reloadNetworkData {
     [[GAlertLoadingView sharedAlertLoadingView] showInView:self.view];
-    [self.viewModel startUpdateDataWithStoreId:self.storeId succeed:^(NSDictionary *data) {
-        [self.detailView reloadData];
+    __weak StoreDetailViewController *weakSelf = self;
+    [weakSelf.viewModel startUpdateDataWithStoreId:weakSelf.storeId succeed:^(NSDictionary *data) {
+        [weakSelf.detailView reloadData];
         [[GAlertLoadingView sharedAlertLoadingView] hide];
-        [self setupBottomView];
+        [weakSelf setupBottomView];
+        [weakSelf resetTitle];
     } failure:^(NSError *error) {
-        [self.detailView reloadData];
+        [weakSelf.detailView reloadData];
         [[GAlertLoadingView sharedAlertLoadingView] hide];
     }];
 }

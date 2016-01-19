@@ -8,6 +8,7 @@
 
 #import "CouponListViewController.h"
 #import "KTCWebViewController.h"
+#import "ServiceListViewController.h"
 
 static NSString *const kCouponUseRuleUrlString = @"http://m.kidstc.com/tools/coupon_desc";
 
@@ -57,6 +58,10 @@ static NSString *const kCouponUseRuleUrlString = @"http://m.kidstc.com/tools/cou
 
 - (void)couponListView:(CouponListView *)listView DidPullUpToLoadMoreforViewTag:(CouponListViewTag)tag {
     [self.viewModel getMoreDataWithViewTag:tag];
+}
+
+- (void)couponListView:(CouponListView *)listView didSelectedAtIndex:(NSUInteger)index ofViewTag:(CouponListViewTag)tag {
+    
 }
 
 #pragma mark Private

@@ -39,7 +39,6 @@
     self = [super initWithNibName:@"NewSearchResultViewController" bundle:nil];
     if (self) {
         self.searchCondition = condition;
-        self.resultArray = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -50,6 +49,7 @@
     // Do any additional setup after loading the view from its nib.
     self.listView.dataSource = self;
     self.listView.delegate = self;
+    self.resultArray = [[NSMutableArray alloc] init];
     __weak NewSearchResultViewController *weakSelf = self;
     self.pageIndex = 1;
     [[KTCSearchService sharedService] startNewsSearchWithKeyWord:weakSelf.searchCondition.keyWord pageIndex:weakSelf.pageIndex pageSize:PageSize success:^(NSDictionary *responseData) {
