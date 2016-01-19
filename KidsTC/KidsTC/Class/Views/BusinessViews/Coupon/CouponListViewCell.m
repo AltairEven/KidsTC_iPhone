@@ -28,7 +28,7 @@
     UIImage *bgImage = [[UIImage imageNamed:@"coupon_cellBG"] resizableImageWithCapInsets:UIEdgeInsetsMake(20, 30, 28, 30) resizingMode:UIImageResizingModeTile];
     [self.cellBGView setImage:bgImage];
     
-    [self.discountPriceView setContentColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Normal];
+    [self.discountPriceView setContentColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
     [self.discountPriceView setUnitFont:[UIFont systemFontOfSize:25]];
     [self.discountPriceView setPriceFont:[UIFont systemFontOfSize:SCREEN_WIDTH / 10]];
 }
@@ -48,12 +48,15 @@
             {
                 UIImage *bgImage = [[UIImage imageNamed:@"coupon_cellBG"] resizableImageWithCapInsets:UIEdgeInsetsMake(20, 30, 28, 30) resizingMode:UIImageResizingModeTile];
                 [self.cellBGView setImage:bgImage];
+                [self.discountPriceView setContentColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
             }
                 break;
             default:
             {
                 UIImage *bgImage = [[UIImage imageNamed:@"coupon_cellBG_d"] resizableImageWithCapInsets:UIEdgeInsetsMake(20, 30, 28, 30) resizingMode:UIImageResizingModeTile];
                 [self.cellBGView setImage:bgImage];
+                [self.discountPriceView setContentColor:[UIColor lightGrayColor]];
+                
             }
                 break;
         }

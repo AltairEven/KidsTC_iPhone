@@ -8,6 +8,7 @@
 
 #import "BaseViewModel.h"
 #import "CouponListView.h"
+#import "ServiceListItemModel.h"
 
 @interface CouponListViewModel : BaseViewModel
 

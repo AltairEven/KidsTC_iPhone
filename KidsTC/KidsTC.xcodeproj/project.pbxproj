@@ -774,7 +774,6 @@
 		8F12062B1C1A622700662E01 /* KTCAnnotationTipWelfareItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F1206231C1A622700662E01 /* KTCAnnotationTipWelfareItemView.m */; };
 		8F12062C1C1A622700662E01 /* KTCAnnotationTipWelfareItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F1206241C1A622700662E01 /* KTCAnnotationTipWelfareItemView.xib */; };
 		8F201FF71C3A22250002AFB3 /* HomeActivityService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F201FF61C3A22250002AFB3 /* HomeActivityService.m */; };
-		8F201FF91C3A25E50002AFB3 /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F201FF81C3A25E50002AFB3 /* interface_list.plist */; };
 		8F23E02D1C434B32005F7A07 /* bigShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F23E02C1C434B32005F7A07 /* bigShadow.png */; };
 		8F25A0E11C2A75C10076A6FA /* SoftwareSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F25A0DF1C2A75C10076A6FA /* SoftwareSettingViewController.m */; };
 		8F25A0E21C2A75C10076A6FA /* SoftwareSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F25A0E01C2A75C10076A6FA /* SoftwareSettingViewController.xib */; };
@@ -844,6 +843,9 @@
 		8F7F76F41C4A290E0035413A /* TextSegueModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7F76F31C4A290E0035413A /* TextSegueModel.m */; };
 		8F7F76F81C4A46950035413A /* StoreDetailServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7F76F61C4A46950035413A /* StoreDetailServiceCell.m */; };
 		8F7F76F91C4A46950035413A /* StoreDetailServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F7F76F71C4A46950035413A /* StoreDetailServiceCell.xib */; };
+		8F7F76FB1C4E0D8B0035413A /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F7F76FA1C4E0D8B0035413A /* interface_list.plist */; };
+		8F7F76FF1C4E161E0035413A /* CouponUsableServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7F76FD1C4E161E0035413A /* CouponUsableServiceViewController.m */; };
+		8F7F77001C4E161E0035413A /* CouponUsableServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F7F76FE1C4E161E0035413A /* CouponUsableServiceViewController.xib */; };
 		8F85AD7D1C0C43F000890526 /* NotificationCenterViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85AD7B1C0C43F000890526 /* NotificationCenterViewCell.m */; };
 		8F85AD7E1C0C43F000890526 /* NotificationCenterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F85AD7C1C0C43F000890526 /* NotificationCenterViewCell.xib */; };
 		8F85AD821C0C498F00890526 /* PushNotificationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F85AD811C0C498F00890526 /* PushNotificationModel.m */; };
@@ -2299,7 +2301,6 @@
 		8F1206241C1A622700662E01 /* KTCAnnotationTipWelfareItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTCAnnotationTipWelfareItemView.xib; sourceTree = "<group>"; };
 		8F201FF51C3A22250002AFB3 /* HomeActivityService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeActivityService.h; sourceTree = "<group>"; };
 		8F201FF61C3A22250002AFB3 /* HomeActivityService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeActivityService.m; sourceTree = "<group>"; };
-		8F201FF81C3A25E50002AFB3 /* interface_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = interface_list.plist; sourceTree = "<group>"; };
 		8F205F7D1C1BC67E00A74386 /* MTAFeedback.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTAFeedback.h; sourceTree = "<group>"; };
 		8F23E02C1C434B32005F7A07 /* bigShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bigShadow.png; sourceTree = "<group>"; };
 		8F25A0DE1C2A75C10076A6FA /* SoftwareSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoftwareSettingViewController.h; sourceTree = "<group>"; };
@@ -2422,6 +2423,10 @@
 		8F7F76F51C4A46950035413A /* StoreDetailServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreDetailServiceCell.h; sourceTree = "<group>"; };
 		8F7F76F61C4A46950035413A /* StoreDetailServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreDetailServiceCell.m; sourceTree = "<group>"; };
 		8F7F76F71C4A46950035413A /* StoreDetailServiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreDetailServiceCell.xib; sourceTree = "<group>"; };
+		8F7F76FA1C4E0D8B0035413A /* interface_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = interface_list.plist; sourceTree = "<group>"; };
+		8F7F76FC1C4E161E0035413A /* CouponUsableServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponUsableServiceViewController.h; sourceTree = "<group>"; };
+		8F7F76FD1C4E161E0035413A /* CouponUsableServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponUsableServiceViewController.m; sourceTree = "<group>"; };
+		8F7F76FE1C4E161E0035413A /* CouponUsableServiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CouponUsableServiceViewController.xib; sourceTree = "<group>"; };
 		8F85AD7A1C0C43F000890526 /* NotificationCenterViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationCenterViewCell.h; sourceTree = "<group>"; };
 		8F85AD7B1C0C43F000890526 /* NotificationCenterViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationCenterViewCell.m; sourceTree = "<group>"; };
 		8F85AD7C1C0C43F000890526 /* NotificationCenterViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationCenterViewCell.xib; sourceTree = "<group>"; };
@@ -3284,7 +3289,7 @@
 		1E3D7E781B4BD83D00275C35 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8F201FF81C3A25E50002AFB3 /* interface_list.plist */,
+				8F7F76FA1C4E0D8B0035413A /* interface_list.plist */,
 				1E943EBD1B7375F60029FE74 /* Area.plist */,
 				1E0B7B591B709A2100A58AD4 /* Category.plist */,
 				1E3D7E791B4BD83D00275C35 /* Info.plist */,
@@ -4725,6 +4730,9 @@
 				1E827CE91B9D318F008F3F08 /* CouponUsableListViewController.h */,
 				1E827CEA1B9D318F008F3F08 /* CouponUsableListViewController.m */,
 				1E827CEB1B9D318F008F3F08 /* CouponUsableListViewController.xib */,
+				8F7F76FC1C4E161E0035413A /* CouponUsableServiceViewController.h */,
+				8F7F76FD1C4E161E0035413A /* CouponUsableServiceViewController.m */,
+				8F7F76FE1C4E161E0035413A /* CouponUsableServiceViewController.xib */,
 			);
 			path = Coupon;
 			sourceTree = "<group>";
@@ -5929,7 +5937,6 @@
 				8F7E45061C09E18C001EF3B5 /* OrderRefundViewController.xib in Resources */,
 				1E0B77A41B68C49000A58AD4 /* AccountSettingViewController.xib in Resources */,
 				8F1206281C1A622700662E01 /* KTCAnnotationTipDestinationView.xib in Resources */,
-				8F201FF91C3A25E50002AFB3 /* interface_list.plist in Resources */,
 				1E827BCF1B941337008F3F08 /* ImageError@3x.png in Resources */,
 				1EC4A1261B5DE49400206BB9 /* KTCSearchResultHeaderView.xib in Resources */,
 				1E943EDA1B78A8900029FE74 /* FavourateSegmentViewCell.xib in Resources */,
@@ -5949,6 +5956,7 @@
 				1E15F9C11BE8953C000C74E7 /* AccountSettingViewCell.xib in Resources */,
 				1E8017091BB006D100B6C352 /* HomeViewWholeImageNewsCell.xib in Resources */,
 				1E8EFD201B68BBA100D00808 /* AccountSettingView.xib in Resources */,
+				8F7F76FB1C4E0D8B0035413A /* interface_list.plist in Resources */,
 				1E7995901BCE2DEC0099CFF9 /* HospitalListViewCell.xib in Resources */,
 				8FABCB381C0FCC07005BF7AD /* FavouriteViewNewsCell.xib in Resources */,
 				1E0B7A831B6F67B800A58AD4 /* CouponGiftView.xib in Resources */,
@@ -5962,6 +5970,7 @@
 				1E3D8DA31B4BF4A100275C35 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				8FABCB671C102A93005BF7AD /* KTCBrowseHistoryViewStoreCell.xib in Resources */,
 				1E0B77AE1B68D60B00A58AD4 /* LoginViewController.xib in Resources */,
+				8F7F77001C4E161E0035413A /* CouponUsableServiceViewController.xib in Resources */,
 				1E943F7B1B831AB60029FE74 /* StoreListViewController.xib in Resources */,
 				8F974A691C34FF8E00F10975 /* HomeRecommendView.xib in Resources */,
 				1EC73C0F1B5F6168008B39EA /* HomeViewTwinklingElfCell.xib in Resources */,
@@ -6377,6 +6386,7 @@
 				1E943E911B71E7CD0029FE74 /* GCommonFilterAttr.m in Sources */,
 				8F38D1E91C085F080061C329 /* CommentFoundingView.m in Sources */,
 				1EC73BD71B5E4854008B39EA /* HomeViewNormalTitleCell.m in Sources */,
+				8F7F76FF1C4E161E0035413A /* CouponUsableServiceViewController.m in Sources */,
 				8F7E45091C09E1F0001EF3B5 /* OrderRefundViewModel.m in Sources */,
 				8FAFABAF1BFF1F3200082F20 /* CommonShareObject.m in Sources */,
 				1EC73C0E1B5F6168008B39EA /* HomeViewTwinklingElfCell.m in Sources */,

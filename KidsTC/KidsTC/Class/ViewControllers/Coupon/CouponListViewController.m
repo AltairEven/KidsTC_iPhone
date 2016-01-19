@@ -8,7 +8,7 @@
 
 #import "CouponListViewController.h"
 #import "KTCWebViewController.h"
-#import "ServiceListViewController.h"
+#import "CouponUsableServiceViewController.h"
 
 static NSString *const kCouponUseRuleUrlString = @"http://m.kidstc.com/tools/coupon_desc";
 
@@ -46,6 +46,11 @@ static NSString *const kCouponUseRuleUrlString = @"http://m.kidstc.com/tools/cou
     [self setupRightBarButton:@"" target:self action:@selector(didClickedCouponRule) frontImage:@"navigation_question" andBackImage:@"navigation_question"];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[GAlertLoadingView sharedAlertLoadingView] hide];
+}
+
 #pragma mark CouponListViewDelegate
 
 - (void)couponListView:(CouponListView *)listView willShowWithTag:(CouponListViewTag)tag {
@@ -61,7 +66,13 @@ static NSString *const kCouponUseRuleUrlString = @"http://m.kidstc.com/tools/cou
 }
 
 - (void)couponListView:(CouponListView *)listView didSelectedAtIndex:(NSUInteger)index ofViewTag:(CouponListViewTag)tag {
-    
+    NSArray *coupons = [self.viewModel resultOfCurrentViewTag];
+    if ([coupons count] > index) {
+        CouponFullCutModel *model = [coupons objectAtIndex:index];
+        CouponUsableServiceViewController *controller = [[CouponUsableServiceViewController alloc] initWithCouponBatchIdentifier:model.batchId];
+        [controller setHidesBottomBarWhenPushed:YES];
+        [self.navigationController pushViewController:controller animated:YES];
+    }
 }
 
 #pragma mark Private

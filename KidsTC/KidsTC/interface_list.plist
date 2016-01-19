@@ -179,6 +179,13 @@
 			<key>url</key>
 			<string>http://api.kidstc.com/json.php?mod=userCenter&amp;&amp;act=get_center_count</string>
 		</dict>
+		<key>GET_COUPON_PRODUCT</key>
+		<dict>
+			<key>method</key>
+			<string>get</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=product&amp;act=get_coupon_product</string>
+		</dict>
 		<key>GET_HOME_PAGE_ACTIVITY</key>
 		<dict>
 			<key>method</key>
@@ -554,6 +561,6 @@
 	<key>errno</key>
 	<integer>0</integer>
 	<key>version</key>
-	<string>32</string>
+	<string>33</string>
 </dict>
 </plist>
