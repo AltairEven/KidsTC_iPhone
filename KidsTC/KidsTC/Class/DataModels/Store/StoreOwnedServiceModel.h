@@ -20,11 +20,11 @@
 
 @property (nonatomic, assign) CGFloat price;
 
-@property (nonatomic, assign) NSUInteger storeCount;
-
 @property (nonatomic, copy) NSString *priceDescription;
 
 @property (nonatomic, copy) NSString *serviceDescription;
+
+@property (nonatomic, assign) NSUInteger storeCount;
 
 - (instancetype)initWithRawData:(NSDictionary *)data;
 

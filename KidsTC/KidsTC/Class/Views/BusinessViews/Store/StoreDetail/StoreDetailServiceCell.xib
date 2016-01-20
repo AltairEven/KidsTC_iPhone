@@ -49,7 +49,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0eb-Tt-KmR" customClass="RichPriceView">
-                                <rect key="frame" x="280" y="67" width="30" height="20"/>
+                                <rect key="frame" x="280" y="64" width="30" height="20"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="66Y-IC-E3k"/>
@@ -60,13 +60,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="0eb-Tt-KmR" secondAttribute="trailing" constant="10" id="2CE-tr-PaB"/>
+                            <constraint firstAttribute="bottom" secondItem="7Xi-dq-9y1" secondAttribute="bottom" constant="20" symbolic="YES" id="7dC-bx-SWK"/>
                             <constraint firstItem="RDC-PS-qFp" firstAttribute="leading" secondItem="Zhb-og-0gL" secondAttribute="trailing" constant="10" id="AQI-4C-7rY"/>
                             <constraint firstAttribute="trailing" secondItem="Fta-yT-e5m" secondAttribute="trailing" constant="10" id="Aqs-L4-jap"/>
                             <constraint firstItem="Zhb-og-0gL" firstAttribute="leading" secondItem="DFz-jT-17w" secondAttribute="leading" constant="10" id="D3T-jz-Caj"/>
                             <constraint firstItem="Zhb-og-0gL" firstAttribute="centerY" secondItem="DFz-jT-17w" secondAttribute="centerY" id="PEF-yQ-91f"/>
+                            <constraint firstItem="7Xi-dq-9y1" firstAttribute="bottom" secondItem="Zhb-og-0gL" secondAttribute="bottom" constant="-3" id="Utu-c9-WFT"/>
                             <constraint firstAttribute="trailing" secondItem="uba-mV-89B" secondAttribute="trailing" constant="10" id="Vcf-HI-Tbr"/>
                             <constraint firstItem="uba-mV-89B" firstAttribute="leading" secondItem="Zhb-og-0gL" secondAttribute="trailing" constant="10" id="WVm-BY-fv3"/>
-                            <constraint firstItem="7Xi-dq-9y1" firstAttribute="bottom" secondItem="0eb-Tt-KmR" secondAttribute="bottom" id="bA0-eH-E64"/>
+                            <constraint firstItem="7Xi-dq-9y1" firstAttribute="bottom" secondItem="Zhb-og-0gL" secondAttribute="bottom" id="aOl-HU-gyp"/>
+                            <constraint firstItem="7Xi-dq-9y1" firstAttribute="bottom" secondItem="0eb-Tt-KmR" secondAttribute="bottom" constant="3" id="bA0-eH-E64"/>
                             <constraint firstItem="uba-mV-89B" firstAttribute="bottom" secondItem="Zhb-og-0gL" secondAttribute="bottom" constant="-25" id="c49-OQ-luY"/>
                             <constraint firstItem="Fta-yT-e5m" firstAttribute="leading" secondItem="Zhb-og-0gL" secondAttribute="trailing" constant="10" id="dvz-WL-5cu"/>
                             <constraint firstItem="RDC-PS-qFp" firstAttribute="bottom" secondItem="Zhb-og-0gL" secondAttribute="bottom" constant="-3" id="hVf-3w-fUj"/>
@@ -74,6 +77,13 @@
                             <constraint firstItem="0eb-Tt-KmR" firstAttribute="bottom" secondItem="Zhb-og-0gL" secondAttribute="bottom" constant="-3" id="ws1-qo-nb5"/>
                             <constraint firstItem="Fta-yT-e5m" firstAttribute="top" secondItem="Zhb-og-0gL" secondAttribute="top" constant="3" id="y1j-O8-10T"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="7dC-bx-SWK"/>
+                                <exclude reference="aOl-HU-gyp"/>
+                                <exclude reference="ws1-qo-nb5"/>
+                            </mask>
+                        </variation>
                     </view>
                 </subviews>
                 <constraints>

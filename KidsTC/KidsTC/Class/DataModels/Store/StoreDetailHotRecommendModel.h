@@ -8,7 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
+@class StoreDetailHotRecommendItem;
+
 @interface StoreDetailHotRecommendModel : NSObject
+
+@property (nonatomic, copy) NSString *title;
+
+@property (nonatomic, copy) NSString *keyword;
+
+@property (nonatomic, copy) NSArray<StoreDetailHotRecommendItem *> *recommendItems;
+
+- (instancetype)initWithRawData:(NSDictionary *)data;
+
+@end
+
+
+@interface StoreDetailHotRecommendItem : NSObject
 
 @property (nonatomic, copy) NSString *serviceId;
 
@@ -24,7 +39,7 @@
 
 @property (nonatomic, assign) NSUInteger storeCount;
 
-@property (nonatomic, copy) NSString *priceDescription;
+@property (nonatomic, copy) NSString *recommendDescription;
 
 @property (nonatomic, copy) NSString *serviceDescription;
 

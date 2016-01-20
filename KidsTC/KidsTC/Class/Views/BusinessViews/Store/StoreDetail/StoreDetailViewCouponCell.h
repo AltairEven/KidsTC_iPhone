@@ -11,5 +11,6 @@
 @interface StoreDetailViewCouponCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *subTitleLabel;
 
 @end

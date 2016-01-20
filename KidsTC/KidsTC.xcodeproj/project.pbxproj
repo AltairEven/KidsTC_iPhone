@@ -873,6 +873,8 @@
 		8F8B0B1E1C4E21D7000E9A26 /* CashierViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8B0B1C1C4E21D7000E9A26 /* CashierViewController.m */; };
 		8F8B0B1F1C4E21D7000E9A26 /* CashierViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F8B0B1D1C4E21D7000E9A26 /* CashierViewController.xib */; };
 		8F8B0B231C4E35FD000E9A26 /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F8B0B221C4E35FD000E9A26 /* interface_list.plist */; };
+		8F8B0B271C4F3655000E9A26 /* StoreDetailStrategyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8B0B251C4F3655000E9A26 /* StoreDetailStrategyCell.m */; };
+		8F8B0B281C4F3655000E9A26 /* StoreDetailStrategyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F8B0B261C4F3655000E9A26 /* StoreDetailStrategyCell.xib */; };
 		8F8DCD361C28FC4500C26296 /* HomeNoticeCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8DCD351C28FC4500C26296 /* HomeNoticeCellModel.m */; };
 		8F974A641C34FF3800F10975 /* HomeRecommenLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F974A631C34FF3800F10975 /* HomeRecommenLayout.m */; };
 		8F974A671C34FF6E00F10975 /* HomeRecommendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F974A661C34FF6E00F10975 /* HomeRecommendView.m */; };
@@ -2473,6 +2475,9 @@
 		8F8B0B1C1C4E21D7000E9A26 /* CashierViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashierViewController.m; sourceTree = "<group>"; };
 		8F8B0B1D1C4E21D7000E9A26 /* CashierViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CashierViewController.xib; sourceTree = "<group>"; };
 		8F8B0B221C4E35FD000E9A26 /* interface_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = interface_list.plist; sourceTree = "<group>"; };
+		8F8B0B241C4F3655000E9A26 /* StoreDetailStrategyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreDetailStrategyCell.h; sourceTree = "<group>"; };
+		8F8B0B251C4F3655000E9A26 /* StoreDetailStrategyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreDetailStrategyCell.m; sourceTree = "<group>"; };
+		8F8B0B261C4F3655000E9A26 /* StoreDetailStrategyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreDetailStrategyCell.xib; sourceTree = "<group>"; };
 		8F8DCD341C28FC4500C26296 /* HomeNoticeCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeNoticeCellModel.h; sourceTree = "<group>"; };
 		8F8DCD351C28FC4500C26296 /* HomeNoticeCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeNoticeCellModel.m; sourceTree = "<group>"; };
 		8F974A621C34FF3800F10975 /* HomeRecommenLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeRecommenLayout.h; sourceTree = "<group>"; };
@@ -4276,6 +4281,9 @@
 				8F7F76F51C4A46950035413A /* StoreDetailServiceCell.h */,
 				8F7F76F61C4A46950035413A /* StoreDetailServiceCell.m */,
 				8F7F76F71C4A46950035413A /* StoreDetailServiceCell.xib */,
+				8F8B0B241C4F3655000E9A26 /* StoreDetailStrategyCell.h */,
+				8F8B0B251C4F3655000E9A26 /* StoreDetailStrategyCell.m */,
+				8F8B0B261C4F3655000E9A26 /* StoreDetailStrategyCell.xib */,
 			);
 			path = StoreDetail;
 			sourceTree = "<group>";
@@ -6069,6 +6077,7 @@
 				1EA8B6A91B633CE100F90688 /* SettlementViewController.xib in Resources */,
 				1E3D8F5E1B4D1DB300275C35 /* OrderDetailViewController.xib in Resources */,
 				1E0B78041B6F429E00A58AD4 /* KTCSearchSortFilterView.xib in Resources */,
+				8F8B0B281C4F3655000E9A26 /* StoreDetailStrategyCell.xib in Resources */,
 				1E827BD31B941337008F3F08 /* ImageSelectedOn.png in Resources */,
 				1EC4A0B61B58E08800206BB9 /* StoreDetailBottomView.xib in Resources */,
 				8FABCB331C0FCBEA005BF7AD /* FavouriteViewStrategyCell.xib in Resources */,
@@ -6572,6 +6581,7 @@
 				1E943EE91B7A19D50029FE74 /* AppointmentOrderListCell.m in Sources */,
 				1E15F9A21BDF7A00000C74E7 /* CommentDetailViewNormalHeaderCell.m in Sources */,
 				1E80172B1BB2792C00B6C352 /* NewsRecommendListModel.m in Sources */,
+				8F8B0B271C4F3655000E9A26 /* StoreDetailStrategyCell.m in Sources */,
 				1E827C9C1B94144E008F3F08 /* MBProgressHUD.m in Sources */,
 				1E827CA21B94144E008F3F08 /* SDWebImageCompat.m in Sources */,
 				1E827CA51B94144E008F3F08 /* SDWebImageDownloaderOperation.m in Sources */,

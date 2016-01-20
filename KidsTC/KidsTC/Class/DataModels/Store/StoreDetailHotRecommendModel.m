@@ -17,16 +17,47 @@
     }
     self = [super init];
     if (self) {
-        if ([data objectForKey:@"serveId"]) {
-            self.serviceId = [NSString stringWithFormat:@"%@", [data objectForKey:@"serveId"]];
+        self.title = [data objectForKey:@"title"];
+        self.keyword = [data objectForKey:@"subTitileKeyword"];
+        NSArray *array = [data objectForKey:@"products"];
+        if ([array isKindOfClass:[NSArray class]]) {
+            NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+            for (NSDictionary *singleElem in array) {
+                StoreDetailHotRecommendItem *item = [[StoreDetailHotRecommendItem alloc] initWithRawData:singleElem];
+                if (item) {
+                    [tempArray addObject:item];
+                    item.recommendDescription = self.keyword;
+                }
+            }
+            self.recommendItems = [NSArray arrayWithArray:tempArray];
         }
-        if ([data objectForKey:@"channelId"]) {
-            self.channelId = [NSString stringWithFormat:@"%@", [data objectForKey:@"channelId"]];
+    }
+    return self;
+}
+
+@end
+
+
+@implementation StoreDetailHotRecommendItem
+
+- (instancetype)initWithRawData:(NSDictionary *)data {
+    if (!data || ![data isKindOfClass:[NSDictionary class]]) {
+        return nil;
+    }
+    self = [super init];
+    if (self) {
+        if ([data objectForKey:@"productId"]) {
+            self.serviceId = [NSString stringWithFormat:@"%@", [data objectForKey:@"productId"]];
         }
-        self.serviceName = [data objectForKey:@"title"];
+        if ([data objectForKey:@"chId"]) {
+            self.channelId = [NSString stringWithFormat:@"%@", [data objectForKey:@"chId"]];
+        }
+        self.serviceName = [data objectForKey:@"productName"];
+        self.serviceDescription = [data objectForKey:@"ageGroup"];
         self.imageUrl = [NSURL URLWithString:[data objectForKey:@"imgUrl"]];
-        self.price = [[data objectForKey:@"price"] floatValue];
-        self.saleCount = [[data objectForKey:@"tuanCount"] integerValue];
+        self.price = [[data objectForKey:@"promotionPrice"] floatValue];
+        self.saleCount = [[data objectForKey:@"buyNum"] integerValue];
+        self.storeCount = [[data objectForKey:@"storeCount"] integerValue];
     }
     return self;
 }

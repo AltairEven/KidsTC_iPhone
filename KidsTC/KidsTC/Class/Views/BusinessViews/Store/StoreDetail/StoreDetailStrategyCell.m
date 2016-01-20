@@ -1,14 +1,14 @@
 //
-//  ParentingStrategyViewCell.m
+//  StoreDetailStrategyCell.m
 //  KidsTC
 //
-//  Created by 钱烨 on 7/23/15.
-//  Copyright (c) 2015 KidsTC. All rights reserved.
+//  Created by Altair on 1/20/16.
+//  Copyright © 2016 KidsTC. All rights reserved.
 //
 
-#import "ParentingStrategyViewCell.h"
+#import "StoreDetailStrategyCell.h"
 
-@interface ParentingStrategyViewCell ()
+@interface StoreDetailStrategyCell ()
 
 @property (weak, nonatomic) IBOutlet UIView *contentBGView;
 @property (weak, nonatomic) IBOutlet UIImageView *cellImageView;
@@ -22,7 +22,7 @@
 
 @end
 
-@implementation ParentingStrategyViewCell
+@implementation StoreDetailStrategyCell
 
 - (void)awakeFromNib {
     // Initialization code
@@ -38,7 +38,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 
@@ -61,6 +61,11 @@
     [self.commentCountLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)model.commentCount]];
     [self.hotImageView setHidden:!model.isHot];
     [self.recommendLabel setHidden:!model.isRecommend];
+}
+
+
++ (CGFloat)cellHeight {
+    return 0.6 * SCREEN_WIDTH;
 }
 
 @end

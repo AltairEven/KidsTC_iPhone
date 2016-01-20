@@ -13,7 +13,7 @@
 
 @property (nonatomic, strong) NSIndexPath *indexPath;
 
-- (void)configWithModel:(StoreDetailHotRecommendModel *)model;
+- (void)configWithModel:(StoreDetailHotRecommendItem *)model;
 
 + (CGFloat)cellHeight;
 

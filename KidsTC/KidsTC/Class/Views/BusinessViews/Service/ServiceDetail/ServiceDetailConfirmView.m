@@ -173,7 +173,11 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 - (IBAction)didClickedSubmitButton:(id)sender {
     [self dismiss];
     if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedSubmitButtonWithBuyNumber:selectedStore:)]) {
-        [self.delegate didClickedSubmitButtonWithBuyNumber:self.stepperView.curVal selectedStore:[self.storeItemsArray objectAtIndex:self.selectedIndex]];
+        StoreListItemModel *itemModel = nil;
+        if ([self.storeItemsArray count] > self.selectedIndex) {
+            itemModel = [self.storeItemsArray objectAtIndex:self.selectedIndex];
+        }
+        [self.delegate didClickedSubmitButtonWithBuyNumber:self.stepperView.curVal selectedStore:itemModel];
     }
 }
 

@@ -34,6 +34,10 @@
 
 - (void)storeDetailView:(StoreDetailView *)detailView didSelectedHotRecommendAtIndex:(NSUInteger)index;
 
+- (void)didClickedAllStrategyOnStoreDetailView:(StoreDetailView *)detailView;
+
+- (void)storeDetailView:(StoreDetailView *)detailView didSelectedSteategyAtIndex:(NSUInteger)index;
+
 - (void)didClickedMoreDetailOnStoreDetailView:(StoreDetailView *)detailView;
 
 - (void)didClickedMoreReviewOnStoreDetailView:(StoreDetailView *)detailView;

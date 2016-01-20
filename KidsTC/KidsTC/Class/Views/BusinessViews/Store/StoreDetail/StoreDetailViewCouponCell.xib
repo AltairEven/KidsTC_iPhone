@@ -75,6 +75,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="descriptionLabel" destination="kZH-1n-Lje" id="Tgz-vf-xlx"/>
+                <outlet property="subTitleLabel" destination="6hS-b3-t5K" id="yFi-eU-hI6"/>
             </connections>
             <point key="canvasLocation" x="190" y="71"/>
         </tableViewCell>

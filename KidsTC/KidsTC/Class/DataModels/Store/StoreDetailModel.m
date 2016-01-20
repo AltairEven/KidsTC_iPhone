@@ -45,9 +45,10 @@
         self.promotionSegueModels = [NSArray arrayWithArray:tempArray];
     }
     self.starNumber = [[data objectForKey:@"level"] integerValue];
-    NSArray *coupons = [data objectForKey:@"coupons"];
+    NSArray *coupons = [data objectForKey:@"coupon_provide"];
     if ([coupons isKindOfClass:[NSArray class]] && [coupons count] > 0) {
-        self.couponName = [coupons firstObject];
+        self.couponName = [[coupons firstObject] objectForKey:@"name"];
+        self.couponProvideCount = [[[coupons firstObject] objectForKey:@"provideNum"] integerValue];
     }
     self.couponUrlString = [data objectForKey:@"couponLink"];
     self.appointmentNumber = [[data objectForKey:@"bookNum"] integerValue];
@@ -100,16 +101,18 @@
         self.serviceModelsArray = [NSArray arrayWithArray:tempArray];
     }
     //hot recommend
-    NSArray *tuans = [data objectForKey:@"tuan"];
-    if ([tuans isKindOfClass:[NSArray class]]) {
+    self.hotRecommedService = [[StoreDetailHotRecommendModel alloc] initWithRawData:[data objectForKey:@"recommend_product"]];
+    //strategy
+    NSArray *strategies = [data objectForKey:@"strategy"];
+    if ([strategies isKindOfClass:[NSArray class]]) {
         NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-        for (NSDictionary *tuanDic in tuans) {
-            StoreDetailHotRecommendModel *model = [[StoreDetailHotRecommendModel alloc] initWithRawData:tuanDic];
+        for (NSDictionary *strategyDic in strategies) {
+            StoreOwnedServiceModel *model = [[StoreOwnedServiceModel alloc] initWithRawData:strategyDic];
             if (model) {
                 [tempArray addObject:model];
             }
         }
-        self.hotRecommedServiceArray = [NSArray arrayWithArray:tempArray];
+        self.strategyModelsArray = [NSArray arrayWithArray:tempArray];
     }
     //recommend
     NSDictionary *recommendDic = [data objectForKey:@"note"];
@@ -133,7 +136,7 @@
         self.commentItemsArray = [NSArray arrayWithArray:tempArray];
     }
     //nearby
-    NSArray *nearbys = [data objectForKey:@"factilities"];
+    NSArray *nearbys = [data objectForKey:@"newFactilities"];
     if ([nearbys isKindOfClass:[NSArray class]]) {
         NSMutableArray *tempArray = [[NSMutableArray alloc] init];
         for (NSDictionary *nearbyDic in nearbys) {

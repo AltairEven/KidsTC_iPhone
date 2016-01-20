@@ -11,7 +11,7 @@
 @implementation StoreOwnedServiceModel
 
 - (instancetype)initWithRawData:(NSDictionary *)data {
-    if (!data) {
+    if (!data || ![data isKindOfClass:[NSDictionary class]]) {
         return nil;
     }
     self = [super init];
@@ -25,6 +25,9 @@
         self.serviceName = [data objectForKey:@"title"];
         self.imageUrl = [NSURL URLWithString:[data objectForKey:@"imgUrl"]];
         self.price = [[data objectForKey:@"price"] floatValue];
+        self.priceDescription = [data objectForKey:@"priceRuleName"];
+        self.serviceDescription = [data objectForKey:@"ageGroup"];
+        self.storeCount = [[data objectForKey:@"storeCount"] integerValue];
     }
     return self;
 }

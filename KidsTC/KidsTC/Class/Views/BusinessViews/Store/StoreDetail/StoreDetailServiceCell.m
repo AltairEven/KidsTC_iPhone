@@ -55,7 +55,13 @@
     if (model.storeCount > 1) {
         [self.storeDesLabel setHidden:NO];
         self.serviceDesAlign.constant = -25;
-        [self.storeDesLabel setText:[NSString stringWithFormat:@"%lu家门店通用", (unsigned long)model.storeCount]];
+        
+        NSString *countString = [NSString stringWithFormat:@"%lu", (unsigned long)model.storeCount];
+        NSString *wholeString = [NSString stringWithFormat:@"%@家门店通用", countString];
+        NSMutableAttributedString *labelString = [[NSMutableAttributedString alloc] initWithString:wholeString];
+        NSDictionary *attribute = [NSDictionary dictionaryWithObject:[[KTCThemeManager manager] defaultTheme].highlightTextColor forKey:NSForegroundColorAttributeName];
+        [labelString setAttributes:attribute range:NSMakeRange(0, [countString length])];
+        [self.storeDesLabel setAttributedText:labelString];
     } else {
         [self.storeDesLabel setHidden:YES];
         self.serviceDesAlign.constant = -3;
