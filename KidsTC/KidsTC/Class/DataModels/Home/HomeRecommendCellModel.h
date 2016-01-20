@@ -27,6 +27,10 @@
 
 @property (nonatomic, assign) NSUInteger saledCount;
 
+@property (nonatomic, assign) CGFloat imageRatio;
+
+@property (nonatomic, readonly) CGFloat cellHeight;
+
 - (instancetype)initWithRawData:(NSDictionary *)data;
 
 @end

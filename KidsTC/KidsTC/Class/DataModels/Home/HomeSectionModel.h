@@ -43,4 +43,6 @@
 
 - (void)setContentModel:(HomeContentCellModel *)contentModel;
 
+- (void)setMarginTop:(CGFloat)marginTop;
+
 @end

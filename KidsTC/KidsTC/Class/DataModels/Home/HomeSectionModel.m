@@ -32,6 +32,10 @@
     _contentModel = contentModel;
 }
 
+- (void)setMarginTop:(CGFloat)marginTop {
+    _marginTop = marginTop;
+}
+
 
 - (void)parseRawData:(NSDictionary *)data {
     _hasTitle = [[data objectForKey:@"hasTitle"] boolValue];

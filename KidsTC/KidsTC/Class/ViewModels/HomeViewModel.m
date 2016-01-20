@@ -142,11 +142,14 @@ NSString *const kHomeViewDataFinishLoadingNotification = @"kHomeViewDataFinishLo
     }
     NSArray *contentArray = [data objectForKey:@"data"];
     if (contentArray && [contentArray isKindOfClass:[NSArray class]]) {
-        HomeRecommendCellModel *model = [[HomeRecommendCellModel alloc] initWithRawData:contentArray];
-        if (model) {
-            HomeSectionModel *sectionModel = [[HomeSectionModel alloc] init];
-            [sectionModel setContentModel:model];
-            [self.customerRecommendModelsArray addObject:sectionModel];
+        for (NSDictionary *singleContent in contentArray) {
+            HomeRecommendCellModel *model = [[HomeRecommendCellModel alloc] initWithRawData:[NSArray arrayWithObject:singleContent]];
+            if (model) {
+                HomeSectionModel *sectionModel = [[HomeSectionModel alloc] init];
+                [sectionModel setContentModel:model];
+                [sectionModel setMarginTop:10];
+                [self.customerRecommendModelsArray addObject:sectionModel];
+            }
         }
     }
     [self.view reloadData];

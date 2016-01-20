@@ -26,6 +26,7 @@
 #import "HomeViewBigImageTwoDescCell.h"
 #import "HomeViewTwoThreeFourCell.h"
 #import "HomeViewRecommendCell.h"
+#import "HomeViewRecommendNewCell.h"
 
 static NSString *const kNormalTitleCellIdentifier = @"kNormalTitleCellIdentifier";
 static NSString *const kCountDownTitleCellIdentifier = @"kCountDownTitleCellIdentifier";
@@ -44,6 +45,7 @@ static NSString *const kNoticeCellIdentifier = @"kNoticeCellIdentifier";
 static NSString *const kBigImageTwoDescCellIdentifier = @"kBigImageTwoDescCellIdentifier";
 static NSString *const kTwoThreeFourCellIdentifier = @"kTwoThreeFourCellIdentifier";
 static NSString *const kRecommendCellIdentifier = @"kRecommendCellIdentifier";
+static NSString *const kRecommendNewCellIdentifier = @"kRecommendNewCellIdentifier";
 
 @interface HomeView () <HomeTopViewDelegate, UITableViewDataSource, UITableViewDelegate, HomeViewBannerCellDelegate, HomeViewThemeCellDelegate, HomeViewThreeCellDelegate, HomeViewTwinklingElfCellDelegate, HomeViewHorizontalListCellDelegate, UIScrollViewDelegate, HomeViewThreeImageNewsCellDelegate, HomeViewWholeImageNewsCellDelegate, HomeViewNoticeCellDelegate, HomeViewBigImageTwoDescCellDelegate, HomeViewTwoThreeFourCellDelegate, HomeViewRecommendCellDelegate>
 
@@ -71,6 +73,7 @@ static NSString *const kRecommendCellIdentifier = @"kRecommendCellIdentifier";
 @property (nonatomic, strong) UINib *bigImageTwoDescCellNib;
 @property (nonatomic, strong) UINib *twoThreeFourCellNib;
 @property (nonatomic, strong) UINib *recommendCellNib;
+@property (nonatomic, strong) UINib *recommendNewCellNib;
 
 @property (nonatomic, strong) UIView *splitFooterView;
 @property (weak, nonatomic) IBOutlet UIButton *backToTopButton;
@@ -200,9 +203,9 @@ static NSString *const kRecommendCellIdentifier = @"kRecommendCellIdentifier";
         self.twoThreeFourCellNib = [UINib nibWithNibName:NSStringFromClass([HomeViewTwoThreeFourCell class]) bundle:nil];
         [self.tableView registerNib:self.twoThreeFourCellNib forCellReuseIdentifier:kTwoThreeFourCellIdentifier];
     }
-    if (!self.recommendCellNib) {
-        self.recommendCellNib = [UINib nibWithNibName:NSStringFromClass([HomeViewRecommendCell class]) bundle:nil];
-        [self.tableView registerNib:self.recommendCellNib forCellReuseIdentifier:kRecommendCellIdentifier];
+    if (!self.recommendNewCellNib) {
+        self.recommendNewCellNib = [UINib nibWithNibName:NSStringFromClass([HomeViewRecommendNewCell class]) bundle:nil];
+        [self.tableView registerNib:self.recommendNewCellNib forCellReuseIdentifier:kRecommendNewCellIdentifier];
     }
     
     self.cellModelsDic = [[NSMutableDictionary alloc] init];
@@ -596,14 +599,13 @@ static NSString *const kRecommendCellIdentifier = @"kRecommendCellIdentifier";
             break;
         case HomeContentCellTypeRecommend:
         {
-            HomeViewRecommendCell *cell = [tableView dequeueReusableCellWithIdentifier:kRecommendCellIdentifier];
+            HomeViewRecommendNewCell *cell = [tableView dequeueReusableCellWithIdentifier:kRecommendNewCellIdentifier];
             if (!cell) {
-                cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewRecommendCell" owner:nil options:nil] objectAtIndex:0];
+                cell =  [[[NSBundle mainBundle] loadNibNamed:@"HomeViewRecommendNewCell" owner:nil options:nil] objectAtIndex:0];
             }
             
-            cell.indexPath = indexPath;
-            cell.delegate = self;
-            [cell configWithModel:(HomeRecommendCellModel *)contentModel];
+            HomeRecommendElement *element = [[(HomeRecommendCellModel *)contentModel recommendElementsArray] firstObject];
+            [cell configWithModel:element];
             
             return cell;
         }

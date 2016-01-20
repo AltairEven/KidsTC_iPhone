@@ -875,6 +875,8 @@
 		8F8B0B231C4E35FD000E9A26 /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F8B0B221C4E35FD000E9A26 /* interface_list.plist */; };
 		8F8B0B271C4F3655000E9A26 /* StoreDetailStrategyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8B0B251C4F3655000E9A26 /* StoreDetailStrategyCell.m */; };
 		8F8B0B281C4F3655000E9A26 /* StoreDetailStrategyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F8B0B261C4F3655000E9A26 /* StoreDetailStrategyCell.xib */; };
+		8F8B0B311C4F6670000E9A26 /* HomeViewRecommendNewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8B0B2F1C4F6670000E9A26 /* HomeViewRecommendNewCell.m */; };
+		8F8B0B321C4F6670000E9A26 /* HomeViewRecommendNewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F8B0B301C4F6670000E9A26 /* HomeViewRecommendNewCell.xib */; };
 		8F8DCD361C28FC4500C26296 /* HomeNoticeCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8DCD351C28FC4500C26296 /* HomeNoticeCellModel.m */; };
 		8F974A641C34FF3800F10975 /* HomeRecommenLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F974A631C34FF3800F10975 /* HomeRecommenLayout.m */; };
 		8F974A671C34FF6E00F10975 /* HomeRecommendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F974A661C34FF6E00F10975 /* HomeRecommendView.m */; };
@@ -2478,6 +2480,9 @@
 		8F8B0B241C4F3655000E9A26 /* StoreDetailStrategyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreDetailStrategyCell.h; sourceTree = "<group>"; };
 		8F8B0B251C4F3655000E9A26 /* StoreDetailStrategyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreDetailStrategyCell.m; sourceTree = "<group>"; };
 		8F8B0B261C4F3655000E9A26 /* StoreDetailStrategyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreDetailStrategyCell.xib; sourceTree = "<group>"; };
+		8F8B0B2E1C4F6670000E9A26 /* HomeViewRecommendNewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewRecommendNewCell.h; sourceTree = "<group>"; };
+		8F8B0B2F1C4F6670000E9A26 /* HomeViewRecommendNewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewRecommendNewCell.m; sourceTree = "<group>"; };
+		8F8B0B301C4F6670000E9A26 /* HomeViewRecommendNewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewRecommendNewCell.xib; sourceTree = "<group>"; };
 		8F8DCD341C28FC4500C26296 /* HomeNoticeCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeNoticeCellModel.h; sourceTree = "<group>"; };
 		8F8DCD351C28FC4500C26296 /* HomeNoticeCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeNoticeCellModel.m; sourceTree = "<group>"; };
 		8F974A621C34FF3800F10975 /* HomeRecommenLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeRecommenLayout.h; sourceTree = "<group>"; };
@@ -5325,6 +5330,9 @@
 				8F463E041C35070A00C13D5A /* HomeViewRecommendCell.h */,
 				8F463E051C35070A00C13D5A /* HomeViewRecommendCell.m */,
 				8F463E061C35070A00C13D5A /* HomeViewRecommendCell.xib */,
+				8F8B0B2E1C4F6670000E9A26 /* HomeViewRecommendNewCell.h */,
+				8F8B0B2F1C4F6670000E9A26 /* HomeViewRecommendNewCell.m */,
+				8F8B0B301C4F6670000E9A26 /* HomeViewRecommendNewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -6134,6 +6142,7 @@
 				1EFFAE0C1BEB7925001D4245 /* WeiboSDK.bundle in Resources */,
 				1E827CCE1B9BE9B9008F3F08 /* CouponListViewSegmentCell.xib in Resources */,
 				1EFFADFD1BEAFB02001D4245 /* UserRoleSelectViewController.xib in Resources */,
+				8F8B0B321C4F6670000E9A26 /* HomeViewRecommendNewCell.xib in Resources */,
 				1E0B7B611B70A9A900A58AD4 /* ProjectResources.bundle in Resources */,
 				1E8EFD061B68782300D00808 /* CommentListViewSegmentCell.xib in Resources */,
 				8F30D5E31C3BF70B004EE892 /* coupon_cellBG_d.png in Resources */,
@@ -6595,6 +6604,7 @@
 				1E943F001B7B23070029FE74 /* AppointmentOrderListViewController.m in Sources */,
 				1E3D8D8A1B4BF4A100275C35 /* ASICloudFilesCDNRequest.m in Sources */,
 				1EC4A0D71B5A001C00206BB9 /* StoreDetailViewController.m in Sources */,
+				8F8B0B311C4F6670000E9A26 /* HomeViewRecommendNewCell.m in Sources */,
 				8FD213C61C0949E60073F2CA /* CommentScoreConfigModel.m in Sources */,
 				1E3D8CD91B4BF4A100275C35 /* IcsonADList.xcdatamodeld in Sources */,
 				1E0B7A8F1B6F67B800A58AD4 /* GBannersView.m in Sources */,
