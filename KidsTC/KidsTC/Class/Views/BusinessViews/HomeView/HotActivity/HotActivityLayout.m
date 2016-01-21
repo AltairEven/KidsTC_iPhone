@@ -8,6 +8,8 @@
 
 #import "HotActivityLayout.h"
 
+#define CellGap (10)
+
 @interface HotActivityLayout ()
 
 @property (nonatomic, assign) CGSize collectionViewSize;
@@ -28,7 +30,7 @@
 
 
 - (void)prepareLayout {
-    self.cellWidth = [[UIScreen mainScreen] bounds].size.width / 2 - BORDER_WIDTH;
+    self.cellWidth = ([[UIScreen mainScreen] bounds].size.width - CellGap * 3) / 2;
 }
 
 
@@ -55,8 +57,8 @@
     }
     
     UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
-    CGFloat xOrigin = indexPath.section * (self.cellWidth + BORDER_WIDTH);
-    CGFloat yOrigin = indexPath.row * ([self cellHeight] + BORDER_WIDTH) + BORDER_WIDTH;
+    CGFloat xOrigin = indexPath.section * (self.cellWidth + CellGap) + CellGap;
+    CGFloat yOrigin = indexPath.row * ([self cellHeight] + CellGap) + CellGap;
     CGFloat cellWidth = self.cellWidth;
 //    if ([self isSingleAtIndexPath:indexPath]) {
 //        xOrigin = 0;
@@ -74,8 +76,8 @@
     self.sectionNumber = [self.collectionView numberOfSections];
     self.rowNumber = [self.collectionView numberOfItemsInSection:0];
     
-    CGFloat width = (self.sectionNumber * self.cellWidth) + (self.sectionNumber - 1) * BORDER_WIDTH;
-    CGFloat height = (self.rowNumber * [self cellHeight]) + (self.rowNumber + 1) * BORDER_WIDTH;
+    CGFloat width = (self.sectionNumber * self.cellWidth) + (self.sectionNumber - 1) * CellGap;
+    CGFloat height = (self.rowNumber * [self cellHeight]) + (self.rowNumber + 1) * CellGap;
     
     self.collectionViewSize = CGSizeMake(width, height);
     return self.collectionViewSize;
@@ -99,7 +101,7 @@
 
 
 - (CGFloat)cellHeight {
-    return self.ratio * (SCREEN_WIDTH / 2);
+    return self.ratio * self.cellWidth;
 }
 
 

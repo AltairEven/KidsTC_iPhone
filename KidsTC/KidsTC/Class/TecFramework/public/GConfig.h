@@ -615,6 +615,7 @@ static const int kInvalidShowPrice = 99999900;
 + (CGFloat)heightForLabelWithWidth:(CGFloat)width LineBreakMode:(NSLineBreakMode)mode Font:(UIFont *)font topGap:(CGFloat)tGap bottomGap:(CGFloat)bGap maxLine:(NSUInteger)line andText:(NSString *)text;
 
 + (void)resetLineView:(UIView *)view withLayoutAttribute:(NSLayoutAttribute)attribute;
++ (void)resetLineView:(UIView *)view withLayoutAttribute:(NSLayoutAttribute)attribute constant:(CGFloat)constant;
 
 + (NSString *)generateSMSCodeKey;
 

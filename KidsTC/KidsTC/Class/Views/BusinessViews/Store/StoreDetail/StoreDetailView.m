@@ -20,8 +20,8 @@
 #import "TTTAttributedLabel.h"
 
 #define ServiceMaxDisplayCount (3)
-#define HotRecommendMaxDisplayCount (3)
-#define StrategyMaxDisplayCount (3)
+#define HotRecommendMaxDisplayCount (1)
+#define StrategyMaxDisplayCount (1)
 
 typedef enum {
     StoreDetailViewSectionTop = 0,
@@ -99,6 +99,8 @@ static NSString *const kStrategyCellIdentifier = @"kStrategyCellIdentifier";
 - (void)didTappedOnAddressBrief;
 - (IBAction)didClickedCouponButton:(id)sender;
 
+- (void)didTappedOnStoreNearby:(id)sender;
+
 @end
 
 @implementation StoreDetailView
@@ -129,6 +131,7 @@ static NSString *const kStrategyCellIdentifier = @"kStrategyCellIdentifier";
     
     self.bannerScrollView.dataSource = self;
     [self.bannerScrollView setRecyclable:YES];
+    [self.bannerScrollView setShowPageIndex:NO];
     
     [self.storeBriefLabel setDelegate:self];
     NSDictionary *linkAttr = [NSDictionary dictionaryWithObjectsAndKeys:[[KTCThemeManager manager] defaultTheme].globalThemeColor, NSForegroundColorAttributeName, [NSNumber numberWithBool:YES], NSUnderlineStyleAttributeName, nil];
@@ -200,6 +203,8 @@ static NSString *const kStrategyCellIdentifier = @"kStrategyCellIdentifier";
         NSDictionary *dictionnary = [[NSDictionary alloc] initWithObjectsAndKeys:newUserAgent, @"UserAgent", nil];
         [[NSUserDefaults standardUserDefaults] registerDefaults:dictionnary];
     }
+    
+    [self.nearbyBGView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
 }
 
 #pragma mark UITableViewDataSource & UITableViewDelegate
@@ -245,7 +250,7 @@ static NSString *const kStrategyCellIdentifier = @"kStrategyCellIdentifier";
         {
             NSUInteger count = [[self.detailModel.hotRecommedService recommendItems] count];
             if (count > HotRecommendMaxDisplayCount) {
-                //最多3个
+                //最多1个
                 count = HotRecommendMaxDisplayCount;
             }
             if (count > 0) {
@@ -288,7 +293,7 @@ static NSString *const kStrategyCellIdentifier = @"kStrategyCellIdentifier";
         {
             NSUInteger count = [self.detailModel.strategyModelsArray count];
             if (count > StrategyMaxDisplayCount) {
-                //最多3个
+                //最多1个
                 count = StrategyMaxDisplayCount;
             }
             if (count > 0) {
@@ -506,7 +511,8 @@ static NSString *const kStrategyCellIdentifier = @"kStrategyCellIdentifier";
             if (indexPath.row == 0) {
                 height = [StoreDetailTitleCell cellHeight];
             } else {
-                height = [StoreDetailStrategyCell cellHeight];
+                StoreRelatedStrategyModel *model = [self.detailModel.strategyModelsArray objectAtIndex:indexPath.row - 1];
+                height = [model cellHeight];
             }
         }
             break;
@@ -657,7 +663,7 @@ static NSString *const kStrategyCellIdentifier = @"kStrategyCellIdentifier";
 
 
 - (CGFloat)heightForBannerScrollView:(AUIBannerScrollView *)scrollView {
-    return self.detailModel.bannerRatio * SCREEN_WIDTH;
+    return self.detailModel.imageRatio * SCREEN_WIDTH;
 }
 
 #pragma mark StoreDetailCommentCellDelegate
@@ -681,11 +687,7 @@ static NSString *const kStrategyCellIdentifier = @"kStrategyCellIdentifier";
 #pragma mark UIWebViewDelegate
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-    NSUInteger sectionIndex = [self.sectionIdentifiersArray indexOfObject:[NSNumber numberWithInteger:StoreDetailViewSectionDetailInfo]];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:sectionIndex];
-    if (indexPath) {
-        [self.tableView reloadData];
-    }
+    [self.tableView reloadData];
     if (![self.detailInfoView isLoading]) {
         [self.detailInfoView.scrollView setContentOffset:CGPointMake(self.detailInfoView.scrollView.contentOffset.x, 0)];
         [self.detailInfoView.scrollView setScrollEnabled:NO];
@@ -726,6 +728,8 @@ static NSString *const kStrategyCellIdentifier = @"kStrategyCellIdentifier";
 }
 
 - (void)configTopCell {
+    [GConfig resetLineView:self.bannerScrollView withLayoutAttribute:NSLayoutAttributeHeight constant:self.detailModel.imageRatio * SCREEN_WIDTH];
+    
     if ([self.detailModel.storeAddress length] > 0) {
         [self.storeAddressBriefBGView setHidden:NO];
         [self.storeAddressBriefLabel setText:self.detailModel.storeAddress];
@@ -810,7 +814,7 @@ static NSString *const kStrategyCellIdentifier = @"kStrategyCellIdentifier";
         case StoreDetailViewSectionStrategy:
         {
             NSString *subTitle = nil;
-            if ([self.detailModel.serviceModelsArray count] > StrategyMaxDisplayCount) {
+            if ([self.detailModel.strategyModelsArray count] > StrategyMaxDisplayCount) {
                 subTitle = @"更多";
             }
             [cell resetWithMainTitle:@"经验说" subTitle:subTitle];
@@ -842,11 +846,17 @@ static NSString *const kStrategyCellIdentifier = @"kStrategyCellIdentifier";
 }
 
 - (void)configNearbyCell {
-    [self.nearbyBGView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
+    for (UIView *subview in self.nearbyBGView.subviews) {
+        UIGestureRecognizer *gesRec = [subview.gestureRecognizers firstObject];
+        if (gesRec) {
+            [subview removeGestureRecognizer:gesRec];
+        }
+        [subview removeFromSuperview];
+    }
     
     CGFloat gap = 0.5;
     CGFloat singleWidth = (SCREEN_WIDTH - gap * 2) / 3;
-    CGFloat singleHeight = 30;
+    CGFloat singleHeight = 40;
     
     CGFloat xPosition = 0;
     CGFloat yPosition = 0;
@@ -863,6 +873,7 @@ static NSString *const kStrategyCellIdentifier = @"kStrategyCellIdentifier";
         StoreDetailNearbyModel *model = [self.detailModel.nearbyFacilities objectAtIndex:index];
         
         UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(xPosition, yPosition, singleWidth, singleHeight)];
+        bgView.tag = index;
         [bgView setBackgroundColor:[UIColor clearColor]];
         [self.nearbyBGView addSubview:bgView];
         
@@ -882,25 +893,31 @@ static NSString *const kStrategyCellIdentifier = @"kStrategyCellIdentifier";
         
         if (index < nearbyCount - 1) {
             //非最后一个
-            if (index % 3 >= 2) {
+            if (index % 3 < 2) {
+                //行内
+                xPosition += singleWidth;
+                
+                UIView *vGapView = [[UIView alloc] initWithFrame:CGRectMake(xPosition, yPosition + margin, gap, imageSideLenght)];
+                [vGapView setBackgroundColor:gapColor];
+                [self.nearbyBGView addSubview:vGapView];
+                
+                xPosition += gap;
+                
+            } else {
                 //换行
                 xPosition = 0;
                 yPosition += singleHeight;
                 
-                UIView *gapView = [[UIView alloc] initWithFrame:CGRectMake(xPosition + margin, yPosition, SCREEN_WIDTH - margin * 2, gap)];
-                [gapView setBackgroundColor:gapColor];
-                [bgView addSubview:gapView];
-                
-            } else {
-                //行内
-                xPosition += singleWidth;
-                
-                UIView *gapView = [[UIView alloc] initWithFrame:CGRectMake(xPosition, yPosition + margin, gap, imageSideLenght)];
-                [gapView setBackgroundColor:gapColor];
-                [bgView addSubview:gapView];
-                
-                xPosition += gap;
+                UIView *hGapView = [[UIView alloc] initWithFrame:CGRectMake(margin, yPosition, SCREEN_WIDTH - margin * 2, gap)];
+                [hGapView setBackgroundColor:gapColor];
+                [self.nearbyBGView addSubview:hGapView];
             }
+        }
+        
+        if (model.hasInfo) {
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTappedOnStoreNearby:)];
+            [bgView addGestureRecognizer:tap];
+            [label setTextColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
         }
     }
 }
@@ -914,6 +931,13 @@ static NSString *const kStrategyCellIdentifier = @"kStrategyCellIdentifier";
 - (IBAction)didClickedCouponButton:(id)sender {
     if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedCouponButtonOnStoreDetailView:)]) {
         [self.delegate didClickedCouponButtonOnStoreDetailView:self];
+    }
+}
+
+- (void)didTappedOnStoreNearby:(id)sender {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(storeDetailView:didClickedNearbyAtIndex:)]) {
+        UIView *view = ((UITapGestureRecognizer *)sender).view;
+        [self.delegate storeDetailView:self didClickedNearbyAtIndex:view.tag];
     }
 }
 

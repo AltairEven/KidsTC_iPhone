@@ -44,6 +44,7 @@
         }
         self.narrowImageUrls = [NSArray arrayWithArray:tempArray];
     }
+    self.imageRatio = [[data objectForKey:@"picRate"] floatValue];
     self.relationType = (CommentRelationType)[[data objectForKey:@"productType"] integerValue];
     
     self.serviceName = [data objectForKey:@"serveName"];
@@ -64,9 +65,10 @@
     if (![self.serviceContent isKindOfClass:[NSString class]]) {
         self.serviceContent = @"";
     }
-    NSArray *coupons = [data objectForKey:@"coupons"];
+    NSArray *coupons = [data objectForKey:@"coupon_provide"];
     if ([coupons isKindOfClass:[NSArray class]] && [coupons count] > 0) {
-        self.couponName = [coupons firstObject];
+        self.couponName = [[coupons firstObject] objectForKey:@"name"];
+        self.couponProvideCount = [[[coupons firstObject] objectForKey:@"provideNum"] integerValue];
     }
     self.couponUrlString = [data objectForKey:@"couponLink"];
     
@@ -192,7 +194,7 @@
 
 - (CGFloat)topCellHeight {
     //image
-    CGFloat height = SCREEN_WIDTH * 0.6;
+    CGFloat height = SCREEN_WIDTH * self.imageRatio;
     //service name
     height += [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 10 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:17] topGap:10 bottomGap:10 maxLine:3 andText:self.serviceName];
     //service description

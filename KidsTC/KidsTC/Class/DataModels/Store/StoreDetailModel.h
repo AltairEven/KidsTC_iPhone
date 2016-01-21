@@ -16,7 +16,7 @@
 #import "StoreDetailNearbyModel.h"
 #import "CommonShareObject.h"
 #import "TextSegueModel.h"
-#import "ParentingStrategyListItemModel.h"
+#import "StoreRelatedStrategyModel.h"
 
 @interface StoreDetailModel : NSObject
 
@@ -24,7 +24,9 @@
 
 @property (nonatomic, strong) NSArray *imageUrls;
 
-@property (nonatomic, assign) CGFloat bannerRatio;
+@property (nonatomic, assign) CGFloat imageRatio;
+
+@property (nonatomic, strong) NSArray *narrowImageUrls;
 
 @property (nonatomic, copy) NSString *storeName;
 
@@ -74,7 +76,7 @@
 
 @property (nonatomic, strong) NSArray<StoreOwnedServiceModel *> *serviceModelsArray;
 
-@property (nonatomic, strong) NSArray<ParentingStrategyListItemModel *> *strategyModelsArray;
+@property (nonatomic, strong) NSArray<StoreRelatedStrategyModel *> *strategyModelsArray;
 
 @property (nonatomic, assign) NSUInteger commentAllNumber;
 

@@ -26,7 +26,18 @@
         }
         self.imageUrls = [NSArray arrayWithArray:tempArray];
     }
-    self.bannerRatio = 0.6;
+    self.imageRatio = [[data objectForKey:@"picRate"] floatValue];
+    NSArray *narrowimageUrlStrings = [data objectForKey:@"narrowImg"];
+    if ([narrowimageUrlStrings isKindOfClass:[NSArray class]]) {
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        for (NSString *urlString in narrowimageUrlStrings) {
+            NSURL *url = [NSURL URLWithString:urlString];
+            if (url) {
+                [tempArray addObject:url];
+            }
+        }
+        self.narrowImageUrls = [NSArray arrayWithArray:tempArray];
+    }
     self.storeName = [data objectForKey:@"storeName"];
     self.storeShortName = [data objectForKey:@"simpleName"];
     if (![self.storeShortName isKindOfClass:[NSString class]] || [self.storeShortName length] == 0) {
@@ -102,18 +113,23 @@
     }
     //hot recommend
     self.hotRecommedService = [[StoreDetailHotRecommendModel alloc] initWithRawData:[data objectForKey:@"recommend_product"]];
-    //strategy
-    NSArray *strategies = [data objectForKey:@"strategy"];
-    if ([strategies isKindOfClass:[NSArray class]]) {
-        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-        for (NSDictionary *strategyDic in strategies) {
-            StoreOwnedServiceModel *model = [[StoreOwnedServiceModel alloc] initWithRawData:strategyDic];
-            if (model) {
-                [tempArray addObject:model];
+    //store relation-----------------------------------------------------------
+    NSDictionary *relationDic = [data objectForKey:@"store_relation"];
+    if ([relationDic isKindOfClass:[NSDictionary class]]) {
+        //strategy
+        NSArray *strategies = [relationDic objectForKey:@"relatedExperienceStrategyLs"];
+        if ([strategies isKindOfClass:[NSArray class]]) {
+            NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+            for (NSDictionary *strategyDic in strategies) {
+                StoreRelatedStrategyModel *model = [[StoreRelatedStrategyModel alloc] initWithRawData:strategyDic];
+                if (model) {
+                    [tempArray addObject:model];
+                }
             }
+            self.strategyModelsArray = [NSArray arrayWithArray:tempArray];
         }
-        self.strategyModelsArray = [NSArray arrayWithArray:tempArray];
     }
+    //--------------------------------------------------------------------------
     //recommend
     NSDictionary *recommendDic = [data objectForKey:@"note"];
     if ([recommendDic isKindOfClass:[NSDictionary class]] && [recommendDic count] > 0) {
@@ -188,7 +204,7 @@
 }
 
 - (CGFloat)topCellHeight {
-    CGFloat height = self.bannerRatio * SCREEN_WIDTH;
+    CGFloat height = self.imageRatio * SCREEN_WIDTH;
     height += 30;
     height += [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 20 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:17] topGap:10 bottomGap:10 maxLine:0 andText:self.storeBrief];
     height += 25;
@@ -210,7 +226,7 @@
 
 - (CGFloat)nearbyCellHeight {
     CGFloat gap = 0.5;
-    CGFloat singleHeight = 30;
+    CGFloat singleHeight = 40;
     
     NSUInteger itemCount = [self.nearbyFacilities count];
     CGFloat row = 0;

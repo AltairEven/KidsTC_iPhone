@@ -828,6 +828,10 @@
 		8F5D8E431C047BCB00632390 /* NewsListTagFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5D8E411C047BCB00632390 /* NewsListTagFilterViewController.m */; };
 		8F5D8E441C047BCB00632390 /* NewsListTagFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F5D8E421C047BCB00632390 /* NewsListTagFilterViewController.xib */; };
 		8F5E56BC1C004F7500365ED4 /* KTCPaymentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5E56BB1C004F7500365ED4 /* KTCPaymentInfo.m */; };
+		8F6502AE1C50C88F00C36260 /* KTCPoiMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6502AC1C50C88F00C36260 /* KTCPoiMapViewController.m */; };
+		8F6502AF1C50C88F00C36260 /* KTCPoiMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F6502AD1C50C88F00C36260 /* KTCPoiMapViewController.xib */; };
+		8F6502B21C50CEB900C36260 /* KTCAnnotationTipPoiView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6502B11C50CEB900C36260 /* KTCAnnotationTipPoiView.m */; };
+		8F6502B41C50CEC900C36260 /* KTCAnnotationTipPoiView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F6502B31C50CEC900C36260 /* KTCAnnotationTipPoiView.xib */; };
 		8F6513961BFC96B9003BE006 /* KTCActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6513951BFC96B9003BE006 /* KTCActionView.m */; };
 		8F65D9D51C10335D007CA5BC /* KTCBrowseHistoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F65D9D41C10335D007CA5BC /* KTCBrowseHistoryManager.m */; };
 		8F70F9F01C00749600A175F0 /* AlipayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F70F9EF1C00749600A175F0 /* AlipayManager.m */; };
@@ -877,6 +881,7 @@
 		8F8B0B281C4F3655000E9A26 /* StoreDetailStrategyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F8B0B261C4F3655000E9A26 /* StoreDetailStrategyCell.xib */; };
 		8F8B0B311C4F6670000E9A26 /* HomeViewRecommendNewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8B0B2F1C4F6670000E9A26 /* HomeViewRecommendNewCell.m */; };
 		8F8B0B321C4F6670000E9A26 /* HomeViewRecommendNewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F8B0B301C4F6670000E9A26 /* HomeViewRecommendNewCell.xib */; };
+		8F8B0B351C4FAC2C000E9A26 /* StoreRelatedStrategyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8B0B341C4FAC2C000E9A26 /* StoreRelatedStrategyModel.m */; };
 		8F8DCD361C28FC4500C26296 /* HomeNoticeCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8DCD351C28FC4500C26296 /* HomeNoticeCellModel.m */; };
 		8F974A641C34FF3800F10975 /* HomeRecommenLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F974A631C34FF3800F10975 /* HomeRecommenLayout.m */; };
 		8F974A671C34FF6E00F10975 /* HomeRecommendView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F974A661C34FF6E00F10975 /* HomeRecommendView.m */; };
@@ -2404,6 +2409,12 @@
 		8F5D8E421C047BCB00632390 /* NewsListTagFilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsListTagFilterViewController.xib; sourceTree = "<group>"; };
 		8F5E56BA1C004F7500365ED4 /* KTCPaymentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCPaymentInfo.h; sourceTree = "<group>"; };
 		8F5E56BB1C004F7500365ED4 /* KTCPaymentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCPaymentInfo.m; sourceTree = "<group>"; };
+		8F6502AB1C50C88F00C36260 /* KTCPoiMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCPoiMapViewController.h; sourceTree = "<group>"; };
+		8F6502AC1C50C88F00C36260 /* KTCPoiMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCPoiMapViewController.m; sourceTree = "<group>"; };
+		8F6502AD1C50C88F00C36260 /* KTCPoiMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTCPoiMapViewController.xib; sourceTree = "<group>"; };
+		8F6502B01C50CEB900C36260 /* KTCAnnotationTipPoiView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCAnnotationTipPoiView.h; sourceTree = "<group>"; };
+		8F6502B11C50CEB900C36260 /* KTCAnnotationTipPoiView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCAnnotationTipPoiView.m; sourceTree = "<group>"; };
+		8F6502B31C50CEC900C36260 /* KTCAnnotationTipPoiView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTCAnnotationTipPoiView.xib; sourceTree = "<group>"; };
 		8F6513941BFC96B9003BE006 /* KTCActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCActionView.h; sourceTree = "<group>"; };
 		8F6513951BFC96B9003BE006 /* KTCActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCActionView.m; sourceTree = "<group>"; };
 		8F65D9D31C10335D007CA5BC /* KTCBrowseHistoryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCBrowseHistoryManager.h; sourceTree = "<group>"; };
@@ -2483,6 +2494,8 @@
 		8F8B0B2E1C4F6670000E9A26 /* HomeViewRecommendNewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewRecommendNewCell.h; sourceTree = "<group>"; };
 		8F8B0B2F1C4F6670000E9A26 /* HomeViewRecommendNewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewRecommendNewCell.m; sourceTree = "<group>"; };
 		8F8B0B301C4F6670000E9A26 /* HomeViewRecommendNewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewRecommendNewCell.xib; sourceTree = "<group>"; };
+		8F8B0B331C4FAC2C000E9A26 /* StoreRelatedStrategyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreRelatedStrategyModel.h; sourceTree = "<group>"; };
+		8F8B0B341C4FAC2C000E9A26 /* StoreRelatedStrategyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreRelatedStrategyModel.m; sourceTree = "<group>"; };
 		8F8DCD341C28FC4500C26296 /* HomeNoticeCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeNoticeCellModel.h; sourceTree = "<group>"; };
 		8F8DCD351C28FC4500C26296 /* HomeNoticeCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeNoticeCellModel.m; sourceTree = "<group>"; };
 		8F974A621C34FF3800F10975 /* HomeRecommenLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeRecommenLayout.h; sourceTree = "<group>"; };
@@ -4205,6 +4218,8 @@
 				1E15F9881BDF21D5000C74E7 /* StoreDetailNearbyModel.m */,
 				1E943F841B832FCE0029FE74 /* StoreAppointmentModel.h */,
 				1E943F851B832FCE0029FE74 /* StoreAppointmentModel.m */,
+				8F8B0B331C4FAC2C000E9A26 /* StoreRelatedStrategyModel.h */,
+				8F8B0B341C4FAC2C000E9A26 /* StoreRelatedStrategyModel.m */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -4533,6 +4548,9 @@
 				8FCD6CF61C43ADF2000C5E65 /* KTCStoreMapViewController.h */,
 				8FCD6CF71C43ADF2000C5E65 /* KTCStoreMapViewController.mm */,
 				8FCD6CF81C43ADF2000C5E65 /* KTCStoreMapViewController.xib */,
+				8F6502AB1C50C88F00C36260 /* KTCPoiMapViewController.h */,
+				8F6502AC1C50C88F00C36260 /* KTCPoiMapViewController.m */,
+				8F6502AD1C50C88F00C36260 /* KTCPoiMapViewController.xib */,
 				8F3DB9FD1C21A0AB0098A299 /* RouteAnnotation.h */,
 				8F3DB9FE1C21A0AB0098A299 /* RouteAnnotation.m */,
 				8F3DBA001C21A2410098A299 /* KTCMapUtil.h */,
@@ -5474,6 +5492,9 @@
 				8F1206221C1A622700662E01 /* KTCAnnotationTipWelfareItemView.h */,
 				8F1206231C1A622700662E01 /* KTCAnnotationTipWelfareItemView.m */,
 				8F1206241C1A622700662E01 /* KTCAnnotationTipWelfareItemView.xib */,
+				8F6502B01C50CEB900C36260 /* KTCAnnotationTipPoiView.h */,
+				8F6502B11C50CEB900C36260 /* KTCAnnotationTipPoiView.m */,
+				8F6502B31C50CEC900C36260 /* KTCAnnotationTipPoiView.xib */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -6069,6 +6090,7 @@
 				1EA8B6CE1B66080400F90688 /* CategoryView.xib in Resources */,
 				8FF57C101BF5EE56006867D2 /* ImageTrimViewController.xib in Resources */,
 				1E943EE51B7A19A00029FE74 /* AppointmentOrderListView.xib in Resources */,
+				8F6502B41C50CEC900C36260 /* KTCAnnotationTipPoiView.xib in Resources */,
 				8F85ADBC1C0EBC9300890526 /* NewsSearchResultListView.xib in Resources */,
 				1EC73C5B1B61129D008B39EA /* ParentingStrategyFilterView.xib in Resources */,
 				1EC73C4F1B60CCB2008B39EA /* ParentingStrategyViewCell.xib in Resources */,
@@ -6103,6 +6125,7 @@
 				1E0B77E31B6B669000A58AD4 /* KTCSearchFilterView.xib in Resources */,
 				1EC4A0D31B59F1D400206BB9 /* StoreDetailTitleCell.xib in Resources */,
 				1E7995981BCE38020099CFF9 /* HospitalListViewController.xib in Resources */,
+				8F6502AF1C50C88F00C36260 /* KTCPoiMapViewController.xib in Resources */,
 				1E7600441B57585D00DF0972 /* ServiceDetailBottomView.xib in Resources */,
 				1E8EFD011B68770400D00808 /* CommentListView.xib in Resources */,
 				8F463E081C35070A00C13D5A /* HomeViewRecommendCell.xib in Resources */,
@@ -6640,6 +6663,7 @@
 				1E0B7AD11B6F67B800A58AD4 /* UnderlineUILabel.m in Sources */,
 				1E943E9C1B71E7CD0029FE74 /* UIColor+GColor.m in Sources */,
 				1E0B7AC81B6F67B800A58AD4 /* ShakingView.m in Sources */,
+				8F6502B21C50CEB900C36260 /* KTCAnnotationTipPoiView.m in Sources */,
 				1E15F99D1BDF79D3000C74E7 /* CommentDetailViewStrategyHeaderCell.m in Sources */,
 				8FC36E2C1C325E4C0079D458 /* mztools.c in Sources */,
 				1E15F9891BDF21D5000C74E7 /* StoreDetailNearbyModel.m in Sources */,
@@ -6652,6 +6676,7 @@
 				1E0B7B4D1B6F891100A58AD4 /* AddressValidator.m in Sources */,
 				1EC73BFE1B5F4FD0008B39EA /* HomeMoreTitleCellModel.m in Sources */,
 				1EC73BAD1B5E25A4008B39EA /* TwinklingElvesLayout.m in Sources */,
+				8F6502AE1C50C88F00C36260 /* KTCPoiMapViewController.m in Sources */,
 				1E827CBF1B9BDE8F008F3F08 /* CouponBaseModel.m in Sources */,
 				1E3D8D451B4BF4A100275C35 /* DDFileLogger.m in Sources */,
 				8F7F76F81C4A46950035413A /* StoreDetailServiceCell.m in Sources */,
@@ -6695,6 +6720,7 @@
 				1E0B7ACF1B6F67B800A58AD4 /* UITextField+HideKeyboard.m in Sources */,
 				1EFD19401B4E1F1100767021 /* OrderDetailView.m in Sources */,
 				1E827CA41B94144E008F3F08 /* SDWebImageDownloader.m in Sources */,
+				8F8B0B351C4FAC2C000E9A26 /* StoreRelatedStrategyModel.m in Sources */,
 				1E0B78021B6F429100A58AD4 /* KTCSearchSortFilterView.m in Sources */,
 				8F25A12B1C2D1D170076A6FA /* ATRefreshViewHeader.m in Sources */,
 				1EC73BA11B5E25A4008B39EA /* HotActivityGroupView.m in Sources */,

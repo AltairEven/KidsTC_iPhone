@@ -27,7 +27,6 @@ typedef enum {
     ServiceDetailTableCellTagActivity
 }ServiceDetailTableCellTag;
 
-#define BannerRatio (0.6)
 #define SectionGap (10)
 #define SegmentViewHeight (40)
 
@@ -66,6 +65,7 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
 @property (weak, nonatomic) IBOutlet InsuranceView *InsuranceView;
 //coupon
 @property (weak, nonatomic) IBOutlet UILabel *couponTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *couponSubTitleLabel;
 //content
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 //notice
@@ -140,6 +140,7 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
     
     self.bannerScrollView.dataSource = self;
     [self.bannerScrollView setRecyclable:YES];
+    [self.bannerScrollView setShowPageIndex:NO];
     
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTappedOnStoreBrief)];
@@ -386,7 +387,7 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
 
 
 - (CGFloat)heightForBannerScrollView:(AUIBannerScrollView *)scrollView {
-    return SCREEN_WIDTH * BannerRatio;
+    return SCREEN_WIDTH * self.detailModel.imageRatio;
 }
 
 #pragma mark AUISegmentViewDataSource & AUISegmentViewDelegate
@@ -530,6 +531,7 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
 - (void)configTopCell {
     //banner
     [self.bannerScrollView reloadData];
+    [GConfig resetLineView:self.bannerScrollView withLayoutAttribute:NSLayoutAttributeHeight constant:self.detailModel.imageRatio * SCREEN_WIDTH];
     //store brief
     NSUInteger storeCount = [self.detailModel.storeItemsArray count];
     if (storeCount > 1) {
@@ -591,6 +593,17 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
 
 - (void)configCouponCell {
     [self.couponTitleLabel setText:self.detailModel.couponName];
+    [self.couponSubTitleLabel setText:self.detailModel.couponName];
+    if (self.detailModel.couponProvideCount > 0) {
+        NSString *countString = [NSString stringWithFormat:@"%lu", (unsigned long)self.detailModel.couponProvideCount];
+        NSString *wholeString = [NSString stringWithFormat:@"已有%@人领用", countString];
+        NSMutableAttributedString *labelString = [[NSMutableAttributedString alloc] initWithString:wholeString];
+        NSDictionary *attribute = [NSDictionary dictionaryWithObject:[[KTCThemeManager manager] defaultTheme].highlightTextColor forKey:NSForegroundColorAttributeName];
+        [labelString setAttributes:attribute range:NSMakeRange(2, [countString length])];
+        [self.couponSubTitleLabel setAttributedText:labelString];
+    } else {
+        [self.couponSubTitleLabel setText:@"更多优惠券"];
+    }
 }
 
 - (void)configContentCell {

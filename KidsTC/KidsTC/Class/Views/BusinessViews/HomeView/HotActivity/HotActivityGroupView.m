@@ -53,6 +53,8 @@
     self.collectionView.delegate = self;
     
     [self.collectionView registerClass:[HotActivityGroupViewCell class] forCellWithReuseIdentifier:kHotActivityCellIdentifier];
+    
+    [self.collectionView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
 }
 
 - (void)setRatio:(CGFloat)ratio {

@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -30,6 +29,7 @@
                 <outlet property="contentCell" destination="jVd-A1-i7V" id="ufq-Ed-IVI"/>
                 <outlet property="contentLabel" destination="i1A-G0-CQf" id="sUo-Ui-km8"/>
                 <outlet property="couponCell" destination="L8f-WK-1ab" id="tG2-NC-6k4"/>
+                <outlet property="couponSubTitleLabel" destination="Dt4-YS-Dic" id="0XU-VZ-UE7"/>
                 <outlet property="couponTitleLabel" destination="iBt-xD-fX4" id="chL-em-dKN"/>
                 <outlet property="noticeBGView" destination="kGV-yB-1MF" id="JQa-8o-IWP"/>
                 <outlet property="noticeCell" destination="bhY-cA-oMa" id="lmP-UL-dS8"/>
@@ -69,7 +69,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="411" height="246.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" secondItem="7dk-sl-uzs" secondAttribute="width" multiplier="6:10" id="l6H-1N-t3l"/>
+                                    <constraint firstAttribute="height" constant="246.5" id="IJ6-EE-Ygz"/>
                                 </constraints>
                             </view>
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hqn-Hn-lH0" userLabel="alphaView">

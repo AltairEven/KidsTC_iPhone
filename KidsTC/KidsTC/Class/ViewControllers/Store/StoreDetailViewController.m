@@ -29,6 +29,7 @@
 #import "KTCStoreMapViewController.h"
 #import "KTCSegueMaster.h"
 #import "CommentDetailViewController.h"
+#import "KTCPoiMapViewController.h"
 
 @interface StoreDetailViewController () <StoreDetailViewDelegate, StoreDetailBottomViewDelegate, KTCActionViewDelegate, KTCBrowseHistoryViewDataSource, KTCBrowseHistoryViewDelegate, CommentFoundingViewControllerDelegate>
 
@@ -213,6 +214,24 @@
 
 - (void)storeDetailView:(StoreDetailView *)detailView didSelectedLinkWithSegueModel:(HomeSegueModel *)model {
     [KTCSegueMaster makeSegueWithModel:model fromController:self];
+}
+
+- (void)storeDetailView:(StoreDetailView *)detailView didClickedNearbyAtIndex:(NSUInteger)index {
+    StoreDetailNearbyModel *model = [self.viewModel.detailModel.nearbyFacilities objectAtIndex:index];
+    if (model.locations) {
+        KTCPoiMapViewController *controller = [[KTCPoiMapViewController alloc] initWithLocations:model.locations];
+        [controller setHidesBottomBarWhenPushed:YES];
+        [self.navigationController pushViewController:controller animated:YES];
+    } else if (model.itemDescriptions) {
+        NSMutableString *showingString = [[NSMutableString alloc] init];
+        for (NSString *string in model.itemDescriptions) {
+            [showingString appendFormat:@"%@\n", string];
+        }
+        UIAlertController *controller = [UIAlertController alertControllerWithTitle:model.name message:showingString preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+        [controller addAction:action];
+        [self presentViewController:controller animated:YES completion:nil];
+    }
 }
 
 

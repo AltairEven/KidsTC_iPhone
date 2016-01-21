@@ -7,13 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ParentingStrategyListItemModel.h"
+#import "StoreRelatedStrategyModel.h"
 
 @interface StoreDetailStrategyCell : UITableViewCell
 
-- (void)configWithItemModel:(ParentingStrategyListItemModel *)model;
-
-
-+ (CGFloat)cellHeight;
+- (void)configWithItemModel:(StoreRelatedStrategyModel *)model;
 
 @end

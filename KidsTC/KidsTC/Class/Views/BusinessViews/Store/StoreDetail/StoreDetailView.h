@@ -46,6 +46,8 @@
 
 - (void)storeDetailView:(StoreDetailView *)detailView didSelectedLinkWithSegueModel:(HomeSegueModel *)model;
 
+- (void)storeDetailView:(StoreDetailView *)detailView didClickedNearbyAtIndex:(NSUInteger)index;
+
 @end
 
 @interface StoreDetailView : UIView

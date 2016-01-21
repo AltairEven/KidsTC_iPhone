@@ -539,6 +539,18 @@ static BOOL bLoadWebImage = YES;
     }
 }
 
++ (void)resetLineView:(UIView *)view withLayoutAttribute:(NSLayoutAttribute)attribute constant:(CGFloat)constant {
+    NSArray *leftBorderConstraintsArray = [view constraints];
+    for (NSLayoutConstraint *constraint in leftBorderConstraintsArray) {
+        if (constraint.firstAttribute == attribute) {
+            //height constraint
+            //new
+            constraint.constant = constant;
+            break;
+        }
+    }
+}
+
 + (NSString *)generateSMSCodeKey {
     NSString *deviceId = [[UIDevice currentDevice] uniqueDeviceIdentifier];
     NSTimeInterval timeStamp = [NSDate timeIntervalSinceReferenceDate];

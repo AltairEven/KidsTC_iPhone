@@ -195,12 +195,15 @@
 - (void)mapView:(BMKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
     if ([self.routeTypeButton isHidden] && self.selectedStore) {
         for (BMKAnnotationView *view in views) {
-            NSUInteger index = ((RouteAnnotation *)view.annotation).tag;
-            if ([self.storeItems count] > index) {
-                StoreListItemModel *model = [self.storeItems objectAtIndex:index];
-                if ([model.identifier isEqualToString:self.selectedStore.identifier]) {
-                    [self.mapView selectAnnotation:view.annotation animated:YES];
-                    break;
+            RouteAnnotation *anno = view.annotation;
+            if ([anno isKindOfClass:[RouteAnnotation class]]) {
+                NSUInteger index = anno.tag;
+                if ([self.storeItems count] > index) {
+                    StoreListItemModel *model = [self.storeItems objectAtIndex:index];
+                    if ([model.identifier isEqualToString:self.selectedStore.identifier]) {
+                        [self.mapView selectAnnotation:view.annotation animated:YES];
+                        break;
+                    }
                 }
             }
         }

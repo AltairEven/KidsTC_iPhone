@@ -42,10 +42,7 @@
     // Configure the view for the selected state
 }
 
-- (void)configWithItemModel:(ParentingStrategyListItemModel *)model {
-    if (!model) {
-        return;
-    }
+- (void)configWithItemModel:(StoreRelatedStrategyModel *)model {
     //image view
     NSArray *constraintsArray = [self.cellImageView constraints];
     for (NSLayoutConstraint *constraint in constraintsArray) {
@@ -56,16 +53,11 @@
     }
     [self.cellImageView setImageWithURL:model.imageUrl placeholderImage:PLACEHOLDERIMAGE_BIG];
     [self.titleLabel setText:model.title];
-    [self.editorLabel setText:model.editorName];
+    [self.editorLabel setText:model.author];
     [self.viewCountLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)model.viewCount]];
     [self.commentCountLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)model.commentCount]];
     [self.hotImageView setHidden:!model.isHot];
     [self.recommendLabel setHidden:!model.isRecommend];
-}
-
-
-+ (CGFloat)cellHeight {
-    return 0.6 * SCREEN_WIDTH;
 }
 
 @end

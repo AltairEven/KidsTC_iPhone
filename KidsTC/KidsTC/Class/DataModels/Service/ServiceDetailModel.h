@@ -28,6 +28,8 @@
 
 @property (nonatomic, strong) NSArray *imageUrls;
 
+@property (nonatomic, assign) CGFloat imageRatio;
+
 @property (nonatomic, strong) NSArray *narrowImageUrls;
 
 @property (nonatomic, copy) NSString *serviceName;
@@ -61,6 +63,8 @@
 @property (nonatomic, copy) NSString *serviceContent;
 
 @property (nonatomic, copy) NSString *couponName;
+
+@property (nonatomic, assign) NSUInteger couponProvideCount;
 
 @property (nonatomic, copy) NSString *couponUrlString;
 

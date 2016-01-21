@@ -211,10 +211,15 @@
 }
 
 - (void)changePaymentTypeSucceed:(NSDictionary *)data {
-    KTCPaymentInfo *info = [KTCPaymentInfo instanceWithRawData:[data objectForKey:@"data"]];
-    if (info && info.paymentType != KTCPaymentTypeNone) {
-        self.currentPaymentInfo = info;
-        [self startPayment];
+    NSDictionary *orderInfo = [data objectForKey:@"data"];
+    //支付信息
+    if ([orderInfo isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *payInfo = [orderInfo objectForKey:@"payInfo"];
+        KTCPaymentInfo *info = [KTCPaymentInfo instanceWithRawData:payInfo];
+        if (info && info.paymentType != KTCPaymentTypeNone) {
+            self.currentPaymentInfo = info;
+            [self startPayment];
+        }
     }
 }
 

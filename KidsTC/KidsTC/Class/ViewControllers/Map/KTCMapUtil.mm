@@ -228,8 +228,8 @@ NSString *const kRouteLineStepsKey = @"kRouteLineStepsKey";
         }
     }
     BMKMapRect rect;
-    rect.origin = BMKMapPointMake(ltX - 500 , ltY - 500);
-    rect.size = BMKMapSizeMake(rbX - ltX + 1000, rbY - ltY + 1000);
+    rect.origin = BMKMapPointMake(ltX - 1000 , ltY - 1000);
+    rect.size = BMKMapSizeMake(rbX - ltX + 2000, rbY - ltY + 2000);
     [mapView setVisibleMapRect:rect];
 }
 
