@@ -30,6 +30,10 @@
 #import "KTCSegueMaster.h"
 #import "CommentDetailViewController.h"
 #import "KTCPoiMapViewController.h"
+#import "StoreDetailServiceListViewController.h"
+#import "StoreDetailHotRecommendListViewController.h"
+#import "StoreDetailRelatedStrategyListViewController.h"
+#import "ParentingStrategyDetailViewController.h"
 
 @interface StoreDetailViewController () <StoreDetailViewDelegate, StoreDetailBottomViewDelegate, KTCActionViewDelegate, KTCBrowseHistoryViewDataSource, KTCBrowseHistoryViewDelegate, CommentFoundingViewControllerDelegate>
 
@@ -144,13 +148,43 @@
 //    [self presentViewController:controller animated:YES completion:nil];
 }
 
+- (void)didClickedAllServiceOnStoreDetailView:(StoreDetailView *)detailView {
+    StoreDetailServiceListViewController *controller = [[StoreDetailServiceListViewController alloc] initWithListItemModels:self.viewModel.detailModel.serviceModelsArray];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)storeDetailView:(StoreDetailView *)detailView didClickedServiceAtIndex:(NSUInteger)index {
+    StoreOwnedServiceModel *serviceModel = [self.viewModel.detailModel.serviceModelsArray objectAtIndex:index];
+    ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithServiceId:serviceModel.serviceId channelId:serviceModel.channelId];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
+    //MTA
+    [MTA trackCustomEvent:@"event_skip_store_servers_dtl" args:nil];
+}
+
 - (void)didClickedAllHotRecommendOnStoreDetailView:(StoreDetailView *)detailView {
-    
+    StoreDetailHotRecommendListViewController *controller = [[StoreDetailHotRecommendListViewController alloc] initWithHotRecommendModel:self.viewModel.detailModel.hotRecommedService];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)storeDetailView:(StoreDetailView *)detailView didSelectedHotRecommendAtIndex:(NSUInteger)index {
     StoreDetailHotRecommendItem *item = [[self.viewModel.detailModel.hotRecommedService recommendItems] objectAtIndex:index];
     ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithServiceId:item.serviceId channelId:item.channelId];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)didClickedAllStrategyOnStoreDetailView:(StoreDetailView *)detailView {
+    StoreDetailRelatedStrategyListViewController *controller = [[StoreDetailRelatedStrategyListViewController alloc] initWithListItemModels:self.viewModel.detailModel.strategyModelsArray];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)storeDetailView:(StoreDetailView *)detailView didSelectedSteategyAtIndex:(NSUInteger)index {
+    StoreRelatedStrategyModel *model = [self.viewModel.detailModel.strategyModelsArray objectAtIndex:index];
+    ParentingStrategyDetailViewController *controller = [[ParentingStrategyDetailViewController alloc] initWithStrategyIdentifier:model.strategyId];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
 }
@@ -200,15 +234,6 @@
     StoreListViewController *controller = [[StoreListViewController alloc] initWithStoreListItemModels:self.viewModel.detailModel.brotherStores];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
-}
-
-- (void)storeDetailView:(StoreDetailView *)detailView didClickedServiceAtIndex:(NSUInteger)index {
-    StoreOwnedServiceModel *serviceModel = [self.viewModel.detailModel.serviceModelsArray objectAtIndex:index];
-    ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithServiceId:serviceModel.serviceId channelId:serviceModel.channelId];
-    [controller setHidesBottomBarWhenPushed:YES];
-    [self.navigationController pushViewController:controller animated:YES];
-    //MTA
-    [MTA trackCustomEvent:@"event_skip_store_servers_dtl" args:nil];
 }
 
 

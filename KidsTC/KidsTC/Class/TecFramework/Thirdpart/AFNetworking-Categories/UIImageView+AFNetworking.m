@@ -147,6 +147,11 @@ static NSUInteger _cacheLength = 0;
         } else {
             self.image = cachedImage;
         }
+        if (self.image == placeholderImage) {
+            [self setContentMode:UIViewContentModeCenter];
+        } else {
+            [self setContentMode:UIViewContentModeScaleToFill];
+        }
 
         self.af_imageRequestOperation = nil;
     } else {

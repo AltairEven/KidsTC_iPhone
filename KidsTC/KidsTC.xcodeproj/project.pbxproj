@@ -832,6 +832,12 @@
 		8F6502AF1C50C88F00C36260 /* KTCPoiMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F6502AD1C50C88F00C36260 /* KTCPoiMapViewController.xib */; };
 		8F6502B21C50CEB900C36260 /* KTCAnnotationTipPoiView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6502B11C50CEB900C36260 /* KTCAnnotationTipPoiView.m */; };
 		8F6502B41C50CEC900C36260 /* KTCAnnotationTipPoiView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F6502B31C50CEC900C36260 /* KTCAnnotationTipPoiView.xib */; };
+		8F6502B81C50D4EB00C36260 /* StoreDetailServiceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6502B61C50D4EB00C36260 /* StoreDetailServiceListViewController.m */; };
+		8F6502B91C50D4EB00C36260 /* StoreDetailServiceListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F6502B71C50D4EB00C36260 /* StoreDetailServiceListViewController.xib */; };
+		8F6502BD1C50D92F00C36260 /* StoreDetailHotRecommendListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6502BB1C50D92F00C36260 /* StoreDetailHotRecommendListViewController.m */; };
+		8F6502BE1C50D92F00C36260 /* StoreDetailHotRecommendListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F6502BC1C50D92F00C36260 /* StoreDetailHotRecommendListViewController.xib */; };
+		8F6502C21C50D9DB00C36260 /* StoreDetailRelatedStrategyListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6502C01C50D9DB00C36260 /* StoreDetailRelatedStrategyListViewController.m */; };
+		8F6502C31C50D9DB00C36260 /* StoreDetailRelatedStrategyListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F6502C11C50D9DB00C36260 /* StoreDetailRelatedStrategyListViewController.xib */; };
 		8F6513961BFC96B9003BE006 /* KTCActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6513951BFC96B9003BE006 /* KTCActionView.m */; };
 		8F65D9D51C10335D007CA5BC /* KTCBrowseHistoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F65D9D41C10335D007CA5BC /* KTCBrowseHistoryManager.m */; };
 		8F70F9F01C00749600A175F0 /* AlipayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F70F9EF1C00749600A175F0 /* AlipayManager.m */; };
@@ -2415,6 +2421,15 @@
 		8F6502B01C50CEB900C36260 /* KTCAnnotationTipPoiView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCAnnotationTipPoiView.h; sourceTree = "<group>"; };
 		8F6502B11C50CEB900C36260 /* KTCAnnotationTipPoiView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCAnnotationTipPoiView.m; sourceTree = "<group>"; };
 		8F6502B31C50CEC900C36260 /* KTCAnnotationTipPoiView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTCAnnotationTipPoiView.xib; sourceTree = "<group>"; };
+		8F6502B51C50D4EB00C36260 /* StoreDetailServiceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreDetailServiceListViewController.h; sourceTree = "<group>"; };
+		8F6502B61C50D4EB00C36260 /* StoreDetailServiceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreDetailServiceListViewController.m; sourceTree = "<group>"; };
+		8F6502B71C50D4EB00C36260 /* StoreDetailServiceListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreDetailServiceListViewController.xib; sourceTree = "<group>"; };
+		8F6502BA1C50D92F00C36260 /* StoreDetailHotRecommendListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreDetailHotRecommendListViewController.h; sourceTree = "<group>"; };
+		8F6502BB1C50D92F00C36260 /* StoreDetailHotRecommendListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreDetailHotRecommendListViewController.m; sourceTree = "<group>"; };
+		8F6502BC1C50D92F00C36260 /* StoreDetailHotRecommendListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreDetailHotRecommendListViewController.xib; sourceTree = "<group>"; };
+		8F6502BF1C50D9DB00C36260 /* StoreDetailRelatedStrategyListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreDetailRelatedStrategyListViewController.h; sourceTree = "<group>"; };
+		8F6502C01C50D9DB00C36260 /* StoreDetailRelatedStrategyListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreDetailRelatedStrategyListViewController.m; sourceTree = "<group>"; };
+		8F6502C11C50D9DB00C36260 /* StoreDetailRelatedStrategyListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreDetailRelatedStrategyListViewController.xib; sourceTree = "<group>"; };
 		8F6513941BFC96B9003BE006 /* KTCActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCActionView.h; sourceTree = "<group>"; };
 		8F6513951BFC96B9003BE006 /* KTCActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCActionView.m; sourceTree = "<group>"; };
 		8F65D9D31C10335D007CA5BC /* KTCBrowseHistoryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCBrowseHistoryManager.h; sourceTree = "<group>"; };
@@ -4239,6 +4254,15 @@
 				1E943F771B831AB60029FE74 /* StoreListViewController.h */,
 				1E943F781B831AB60029FE74 /* StoreListViewController.m */,
 				1E943F791B831AB60029FE74 /* StoreListViewController.xib */,
+				8F6502B51C50D4EB00C36260 /* StoreDetailServiceListViewController.h */,
+				8F6502B61C50D4EB00C36260 /* StoreDetailServiceListViewController.m */,
+				8F6502B71C50D4EB00C36260 /* StoreDetailServiceListViewController.xib */,
+				8F6502BA1C50D92F00C36260 /* StoreDetailHotRecommendListViewController.h */,
+				8F6502BB1C50D92F00C36260 /* StoreDetailHotRecommendListViewController.m */,
+				8F6502BC1C50D92F00C36260 /* StoreDetailHotRecommendListViewController.xib */,
+				8F6502BF1C50D9DB00C36260 /* StoreDetailRelatedStrategyListViewController.h */,
+				8F6502C01C50D9DB00C36260 /* StoreDetailRelatedStrategyListViewController.m */,
+				8F6502C11C50D9DB00C36260 /* StoreDetailRelatedStrategyListViewController.xib */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -5931,6 +5955,7 @@
 				1E15F9A31BDF7A00000C74E7 /* CommentDetailViewNormalHeaderCell.xib in Resources */,
 				1E5CD75A1B510F7900D177CB /* ServiceListViewCell.xib in Resources */,
 				1E827BCE1B941337008F3F08 /* ImageError@2x.png in Resources */,
+				8F6502C31C50D9DB00C36260 /* StoreDetailRelatedStrategyListViewController.xib in Resources */,
 				1E943F421B7DC74B0029FE74 /* HomeViewHorizontalListCell.xib in Resources */,
 				1E827BD51B941337008F3F08 /* ImageSelectedOn@3x.png in Resources */,
 				1EC4A10F1B5CCD1B00206BB9 /* KTCSearchHeaderView.xib in Resources */,
@@ -5990,12 +6015,14 @@
 				1E0B77E91B6B6BAD00A58AD4 /* KTCSearchResultFilterLevel1Cell.xib in Resources */,
 				1EC4A0B11B58ABC200206BB9 /* StoreDetailView.xib in Resources */,
 				8F25A1241C2D1C9C0076A6FA /* MJRefresh.bundle in Resources */,
+				8F6502B91C50D4EB00C36260 /* StoreDetailServiceListViewController.xib in Resources */,
 				1E827BE01B941337008F3F08 /* PlayButtonOverlayLargeTap@2x.png in Resources */,
 				8FA361661C1566B50094A9AA /* loading_empty_child_girl.png in Resources */,
 				1E827BDC1B941337008F3F08 /* PlayButtonOverlayLarge.png in Resources */,
 				1EC73BEC1B5E5FF3008B39EA /* HomeViewThreeCell.xib in Resources */,
 				8FAFABAC1BFF1EC600082F20 /* CommonShareViewController.xib in Resources */,
 				8FBAEAFB1C31703A00A8AFF0 /* HomeViewTwoThreeFourCell.xib in Resources */,
+				8F6502BE1C50D92F00C36260 /* StoreDetailHotRecommendListViewController.xib in Resources */,
 				1E0B77FF1B6F32D300A58AD4 /* KTCSearchAreaFilterView.xib in Resources */,
 				1E7995581BCB96DF0099CFF9 /* ActivityViewController.xib in Resources */,
 				1E15F9C11BE8953C000C74E7 /* AccountSettingViewCell.xib in Resources */,
@@ -6386,6 +6413,7 @@
 				1E0B7A911B6F67B800A58AD4 /* GBigADView.m in Sources */,
 				1E0B7AC21B6F67B800A58AD4 /* ICPopTipView.m in Sources */,
 				1E827CAB1B94144E008F3F08 /* UIImageView+HighlightedWebCache.m in Sources */,
+				8F6502BD1C50D92F00C36260 /* StoreDetailHotRecommendListViewController.m in Sources */,
 				1E79956D1BCD25770099CFF9 /* LoveHouseListView.m in Sources */,
 				1E3D8CDA1B4BF4A100275C35 /* IcsonCity.m in Sources */,
 				1EA8B6D21B66084D00F90688 /* CategoryViewCell.m in Sources */,
@@ -6573,6 +6601,7 @@
 				1E76003E1B56496100DF0972 /* ServiceDetailViewController.m in Sources */,
 				8F38D1EE1C089AB70061C329 /* CommentFoundingModel.m in Sources */,
 				8F65D9D51C10335D007CA5BC /* KTCBrowseHistoryManager.m in Sources */,
+				8F6502B81C50D4EB00C36260 /* StoreDetailServiceListViewController.m in Sources */,
 				1E943ED51B78A4760029FE74 /* FavourateViewModel.m in Sources */,
 				1E0B7A931B6F67B800A58AD4 /* GCheckBox.m in Sources */,
 				1E943F0C1B7B57E40029FE74 /* OrderDetailViewModel.m in Sources */,
@@ -6629,6 +6658,7 @@
 				1EC4A0D71B5A001C00206BB9 /* StoreDetailViewController.m in Sources */,
 				8F8B0B311C4F6670000E9A26 /* HomeViewRecommendNewCell.m in Sources */,
 				8FD213C61C0949E60073F2CA /* CommentScoreConfigModel.m in Sources */,
+				8F6502C21C50D9DB00C36260 /* StoreDetailRelatedStrategyListViewController.m in Sources */,
 				1E3D8CD91B4BF4A100275C35 /* IcsonADList.xcdatamodeld in Sources */,
 				1E0B7A8F1B6F67B800A58AD4 /* GBannersView.m in Sources */,
 				8F8671681C107E29005C838B /* StoreDetailViewCouponCell.m in Sources */,

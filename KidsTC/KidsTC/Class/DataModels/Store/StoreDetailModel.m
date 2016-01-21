@@ -98,7 +98,20 @@
             }
         }
     }
-    self.activeModelsArray = [NSArray arrayWithArray:tempArray];
+    //activity
+    NSArray *fullCut = [data objectForKey:@"fullCut"];
+    if ([fullCut isKindOfClass:[NSArray class]] && [fullCut count] > 0) {
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        for (NSString *fullCutTitle in fullCut) {
+            if ([fullCutTitle isKindOfClass:[NSString class]]) {
+                ActivityLogoItem *item = [[ActivityLogoItem alloc] initWithType:ActivityLogoItemTypeDiscount description:fullCutTitle];
+                if (item) {
+                    [tempArray addObject:item];
+                }
+            }
+        }
+        self.activeModelsArray = [NSArray arrayWithArray:tempArray];
+    }
     //services
     NSArray *services = [data objectForKey:@"serve"];
     if ([services isKindOfClass:[NSArray class]]) {

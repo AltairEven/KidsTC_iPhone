@@ -63,7 +63,9 @@
     if (self) {
         self.itemDescription = [data objectForKey:@"prompt"];
         CLLocationCoordinate2D coord = [GToolUtil coordinateFromString:[data objectForKey:@"mapAddress"]];
-        if (CLLocationCoordinate2DIsValid(coord)) {
+        if (coord.latitude == 0 || coord.longitude == 0) {
+            return self;
+        } else if (CLLocationCoordinate2DIsValid(coord)) {
             CLLocation *loc = [[CLLocation alloc] initWithLatitude:coord.latitude longitude:coord.longitude];
             if (loc) {
                 self.location = [[KTCLocation alloc] initWithLocation:loc locationDescription:self.itemDescription];
