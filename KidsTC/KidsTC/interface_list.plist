@@ -221,6 +221,13 @@
 			<key>url</key>
 			<string>http://api.kidstc.com/json.php?mod=main&amp;&amp;act=get_page_home</string>
 		</dict>
+		<key>GET_PAGE_RECOMMEND_PRODUCE</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=main&amp;&amp;act=get_page_recommend</string>
+		</dict>
 		<key>IMAGE_UPLOAD</key>
 		<dict>
 			<key>method</key>
@@ -575,6 +582,6 @@
 	<key>errno</key>
 	<integer>0</integer>
 	<key>version</key>
-	<string>34</string>
+	<string>35</string>
 </dict>
 </plist>

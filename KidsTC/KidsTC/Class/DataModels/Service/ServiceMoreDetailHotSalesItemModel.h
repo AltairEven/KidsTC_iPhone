@@ -10,11 +10,27 @@
 
 @interface ServiceMoreDetailHotSalesItemModel : NSObject
 
+@property (nonatomic, copy) NSString *serviceId;
+
+@property (nonatomic, copy) NSString *channelId;
+
+@property (nonatomic, copy) NSString *serviceName;
+
 @property (nonatomic, strong) NSURL *imageUrl;
 
-@property (nonatomic, copy) NSString *name;
-
 @property (nonatomic, assign) CGFloat price;
+
+@property (nonatomic, assign) CGFloat originalPrice;
+
+@property (nonatomic, copy) NSString *priceDescription;
+
+@property (nonatomic, assign) NSUInteger storeCount;
+
+@property (nonatomic, copy) NSString *serviceDescription;
+
+@property (nonatomic, copy) NSString *ageDescription;
+
+@property (nonatomic, assign) NSUInteger saleCount;
 
 - (instancetype)initWithRawData:(NSDictionary *)data;
 

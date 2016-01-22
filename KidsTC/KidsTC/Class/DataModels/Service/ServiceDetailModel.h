@@ -13,6 +13,7 @@
 #import "CommonShareObject.h"
 #import "KTCCommentManager.h"
 #import "TextSegueModel.h"
+#import "ServiceMoreDetailHotSalesItemModel.h"
 
 @class ServiceDetailNoticeItem;
 @class ServiceDetailPhoneItem;
@@ -67,6 +68,8 @@
 @property (nonatomic, assign) NSUInteger couponProvideCount;
 
 @property (nonatomic, copy) NSString *couponUrlString;
+
+@property (nonatomic, copy) NSArray<ServiceMoreDetailHotSalesItemModel *> *moreServiceItems;
 
 @property (nonatomic, strong) NSArray<ActivityLogoItem *> *activeModelsArray;
 
@@ -133,6 +136,10 @@
 - (CGFloat)noticeCellHeight;
 
 - (CGFloat)recommendCellHeight;
+
+- (CGFloat)moreServiceTitleCellHeight;
+
+- (CGFloat)moreServiceCellHeightAtIndex:(NSUInteger)index;
 
 - (BOOL)hasCoupon;
 

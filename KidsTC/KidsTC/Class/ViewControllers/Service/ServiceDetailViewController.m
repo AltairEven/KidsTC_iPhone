@@ -26,6 +26,7 @@
 #import "OnlineCustomerService.h"
 #import "KTCSegueMaster.h"
 #import "KTCStoreMapViewController.h"
+#import "ServiceDetailRelatedServiceListViewController.h"
 
 
 @interface ServiceDetailViewController () <ServiceDetailViewDelegate, ServiceDetailBottomViewDelegate, ServiceDetailConfirmViewDelegate, KTCActionViewDelegate, KTCBrowseHistoryViewDataSource, KTCBrowseHistoryViewDelegate>
@@ -196,6 +197,19 @@
         }
     }
     KTCStoreMapViewController *controller = [[KTCStoreMapViewController alloc] initWithStoreItems:self.viewModel.detailModel.storeItemsArray];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)didClickedAllRelatedServiceOnServiceDetailView:(ServiceDetailView *)detailView {
+    ServiceDetailRelatedServiceListViewController *controller = [[ServiceDetailRelatedServiceListViewController alloc] initWithListItemModels:self.viewModel.detailModel.moreServiceItems];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)serviceDetailView:(ServiceDetailView *)detailView didSelectedRelatedServiceAtIndex:(NSUInteger)index {
+    ServiceMoreDetailHotSalesItemModel *model = [self.viewModel.detailModel.moreServiceItems objectAtIndex:index];
+    ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithServiceId:model.serviceId channelId:model.channelId];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
 }

@@ -802,6 +802,11 @@
 		8F25A1311C2D3AED0076A6FA /* MJChiBaoZiHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F25A1301C2D3AED0076A6FA /* MJChiBaoZiHeader.m */; };
 		8F25A1361C3164B60076A6FA /* HomeBigImageTwoDescCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F25A1351C3164B60076A6FA /* HomeBigImageTwoDescCellModel.m */; };
 		8F2C55BB1BFF167B00C2B6BF /* CommonShareService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2C55BA1BFF167B00C2B6BF /* CommonShareService.m */; };
+		8F2F87371C51081800DD1FD1 /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F2F87361C51081800DD1FD1 /* interface_list.plist */; };
+		8F2F873B1C510D6900DD1FD1 /* ServiceDetailRelatedServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2F87391C510D6900DD1FD1 /* ServiceDetailRelatedServiceCell.m */; };
+		8F2F873C1C510D6900DD1FD1 /* ServiceDetailRelatedServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F2F873A1C510D6900DD1FD1 /* ServiceDetailRelatedServiceCell.xib */; };
+		8F2F87451C51D16100DD1FD1 /* ServiceDetailRelatedServiceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2F87431C51D16100DD1FD1 /* ServiceDetailRelatedServiceListViewController.m */; };
+		8F2F87461C51D16100DD1FD1 /* ServiceDetailRelatedServiceListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F2F87441C51D16100DD1FD1 /* ServiceDetailRelatedServiceListViewController.xib */; };
 		8F30D5E01C3B7175004EE892 /* ServiceDetailActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F30D5DE1C3B7175004EE892 /* ServiceDetailActivityCell.m */; };
 		8F30D5E11C3B7175004EE892 /* ServiceDetailActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F30D5DF1C3B7175004EE892 /* ServiceDetailActivityCell.xib */; };
 		8F30D5E31C3BF70B004EE892 /* coupon_cellBG_d.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F30D5E21C3BF70B004EE892 /* coupon_cellBG_d.png */; };
@@ -882,7 +887,6 @@
 		8F8A08D31BF9E31300134A9A /* BindPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F8A08D11BF9E31300134A9A /* BindPhoneViewController.xib */; };
 		8F8B0B1E1C4E21D7000E9A26 /* CashierViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8B0B1C1C4E21D7000E9A26 /* CashierViewController.m */; };
 		8F8B0B1F1C4E21D7000E9A26 /* CashierViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F8B0B1D1C4E21D7000E9A26 /* CashierViewController.xib */; };
-		8F8B0B231C4E35FD000E9A26 /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F8B0B221C4E35FD000E9A26 /* interface_list.plist */; };
 		8F8B0B271C4F3655000E9A26 /* StoreDetailStrategyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8B0B251C4F3655000E9A26 /* StoreDetailStrategyCell.m */; };
 		8F8B0B281C4F3655000E9A26 /* StoreDetailStrategyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F8B0B261C4F3655000E9A26 /* StoreDetailStrategyCell.xib */; };
 		8F8B0B311C4F6670000E9A26 /* HomeViewRecommendNewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8B0B2F1C4F6670000E9A26 /* HomeViewRecommendNewCell.m */; };
@@ -2373,6 +2377,13 @@
 		8F25A1351C3164B60076A6FA /* HomeBigImageTwoDescCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeBigImageTwoDescCellModel.m; sourceTree = "<group>"; };
 		8F2C55B91BFF167B00C2B6BF /* CommonShareService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonShareService.h; sourceTree = "<group>"; };
 		8F2C55BA1BFF167B00C2B6BF /* CommonShareService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonShareService.m; sourceTree = "<group>"; };
+		8F2F87361C51081800DD1FD1 /* interface_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = interface_list.plist; sourceTree = "<group>"; };
+		8F2F87381C510D6900DD1FD1 /* ServiceDetailRelatedServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceDetailRelatedServiceCell.h; sourceTree = "<group>"; };
+		8F2F87391C510D6900DD1FD1 /* ServiceDetailRelatedServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceDetailRelatedServiceCell.m; sourceTree = "<group>"; };
+		8F2F873A1C510D6900DD1FD1 /* ServiceDetailRelatedServiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceDetailRelatedServiceCell.xib; sourceTree = "<group>"; };
+		8F2F87421C51D16100DD1FD1 /* ServiceDetailRelatedServiceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceDetailRelatedServiceListViewController.h; sourceTree = "<group>"; };
+		8F2F87431C51D16100DD1FD1 /* ServiceDetailRelatedServiceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceDetailRelatedServiceListViewController.m; sourceTree = "<group>"; };
+		8F2F87441C51D16100DD1FD1 /* ServiceDetailRelatedServiceListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceDetailRelatedServiceListViewController.xib; sourceTree = "<group>"; };
 		8F30D5DD1C3B7175004EE892 /* ServiceDetailActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceDetailActivityCell.h; sourceTree = "<group>"; };
 		8F30D5DE1C3B7175004EE892 /* ServiceDetailActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceDetailActivityCell.m; sourceTree = "<group>"; };
 		8F30D5DF1C3B7175004EE892 /* ServiceDetailActivityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceDetailActivityCell.xib; sourceTree = "<group>"; };
@@ -2502,7 +2513,6 @@
 		8F8B0B1B1C4E21D7000E9A26 /* CashierViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CashierViewController.h; sourceTree = "<group>"; };
 		8F8B0B1C1C4E21D7000E9A26 /* CashierViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CashierViewController.m; sourceTree = "<group>"; };
 		8F8B0B1D1C4E21D7000E9A26 /* CashierViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CashierViewController.xib; sourceTree = "<group>"; };
-		8F8B0B221C4E35FD000E9A26 /* interface_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = interface_list.plist; sourceTree = "<group>"; };
 		8F8B0B241C4F3655000E9A26 /* StoreDetailStrategyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreDetailStrategyCell.h; sourceTree = "<group>"; };
 		8F8B0B251C4F3655000E9A26 /* StoreDetailStrategyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreDetailStrategyCell.m; sourceTree = "<group>"; };
 		8F8B0B261C4F3655000E9A26 /* StoreDetailStrategyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreDetailStrategyCell.xib; sourceTree = "<group>"; };
@@ -3332,7 +3342,7 @@
 		1E3D7E781B4BD83D00275C35 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8F8B0B221C4E35FD000E9A26 /* interface_list.plist */,
+				8F2F87361C51081800DD1FD1 /* interface_list.plist */,
 				1E943EBD1B7375F60029FE74 /* Area.plist */,
 				1E0B7B591B709A2100A58AD4 /* Category.plist */,
 				1E3D7E791B4BD83D00275C35 /* Info.plist */,
@@ -4211,6 +4221,9 @@
 				1E76003B1B56496100DF0972 /* ServiceDetailViewController.h */,
 				1E76003C1B56496100DF0972 /* ServiceDetailViewController.m */,
 				1E76003D1B56496100DF0972 /* ServiceDetailViewController.xib */,
+				8F2F87421C51D16100DD1FD1 /* ServiceDetailRelatedServiceListViewController.h */,
+				8F2F87431C51D16100DD1FD1 /* ServiceDetailRelatedServiceListViewController.m */,
+				8F2F87441C51D16100DD1FD1 /* ServiceDetailRelatedServiceListViewController.xib */,
 				1E943F7C1B831DAF0029FE74 /* ServiceListViewController.h */,
 				1E943F7D1B831DAF0029FE74 /* ServiceListViewController.m */,
 				1E943F7E1B831DAF0029FE74 /* ServiceListViewController.xib */,
@@ -4294,6 +4307,9 @@
 				1E0B77DA1B6A48F600A58AD4 /* ServiceDetailConfirmViewCell.h */,
 				1E0B77DB1B6A48F600A58AD4 /* ServiceDetailConfirmViewCell.m */,
 				1E0B77DC1B6A48F600A58AD4 /* ServiceDetailConfirmViewCell.xib */,
+				8F2F87381C510D6900DD1FD1 /* ServiceDetailRelatedServiceCell.h */,
+				8F2F87391C510D6900DD1FD1 /* ServiceDetailRelatedServiceCell.m */,
+				8F2F873A1C510D6900DD1FD1 /* ServiceDetailRelatedServiceCell.xib */,
 			);
 			path = ServiceDetail;
 			sourceTree = "<group>";
@@ -5961,6 +5977,7 @@
 				1EC4A10F1B5CCD1B00206BB9 /* KTCSearchHeaderView.xib in Resources */,
 				1E7994F11BC651E00099CFF9 /* HorizontalCalendarView.xib in Resources */,
 				1E79951D1BC758560099CFF9 /* NewsView.xib in Resources */,
+				8F2F873C1C510D6900DD1FD1 /* ServiceDetailRelatedServiceCell.xib in Resources */,
 				1E0B77A91B68CD3500A58AD4 /* LoginView.xib in Resources */,
 				1E827CC41B9BE667008F3F08 /* CouponListView.xib in Resources */,
 				8F30D5E11C3B7175004EE892 /* ServiceDetailActivityCell.xib in Resources */,
@@ -5976,7 +5993,9 @@
 				1EC73BDD1B5E487E008B39EA /* HomeViewCountDownTitleCell.xib in Resources */,
 				1E15F9B11BE1C784000C74E7 /* CommentDetailViewController.xib in Resources */,
 				1E827BE91B941337008F3F08 /* UIBarButtonItemGrid@2x.png in Resources */,
+				8F2F87461C51D16100DD1FD1 /* ServiceDetailRelatedServiceListViewController.xib in Resources */,
 				8F42FABF1C0BF8F500E9F62A /* ResetPasswordViewController.xib in Resources */,
+				8F2F87371C51081800DD1FD1 /* interface_list.plist in Resources */,
 				1E0B7AF01B6F6A6D00A58AD4 /* GuideViewController.xib in Resources */,
 				1E76003F1B56496100DF0972 /* ServiceDetailViewController.xib in Resources */,
 				1E0B7B0F1B6F6C1400A58AD4 /* SaiDanPhotoView.xib in Resources */,
@@ -6058,7 +6077,6 @@
 				1EC73C691B61186E008B39EA /* SettlementPayTypeCell.xib in Resources */,
 				8FD6B77D1C27FC79006B8D90 /* HomeViewNoticeCell.xib in Resources */,
 				1EC73BE71B5E588A008B39EA /* HomeViewBannerCell.xib in Resources */,
-				8F8B0B231C4E35FD000E9A26 /* interface_list.plist in Resources */,
 				1E8EFD0B1B687D4200D00808 /* CommentListViewController.xib in Resources */,
 				1E0B7B071B6F6C1400A58AD4 /* SaiDanAndCommentView.xib in Resources */,
 				1E0B77EE1B6B6C5000A58AD4 /* KTCSearchResultFilterLevel2Cell.xib in Resources */,
@@ -6409,6 +6427,7 @@
 				1E3D8DAA1B4BF4A100275C35 /* NSString+MD5Addition.m in Sources */,
 				8F974A641C34FF3800F10975 /* HomeRecommenLayout.m in Sources */,
 				8F7E45051C09E18C001EF3B5 /* OrderRefundViewController.m in Sources */,
+				8F2F87451C51D16100DD1FD1 /* ServiceDetailRelatedServiceListViewController.m in Sources */,
 				1EA8B6D61B660BBF00F90688 /* CategoryViewCellLayout.m in Sources */,
 				1E0B7A911B6F67B800A58AD4 /* GBigADView.m in Sources */,
 				1E0B7AC21B6F67B800A58AD4 /* ICPopTipView.m in Sources */,
@@ -6767,6 +6786,7 @@
 				1E7995B11BCF6BB50099CFF9 /* NewsTagItemModel.m in Sources */,
 				1E8EFD0A1B687D4200D00808 /* CommentListViewController.m in Sources */,
 				8F9EA6B61BF9AE7100062E91 /* WeChatManager.m in Sources */,
+				8F2F873B1C510D6900DD1FD1 /* ServiceDetailRelatedServiceCell.m in Sources */,
 				1E0B7B3D1B6F849600A58AD4 /* FeedbackImgUploadManager.m in Sources */,
 				8F85ADA61C0D3D7D00890526 /* MyCommentListItemModel.m in Sources */,
 				1E0B7A941B6F67B800A58AD4 /* GCheckCell.m in Sources */,

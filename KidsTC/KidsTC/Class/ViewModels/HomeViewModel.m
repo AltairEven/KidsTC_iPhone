@@ -228,25 +228,25 @@ NSString *const kHomeViewDataFinishLoadingNotification = @"kHomeViewDataFinishLo
 
 
 - (void)getCustomerRecommendWithSucceed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
+    if (!self.loadCustomerRecommendRequest) {
+        self.loadCustomerRecommendRequest = [HttpRequestClient clientWithUrlAliasName:@"GET_PAGE_RECOMMEND_PRODUCE"];
+    } else {
+        [self.loadHomeDataRequest cancel];
+        [self.loadCustomerRecommendRequest cancel];
+    }
     self.currentRecommendPage ++;
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
-                           [NSNumber numberWithInteger:KTCSearchTypeService], @"type",
+                           [[KTCUser currentUser].userRole userRoleIdentifierString], @"populationType",
                            [NSNumber numberWithInteger:self.currentRecommendPage], @"page",
-                           [NSNumber numberWithInteger:10], @"pageSize", nil];
-    KTCSearchServiceCondition *condition = [[KTCSearchServiceCondition alloc] init];
-    KTCAgeItem *ageItem = [[KTCAgeItem alloc] init];
-    ageItem.identifier = [NSString stringWithFormat:@"%d", [KTCUser currentUser].userRole.role];
-    condition.age = ageItem;
-    condition.sortType = KTCSearchResultServiceSortTypeSaleCount;
-    condition.userRole = [KTCUser currentUser].userRole.role;
+                           [NSNumber numberWithInteger:10], @"pageCount", nil];
     
     __weak HomeViewModel *weakSelf = self;
-    [[KTCSearchService sharedService] startServiceSearchWithParamDic:param Condition:condition success:^(NSDictionary *responseData) {
+    [weakSelf.loadCustomerRecommendRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [weakSelf loadCustomerRecommendSucceed:responseData];
         if (succeed) {
             succeed(responseData);
         }
-    } failure:^(NSError *error) {
+    } failure:^(HttpRequestClient *client, NSError *error) {
         [weakSelf loadCustomerRecommendFailed:error];
         if (failure) {
             failure(error);

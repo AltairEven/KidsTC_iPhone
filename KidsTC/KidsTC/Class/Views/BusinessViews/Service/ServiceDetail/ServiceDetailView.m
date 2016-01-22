@@ -14,24 +14,29 @@
 #import "ServiceDetailSegmentCell.h"
 #import "ServiceDetailActivityCell.h"
 #import "TTTAttributedLabel.h"
+#import "ServiceDetailRelatedServiceCell.h"
 
 typedef enum {
     ServiceDetailTableCellTagTop = 0,
-    ServiceDetailTableCellTagPrice,
-    ServiceDetailTableCellTagInsurance,
-    ServiceDetailTableCellTagCoupon,
-    ServiceDetailTableCellTagContent,
-    ServiceDetailTableCellTagNoticeTitle,
-    ServiceDetailTableCellTagNotice,
-    ServiceDetailTableCellTagRecommend,
-    ServiceDetailTableCellTagActivity
+    ServiceDetailTableCellTagPrice = 1,
+    ServiceDetailTableCellTagInsurance = 2,
+    ServiceDetailTableCellTagCoupon = 3,
+    ServiceDetailTableCellTagContent = 4,
+    ServiceDetailTableCellTagNoticeTitle = 5,
+    ServiceDetailTableCellTagNotice = 6,
+    ServiceDetailTableCellTagRecommend = 7,
+    ServiceDetailTableCellTagActivity = 8,
+    ServiceDetailTableCellTagMoreServiceTitle = 9,
+    ServiceDetailTableCellTagMoreService = 10
 }ServiceDetailTableCellTag;
 
 #define SectionGap (10)
 #define SegmentViewHeight (40)
+#define MoreServiceMaxCount (3)
 
 static NSString *const kSegmentCellIdentifier = @"kSegmentCellIdentifier";
 static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
+static NSString *const kMoreServiceCellIdentifier = @"kMoreServiceCellIdentifier";
 
 @interface ServiceDetailView () <UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, AUIBannerScrollViewDataSource, AUISegmentViewDataSource, AUISegmentViewDelegate, ServiceDetailMoreInfoViewDelegate, TTTAttributedLabelDelegate>
 
@@ -48,6 +53,7 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
 @property (strong, nonatomic) IBOutlet UITableViewCell *noticeTitleCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *noticeCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *recommendCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *moreServiceTitleCell;
 //top
 @property (weak, nonatomic) IBOutlet AUIBannerScrollView *bannerScrollView;
 @property (weak, nonatomic) IBOutlet UIView *storeBriefAlphaView;
@@ -76,10 +82,16 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
 //recommend
 @property (weak, nonatomic) IBOutlet UIImageView *recommendFaceImageView;
 @property (weak, nonatomic) IBOutlet UILabel *recommendLabel;
+//more service
+@property (weak, nonatomic) IBOutlet UIView *moreServiceTitleCellTagView;
+@property (weak, nonatomic) IBOutlet UILabel *moreServiceLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *moreServiceTagImage;
+
 
 
 @property (nonatomic, strong) UINib *segmentCellNib;
 @property (nonatomic, strong) UINib *activityCellNib;
+@property (nonatomic, strong) UINib *moreServiceCellNib;
 
 @property (nonatomic, strong) ServiceDetailModel *detailModel;
 @property (nonatomic, strong) NSMutableArray *cellArray;
@@ -107,6 +119,8 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
 - (void)configNoticeCell;
 
 - (void)configRecommendCell;
+
+- (void)configMoreServiceTitleCell;
 
 - (void)didTappedOnStoreBrief;
 
@@ -187,9 +201,16 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
     self.recommendFaceImageView.layer.cornerRadius = 30;
     self.recommendFaceImageView.layer.masksToBounds = YES;
     
+    
+    [self.moreServiceTitleCellTagView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
+    
     if (!self.activityCellNib) {
         self.activityCellNib = [UINib nibWithNibName:NSStringFromClass([ServiceDetailActivityCell class]) bundle:nil];
         [self.tableView registerNib:self.activityCellNib forCellReuseIdentifier:kActivityCellIdentifier];
+    }
+    if (!self.moreServiceCellNib) {
+        self.moreServiceCellNib = [UINib nibWithNibName:NSStringFromClass([ServiceDetailRelatedServiceCell class]) bundle:nil];
+        [self.tableView registerNib:self.moreServiceCellNib forCellReuseIdentifier:kMoreServiceCellIdentifier];
     }
     
     self.cellArray = [[NSMutableArray alloc] init];
@@ -250,6 +271,11 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
         case ServiceDetailTableCellTagRecommend:
         {
             [self configRecommendCell];
+        }
+            break;
+        case ServiceDetailTableCellTagMoreServiceTitle:
+        {
+            [self configMoreServiceTitleCell];
         }
             break;
         default:
@@ -314,6 +340,16 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
             height = [self.detailModel activityCellHeightAtIndex:indexPath.row];
         }
             break;
+        case ServiceDetailTableCellTagMoreServiceTitle:
+        {
+            height = [self.detailModel moreServiceTitleCellHeight];
+        }
+            break;
+        case ServiceDetailTableCellTagMoreService:
+        {
+            height = [self.detailModel moreServiceCellHeightAtIndex:indexPath.row - 1];
+        }
+            break;
         default:
             break;
     }
@@ -338,10 +374,23 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    UITableViewCell *cell = [[self.cellArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    if (cell == self.couponCell) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedCouponOnServiceDetailView:)]) {
-            [self.delegate didClickedCouponOnServiceDetailView:self];
+    if (self.delegate) {
+        UITableViewCell *cell = [[self.cellArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        if (cell.tag == ServiceDetailTableCellTagCoupon) {
+            if ([self.delegate respondsToSelector:@selector(didClickedCouponOnServiceDetailView:)]) {
+                [self.delegate didClickedCouponOnServiceDetailView:self];
+            }
+        } else if (cell.tag == ServiceDetailTableCellTagMoreServiceTitle) {
+            if ([self.detailModel.moreServiceItems count] <= MoreServiceMaxCount) {
+                return;
+            }
+            if ([self.delegate respondsToSelector:@selector(didClickedAllRelatedServiceOnServiceDetailView:)]) {
+                [self.delegate didClickedAllRelatedServiceOnServiceDetailView:self];
+            }
+        } else if (cell.tag == ServiceDetailTableCellTagMoreService) {
+            if ([self.delegate respondsToSelector:@selector(serviceDetailView:didSelectedRelatedServiceAtIndex:)]) {
+                [self.delegate serviceDetailView:self didSelectedRelatedServiceAtIndex:indexPath.row - 1];
+            }
         }
     }
 }
@@ -667,6 +716,16 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
     
 }
 
+- (void)configMoreServiceTitleCell {
+    if ([self.detailModel.moreServiceItems count] <= MoreServiceMaxCount) {
+        [self.moreServiceLabel setHidden:YES];
+        [self.moreServiceTagImage setHidden:YES];
+    } else {
+        [self.moreServiceLabel setHidden:NO];
+        [self.moreServiceTagImage setHidden:NO];
+    }
+}
+
 - (void)didTappedOnStoreBrief {
     if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedStoreBriefOnServiceDetailView:)]) {
         [self.delegate didClickedStoreBriefOnServiceDetailView:self];
@@ -708,6 +767,7 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
                         [cell configWithModel:item];
                         [section2 addObject:cell];
                         cell.tag = ServiceDetailTableCellTagActivity;
+                        self.tableViewHeight += [self.detailModel activityCellHeightAtIndex:index];
                     }
                 }
             }
@@ -731,6 +791,26 @@ static NSString *const kActivityCellIdentifier = @"kActivityCellIdentifier";
                 [self.cellArray addObject:section5];
                 self.tableViewHeight += SectionGap;
                 self.tableViewHeight += [self.detailModel recommendCellHeight];
+            }
+            if ([self.detailModel.moreServiceItems count] > 0) {
+                NSMutableArray *section6 = [NSMutableArray arrayWithObject:self.moreServiceTitleCell];
+                self.tableViewHeight += SectionGap;
+                self.tableViewHeight += [self.detailModel moreServiceTitleCellHeight];
+                NSArray *array = [NSArray arrayWithArray:self.detailModel.moreServiceItems];
+                if ([array count] > MoreServiceMaxCount) {
+                    array = [array subarrayWithRange:NSMakeRange(0, MoreServiceMaxCount)];
+                }
+                for (NSUInteger index = 0; index < [array count]; index ++) {
+                    ServiceDetailRelatedServiceCell *cell =  [[[NSBundle mainBundle] loadNibNamed:@"ServiceDetailRelatedServiceCell" owner:nil options:nil] objectAtIndex:0];
+                    if (cell) {
+                        ServiceMoreDetailHotSalesItemModel *item = [array objectAtIndex:index];
+                        [cell configWithModel:item];
+                        [section6 addObject:cell];
+                        cell.tag = ServiceDetailTableCellTagMoreService;
+                        self.tableViewHeight += [self.detailModel moreServiceCellHeightAtIndex:index];
+                    }
+                }
+                [self.cellArray addObject:section6];
             }
             self.tableViewHeight += SectionGap;
         }

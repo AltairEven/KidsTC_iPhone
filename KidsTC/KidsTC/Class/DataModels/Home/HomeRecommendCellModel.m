@@ -64,9 +64,9 @@
         self.imageUrl = [NSURL URLWithString:[data objectForKey:@"imgUrl"]];
         self.title = [data objectForKey:@"serveName"];
         self.promotionPrice = [[data objectForKey:@"price"] floatValue];
-        self.originalPrice = [[data objectForKey:@"originalPrice"] floatValue];
+        self.originalPrice = [[data objectForKey:@"storePrice"] floatValue];
         self.saledCount = [[data objectForKey:@"sale"] integerValue];
-        self.imageRatio = [[data objectForKey:@"ratio"] floatValue];
+        self.imageRatio = [[data objectForKey:@"picRate"] floatValue];
         if (self.imageRatio <= 0) {
             self.imageRatio = 0.6;
         }

@@ -38,6 +38,10 @@
 
 - (void)didClickedStoreBriefOnServiceDetailView:(ServiceDetailView *)detailView;
 
+- (void)didClickedAllRelatedServiceOnServiceDetailView:(ServiceDetailView *)detailView;
+
+- (void)serviceDetailView:(ServiceDetailView *)detailView didSelectedRelatedServiceAtIndex:(NSUInteger)index;
+
 @end
 
 @interface ServiceDetailView : UIView

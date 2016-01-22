@@ -13,7 +13,7 @@
 - (instancetype)initWithRawData:(NSArray *)dataArray {
     self = [super initWithRawData:dataArray];
     if (self) {
-        if ([dataArray count] < 2 || [dataArray count] > 4) {
+        if ([dataArray count] < 1 || [dataArray count] > 4) {
             return nil;
         }
         self.type = HomeContentCellTypeTwoThreeFour;
@@ -37,8 +37,9 @@
     [super setRatio:ratio];
     NSUInteger count = [self.itemsArray count];
     CGFloat hMargin = 10;
-    CGFloat vMargin = 10;
-    cellHeight = cellRatio * (SCREEN_WIDTH - (count + 1) * hMargin) / count  + 2 * vMargin;
+    CGFloat vMargin = 5;
+    CGFloat cellWidth = (SCREEN_WIDTH - (count + 1) * hMargin) / count;
+    cellHeight = cellRatio * cellWidth  + 2 * vMargin;
 }
 
 

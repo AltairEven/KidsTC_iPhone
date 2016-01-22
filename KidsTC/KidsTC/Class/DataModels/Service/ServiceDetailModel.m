@@ -71,6 +71,23 @@
         self.couponProvideCount = [[[coupons firstObject] objectForKey:@"provideNum"] integerValue];
     }
     self.couponUrlString = [data objectForKey:@"couponLink"];
+    //store relation-----------------------------------------------------------
+    NSDictionary *relationDic = [data objectForKey:@"product_relation"];
+    if ([relationDic isKindOfClass:[NSDictionary class]]) {
+        //strategy
+        NSArray *products = [relationDic objectForKey:@"relatedDiscountProductLs"];
+        if ([products isKindOfClass:[NSArray class]]) {
+            NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+            for (NSDictionary *strategyDic in products) {
+                ServiceMoreDetailHotSalesItemModel *model = [[ServiceMoreDetailHotSalesItemModel alloc] initWithRawData:strategyDic];
+                if (model) {
+                    [tempArray addObject:model];
+                }
+            }
+            self.moreServiceItems = [NSArray arrayWithArray:tempArray];
+        }
+    }
+    //--------------------------------------------------------------------------
     
     //activity
     NSArray *fullCut = [data objectForKey:@"fullCut"];
@@ -249,6 +266,14 @@
     }
     
     return height;
+}
+
+- (CGFloat)moreServiceTitleCellHeight {
+    return 40;
+}
+
+- (CGFloat)moreServiceCellHeightAtIndex:(NSUInteger)index {
+    return 100;
 }
 
 - (BOOL)hasCoupon {

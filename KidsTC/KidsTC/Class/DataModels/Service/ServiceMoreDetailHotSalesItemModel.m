@@ -13,9 +13,21 @@
 - (instancetype)initWithRawData:(NSDictionary *)data {
     self = [super init];
     if (self) {
-        self.imageUrl = nil;
-        self.name = @"韩国专业宝宝摄影套餐，特价优惠，活动限量，先到先得";
-        self.price = 12000;
+        if ([data objectForKey:@"productSysNo"]) {
+            self.serviceId = [NSString stringWithFormat:@"%@", [data objectForKey:@"productSysNo"]];
+        }
+        if ([data objectForKey:@"channelId"]) {
+            self.channelId = [NSString stringWithFormat:@"%@", [data objectForKey:@"channelId"]];
+        }
+        self.serviceName = [data objectForKey:@"productName"];
+        self.imageUrl = [NSURL URLWithString:[data objectForKey:@"imageUrl"]];
+        self.price = [[data objectForKey:@"price"] floatValue];
+        self.originalPrice = [[data objectForKey:@"storePrice"] floatValue];
+        self.priceDescription = [data objectForKey:@"priceDescription"];
+        self.storeCount = [[data objectForKey:@"storeCount"] integerValue];
+        self.serviceDescription = [data objectForKey:@"promotionText"];
+        self.ageDescription = [data objectForKey:@"ageDes"];
+        self.saleCount = [[data objectForKey:@"saleCount"] integerValue];
     }
     return self;
 }
