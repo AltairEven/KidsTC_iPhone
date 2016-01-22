@@ -27,6 +27,14 @@
 
 - (void)parentingStrategyDetailView:(ParentingStrategyDetailView *)detailView didClickedRelatedInfoButtonAtIndex:(NSUInteger)index;
 
+- (void)didClickedStoreOnParentingStrategyDetailView:(ParentingStrategyDetailView *)detailView;
+
+- (void)didClickedAllRelatedServiceOnParentingStrategyDetailView:(ParentingStrategyDetailView *)detailView;
+
+- (void)parentingStrategyDetailView:(ParentingStrategyDetailView *)detailView didClickedRelatedServiceAtIndex:(NSUInteger)index;
+
+- (void)parentingStrategyDetailView:(ParentingStrategyDetailView *)detailView didSelectedLinkWithSegueModel:(HomeSegueModel *)model;
+
 @end
 
 @interface ParentingStrategyDetailView : UIView
@@ -36,5 +44,7 @@
 @property (nonatomic, assign) id<ParentingStrategyDetailViewDelegate> delegate;
 
 - (void)reloadData;
+
+- (void)scrollToRelatedServices;
 
 @end

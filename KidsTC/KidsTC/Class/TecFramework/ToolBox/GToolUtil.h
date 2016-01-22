@@ -159,4 +159,8 @@ NSInteger sortImageDictionaryWithIdx(id v1, id v2, void *context);
 
 + (NSString *)hashString:(NSString *)input;
 
++ (UIColor *)colorWithString:(NSString *)string;
+
++ (NSArray<NSString *> *)rangeStringsOfSubString:(NSString *)sub inString:(NSString *)string;
+
 @end

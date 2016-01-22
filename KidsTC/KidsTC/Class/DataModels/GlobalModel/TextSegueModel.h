@@ -19,6 +19,10 @@
 
 @property (nonatomic, readonly) NSRange linkRange;
 
+@property (nonatomic, readonly) NSArray<NSString *> *linkRangeStrings;
+
+@property (nonatomic, strong) UIColor *linkColor;
+
 - (instancetype)initWithLinkParam:(NSDictionary *)param promotionWords:(NSString *)words;
 
 @end

@@ -1245,4 +1245,45 @@ NSInteger sortImageDictionaryWithIdx(id v1, id v2, void *context)
     return output;
 }
 
+
++ (UIColor *)colorWithString:(NSString *)string {
+    if (!string || ![string isKindOfClass:[NSString class]]) {
+        return nil;
+    }
+    NSArray *colorArray = [string componentsSeparatedByString:@","];
+    if ([colorArray count] < 3) {
+        return nil;
+    }
+    UIColor *color = [UIColor colorWithRed:[[colorArray objectAtIndex:0] floatValue]/255.0 green:[[colorArray objectAtIndex:1] floatValue]/255.0 blue:[[colorArray objectAtIndex:2] floatValue]/255.0 alpha:1];
+    return color;
+}
+
+
++ (NSArray<NSString *> *)rangeStringsOfSubString:(NSString *)sub inString:(NSString *)string {
+    if (![sub isKindOfClass:[NSString class]] || ![string isKindOfClass:[NSString class]]) {
+        return nil;
+    }
+    if ([sub length] == 0 || [string length] == 0) {
+        return nil;
+    }
+    NSString *copyStr = string;
+    NSMutableString *replaceString = [[NSMutableString alloc] init];
+    for (NSUInteger index = 0; index < [sub length]; index ++) {
+        [replaceString appendString:@"x"];
+    }
+    NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+    while ([copyStr rangeOfString:sub].location != NSNotFound) {
+        NSRange  range  = [copyStr rangeOfString:sub];
+        if (range.location != NSNotFound) {
+            [tempArray addObject:NSStringFromRange(range)];
+        }
+        copyStr = [copyStr stringByReplacingCharactersInRange:NSMakeRange(range.location, range.length) withString:replaceString];
+    }
+    if ([tempArray count] > 0) {
+        return [NSArray arrayWithArray:tempArray];
+    }
+    return nil;
+}
+
+
 @end

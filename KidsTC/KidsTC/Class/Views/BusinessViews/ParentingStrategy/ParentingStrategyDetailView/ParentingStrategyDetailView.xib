@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -24,9 +24,32 @@
                 <constraint firstAttribute="trailing" secondItem="O7n-j4-cp3" secondAttribute="trailing" id="gIa-Ie-wq8"/>
             </constraints>
             <connections>
+                <outlet property="moreServiceCell" destination="tLL-fQ-9CV" id="Pmt-zQ-nAI"/>
                 <outlet property="tableView" destination="O7n-j4-cp3" id="SVH-XH-bbL"/>
             </connections>
             <point key="canvasLocation" x="160" y="296"/>
         </view>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="tLL-fQ-9CV">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tLL-fQ-9CV" id="aSC-Uq-eNu">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="更多精彩优惠请点这里" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DrS-x6-6IV">
+                        <rect key="frame" x="10" y="0.0" width="300" height="43.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.93978821999999995" green="0.4733254321" blue="0.40583982359999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="DrS-x6-6IV" secondAttribute="trailing" constant="10" id="bFI-7b-Br4"/>
+                    <constraint firstAttribute="bottom" secondItem="DrS-x6-6IV" secondAttribute="bottom" id="hVW-My-a6b"/>
+                    <constraint firstItem="DrS-x6-6IV" firstAttribute="leading" secondItem="aSC-Uq-eNu" secondAttribute="leading" constant="10" id="uQ9-yg-YfB"/>
+                    <constraint firstItem="DrS-x6-6IV" firstAttribute="top" secondItem="aSC-Uq-eNu" secondAttribute="top" id="uhE-9z-Ucx"/>
+                </constraints>
+            </tableViewCellContentView>
+        </tableViewCell>
     </objects>
 </document>

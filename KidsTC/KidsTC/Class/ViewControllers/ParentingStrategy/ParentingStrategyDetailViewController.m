@@ -12,10 +12,15 @@
 #import "CommonShareViewController.h"
 #import "KTCSegueMaster.h"
 #import "KTCMapViewController.h"
+#import "KTCStoreMapViewController.h"
+#import "ServiceDetailViewController.h"
+#import "StrategyDetailRelatedServiceListViewController.h"
+#import "StrategyDetailBottomView.h"
 
-@interface ParentingStrategyDetailViewController () <ParentingStrategyDetailViewDelegate>
+@interface ParentingStrategyDetailViewController () <ParentingStrategyDetailViewDelegate, StrategyDetailBottomViewDelegate>
 
 @property (weak, nonatomic) IBOutlet ParentingStrategyDetailView *detailView;
+@property (weak, nonatomic) IBOutlet StrategyDetailBottomView *bottomView;
 
 @property (nonatomic, strong) ParentingStrategyDetailViewModel *viewModel;
 
@@ -30,6 +35,8 @@
 - (void)didClickedLikeButton;
 
 - (void)didClickedShareButton;
+
+- (void)resetBottomView;
 
 @end
 
@@ -55,6 +62,9 @@
         [weakSelf showConnectError:YES];
     }];
     [self reloadNetworkData];
+    
+    self.bottomView.delegate = self;
+    [self.bottomView setHidden:YES];
 }
 
 #pragma mark ParentingStrategyDetailViewDelegate
@@ -87,6 +97,47 @@
 - (void)parentingStrategyDetailView:(ParentingStrategyDetailView *)detailView didClickedRelatedInfoButtonAtIndex:(NSUInteger)index {
     ParentingStrategyDetailCellModel *model = [self.viewModel.detailModel.cellModels objectAtIndex:index];
     [KTCSegueMaster makeSegueWithModel:model.relatedInfoModel fromController:self];
+}
+
+- (void)didClickedStoreOnParentingStrategyDetailView:(ParentingStrategyDetailView *)detailView {
+    KTCStoreMapViewController *controller = [[KTCStoreMapViewController alloc] initWithStoreItems:[self.viewModel.detailModel relatedStoreItems]];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)didClickedAllRelatedServiceOnParentingStrategyDetailView:(ParentingStrategyDetailView *)detailView {
+    StrategyDetailRelatedServiceListViewController *controller = [[StrategyDetailRelatedServiceListViewController alloc] initWithListItemModels:self.viewModel.detailModel.relatedServices];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)parentingStrategyDetailView:(ParentingStrategyDetailView *)detailView didClickedRelatedServiceAtIndex:(NSUInteger)index {
+    StrategyDetailServiceItemModel *serviceModel = [self.viewModel.detailModel.relatedServices objectAtIndex:index];
+    ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithServiceId:serviceModel.serviceId channelId:serviceModel.channelId];
+    [controller setHidesBottomBarWhenPushed:YES];
+    [self.navigationController pushViewController:controller animated:YES];
+    //MTA
+    [MTA trackCustomEvent:@"event_skip_strategy_servers_dtl" args:nil];
+}
+
+- (void)parentingStrategyDetailView:(ParentingStrategyDetailView *)detailView didSelectedLinkWithSegueModel:(HomeSegueModel *)model {
+    [KTCSegueMaster makeSegueWithModel:model fromController:self];
+}
+
+
+#pragma mark StrategyDetailBottomViewDelegate
+
+
+- (void)didClickedLeftButtonOnStrategyDetailBottomView:(StrategyDetailBottomView *)bottomView {
+    [self didClickedCommentButton];
+}
+
+- (void)didClickedRightButtonOnStrategyDetailBottomView:(StrategyDetailBottomView *)bottomView {
+    if ([self.viewModel.detailModel.relatedServices count] > 0) {
+        [self.detailView scrollToRelatedServices];
+    } else {
+        [self didClickedShareButton];
+    }
 }
 
 
@@ -155,6 +206,15 @@
     [self presentViewController:controller animated:YES completion:nil];
 }
 
+- (void)resetBottomView {
+    [self.bottomView setHidden:NO];
+    if ([self.viewModel.detailModel.relatedServices count] > 0) {
+        [self.bottomView.rightLabel setText:@"查看优惠服务"];
+    } else {
+        [self.bottomView.rightLabel setText:@"分享给好友"];
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -168,8 +228,10 @@
     [weakSelf.viewModel startUpdateDataWithStrategyIdentifier:self.strategyId Succeed:^(NSDictionary *data) {
         [[GAlertLoadingView sharedAlertLoadingView] hide];
         [weakSelf.likeButton setHighlighted:weakSelf.viewModel.detailModel.isFavourite];
+        [weakSelf resetBottomView];
     } failure:^(NSError *error) {
         [[GAlertLoadingView sharedAlertLoadingView] hide];
+        [weakSelf resetBottomView];
     }];
 }
 

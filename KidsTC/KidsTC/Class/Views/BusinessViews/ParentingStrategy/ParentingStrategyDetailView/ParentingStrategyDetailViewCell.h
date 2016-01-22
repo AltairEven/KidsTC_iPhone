@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TextSegueModel.h"
 
 @class ParentingStrategyDetailCellModel;
 @class ParentingStrategyDetailViewCell;
@@ -18,6 +19,8 @@
 - (void)didClickedCommentButtonOnParentingStrategyDetailViewCell:(ParentingStrategyDetailViewCell *)cell;
 
 - (void)didClickedRelatedInfoButtonOnParentingStrategyDetailViewCell:(ParentingStrategyDetailViewCell *)cell;
+
+- (void)parentingStrategyDetailViewCell:(ParentingStrategyDetailViewCell *)cell didSelectedLinkWithSegueModel:(HomeSegueModel *)model;
 
 @end
 

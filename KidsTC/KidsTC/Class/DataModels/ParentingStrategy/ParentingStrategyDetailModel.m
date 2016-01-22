@@ -23,11 +23,49 @@
         self.mainImageUrl = [NSURL URLWithString:[array lastObject]];
         self.title = [infoDic objectForKey:@"title"];
         self.authorName = [infoDic objectForKey:@"authorName"];
+        self.strategyDescriptionTitle = [infoDic objectForKey:@"simplyDescTitle"];
         self.strategyDescription = [infoDic objectForKey:@"simply"];
         self.shareObject = [CommonShareObject shareObjectWithRawData:[infoDic objectForKey:@"share"]];
         if (self.shareObject) {
             self.shareObject.identifier = self.identifier;
             self.shareObject.followingContent = @"【童成】";
+        }
+        
+        NSArray *storesArray = [infoDic objectForKey:@"stores"];
+        if ([storesArray isKindOfClass:[NSArray class]]) {
+            NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+            for (NSDictionary *singleDic in storesArray) {
+                StrategyDetailRelatedStoreItemModel *item = [[StrategyDetailRelatedStoreItemModel alloc] initWithRawData:singleDic];
+                if (item) {
+                    [tempArray addObject:item];
+                }
+                
+            }
+            self.storeItems = [NSArray arrayWithArray:tempArray];
+        }
+        
+        NSArray *servicesArray = [infoDic objectForKey:@"products"];
+        if ([servicesArray isKindOfClass:[NSArray class]]) {
+            NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+            for (NSDictionary *singleDic in servicesArray) {
+                StrategyDetailServiceItemModel *item = [[StrategyDetailServiceItemModel alloc] initWithRawData:singleDic];
+                if (item) {
+                    [tempArray addObject:item];
+                }
+                
+            }
+            self.relatedServices = [NSArray arrayWithArray:tempArray];
+        }
+        NSArray *promotionLinks = [infoDic objectForKey:@"promotionLink"];
+        if ([promotionLinks isKindOfClass:[NSArray class]]) {
+            NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+            for (NSDictionary *rawData in promotionLinks) {
+                TextSegueModel *model = [[TextSegueModel alloc] initWithLinkParam:rawData promotionWords:[NSString stringWithFormat:@"%@：%@", self.strategyDescriptionTitle, self.strategyDescription]];
+                if (model) {
+                    [tempArray addObject:model];
+                }
+            }
+            self.briefSegueModels = [NSArray arrayWithArray:tempArray];
         }
     }
     NSArray *cellDataArray = [data objectForKey:@"items"];
@@ -118,6 +156,22 @@
     return contentHeight;
 }
 
+- (NSArray<StoreListItemModel *> *)relatedStoreItems {
+    NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+    for (StrategyDetailRelatedStoreItemModel *item in self.storeItems) {
+        StoreListItemModel *model = [[StoreListItemModel alloc] init];
+        model.identifier = item.identifier;
+        model.storeName = item.storeName;
+        model.imageUrl = item.imageUrl;
+        model.location = item.location;
+        [tempArray addObject:model];
+    }
+    if ([tempArray count] > 0) {
+        return [NSArray arrayWithArray:tempArray];
+    }
+    return nil;
+}
+
 @end
 
 
@@ -152,6 +206,17 @@
         self.commentCount = [[data objectForKey:@"commentCount"] integerValue];
         
         self.ratio = 0.618;
+        NSArray *promotionLinks = [data objectForKey:@"promotionLink"];
+        if ([promotionLinks isKindOfClass:[NSArray class]]) {
+            NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+            for (NSDictionary *rawData in promotionLinks) {
+                TextSegueModel *model = [[TextSegueModel alloc] initWithLinkParam:rawData promotionWords:self.cellContentString];
+                if (model) {
+                    [tempArray addObject:model];
+                }
+            }
+            self.contentSegueModels = [NSArray arrayWithArray:tempArray];
+        }
     }
     return self;
 }
@@ -160,8 +225,8 @@
     CGFloat height = 40; //时间栏高度
     CGFloat cellWidth = SCREEN_WIDTH - 20;
     height += cellWidth * self.ratio; //图片
-    height += [GConfig heightForLabelWithWidth:cellWidth - 20 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:15] topGap:0 bottomGap:0 andText:self.cellContentString]; //内容
-    return height + 3;
+    height += [GConfig heightForLabelWithWidth:cellWidth - 20 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:15] topGap:10 bottomGap:10 andText:self.cellContentString]; //内容
+    return height;
 }
 
 @end

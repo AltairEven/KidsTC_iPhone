@@ -189,13 +189,6 @@
 }
 
 - (void)didClickedStoreBriefOnServiceDetailView:(ServiceDetailView *)detailView {
-    NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-    for (NSUInteger index = 0; index < [self.viewModel.detailModel.storeItemsArray count]; index ++) {
-        StoreListItemModel *model = [self.viewModel.detailModel.storeItemsArray objectAtIndex:index];
-        if (model.location) {
-            [tempArray addObject:model.location];
-        }
-    }
     KTCStoreMapViewController *controller = [[KTCStoreMapViewController alloc] initWithStoreItems:self.viewModel.detailModel.storeItemsArray];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];

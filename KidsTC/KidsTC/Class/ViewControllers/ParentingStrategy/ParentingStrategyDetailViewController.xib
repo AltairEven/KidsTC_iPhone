@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9059"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9531"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ParentingStrategyDetailViewController">
             <connections>
+                <outlet property="bottomView" destination="kvM-Lh-tQu" id="fzM-12-Cot"/>
                 <outlet property="detailView" destination="CGX-kL-g7a" id="8rY-Tl-5En"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -17,16 +18,26 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CGX-kL-g7a" customClass="ParentingStrategyDetailView">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kvM-Lh-tQu" customClass="StrategyDetailBottomView">
+                    <rect key="frame" x="0.0" y="518" width="320" height="50"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="Uar-W1-ddW"/>
+                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="kvM-Lh-tQu" firstAttribute="top" secondItem="CGX-kL-g7a" secondAttribute="bottom" id="ACJ-BC-BI2"/>
+                <constraint firstAttribute="bottom" secondItem="kvM-Lh-tQu" secondAttribute="bottom" id="IzR-HI-TS2"/>
                 <constraint firstAttribute="trailing" secondItem="CGX-kL-g7a" secondAttribute="trailing" id="PHz-H1-Dl0"/>
                 <constraint firstItem="CGX-kL-g7a" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="eIN-PD-GRE"/>
-                <constraint firstAttribute="bottom" secondItem="CGX-kL-g7a" secondAttribute="bottom" id="qca-X5-Id5"/>
                 <constraint firstItem="CGX-kL-g7a" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="uEh-t7-5sM"/>
+                <constraint firstAttribute="trailing" secondItem="kvM-Lh-tQu" secondAttribute="trailing" id="zQt-ZJ-Sze"/>
+                <constraint firstItem="kvM-Lh-tQu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="zpu-lB-AgF"/>
             </constraints>
             <point key="canvasLocation" x="313" y="362"/>
         </view>

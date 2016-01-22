@@ -28,10 +28,10 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QAk-wR-hVx" userLabel="labelBGView">
-                                <rect key="frame" x="0.0" y="120" width="300" height="38"/>
+                                <rect key="frame" x="0.0" y="130" width="300" height="18"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="apv-mR-OcX">
-                                        <rect key="frame" x="10" y="10" width="280" height="18"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="apv-mR-OcX" customClass="TTTAttributedLabel">
+                                        <rect key="frame" x="10" y="0.0" width="280" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -143,10 +143,10 @@
                             <constraint firstAttribute="trailing" secondItem="JaD-Us-V57" secondAttribute="trailing" constant="10" id="SqY-rv-cnP"/>
                             <constraint firstItem="4IF-x9-1Oc" firstAttribute="leading" secondItem="RZZ-uJ-UJ8" secondAttribute="leading" id="V0b-FR-105"/>
                             <constraint firstItem="hpi-80-UzU" firstAttribute="top" secondItem="RZZ-uJ-UJ8" secondAttribute="top" id="Y00-EH-91y"/>
-                            <constraint firstItem="QAk-wR-hVx" firstAttribute="top" secondItem="JaD-Us-V57" secondAttribute="bottom" constant="10" id="YqY-Qx-V0V"/>
+                            <constraint firstItem="JaD-Us-V57" firstAttribute="bottom" secondItem="hpi-80-UzU" secondAttribute="bottom" constant="-10" id="ale-6g-0ex"/>
                             <constraint firstItem="HlM-ks-3UI" firstAttribute="width" secondItem="JaD-Us-V57" secondAttribute="width" constant="4" id="eYa-oe-IZk"/>
-                            <constraint firstItem="QAk-wR-hVx" firstAttribute="top" secondItem="hpi-80-UzU" secondAttribute="bottom" id="eis-w3-2sL"/>
-                            <constraint firstItem="4IF-x9-1Oc" firstAttribute="top" secondItem="QAk-wR-hVx" secondAttribute="bottom" id="loD-WU-XZq"/>
+                            <constraint firstItem="QAk-wR-hVx" firstAttribute="top" secondItem="hpi-80-UzU" secondAttribute="bottom" constant="10" id="eis-w3-2sL"/>
+                            <constraint firstItem="4IF-x9-1Oc" firstAttribute="top" secondItem="QAk-wR-hVx" secondAttribute="bottom" constant="10" id="loD-WU-XZq"/>
                             <constraint firstItem="hpi-80-UzU" firstAttribute="leading" secondItem="RZZ-uJ-UJ8" secondAttribute="leading" id="oFS-SU-Mpk"/>
                             <constraint firstItem="JaD-Us-V57" firstAttribute="leading" secondItem="ncI-vI-LVw" secondAttribute="trailing" constant="5" id="qYc-yh-0W9"/>
                             <constraint firstItem="ncI-vI-LVw" firstAttribute="centerY" secondItem="JaD-Us-V57" secondAttribute="centerY" id="r5V-HE-Qd0"/>

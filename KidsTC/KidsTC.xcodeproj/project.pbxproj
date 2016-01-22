@@ -807,6 +807,10 @@
 		8F2F873C1C510D6900DD1FD1 /* ServiceDetailRelatedServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F2F873A1C510D6900DD1FD1 /* ServiceDetailRelatedServiceCell.xib */; };
 		8F2F87451C51D16100DD1FD1 /* ServiceDetailRelatedServiceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2F87431C51D16100DD1FD1 /* ServiceDetailRelatedServiceListViewController.m */; };
 		8F2F87461C51D16100DD1FD1 /* ServiceDetailRelatedServiceListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F2F87441C51D16100DD1FD1 /* ServiceDetailRelatedServiceListViewController.xib */; };
+		8F2F87491C51D76A00DD1FD1 /* StrategyDetailRelatedStoreItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2F87481C51D76A00DD1FD1 /* StrategyDetailRelatedStoreItemModel.m */; };
+		8F2F874C1C52006800DD1FD1 /* StrategyDetailServiceItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2F874B1C52006800DD1FD1 /* StrategyDetailServiceItemModel.m */; };
+		8F2F87501C52045A00DD1FD1 /* StrategyDetailRelatedServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2F874E1C52045A00DD1FD1 /* StrategyDetailRelatedServiceCell.m */; };
+		8F2F87511C52045A00DD1FD1 /* StrategyDetailRelatedServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F2F874F1C52045A00DD1FD1 /* StrategyDetailRelatedServiceCell.xib */; };
 		8F30D5E01C3B7175004EE892 /* ServiceDetailActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F30D5DE1C3B7175004EE892 /* ServiceDetailActivityCell.m */; };
 		8F30D5E11C3B7175004EE892 /* ServiceDetailActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F30D5DF1C3B7175004EE892 /* ServiceDetailActivityCell.xib */; };
 		8F30D5E31C3BF70B004EE892 /* coupon_cellBG_d.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F30D5E21C3BF70B004EE892 /* coupon_cellBG_d.png */; };
@@ -833,6 +837,10 @@
 		8F5D8E431C047BCB00632390 /* NewsListTagFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5D8E411C047BCB00632390 /* NewsListTagFilterViewController.m */; };
 		8F5D8E441C047BCB00632390 /* NewsListTagFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F5D8E421C047BCB00632390 /* NewsListTagFilterViewController.xib */; };
 		8F5E56BC1C004F7500365ED4 /* KTCPaymentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F5E56BB1C004F7500365ED4 /* KTCPaymentInfo.m */; };
+		8F62C3431C52145B0013031E /* StrategyDetailRelatedServiceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F62C3411C52145B0013031E /* StrategyDetailRelatedServiceListViewController.m */; };
+		8F62C3441C52145B0013031E /* StrategyDetailRelatedServiceListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F62C3421C52145B0013031E /* StrategyDetailRelatedServiceListViewController.xib */; };
+		8F62C3471C521B3C0013031E /* StrategyDetailBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F62C3461C521B3C0013031E /* StrategyDetailBottomView.m */; };
+		8F62C34B1C521B5F0013031E /* StrategyDetailBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F62C34A1C521B5F0013031E /* StrategyDetailBottomView.xib */; };
 		8F6502AE1C50C88F00C36260 /* KTCPoiMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6502AC1C50C88F00C36260 /* KTCPoiMapViewController.m */; };
 		8F6502AF1C50C88F00C36260 /* KTCPoiMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F6502AD1C50C88F00C36260 /* KTCPoiMapViewController.xib */; };
 		8F6502B21C50CEB900C36260 /* KTCAnnotationTipPoiView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6502B11C50CEB900C36260 /* KTCAnnotationTipPoiView.m */; };
@@ -2384,6 +2392,13 @@
 		8F2F87421C51D16100DD1FD1 /* ServiceDetailRelatedServiceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceDetailRelatedServiceListViewController.h; sourceTree = "<group>"; };
 		8F2F87431C51D16100DD1FD1 /* ServiceDetailRelatedServiceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceDetailRelatedServiceListViewController.m; sourceTree = "<group>"; };
 		8F2F87441C51D16100DD1FD1 /* ServiceDetailRelatedServiceListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceDetailRelatedServiceListViewController.xib; sourceTree = "<group>"; };
+		8F2F87471C51D76A00DD1FD1 /* StrategyDetailRelatedStoreItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StrategyDetailRelatedStoreItemModel.h; sourceTree = "<group>"; };
+		8F2F87481C51D76A00DD1FD1 /* StrategyDetailRelatedStoreItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StrategyDetailRelatedStoreItemModel.m; sourceTree = "<group>"; };
+		8F2F874A1C52006800DD1FD1 /* StrategyDetailServiceItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StrategyDetailServiceItemModel.h; sourceTree = "<group>"; };
+		8F2F874B1C52006800DD1FD1 /* StrategyDetailServiceItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StrategyDetailServiceItemModel.m; sourceTree = "<group>"; };
+		8F2F874D1C52045A00DD1FD1 /* StrategyDetailRelatedServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StrategyDetailRelatedServiceCell.h; sourceTree = "<group>"; };
+		8F2F874E1C52045A00DD1FD1 /* StrategyDetailRelatedServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StrategyDetailRelatedServiceCell.m; sourceTree = "<group>"; };
+		8F2F874F1C52045A00DD1FD1 /* StrategyDetailRelatedServiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StrategyDetailRelatedServiceCell.xib; sourceTree = "<group>"; };
 		8F30D5DD1C3B7175004EE892 /* ServiceDetailActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceDetailActivityCell.h; sourceTree = "<group>"; };
 		8F30D5DE1C3B7175004EE892 /* ServiceDetailActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceDetailActivityCell.m; sourceTree = "<group>"; };
 		8F30D5DF1C3B7175004EE892 /* ServiceDetailActivityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceDetailActivityCell.xib; sourceTree = "<group>"; };
@@ -2426,6 +2441,12 @@
 		8F5D8E421C047BCB00632390 /* NewsListTagFilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsListTagFilterViewController.xib; sourceTree = "<group>"; };
 		8F5E56BA1C004F7500365ED4 /* KTCPaymentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCPaymentInfo.h; sourceTree = "<group>"; };
 		8F5E56BB1C004F7500365ED4 /* KTCPaymentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCPaymentInfo.m; sourceTree = "<group>"; };
+		8F62C3401C52145B0013031E /* StrategyDetailRelatedServiceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StrategyDetailRelatedServiceListViewController.h; sourceTree = "<group>"; };
+		8F62C3411C52145B0013031E /* StrategyDetailRelatedServiceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StrategyDetailRelatedServiceListViewController.m; sourceTree = "<group>"; };
+		8F62C3421C52145B0013031E /* StrategyDetailRelatedServiceListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StrategyDetailRelatedServiceListViewController.xib; sourceTree = "<group>"; };
+		8F62C3451C521B3C0013031E /* StrategyDetailBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StrategyDetailBottomView.h; sourceTree = "<group>"; };
+		8F62C3461C521B3C0013031E /* StrategyDetailBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StrategyDetailBottomView.m; sourceTree = "<group>"; };
+		8F62C34A1C521B5F0013031E /* StrategyDetailBottomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StrategyDetailBottomView.xib; sourceTree = "<group>"; };
 		8F6502AB1C50C88F00C36260 /* KTCPoiMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCPoiMapViewController.h; sourceTree = "<group>"; };
 		8F6502AC1C50C88F00C36260 /* KTCPoiMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCPoiMapViewController.m; sourceTree = "<group>"; };
 		8F6502AD1C50C88F00C36260 /* KTCPoiMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTCPoiMapViewController.xib; sourceTree = "<group>"; };
@@ -3141,6 +3162,10 @@
 				1E0B7B2B1B6F713E00A58AD4 /* ParentingStrategyListItemModel.m */,
 				1E7994DF1BC622900099CFF9 /* ParentingStrategyDetailModel.h */,
 				1E7994E01BC622900099CFF9 /* ParentingStrategyDetailModel.m */,
+				8F2F87471C51D76A00DD1FD1 /* StrategyDetailRelatedStoreItemModel.h */,
+				8F2F87481C51D76A00DD1FD1 /* StrategyDetailRelatedStoreItemModel.m */,
+				8F2F874A1C52006800DD1FD1 /* StrategyDetailServiceItemModel.h */,
+				8F2F874B1C52006800DD1FD1 /* StrategyDetailServiceItemModel.m */,
 			);
 			path = ParentingStrategy;
 			sourceTree = "<group>";
@@ -4366,6 +4391,12 @@
 				1E7994DA1BC615280099CFF9 /* ParentingStrategyDetailViewCell.h */,
 				1E7994DB1BC615280099CFF9 /* ParentingStrategyDetailViewCell.m */,
 				1E7994DC1BC615280099CFF9 /* ParentingStrategyDetailViewCell.xib */,
+				8F2F874D1C52045A00DD1FD1 /* StrategyDetailRelatedServiceCell.h */,
+				8F2F874E1C52045A00DD1FD1 /* StrategyDetailRelatedServiceCell.m */,
+				8F2F874F1C52045A00DD1FD1 /* StrategyDetailRelatedServiceCell.xib */,
+				8F62C3451C521B3C0013031E /* StrategyDetailBottomView.h */,
+				8F62C3461C521B3C0013031E /* StrategyDetailBottomView.m */,
+				8F62C34A1C521B5F0013031E /* StrategyDetailBottomView.xib */,
 			);
 			path = ParentingStrategyDetailView;
 			sourceTree = "<group>";
@@ -4403,6 +4434,9 @@
 				1E7995241BC7656C0099CFF9 /* ParentingStrategyDetailViewController.h */,
 				1E7995251BC7656C0099CFF9 /* ParentingStrategyDetailViewController.m */,
 				1E7995261BC7656C0099CFF9 /* ParentingStrategyDetailViewController.xib */,
+				8F62C3401C52145B0013031E /* StrategyDetailRelatedServiceListViewController.h */,
+				8F62C3411C52145B0013031E /* StrategyDetailRelatedServiceListViewController.m */,
+				8F62C3421C52145B0013031E /* StrategyDetailRelatedServiceListViewController.xib */,
 			);
 			path = ParentingStrategy;
 			sourceTree = "<group>";
@@ -6204,7 +6238,9 @@
 				1E1CFA231BD72F5E0005653D /* ServiceDetailMoreInfoView.xib in Resources */,
 				8F23E02D1C434B32005F7A07 /* bigShadow.png in Resources */,
 				1E827BD21B941337008F3F08 /* ImageSelectedOff@3x.png in Resources */,
+				8F2F87511C52045A00DD1FD1 /* StrategyDetailRelatedServiceCell.xib in Resources */,
 				1E8017371BB3CDC900B6C352 /* NewsViewController.xib in Resources */,
+				8F62C34B1C521B5F0013031E /* StrategyDetailBottomView.xib in Resources */,
 				8FEAED761C12C23400DF6E5E /* NewsRecommedListViewController.xib in Resources */,
 				8F85AD871C0C6C8200890526 /* NotificationCenterViewController.xib in Resources */,
 				1EFFAE0C1BEB7925001D4245 /* WeiboSDK.bundle in Resources */,
@@ -6217,6 +6253,7 @@
 				1E79956F1BCD25860099CFF9 /* LoveHouseListView.xib in Resources */,
 				1E15F9781BDDCFA4000C74E7 /* StoreDetailHotRecommendCell.xib in Resources */,
 				1E80170E1BB006EF00B6C352 /* HomeViewNewsCell.xib in Resources */,
+				8F62C3441C52145B0013031E /* StrategyDetailRelatedServiceListViewController.xib in Resources */,
 				8F85ADB71C0D5BB600890526 /* MyCommentListViewController.xib in Resources */,
 				1E7995281BC7656C0099CFF9 /* ParentingStrategyDetailViewController.xib in Resources */,
 				8F7F76F91C4A46950035413A /* StoreDetailServiceCell.xib in Resources */,
@@ -6278,6 +6315,7 @@
 				1E79951A1BC758560099CFF9 /* NewsRecommendListViewCell.m in Sources */,
 				1E7995221BC75E580099CFF9 /* ParentingStrategyDetailViewModel.m in Sources */,
 				1E15F9D11BE8A47C000C74E7 /* SoftwareSettingViewCell.m in Sources */,
+				8F62C3471C521B3C0013031E /* StrategyDetailBottomView.m in Sources */,
 				1E3D8D861B4BF4A100275C35 /* ASIFormDataRequest.m in Sources */,
 				1E8EFD0F1B68836600D00808 /* CommentListViewCell.m in Sources */,
 				1E3D8D8C1B4BF4A100275C35 /* ASICloudFilesContainerRequest.m in Sources */,
@@ -6307,6 +6345,7 @@
 				8FC36E2D1C325E4C0079D458 /* unzip.c in Sources */,
 				1E0B7AEA1B6F693000A58AD4 /* PhotosBrowserController.m in Sources */,
 				1E3D8D4D1B4BF4A100275C35 /* NSTimer+Blocks.m in Sources */,
+				8F2F87491C51D76A00DD1FD1 /* StrategyDetailRelatedStoreItemModel.m in Sources */,
 				1E3D8D911B4BF4A100275C35 /* Reachability.m in Sources */,
 				1E8017361BB3CDC900B6C352 /* NewsViewController.m in Sources */,
 				1E3D8CE31B4BF4A100275C35 /* IcsonCategoryManager.m in Sources */,
@@ -6355,6 +6394,7 @@
 				1E943F661B81DEE30029FE74 /* StoreDetailViewModel.m in Sources */,
 				1E3D8D551B4BF4A100275C35 /* FMDatabaseQueue.m in Sources */,
 				1E943E9A1B71E7CD0029FE74 /* RollConfig.m in Sources */,
+				8F2F87501C52045A00DD1FD1 /* StrategyDetailRelatedServiceCell.m in Sources */,
 				8F25A1181C2D1C9C0076A6FA /* MJRefreshComponent.m in Sources */,
 				1E3D8CE51B4BF4A100275C35 /* IcsonLevel2Category.m in Sources */,
 				1E3D8D701B4BF4A100275C35 /* GConfig.m in Sources */,
@@ -6569,6 +6609,7 @@
 				1E943EA21B71E8370029FE74 /* KTCUser.m in Sources */,
 				1E0B7AA01B6F67B800A58AD4 /* GEventPageViewCell1.m in Sources */,
 				1E7995641BCBCB480099CFF9 /* AddressSelectTableViewCell.m in Sources */,
+				8F2F874C1C52006800DD1FD1 /* StrategyDetailServiceItemModel.m in Sources */,
 				1E0B7B111B6F6C1400A58AD4 /* WelcomeView.m in Sources */,
 				1EC4A0F31B5A4C8600206BB9 /* FavourateView.m in Sources */,
 				8F06234E1C02EE8A00A8AF6C /* ActivityLogoItem.m in Sources */,
@@ -6913,6 +6954,7 @@
 				1E827CA01B94144E008F3F08 /* NSData+ImageContentType.m in Sources */,
 				1E943F051B7B231F0029FE74 /* AppointmentOrderDetailViewController.m in Sources */,
 				1E0B7B311B6F713E00A58AD4 /* ParentingStrategyListItemModel.m in Sources */,
+				8F62C3431C52145B0013031E /* StrategyDetailRelatedServiceListViewController.m in Sources */,
 				1E15F9771BDDCFA4000C74E7 /* StoreDetailHotRecommendCell.m in Sources */,
 				1E3D8D4F1B4BF4A100275C35 /* GInterface.m in Sources */,
 				1E827BA81B9412C6008F3F08 /* MWTapDetectingView.m in Sources */,

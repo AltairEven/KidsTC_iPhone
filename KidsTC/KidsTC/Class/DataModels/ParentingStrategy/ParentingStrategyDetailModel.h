@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "HomeSegueModel.h"
 #import "CommonShareObject.h"
+#import "StrategyDetailRelatedStoreItemModel.h"
+#import "StoreListItemModel.h"
+#import "StrategyDetailServiceItemModel.h"
+#import "TextSegueModel.h"
 
 @class ParentingStrategyDetailCellModel;
 
@@ -26,6 +30,8 @@
 
 @property (nonatomic, strong) NSArray *tagNames;
 
+@property (nonatomic, copy) NSString *strategyDescriptionTitle;
+
 @property (nonatomic, copy) NSString *strategyDescription;
 
 @property (nonatomic, assign) CGFloat mainImageRatio;
@@ -33,6 +39,12 @@
 @property (nonatomic, strong) NSArray<ParentingStrategyDetailCellModel *> *cellModels;
 
 @property (nonatomic, strong) CommonShareObject *shareObject;
+
+@property (nonatomic, strong) NSArray<StrategyDetailRelatedStoreItemModel *> *storeItems;
+
+@property (nonatomic, strong) NSArray<StrategyDetailServiceItemModel *> *relatedServices;
+
+@property (nonatomic, strong) NSArray<TextSegueModel *> *briefSegueModels;
 
 - (void)fillWithRawData:(NSDictionary *)data;
 
@@ -43,6 +55,8 @@
 - (CGFloat)tagViewHeight;
 
 - (CGFloat)strategyDescriptionViewHeight;
+
+- (NSArray<StoreListItemModel *> *)relatedStoreItems;
 
 @end
 
@@ -69,8 +83,10 @@
 
 @property (nonatomic, assign) CGFloat ratio;
 
+@property (nonatomic, strong) NSArray<TextSegueModel *> *contentSegueModels;
+
 - (instancetype)initWithRawData:(NSDictionary *)data;
 
-- (CGFloat) cellHeight;
+- (CGFloat)cellHeight;
 
 @end
