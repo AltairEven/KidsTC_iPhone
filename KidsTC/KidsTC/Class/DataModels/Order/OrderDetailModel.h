@@ -7,6 +7,7 @@
 //
 
 #import "OrderModel.h"
+#import "OrderRefundModel.h"
 
 @interface OrderDetailModel : OrderModel
 
@@ -32,12 +33,10 @@
 
 @property (nonatomic, copy) NSString *orderPaymentDes;
 
-@property (nonatomic, strong) NSArray *refundDescriptions;
+@property (nonatomic, strong) NSArray<OrderRefundFlowModel *> *refundFlows;
 
 - (instancetype)initWithRawData:(NSDictionary *)data;
 
 - (BOOL)canGetCode;
-
-- (CGFloat)refundDescriptionCellHeightAtIndex:(NSUInteger)index;
 
 @end

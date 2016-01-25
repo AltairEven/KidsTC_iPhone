@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum {
+    OrderRefundStatusApply,
+    OrderRefundStatusSucceed
+}OrderRefundStatus;
+
 @class OrderRefundReasonItem;
 
 @interface OrderRefundModel : NSObject
@@ -48,5 +53,26 @@
 @property (nonatomic, copy) NSString *reasonName;
 
 + (instancetype)reasonItemWithIdentifier:(NSString *)identifier name:(NSString *)name;
+
+@end
+
+
+@interface OrderRefundFlowModel : NSObject
+
+@property (nonatomic, assign) OrderRefundStatus status;
+
+@property (nonatomic, strong) NSArray *refundCodes;
+
+@property (nonatomic, copy) NSString *applyTimeDes;
+
+@property (nonatomic, copy) NSString *statusDescription;
+
+@property (nonatomic, copy) NSString *flowDescription;
+
+- (instancetype)initWithRawData:(NSDictionary *)data;
+
+- (NSString *)codeString;
+
+- (CGFloat)cellHeight;
 
 @end

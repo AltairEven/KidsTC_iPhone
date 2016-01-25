@@ -14,7 +14,7 @@
     self = [super initWithRawData:dataArray];
     if (self) {
         self.type = HomeContentCellTypeNotice;
-        cellHeight = 40;
+        cellHeight = 50;
     }
     return self;
 }

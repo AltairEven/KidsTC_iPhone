@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrderRefundModel.h"
 
 @interface OrderDetailRefundDescriptionCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
+- (void)configWithModel:(OrderRefundFlowModel *)model;
 
 @end

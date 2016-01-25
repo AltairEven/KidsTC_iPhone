@@ -161,7 +161,7 @@ static NSString *const kRefundDescriptionCellIdentifier = @"kRefundDescriptionCe
     NSUInteger number = 0;
     if (self.detailModel) {
         number = 3;
-        if ([self.detailModel.refundDescriptions count] > 0) {
+        if ([self.detailModel.refundFlows count] > 0) {
             number ++;
         }
     }
@@ -189,7 +189,7 @@ static NSString *const kRefundDescriptionCellIdentifier = @"kRefundDescriptionCe
                 break;
             case 3:
             {
-                number = [self.detailModel.refundDescriptions count] + 1;
+                number = [self.detailModel.refundFlows count] + 1;
             }
                 break;
             default:
@@ -258,8 +258,8 @@ static NSString *const kRefundDescriptionCellIdentifier = @"kRefundDescriptionCe
                 if (!cell) {
                     cell =  [[[NSBundle mainBundle] loadNibNamed:@"OrderDetailRefundDescriptionCell" owner:nil options:nil] objectAtIndex:0];
                 }
-                NSString *refundDes = [self.detailModel.refundDescriptions objectAtIndex:indexPath.row - 1];
-                [((OrderDetailRefundDescriptionCell *)cell).descriptionLabel setText:refundDes];
+                OrderRefundFlowModel *model = [self.detailModel.refundFlows objectAtIndex:indexPath.row - 1];
+                [((OrderDetailRefundDescriptionCell *)cell) configWithModel:model];
             }
         }
         default:
@@ -312,7 +312,8 @@ static NSString *const kRefundDescriptionCellIdentifier = @"kRefundDescriptionCe
             if (indexPath.row == 0) {
                 height = self.refundDescriptionTitleCell.frame.size.height;
             } else {
-                height = [self.detailModel refundDescriptionCellHeightAtIndex:indexPath.row - 1];
+                OrderRefundFlowModel *model = [self.detailModel.refundFlows objectAtIndex:indexPath.row - 1];
+                height = [model cellHeight];
             }
         }
             break;

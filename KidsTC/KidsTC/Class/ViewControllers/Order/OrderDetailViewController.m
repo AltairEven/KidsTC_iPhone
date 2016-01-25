@@ -33,6 +33,8 @@
 
 - (void)contectOnlineCustomerService;
 
+- (void)loadOrderStatusFailed:(NSError *)error;
+
 @end
 
 @implementation OrderDetailViewController
@@ -63,6 +65,7 @@
         [MTA trackCustomKeyValueEvent:@"event_result_orders_dtl" props:trackParam];
         [[GAlertLoadingView sharedAlertLoadingView] hide];
     } failure:^(NSError *error) {
+        [weakSelf loadOrderStatusFailed:error];
         //MTA
         NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:self.orderId, @"id", @"false", @"result", nil];
         [MTA trackCustomKeyValueEvent:@"event_result_orders_dtl" props:trackParam];
@@ -167,7 +170,9 @@
 #pragma mark CommentFoundingViewControllerDelegate
 
 - (void)commentFoundingViewControllerDidFinishSubmitComment:(CommentFoundingViewController *)vc {
-    [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
+    [self.viewModel startUpdateDataWithSucceed:nil failure:^(NSError *error) {
+        [self loadOrderStatusFailed:error];
+    }];
     if (self.delegate && [self.delegate respondsToSelector:@selector(orderStatusChanged:needRefresh:)]) {
         [self.delegate orderStatusChanged:self.orderId needRefresh:YES];
     }
@@ -183,6 +188,7 @@
             [self.delegate orderStatusChanged:self.orderId needRefresh:YES];
         }
     } failure:^(NSError *error) {
+        [self loadOrderStatusFailed:error];
         [[GAlertLoadingView sharedAlertLoadingView] hide];
     }];
 }
@@ -197,12 +203,26 @@
             [self.delegate orderStatusChanged:self.orderId needRefresh:YES];
         }
     } failure:^(NSError *error) {
+        [self loadOrderStatusFailed:error];
         [[GAlertLoadingView sharedAlertLoadingView] hide];
     }];
 }
 
 
 #pragma mark Private methods
+
+- (void)loadOrderStatusFailed:(NSError *)error {
+    if (error.userInfo) {
+        NSString *msg = [error.userInfo objectForKey:@"data"];
+        if ([msg isKindOfClass:[NSString class]] && [msg length] > 0) {
+            [[iToast makeText:msg] show];
+        } else {
+            [[iToast makeText:@"获取订单信息失败"] show];
+        }
+    } else {
+        [[iToast makeText:@"获取订单信息失败"] show];
+    }
+}
 
 - (void)didClickedContectCSButton {
     BOOL hasOnlineService = [OnlineCustomerService serviceIsOnline];

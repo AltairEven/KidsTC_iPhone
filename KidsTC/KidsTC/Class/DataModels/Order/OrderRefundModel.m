@@ -74,3 +74,45 @@
 }
 
 @end
+
+
+@implementation OrderRefundFlowModel
+
+- (instancetype)initWithRawData:(NSDictionary *)data {
+    if (!data || ![data isKindOfClass:[NSDictionary class]]) {
+        return nil;
+    }
+    self = [super init];
+    if (self) {
+        NSArray *array = [data objectForKey:@"consume_codes"];
+        if ([array isKindOfClass:[NSArray class]]) {
+            self.refundCodes = [NSArray arrayWithArray:array];
+        }
+        if ([self.refundCodes count] == 0) {
+            return nil;
+        }
+        self.applyTimeDes = [data objectForKey:@"refund_apply_time"];
+        self.status = (OrderRefundStatus)[[data objectForKey:@"refund_status"] integerValue];
+        self.statusDescription = [data objectForKey:@"refund_status_desc"];
+        self.flowDescription = [data objectForKey:@"refund_notice"];
+    }
+    return self;
+}
+
+- (NSString *)codeString {
+    if ([self.refundCodes count] == 0) {
+        return nil;
+    }
+    NSString *codesString = [self.refundCodes componentsJoinedByString:@", "];
+    return codesString;
+}
+
+- (CGFloat)cellHeight {
+    CGFloat height = [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 85 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:13] topGap:10 bottomGap:10 andText:[self codeString]];
+    height += 52;
+    height += [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 85 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:13] topGap:0 bottomGap:10 andText:self.flowDescription];
+    
+    return height;
+}
+
+@end

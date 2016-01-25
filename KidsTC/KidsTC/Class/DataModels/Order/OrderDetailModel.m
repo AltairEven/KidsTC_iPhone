@@ -57,12 +57,12 @@
         if ([refunds isKindOfClass:[NSArray class]]) {
             NSMutableArray *tempArray = [[NSMutableArray alloc] init];
             for (NSDictionary *singleElem in refunds) {
-                NSString *des = [singleElem objectForKey:@"refund_notice"];
-                if ([des isKindOfClass:[NSString class]] && [des length] > 0) {
-                    [tempArray addObject:des];
+                OrderRefundFlowModel *model = [[OrderRefundFlowModel alloc] initWithRawData:singleElem];
+                if (model) {
+                    [tempArray addObject:model];
                 }
             }
-            self.refundDescriptions = [NSArray arrayWithArray:tempArray];
+            self.refundFlows = [NSArray arrayWithArray:tempArray];
         }
     }
     return self;
@@ -75,15 +75,6 @@
         retValue = YES;
     }
     return retValue;
-}
-
-- (CGFloat)refundDescriptionCellHeightAtIndex:(NSUInteger)index {
-    CGFloat height = 0;
-    if ([self.refundDescriptions count] > index) {
-        NSString *des = [self.refundDescriptions objectAtIndex:index];
-        height = [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 20 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:13] topGap:10 bottomGap:10 andText:des];
-    }
-    return height;
 }
 
 @end

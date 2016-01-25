@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -18,14 +19,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_notice" translatesAutoresizingMaskIntoConstraints="NO" id="1W7-rk-rxr">
-                                <rect key="frame" x="10" y="7" width="30" height="30"/>
+                                <rect key="frame" x="10" y="5" width="33.5" height="33.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="gKp-OZ-LTQ"/>
-                                    <constraint firstAttribute="height" constant="30" id="uO1-fK-msq"/>
+                                    <constraint firstAttribute="width" secondItem="1W7-rk-rxr" secondAttribute="height" multiplier="1:1" id="tK9-xs-tl2"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tif-Ht-8uN" customClass="AUINoticeView">
-                                <rect key="frame" x="50" y="0.0" width="260" height="43.5"/>
+                                <rect key="frame" x="53.5" y="0.0" width="256.5" height="43.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -33,10 +33,12 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Tif-Ht-8uN" secondAttribute="trailing" constant="10" id="9ho-j2-S9X"/>
                             <constraint firstItem="Tif-Ht-8uN" firstAttribute="leading" secondItem="1W7-rk-rxr" secondAttribute="trailing" constant="10" id="Ldd-3j-XUT"/>
+                            <constraint firstItem="1W7-rk-rxr" firstAttribute="top" secondItem="Rd5-Kl-aha" secondAttribute="top" constant="5" id="R6B-Ie-Ynh"/>
                             <constraint firstItem="1W7-rk-rxr" firstAttribute="leading" secondItem="Rd5-Kl-aha" secondAttribute="leading" constant="10" id="ayA-av-d6f"/>
                             <constraint firstAttribute="bottom" secondItem="Tif-Ht-8uN" secondAttribute="bottom" id="jDp-9g-IrZ"/>
                             <constraint firstItem="Tif-Ht-8uN" firstAttribute="top" secondItem="Rd5-Kl-aha" secondAttribute="top" id="jXb-FT-zCJ"/>
                             <constraint firstItem="1W7-rk-rxr" firstAttribute="centerY" secondItem="Rd5-Kl-aha" secondAttribute="centerY" id="lZM-4m-U4v"/>
+                            <constraint firstAttribute="bottom" secondItem="1W7-rk-rxr" secondAttribute="bottom" constant="5" id="wqq-bS-6Fh"/>
                         </constraints>
                     </view>
                 </subviews>
