@@ -779,7 +779,9 @@ static NSString *const kMoreServiceCellIdentifier = @"kMoreServiceCellIdentifier
                     }
                 }
             }
-            [self.cellArray addObject:[NSArray arrayWithArray:section2]];
+            if ([section2 count] > 0) {
+                [self.cellArray addObject:[NSArray arrayWithArray:section2]];
+            }
             
             if ([self.detailModel.serviceContent length] > 0) {
                 NSArray *section3 = [NSArray arrayWithObject:self.contentCell];

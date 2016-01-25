@@ -46,7 +46,7 @@
 }
 
 - (void)configWithModel:(ServiceMoreDetailHotSalesItemModel *)model {
-    [self.cellImageView setImageWithURL:model.imageUrl placeholderImage:PLACEHOLDERIMAGE_BIG];
+    [self.cellImageView setImageWithURL:model.imageUrl];
     [self.serviceNameLabel setText:model.serviceName];
     [self.promotionPriceView setPrice:model.price];
     if (model.price >= model.originalPrice) {

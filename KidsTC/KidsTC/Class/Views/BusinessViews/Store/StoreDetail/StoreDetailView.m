@@ -893,6 +893,7 @@ static NSString *const kStrategyCellIdentifier = @"kStrategyCellIdentifier";
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(labelStart, margin, labelWidth, imageSideLenght)];
         [label setBackgroundColor:[UIColor clearColor]];
         [label setFont:font];
+//        [label setTextColor:[UIColor lightGrayColor]];
         [label setTextColor:[UIColor lightGrayColor]];
         [label setTextAlignment:NSTextAlignmentCenter];
         [label setText:model.name];
@@ -924,7 +925,11 @@ static NSString *const kStrategyCellIdentifier = @"kStrategyCellIdentifier";
         if (model.hasInfo) {
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTappedOnStoreNearby:)];
             [bgView addGestureRecognizer:tap];
-            [label setTextColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
+//            [label setTextColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
+            label.layer.cornerRadius = 2;
+            label.layer.borderColor = RGBA(180, 180, 180, 1).CGColor;
+            label.layer.borderWidth = 0.5;
+            label.layer.masksToBounds = YES;
         }
     }
 }
