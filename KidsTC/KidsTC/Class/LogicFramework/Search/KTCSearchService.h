@@ -51,6 +51,12 @@ typedef enum {
 - (void)stopStoreSearch;
 
 //news
+- (void)startNewsSearchWithParamDic:(NSDictionary *)param
+                             Condition:(KTCSearchNewsCondition *)condition
+                               success:(void(^)(NSDictionary *responseData))success
+                               failure:(void(^)(NSError *error))failure;
+
+
 - (void)startNewsSearchWithKeyWord:(NSString *)keyword
                          pageIndex:(NSUInteger)index
                           pageSize:(NSUInteger)size

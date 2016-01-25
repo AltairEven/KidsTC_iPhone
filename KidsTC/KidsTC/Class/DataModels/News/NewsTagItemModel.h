@@ -23,6 +23,8 @@
 
 - (instancetype)initWithRawData:(NSDictionary *)data;
 
++ (NSUInteger)tagTypeFromUserRole:(KTCUserRole *)role;
+
 @end
 
 @interface NewsTagItemModel : NSObject

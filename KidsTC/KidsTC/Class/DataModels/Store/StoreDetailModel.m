@@ -219,7 +219,7 @@
 - (CGFloat)topCellHeight {
     CGFloat height = self.imageRatio * SCREEN_WIDTH;
     height += 30;
-    height += [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 20 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:17] topGap:10 bottomGap:10 maxLine:0 andText:self.storeBrief];
+    height += [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 20 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:13] topGap:10 bottomGap:10 maxLine:0 andText:self.storeBrief];
     height += 25;
     return height;
 }

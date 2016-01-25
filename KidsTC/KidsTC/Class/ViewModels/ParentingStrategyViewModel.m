@@ -146,6 +146,8 @@
             }
             if ([dataArray count] < PageSize) {
                 [self.view noMoreData:YES];
+            } else {
+                [self.view noMoreData:NO];
             }
         } else {
             [self.view noMoreData:YES];

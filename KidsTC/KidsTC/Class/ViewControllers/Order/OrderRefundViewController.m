@@ -57,6 +57,12 @@
     }];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.viewModel stopUpdateData];
+    [[GAlertLoadingView sharedAlertLoadingView] hide];
+}
+
 #pragma mark OrderRefundViewDelegate
 
 - (void)orderRefundView:(OrderRefundView *)view didChangedRefundCountToValue:(NSUInteger)count {
@@ -84,6 +90,7 @@
         return;
     }
     __weak OrderRefundViewController *weakSelf = self;
+    [[GAlertLoadingView sharedAlertLoadingView] showInView:self.view];
     [weakSelf.viewModel createOrderRefundWithSucceed:^(NSDictionary *data) {
         [[iToast makeText:@"退款申请提交成功"] show];
         if (self.delegate && [self.delegate respondsToSelector:@selector(orderRefundViewController:didSucceedWithRefundForOrderId:)]) {
@@ -92,6 +99,7 @@
         [weakSelf goBackController:nil];
         NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:self.orderId, @"id", @"true", @"result", nil];
         [MTA trackCustomKeyValueEvent:@"event_result_refund_apply" props:trackParam];
+        [[GAlertLoadingView sharedAlertLoadingView] hide];
     } failure:^(NSError *error) {
         NSString *msg = nil;
         if (error.userInfo) {
@@ -103,6 +111,7 @@
         [[iToast makeText:msg] show];
         NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:self.orderId, @"id", @"false", @"result", nil];
         [MTA trackCustomKeyValueEvent:@"event_result_refund_apply" props:trackParam];
+        [[GAlertLoadingView sharedAlertLoadingView] hide];
     }];
 }
 

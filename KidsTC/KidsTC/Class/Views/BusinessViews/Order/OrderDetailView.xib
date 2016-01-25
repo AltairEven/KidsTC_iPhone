@@ -100,6 +100,7 @@
                 <outlet property="productTotalPriceView" destination="Gpr-v3-IYU" id="6aw-og-htr"/>
                 <outlet property="promotionDescriptionLabel" destination="VVu-Eu-hEa" id="4d5-ox-RZ8"/>
                 <outlet property="promotionPriceView" destination="Teq-tv-ylb" id="MWp-cq-teR"/>
+                <outlet property="refundDescriptionTitleCell" destination="X1h-fy-YF0" id="M6f-d1-gph"/>
                 <outlet property="rightButton" destination="IvI-00-SGX" id="NVT-9H-bfp"/>
                 <outlet property="rightButtonBGView" destination="OcG-0Q-keF" id="Clc-Xd-FpY"/>
                 <outlet property="scorePriceView" destination="EAU-Up-FA3" id="Ypm-Ui-2yY"/>
@@ -183,7 +184,7 @@
                     <constraint firstItem="mJn-if-Tnr" firstAttribute="centerY" secondItem="gy5-r6-t7i" secondAttribute="centerY" id="oFY-Mh-vuF"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="44.5" y="199"/>
+            <point key="canvasLocation" x="44.5" y="160"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="160" id="eMR-GK-sAe">
             <rect key="frame" x="0.0" y="0.0" width="419" height="160"/>
@@ -329,7 +330,28 @@
                     <constraint firstAttribute="centerY" secondItem="9Tz-Xs-cC8" secondAttribute="centerY" id="zFf-yY-aZu"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="44.5" y="310"/>
+            <point key="canvasLocation" x="44.5" y="337"/>
+        </tableViewCell>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="X1h-fy-YF0" userLabel="OrderDetailRefundDescriptionCell">
+            <rect key="frame" x="0.0" y="0.0" width="419" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X1h-fy-YF0" id="oRJ-qA-3my">
+                <rect key="frame" x="0.0" y="0.0" width="419" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="退款信息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mHj-RY-TSS">
+                        <rect key="frame" x="10" y="11.5" width="68" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="mHj-RY-TSS" firstAttribute="centerY" secondItem="oRJ-qA-3my" secondAttribute="centerY" id="oy2-gV-mrv"/>
+                    <constraint firstItem="mHj-RY-TSS" firstAttribute="leading" secondItem="oRJ-qA-3my" secondAttribute="leading" constant="10" id="qnG-gj-uUf"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="44.5" y="241"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="120" id="9yq-gK-heo" userLabel="SettlementCell">
             <rect key="frame" x="0.0" y="0.0" width="419" height="160"/>

@@ -16,6 +16,8 @@
 
 @property (nonatomic, strong) HttpRequestClient *createRefundRequest;
 
+@property (nonatomic, copy) NSString *soleId;
+
 - (void)loadRefundSucceed:(NSDictionary *)data;
 
 - (void)loadRefundFailed:(NSError *)error;
@@ -34,6 +36,7 @@
         self.view = (OrderRefundView *)view;
         self.view.dataSource = self;
         self.refundModel = [[OrderRefundModel alloc] init];
+        self.soleId = [GConfig generateSMSCodeKey];
     }
     return self;
 }
@@ -74,7 +77,7 @@
     }
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
                            self.refundModel.orderId, @"orderid",
-                           [GConfig generateSMSCodeKey], @"soleid",
+                           self.soleId, @"soleid",
                            self.refundModel.refundDescription, @"reason",
                            self.refundModel.selectedReasonItem.identifier, @"type",
                            [NSNumber numberWithInteger:self.refundModel.refundCount], @"refundNum", nil];

@@ -44,14 +44,29 @@
     self.orderListView.delegate = self;
     self.viewModel = [[OrderListViewModel alloc] initWithView:self.orderListView];
     [self.viewModel setOrderListType:self.listType];
-    [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
+//    [[GAlertLoadingView sharedAlertLoadingView] showInView:self.view];
+    [self.viewModel startUpdateDataWithSucceed:^(NSDictionary *data) {
+        [[GAlertLoadingView sharedAlertLoadingView] hide];
+    } failure:^(NSError *error) {
+        [[GAlertLoadingView sharedAlertLoadingView] hide];
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     if (self.needRefresh) {
-        [self.viewModel startUpdateDataWithSucceed:nil failure:nil];
+        [[GAlertLoadingView sharedAlertLoadingView] showInView:self.view];
+        [self.viewModel startUpdateDataWithSucceed:^(NSDictionary *data) {
+            [[GAlertLoadingView sharedAlertLoadingView] hide];
+        } failure:^(NSError *error) {
+            [[GAlertLoadingView sharedAlertLoadingView] hide];
+        }];
     }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[GAlertLoadingView sharedAlertLoadingView] hide];
 }
 
 

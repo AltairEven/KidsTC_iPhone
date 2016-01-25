@@ -15,6 +15,8 @@ typedef void(^ SelectCompletion)(NewsTagItemModel *itemModel);
 
 @property (nonatomic, strong) SelectCompletion completionBlock;
 
+@property (nonatomic, assign) NSUInteger selectedTagType;
+
 - (instancetype)initWithNewsTagTypeModels:(NSArray<NewsTagTypeModel *> *)models;
 
 @end

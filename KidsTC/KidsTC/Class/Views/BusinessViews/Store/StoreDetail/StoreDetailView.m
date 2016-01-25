@@ -28,8 +28,8 @@ typedef enum {
     StoreDetailViewSectionAddress = 1,
     StoreDetailViewSectionCoupon = 2,
     StoreDetailViewSectionActivity = 3,
-    StoreDetailViewSectionService = 4,
-    StoreDetailViewSectionHotRecommend = 5,
+    StoreDetailViewSectionHotRecommend = 4,
+    StoreDetailViewSectionService = 5,
     StoreDetailViewSectionRecommend = 6,
     StoreDetailViewSectionComment = 7,
     StoreDetailViewSectionDetailInfo = 8,
@@ -134,9 +134,7 @@ static NSString *const kStrategyCellIdentifier = @"kStrategyCellIdentifier";
     [self.bannerScrollView setShowPageIndex:NO];
     
     [self.storeBriefLabel setDelegate:self];
-    NSDictionary *linkAttr = [NSDictionary dictionaryWithObjectsAndKeys:[[KTCThemeManager manager] defaultTheme].globalThemeColor, NSForegroundColorAttributeName, [NSNumber numberWithBool:YES], NSUnderlineStyleAttributeName, nil];
-    [self.storeBriefLabel setLinkAttributes:linkAttr];
-    [self.storeBriefLabel setTextColor:[UIColor darkGrayColor]];
+    [self.storeBriefLabel setLinkAttributes:nil];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTappedOnAddressBrief)];
     [self.storeAddressBriefBGView addGestureRecognizer:tap];
@@ -746,13 +744,22 @@ static NSString *const kStrategyCellIdentifier = @"kStrategyCellIdentifier";
     
     [self.storeName setText:self.detailModel.storeName];
     
-    [self.storeBriefLabel setText:self.detailModel.storeBrief];
     
+    NSMutableAttributedString *briefLabelString = [[NSMutableAttributedString alloc] initWithString:self.detailModel.storeBrief];
+    NSDictionary *fontAttribute = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13], NSFontAttributeName, [[KTCThemeManager manager] defaultTheme].globalThemeColor, NSForegroundColorAttributeName, nil];
+    [briefLabelString setAttributes:fontAttribute range:NSMakeRange(0, [briefLabelString length])];
     if (self.detailModel.promotionSegueModels) {
         for (TextSegueModel *model in self.detailModel.promotionSegueModels) {
-            [self.storeBriefLabel addLinkToAddress:[NSDictionary dictionaryWithObject:model forKey:@"promotionSegueModel"] withRange:model.linkRange];
+            //[NSNumber numberWithBool:YES], NSUnderlineStyleAttributeName
+            NSDictionary *linkAttribute = [NSDictionary dictionaryWithObjectsAndKeys:model.linkColor, NSForegroundColorAttributeName, [NSNumber numberWithBool:YES], NSUnderlineStyleAttributeName, nil];
+            for (NSString *rangeString in model.linkRangeStrings) {
+                NSRange range = NSRangeFromString(rangeString);
+                [briefLabelString addAttributes:linkAttribute range:range];
+                [self.storeBriefLabel addLinkToAddress:[NSDictionary dictionaryWithObject:model forKey:@"promotionSegueModel"] withRange:range];
+            }
         }
     }
+    [self.storeBriefLabel setAttributedText:briefLabelString];
     
     [self.starView setStarNumber:self.detailModel.starNumber];
     
@@ -955,11 +962,11 @@ static NSString *const kStrategyCellIdentifier = @"kStrategyCellIdentifier";
             if ([self.detailModel.activeModelsArray count] > 0) {
                 [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionActivity]];
             }
-            if ([self.detailModel.serviceModelsArray count] > 0) {
-                [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionService]];
-            }
             if ([[self.detailModel.hotRecommedService recommendItems] count] > 0) {
                 [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionHotRecommend]];
+            }
+            if ([self.detailModel.serviceModelsArray count] > 0) {
+                [tempSections addObject:[NSNumber numberWithInteger:StoreDetailViewSectionService]];
             }
             if ([self.detailModel.recommendString length] > 0) {
                 [self configRecommendCell];

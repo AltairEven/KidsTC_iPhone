@@ -32,4 +32,6 @@
 
 - (void)setTagItemModelsWithModel:(NewsTagItemModel *)model;
 
+- (NSUInteger)currentTagType;
+
 @end

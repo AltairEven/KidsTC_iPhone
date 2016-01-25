@@ -52,6 +52,18 @@
         self.productType = [[data objectForKey:@"productType"] integerValue];
         
         self.price = self.originalAmount - self.discountAmount - self.usedPointNumber * ScoreCoefficient;
+        
+        NSArray *refunds = [data objectForKey:@"refunds"];
+        if ([refunds isKindOfClass:[NSArray class]]) {
+            NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+            for (NSDictionary *singleElem in refunds) {
+                NSString *des = [singleElem objectForKey:@"refund_notice"];
+                if ([des isKindOfClass:[NSString class]] && [des length] > 0) {
+                    [tempArray addObject:des];
+                }
+            }
+            self.refundDescriptions = [NSArray arrayWithArray:tempArray];
+        }
     }
     return self;
 }
@@ -63,6 +75,15 @@
         retValue = YES;
     }
     return retValue;
+}
+
+- (CGFloat)refundDescriptionCellHeightAtIndex:(NSUInteger)index {
+    CGFloat height = 0;
+    if ([self.refundDescriptions count] > index) {
+        NSString *des = [self.refundDescriptions objectAtIndex:index];
+        height = [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 20 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:13] topGap:10 bottomGap:10 andText:des];
+    }
+    return height;
 }
 
 @end

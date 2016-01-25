@@ -31,4 +31,6 @@
 
 - (void)reloadData;
 
+- (void)setSelectedTagIndex:(NSUInteger)index;
+
 @end

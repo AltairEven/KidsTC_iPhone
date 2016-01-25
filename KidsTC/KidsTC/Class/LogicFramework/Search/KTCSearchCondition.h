@@ -70,4 +70,12 @@ typedef enum {
 
 @interface KTCSearchNewsCondition : KTCSearchCondition
 
+@property (nonatomic, assign) NSUInteger articleKind;
+
+@property (nonatomic, assign) NSUInteger populationType;
+
+@property (nonatomic, copy) NSString *authorId;
+
+@property (nonatomic, copy) NSString *tagId;
+
 @end

@@ -30,6 +30,7 @@
     
     self.newsViewModel = [[NewsViewModel alloc] initWithView:self.newsView];
     [self.newsViewModel refreshNewsWithViewTag:NewsViewTagRecommend newsTagIndex:self.newsViewModel.currentNewsTagIndex];
+    [self.newsView resetRoleTypeWithImage:[KTCUserRole smallImageWithUserRole:[KTCUser currentUser].userRole]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -88,6 +89,7 @@
 
 - (void)didClickedUserRoleButton {
     NewsListTagFilterViewController *controller = [[NewsListTagFilterViewController alloc] initWithNewsTagTypeModels:[self.newsViewModel tagTypeModels]];
+    [controller setSelectedTagType:[self.newsViewModel currentTagType] - 1];
     [controller setCompletionBlock:^(NewsTagItemModel *itemModel) {
         [self.newsViewModel setTagItemModelsWithModel:itemModel];
         [self.newsView resetRoleTypeWithImage:[KTCUserRole smallImageWithUserRole:[itemModel relatedUserRole]]];

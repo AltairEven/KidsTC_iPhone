@@ -54,8 +54,14 @@
     __weak OrderListViewModel *weakSelf = self;
     [weakSelf.loadOrderRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [weakSelf loadOrderListSucceed:responseData];
+        if (succeed) {
+            succeed(responseData);
+        }
     } failure:^(HttpRequestClient *client, NSError *error) {
         [weakSelf loadOrderListFailed:error];
+        if (failure) {
+            failure(error);
+        }
     }];
 }
 

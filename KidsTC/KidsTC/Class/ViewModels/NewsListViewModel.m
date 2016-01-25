@@ -55,7 +55,7 @@
         self.totalResultsContainer = [[NSMutableDictionary alloc] init];
         self.newsTagItemModels = [[NSMutableArray alloc] init];
         self.currentPageIndexs = [[NSMutableDictionary alloc] init];
-        _currentTagType = 1;
+        _currentTagType = [NewsTagTypeModel tagTypeFromUserRole:[KTCUser currentUser].userRole];
     }
     return self;
 }

@@ -841,6 +841,8 @@
 		8F62C3441C52145B0013031E /* StrategyDetailRelatedServiceListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F62C3421C52145B0013031E /* StrategyDetailRelatedServiceListViewController.xib */; };
 		8F62C3471C521B3C0013031E /* StrategyDetailBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F62C3461C521B3C0013031E /* StrategyDetailBottomView.m */; };
 		8F62C34B1C521B5F0013031E /* StrategyDetailBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F62C34A1C521B5F0013031E /* StrategyDetailBottomView.xib */; };
+		8F62C34F1C56236F0013031E /* OrderDetailRefundDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F62C34D1C56236F0013031E /* OrderDetailRefundDescriptionCell.m */; };
+		8F62C3501C56236F0013031E /* OrderDetailRefundDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F62C34E1C56236F0013031E /* OrderDetailRefundDescriptionCell.xib */; };
 		8F6502AE1C50C88F00C36260 /* KTCPoiMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6502AC1C50C88F00C36260 /* KTCPoiMapViewController.m */; };
 		8F6502AF1C50C88F00C36260 /* KTCPoiMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F6502AD1C50C88F00C36260 /* KTCPoiMapViewController.xib */; };
 		8F6502B21C50CEB900C36260 /* KTCAnnotationTipPoiView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F6502B11C50CEB900C36260 /* KTCAnnotationTipPoiView.m */; };
@@ -2447,6 +2449,9 @@
 		8F62C3451C521B3C0013031E /* StrategyDetailBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StrategyDetailBottomView.h; sourceTree = "<group>"; };
 		8F62C3461C521B3C0013031E /* StrategyDetailBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StrategyDetailBottomView.m; sourceTree = "<group>"; };
 		8F62C34A1C521B5F0013031E /* StrategyDetailBottomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StrategyDetailBottomView.xib; sourceTree = "<group>"; };
+		8F62C34C1C56236F0013031E /* OrderDetailRefundDescriptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailRefundDescriptionCell.h; sourceTree = "<group>"; };
+		8F62C34D1C56236F0013031E /* OrderDetailRefundDescriptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailRefundDescriptionCell.m; sourceTree = "<group>"; };
+		8F62C34E1C56236F0013031E /* OrderDetailRefundDescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderDetailRefundDescriptionCell.xib; sourceTree = "<group>"; };
 		8F6502AB1C50C88F00C36260 /* KTCPoiMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCPoiMapViewController.h; sourceTree = "<group>"; };
 		8F6502AC1C50C88F00C36260 /* KTCPoiMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTCPoiMapViewController.m; sourceTree = "<group>"; };
 		8F6502AD1C50C88F00C36260 /* KTCPoiMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTCPoiMapViewController.xib; sourceTree = "<group>"; };
@@ -4152,6 +4157,9 @@
 				1E943F0D1B7B5B850029FE74 /* OrderDetailConsumptionCodeCell.h */,
 				1E943F0E1B7B5B850029FE74 /* OrderDetailConsumptionCodeCell.m */,
 				1E943F0F1B7B5B850029FE74 /* OrderDetailConsumptionCodeCell.xib */,
+				8F62C34C1C56236F0013031E /* OrderDetailRefundDescriptionCell.h */,
+				8F62C34D1C56236F0013031E /* OrderDetailRefundDescriptionCell.m */,
+				8F62C34E1C56236F0013031E /* OrderDetailRefundDescriptionCell.xib */,
 				1E8EFCDD1B6729A000D00808 /* OrderCommentBottomView.h */,
 				1E8EFCDE1B6729A000D00808 /* OrderCommentBottomView.m */,
 				1E8EFCE01B6729A900D00808 /* OrderCommentBottomView.xib */,
@@ -6203,6 +6211,7 @@
 				1EC4A1151B5CCD4200206BB9 /* KTCSearchHistoryView.xib in Resources */,
 				1E0B77E31B6B669000A58AD4 /* KTCSearchFilterView.xib in Resources */,
 				1EC4A0D31B59F1D400206BB9 /* StoreDetailTitleCell.xib in Resources */,
+				8F62C3501C56236F0013031E /* OrderDetailRefundDescriptionCell.xib in Resources */,
 				1E7995981BCE38020099CFF9 /* HospitalListViewController.xib in Resources */,
 				8F6502AF1C50C88F00C36260 /* KTCPoiMapViewController.xib in Resources */,
 				1E7600441B57585D00DF0972 /* ServiceDetailBottomView.xib in Resources */,
@@ -6491,6 +6500,7 @@
 				1E0B7AE81B6F693000A58AD4 /* BrowserToolbar.m in Sources */,
 				8F98D25B1C002CB700C1388A /* KTCPaymentService.m in Sources */,
 				1EC4A11D1B5D038000206BB9 /* KTCSearchResultView.m in Sources */,
+				8F62C34F1C56236F0013031E /* OrderDetailRefundDescriptionCell.m in Sources */,
 				1EC73BF81B5F4F96008B39EA /* HomeNormalTitleCellModel.m in Sources */,
 				1EA5C9181BA84439001E599D /* KTCWebViewController.m in Sources */,
 				1E827B651B8EB90B008F3F08 /* KTCMapViewController.mm in Sources */,

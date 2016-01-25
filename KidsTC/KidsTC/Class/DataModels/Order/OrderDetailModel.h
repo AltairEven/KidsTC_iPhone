@@ -32,8 +32,12 @@
 
 @property (nonatomic, copy) NSString *orderPaymentDes;
 
+@property (nonatomic, strong) NSArray *refundDescriptions;
+
 - (instancetype)initWithRawData:(NSDictionary *)data;
 
 - (BOOL)canGetCode;
+
+- (CGFloat)refundDescriptionCellHeightAtIndex:(NSUInteger)index;
 
 @end

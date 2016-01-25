@@ -12,11 +12,13 @@
 #import "InsuranceView.h"
 #import "OrderDetailConsumptionCodeCell.h"
 #import "OrderDetailModel.h"
+#import "OrderDetailRefundDescriptionCell.h"
 
 #define LeftButtonWith (150)
 
 static NSString *const kCellIdentifier = @"kCellIdentifier";
 static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellIdentifier";
+static NSString *const kRefundDescriptionCellIdentifier = @"kRefundDescriptionCellIdentifier";
 
 
 @interface OrderDetailView () <UITableViewDataSource, UITableViewDelegate>
@@ -27,6 +29,7 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
 @property (strong, nonatomic) IBOutlet UITableViewCell *InsuranceCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *settlementCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *orderDetailHeaderCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *refundDescriptionTitleCell;
 
 @property (weak, nonatomic) IBOutlet UILabel *orderIdLabel;
 @property (weak, nonatomic) IBOutlet UILabel *orderStatusLabel;
@@ -46,6 +49,7 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
 
 @property (nonatomic, strong) UINib *cellNib;
 @property (nonatomic, strong) UINib *consumptionCodeCellNib;
+@property (nonatomic, strong) UINib *refundDescriptionCellNib;
 
 @property (nonatomic, strong) OrderDetailModel *detailModel;
 //settlement
@@ -134,6 +138,10 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
         self.consumptionCodeCellNib = [UINib nibWithNibName:NSStringFromClass([OrderDetailConsumptionCodeCell class]) bundle:nil];
         [self.tableView registerNib:self.consumptionCodeCellNib forCellReuseIdentifier:kConsumptionCodeCellIdentifier];
     }
+    if (!self.refundDescriptionCellNib) {
+        self.refundDescriptionCellNib = [UINib nibWithNibName:NSStringFromClass([OrderDetailRefundDescriptionCell class]) bundle:nil];
+        [self.tableView registerNib:self.refundDescriptionCellNib forCellReuseIdentifier:kRefundDescriptionCellIdentifier];
+    }
     
     [self.leftButton setBackgroundColor:RGBA(239, 239, 239, 1) forState:UIControlStateNormal];
     [self.leftButton setBackgroundColor:RGBA(200, 200, 200, 1) forState:UIControlStateHighlighted];
@@ -152,7 +160,10 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     NSUInteger number = 0;
     if (self.detailModel) {
-        number = 4;
+        number = 3;
+        if ([self.detailModel.refundDescriptions count] > 0) {
+            number ++;
+        }
     }
     return number;
 }
@@ -174,6 +185,11 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
             case 2:
             {
                 number = 2;
+            }
+                break;
+            case 3:
+            {
+                number = [self.detailModel.refundDescriptions count] + 1;
             }
                 break;
             default:
@@ -234,6 +250,18 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
             }
         }
             break;
+        case 3: {
+            if (indexPath.row == 0) {
+                cell = self.refundDescriptionTitleCell;
+            } else {
+                cell = [tableView dequeueReusableCellWithIdentifier:kRefundDescriptionCellIdentifier forIndexPath:indexPath];
+                if (!cell) {
+                    cell =  [[[NSBundle mainBundle] loadNibNamed:@"OrderDetailRefundDescriptionCell" owner:nil options:nil] objectAtIndex:0];
+                }
+                NSString *refundDes = [self.detailModel.refundDescriptions objectAtIndex:indexPath.row - 1];
+                [((OrderDetailRefundDescriptionCell *)cell).descriptionLabel setText:refundDes];
+            }
+        }
         default:
             break;
     }
@@ -276,6 +304,15 @@ static NSString *const kConsumptionCodeCellIdentifier = @"kConsumptionCodeCellId
                 height = self.orderDetailHeaderCell.frame.size.height;
             } else {
                 height = self.orderDetailCell.frame.size.height;
+            }
+        }
+            break;
+        case 3:
+        {
+            if (indexPath.row == 0) {
+                height = self.refundDescriptionTitleCell.frame.size.height;
+            } else {
+                height = [self.detailModel refundDescriptionCellHeightAtIndex:indexPath.row - 1];
             }
         }
             break;

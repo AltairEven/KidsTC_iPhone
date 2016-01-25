@@ -203,6 +203,17 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     }
 }
 
+
+- (void)setSelectedTagIndex:(NSUInteger)index{
+    if ([self.modelsArray count] > index) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+        [self.ageSelectTable selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+        self.currentTypeIndex = index;
+        NewsTagTypeModel *model = [self.modelsArray objectAtIndex:index];
+        [self resetTagContentViewWithTagItems:model.tagItems];
+    }
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

@@ -56,22 +56,26 @@
     self.viewModel = [[OrderDetailViewModel alloc] initWithView:self.detailView];
     [self.viewModel setOrderId:self.orderId];
     __weak OrderDetailViewController *weakSelf = self;
+//    [[GAlertLoadingView sharedAlertLoadingView] showInView:self.view];
     [weakSelf.viewModel startUpdateDataWithSucceed:^(NSDictionary *data) {
         //MTA
         NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:self.orderId, @"id", @"true", @"result", nil];
         [MTA trackCustomKeyValueEvent:@"event_result_orders_dtl" props:trackParam];
+        [[GAlertLoadingView sharedAlertLoadingView] hide];
     } failure:^(NSError *error) {
         //MTA
         NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:self.orderId, @"id", @"false", @"result", nil];
         [MTA trackCustomKeyValueEvent:@"event_result_orders_dtl" props:trackParam];
+        [[GAlertLoadingView sharedAlertLoadingView] hide];
     }];
     [weakSelf setupRightBarButton:@"" target:self action:@selector(didClickedContectCSButton) frontImage:@"customerService_n" andBackImage:@"customerService_n"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [[GAlertLoadingView sharedAlertLoadingView] hide];
 }
-#pragma mark & OrderDetailViewDelegate
+#pragma mark OrderDetailViewDelegate
 
 - (void)orderDetailView:(OrderDetailView *)detailView executeActionWithTag:(OrderDetailActionTag)tag {
     switch (tag) {

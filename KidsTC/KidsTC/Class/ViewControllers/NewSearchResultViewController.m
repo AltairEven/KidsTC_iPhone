@@ -52,10 +52,14 @@
     self.resultArray = [[NSMutableArray alloc] init];
     __weak NewSearchResultViewController *weakSelf = self;
     self.pageIndex = 1;
-    [[KTCSearchService sharedService] startNewsSearchWithKeyWord:weakSelf.searchCondition.keyWord pageIndex:weakSelf.pageIndex pageSize:PageSize success:^(NSDictionary *responseData) {
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:self.pageIndex], @"page", [NSNumber numberWithInteger:PageSize], @"pageCount", nil];
+    [[GAlertLoadingView sharedAlertLoadingView] showInView:self.view];
+    [[KTCSearchService sharedService] startNewsSearchWithParamDic:param Condition:weakSelf.searchCondition success:^(NSDictionary *responseData) {
         [weakSelf loadNewsSucceedWithData:responseData];
+        [[GAlertLoadingView sharedAlertLoadingView] hide];
     } failure:^(NSError *error) {
         [weakSelf loadMoreNewsFailedWithError:error];
+        [[GAlertLoadingView sharedAlertLoadingView] hide];
     }];
 }
 
@@ -64,10 +68,14 @@
     if (self.needRefresh) {
         __weak NewSearchResultViewController *weakSelf = self;
         self.pageIndex = 1;
-        [[KTCSearchService sharedService] startNewsSearchWithKeyWord:weakSelf.searchCondition.keyWord pageIndex:weakSelf.pageIndex pageSize:PageSize success:^(NSDictionary *responseData) {
+        [[GAlertLoadingView sharedAlertLoadingView] showInView:self.view];
+        NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:self.pageIndex], @"page", [NSNumber numberWithInteger:PageSize], @"pageCount", nil];
+        [[KTCSearchService sharedService] startNewsSearchWithParamDic:param Condition:weakSelf.searchCondition success:^(NSDictionary *responseData) {
             [weakSelf loadNewsSucceedWithData:responseData];
+            [[GAlertLoadingView sharedAlertLoadingView] hide];
         } failure:^(NSError *error) {
             [weakSelf loadMoreNewsFailedWithError:error];
+            [[GAlertLoadingView sharedAlertLoadingView] hide];
         }];
         self.needRefresh = NO;
     }
@@ -76,6 +84,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [[KTCSearchService sharedService] stopNewsSearch];
+    [[GAlertLoadingView sharedAlertLoadingView] hide];
 }
 
 #pragma mark NewsSearchResultListViewDataSource & NewsSearchResultListViewDelegate

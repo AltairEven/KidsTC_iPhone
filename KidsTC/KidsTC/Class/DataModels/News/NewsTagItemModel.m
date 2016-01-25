@@ -47,6 +47,43 @@
     return self;
 }
 
+
++ (NSUInteger)tagTypeFromUserRole:(KTCUserRole *)role {
+    if (!role) {
+        return 1;
+    }
+    NSUInteger tagType = 1;
+    switch (role.role) {
+        case UserRolePrepregnancy: {
+            tagType = 1;
+        }
+            break;
+        case UserRolePregnancy: {
+            tagType = 2;
+        }
+            break;
+        case UserRoleBirth: {
+            tagType = 3;
+        }
+            break;
+        case UserRoleBabyInOne: {
+            tagType = 4;
+        }
+            break;
+        case UserRoleBabyOneToThree: {
+            tagType = 5;
+        }
+            break;
+        case UserRoleBabyFourToSix: {
+            tagType = 6;
+        }
+            break;
+        default:
+            break;
+    }
+    return tagType;
+}
+
 - (KTCUserRole *)userRoleWithType:(NSUInteger)type {
     KTCUserRole *role = nil;
     switch (type) {

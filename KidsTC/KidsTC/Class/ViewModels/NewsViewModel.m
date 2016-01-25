@@ -136,6 +136,11 @@
         }
         default:
             break;
-    }}
+    }
+}
+
+- (NSUInteger)currentTagType {
+    return self.listViewModel.currentTagType;
+}
 
 @end

@@ -162,10 +162,8 @@ static NSString *const kMoreServiceCellIdentifier = @"kMoreServiceCellIdentifier
     
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
     //description
-    [self.serviceDescriptionLabel setDelegate:self];
-    NSDictionary *linkAttr = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor redColor], NSForegroundColorAttributeName, [NSNumber numberWithBool:YES], NSUnderlineStyleAttributeName, nil];
-    [self.serviceDescriptionLabel setLinkAttributes:linkAttr];
-    [self.serviceDescriptionLabel setTextColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
+    self.serviceDescriptionLabel.delegate = self;
+    [self.serviceDescriptionLabel setLinkAttributes:nil];
     //price view
     [self.priceView setContentColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
     [self.priceView setUnitFont:[UIFont systemFontOfSize:15]];
@@ -601,12 +599,22 @@ static NSString *const kMoreServiceCellIdentifier = @"kMoreServiceCellIdentifier
     }
     //others
     [self.serviceNameLabel setText:self.detailModel.serviceName];
-    [self.serviceDescriptionLabel setText:self.detailModel.serviceDescription];
+    
+    NSMutableAttributedString *labelString = [[NSMutableAttributedString alloc] initWithString:self.detailModel.serviceDescription];
+    NSDictionary *fontAttribute = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13], NSFontAttributeName, [[KTCThemeManager manager] defaultTheme].globalThemeColor, NSForegroundColorAttributeName, nil];
+    [labelString setAttributes:fontAttribute range:NSMakeRange(0, [labelString length])];
     if (self.detailModel.promotionSegueModels) {
         for (TextSegueModel *model in self.detailModel.promotionSegueModels) {
-            [self.serviceDescriptionLabel addLinkToAddress:[NSDictionary dictionaryWithObject:model forKey:@"promotionSegueModel"] withRange:model.linkRange];
+            //[NSNumber numberWithBool:YES], NSUnderlineStyleAttributeName
+            NSDictionary *linkAttribute = [NSDictionary dictionaryWithObjectsAndKeys:model.linkColor, NSForegroundColorAttributeName, [NSNumber numberWithBool:YES], NSUnderlineStyleAttributeName, nil];
+            for (NSString *rangeString in model.linkRangeStrings) {
+                NSRange range = NSRangeFromString(rangeString);
+                [labelString addAttributes:linkAttribute range:range];
+                [self.serviceDescriptionLabel addLinkToAddress:[NSDictionary dictionaryWithObject:model forKey:@"promotionSegueModel"] withRange:range];
+            }
         }
     }
+    [self.serviceDescriptionLabel setAttributedText:labelString];
 }
 
 - (void)configPriceCell {

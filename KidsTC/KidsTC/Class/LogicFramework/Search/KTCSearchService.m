@@ -269,6 +269,40 @@ static KTCSearchService *_sharedInstance;
 
 #pragma mark News
 
+- (void)startNewsSearchWithParamDic:(NSDictionary *)param Condition:(KTCSearchNewsCondition *)condition success:(void (^)(NSDictionary *))success failure:(void (^)(NSError *))failure {
+    if (!self.newsSearchRequest) {
+        self.newsSearchRequest = [HttpRequestClient clientWithUrlAliasName:@"ARTICLE_GET_LIST"];
+    }
+    
+    if (!param) {
+        return;
+    }
+    NSMutableDictionary *requestParam = [NSMutableDictionary dictionaryWithDictionary:param];
+    if (condition) {
+        [requestParam setObject:[NSNumber numberWithInteger:condition.articleKind] forKey:@"articleKind"];
+        [requestParam setObject:[NSNumber numberWithInteger:condition.populationType] forKey:@"population_type"];
+        if ([condition.keyWord length] > 0) {
+            [requestParam setObject:condition.keyWord forKey:@"keyWord"];
+        }
+        if ([condition.authorId length] > 0) {
+            [requestParam setObject:condition.authorId forKey:@"authorId"];
+        }
+        if ([condition.tagId length] > 0) {
+            [requestParam setObject:condition.tagId forKey:@"tagId"];
+        }
+    }
+    __weak KTCSearchService *weakSelf = self;
+    [weakSelf.newsSearchRequest startHttpRequestWithParameter:requestParam success:^(HttpRequestClient *client, NSDictionary *responseData) {
+        if (success) {
+            success(responseData);
+        }
+    } failure:^(HttpRequestClient *client, NSError *error) {
+        if (failure) {
+            failure(error);
+        }
+    }];
+}
+
 - (void)startNewsSearchWithKeyWord:(NSString *)keyword
                          pageIndex:(NSUInteger)index
                           pageSize:(NSUInteger)size

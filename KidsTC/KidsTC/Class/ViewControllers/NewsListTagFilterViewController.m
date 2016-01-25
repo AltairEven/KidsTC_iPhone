@@ -35,6 +35,7 @@
     self.filterView.dataSource = self;
     self.filterView.delegate = self;
     [self.filterView reloadData];
+    [self.filterView setSelectedTagIndex:self.selectedTagType];
 }
 
 #pragma mark NewsListTagFilterViewDataSource & NewsListTagFilterViewDelegate

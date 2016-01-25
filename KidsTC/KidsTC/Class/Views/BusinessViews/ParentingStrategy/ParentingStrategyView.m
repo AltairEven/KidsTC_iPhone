@@ -138,12 +138,6 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
         self.listModels = [self.dataSource listItemModelsOfParentingStrategyView:self];
     }
     [self.tableView reloadData];
-    if (self.noMoreData) {
-        [self.tableView.mj_footer endRefreshingWithNoMoreData];
-    } else {
-        [self.tableView.mj_footer resetNoMoreData];
-    }
-    [self.tableView.mj_footer setHidden:self.noMoreData];
     if ([self.listModels count] == 0) {
         self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
     } else {
@@ -165,6 +159,11 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 
 - (void)noMoreData:(BOOL)noMore {
     self.noMoreData = noMore;
+    if (noMore) {
+        [self.tableView.mj_footer endRefreshingWithNoMoreData];
+    } else {
+        [self.tableView.mj_footer resetNoMoreData];
+    }
 }
 
 - (void)hideLoadMoreFooter:(BOOL)hidden {
