@@ -8,9 +8,12 @@
 
 #import "StoreDetailBottomView.h"
 
+#define StandardButtonWidth (60)
+
 @interface StoreDetailBottomView ()
 
 - (IBAction)didClickedButton:(id)sender;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *phoneButtonWidth;
 
 @end
 
@@ -41,6 +44,8 @@
     [self.appointmentButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Normal forState:UIControlStateNormal];
     [self.appointmentButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Highlight forState:UIControlStateHighlighted];
     [self.appointmentButton setBackgroundColor:[[KTCThemeManager manager] defaultTheme].buttonBGColor_Disable forState:UIControlStateDisabled];
+    
+    [self hidePhone:YES];
 }
 
 - (void)setFavourite:(BOOL)isFavourite {
@@ -48,6 +53,15 @@
         [self.favourateButton setImage:[UIImage imageNamed:@"favourate_h"] forState:UIControlStateNormal];
     } else {
         [self.favourateButton setImage:[UIImage imageNamed:@"favourate_n"] forState:UIControlStateNormal];
+    }
+}
+
+- (void)hidePhone:(BOOL)bHidden {
+    [self.phoneButton setHidden:bHidden];
+    if (bHidden) {
+        self.phoneButtonWidth.constant = 0;
+    } else {
+        self.phoneButtonWidth.constant = StandardButtonWidth;
     }
 }
 

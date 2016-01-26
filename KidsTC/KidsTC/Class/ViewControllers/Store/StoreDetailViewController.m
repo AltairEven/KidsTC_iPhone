@@ -420,6 +420,8 @@
     [self.bottomView.appointmentButton setTitle:title forState:UIControlStateNormal];
     [self.bottomView.appointmentButton setTitle:title forState:UIControlStateHighlighted];
     [self.bottomView.appointmentButton setTitle:title forState:UIControlStateDisabled];
+    
+    [self.bottomView hidePhone:!([[self.viewModel.detailModel phoneNumbersArray] count] > 0)];
 }
 
 - (void)buildRightBarButtons {

@@ -34,4 +34,6 @@ typedef enum {
 
 - (void)setFavourite:(BOOL)isFavourite;
 
+- (void)hidePhone:(BOOL)bHidden;
+
 @end

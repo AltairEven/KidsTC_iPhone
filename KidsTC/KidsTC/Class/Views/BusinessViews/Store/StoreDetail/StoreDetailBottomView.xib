@@ -38,6 +38,9 @@
                 <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IXG-yu-Cdm">
                     <rect key="frame" x="60" y="0.0" width="60" height="60"/>
                     <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="GUe-PG-G74"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <inset key="titleEdgeInsets" minX="-30" minY="35" maxX="0.0" maxY="0.0"/>
                     <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="5" maxY="15"/>
@@ -58,6 +61,9 @@
                 <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mfb-FL-pbX">
                     <rect key="frame" x="120" y="0.0" width="60" height="60"/>
                     <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="OgO-5D-fOU"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <inset key="titleEdgeInsets" minX="-30" minY="35" maxX="0.0" maxY="0.0"/>
                     <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="5" maxY="15"/>
@@ -97,9 +103,7 @@
             <constraints>
                 <constraint firstItem="Mfb-FL-pbX" firstAttribute="height" secondItem="bn4-S6-jdq" secondAttribute="height" id="0aX-V4-uop"/>
                 <constraint firstItem="bn4-S6-jdq" firstAttribute="top" secondItem="tFu-1g-bOw" secondAttribute="top" id="7pe-BM-EI8"/>
-                <constraint firstItem="Mfb-FL-pbX" firstAttribute="width" secondItem="bn4-S6-jdq" secondAttribute="width" id="AIm-aR-3DG"/>
                 <constraint firstItem="ui9-fc-pQB" firstAttribute="leading" secondItem="Mfb-FL-pbX" secondAttribute="trailing" id="AXk-nr-pbZ"/>
-                <constraint firstItem="IXG-yu-Cdm" firstAttribute="width" secondItem="bn4-S6-jdq" secondAttribute="width" id="Dwr-1P-gOD"/>
                 <constraint firstItem="Mfb-FL-pbX" firstAttribute="top" secondItem="tFu-1g-bOw" secondAttribute="top" id="RNh-Zd-USy"/>
                 <constraint firstItem="IXG-yu-Cdm" firstAttribute="top" secondItem="bn4-S6-jdq" secondAttribute="top" id="SmV-WW-osw"/>
                 <constraint firstAttribute="trailing" secondItem="ui9-fc-pQB" secondAttribute="trailing" id="Tt0-kO-kdh"/>
@@ -115,6 +119,7 @@
                 <outlet property="commentButton" destination="IXG-yu-Cdm" id="fGb-sa-s6w"/>
                 <outlet property="favourateButton" destination="Mfb-FL-pbX" id="deg-2C-O6i"/>
                 <outlet property="phoneButton" destination="bn4-S6-jdq" id="jDj-vO-8FI"/>
+                <outlet property="phoneButtonWidth" destination="2Mb-m4-fXh" id="ejW-5i-oZd"/>
             </connections>
             <point key="canvasLocation" x="424" y="321"/>
         </view>

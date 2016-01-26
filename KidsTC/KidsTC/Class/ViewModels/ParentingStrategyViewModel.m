@@ -37,6 +37,7 @@
         self.view = (ParentingStrategyView *)view;
         self.view.dataSource = self;
         self.itemModelsArray = [[NSMutableArray alloc] init];
+        self.currentSortType = ParentingStrategySortTypeTime;
     }
     return self;
 }

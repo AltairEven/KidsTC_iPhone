@@ -44,6 +44,7 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UIImageView *rightImageView;
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
+
 - (IBAction)didClickedAgeSelectedDoneButton:(id)sender;
 - (IBAction)didClickedDoneButton:(id)sender;
 - (IBAction)didClickedBackButton:(id)sender;
@@ -77,6 +78,14 @@ typedef enum {
     
     [self buildFirstAndSecondView];
     [self.linearView reloadData];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -387,7 +396,7 @@ typedef enum {
         default:
             break;
     }
-    [self.linearView setSelectedIndex:index];
+    [self.linearView setSelectedIndex:index animated:YES];
 }
 
 #pragma mark Public methods

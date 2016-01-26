@@ -53,4 +53,6 @@
 
 - (void)resetLayout;
 
+- (void)setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL)animated;
+
 @end

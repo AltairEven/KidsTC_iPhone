@@ -66,8 +66,10 @@
     self.commentNumber = [[data objectForKey:@"evaluateNum"] integerValue];
     if ([data objectForKey:@"phone"]) {
         self.phoneNumber = [data objectForKey:@"phone"];
-        self.phoneNumber = [self.phoneNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
-        self.phoneNumber = [self.phoneNumber stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        if ([self.phoneNumber length] > 0) {
+            self.phoneNumber = [self.phoneNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
+            self.phoneNumber = [self.phoneNumber stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        }
     }
     self.isFavourate = [[data objectForKey:@"favor"] boolValue];
     //appoint times

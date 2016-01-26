@@ -162,7 +162,9 @@
             if (item) {
                 [tempArray addObject:item];
                 ServiceDetailPhoneItem *phoneItem = [[ServiceDetailPhoneItem alloc] initWithTitle:item.storeName andPhoneNumberString:item.phoneNumber];
-                [tempPhoneArray addObject:phoneItem];
+                if (phoneItem) {
+                    [tempPhoneArray addObject:phoneItem];
+                }
             }
             
         }
@@ -334,7 +336,7 @@
     if (!title || ![title isKindOfClass:[NSString class]]) {
         title = @"门店";
     }
-    if (!string || ![string isKindOfClass:[NSString class]]) {
+    if (!string || ![string isKindOfClass:[NSString class]] || [string length] == 0) {
         return nil;
     }
     self = [super init];

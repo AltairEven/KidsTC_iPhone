@@ -261,11 +261,23 @@ NSString *const kLinearViewCellIdentifier = @"kLinearViewCellIdentifier";
 }
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex {
+    _selectedIndex = selectedIndex;
     if (selectedIndex < self.cellNumber) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:selectedIndex];
         if (indexPath) {
             [self.collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
-            [self collectionView:self.collectionView didSelectItemAtIndexPath:indexPath];
+            [self collectionView:self.collectionView didSelectItemAtIndexPath:indexPath animated:YES];
+        }
+    }
+}
+
+- (void)setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL)animated {
+    _selectedIndex = selectedIndex;
+    if (selectedIndex < self.cellNumber) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:selectedIndex];
+        if (indexPath) {
+            [self.collectionView selectItemAtIndexPath:indexPath animated:animated scrollPosition:UICollectionViewScrollPositionNone];
+            [self collectionView:self.collectionView didSelectItemAtIndexPath:indexPath animated:animated];
         }
     }
 }
@@ -313,9 +325,9 @@ NSString *const kLinearViewCellIdentifier = @"kLinearViewCellIdentifier";
     return cell;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated {
     _selectedIndex = indexPath.section;
-    [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+    [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:animated];
     if (self.delegate && [self.delegate respondsToSelector:@selector(auilinearView:didSelectedCellAtIndex:)]) {
         [self.delegate auilinearView:self didSelectedCellAtIndex:indexPath.section];
     }
@@ -335,7 +347,7 @@ NSString *const kLinearViewCellIdentifier = @"kLinearViewCellIdentifier";
         [self collectionView:self.collectionView didDeselectItemAtIndexPath:lastIndexPath];
         
         [self.collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
-        [self collectionView:self.collectionView didSelectItemAtIndexPath:indexPath];
+        [self collectionView:self.collectionView didSelectItemAtIndexPath:indexPath animated:YES];
     }
 }
 
