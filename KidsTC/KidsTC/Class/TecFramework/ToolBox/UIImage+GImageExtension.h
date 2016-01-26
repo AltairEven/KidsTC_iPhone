@@ -16,6 +16,7 @@ CGFloat RadiansToDegrees(CGFloat radians);
 - (UIImage *)imageByScalingProportionallyToMinimumSize:(CGSize)targetSize;
 - (UIImage *)imageByScalingProportionallyToSize:(CGSize)targetSize;
 - (UIImage *)imageByScalingToSize:(CGSize)targetSize;
+- (UIImage *)imageByScalingToSize:(CGSize)targetSize retinaFit:(BOOL)needFit;
 - (UIImage *)imageRotatedByRadians:(CGFloat)radians;
 - (UIImage *)imageRotatedByDegrees:(CGFloat)degrees;
 + (UIImage *)imageWithColor:(UIColor *)color;

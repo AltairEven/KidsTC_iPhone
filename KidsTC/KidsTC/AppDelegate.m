@@ -361,6 +361,7 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
     [selectVC setCompleteBlock:^(UserRole selectedRole, KTCSex selectedSex){
         [[KTCUser currentUser] setUserRole:[KTCUserRole instanceWithRole:selectedRole sex:selectedSex]];
         self.window.rootViewController = controller;
+        [CheckFirstInstalDataManager setHasLaunchedValue:YES];
     }];
 }
 
@@ -449,6 +450,7 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
         [weakWelcome setAlpha:1];
         weakWelcome.rootViewController = nil;
     }];
+    [CheckFirstInstalDataManager setHasLaunchedValue:YES];
 }
 
 #pragma mark Network Status

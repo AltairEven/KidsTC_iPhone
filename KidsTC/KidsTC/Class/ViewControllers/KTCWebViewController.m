@@ -388,11 +388,11 @@
 #pragma mark UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (scrollView == self.webView.scrollView && scrollView.contentOffset.y > 200) {
-        [self.backToTopButton setHidden:NO];
-    } else {
-        [self.backToTopButton setHidden:YES];
-    }
+//    if (scrollView == self.webView.scrollView && scrollView.contentOffset.y > 200) {
+//        [self.backToTopButton setHidden:NO];
+//    } else {
+//        [self.backToTopButton setHidden:YES];
+//    }
 }
 
 #pragma mark AUIKeyboardAdhesiveViewDelegate

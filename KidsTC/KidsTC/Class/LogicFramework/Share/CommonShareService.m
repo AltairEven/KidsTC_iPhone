@@ -102,7 +102,7 @@ static CommonShareService *_sharedInstance = nil;
         __weak CommonShareService *weakSelf = self;
         [[GAlertLoadingView sharedAlertLoadingView] show];
         [weakSelf.loadImageRequest downloadImageWithSuccess:^(HttpRequestClient *client, UIImage *image) {
-            UIImage *compressedImage = [image imageByScalingToSize:CGSizeMake(100, 100)];
+            UIImage *compressedImage = [image imageByScalingToSize:CGSizeMake(100, 100) retinaFit:NO];
             CommonShareObject *refreshedObject = [object copyObject];
             refreshedObject.thumbImage = compressedImage;
             [weakSelf shareWithType:type object:refreshedObject succeed:succeed failure:failure];
@@ -139,6 +139,7 @@ static CommonShareService *_sharedInstance = nil;
         {
             WeiboWebPageShareObject *shareObject = [WeiboWebPageShareObject webPageShareObjectWithFollowingContent:object.followingContent identifier:object.identifier title:object.title urlString:object.webPageUrlString];
             shareObject.thumbnailImage = object.thumbImage;
+            shareObject.pageDescription = object.shareDescription;
             retValue = [[WeiboManager sharedManager] sendShareRequestWithObject:shareObject succeed:succeed failure:failure];
         }
             break;
