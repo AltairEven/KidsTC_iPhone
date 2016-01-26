@@ -18,4 +18,6 @@ typedef void(^select_complete)(UserRole role, KTCSex sex);
 
 @property (nonatomic, strong) select_complete completeBlock;
 
+- (void)setSelectedRole:(UserRole)role;
+
 @end

@@ -42,10 +42,13 @@
 - (void)buildSubviews {
     self.inputField.delegate = self;
     
-    self.roleButton.layer.cornerRadius = 14;
-    self.roleButton.layer.masksToBounds = YES;
-    self.roleButton.layer.borderColor = [[KTCThemeManager manager] defaultTheme].navibarTitleColor_Normal.CGColor;
-    self.roleButton.layer.borderWidth = 1;
+    [self.roleButton setTitleColor:[[KTCThemeManager manager] defaultTheme].navibarTitleColor_Normal forState:UIControlStateNormal];
+    [self.roleButton setTitleColor:[[KTCThemeManager manager] defaultTheme].navibarTitleColor_Highlight forState:UIControlStateHighlighted];
+    
+//    self.roleButton.layer.cornerRadius = 14;
+//    self.roleButton.layer.masksToBounds = YES;
+//    self.roleButton.layer.borderColor = [[KTCThemeManager manager] defaultTheme].navibarTitleColor_Normal.CGColor;
+//    self.roleButton.layer.borderWidth = 1;
 }
 
 #pragma mark UITextFieldDelegate
@@ -77,6 +80,10 @@
 
 - (void)setRoleWithImage:(UIImage *)image {
     [self.roleButton setImage:image forState:UIControlStateNormal];
+}
+
+- (void)setRoleWithTitle:(NSString *)title {
+    [self.roleButton setTitle:title forState:UIControlStateNormal];
 }
 
 - (void)resetInputFieldContent:(NSString *)content isPlaceHolder:(BOOL)isPlaceHolder {

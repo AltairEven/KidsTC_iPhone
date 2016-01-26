@@ -849,6 +849,10 @@ static NSString *const kRecommendNewCellIdentifier = @"kRecommendNewCellIdentifi
     [self.topView setRoleWithImage:image];
 }
 
+- (void)resetTopRoleWithTitle:(NSString *)title {
+    [self.topView setRoleWithTitle:title];
+}
+
 - (void)resetTopViewWithBGColor:(UIColor *)bgColor {
     [self.topView setBackgroundColor:bgColor];
 }

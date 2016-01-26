@@ -133,6 +133,74 @@ static NSUInteger _cacheLength = 0;
     [self setImageWithURLRequest:request placeholderImage:placeholderImage success:nil failure:nil];
 }
 
+- (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholderImage contentMode:(UIViewContentMode)mode success:(void (^)(NSURLRequest *, NSHTTPURLResponse *, UIImage *))success failure:(void (^)(NSURLRequest *, NSHTTPURLResponse *, NSError *))failure {
+    
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+    [urlRequest addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+    [self cancelImageRequestOperation];
+    
+    UIImage *cachedImage = [[[self class] sharedImageCache] cachedImageForRequest:urlRequest];
+    if (cachedImage) {
+        if (success) {
+            success(nil, nil, cachedImage);
+        } else {
+            self.image = cachedImage;
+        }
+        if (self.image == placeholderImage) {
+            [self setContentMode:UIViewContentModeCenter];
+        } else {
+            [self setContentMode:mode];
+        }
+        
+        self.af_imageRequestOperation = nil;
+    } else {
+        if (placeholderImage) {
+            self.image = placeholderImage;
+            [self setContentMode:UIViewContentModeCenter];
+        } else {
+            [self setContentMode:mode];
+        }
+        
+        //add by Altair, 20150429, for non web image
+        if (![[GConfig sharedConfig] loadWebImage]) {
+            return;
+        }
+        __weak __typeof(self)weakSelf = self;
+        self.af_imageRequestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
+        self.af_imageRequestOperation.responseSerializer = self.imageResponseSerializer;
+        [self.af_imageRequestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            __strong __typeof(weakSelf)strongSelf = weakSelf;
+            if ([[urlRequest URL] isEqual:[strongSelf.af_imageRequestOperation.request URL]]) {
+                if (success) {
+                    success(urlRequest, operation.response, responseObject);
+                } else if (responseObject) {
+                    strongSelf.image = responseObject;
+                    [strongSelf setContentMode:mode];
+                }
+                
+                if (operation == strongSelf.af_imageRequestOperation){
+                    strongSelf.af_imageRequestOperation = nil;
+                }
+            }
+            
+            [[[strongSelf class] sharedImageCache] cacheImage:responseObject forRequest:urlRequest];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            __strong __typeof(weakSelf)strongSelf = weakSelf;
+            if ([[urlRequest URL] isEqual:[strongSelf.af_imageRequestOperation.request URL]]) {
+                if (failure) {
+                    failure(urlRequest, operation.response, error);
+                }
+                
+                if (operation == strongSelf.af_imageRequestOperation){
+                    strongSelf.af_imageRequestOperation = nil;
+                }
+            }
+        }];
+        
+        [[[self class] af_sharedImageRequestOperationQueue] addOperation:self.af_imageRequestOperation];
+    }
+}
+
 - (void)setImageWithURLRequest:(NSURLRequest *)urlRequest
               placeholderImage:(UIImage *)placeholderImage
                        success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image))success

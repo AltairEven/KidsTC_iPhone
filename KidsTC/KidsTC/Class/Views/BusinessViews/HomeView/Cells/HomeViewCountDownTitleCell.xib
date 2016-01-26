@@ -15,20 +15,20 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WwK-uW-Fsb" userLabel="tagView">
-                        <rect key="frame" x="10" y="10" width="5" height="23"/>
+                        <rect key="frame" x="0.0" y="10" width="3" height="23"/>
                         <color key="backgroundColor" red="1" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="5" id="Hum-Qd-I7S"/>
+                            <constraint firstAttribute="width" constant="3" id="Hum-Qd-I7S"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="掌上秒杀" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Erh-XH-Cdj">
-                        <rect key="frame" x="25" y="11.5" width="68" height="20.5"/>
+                        <rect key="frame" x="13" y="11.5" width="68" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d1T-fH-e53" userLabel="countdownBG">
-                        <rect key="frame" x="98" y="12" width="150" height="20"/>
+                        <rect key="frame" x="86" y="12" width="150" height="20"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="距离开始" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ca-Y0-ayY">
                                 <rect key="frame" x="5" y="2" width="52" height="16"/>
@@ -98,7 +98,7 @@
                 <constraints>
                     <constraint firstItem="d1T-fH-e53" firstAttribute="leading" secondItem="Erh-XH-Cdj" secondAttribute="trailing" constant="5" id="0Qq-6L-fXL"/>
                     <constraint firstAttribute="centerY" secondItem="d1T-fH-e53" secondAttribute="centerY" id="7Mn-gk-2X1"/>
-                    <constraint firstItem="WwK-uW-Fsb" firstAttribute="leading" secondItem="9uW-Nz-hZG" secondAttribute="leading" constant="10" id="Pbq-9d-2pC"/>
+                    <constraint firstItem="WwK-uW-Fsb" firstAttribute="leading" secondItem="9uW-Nz-hZG" secondAttribute="leading" id="Pbq-9d-2pC"/>
                     <constraint firstAttribute="centerY" secondItem="Erh-XH-Cdj" secondAttribute="centerY" id="T4B-S6-QCm"/>
                     <constraint firstItem="Erh-XH-Cdj" firstAttribute="leading" secondItem="WwK-uW-Fsb" secondAttribute="trailing" constant="10" id="aDe-06-adg"/>
                     <constraint firstItem="WwK-uW-Fsb" firstAttribute="top" secondItem="9uW-Nz-hZG" secondAttribute="top" constant="10" id="lYr-EW-Wrh"/>

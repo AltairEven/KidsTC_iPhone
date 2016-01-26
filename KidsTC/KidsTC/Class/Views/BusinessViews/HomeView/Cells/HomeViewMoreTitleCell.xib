@@ -15,22 +15,22 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qxK-jP-eg1" userLabel="tagView">
-                        <rect key="frame" x="10" y="10" width="5" height="23"/>
+                        <rect key="frame" x="0.0" y="10" width="3" height="23"/>
                         <color key="backgroundColor" red="1" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="5" id="PaC-l4-Lef"/>
+                            <constraint firstAttribute="width" constant="3" id="PaC-l4-Lef"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="标题" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T36-dn-LrB">
-                        <rect key="frame" x="25" y="11" width="225" height="21"/>
+                        <rect key="frame" x="13" y="11.5" width="246" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="副标题" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DDB-QX-4W6">
-                        <rect key="frame" x="250" y="12" width="45" height="18"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <rect key="frame" x="259" y="14" width="36" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_r" translatesAutoresizingMaskIntoConstraints="NO" id="UAB-Bm-3ic">
@@ -42,7 +42,7 @@
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="qxK-jP-eg1" firstAttribute="leading" secondItem="hi7-O9-Z0P" secondAttribute="leading" constant="10" id="KsK-69-gif"/>
+                    <constraint firstItem="qxK-jP-eg1" firstAttribute="leading" secondItem="hi7-O9-Z0P" secondAttribute="leading" id="KsK-69-gif"/>
                     <constraint firstAttribute="centerY" secondItem="DDB-QX-4W6" secondAttribute="centerY" constant="1" id="Tw3-ix-fDb"/>
                     <constraint firstItem="T36-dn-LrB" firstAttribute="leading" secondItem="qxK-jP-eg1" secondAttribute="trailing" constant="10" id="Txb-va-gNZ"/>
                     <constraint firstItem="qxK-jP-eg1" firstAttribute="top" secondItem="hi7-O9-Z0P" secondAttribute="top" constant="10" id="Z62-4k-JW0"/>

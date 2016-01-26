@@ -125,6 +125,51 @@
     return [NSString stringWithFormat:@"%lu", (unsigned long)[KTCUserRole userRoleIdentifierWithRole:self.role sex:self.sex]];
 }
 
++ (NSString *)roleNameWithUserRole:(KTCUserRole *)role {
+    UserRole userRole = role.role;
+    NSString *name = nil;
+    switch (userRole) {
+        case UserRoleUnknown:
+        {
+            name = @"备孕";
+        }
+            break;
+        case UserRolePrepregnancy:
+        {
+            name = @"备孕";
+        }
+            break;
+        case UserRolePregnancy:
+        {
+            name = @"孕期";
+        }
+            break;
+        case UserRoleBirth:
+        {
+            name = @"新生儿";
+        }
+            break;
+        case UserRoleBabyInOne:
+        {
+            name = @"婴儿";
+        }
+            break;
+        case UserRoleBabyOneToThree:
+        {
+            name = @"幼儿";
+        }
+            break;
+        case UserRoleBabyFourToSix:
+        {
+            name = @"学前";
+        }
+            break;
+        default:
+            break;
+    }
+    return name;
+}
+
 + (UIImage *)smallImageWithUserRole:(KTCUserRole *)role {
     UserRole userRole = role.role;
     UIImage *image = nil;

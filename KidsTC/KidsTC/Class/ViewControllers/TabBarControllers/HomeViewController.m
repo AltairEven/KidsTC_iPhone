@@ -72,7 +72,8 @@
     self.floorNavigationView.delegate = self;
     [self.floorNavigationView setEnableCollapse:YES];
     [self.floorNavigationView setAnimateDirection:AUIFloorNavigationViewAnimateDirectionDown];
-    [self.homeView resetTopRoleWithImage:[KTCUserRole smallImageWithUserRole:[KTCUser currentUser].userRole]];
+//    [self.homeView resetTopRoleWithImage:[KTCUserRole smallImageWithUserRole:[KTCUser currentUser].userRole]];
+    [self.homeView resetTopRoleWithTitle:[KTCUserRole roleNameWithUserRole:[KTCUser currentUser].userRole]];
     
     self.viewModel = [[HomeViewModel alloc] initWithView:self.homeView];
     
@@ -153,13 +154,14 @@
 
 - (void)didClickedRoleButtonOnHomeView:(HomeView *)homeView {
     UserRoleSelectViewController *controller = [[UserRoleSelectViewController alloc] initWithNibName:@"UserRoleSelectViewController" bundle:nil];
-    
+    [controller setSelectedRole:[KTCUser currentUser].userRole.role];
     __weak UserRoleSelectViewController *weakController = controller;
     [controller setCompleteBlock:^(UserRole selectedRole, KTCSex selectedSex){
         KTCUserRole *role = [KTCUserRole instanceWithRole:selectedRole sex:selectedSex];
         [[KTCUser currentUser] setUserRole:role];
         [weakController.navigationController popViewControllerAnimated:YES];
-        [self.homeView resetTopRoleWithImage:[KTCUserRole smallImageWithUserRole:role]];
+//        [self.homeView resetTopRoleWithImage:[KTCUserRole smallImageWithUserRole:role]];
+        [self.homeView resetTopRoleWithTitle:[KTCUserRole roleNameWithUserRole:[KTCUser currentUser].userRole]];
     }];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
@@ -325,7 +327,8 @@
 
 - (void)userRoleHasChanged:(id)info {
     [self.viewModel refreshHomeDataWithSucceed:^(NSDictionary *data) {
-        [self.homeView resetTopRoleWithImage:[KTCUserRole smallImageWithUserRole:[KTCUser currentUser].userRole]];
+//        [self.homeView resetTopRoleWithImage:[KTCUserRole smallImageWithUserRole:[KTCUser currentUser].userRole]];
+        [self.homeView resetTopRoleWithTitle:[KTCUserRole roleNameWithUserRole:[KTCUser currentUser].userRole]];
         [self.floorNavigationView reloadData];
         [self.floorNavigationView setSelectedIndex:0];
     } failure:nil];

@@ -16,14 +16,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XRL-fJ-ahv" userLabel="tagView">
-                        <rect key="frame" x="10" y="10" width="5" height="23"/>
+                        <rect key="frame" x="0.0" y="10" width="3" height="23"/>
                         <color key="backgroundColor" red="1" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="5" id="61x-Wh-a5F"/>
+                            <constraint firstAttribute="width" constant="3" id="61x-Wh-a5F"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="标题" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AiX-j1-haN">
-                        <rect key="frame" x="25" y="11" width="277" height="21"/>
+                        <rect key="frame" x="13" y="11.5" width="289" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -35,7 +35,7 @@
                     <constraint firstItem="XRL-fJ-ahv" firstAttribute="top" secondItem="HJy-XO-gez" secondAttribute="top" constant="10" id="RHU-fv-k5M"/>
                     <constraint firstAttribute="centerY" secondItem="AiX-j1-haN" secondAttribute="centerY" id="ZCa-SM-S3r"/>
                     <constraint firstAttribute="trailingMargin" secondItem="AiX-j1-haN" secondAttribute="trailing" constant="10" id="gZs-TA-I8c"/>
-                    <constraint firstItem="XRL-fJ-ahv" firstAttribute="leading" secondItem="HJy-XO-gez" secondAttribute="leading" constant="10" id="n9A-eI-POL"/>
+                    <constraint firstItem="XRL-fJ-ahv" firstAttribute="leading" secondItem="HJy-XO-gez" secondAttribute="leading" id="n9A-eI-POL"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

@@ -339,6 +339,12 @@ NSString *const kLinearViewCellIdentifier = @"kLinearViewCellIdentifier";
     }
 }
 
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(auilinearViewDidEndScroll:)]) {
+        [self.delegate auilinearViewDidEndScroll:self];
+    }
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (self.delegate && [self.delegate respondsToSelector:@selector(auilinearView:didDeselectCellAtIndex:)]) {
         [self.delegate auilinearView:self didDeselectCellAtIndex:indexPath.section];

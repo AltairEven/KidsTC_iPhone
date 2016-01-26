@@ -69,9 +69,11 @@ static NSString *const kCouponUseRuleUrlString = @"http://m.kidstc.com/tools/cou
     NSArray *coupons = [self.viewModel resultOfCurrentViewTag];
     if ([coupons count] > index) {
         CouponFullCutModel *model = [coupons objectAtIndex:index];
-        CouponUsableServiceViewController *controller = [[CouponUsableServiceViewController alloc] initWithCouponBatchIdentifier:model.batchId];
-        [controller setHidesBottomBarWhenPushed:YES];
-        [self.navigationController pushViewController:controller animated:YES];
+        if (model.hasRelatedService) {
+            CouponUsableServiceViewController *controller = [[CouponUsableServiceViewController alloc] initWithCouponBatchIdentifier:model.batchId];
+            [controller setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
     }
 }
 

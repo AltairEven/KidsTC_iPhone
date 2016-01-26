@@ -97,7 +97,7 @@ static KTCMapService *sharedInstance = nil;
 }
 
 - (void)didFailToLocateUserWithError:(NSError *)error {
-    [[iToast makeText:@"定位失败"] show];
+    [[iToast makeText:@"定位失败，请检查您手机的定位设置"] show];
 }
 
 #pragma mark BMKGeoCodeSearchDelegate

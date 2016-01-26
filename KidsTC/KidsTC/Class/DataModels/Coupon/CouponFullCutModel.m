@@ -29,6 +29,7 @@
         self.status = (CouponStatus)[[data objectForKey:@"status"] integerValue];
         self.statusDescription = [data objectForKey:@"statusName"];
         self.useTag = (CouponUseTag)[[data objectForKey:@"useTag"] integerValue];
+        self.hasRelatedService = [[data objectForKey:@"isLink"] boolValue];
     }
     return self;
 }

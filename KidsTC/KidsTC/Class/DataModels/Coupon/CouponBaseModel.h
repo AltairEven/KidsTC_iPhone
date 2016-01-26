@@ -44,6 +44,8 @@ typedef enum {
 
 @property (nonatomic, assign) CouponUseTag useTag;
 
+@property (nonatomic, assign) BOOL hasRelatedService;
+
 - (instancetype)initWithRawData:(NSDictionary *)data;
 
 @end

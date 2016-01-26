@@ -57,6 +57,7 @@
                 //大图
                 NewsListItemModel *cellModel = [self.itemModels objectAtIndex:index];
                 view = [[[NSBundle mainBundle] loadNibNamed:@"NewsRecommendCellViewBigImageView" owner:nil options:nil] objectAtIndex:0];
+//                [((NewsRecommendCellViewBigImageView *)view).imageView setImageWithURL:cellModel.imageUrl placeholderImage:PLACEHOLDERIMAGE_BIG contentMode:UIViewContentModeScaleAspectFit success:nil failure:nil];
                 [((NewsRecommendCellViewBigImageView *)view).imageView setImageWithURL:cellModel.imageUrl];
                 [((NewsRecommendCellViewBigImageView *)view).titleLabel setText:cellModel.title];
                 viewHeight = [((NewsRecommendCellViewBigImageView *)view) viewHeight];

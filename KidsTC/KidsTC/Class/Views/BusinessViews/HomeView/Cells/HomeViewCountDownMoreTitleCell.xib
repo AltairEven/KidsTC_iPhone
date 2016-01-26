@@ -15,20 +15,20 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oWh-NF-wTj" userLabel="tagView">
-                        <rect key="frame" x="10" y="10" width="5" height="23"/>
+                        <rect key="frame" x="0.0" y="10" width="3" height="23"/>
                         <color key="backgroundColor" red="1" green="0.53333333329999999" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="5" id="9aF-bf-eVe"/>
+                            <constraint firstAttribute="width" constant="3" id="9aF-bf-eVe"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="掌上秒杀" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hxl-lV-zi5">
-                        <rect key="frame" x="25" y="11.5" width="68" height="20.5"/>
+                        <rect key="frame" x="13" y="11.5" width="68" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="luf-ci-tsJ" userLabel="countdownBG">
-                        <rect key="frame" x="98" y="12" width="150" height="20"/>
+                        <rect key="frame" x="86" y="12" width="150" height="20"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="距离开始" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SoH-zU-RAz">
                                 <rect key="frame" x="5" y="2" width="52" height="16"/>
@@ -95,16 +95,16 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k0O-iY-k06" userLabel="subTitleBG">
-                        <rect key="frame" x="248" y="0.0" width="72" height="43"/>
+                        <rect key="frame" x="236" y="0.0" width="84" height="43"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="副标题" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9sM-u6-apQ">
-                                <rect key="frame" x="0.0" y="14" width="52" height="16"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="15" width="64" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_r" translatesAutoresizingMaskIntoConstraints="NO" id="blU-p9-oza">
-                                <rect key="frame" x="52" y="14" width="15" height="15"/>
+                                <rect key="frame" x="64" y="14" width="15" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="15" id="UII-wl-cup"/>
                                     <constraint firstAttribute="height" constant="15" id="fXz-cN-zgJ"/>
@@ -125,7 +125,7 @@
                     <constraint firstAttribute="centerY" secondItem="luf-ci-tsJ" secondAttribute="centerY" id="A7X-uz-qMF"/>
                     <constraint firstAttribute="bottom" secondItem="oWh-NF-wTj" secondAttribute="bottom" constant="10" id="B6a-Pr-Osq"/>
                     <constraint firstItem="oWh-NF-wTj" firstAttribute="top" secondItem="tSo-Sb-PbA" secondAttribute="top" constant="10" id="HOK-GQ-IJT"/>
-                    <constraint firstItem="oWh-NF-wTj" firstAttribute="leading" secondItem="tSo-Sb-PbA" secondAttribute="leading" constant="10" id="Mw2-OV-bem"/>
+                    <constraint firstItem="oWh-NF-wTj" firstAttribute="leading" secondItem="tSo-Sb-PbA" secondAttribute="leading" id="Mw2-OV-bem"/>
                     <constraint firstAttribute="bottom" secondItem="k0O-iY-k06" secondAttribute="bottom" id="Zbi-Zp-arO"/>
                     <constraint firstItem="k0O-iY-k06" firstAttribute="top" secondItem="tSo-Sb-PbA" secondAttribute="top" id="cvc-SR-jgy"/>
                     <constraint firstItem="Hxl-lV-zi5" firstAttribute="leading" secondItem="oWh-NF-wTj" secondAttribute="trailing" constant="10" id="doA-nT-ms6"/>

@@ -22,7 +22,8 @@ NSString *const kAUIThemeTabItemKeyUserCenter = @"kAUIThemeTabItemKeyUserCenter"
 + (instancetype)defaultTheme {
     AUITheme *theme = [[AUITheme alloc] init];
     theme.globalThemeColor = RGBA(255, 136, 136, 1);
-    theme.globalBGColor = RGBA(252, 248, 245, 1);
+//    theme.globalBGColor = RGBA(252, 248, 245, 1);
+    theme.globalBGColor = RGBA(246, 246, 246, 1);
     theme.globalCellBGColor = RGBA(255, 255, 255, 1);
     theme.darkTextColor = RGBA(85, 85, 85, 1);
     theme.lightTextColor = RGBA(170, 170, 170, 1);

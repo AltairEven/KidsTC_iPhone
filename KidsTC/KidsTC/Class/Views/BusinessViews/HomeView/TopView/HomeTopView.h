@@ -23,6 +23,8 @@
 
 - (void)setRoleWithImage:(UIImage *)image;
 
+- (void)setRoleWithTitle:(NSString *)title;
+
 - (void)resetInputFieldContent:(NSString *)content isPlaceHolder:(BOOL)isPlaceHolder;
 
 @end

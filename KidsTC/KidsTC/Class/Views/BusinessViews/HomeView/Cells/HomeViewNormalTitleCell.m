@@ -21,6 +21,7 @@
     // Initialization code
     [self.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
     [self.tagView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
+    [self.titleLabel setTextColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

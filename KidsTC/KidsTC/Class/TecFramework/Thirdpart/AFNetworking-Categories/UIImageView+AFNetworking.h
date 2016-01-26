@@ -55,6 +55,12 @@
 
 + (void)clearCache; //add by altair
 
+- (void)setImageWithURL:(NSURL *)url
+       placeholderImage:(UIImage *)placeholderImage
+            contentMode:(UIViewContentMode)mode
+                success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image))success
+                failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure;
+
 ///------------------------------------
 /// @name Accessing Response Serializer
 ///------------------------------------

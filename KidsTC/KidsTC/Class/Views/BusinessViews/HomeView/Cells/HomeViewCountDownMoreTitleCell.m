@@ -40,6 +40,8 @@
     [self.hourLabel setTextColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
     [self.minuteLabel setTextColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
     [self.secondLabel setTextColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
+    
+    [self.titleLabel setTextColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

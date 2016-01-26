@@ -36,6 +36,8 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UIButton *ageSelectDoneButton;
 @property (nonatomic, assign) CGFloat elementWidth;
 
+@property (nonatomic, assign) UserRole selectedRole;
+
 //sex view
 @property (strong, nonatomic) IBOutlet UIView *sexView;
 @property (weak, nonatomic) IBOutlet UIImageView *leftImageView;
@@ -47,6 +49,8 @@ typedef enum {
 - (IBAction)didClickedBackButton:(id)sender;
 
 - (void)buildFirstAndSecondView;
+
+- (void)resetLinearView;
 
 - (void)resetSecondView;
 
@@ -77,6 +81,7 @@ typedef enum {
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [self resetLinearView];
 }
 
 #pragma mark AUILinearViewDataSource & AUILinearViewDelegate
@@ -344,6 +349,51 @@ typedef enum {
         [self.leftImageView setAlpha:0.3];
         [self.rightImageView setAlpha:1];
     }
+}
+
+- (void)resetLinearView {
+    NSUInteger index = 0;
+    switch (self.selectedRole) {
+        case UserRolePrepregnancy:
+        {
+            index = 0;
+        }
+            break;
+        case UserRolePregnancy:
+        {
+            index = 1;
+        }
+            break;
+        case UserRoleBirth:
+        {
+            index = 2;
+        }
+            break;
+        case UserRoleBabyInOne:
+        {
+            index = 3;
+        }
+            break;
+        case UserRoleBabyOneToThree:
+        {
+            index = 4;
+        }
+            break;
+        case UserRoleBabyFourToSix:
+        {
+            index = 5;
+        }
+            break;
+        default:
+            break;
+    }
+    [self.linearView setSelectedIndex:index];
+}
+
+#pragma mark Public methods
+
+- (void)setSelectedRole:(UserRole)role {
+    _selectedRole = role;
 }
 
 #pragma mark Super methods

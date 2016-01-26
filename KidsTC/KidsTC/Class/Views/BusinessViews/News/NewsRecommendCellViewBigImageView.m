@@ -12,6 +12,7 @@
 
 - (void)awakeFromNib {
     [self setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
+//    [self.imageView setContentMode:UIViewContentModeScaleAspectFit];
 }
 
 - (CGFloat)viewHeight {

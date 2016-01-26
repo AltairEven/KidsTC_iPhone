@@ -40,6 +40,8 @@ typedef enum {
 
 - (NSString *)userRoleIdentifierString;
 
++ (NSString *)roleNameWithUserRole:(KTCUserRole *)role;
+
 + (UIImage *)smallImageWithUserRole:(KTCUserRole *)role;
 
 + (UIImage *)middleImageWithUserRole:(KTCUserRole *)role;
