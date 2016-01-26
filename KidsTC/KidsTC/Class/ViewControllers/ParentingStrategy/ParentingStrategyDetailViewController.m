@@ -210,8 +210,10 @@
     [self.bottomView setHidden:NO];
     if ([self.viewModel.detailModel.relatedServices count] > 0) {
         [self.bottomView.rightLabel setText:@"查看优惠服务"];
+        [self.bottomView hideLeftTag:NO rightTag:NO];
     } else {
         [self.bottomView.rightLabel setText:@"分享给好友"];
+        [self.bottomView hideLeftTag:NO rightTag:YES];
     }
 }
 

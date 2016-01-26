@@ -423,17 +423,16 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
 
 - (void)showWelcome {
     //检查是否第一次安装，弹出引导图
-    if ([CheckFirstInstalDataManager getIsFirstTimeValue]) {//第一次安装
+    if ([CheckFirstInstalDataManager getHasLaunchedValue]) {//第一次安装
+        [self showRealWindow];
+    } else {
         GuideViewController *guideVC = [[GuideViewController alloc] init];
         self.welcomeWindow.rootViewController = guideVC;
         
         __weak AppDelegate *weakSelf = self;
         [guideVC setGuide_complete:^(){
             [weakSelf showRealWindow];
-            [CheckFirstInstalDataManager setIsFirstTimeValue:NO];
         }];
-    } else {
-        [self showRealWindow];
     }
 }
 
@@ -455,30 +454,33 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
 #pragma mark Network Status
 
 + (void)handleNetworkStatusChange:(IcsonNetworkStatus)status {
-    switch (status) {
-        case IcsonNetworkStatusUnknown:
-        case IcsonNetworkStatusNotReachable:
-        {
-            [[GAlertLoadingView sharedAlertLoadingView] hide];
-            [[[iToast makeText:@"您当前网络不可用，请检查网络设置"] setDuration:1500] show];
-        }
-            break;
-        case IcsonNetworkStatusReachableViaWWAN:
-        {
-            [[[iToast makeText:@"当前为蜂窝移动网络，请注意流量消耗"] setDuration:1500] show];
-        }
-            break;
-        case IcsonNetworkStatusReachableViaWiFi:
-        {
-            if (!_alreadyLaunched) {
-                return;
-            }
-            [[[iToast makeText:@"当前为WIFI网络，祝您使用愉快"] setDuration:1500] show];
-        }
-            break;
-        default:
-            break;
-    }
+//    switch (status) {
+//        case IcsonNetworkStatusUnknown:
+//        case IcsonNetworkStatusNotReachable:
+//        {
+//            [[GAlertLoadingView sharedAlertLoadingView] hide];
+//            [[[iToast makeText:@"您当前网络不可用，请检查网络设置"] setDuration:1500] show];
+//        }
+//            break;
+//        case IcsonNetworkStatusReachableViaWWAN:
+//        {
+//            if (!_alreadyLaunched) {
+//                return;
+//            }
+//            [[[iToast makeText:@"当前为蜂窝移动网络，请注意流量消耗"] setDuration:1500] show];
+//        }
+//            break;
+//        case IcsonNetworkStatusReachableViaWiFi:
+//        {
+//            if (!_alreadyLaunched) {
+//                return;
+//            }
+//            [[[iToast makeText:@"当前为WIFI网络，祝您使用愉快"] setDuration:1500] show];
+//        }
+//            break;
+//        default:
+//            break;
+//    }
 }
 
 #pragma mark Exit

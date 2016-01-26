@@ -51,6 +51,7 @@
     self.relatedInfoButton.layer.masksToBounds = YES;
     
     self.contentLabel.delegate = self;
+    self.contentLabel.lineSpacing = 10;
     [self.contentLabel setLinkAttributes:nil];
 }
 
@@ -80,7 +81,10 @@
                 }
             }
         }
-        [self.contentLabel setAttributedText:labelString];
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        [paragraphStyle setLineSpacing:AttributeStringLineSpace];//调整行间距
+        [labelString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [labelString length])];
+        [self.contentLabel setText:labelString];
         //time
         if ([cellModel.timeDescription length] > 0) {
             [self.timeTagImageView setHidden:NO];

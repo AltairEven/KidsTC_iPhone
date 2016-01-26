@@ -38,7 +38,19 @@
 - (void)configWithCellModel:(HomeBigImageTwoDescCellModel *)model {
     HomeBigImageTwoDescItem *item = [model.cellItemsArray firstObject];
     [self.cellImageView setImageWithURL:item.imageUrl placeholderImage:PLACEHOLDERIMAGE_BIG];
-    [self.titleLabel setText:item.title];
+    //title
+    NSMutableAttributedString *labelString = [[NSMutableAttributedString alloc] initWithString:item.title];
+    NSDictionary *fontAttribute = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13], NSFontAttributeName, [UIColor darkGrayColor], NSForegroundColorAttributeName, nil];
+    [labelString setAttributes:fontAttribute range:NSMakeRange(0, [labelString length])];
+    if (item.textSegue) {
+        //[NSNumber numberWithBool:YES], NSUnderlineStyleAttributeName
+        NSDictionary *linkAttribute = [NSDictionary dictionaryWithObjectsAndKeys:item.textSegue.linkColor, NSForegroundColorAttributeName, nil];
+        for (NSString *rangeString in item.textSegue.linkRangeStrings) {
+            NSRange range = NSRangeFromString(rangeString);
+            [labelString addAttributes:linkAttribute range:range];
+        }
+    }
+    [self.titleLabel setAttributedText:labelString];
     [self.subTitleLabel setText:item.subTitle];
 }
 

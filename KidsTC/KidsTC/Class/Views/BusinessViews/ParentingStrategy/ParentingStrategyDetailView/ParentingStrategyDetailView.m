@@ -433,7 +433,7 @@ static NSString *const kRelatedServiceCellIdentifier = @"kRelatedServiceCellIden
         [self.descriptionBGView setFrame:CGRectMake(20, yPosition, SCREEN_WIDTH - 40, strategyDescriptionViewHeight)];
         NSString *wholeString = [NSString stringWithFormat:@"%@：%@", self.detailModel.strategyDescriptionTitle, self.detailModel.strategyDescription];
         NSMutableAttributedString *labelString = [[NSMutableAttributedString alloc] initWithString:wholeString];
-        NSDictionary *fontAttribute = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:14], NSFontAttributeName, nil];
+        NSDictionary *fontAttribute = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:14], NSFontAttributeName, [[KTCThemeManager manager] defaultTheme].lightTextColor, NSForegroundColorAttributeName, nil];
         [labelString setAttributes:fontAttribute range:NSMakeRange(0, [wholeString length])];
         NSDictionary *attribute = [NSDictionary dictionaryWithObjectsAndKeys:[[KTCThemeManager manager] defaultTheme].globalThemeColor, NSForegroundColorAttributeName, nil];
         [labelString addAttributes:attribute range:NSMakeRange(0, [self.detailModel.strategyDescriptionTitle length])];
@@ -448,7 +448,10 @@ static NSString *const kRelatedServiceCellIdentifier = @"kRelatedServiceCellIden
                 }
             }
         }
-        [self.descriptionLabel setAttributedText:labelString];
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        [paragraphStyle setLineSpacing:AttributeStringLineSpace];//调整行间距
+        [labelString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [labelString length])];
+        [self.descriptionLabel setText:labelString];
         [self.descriptionLabel sizeOfSizeToFitWithMaximumNumberOfLines:0];
         
         [self.descriptionBottomLineView setFrame:CGRectMake(0, strategyDescriptionViewHeight - 2, SCREEN_WIDTH - 40, 2)];

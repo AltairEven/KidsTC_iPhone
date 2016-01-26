@@ -13,8 +13,8 @@ extern NSString *const kKidsTCIsFirstInstal;
 @interface CheckFirstInstalDataManager : NSObject
 
 //设定和检查是否第一次安装
-+ (void)setIsFirstTimeValue:(BOOL)value;
-+ (BOOL)getIsFirstTimeValue;
++ (void)setHasLaunchedValue:(BOOL)value;
++ (BOOL)getHasLaunchedValue;
 
 + (NSString	*)getConfigFilePath;
 + (NSString	*)getDocumentConfigFilePath;

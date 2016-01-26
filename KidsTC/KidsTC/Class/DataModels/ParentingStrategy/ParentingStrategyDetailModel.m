@@ -151,7 +151,8 @@
 - (CGFloat)strategyDescriptionViewHeight {
     CGFloat contentHeight = 0;
     if ([self.strategyDescription length] > 0) {
-        contentHeight = [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 80 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:14] topGap:10 bottomGap:10 andText:self.strategyDescription];
+//        contentHeight = [GConfig heightForLabelWithWidth:SCREEN_WIDTH - 80 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:14] topGap:10 bottomGap:10 andText:self.strategyDescription];
+        contentHeight = [GConfig heightForAttributeLabelWithWidth:SCREEN_WIDTH - 80 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:14] topGap:10 bottomGap:10 maxLine:0 andText:self.strategyDescription];
     }
     return contentHeight;
 }
@@ -205,7 +206,7 @@
         self.relatedInfoTitle = [data objectForKey:@"linkTitle"];
         self.commentCount = [[data objectForKey:@"commentCount"] integerValue];
         
-        self.ratio = 0.618;
+        self.ratio = 0.6;
         NSArray *promotionLinks = [data objectForKey:@"promotionLink"];
         if ([promotionLinks isKindOfClass:[NSArray class]]) {
             NSMutableArray *tempArray = [[NSMutableArray alloc] init];
@@ -222,10 +223,13 @@
 }
 
 - (CGFloat)cellHeight {
-    CGFloat height = 40; //时间栏高度
     CGFloat cellWidth = SCREEN_WIDTH - 20;
-    height += cellWidth * self.ratio; //图片
-    height += [GConfig heightForLabelWithWidth:cellWidth - 20 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:15] topGap:10 bottomGap:10 andText:self.cellContentString]; //内容
+    CGFloat height = cellWidth * self.ratio; //图片
+//    height += [GConfig heightForLabelWithWidth:cellWidth - 20 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:15] topGap:10 bottomGap:10 andText:self.cellContentString]; //内容
+    height += [GConfig heightForAttributeLabelWithWidth:cellWidth - 20 LineBreakMode:NSLineBreakByCharWrapping Font:[UIFont systemFontOfSize:15] topGap:10 bottomGap:10 maxLine:0 andText:self.cellContentString];
+    if ([self.timeDescription length] != 0 || [self.relatedInfoTitle length] != 0) {
+        height += 40; //时间栏高度
+    }
     return height;
 }
 

@@ -9,6 +9,7 @@
 #import "GConfig.h"
 #import "InterfaceManager.h"
 #import "UIDevice+IdentifierAddition.h"
+#import "TTTAttributedLabel.h"
 //#import "GArea.h"
 
 #define DefaultLongitude (121.4812701835353)
@@ -523,6 +524,37 @@ static BOOL bLoadWebImage = YES;
     [label setFont:font];
     [label setText:text];
     CGFloat height = [label sizeToFitWithMaximumNumberOfLines:line] + tGap + bGap;
+    return height;
+}
+
+
++ (CGFloat)heightForAttributeLabelWithWidth:(CGFloat)width LineBreakMode:(NSLineBreakMode)mode Font:(UIFont *)font topGap:(CGFloat)tGap bottomGap:(CGFloat)bGap maxLine:(NSUInteger)line andText:(NSString *)text {
+    
+    if ([text length] == 0) {
+        return 0;
+    }
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, font.pointSize)];
+    [label setLineBreakMode:mode];
+    [label setFont:font];
+    [label setText:text];
+    
+    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:text];
+    //自定义str和TTTAttributedLabel一样的行间距
+    NSMutableParagraphStyle *paragrapStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragrapStyle setLineSpacing:AttributeStringLineSpace];
+    //设置行间距
+    [attrString addAttribute:NSParagraphStyleAttributeName value:paragrapStyle range:NSMakeRange(0, text.length)];
+    //设置字体
+    [attrString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, text.length)];
+    
+    //得到自定义行间距的UILabel的高度
+    CGFloat height = [TTTAttributedLabel sizeThatFitsAttributedString:attrString withConstraints:CGSizeMake(width, MAXFLOAT) limitedToNumberOfLines:0].height + tGap + bGap;
+    
+//    //重新改变tttLabel的frame高度
+//    CGRect rect = tttLabel.frame;
+//    rect.size.height = height;
+//    tttLabel.frame = rect;
+    
     return height;
 }
 

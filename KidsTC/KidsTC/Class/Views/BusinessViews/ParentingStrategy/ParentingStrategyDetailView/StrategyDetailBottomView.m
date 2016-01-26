@@ -13,6 +13,8 @@
 @property (weak, nonatomic) IBOutlet UIView *leftBGView;
 @property (weak, nonatomic) IBOutlet UIView *gapView;
 @property (weak, nonatomic) IBOutlet UIView *rightBGView;
+@property (weak, nonatomic) IBOutlet UILabel *leftTagLabel;
+@property (weak, nonatomic) IBOutlet UILabel *rightTagLabel;
 
 - (void)didClickedLeft;
 - (void)didClickedRight;
@@ -44,6 +46,16 @@
     [self.leftBGView addGestureRecognizer:tap1];
     UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickedRight)];
     [self.rightBGView addGestureRecognizer:tap2];
+    
+    [self.leftTagLabel setTextColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
+    self.leftTagLabel.layer.cornerRadius = 9;
+    self.leftTagLabel.layer.borderColor = [[KTCThemeManager manager] defaultTheme].globalThemeColor.CGColor;
+    self.leftTagLabel.layer.borderWidth = BORDER_WIDTH;
+    
+    [self.rightTagLabel setTextColor:[[KTCThemeManager manager] defaultTheme].highlightTextColor];
+    self.rightTagLabel.layer.cornerRadius = 9;
+    self.rightTagLabel.layer.borderColor = [[KTCThemeManager manager] defaultTheme].highlightTextColor.CGColor;
+    self.rightTagLabel.layer.borderWidth = BORDER_WIDTH;
 }
 
 
@@ -58,6 +70,11 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedRightButtonOnStrategyDetailBottomView:)]) {
         [self.delegate didClickedRightButtonOnStrategyDetailBottomView:self];
     }
+}
+
+- (void)hideLeftTag:(BOOL)hideLeft rightTag:(BOOL)hideRight {
+    [self.leftTagLabel setHidden:hideLeft];
+    [self.rightTagLabel setHidden:hideRight];
 }
 
 /*

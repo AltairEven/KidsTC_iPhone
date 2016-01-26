@@ -56,6 +56,7 @@
     if ([data objectForKey:@"subTitle"]) {
         self.subTitle = [NSString stringWithFormat:@"%@", [data objectForKey:@"subTitle"]];
     }
+    self.textSegue = [[TextSegueModel alloc] initWithLinkParam:data promotionWords:self.title];
 }
 
 

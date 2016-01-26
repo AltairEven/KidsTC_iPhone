@@ -759,7 +759,10 @@ static NSString *const kStrategyCellIdentifier = @"kStrategyCellIdentifier";
             }
         }
     }
-    [self.storeBriefLabel setAttributedText:briefLabelString];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:AttributeStringLineSpace];//调整行间距
+    [briefLabelString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [briefLabelString length])];
+    [self.storeBriefLabel setText:briefLabelString];
     
     [self.starView setStarNumber:self.detailModel.starNumber];
     

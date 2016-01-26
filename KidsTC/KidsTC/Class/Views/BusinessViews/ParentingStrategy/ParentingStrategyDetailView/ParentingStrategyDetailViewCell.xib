@@ -35,12 +35,17 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="lineSpacing">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="apv-mR-OcX" firstAttribute="top" secondItem="QAk-wR-hVx" secondAttribute="top" id="ETF-R8-E5G"/>
                                     <constraint firstItem="apv-mR-OcX" firstAttribute="leading" secondItem="QAk-wR-hVx" secondAttribute="leading" constant="10" id="S0C-vM-Ttw"/>
-                                    <constraint firstItem="apv-mR-OcX" firstAttribute="centerY" secondItem="QAk-wR-hVx" secondAttribute="centerY" id="SlN-fX-b4I"/>
                                     <constraint firstAttribute="trailing" secondItem="apv-mR-OcX" secondAttribute="trailing" constant="10" id="hJu-za-WHv"/>
                                 </constraints>
                             </view>

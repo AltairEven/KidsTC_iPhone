@@ -198,6 +198,7 @@ typedef enum
 #define kidsTCAppSDKVersion     @"0"
 #define kidsTCAppSDKVersionKey  @"kidsTCAppSDKVersionKeyNew"
 #define kInterfaceBundleVersion @"kInterfaceBundleVersion"
+#define kAppHasLaunchedKey ([GConfig getCurrentAppVersionCode])
 
 
 //无货商品价格

@@ -548,6 +548,8 @@ static const int kInvalidShowPrice = 99999900;
 
 #define ScoreCoefficient (0.1)
 
+#define AttributeStringLineSpace (1.5)
+
 @class GConfig;
 @class ATCountDown;
 
@@ -613,6 +615,7 @@ static const int kInvalidShowPrice = 99999900;
 
 + (CGFloat)heightForLabelWithWidth:(CGFloat)width LineBreakMode:(NSLineBreakMode)mode Font:(UIFont *)font topGap:(CGFloat)tGap bottomGap:(CGFloat)bGap andText:(NSString *)text;
 + (CGFloat)heightForLabelWithWidth:(CGFloat)width LineBreakMode:(NSLineBreakMode)mode Font:(UIFont *)font topGap:(CGFloat)tGap bottomGap:(CGFloat)bGap maxLine:(NSUInteger)line andText:(NSString *)text;
++ (CGFloat)heightForAttributeLabelWithWidth:(CGFloat)width LineBreakMode:(NSLineBreakMode)mode Font:(UIFont *)font topGap:(CGFloat)tGap bottomGap:(CGFloat)bGap maxLine:(NSUInteger)line andText:(NSString *)text;
 
 + (void)resetLineView:(UIView *)view withLayoutAttribute:(NSLayoutAttribute)attribute;
 + (void)resetLineView:(UIView *)view withLayoutAttribute:(NSLayoutAttribute)attribute constant:(CGFloat)constant;

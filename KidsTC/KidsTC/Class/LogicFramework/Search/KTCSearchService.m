@@ -52,8 +52,11 @@ static KTCSearchService *_sharedInstance;
     } else {
         [self stopSyncHotSearchKeys];
     }
+    
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:[[KTCUser currentUser].userRole userRoleIdentifierString], @"pt", nil];
+    
     __weak KTCSearchService *weakSelf = self;
-    [weakSelf.hotSearchRequest startHttpRequestWithParameter:nil success:^(HttpRequestClient *client, NSDictionary *responseData) {
+    [weakSelf.hotSearchRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [weakSelf loadHotKeySucceed:responseData];
         if (success) {
             success(responseData);

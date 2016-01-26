@@ -7,6 +7,7 @@
 //
 
 #import "InterfaceManager.h"
+#import "CheckFirstInstalDataManager.h"
 
 #define MAIN_GETINTERFACE     @"http://api.kidstc.com/json.php?mod=main&&act=getinterface"
 
@@ -15,6 +16,8 @@ static InterfaceManager *_sharedInstance = nil;
 @interface InterfaceManager ()
 
 @property (nonatomic, strong) HttpRequestClient *downloadClient;
+
+- (void)cleanInterfaceInfo;
 
 - (NSString *)getConfigVersion;
 
@@ -29,6 +32,10 @@ static InterfaceManager *_sharedInstance = nil;
 - (instancetype)init {
     self = [super init];
     if (self) {
+        if (![CheckFirstInstalDataManager getHasLaunchedValue]) {
+            //未启动过
+            [self cleanInterfaceInfo];
+        }
     }
     return self;
 }
@@ -52,8 +59,10 @@ static InterfaceManager *_sharedInstance = nil;
     __weak InterfaceManager *weakSelf = self;
     [weakSelf.downloadClient startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [weakSelf downloadInterfaceListSusseed:responseData];
+        [CheckFirstInstalDataManager setHasLaunchedValue:YES];
     } failure:^(HttpRequestClient *client, NSError *error) {
         [weakSelf downloadInterfaceListFailed:error];
+        [CheckFirstInstalDataManager setHasLaunchedValue:YES];
     }];
 }
 
@@ -99,6 +108,12 @@ static InterfaceManager *_sharedInstance = nil;
 {
     NSDictionary*dic = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"interface_list" ofType:@"plist"]];
     return dic;
+}
+
+- (void)cleanInterfaceInfo {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kidsTCAppSDKVersionKey];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kInterfaceBundleVersion];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

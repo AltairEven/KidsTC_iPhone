@@ -7,6 +7,7 @@
 //
 
 #import "HomeContentCellModel.h"
+#import "TextSegueModel.h"
 
 @class HomeBigImageTwoDescItem;
 
@@ -22,6 +23,8 @@
 @property (nonatomic, copy) NSString *title;
 
 @property (nonatomic, copy) NSString *subTitle;
+
+@property (nonatomic, strong) TextSegueModel *textSegue;
 
 @end
 
