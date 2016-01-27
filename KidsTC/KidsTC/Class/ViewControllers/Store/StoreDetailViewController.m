@@ -178,6 +178,8 @@
     ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithServiceId:item.serviceId channelId:item.channelId];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
+    //MTA
+    [MTA trackCustomEvent:@"event_skip_store_service_free_dtl" args:nil];
 }
 
 - (void)didClickedAllStrategyOnStoreDetailView:(StoreDetailView *)detailView {
@@ -191,6 +193,8 @@
     ParentingStrategyDetailViewController *controller = [[ParentingStrategyDetailViewController alloc] initWithStrategyIdentifier:model.strategyId];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
+    //MTA
+    [MTA trackCustomEvent:@"event_skip_store_stgy_dtl" args:nil];
 }
 
 - (void)didClickedMoreDetailOnStoreDetailView:(StoreDetailView *)detailView {
