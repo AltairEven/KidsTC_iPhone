@@ -46,7 +46,7 @@
 
 @property (nonatomic, strong) NSArray<TextSegueModel *> *briefSegueModels;
 
-- (void)fillWithRawData:(NSDictionary *)data;
+- (BOOL)fillWithRawData:(NSDictionary *)data;
 
 - (CGFloat)mainImageHeight;
 

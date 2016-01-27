@@ -11,9 +11,9 @@
 
 @implementation StoreDetailModel
 
-- (void)fillWithRawData:(NSDictionary *)data {
+- (BOOL)fillWithRawData:(NSDictionary *)data {
     if (!data || ![data isKindOfClass:[NSDictionary class]]) {
-        return;
+        return NO;
     }
     NSArray *imgUrls = [data objectForKey:@"imgUrl"];
     if ([imgUrls isKindOfClass:[NSArray class]]) {
@@ -44,6 +44,9 @@
         self.storeShortName = @"门店详情";
     }
     self.storeBrief = [data objectForKey:@"breif"];
+    if (!self.storeBrief) {
+        self.storeBrief = @"";
+    }
     NSArray *promotionLinks = [data objectForKey:@"promotionLink"];
     if ([promotionLinks isKindOfClass:[NSArray class]]) {
         NSMutableArray *tempArray = [[NSMutableArray alloc] init];
@@ -103,7 +106,6 @@
     //activity
     NSArray *fullCut = [data objectForKey:@"fullCut"];
     if ([fullCut isKindOfClass:[NSArray class]] && [fullCut count] > 0) {
-        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
         for (NSString *fullCutTitle in fullCut) {
             if ([fullCutTitle isKindOfClass:[NSString class]]) {
                 ActivityLogoItem *item = [[ActivityLogoItem alloc] initWithType:ActivityLogoItemTypeDiscount description:fullCutTitle];
@@ -216,6 +218,8 @@
     if ([data objectForKey:@"statusDesc"]) {
         self.appointButtonTitle = [NSString stringWithFormat:@"%@", [data objectForKey:@"statusDesc"]];
     }
+    
+    return YES;
 }
 
 - (CGFloat)topCellHeight {

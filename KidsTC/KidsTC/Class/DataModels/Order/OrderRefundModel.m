@@ -10,9 +10,9 @@
 
 @implementation OrderRefundModel
 
-- (void)fillWithRawData:(NSDictionary *)data {
+- (BOOL)fillWithRawData:(NSDictionary *)data {
     if (!data || ![data isKindOfClass:[NSDictionary class]]) {
-        return;
+        return NO;
     }
     self.maxRefundCount = [[data objectForKey:@"refundMaxNum"] integerValue];
     self.unitRefundAmount = [[data objectForKey:@"singleRefundAmt"] floatValue];
@@ -33,6 +33,7 @@
         self.refundReasons = [NSArray arrayWithArray:tempArray];
     }
     self.refundCount = 1;
+    return YES;
 }
 
 - (CGFloat)refundAmount {

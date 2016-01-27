@@ -16,9 +16,9 @@
 
 @implementation ServiceDetailModel
 
-- (void)fillWithRawData:(NSDictionary *)data {
+- (BOOL)fillWithRawData:(NSDictionary *)data {
     if (!data || ![data isKindOfClass:[NSDictionary class]]) {
-        return;
+        return NO;
     }
     self.channelId = [NSString stringWithFormat:@"%@", [data objectForKey:@"chId"]];
     self.type = [[data objectForKey:@"productType"] integerValue];
@@ -130,6 +130,9 @@
     }
     
     self.serviceDescription = [data objectForKey:@"promote"];
+    if (!self.serviceDescription) {
+        self.serviceDescription = @"";
+    }
     NSArray *promotionLinks = [data objectForKey:@"promotionLink"];
     if ([promotionLinks isKindOfClass:[NSArray class]]) {
         NSMutableArray *tempArray = [[NSMutableArray alloc] init];
@@ -208,6 +211,8 @@
     if ([data objectForKey:@"statusDesc"]) {
         self.buyButtonTitle = [NSString stringWithFormat:@"%@", [data objectForKey:@"statusDesc"]];
     }
+    
+    return YES;
 }
 
 

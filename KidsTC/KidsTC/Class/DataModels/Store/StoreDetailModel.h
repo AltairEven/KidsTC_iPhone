@@ -102,7 +102,7 @@
 
 @property (nonatomic, copy) NSString *appointButtonTitle;
 
-- (void)fillWithRawData:(NSDictionary *)data;
+- (BOOL)fillWithRawData:(NSDictionary *)data;
 
 - (CGFloat)topCellHeight;
 

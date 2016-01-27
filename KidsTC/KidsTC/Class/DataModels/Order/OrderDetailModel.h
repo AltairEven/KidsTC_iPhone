@@ -35,8 +35,8 @@
 
 @property (nonatomic, strong) NSArray<OrderRefundFlowModel *> *refundFlows;
 
-- (instancetype)initWithRawData:(NSDictionary *)data;
+@property (nonatomic, assign) BOOL canGetCode;
 
-- (BOOL)canGetCode;
+- (instancetype)initWithRawData:(NSDictionary *)data;
 
 @end

@@ -81,6 +81,8 @@
         [weakSelf showConnectError:YES];
     }];
     [self buildRightBarButtons];
+    
+    [self.bottomView setHidden:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -405,6 +407,11 @@
 
 
 - (void)setupBottomView {
+    if (self.viewModel.detailModel) {
+        [self.bottomView setHidden:NO];
+    } else {
+        [self.bottomView setHidden:YES];
+    }
     if ([[KTCUser currentUser] hasLogin]) {
         [self.bottomView setFavourite:self.viewModel.detailModel.isFavourate];
     }

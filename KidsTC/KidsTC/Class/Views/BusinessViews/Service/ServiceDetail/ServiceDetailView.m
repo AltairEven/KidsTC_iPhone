@@ -835,7 +835,7 @@ static NSString *const kMoreServiceCellIdentifier = @"kMoreServiceCellIdentifier
     [self.scrollView setContentSize:CGSizeMake(0, self.viewHeight)];
     [self.tableView reloadData];
     if (!self.detailModel) {
-        self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
+        self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···" needGoHome:YES];
     } else {
         self.tableView.backgroundView = nil;
     }

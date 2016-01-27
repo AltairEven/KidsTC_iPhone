@@ -33,6 +33,8 @@ typedef enum {
 
 @interface KTCSearchCondition : NSObject
 
+@property (nonatomic, copy) NSString *name;
+
 @property (nonatomic, copy) NSString *keyWord;
 
 @property (nonatomic, strong) KTCAreaItem *area;

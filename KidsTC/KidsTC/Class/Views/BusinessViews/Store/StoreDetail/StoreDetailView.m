@@ -643,19 +643,19 @@ static NSString *const kStrategyCellIdentifier = @"kStrategyCellIdentifier";
 #pragma mark AUIBannerScrollViewDataSource
 
 - (NSUInteger)numberOfBannersOnScrollView:(AUIBannerScrollView *)scrollView {
-    return [self.detailModel.imageUrls count];
+    return [self.detailModel.narrowImageUrls count];
 }
 
 - (UIImageView *)bannerImageViewOnScrollView:(AUIBannerScrollView *)scrollView withViewFrame:(CGRect)frame atIndex:(NSUInteger)index {
     UIImageView *imageView = nil;
     imageView = [[UIImageView alloc] initWithFrame:frame];
-    NSURL *imageUrl = [self.detailModel.imageUrls objectAtIndex:index];
+    NSURL *imageUrl = [self.detailModel.narrowImageUrls objectAtIndex:index];
     [imageView setImageWithURL:imageUrl];
     return imageView;
 }
 
 - (NSURL *)bannerImageUrlForScrollView:(AUIBannerScrollView *)scrollView atIndex:(NSUInteger)index {
-    NSURL *imageUrl = [self.detailModel.imageUrls objectAtIndex:index];
+    NSURL *imageUrl = [self.detailModel.narrowImageUrls objectAtIndex:index];
     return imageUrl;
 }
 
@@ -1001,7 +1001,7 @@ static NSString *const kStrategyCellIdentifier = @"kStrategyCellIdentifier";
     [self.tableView reloadData];
     [self.bannerScrollView reloadData];
     if (!self.detailModel) {
-        self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···"];
+        self.tableView.backgroundView = [[KTCEmptyDataView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.tableView.frame.size.height) image:[UIImage imageNamed:@""] description:@"啥都木有啊···" needGoHome:YES];
     } else {
         self.tableView.backgroundView = nil;
     }

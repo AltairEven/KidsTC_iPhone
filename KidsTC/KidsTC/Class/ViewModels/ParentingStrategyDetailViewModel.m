@@ -44,11 +44,14 @@
 #pragma mark Private methods
 
 - (void)loadDetailSucceed:(NSDictionary *)data {
-    [self.detailModel fillWithRawData:[data objectForKey:@"data"]];
+    if (![self.detailModel fillWithRawData:[data objectForKey:@"data"]]) {
+        _detailModel = nil;
+    }
     [self.view reloadData];
 }
 
 - (void)loadDetailFailed:(NSError *)error {
+    _detailModel = nil;
 }
 
 #pragma mark Public methods

@@ -86,6 +86,7 @@ static KTCSearchService *_sharedInstance;
             if (!condition) {
                 condition = [[KTCSearchServiceCondition alloc] init];
             }
+            condition.name = name;
             if ([condition.keyWord length] == 0) {
                 condition.keyWord = name;
             }
@@ -105,6 +106,7 @@ static KTCSearchService *_sharedInstance;
             if (!condition) {
                 condition = [[KTCSearchStoreCondition alloc] init];
             }
+            condition.name = name;
             if ([condition.keyWord length] == 0) {
                 condition.keyWord = name;
             }
@@ -124,6 +126,7 @@ static KTCSearchService *_sharedInstance;
             if (!condition) {
                 condition = [[KTCSearchNewsCondition alloc] init];
             }
+            condition.name = name;
             if ([condition.keyWord length] == 0) {
                 condition.keyWord = name;
             }

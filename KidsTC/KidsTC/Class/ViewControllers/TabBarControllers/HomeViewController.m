@@ -348,7 +348,7 @@
     KTCSearchServiceCondition *hotSearchCondition = (KTCSearchServiceCondition *)[[KTCSearchService sharedService] mostHotSearchConditionOfSearchType:KTCSearchTypeService];
     NSString *hotSearchKeyWord = @"";
     if (hotSearchCondition) {
-        hotSearchKeyWord = hotSearchCondition.keyWord;
+        hotSearchKeyWord = hotSearchCondition.name;
     }
     if ([hotSearchKeyWord length] == 0) {
         hotSearchKeyWord = @"宝爸宝妈都在这里找";

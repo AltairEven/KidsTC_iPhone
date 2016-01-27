@@ -19,7 +19,7 @@
 
 @property (nonatomic, assign) KTCSearchType defaultSearchType;
 
-- (void)searchWithKeyword:(NSString *)kw;
+- (void)searchWithKeyword:(NSString *)kw saveHistory:(BOOL)save;
 
 - (void)resetHotSearchKeyWord;
 
@@ -96,8 +96,10 @@
     if ([kw length] == 0) {
         KTCSearchCondition *condition = [[KTCSearchService sharedService] mostHotSearchConditionOfSearchType:self.viewModel.searchType];
         kw = condition.keyWord;
+        [self searchWithKeyword:kw saveHistory:NO];
+    } else {
+        [self searchWithKeyword:kw saveHistory:YES];
     }
-    [self searchWithKeyword:kw];
 }
 
 - (void)searchView:(KTCSearchView *)searchView didSelectedHotKeyAtIndex:(NSUInteger)index {
@@ -136,7 +138,7 @@
 
 - (void)searchView:(KTCSearchView *)searchView didSelectedHistoryAtIndex:(NSUInteger)index {
     NSString *kw = [[[self.viewModel searchHistory] allKeys] firstObject];
-    [self searchWithKeyword:kw];
+    [self searchWithKeyword:kw saveHistory:NO];
 }
 
 - (void)didClickedClearHistoryButtonOnKTCSearchView:(KTCSearchView *)searchView {
@@ -145,8 +147,10 @@
 
 #pragma mark Private methods
 
-- (void)searchWithKeyword:(NSString *)kw {
-    [self.viewModel addSearchHistoryWithType:self.searchView.type keyword:kw];
+- (void)searchWithKeyword:(NSString *)kw saveHistory:(BOOL)save {
+    if (save) {
+        [self.viewModel addSearchHistoryWithType:self.searchView.type keyword:kw];
+    }
     KTCSearchCondition *condition = nil;
     switch (self.searchView.type) {
         case KTCSearchTypeService:
@@ -205,7 +209,7 @@
     KTCSearchServiceCondition *hotSearchCondition = (KTCSearchServiceCondition *)[[KTCSearchService sharedService] mostHotSearchConditionOfSearchType:self.viewModel.searchType];
     NSString *hotSearchKeyWord = @"";
     if (hotSearchCondition) {
-        hotSearchKeyWord = hotSearchCondition.keyWord;
+        hotSearchKeyWord = hotSearchCondition.name;
     }
     if ([hotSearchKeyWord length] == 0) {
         hotSearchKeyWord = @"请输入关键词";

@@ -37,7 +37,7 @@ typedef enum {
 
 @property (nonatomic, copy) NSString *refundDescription;
 
-- (void)fillWithRawData:(NSDictionary *)data;
+- (BOOL)fillWithRawData:(NSDictionary *)data;
 
 - (CGFloat)refundAmount;
 

@@ -25,7 +25,7 @@
 
 - (void)loadIntroductionFailed:(NSError *)error;
 
-- (void)loadDetailSucceed:(NSDictionary *)data;
+- (BOOL)loadDetailSucceed:(NSDictionary *)data;
 
 - (void)loadDetailFailed:(NSError *)error;
 
@@ -51,11 +51,12 @@
 
 #pragma mark Private methods
 
-- (void)loadDetailSucceed:(NSDictionary *)data {
-    [self.detailModel fillWithRawData:[data objectForKey:@"data"]];
+- (BOOL)loadDetailSucceed:(NSDictionary *)data {
+    return [self.detailModel fillWithRawData:[data objectForKey:@"data"]];
 }
 
 - (void)loadDetailFailed:(NSError *)error {
+    _detailModel = nil;
 }
 
 - (void)loadIntroduction {
@@ -105,9 +106,16 @@
     
     __weak ServiceDetailViewModel *weakSelf = self;
     [weakSelf.loadServiceDetailRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
-        [weakSelf loadDetailSucceed:responseData];
-        if (succeed) {
-            succeed(responseData);
+        if ([weakSelf loadDetailSucceed:responseData]) {
+            if (succeed) {
+                succeed(responseData);
+            }
+        } else {
+            NSError *error = [NSError errorWithDomain:@"Service Detail" code:-1 userInfo:[NSDictionary dictionaryWithObject:@"没有查询到数据" forKey:kErrMsgKey]];
+            [weakSelf loadDetailFailed:error];
+            if (failure) {
+                failure(error);
+            }
         }
     } failure:^(HttpRequestClient *client, NSError *error) {
         [weakSelf loadDetailFailed:error];

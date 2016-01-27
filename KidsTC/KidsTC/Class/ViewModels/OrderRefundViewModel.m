@@ -51,12 +51,14 @@
 
 - (void)loadRefundSucceed:(NSDictionary *)data {
     NSDictionary *refundData = [data objectForKey:@"data"];
-    [self.refundModel fillWithRawData:refundData];
+    if (![self.refundModel fillWithRawData:refundData]) {
+        _refundModel = nil;
+    }
     [self.view reloadData];
 }
 
 - (void)loadRefundFailed:(NSError *)error {
-    
+    _refundModel = nil;
 }
 
 - (void)createRefundSucceed:(NSDictionary *)data {

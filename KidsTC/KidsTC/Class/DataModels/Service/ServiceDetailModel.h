@@ -117,7 +117,7 @@
 
 @property (nonatomic, copy) NSString *buyButtonTitle;
 
-- (void)fillWithRawData:(NSDictionary *)data;
+- (BOOL)fillWithRawData:(NSDictionary *)data;
 
 - (CGFloat)topCellHeight;
 

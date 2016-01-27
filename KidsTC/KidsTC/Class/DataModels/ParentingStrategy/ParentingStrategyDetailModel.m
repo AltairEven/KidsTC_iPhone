@@ -10,9 +10,9 @@
 
 @implementation ParentingStrategyDetailModel
 
-- (void)fillWithRawData:(NSDictionary *)data {
+- (BOOL)fillWithRawData:(NSDictionary *)data {
     if (!data || ![data isKindOfClass:[NSDictionary class]]) {
-        return;
+        return NO;
     }
     self.tagNames = [data objectForKey:@"flag"];
     NSDictionary *infoDic = [data objectForKey:@"info"];
@@ -24,7 +24,13 @@
         self.title = [infoDic objectForKey:@"title"];
         self.authorName = [infoDic objectForKey:@"authorName"];
         self.strategyDescriptionTitle = [infoDic objectForKey:@"simplyDescTitle"];
+        if (!self.strategyDescriptionTitle) {
+            self.strategyDescriptionTitle = @"";
+        }
         self.strategyDescription = [infoDic objectForKey:@"simply"];
+        if (!self.strategyDescription) {
+            self.strategyDescription = @"";
+        }
         self.shareObject = [CommonShareObject shareObjectWithRawData:[infoDic objectForKey:@"share"]];
         if (self.shareObject) {
             self.shareObject.identifier = self.identifier;
@@ -81,6 +87,8 @@
     }
     
     self.mainImageRatio = 0.618;
+    
+    return YES;
 }
 
 - (CGFloat)mainImageHeight {
@@ -193,6 +201,9 @@
         NSArray *array = [data objectForKey:@"image"];
         self.imageUrl = [NSURL URLWithString:[array lastObject]];
         self.cellContentString = [data objectForKey:@"desc"];
+        if (!self.cellContentString) {
+            self.cellContentString = @"";
+        }
         self.timeDescription = [data objectForKey:@"time"];
         
         CLLocationCoordinate2D coordinate = [GToolUtil coordinateFromString:[data objectForKey:@"mapAddress"]];

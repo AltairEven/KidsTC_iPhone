@@ -64,17 +64,19 @@
             }
             self.refundFlows = [NSArray arrayWithArray:tempArray];
         }
+        
+        self.canGetCode = [[data objectForKey:@"isShowSendConsumeCode"] boolValue];
     }
     return self;
 }
 
 
-- (BOOL)canGetCode {
-    BOOL retValue = NO;
-    if (self.status == OrderStatusHasPayed || self.status == OrderStatusPartialUsed) {
-        retValue = YES;
-    }
-    return retValue;
-}
+//- (BOOL)canGetCode {
+//    BOOL retValue = NO;
+//    if (self.status == OrderStatusHasPayed || self.status == OrderStatusPartialUsed) {
+//        retValue = YES;
+//    }
+//    return retValue;
+//}
 
 @end
