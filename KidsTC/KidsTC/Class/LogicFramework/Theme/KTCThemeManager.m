@@ -138,7 +138,10 @@ static KTCThemeManager *_sharedInstance = nil;
 }
 
 - (void)loadRemoteDataFailed:(NSError *)error {
-    
+    if (error.code == -2001) {
+        [self removeLocalData];
+        [self setTheme:[[KTCThemeManager manager] defaultTheme]];
+    }
 }
 
 #pragma mark Zip File

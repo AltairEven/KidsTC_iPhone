@@ -189,7 +189,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="54" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8hv-um-5uM">
-                        <rect key="frame" x="377.5" y="14" width="16.5" height="16"/>
+                        <rect key="frame" x="377.5" y="17" width="16.5" height="13"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="13" id="1yT-KS-k8y"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -203,7 +206,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b95-VL-kzd" userLabel="originalPrice" customClass="RichPriceView">
-                        <rect key="frame" x="102" y="10" width="30" height="20"/>
+                        <rect key="frame" x="94" y="10" width="30" height="20"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="mlf-yf-8V6"/>
@@ -213,7 +216,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="8hv-um-5uM" firstAttribute="bottom" secondItem="gOc-Ty-LnP" secondAttribute="bottom" id="CmL-s1-LZ0"/>
-                    <constraint firstItem="b95-VL-kzd" firstAttribute="leading" secondItem="gOc-Ty-LnP" secondAttribute="trailing" constant="10" id="FrF-XV-3KI"/>
+                    <constraint firstItem="b95-VL-kzd" firstAttribute="leading" secondItem="gOc-Ty-LnP" secondAttribute="trailing" constant="2" id="FrF-XV-3KI"/>
                     <constraint firstItem="gOc-Ty-LnP" firstAttribute="leading" secondItem="rRJ-I7-DXa" secondAttribute="trailing" id="I31-hc-y0y"/>
                     <constraint firstItem="gOc-Ty-LnP" firstAttribute="centerY" secondItem="sED-lL-BUz" secondAttribute="centerY" id="KHC-oJ-e1Y"/>
                     <constraint firstItem="b95-VL-kzd" firstAttribute="bottom" secondItem="gOc-Ty-LnP" secondAttribute="bottom" id="P43-bw-auM"/>

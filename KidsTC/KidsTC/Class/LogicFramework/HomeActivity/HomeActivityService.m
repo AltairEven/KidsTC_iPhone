@@ -34,6 +34,8 @@ static HomeActivityService *_sharedInstance = nil;
 
 - (HomeActivity *)getHomeActivitySucceed:(NSDictionary *)data;
 
+- (void)getHomeActivityFailed:(NSError *)error;
+
 - (void)downloadImageWithUrlString:(NSString *)urlString;
 
 - (void)downloadUnfinishedImages;
@@ -112,6 +114,14 @@ static HomeActivityService *_sharedInstance = nil;
     return activity;
 }
 
+- (void)getHomeActivityFailed:(NSError *)error {
+    if (error.code == -2001) {
+        [self removeLocalData];
+    } else {
+        [self downloadUnfinishedImages];
+    }
+}
+
 - (void)downloadImageWithUrlString:(NSString *)urlString {
     if (!urlString || ![urlString isKindOfClass:[NSString class]] || [urlString length] == 0) {
         return;
@@ -163,10 +173,10 @@ static HomeActivityService *_sharedInstance = nil;
             failure(error);
         }
     } failure:^(HttpRequestClient *client, NSError *error) {
+        [weakSelf getHomeActivityFailed:error];
         if (failure) {
             failure(error);
         }
-        [weakSelf downloadUnfinishedImages];
     }];
 }
 

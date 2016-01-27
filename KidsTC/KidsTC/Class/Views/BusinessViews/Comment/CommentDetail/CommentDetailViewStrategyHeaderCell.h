@@ -7,15 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TextSegueModel.h"
 
 @class ParentingStrategyDetailCellModel;
 @class CommentDetailViewStrategyHeaderCell;
 
 @protocol CommentDetailViewStrategyHeaderCellDelegate <NSObject>
 
-- (void)didClickedCommentButtonOnCommentDetailViewStrategyHeaderCell:(CommentDetailViewStrategyHeaderCell *)cell;;
+- (void)didClickedCommentButtonOnCommentDetailViewStrategyHeaderCell:(CommentDetailViewStrategyHeaderCell *)cell;
 
-- (void)didClickedRelatedInfoButtonOnCommentDetailViewStrategyHeaderCell:(CommentDetailViewStrategyHeaderCell *)cell;;
+- (void)didClickedRelatedInfoButtonOnCommentDetailViewStrategyHeaderCell:(CommentDetailViewStrategyHeaderCell *)cell;
+
+- (void)commentDetailViewStrategyHeaderCell:(CommentDetailViewStrategyHeaderCell *)cell didSelectedLinkWithSegueModel:(HomeSegueModel *)model;
 
 @end
 

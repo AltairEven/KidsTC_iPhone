@@ -31,6 +31,8 @@
 
 - (void)commentDetailViewDidPulledUpToloadMore:(CommentDetailView *)detailView;
 
+- (void)commentDetailView:(CommentDetailView *)detailView didSelectedLinkWithSegueModel:(HomeSegueModel *)model;
+
 @end
 
 @interface CommentDetailView : UIView

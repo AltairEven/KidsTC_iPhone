@@ -165,6 +165,10 @@
     [self.viewModel getMoreReplies];
 }
 
+- (void)commentDetailView:(CommentDetailView *)detailView didSelectedLinkWithSegueModel:(HomeSegueModel *)model {
+    [KTCSegueMaster makeSegueWithModel:model fromController:self];
+}
+
 #pragma mark AUIKeyboardAdhesiveViewDelegate
 
 - (void)didClickedSendButtonOnKeyboardAdhesiveView:(AUIKeyboardAdhesiveView *)view {

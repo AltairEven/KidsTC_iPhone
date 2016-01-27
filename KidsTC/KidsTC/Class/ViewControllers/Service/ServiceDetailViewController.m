@@ -194,6 +194,8 @@
     KTCStoreMapViewController *controller = [[KTCStoreMapViewController alloc] initWithStoreItems:self.viewModel.detailModel.storeItemsArray];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
+    //MTA
+    [MTA trackCustomEvent:@"event_skip_service_promotion_dtl" args:nil];
 }
 
 - (void)didClickedAllRelatedServiceOnServiceDetailView:(ServiceDetailView *)detailView {

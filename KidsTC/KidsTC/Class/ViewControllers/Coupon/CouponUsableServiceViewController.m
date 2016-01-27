@@ -130,6 +130,8 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
     ServiceDetailViewController *controller = [[ServiceDetailViewController alloc] initWithServiceId:item.identifier channelId:item.channelId];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
+    //MTA
+    [MTA trackCustomEvent:@"event_skip_coupon_prods_dtl" args:nil];
 }
 
 #pragma mark Private methods

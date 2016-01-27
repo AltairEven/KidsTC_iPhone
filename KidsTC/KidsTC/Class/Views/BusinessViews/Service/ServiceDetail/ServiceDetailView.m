@@ -603,6 +603,9 @@ static NSString *const kMoreServiceCellIdentifier = @"kMoreServiceCellIdentifier
     NSMutableAttributedString *labelString = [[NSMutableAttributedString alloc] initWithString:self.detailModel.serviceDescription];
     NSDictionary *fontAttribute = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13], NSFontAttributeName, [[KTCThemeManager manager] defaultTheme].globalThemeColor, NSForegroundColorAttributeName, nil];
     [labelString setAttributes:fontAttribute range:NSMakeRange(0, [labelString length])];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:AttributeStringLineSpace];//调整行间距
+    [labelString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [labelString length])];
     if (self.detailModel.promotionSegueModels) {
         for (TextSegueModel *model in self.detailModel.promotionSegueModels) {
             //[NSNumber numberWithBool:YES], NSUnderlineStyleAttributeName
@@ -614,10 +617,7 @@ static NSString *const kMoreServiceCellIdentifier = @"kMoreServiceCellIdentifier
             }
         }
     }
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    [paragraphStyle setLineSpacing:AttributeStringLineSpace];//调整行间距
-    [labelString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [labelString length])];
-    [self.serviceDescriptionLabel setText:labelString];
+    [self.serviceDescriptionLabel setAttributedText:labelString];
 }
 
 - (void)configPriceCell {

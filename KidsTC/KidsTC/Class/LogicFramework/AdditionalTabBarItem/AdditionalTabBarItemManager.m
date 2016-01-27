@@ -40,6 +40,8 @@ static AdditionalTabBarItemManager *_sharedInstance = nil;
 
 - (void)getAdInfoSucceed:(NSDictionary *)data;
 
+- (void)getAdInfoFailed:(NSError *)error;
+
 - (void)createConfigWithRawData:(NSDictionary *)data;
 
 - (void)downloadAdImagesWithUrlStrings:(NSArray *)urlStrings;
@@ -111,6 +113,14 @@ static AdditionalTabBarItemManager *_sharedInstance = nil;
         [self downloadAdImagesWithUrlStrings:urlStrings];
     } else {
         //服务端没有返回有效数据，则开始下载本地未完成的图片文件
+        [self downloadUnfinishedImages];
+    }
+}
+
+- (void)getAdInfoFailed:(NSError *)error {
+    if (error.code == -2001) {
+        [self removeLocalData];
+    } else {
         [self downloadUnfinishedImages];
     }
 }
@@ -218,7 +228,7 @@ static AdditionalTabBarItemManager *_sharedInstance = nil;
     [weakSelf.getTabBarItemInfoRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [weakSelf getAdInfoSucceed:responseData];
     } failure:^(HttpRequestClient *client, NSError *error) {
-        [weakSelf downloadUnfinishedImages];
+        [weakSelf getAdInfoFailed:error];
     }];
 }
 

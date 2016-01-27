@@ -318,7 +318,7 @@
             break;
         case UserRoleBabyOneToThree:
         {
-            description = @"2~3岁";
+            description = @"1~3岁";
         }
             break;
         case UserRoleBabyFourToSix:

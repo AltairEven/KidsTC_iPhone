@@ -140,6 +140,8 @@
     }
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
+    //MTA
+    [MTA trackCustomEvent:@"event_skip_map_stores_dtl" args:nil];
 }
 
 - (void)didClickedActiveOnStoreDetailView:(StoreDetailView *)detailView atIndex:(NSUInteger)index {
@@ -162,7 +164,7 @@
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
     //MTA
-    [MTA trackCustomEvent:@"event_skip_store_servers_dtl" args:nil];
+    [MTA trackCustomEvent:@"event_skip_service_promotion_dtl" args:nil];
 }
 
 - (void)didClickedAllHotRecommendOnStoreDetailView:(StoreDetailView *)detailView {

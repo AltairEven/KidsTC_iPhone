@@ -73,6 +73,8 @@ static NSString *const kCouponUseRuleUrlString = @"http://m.kidstc.com/tools/cou
             CouponUsableServiceViewController *controller = [[CouponUsableServiceViewController alloc] initWithCouponBatchIdentifier:model.batchId];
             [controller setHidesBottomBarWhenPushed:YES];
             [self.navigationController pushViewController:controller animated:YES];
+            //MTA
+            [MTA trackCustomEvent:@"event_skip_coupon_prods" args:nil];
         }
     }
 }

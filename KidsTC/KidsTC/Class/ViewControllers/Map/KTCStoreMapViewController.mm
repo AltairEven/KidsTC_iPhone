@@ -160,16 +160,20 @@
         annotationView.draggable = YES;
     } else {
         //泡泡
-        NSUInteger index = ((RouteAnnotation *)annotation).tag;
+        NSUInteger index = [annotation.title integerValue];
         if ([self.storeItems count] > index) {
             StoreListItemModel *item = [self.storeItems objectAtIndex:index];
             KTCAnnotationTipStoreItemView *tipView = [[KTCAnnotationTipStoreItemView alloc] initWithFrame:CGRectMake(0, 0, 200, 120)];
             [tipView setStoreItem:[KTCAnnotationTipStoreItem annotationStoreItemFromStoreListItemModel:item]];
+            tipView.annotation = annotation;
             annotationView.paopaoView = [[BMKActionPaopaoView alloc] initWithCustomView:tipView];
             // 设置是否可以拖拽
             annotationView.draggable = NO;
             tipView.delegate = self;
         }
+    }
+    if ([annotation isKindOfClass:[RouteAnnotation class]]) {
+        return [RouteAnnotation routeAnnotationView:mapView viewForAnnotation:(RouteAnnotation*)annotation];
     }
     
     return annotationView;
@@ -195,15 +199,12 @@
 - (void)mapView:(BMKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
     if ([self.routeTypeButton isHidden] && self.selectedStore) {
         for (BMKAnnotationView *view in views) {
-            RouteAnnotation *anno = view.annotation;
-            if ([anno isKindOfClass:[RouteAnnotation class]]) {
-                NSUInteger index = anno.tag;
-                if ([self.storeItems count] > index) {
-                    StoreListItemModel *model = [self.storeItems objectAtIndex:index];
-                    if ([model.identifier isEqualToString:self.selectedStore.identifier]) {
-                        [self.mapView selectAnnotation:view.annotation animated:YES];
-                        break;
-                    }
+            NSUInteger index = [view.annotation.title integerValue];
+            if ([self.storeItems count] > index) {
+                StoreListItemModel *model = [self.storeItems objectAtIndex:index];
+                if ([model.identifier isEqualToString:self.selectedStore.identifier]) {
+                    [self.mapView selectAnnotation:view.annotation animated:YES];
+                    break;
                 }
             }
         }
@@ -223,6 +224,11 @@
 #pragma mark KTCAnnotationTipDestinationViewDelegate
 
 - (void)didClickedGotoButtonOnAnnotationTipStoreItemView:(KTCAnnotationTipStoreItemView *)view {
+    NSUInteger index = [view.annotation.title integerValue];
+    if ([self.storeItems count] > index) {
+        StoreListItemModel *model = [self.storeItems objectAtIndex:index];
+        self.destinationLocation = model.location;
+    }
     [self selectRouteSearchType];
 }
 
@@ -341,16 +347,20 @@
     for (NSUInteger index = 0; index < [self.storeItems count]; index ++) {
         StoreListItemModel *storeItem = [self.storeItems objectAtIndex:index];
         if (CLLocationCoordinate2DIsValid(storeItem.location.location.coordinate)) {
-            RouteAnnotation *annotation = [[RouteAnnotation alloc]init];
+            BMKPointAnnotation *annotation = [[BMKPointAnnotation alloc]init];
             if (CLLocationCoordinate2DIsValid(storeItem.location.location.coordinate)) {
                 [annotation setCoordinate:storeItem.location.location.coordinate];
-                annotation.tag = index;
+                annotation.title = [NSString stringWithFormat:@"%lu", (unsigned long)index];
                 [self.mapView addAnnotation:annotation];
                 [tempArray addObject:storeItem.location.location];
             }
         }
     }
-    [KTCMapUtil resetMapView:self.mapView toFitLocations:[NSArray arrayWithArray:tempArray]];
+    if (self.selectedStore.location) {
+        [KTCMapUtil resetMapView:self.mapView toFitLocations:[NSArray arrayWithObject:self.selectedStore.location.location]];
+    } else {
+        [KTCMapUtil resetMapView:self.mapView toFitLocations:[NSArray arrayWithArray:tempArray]];
+    }
 }
 
 - (void)startSearchWithAddress:(NSString *)address {

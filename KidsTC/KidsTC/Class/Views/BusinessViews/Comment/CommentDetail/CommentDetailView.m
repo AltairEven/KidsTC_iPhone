@@ -250,6 +250,12 @@ static NSString *const kStrategyHeaderCellIdentifier = @"kStrategyHeaderCellIden
     }
 }
 
+- (void)commentDetailViewStrategyHeaderCell:(CommentDetailViewStrategyHeaderCell *)cell didSelectedLinkWithSegueModel:(HomeSegueModel *)model {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(commentDetailView:didSelectedLinkWithSegueModel:)]) {
+        [self.delegate commentDetailView:self didSelectedLinkWithSegueModel:model];
+    }
+}
+
 #pragma mark Private methods
 
 - (void)pullToRefreshTable {

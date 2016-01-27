@@ -737,7 +737,7 @@ static NSString *const kStrategyCellIdentifier = @"kStrategyCellIdentifier";
     
     NSString *title = @"点击查看";
     NSUInteger count = [self.detailModel.brotherStores count];
-    if (count > 0) {
+    if (count > 1) {
         title = [NSString stringWithFormat:@"共%lu家兄弟门店", (unsigned long)count];
     }
     [self.broStoreLabel setText:title];
@@ -748,6 +748,9 @@ static NSString *const kStrategyCellIdentifier = @"kStrategyCellIdentifier";
     NSMutableAttributedString *briefLabelString = [[NSMutableAttributedString alloc] initWithString:self.detailModel.storeBrief];
     NSDictionary *fontAttribute = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:13], NSFontAttributeName, [[KTCThemeManager manager] defaultTheme].globalThemeColor, NSForegroundColorAttributeName, nil];
     [briefLabelString setAttributes:fontAttribute range:NSMakeRange(0, [briefLabelString length])];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:AttributeStringLineSpace];//调整行间距
+    [briefLabelString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [briefLabelString length])];
     if (self.detailModel.promotionSegueModels) {
         for (TextSegueModel *model in self.detailModel.promotionSegueModels) {
             //[NSNumber numberWithBool:YES], NSUnderlineStyleAttributeName
@@ -759,10 +762,7 @@ static NSString *const kStrategyCellIdentifier = @"kStrategyCellIdentifier";
             }
         }
     }
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    [paragraphStyle setLineSpacing:AttributeStringLineSpace];//调整行间距
-    [briefLabelString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [briefLabelString length])];
-    [self.storeBriefLabel setText:briefLabelString];
+    [self.storeBriefLabel setAttributedText:briefLabelString];
     
     [self.starView setStarNumber:self.detailModel.starNumber];
     

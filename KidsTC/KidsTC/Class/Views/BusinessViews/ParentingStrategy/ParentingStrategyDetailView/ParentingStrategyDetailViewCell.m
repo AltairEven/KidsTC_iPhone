@@ -51,7 +51,6 @@
     self.relatedInfoButton.layer.masksToBounds = YES;
     
     self.contentLabel.delegate = self;
-    self.contentLabel.lineSpacing = 10;
     [self.contentLabel setLinkAttributes:nil];
 }
 
@@ -70,6 +69,9 @@
         NSMutableAttributedString *labelString = [[NSMutableAttributedString alloc] initWithString:cellModel.cellContentString];
         NSDictionary *fontAttribute = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:15], NSFontAttributeName, [UIColor darkGrayColor], NSForegroundColorAttributeName, nil];
         [labelString setAttributes:fontAttribute range:NSMakeRange(0, [labelString length])];
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        [paragraphStyle setLineSpacing:AttributeStringLineSpace];//调整行间距
+        [labelString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [labelString length])];
         if (cellModel.contentSegueModels) {
             for (TextSegueModel *model in cellModel.contentSegueModels) {
                 //[NSNumber numberWithBool:YES], NSUnderlineStyleAttributeName
@@ -81,10 +83,7 @@
                 }
             }
         }
-        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-        [paragraphStyle setLineSpacing:AttributeStringLineSpace];//调整行间距
-        [labelString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [labelString length])];
-        [self.contentLabel setText:labelString];
+        [self.contentLabel setAttributedText:labelString];
         //time
         if ([cellModel.timeDescription length] > 0) {
             [self.timeTagImageView setHidden:NO];

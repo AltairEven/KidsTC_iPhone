@@ -103,6 +103,8 @@
     KTCStoreMapViewController *controller = [[KTCStoreMapViewController alloc] initWithStoreItems:[self.viewModel.detailModel relatedStoreItems]];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
+    //MTA
+    [MTA trackCustomEvent:@"event_skip_map_stores_dtl" args:nil];
 }
 
 - (void)didClickedAllRelatedServiceOnParentingStrategyDetailView:(ParentingStrategyDetailView *)detailView {
@@ -117,7 +119,7 @@
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
     //MTA
-    [MTA trackCustomEvent:@"event_skip_strategy_servers_dtl" args:nil];
+    [MTA trackCustomEvent:@"event_skip_stgy_prods_dtl" args:nil];
 }
 
 - (void)parentingStrategyDetailView:(ParentingStrategyDetailView *)detailView didSelectedLinkWithSegueModel:(HomeSegueModel *)model {
