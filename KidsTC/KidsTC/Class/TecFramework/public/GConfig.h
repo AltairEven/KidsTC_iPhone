@@ -464,10 +464,10 @@ typedef enum {
     GPageIDIntegral = 199100,           // 我的积分
     GPageIDBalance =  199101,            // 账户余额
     GPageIDGetCoupon = 1402,               //领取优惠券
-    GPageIDLogin = 11703230,                   //登陆
-    GPageIDLoginIcson = 11703260,                   //登陆易讯
-    GPageIDLoginQQ = 11703250,                   //登陆QQ
-    GPageIDLoginAlipay = 11703270,                   //登陆Alipay
+    GPageIDLogin = 11703230,                   //登录
+    GPageIDLoginIcson = 11703260,                   //登录易讯
+    GPageIDLoginQQ = 11703250,                   //登录QQ
+    GPageIDLoginAlipay = 11703270,                   //登录Alipay
     GPageIDRegister = 2200,                //注册
     GPageIDRegisterProtocolInfo = 2210,    //注册协议
     GPageIDOrders = 11594060,                  //我的订单列表
@@ -505,7 +505,7 @@ typedef enum {
 }GPageID;
 
 typedef enum {
-    GPageCommonActionLogin = 90000, //登陆（自动登陆）
+    GPageCommonActionLogin = 90000, //登录（自动登录）
     GPageCommonActionBackPage = 19999, //页面返回
     GPageCommonActionUnknow = 99999 //
 }GPageCommonAction;

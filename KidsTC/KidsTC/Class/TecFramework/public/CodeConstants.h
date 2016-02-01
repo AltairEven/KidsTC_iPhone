@@ -62,7 +62,7 @@
 #define  kUserLogoutNotification               @"UserLogoutNotification"
 //#define  kQQOrAliPayLoginSuccessNotification   @"UseQQOrAliPayLoginSuccessNotification"
 #define  kRegisterAndLoginSucessNotification   @"kRegisterAndLoginSucessNotification"
-//用户自动登陆是否check
+//用户自动登录是否check
 #define  kIsUserAutoLoginChecked               @"kIsUserAutoLoginChecked"
 
 #define RGBColor(_rgb, _alpha) [UIColor colorWithRed:(((_rgb) >> 16) & 0xFF)/256.0f green:(((_rgb) >> 8) & 0xFF)/256.0f blue:((_rgb) & 0xFF)/256.0f alpha:(_alpha)]

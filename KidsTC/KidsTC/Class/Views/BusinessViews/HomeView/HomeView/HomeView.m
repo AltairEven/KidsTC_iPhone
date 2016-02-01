@@ -343,8 +343,10 @@ static NSString *const kRecommendNewCellIdentifier = @"kRecommendNewCellIdentifi
 
 - (void)homeCell:(HomeViewTwoThreeFourCell *)cell didClickedAtIndex:(NSUInteger)index {
     if (self.delegate && [self.delegate respondsToSelector:@selector(homeView:didClickedAtCoordinate:)]) {
-        HomeSectionModel *model = [self.totalSectionModels objectAtIndex:cell.indexPath.section];
-        [self.delegate homeView:self didClickedAtCoordinate:HomeClickMakeCoordinate(model.floorIndex, cell.indexPath.section, NO, index)];
+        if ([self.totalSectionModels count] > cell.indexPath.section) {
+            HomeSectionModel *model = [self.totalSectionModels objectAtIndex:cell.indexPath.section];
+            [self.delegate homeView:self didClickedAtCoordinate:HomeClickMakeCoordinate(model.floorIndex, cell.indexPath.section, NO, index)];
+        }
     }
 }
 

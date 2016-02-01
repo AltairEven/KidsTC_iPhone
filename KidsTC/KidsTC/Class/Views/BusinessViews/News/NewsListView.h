@@ -38,7 +38,7 @@
 @property (nonatomic, assign) id<NewsListViewDataSource> dataSource;
 @property (nonatomic, assign) id<NewsListViewDelegate> delegate;
 @property (nonatomic, readonly) NSUInteger itemCount;
-@property (nonatomic, readonly) NSUInteger currentNewsTagIndex;
+@property (nonatomic, assign) NSUInteger currentNewsTagIndex;
 
 - (void)selectNewsTagAtIndex:(NSUInteger)index;
 

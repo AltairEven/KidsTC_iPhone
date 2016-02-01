@@ -42,7 +42,7 @@ typedef enum {
 
 @property (weak, nonatomic) IBOutlet NewsListView *newsListView;
 
-@property (nonatomic, readonly) NewsViewTag currentViewTag;
+@property (nonatomic, assign) NewsViewTag currentViewTag;
 
 @property (nonatomic, readonly) NSUInteger currentNewsTagIndex;
 

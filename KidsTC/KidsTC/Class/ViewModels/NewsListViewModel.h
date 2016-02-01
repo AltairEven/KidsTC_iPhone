@@ -14,11 +14,13 @@
 
 @interface NewsListViewModel : BaseViewModel
 
+@property (nonatomic, copy) NSString *preselectedTagId;
+
 @property (nonatomic, strong, readonly) NSArray *newsTagTypeModels;
 
 @property (nonatomic, strong) NSMutableArray *newsTagItemModels;
 
-@property (nonatomic, readonly) NSUInteger currentTagType;
+@property (nonatomic, assign) NSUInteger currentTagType;
 
 @property (nonatomic, assign) NSUInteger currentTagIndex;
 
@@ -29,6 +31,8 @@
 - (void)getMoreDataWithNewsTagIndex:(NSUInteger)index;
 
 - (void)resetResultWithNewsTagIndex:(NSUInteger)index;
+
+- (NSUInteger)resetResultWithNewsTagId:(NSString *)tagId;
 
 - (void)setTagItemModel:(NewsTagItemModel *)model;
 

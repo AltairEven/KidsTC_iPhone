@@ -24,7 +24,9 @@ typedef enum {
     HomeSegueDestinationStrategyDetail = 12, //攻略详情
     HomeSegueDestinationCouponList = 13, //优惠券列表
     HomeSegueDestinationOrderDetail = 14, //订单详情
-    HomeSegueDestinationOrderList = 15 //订单列表
+    HomeSegueDestinationOrderList = 15, //订单列表
+    HomeSegueDestinationNewsFilter = 16, //资讯分类
+    HomeSegueDestinationNewsListView = 17 //资讯列表（tab）
 }HomeSegueDestination;
 
 //H5

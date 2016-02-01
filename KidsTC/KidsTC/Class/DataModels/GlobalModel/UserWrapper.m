@@ -164,7 +164,7 @@ static NSDictionary *_gsDeliveryDic = nil; //送货省份和站点id，以及区
 
 - (void)readLoginCookieFromResponse:(NSArray*)cookie {
     
-    //当用户从新登陆的时候，我们需要清掉启动来源
+    //当用户从新登录的时候，我们需要清掉启动来源
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     appDelegate.yid = @"";
     appDelegate.loginSource = @"";
@@ -185,7 +185,7 @@ static NSDictionary *_gsDeliveryDic = nil; //送货省份和站点id，以及区
 - (void)loginIcsonSuccess:(NSDictionary *)data
 {
     AsyncUserDeviceInfoLogin;
-    //当用户从新登陆的时候，我们需要清掉启动来源
+    //当用户从新登录的时候，我们需要清掉启动来源
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     appDelegate.yid = @"";
     appDelegate.loginSource = @"";
@@ -283,7 +283,7 @@ static NSDictionary *_gsDeliveryDic = nil; //送货省份和站点id，以及区
 //    NSLog(@"uin:%llu", uin);
 //    
 //    if (action == WTLOGIN_QUICKLOGIN_CANCEL) {
-//        [[iToast makeText:@"快速登陆已经取消"] show];
+//        [[iToast makeText:@"快速登录已经取消"] show];
 //    } else if (action == WTLOGIN_QUICKLOGIN_CONFORM) {
 //        if (ret == WLOGIN_V2_SECCESS) {
 //            NSString* uinStr = [NSString stringWithFormat:@"%llu",uin];
@@ -298,7 +298,7 @@ static NSDictionary *_gsDeliveryDic = nil; //送货省份和站点id，以及区
 //            self.isQQQuickLoginFuckingFail = YES;
 //        }
 //    } else {
-//        [[iToast makeText:@"快速登陆因为未知的原因失败"] show];
+//        [[iToast makeText:@"快速登录因为未知的原因失败"] show];
 //        self.isQQQuickLoginFuckingFail = YES;
 //    }
 //}
@@ -389,7 +389,7 @@ static NSDictionary *_gsDeliveryDic = nil; //送货省份和站点id，以及区
 {
     
     AsyncUserDeviceInfoLogin;
-    //当用户从新登陆的时候，我们需要清掉启动来源
+    //当用户从新登录的时候，我们需要清掉启动来源
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     appDelegate.yid = @"";
     appDelegate.loginSource = @"";
@@ -443,7 +443,7 @@ static NSDictionary *_gsDeliveryDic = nil; //送货省份和站点id，以及区
         }
     }
     
-//    NSString *errMsg = [NSString stringWithFormat:@"qq登陆失败，失败信息:%@", retStr];
+//    NSString *errMsg = [NSString stringWithFormat:@"qq登录失败，失败信息:%@", retStr];
 //    [MTA trackError:errMsg];
     if (delegate)
     {
@@ -499,7 +499,7 @@ static NSDictionary *_gsDeliveryDic = nil; //送货省份和站点id，以及区
         }
     }
     
-//    NSString *errMsg = [NSString stringWithFormat:@"微信登陆失败，失败信息:%@", retStr];
+//    NSString *errMsg = [NSString stringWithFormat:@"微信登录失败，失败信息:%@", retStr];
 //    [MTA trackError:errMsg];
     if (delegate)
     {

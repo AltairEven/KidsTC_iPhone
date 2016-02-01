@@ -85,12 +85,19 @@
             break;
         case NewsViewTagMore:
         {
-            self.currentNewsTagIndex = index;
+            _currentNewsTagIndex = index;
             [self.listViewModel resetResultWithNewsTagIndex:index];
         }
         default:
             break;
     }
+}
+
+- (void)activateNewsListViewWithTagType:(NSInteger)type tagId:(NSString *)tagId {
+    self.currentViewTag = NewsViewTagMore;
+    self.listViewModel.currentTagType = type;
+    self.listViewModel.preselectedTagId = tagId;
+    _currentNewsTagIndex = [self.listViewModel resetResultWithNewsTagId:tagId];
 }
 
 - (NSArray *)resultListItemsWithViewTag:(NewsViewTag)viewTag {

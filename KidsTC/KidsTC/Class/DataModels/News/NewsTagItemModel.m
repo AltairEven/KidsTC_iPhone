@@ -16,6 +16,14 @@
 
 @implementation NewsTagTypeModel
 
+
+//if ([data objectForKey:@"id"]) {
+//    self.identifier = [NSString stringWithFormat:@"%@", [data objectForKey:@"id"]];
+//}
+//self.name = [NSString stringWithFormat:@"%@", [data objectForKey:@"tagName"]];
+//self.isHot = [[data objectForKey:@"isHostTag"] boolValue];
+//self.type = [[data objectForKey:@"type"] integerValue];
+
 - (instancetype)initWithRawData:(NSDictionary *)data {
     if (!data || ![data isKindOfClass:[NSDictionary class]]) {
         return nil;
@@ -27,6 +35,12 @@
         NSArray *tags = [data objectForKey:@"tags"];
         if (tags && [tags isKindOfClass:[NSArray class]]) {
             NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+            //手动添加“全部”, WTF
+            NSDictionary *allDic = [NSDictionary dictionaryWithObjectsAndKeys:@"0", @"id", @"全部", @"tagName", @"1", @"isHotTag", [NSNumber numberWithInteger:self.type], @"type", nil];
+            NewsTagItemModel *allModel = [[NewsTagItemModel alloc] initWithRawData:allDic];
+            if (allDic) {
+                [tempArray addObject:allModel];
+            }
             for (NSDictionary *singleElem in tags) {
                 NewsTagItemModel *model = [[NewsTagItemModel alloc] initWithRawData:singleElem];
                 if (model) {

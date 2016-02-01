@@ -7,7 +7,12 @@
 //
 
 #import "GViewController.h"
+#import "NewsViewModel.h"
 
 @interface NewsViewController : GViewController
+
+- (void)setSelectedTagType:(NSUInteger)type andTagId:(NSString *)tagId;
+
+- (void)setSelectedViewTag:(NewsViewTag)viewTag;
 
 @end

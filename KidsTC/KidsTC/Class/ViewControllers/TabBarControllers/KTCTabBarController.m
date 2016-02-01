@@ -165,6 +165,17 @@ static KTCTabBarController* _shareTabBarController = nil;
     return YES;
 }
 
+- (UIViewController *)rootViewControllerAtIndex:(NSUInteger)index {
+    if (index < [self.viewControllers count])
+    {
+        UINavigationController *naviController = [self.viewControllers objectAtIndex:index];
+        if ([naviController isKindOfClass:[UINavigationController class]]) {
+            return [[naviController viewControllers] objectAtIndex:0];
+        }
+    }
+    return nil;
+}
+
 - (NSUInteger)selectedButton
 {
     return _selectTabBarButtonIndex;

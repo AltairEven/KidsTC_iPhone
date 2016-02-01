@@ -24,6 +24,8 @@
 #import "OrderDetailViewController.h"
 #import "OrderListViewController.h"
 #import "NotificationCenterViewController.h"
+#import "NewsListTagFilterViewController.h"
+#import "NewsViewController.h"
 
 @implementation KTCSegueMaster
 
@@ -46,9 +48,13 @@
             break;
         case HomeSegueDestinationNewsRecommend:
         {
-            NewsRecommedListViewController *controller = [[NewsRecommedListViewController alloc] initWithNibName:@"NewsRecommedListViewController" bundle:nil];
-            [controller setHidesBottomBarWhenPushed:YES];
-            toController = controller;
+            NewsViewController *controller = (NewsViewController *)[[KTCTabBarController shareTabBarController] rootViewControllerAtIndex:1];
+            [controller setSelectedViewTag:NewsViewTagRecommend];
+            [[KTCTabBarController shareTabBarController] setButtonSelected:1];
+            toController = nil;
+//            NewsRecommedListViewController *controller = [[NewsRecommedListViewController alloc] initWithNibName:@"NewsRecommedListViewController" bundle:nil];
+//            [controller setHidesBottomBarWhenPushed:YES];
+//            toController = controller;
         }
             break;
         case HomeSegueDestinationNewsList:
@@ -195,6 +201,27 @@
                 [controller setHidesBottomBarWhenPushed:YES];
                 [fromVC.navigationController pushViewController:controller animated:YES];
             } target:fromVC.navigationController];
+        }
+            break;
+        case HomeSegueDestinationNewsFilter:
+        {
+            KTCSearchNewsCondition *condition = [KTCSearchNewsCondition conditionFromRawData:model.segueParam];
+            NewSearchResultViewController *controller = [[NewSearchResultViewController alloc] initWithSearchCondition:condition];
+            [controller setHidesBottomBarWhenPushed:YES];
+            toController = controller;
+        }
+            break;
+        case HomeSegueDestinationNewsListView:
+        {
+            NSUInteger tagType = [[model.segueParam objectForKey:@"p"] integerValue];
+            NSString *tagId = @"0";
+            if ([model.segueParam objectForKey:@"at"]) {
+                tagId = [NSString stringWithFormat:@"%@", [model.segueParam objectForKey:@"at"]];
+            }
+            NewsViewController *controller = (NewsViewController *)[[KTCTabBarController shareTabBarController] rootViewControllerAtIndex:1];
+            [controller setSelectedTagType:tagType andTagId:tagId];
+            [[KTCTabBarController shareTabBarController] setButtonSelected:1];
+            toController = nil;
         }
             break;
         default:

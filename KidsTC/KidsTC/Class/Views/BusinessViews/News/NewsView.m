@@ -68,6 +68,35 @@
     [self.listBG bringSubviewToFront:self.recommendListView];
 }
 
+- (void)setCurrentViewTag:(NewsViewTag)currentViewTag {
+    if (_currentViewTag != currentViewTag) {
+        [self.tabControl setSelectedSegmentIndex:currentViewTag];
+        switch (currentViewTag) {
+            case NewsViewTagRecommend:
+            {
+                [self.listBG bringSubviewToFront:self.recommendListView];
+                if (self.recommendListView.itemCount == 0) {
+                    [self.recommendListView startLoadMore];
+                }
+                [self.roleSelectButton setHidden:YES];
+            }
+                break;
+            case NewsViewTagMore:
+            {
+                [self.listBG bringSubviewToFront:self.newsListView];
+                if (self.newsListView.itemCount == 0) {
+                    [self.newsListView startRefresh];
+                }
+                [self.roleSelectButton setHidden:NO];
+            }
+                break;
+            default:
+                break;
+        }
+    }
+    _currentViewTag = currentViewTag;
+}
+
 #pragma mark NewsRecommendListViewDelegate
 
 - (void)newsRecommendListView:(NewsRecommendListView *)listView didSelectedCellItem:(NewsListItemModel *)item {

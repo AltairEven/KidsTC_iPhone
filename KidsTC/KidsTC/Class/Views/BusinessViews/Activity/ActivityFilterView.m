@@ -88,7 +88,9 @@
     _currentCategoryIndex = INVALID_INDEX;
     _currentAreaIndex = INVALID_INDEX;
     
-    [self.filterBGView bringSubviewToFront:self.loadingView];
+    if (self.loadingView) {
+        [self.filterBGView bringSubviewToFront:self.loadingView];
+    }
 }
 
 - (void)setCategoryNameArray:(NSArray *)categoryNameArray {

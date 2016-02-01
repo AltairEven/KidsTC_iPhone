@@ -24,6 +24,8 @@
 
 - (void)resetNewsViewWithViewTag:(NewsViewTag)viewTag newsTagIndex:(NSUInteger)index;
 
+- (void)activateNewsListViewWithTagType:(NSInteger)type tagId:(NSString *)tagId;
+
 - (NSArray *)resultListItemsWithViewTag:(NewsViewTag)viewTag;
 
 - (NSArray<NewsTagTypeModel *> *)tagTypeModels;

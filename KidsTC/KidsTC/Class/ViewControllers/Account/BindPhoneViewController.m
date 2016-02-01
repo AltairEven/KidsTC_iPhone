@@ -239,7 +239,7 @@
 #pragma mark Super methods
 
 - (void)goBackController:(id)sender {
-    UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"提示" message:@"不绑定手机将无法正常登陆" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"提示" message:@"不绑定手机将无法正常登录" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelBind = [UIAlertAction actionWithTitle:@"暂不绑定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self.navigationController popViewControllerAnimated:YES];
     }];

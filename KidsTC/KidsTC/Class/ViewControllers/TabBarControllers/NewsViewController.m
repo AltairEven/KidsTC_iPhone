@@ -7,7 +7,6 @@
 //
 
 #import "NewsViewController.h"
-#import "NewsViewModel.h"
 #import "KTCWebViewController.h"
 #import "NewsListTagFilterViewController.h"
 #import "KTCSearchViewController.h"
@@ -17,6 +16,10 @@
 @property (weak, nonatomic) IBOutlet NewsView *newsView;
 
 @property (nonatomic, strong) NewsViewModel *newsViewModel;
+
+@property (nonatomic, assign) NSUInteger preselectedTagType;
+
+@property (nonatomic, copy) NSString *preselectedTagId;
 
 @end
 
@@ -29,13 +32,25 @@
     self.newsView.delegate = self;
     
     self.newsViewModel = [[NewsViewModel alloc] initWithView:self.newsView];
-    [self.newsViewModel refreshNewsWithViewTag:NewsViewTagRecommend newsTagIndex:self.newsViewModel.currentNewsTagIndex];
-    [self.newsView resetRoleTypeWithImage:[KTCUserRole smallImageWithUserRole:[KTCUser currentUser].userRole]];
+    if (self.preselectedTagType == 0) {
+        [self.newsViewModel refreshNewsWithViewTag:NewsViewTagRecommend newsTagIndex:self.newsViewModel.currentNewsTagIndex];
+        [self.newsView resetRoleTypeWithImage:[KTCUserRole smallImageWithUserRole:[KTCUser currentUser].userRole]];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
+    if (self.preselectedTagType != 0) {
+        [self.newsView setCurrentViewTag:NewsViewTagMore];
+        [self.newsViewModel activateNewsListViewWithTagType:self.preselectedTagType tagId:self.preselectedTagId];
+        NewsTagItemModel *itemModel = [[NewsTagItemModel alloc] init];
+        itemModel.type = self.preselectedTagType;
+        [self.newsView resetRoleTypeWithImage:[KTCUserRole smallImageWithUserRole:[itemModel relatedUserRole]]];
+        //清空
+        self.preselectedTagType = 0;
+        self.preselectedTagId = @"0";
+    }
 }
 
 
@@ -58,7 +73,7 @@
 #pragma mark NewsViewDelegate
 
 - (void)newsView:(NewsView *)newsView didClickedSegmentControlWithNewsViewTag:(NewsViewTag)viewTag {
-    [self.newsViewModel resetNewsViewWithViewTag:viewTag newsTagIndex:0];
+    [self.newsViewModel resetNewsViewWithViewTag:viewTag newsTagIndex:self.newsViewModel.currentNewsTagIndex];
     if (viewTag == NewsViewTagRecommend) {
         _pageIdentifier = @"pv_found_recommends";
     } else {
@@ -101,6 +116,17 @@
 - (void)didClickedSearchButton {
     KTCSearchViewController *controller = [[KTCSearchViewController alloc] initWithSearchType:KTCSearchTypeNews];
     [self.navigationController pushViewController:controller animated:NO];
+}
+
+#pragma mark Public methods
+
+- (void)setSelectedTagType:(NSUInteger)type andTagId:(NSString *)tagId {
+    self.preselectedTagType = type;
+    self.preselectedTagId = tagId;
+}
+
+- (void)setSelectedViewTag:(NewsViewTag)viewTag {
+    [self.newsView setCurrentViewTag:viewTag];
 }
 
 - (void)didReceiveMemoryWarning {

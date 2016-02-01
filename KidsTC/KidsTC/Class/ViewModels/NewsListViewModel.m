@@ -60,6 +60,20 @@
     return self;
 }
 
+- (void)setCurrentTagType:(NSUInteger)currentTagType {
+    if (currentTagType < 1) {
+        currentTagType = 1;
+    }
+    _currentTagType = currentTagType;
+}
+
+- (NSString *)preselectedTagId {
+    if (!_preselectedTagId) {
+        _preselectedTagId = @"0";
+    }
+    return _preselectedTagId;
+}
+
 #pragma mark NewsListViewDataSource
 
 - (NSArray *)newsTagItemModelsForNewsListView:(NewsListView *)listView {
@@ -76,14 +90,15 @@
     self.gettingNewsTag = YES;
     if (!self.loadNewsTagRequest) {
         self.loadNewsTagRequest = [HttpRequestClient clientWithUrlAliasName:@"ARTICLE_GET_KNOWLEDGE"];
+    } else {
+        [self.loadNewsTagRequest cancel];
     }
-    [self.loadNewsTagRequest cancel];
     __weak NewsListViewModel *weakSelf = self;
     [weakSelf.loadNewsTagRequest startHttpRequestWithParameter:nil success:^(HttpRequestClient *client, NSDictionary *responseData) {
         [weakSelf parseTagsWithData:responseData];
         [weakSelf.view reloadNewsTag];
-        [weakSelf startUpdateDataWithNewsTagIndex:weakSelf.currentTagIndex];
         weakSelf.gettingNewsTag = NO;
+        [weakSelf startUpdateDataWithNewsTagIndex:weakSelf.currentTagIndex];
     } failure:^(HttpRequestClient *client, NSError *error) {
         weakSelf.gettingNewsTag = NO;
     }];
@@ -106,8 +121,13 @@
         NSUInteger index = self.currentTagType - 1;
         if ([self.newsTagTypeModels count] > index) {
             NewsTagTypeModel *model = [self.newsTagTypeModels objectAtIndex:index];
-            for (NewsTagItemModel *itemModel in model.tagItems) {
+            for (NSUInteger itemIndex = 0; itemIndex < [model.tagItems count]; itemIndex ++) {
+                NewsTagItemModel *itemModel = [model.tagItems objectAtIndex:itemIndex];
                 [self.newsTagItemModels addObject:itemModel];
+                if ([itemModel.identifier isEqualToString:self.preselectedTagId]) {
+                    self.currentTagIndex = itemIndex;
+                    [((NewsListView *)self.view) setCurrentNewsTagIndex:itemIndex];
+                }
             }
         }
     }
@@ -245,6 +265,8 @@
     }
     if (!self.loadNewsRequest) {
         self.loadNewsRequest = [HttpRequestClient clientWithUrlAliasName:@"ARTICLE_GET_LIST"];
+    } else {
+        [self.loadNewsRequest cancel];
     }
     
     NSString *tagId = @"0";
@@ -259,25 +281,28 @@
         pageIndex = 1;
         [self.currentPageIndexs setObject:[NSNumber numberWithInteger:1] forKey:[NSString stringWithFormat:@"%lu", (unsigned long)index]];
     }
-    NewsTagItemModel *model = [self.newsTagItemModels objectAtIndex:self.currentTagIndex];
-    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
-                           [NSNumber numberWithInteger:pageIndex], @"page",
-                           [NSNumber numberWithInteger:PageSize], @"pageCount",
-                           model.identifier, @"tagId",
-                           @"", @"authorId",
-                           [NSNumber numberWithInteger:model.type], @"population_type", nil];
-    __weak NewsListViewModel *weakSelf = self;
-    [weakSelf.loadNewsRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
-        [weakSelf loadNewsSucceedWithData:responseData tagIndex:index];
-    } failure:^(HttpRequestClient *client, NSError *error) {
-        [weakSelf loadNewsFailedWithError:error tagIndex:index];
-    }];
+    if ([self.newsTagItemModels count] > self.currentTagIndex) {
+        NewsTagItemModel *model = [self.newsTagItemModels objectAtIndex:self.currentTagIndex];
+        NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
+                               [NSNumber numberWithInteger:pageIndex], @"page",
+                               [NSNumber numberWithInteger:PageSize], @"pageCount",
+                               model.identifier, @"tagId",
+                               @"", @"authorId",
+                               [NSNumber numberWithInteger:model.type], @"population_type", nil];
+        __weak NewsListViewModel *weakSelf = self;
+        [weakSelf.loadNewsRequest startHttpRequestWithParameter:param success:^(HttpRequestClient *client, NSDictionary *responseData) {
+            [weakSelf loadNewsSucceedWithData:responseData tagIndex:index];
+        } failure:^(HttpRequestClient *client, NSError *error) {
+            [weakSelf loadNewsFailedWithError:error tagIndex:index];
+        }];
+    }
 }
 
 - (void)getMoreDataWithNewsTagIndex:(NSUInteger)index {
     if ([self.newsTagItemModels count] == 0) {
         [self.view noMoreData:YES forNewsTagIndex:index];
-        [self.view hideLoadMoreFooter:YES forNewsTagIndex:index];        return;
+        [self.view hideLoadMoreFooter:YES forNewsTagIndex:index];
+        return;
     }
     if (!self.loadNewsRequest) {
         self.loadNewsRequest = [HttpRequestClient clientWithUrlAliasName:@"ARTICLE_GET_LIST"];
@@ -321,16 +346,53 @@
     }
 }
 
+- (NSUInteger)resetResultWithNewsTagId:(NSString *)tagId {
+    [self.view endRefresh];
+    [self.view endLoadMore];
+    NSUInteger index = self.currentTagType - 1;
+    NSUInteger tagIndex = 0;
+    if ([self.newsTagTypeModels count] > index) {
+        NewsTagTypeModel *model = [self.newsTagTypeModels objectAtIndex:index];
+        [self.newsTagItemModels removeAllObjects];
+        for (NSUInteger itemIndex = 0; itemIndex < [model.tagItems count]; itemIndex ++) {
+            NewsTagItemModel *itemModel = [model.tagItems objectAtIndex:itemIndex];
+            if (itemModel) {
+                [self.newsTagItemModels addObject:itemModel];
+                if ([itemModel.identifier isEqualToString:self.preselectedTagId]) {
+                    self.currentTagIndex = itemIndex;
+                    tagIndex = itemIndex;
+                    [((NewsListView *)self.view) setCurrentNewsTagIndex:itemIndex];
+                }
+            }
+        }
+        [((NewsListView *)self.view) reloadNewsTag];
+    }
+    NSMutableArray *dataArray = [self newsResultAtTagIndex:self.currentTagIndex];
+    [self.view reloadData];
+    
+    if ([dataArray count] == 0) {
+        [self.view startRefresh];
+    }
+    return tagIndex;
+}
+
 - (void)setTagItemModel:(NewsTagItemModel *)model {
+    BOOL needFlush = NO;
+    if (self.currentTagType != model.type) {
+        needFlush = YES;
+    }
     _currentTagType = model.type;
     NSUInteger typeIndex = self.currentTagType - 1;
     if ([self.newsTagTypeModels count] > typeIndex) {
-        [self.newsTagItemModels removeAllObjects];
-        NewsTagTypeModel *model = [self.newsTagTypeModels objectAtIndex:typeIndex];
-        for (NewsTagItemModel *itemModel in model.tagItems) {
-            [self.newsTagItemModels addObject:itemModel];
+        if (needFlush) {
+            [self.newsTagItemModels removeAllObjects];
+            [self.totalResultsContainer removeAllObjects];
+            NewsTagTypeModel *model = [self.newsTagTypeModels objectAtIndex:typeIndex];
+            for (NewsTagItemModel *itemModel in model.tagItems) {
+                [self.newsTagItemModels addObject:itemModel];
+            }
+            [self.view reloadNewsTag];
         }
-        [self.view reloadNewsTag];
     } else {
         return;
     }
@@ -350,6 +412,7 @@
         [self.view reloadNewsTag];
         [self.view selectNewsTagAtIndex:[self.newsTagItemModels count] - 1];
     }
+    [self resetResultWithNewsTagIndex:index];
 }
 
 

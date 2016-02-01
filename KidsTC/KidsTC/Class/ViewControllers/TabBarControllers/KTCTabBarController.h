@@ -20,6 +20,8 @@
 
 + (KTCTabBarController *)shareTabBarController;
 
+- (UIViewController *)rootViewControllerAtIndex:(NSUInteger)index;
+
 - (NSUInteger)selectedButton;
 
 - (void)createViewControllers;
