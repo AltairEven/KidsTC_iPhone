@@ -58,6 +58,7 @@ static NSString *const kStrategyCellIdentifier = @"kStrategyCellIdentifier";
 //banner
 @property (weak, nonatomic) IBOutlet AUIBannerScrollView *bannerScrollView;
 //top
+@property (weak, nonatomic) IBOutlet UIView *storeAddressBriefAlphaView;
 @property (weak, nonatomic) IBOutlet UIView *storeAddressBriefBGView;
 @property (weak, nonatomic) IBOutlet UILabel *storeAddressBriefLabel;
 @property (weak, nonatomic) IBOutlet UILabel *broStoreLabel;
@@ -135,6 +136,9 @@ static NSString *const kStrategyCellIdentifier = @"kStrategyCellIdentifier";
     
     [self.storeBriefLabel setDelegate:self];
     [self.storeBriefLabel setLinkAttributes:nil];
+    
+    [self.storeAddressBriefAlphaView setBackgroundColor:[UIColor clearColor]];
+    [GToolUtil renderGradientForView:self.storeAddressBriefAlphaView displayFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.storeAddressBriefAlphaView.frame.size.height) startPoint:CGPointMake(0.5, 0) endPoint:CGPointMake(0.5, 1) colors:[NSArray arrayWithObjects:RGBA(0, 0, 0, 0), RGBA(0, 0, 0, 1), nil] locations:nil];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTappedOnAddressBrief)];
     [self.storeAddressBriefBGView addGestureRecognizer:tap];

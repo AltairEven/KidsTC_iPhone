@@ -37,6 +37,7 @@
                 <outlet property="recommenderFaceImageView" destination="Ydg-3f-qKl" id="J9K-FB-KQa"/>
                 <outlet property="reviewLabel" destination="WuV-xT-1Ol" id="Vk9-Ev-xeu"/>
                 <outlet property="starView" destination="F3g-hw-bnE" id="6NJ-rC-FJD"/>
+                <outlet property="storeAddressBriefAlphaView" destination="3qC-kx-KJH" id="nrM-HB-NyD"/>
                 <outlet property="storeAddressBriefBGView" destination="gmf-qn-HH2" id="FEh-eg-hcc"/>
                 <outlet property="storeAddressBriefLabel" destination="g6o-1G-YSQ" id="LzA-rZ-41o"/>
                 <outlet property="storeBriefLabel" destination="d1J-dm-bc1" id="5X6-nD-ccR"/>

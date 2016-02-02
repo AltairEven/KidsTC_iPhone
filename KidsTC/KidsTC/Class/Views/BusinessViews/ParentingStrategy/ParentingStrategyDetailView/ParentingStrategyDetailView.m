@@ -106,6 +106,9 @@ static NSString *const kRelatedServiceCellIdentifier = @"kRelatedServiceCellIden
     [self.storeBriefBGView setBackgroundColor:[UIColor clearColor]];
     [self.headerView addSubview:self.storeBriefBGView];
     
+    
+    [self.storeBriefAlphaView setBackgroundColor:[UIColor clearColor]];
+    [GToolUtil renderGradientForView:self.storeBriefAlphaView displayFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.storeBriefAlphaView.frame.size.height) startPoint:CGPointMake(0.5, 0) endPoint:CGPointMake(0.5, 1) colors:[NSArray arrayWithObjects:RGBA(0, 0, 0, 0), RGBA(0, 0, 0, 1), nil] locations:nil];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickedAtRelatedStores:)];
     [self.storeBriefBGView addGestureRecognizer:tap];
     
