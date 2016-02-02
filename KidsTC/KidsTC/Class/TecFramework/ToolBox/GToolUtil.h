@@ -163,4 +163,6 @@ NSInteger sortImageDictionaryWithIdx(id v1, id v2, void *context);
 
 + (NSArray<NSString *> *)rangeStringsOfSubString:(NSString *)sub inString:(NSString *)string;
 
++ (void)renderGradientForView:(UIView *)view displayFrame:(CGRect)frame startPoint:(CGPoint)start endPoint:(CGPoint)end colors:(NSArray<UIColor *> *)colors locations:(NSArray<NSNumber *> *)locations;
+
 @end

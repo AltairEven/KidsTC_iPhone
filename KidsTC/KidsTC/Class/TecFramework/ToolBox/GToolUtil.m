@@ -1286,4 +1286,21 @@ NSInteger sortImageDictionaryWithIdx(id v1, id v2, void *context)
 }
 
 
++ (void)renderGradientForView:(UIView *)view displayFrame:(CGRect)frame startPoint:(CGPoint)start endPoint:(CGPoint)end colors:(NSArray<UIColor *> *)colors locations:(NSArray<NSNumber *> *)locations {
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = frame;
+    gradient.startPoint = start;
+    gradient.endPoint = end;
+    if (colors) {
+        NSMutableArray *temp = [[NSMutableArray alloc] init];
+        for (UIColor *color in colors) {
+            [temp addObject:(id)(color.CGColor)];
+        }
+        gradient.colors = temp;
+    }
+    gradient.locations = locations;
+    [view.layer insertSublayer:gradient atIndex:0];
+}
+
+
 @end
