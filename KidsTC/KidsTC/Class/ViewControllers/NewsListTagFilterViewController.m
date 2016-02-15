@@ -15,6 +15,12 @@
 
 @property (nonatomic, strong) NSArray<NewsTagTypeModel *> *typeModels;
 
+@property (nonatomic, strong) HttpRequestClient *loadNewsTagRequest;
+
+- (void)getNewsTags;
+
+- (void)parseTagsWithData:(NSDictionary *)data;
+
 @end
 
 @implementation NewsListTagFilterViewController
@@ -36,6 +42,14 @@
     self.filterView.delegate = self;
     [self.filterView reloadData];
     [self.filterView setSelectedTagIndex:self.selectedTagType];
+    if ([self.typeModels count] == 0) {
+        [self getNewsTags];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[GAlertLoadingView sharedAlertLoadingView] hide];
 }
 
 #pragma mark NewsListTagFilterViewDataSource & NewsListTagFilterViewDelegate
@@ -49,6 +63,44 @@
         self.completionBlock(itemModel);
     }
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark Private methods
+
+#pragma mark Private methods
+
+- (void)getNewsTags {
+    if (!self.loadNewsTagRequest) {
+        self.loadNewsTagRequest = [HttpRequestClient clientWithUrlAliasName:@"ARTICLE_GET_KNOWLEDGE"];
+    } else {
+        [self.loadNewsTagRequest cancel];
+    }
+    __weak NewsListTagFilterViewController *weakSelf = self;
+    [[GAlertLoadingView sharedAlertLoadingView] show];
+    [weakSelf.loadNewsTagRequest startHttpRequestWithParameter:nil success:^(HttpRequestClient *client, NSDictionary *responseData) {
+        [weakSelf parseTagsWithData:responseData];
+        [[GAlertLoadingView sharedAlertLoadingView] hide];
+    } failure:^(HttpRequestClient *client, NSError *error) {
+        [[GAlertLoadingView sharedAlertLoadingView] hide];
+    }];
+}
+
+- (void)parseTagsWithData:(NSDictionary *)data {
+    self.typeModels = nil;
+    
+    NSArray *array = [data objectForKey:@"data"];
+    if ([array isKindOfClass:[NSArray class]]) {
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        for (NSDictionary *singleTypeElem in array) {
+            NewsTagTypeModel *typeModel = [[NewsTagTypeModel alloc] initWithRawData:singleTypeElem];
+            if (typeModel) {
+                [tempArray addObject:typeModel];
+            }
+        }
+        self.typeModels = [NSArray arrayWithArray:tempArray];
+    }
+    [self.filterView reloadData];
+    [self.filterView setSelectedTagIndex:self.selectedTagType];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -205,15 +205,27 @@
             break;
         case HomeSegueDestinationNewsFilter:
         {
-            KTCSearchNewsCondition *condition = [KTCSearchNewsCondition conditionFromRawData:model.segueParam];
-            NewSearchResultViewController *controller = [[NewSearchResultViewController alloc] initWithSearchCondition:condition];
+            NSUInteger tagType = [[model.segueParam objectForKey:@"p"] integerValue];
+            if (tagType == 0) {
+                tagType = [NewsTagTypeModel tagTypeFromUserRole:[KTCUser currentUser].userRole];
+            }
+            NewsListTagFilterViewController *controller = [[NewsListTagFilterViewController alloc] initWithNibName:@"NewsListTagFilterViewController" bundle:nil];
             [controller setHidesBottomBarWhenPushed:YES];
+            [controller setSelectedTagType:tagType - 1];
+            [controller setCompletionBlock:^(NewsTagItemModel *itemModel) {
+                NewsViewController *controller = (NewsViewController *)[[KTCTabBarController shareTabBarController] rootViewControllerAtIndex:1];
+                [controller setSelectedTagType:itemModel.type andTagId:itemModel.identifier];
+                [[KTCTabBarController shareTabBarController] setButtonSelected:1];
+            }];
             toController = controller;
         }
             break;
         case HomeSegueDestinationNewsListView:
         {
             NSUInteger tagType = [[model.segueParam objectForKey:@"p"] integerValue];
+            if (tagType == 0) {
+                tagType = [NewsTagTypeModel tagTypeFromUserRole:[KTCUser currentUser].userRole];
+            }
             NSString *tagId = @"0";
             if ([model.segueParam objectForKey:@"at"]) {
                 tagId = [NSString stringWithFormat:@"%@", [model.segueParam objectForKey:@"at"]];
