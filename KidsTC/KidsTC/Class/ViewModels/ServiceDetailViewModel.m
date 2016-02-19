@@ -132,7 +132,7 @@
     }
     
     if (!self.addToSettlementRequest) {
-        self.addToSettlementRequest = [HttpRequestClient clientWithUrlAliasName:@"SHOPPINGCART_SET"];
+        self.addToSettlementRequest = [HttpRequestClient clientWithUrlAliasName:@"SHOPPINGCART_SET_V2"];
     }
     
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:self.detailModel.serviceId, @"productid", self.detailModel.channelId, @"chid", storeId, @"storeno", [NSNumber numberWithInteger:count], @"buynum", nil];

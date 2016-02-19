@@ -13,6 +13,7 @@
 #import "CouponUsableListViewController.h"
 #import "OrderDetailViewController.h"
 #import "KTCPaymentService.h"
+#import "SettlementScoreEditViewController.h"
 
 @interface SettlementViewController () <SettlementViewDelegate, SettlementBottomViewDelegate>
 
@@ -24,6 +25,10 @@
 - (void)submitOrderSucceed;
 
 - (void)goToOrderDetailViewController;
+
+- (void)loadSettlementSucceed:(NSDictionary *)data;
+
+- (void)loadSettlementFailed:(NSError *)error;
 
 @end
 
@@ -42,11 +47,16 @@
     [self.viewModel setNetErrorBlock:^(NSError *error) {
         [weakSelf showConnectError:YES];
     }];
+    [self reloadNetworkData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self reloadNetworkData];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[GAlertLoadingView sharedAlertLoadingView] hide];
 }
 
 #pragma mark SettlementViewDelegate
@@ -67,15 +77,49 @@
     CouponUsableListViewController *controller = [[CouponUsableListViewController alloc] initWithCouponModels:self.viewModel.dataModel.usableCoupons selectedCoupon:self.viewModel.dataModel.usedCoupon];
     __weak SettlementViewController *weakSelf = self;
     [controller setDismissBlock:^(CouponBaseModel *selectedCoupon) {
-        [weakSelf.viewModel resetWithUsedCoupon:selectedCoupon];
+        [[GAlertLoadingView sharedAlertLoadingView] show];
+        [weakSelf.viewModel resetWithUsedCoupon:selectedCoupon succeed:^(NSDictionary *data) {
+            [weakSelf loadSettlementSucceed:data];
+            [[GAlertLoadingView sharedAlertLoadingView] hide];
+        } failure:^(NSError *error) {
+            [[GAlertLoadingView sharedAlertLoadingView] hide];
+            [weakSelf loadSettlementFailed:error];
+        }];
     }];
     [controller setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:controller animated:YES];
 }
 
+- (void)didClickedScoreEditOnSettlementView:(SettlementView *)settlementView {
+    if (self.viewModel.dataModel.canUseScore > 0) {
+        SettlementScoreEditViewController *controller = [SettlementScoreEditViewController alertInstance];
+        controller.totalScore = self.viewModel.dataModel.canUseScore;
+        controller.usedScore = self.viewModel.dataModel.usedScore;
+        __weak SettlementViewController *weakSelf = self;
+        [controller setDismissBlock:^(NSUInteger usedScore) {
+            [[GAlertLoadingView sharedAlertLoadingView] show];
+            [self.viewModel resetWithUsedScore:usedScore succeed:^(NSDictionary *data) {
+                [weakSelf loadSettlementSucceed:data];
+                [[GAlertLoadingView sharedAlertLoadingView] hide];
+            } failure:^(NSError *error) {
+                [[GAlertLoadingView sharedAlertLoadingView] hide];
+                [weakSelf loadSettlementFailed:error];
+            }];
+        }];
+        [self presentViewController:controller animated:NO completion:nil];
+    }
+}
+
 - (void)settlementView:(SettlementView *)settlementView didEndEditWithScore:(NSUInteger)score {
-    [self.viewModel resetWithUsedScore:score];
-    [self.bottomView setPrice:self.viewModel.dataModel.totalPrice];
+    __weak SettlementViewController *weakSelf = self;
+    [[GAlertLoadingView sharedAlertLoadingView] show];
+    [self.viewModel resetWithUsedScore:score succeed:^(NSDictionary *data) {
+        [weakSelf loadSettlementSucceed:data];
+        [[GAlertLoadingView sharedAlertLoadingView] hide];
+    } failure:^(NSError *error) {
+        [[GAlertLoadingView sharedAlertLoadingView] hide];
+        [weakSelf loadSettlementFailed:error];
+    }];
 }
 
 - (void)settlementView:(SettlementView *)settlementView didSelectedPaymentAtIndex:(NSUInteger)index {
@@ -166,22 +210,30 @@
     [[GAlertLoadingView sharedAlertLoadingView] show];
     [self.bottomView.confirmButton setEnabled:NO];
     [weakSelf.viewModel startUpdateDataWithSucceed:^(NSDictionary *data) {
-        [weakSelf.bottomView setPrice:weakSelf.viewModel.dataModel.totalPrice];
-        [weakSelf.bottomView.confirmButton setEnabled:YES];
-        if (weakSelf.viewModel.dataModel.needPay) {
-            [weakSelf.bottomView.confirmButton setTitle:@"确认支付" forState:UIControlStateNormal];
-        } else {
-            [weakSelf.bottomView.confirmButton setTitle:@"确认提交" forState:UIControlStateNormal];
-        }
+        [weakSelf loadSettlementSucceed:data];
         [[GAlertLoadingView sharedAlertLoadingView] hide];
-        [weakSelf.bottomView setSubmitEnable:YES];
     } failure:^(NSError *error) {
         [[GAlertLoadingView sharedAlertLoadingView] hide];
-        if ([[error userInfo] count] > 0) {
-            [[iToast makeText:[[error userInfo] objectForKey:@"data"]] show];
-        }
-        [weakSelf.bottomView setSubmitEnable:NO];
+        [weakSelf loadSettlementFailed:error];
     }];
+}
+
+- (void)loadSettlementSucceed:(NSDictionary *)data {
+    [self.bottomView setPrice:self.viewModel.dataModel.totalPrice];
+    [self.bottomView.confirmButton setEnabled:YES];
+    if (self.viewModel.dataModel.needPay) {
+        [self.bottomView.confirmButton setTitle:@"确认支付" forState:UIControlStateNormal];
+    } else {
+        [self.bottomView.confirmButton setTitle:@"确认提交" forState:UIControlStateNormal];
+    }
+    [self.bottomView setSubmitEnable:YES];
+}
+
+- (void)loadSettlementFailed:(NSError *)error {
+    if ([[error userInfo] count] > 0) {
+        [[iToast makeText:[[error userInfo] objectForKey:@"data"]] show];
+    }
+    [self.bottomView setSubmitEnable:NO];
 }
 
 - (void)didReceiveMemoryWarning {

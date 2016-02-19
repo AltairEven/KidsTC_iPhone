@@ -279,7 +279,8 @@ static WeiboManager *_sharedInstance = nil;
     
     WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:messageObject authInfo:[WeiboManager weiboAuthRequest] access_token:self.token];
     
-    return [WeiboSDK sendRequest:request];
+    BOOL bRet = [WeiboSDK sendRequest:request];
+    return bRet;
 }
 
 @end

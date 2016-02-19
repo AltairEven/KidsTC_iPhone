@@ -18,9 +18,9 @@
 
 @property (nonatomic, strong, readonly) KTCPaymentInfo *paymentInfo;
 
-- (void)resetWithUsedCoupon:(CouponBaseModel *)coupon;
+- (void)resetWithUsedCoupon:(CouponBaseModel *)coupon succeed:(void (^)(NSDictionary *data))succeed failure:(void (^)(NSError *error))failure;
 
-- (void)resetWithUsedScore:(NSUInteger)score;
+- (void)resetWithUsedScore:(NSUInteger)score succeed:(void (^)(NSDictionary *data))succeed failure:(void (^)(NSError *error))failure;
 
 - (void)resetWithSelectedPaymentIndex:(NSUInteger)index;
 

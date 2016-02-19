@@ -32,6 +32,9 @@ static KTCTabBarController* _shareTabBarController = nil;
         if (!_shareTabBarController) {
             _shareTabBarController = [[self alloc] init];
             [_shareTabBarController.tabBar setBarTintColor:[[KTCThemeManager manager] defaultTheme].tabbarBGColor];
+            //顶部边界线
+//            [_shareTabBarController.tabBar setShadowImage:[UIImage imageWithColor:[UIColor clearColor]]];
+//            [_shareTabBarController.tabBar setBackgroundImage:[[UIImage alloc]init]];
         }
         
         return _shareTabBarController;

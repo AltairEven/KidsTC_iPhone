@@ -354,6 +354,13 @@
 			<key>url</key>
 			<string>http://api.kidstc.com/json.php?mod=order&amp;&amp;act=place_order</string>
 		</dict>
+		<key>ORDER_PLACE_ORDER_V2</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=order&amp;&amp;act=place_orderV2</string>
+		</dict>
 		<key>ORDER_SEARCH_APPOINTMENTORDER</key>
 		<dict>
 			<key>method</key>
@@ -388,6 +395,13 @@
 			<string>post</string>
 			<key>url</key>
 			<string>http://api.kidstc.com/json.php?mod=pay&amp;&amp;act=get_pay_notice</string>
+		</dict>
+		<key>PRODUCE_GET_FS_DETAIL</key>
+		<dict>
+			<key>method</key>
+			<string>get</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=product&amp;&amp;act=get_fs_product_detail</string>
 		</dict>
 		<key>PRODUCT_ACTIVITY_FILTER_GET</key>
 		<dict>
@@ -480,12 +494,26 @@
 			<key>url</key>
 			<string>http://api.kidstc.com/json.php?mod=shoppingCart&amp;&amp;act=get_shoppingCart</string>
 		</dict>
+		<key>SHOPPINGCART_GET_V2</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=shoppingCart&amp;&amp;act=get_shoppingCart_new</string>
+		</dict>
 		<key>SHOPPINGCART_SET</key>
 		<dict>
 			<key>method</key>
 			<string>post</string>
 			<key>url</key>
 			<string>http://api.kidstc.com/json.php?mod=shoppingCart&amp;&amp;act=set_shoppingCart</string>
+		</dict>
+		<key>SHOPPINGCART_SET_V2</key>
+		<dict>
+			<key>method</key>
+			<string>post</string>
+			<key>url</key>
+			<string>http://api.kidstc.com/json.php?mod=shoppingCart&amp;&amp;act=set_shoppingCart_new</string>
 		</dict>
 		<key>STORE_GETDETAIL</key>
 		<dict>
@@ -582,6 +610,6 @@
 	<key>errno</key>
 	<integer>0</integer>
 	<key>version</key>
-	<string>0</string>
+	<string>3</string>
 </dict>
 </plist>

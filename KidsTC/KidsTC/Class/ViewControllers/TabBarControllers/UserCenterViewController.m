@@ -161,6 +161,14 @@
                 [self.userCenterView reloadData];
             }
                 break;
+            case UserCenterTagSignUp:
+            {
+                KTCWebViewController *controller = [[KTCWebViewController alloc] init];
+                controller.webUrlString = @"www.baidu.com";
+                controller.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:controller animated:YES];
+            }
+                break;
             default:
                 break;
         }

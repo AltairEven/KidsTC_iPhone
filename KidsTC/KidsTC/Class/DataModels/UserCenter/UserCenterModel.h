@@ -20,6 +20,8 @@
 
 @property (nonatomic, assign) NSUInteger score; //积分
 
+@property (nonatomic, assign) NSUInteger carrotCount; //萝卜数量
+
 @property (nonatomic, assign) NSUInteger age; //年龄
 
 @property (nonatomic, strong) KTCUserRole *userRole; //角色

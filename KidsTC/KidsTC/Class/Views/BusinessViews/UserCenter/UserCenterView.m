@@ -8,19 +8,19 @@
 
 #import "UserCenterView.h"
 
-#define UserInfoRatio (0.6)
-
 @interface UserCenterView () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 
 @property (weak, nonatomic) IBOutlet UIView *userInfoContainerView;
 @property (weak, nonatomic) IBOutlet UIView *userInfoBGView;
 @property (weak, nonatomic) IBOutlet UIButton *settingButton;
+@property (weak, nonatomic) IBOutlet UIView *signBGView;
 @property (weak, nonatomic) IBOutlet UIImageView *BGImageView;
 @property (strong, nonatomic) UIImageView *faceImageView;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *levelTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *carrotLabel;
 @property (weak, nonatomic) IBOutlet UIView *myAppointmentTapView;
 @property (weak, nonatomic) IBOutlet UIView *waitingPaymentTapView;
 @property (weak, nonatomic) IBOutlet UIView *waitingCommentTapView;
@@ -78,14 +78,19 @@
 }
 
 - (void)buildSubviews {
+    self.signBGView.tag = UserCenterTagSignUp;
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTappedOnView:)];
+    [self.signBGView addGestureRecognizer:tapGesture];
+    
     [self.bottomView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalBGColor];
+    
     self.faceImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
     self.faceImageView.tag = 0;
     [self.faceImageView setImage:[UIImage imageNamed:@"userCenter_noLoginFace"]];
     [self.faceImageView setUserInteractionEnabled:YES];
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickedfaceImageView)];
     [self.faceImageView addGestureRecognizer:gesture];
-    [self addSubview:self.faceImageView];
+    [self.userInfoContainerView addSubview:self.faceImageView];
     
     self.faceImageView.layer.cornerRadius = self.faceImageView.frame.size.width / 2;
     self.faceImageView.layer.borderWidth = 4;
@@ -234,7 +239,8 @@
 
 
 - (void)reloadTopView {
-    CGFloat yPosition = (SCREEN_WIDTH * UserInfoRatio - 40) / 2;
+//    CGFloat yPosition = (SCREEN_WIDTH * UserInfoRatio - 40) / 2;
+    CGFloat yPosition = (SCREEN_WIDTH * 2 / 3 - 64 - 60) / 2;
     if (self.dataModel) {
         CGFloat xPosition = SCREEN_WIDTH / 2 - 50;
         UIImage *placeHolder = [UIImage imageNamed:@"userCenter_defaultFace_boy"];
@@ -250,6 +256,7 @@
         [self.userNameLabel setText:self.dataModel.userName];
         [self.levelTitleLabel setText:self.dataModel.levelTitle];
         [self.scoreLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)self.dataModel.score]];
+        [self.carrotLabel setText:[NSString stringWithFormat:@"%lu", (unsigned long)self.dataModel.carrotCount]];
         
         if (self.dataModel.appointmentOrderCount > 0) {
             [self.appointCountLabel setHidden:NO];

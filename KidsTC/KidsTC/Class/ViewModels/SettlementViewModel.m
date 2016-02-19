@@ -44,12 +44,6 @@
 }
 
 
-
-//@property (nonatomic, strong) CouponFullCutModel *usedCoupon;
-//
-//@property (nonatomic, assign) NSUInteger usedScore;
-//
-//@property (nonatomic, assign) CGFloat totalPrice;
 #pragma mark Private methods
 
 - (void)loadSettlementSucceed:(NSDictionary *)data {
@@ -78,15 +72,15 @@
 
 #pragma mark Public methods
 
-- (void)resetWithUsedCoupon:(CouponBaseModel *)coupon {
+- (void)resetWithUsedCoupon:(CouponBaseModel *)coupon succeed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
     CouponFullCutModel *model = (CouponFullCutModel *)coupon;
     [self.dataModel setUsedCoupon:model];
-    [self.view reloadData];
+    [self startUpdateDataWithSucceed:succeed failure:failure];
 }
 
-- (void)resetWithUsedScore:(NSUInteger)score {
+- (void)resetWithUsedScore:(NSUInteger)score succeed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
     [self.dataModel setUsedScore:score];
-    [self.view reloadData];
+    [self startUpdateDataWithSucceed:succeed failure:failure];
 }
 
 - (void)resetWithSelectedPaymentIndex:(NSUInteger)index {
@@ -96,10 +90,20 @@
 
 - (void)startUpdateDataWithSucceed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
     if (!self.loadSettlementRequest) {
-        self.loadSettlementRequest = [HttpRequestClient clientWithUrlAliasName:@"SHOPPINGCART_GET"];
+        self.loadSettlementRequest = [HttpRequestClient clientWithUrlAliasName:@"SHOPPINGCART_GET_V2"];
         [self.loadSettlementRequest setErrorBlock:self.netErrorBlock];
     }
-    NSDictionary *param = [NSDictionary dictionaryWithObject:[KTCUser currentUser].uid forKey:@"uid"];
+    
+    NSString *couponCode = [[self.dataModel usedCoupon] couponId];
+    if ([couponCode length] == 0) {
+        couponCode = @"";
+    }
+    
+    NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
+                           [KTCUser currentUser].uid, @"uid",
+                           couponCode, @"couponCode",
+                           [NSNumber numberWithInteger:self.dataModel.usedScore], @"scoreNum",
+                           [NSNumber numberWithBool:!self.dataModel.hasUsedCoupon], @"isCancelCoupon", nil];
     
     self.lastDataModel = self.dataModel;
     
@@ -120,7 +124,7 @@
 
 - (void)submitOrderWithSucceed:(void (^)(NSDictionary *))succeed failure:(void (^)(NSError *))failure {
     if (!self.submitOrderRequest) {
-        self.submitOrderRequest = [HttpRequestClient clientWithUrlAliasName:@"ORDER_PLACE_ORDER"];
+        self.submitOrderRequest = [HttpRequestClient clientWithUrlAliasName:@"ORDER_PLACE_ORDER_V2"];
     }
     NSString *couponCode = @"";
     BOOL isPromotion = NO;

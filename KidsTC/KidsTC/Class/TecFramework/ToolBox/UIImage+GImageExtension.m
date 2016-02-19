@@ -287,7 +287,9 @@ CGFloat RadiansToDegrees(CGFloat radians) {return radians * 180/M_PI;};
     }
     
     CGContextDrawImage(context,CGRectMake(0, 0, width, height), self.CGImage);
-    UIImage *grayImage = [UIImage imageWithCGImage:CGBitmapContextCreateImage(context)];
+    CGImageRef imgRef = CGBitmapContextCreateImage(context);
+    UIImage *grayImage = [UIImage imageWithCGImage:imgRef];
+    CFRelease(imgRef);
     CGContextRelease(context);
     
     return grayImage;

@@ -802,7 +802,6 @@
 		8F25A1311C2D3AED0076A6FA /* MJChiBaoZiHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F25A1301C2D3AED0076A6FA /* MJChiBaoZiHeader.m */; };
 		8F25A1361C3164B60076A6FA /* HomeBigImageTwoDescCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F25A1351C3164B60076A6FA /* HomeBigImageTwoDescCellModel.m */; };
 		8F2C55BB1BFF167B00C2B6BF /* CommonShareService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2C55BA1BFF167B00C2B6BF /* CommonShareService.m */; };
-		8F2F87371C51081800DD1FD1 /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8F2F87361C51081800DD1FD1 /* interface_list.plist */; };
 		8F2F873B1C510D6900DD1FD1 /* ServiceDetailRelatedServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2F87391C510D6900DD1FD1 /* ServiceDetailRelatedServiceCell.m */; };
 		8F2F873C1C510D6900DD1FD1 /* ServiceDetailRelatedServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F2F873A1C510D6900DD1FD1 /* ServiceDetailRelatedServiceCell.xib */; };
 		8F2F87451C51D16100DD1FD1 /* ServiceDetailRelatedServiceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2F87431C51D16100DD1FD1 /* ServiceDetailRelatedServiceListViewController.m */; };
@@ -969,6 +968,9 @@
 		8FC75DAE1C0EED8200D1E5F0 /* CommentEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC75DAC1C0EED8200D1E5F0 /* CommentEditViewController.m */; };
 		8FC75DAF1C0EED8200D1E5F0 /* CommentEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FC75DAD1C0EED8200D1E5F0 /* CommentEditViewController.xib */; };
 		8FC75DB51C0EF16400D1E5F0 /* CommentEditingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC75DB41C0EF16400D1E5F0 /* CommentEditingModel.m */; };
+		8FCC49291C72CD0E008BB836 /* interface_list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8FCC49281C72CD0E008BB836 /* interface_list.plist */; };
+		8FCC49301C73007B008BB836 /* SettlementScoreEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FCC492E1C73007B008BB836 /* SettlementScoreEditViewController.m */; };
+		8FCC49311C73007B008BB836 /* SettlementScoreEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FCC492F1C73007B008BB836 /* SettlementScoreEditViewController.xib */; };
 		8FCD6CF91C43ADF2000C5E65 /* KTCStoreMapViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8FCD6CF71C43ADF2000C5E65 /* KTCStoreMapViewController.mm */; };
 		8FCD6CFA1C43ADF2000C5E65 /* KTCStoreMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FCD6CF81C43ADF2000C5E65 /* KTCStoreMapViewController.xib */; };
 		8FD213C21C08A29B0073F2CA /* CommentFoundingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FD213C01C08A29B0073F2CA /* CommentFoundingViewController.m */; };
@@ -2387,7 +2389,6 @@
 		8F25A1351C3164B60076A6FA /* HomeBigImageTwoDescCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeBigImageTwoDescCellModel.m; sourceTree = "<group>"; };
 		8F2C55B91BFF167B00C2B6BF /* CommonShareService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonShareService.h; sourceTree = "<group>"; };
 		8F2C55BA1BFF167B00C2B6BF /* CommonShareService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonShareService.m; sourceTree = "<group>"; };
-		8F2F87361C51081800DD1FD1 /* interface_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = interface_list.plist; sourceTree = "<group>"; };
 		8F2F87381C510D6900DD1FD1 /* ServiceDetailRelatedServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceDetailRelatedServiceCell.h; sourceTree = "<group>"; };
 		8F2F87391C510D6900DD1FD1 /* ServiceDetailRelatedServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceDetailRelatedServiceCell.m; sourceTree = "<group>"; };
 		8F2F873A1C510D6900DD1FD1 /* ServiceDetailRelatedServiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceDetailRelatedServiceCell.xib; sourceTree = "<group>"; };
@@ -2657,6 +2658,10 @@
 		8FC75DAD1C0EED8200D1E5F0 /* CommentEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentEditViewController.xib; sourceTree = "<group>"; };
 		8FC75DB31C0EF16400D1E5F0 /* CommentEditingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentEditingModel.h; sourceTree = "<group>"; };
 		8FC75DB41C0EF16400D1E5F0 /* CommentEditingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentEditingModel.m; sourceTree = "<group>"; };
+		8FCC49281C72CD0E008BB836 /* interface_list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = interface_list.plist; sourceTree = "<group>"; };
+		8FCC492D1C73007B008BB836 /* SettlementScoreEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettlementScoreEditViewController.h; sourceTree = "<group>"; };
+		8FCC492E1C73007B008BB836 /* SettlementScoreEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettlementScoreEditViewController.m; sourceTree = "<group>"; };
+		8FCC492F1C73007B008BB836 /* SettlementScoreEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettlementScoreEditViewController.xib; sourceTree = "<group>"; };
 		8FCD6CF61C43ADF2000C5E65 /* KTCStoreMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTCStoreMapViewController.h; sourceTree = "<group>"; };
 		8FCD6CF71C43ADF2000C5E65 /* KTCStoreMapViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = KTCStoreMapViewController.mm; sourceTree = "<group>"; };
 		8FCD6CF81C43ADF2000C5E65 /* KTCStoreMapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KTCStoreMapViewController.xib; sourceTree = "<group>"; };
@@ -3372,7 +3377,7 @@
 		1E3D7E781B4BD83D00275C35 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8F2F87361C51081800DD1FD1 /* interface_list.plist */,
+				8FCC49281C72CD0E008BB836 /* interface_list.plist */,
 				1E943EBD1B7375F60029FE74 /* Area.plist */,
 				1E0B7B591B709A2100A58AD4 /* Category.plist */,
 				1E3D7E791B4BD83D00275C35 /* Info.plist */,
@@ -5177,6 +5182,9 @@
 				8F8B0B1B1C4E21D7000E9A26 /* CashierViewController.h */,
 				8F8B0B1C1C4E21D7000E9A26 /* CashierViewController.m */,
 				8F8B0B1D1C4E21D7000E9A26 /* CashierViewController.xib */,
+				8FCC492D1C73007B008BB836 /* SettlementScoreEditViewController.h */,
+				8FCC492E1C73007B008BB836 /* SettlementScoreEditViewController.m */,
+				8FCC492F1C73007B008BB836 /* SettlementScoreEditViewController.xib */,
 			);
 			path = Settlement;
 			sourceTree = "<group>";
@@ -6037,7 +6045,6 @@
 				1E827BE91B941337008F3F08 /* UIBarButtonItemGrid@2x.png in Resources */,
 				8F2F87461C51D16100DD1FD1 /* ServiceDetailRelatedServiceListViewController.xib in Resources */,
 				8F42FABF1C0BF8F500E9F62A /* ResetPasswordViewController.xib in Resources */,
-				8F2F87371C51081800DD1FD1 /* interface_list.plist in Resources */,
 				1E0B7AF01B6F6A6D00A58AD4 /* GuideViewController.xib in Resources */,
 				1E76003F1B56496100DF0972 /* ServiceDetailViewController.xib in Resources */,
 				1E0B7B0F1B6F6C1400A58AD4 /* SaiDanPhotoView.xib in Resources */,
@@ -6195,6 +6202,7 @@
 				1E3D8F5E1B4D1DB300275C35 /* OrderDetailViewController.xib in Resources */,
 				1E0B78041B6F429E00A58AD4 /* KTCSearchSortFilterView.xib in Resources */,
 				8F8B0B281C4F3655000E9A26 /* StoreDetailStrategyCell.xib in Resources */,
+				8FCC49291C72CD0E008BB836 /* interface_list.plist in Resources */,
 				1E827BD31B941337008F3F08 /* ImageSelectedOn.png in Resources */,
 				1EC4A0B61B58E08800206BB9 /* StoreDetailBottomView.xib in Resources */,
 				8FABCB331C0FCBEA005BF7AD /* FavouriteViewStrategyCell.xib in Resources */,
@@ -6261,6 +6269,7 @@
 				8F30D5E31C3BF70B004EE892 /* coupon_cellBG_d.png in Resources */,
 				1E79956F1BCD25860099CFF9 /* LoveHouseListView.xib in Resources */,
 				1E15F9781BDDCFA4000C74E7 /* StoreDetailHotRecommendCell.xib in Resources */,
+				8FCC49311C73007B008BB836 /* SettlementScoreEditViewController.xib in Resources */,
 				1E80170E1BB006EF00B6C352 /* HomeViewNewsCell.xib in Resources */,
 				8F62C3441C52145B0013031E /* StrategyDetailRelatedServiceListViewController.xib in Resources */,
 				8F85ADB71C0D5BB600890526 /* MyCommentListViewController.xib in Resources */,
@@ -6425,6 +6434,7 @@
 				1E1CFA211BD72F4C0005653D /* ServiceDetailMoreInfoView.m in Sources */,
 				1EC4A1041B5CCC8F00206BB9 /* KTCSearchView.m in Sources */,
 				1E0B7B261B6F6FB100A58AD4 /* NSString+XXTEA.m in Sources */,
+				8FCC49301C73007B008BB836 /* SettlementScoreEditViewController.m in Sources */,
 				8F25A11E1C2D1C9C0076A6FA /* MJRefreshBackGifFooter.m in Sources */,
 				1EC4A0C41B5914FB00206BB9 /* StoreDetailViewActiveCell.m in Sources */,
 				1E0B77AD1B68D60B00A58AD4 /* LoginViewController.m in Sources */,

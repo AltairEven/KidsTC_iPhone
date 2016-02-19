@@ -18,7 +18,8 @@ typedef enum {
     UserCenterTagMyComment = 5,
     UserCenterTagMyFavourate = 6,
     UserCenterTagCoupon = 7,
-    UserCenterTagMessageCenter = 8
+    UserCenterTagMessageCenter = 8,
+    UserCenterTagSignUp = 9
 }UserCenterTag;
 
 @class UserCenterView;

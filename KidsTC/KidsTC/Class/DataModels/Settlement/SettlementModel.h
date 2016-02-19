@@ -37,11 +37,13 @@
 
 @property (nonatomic, strong) PromotionFullCutModel *promotionModel;
 
-@property (nonatomic, assign) NSUInteger score;
+//@property (nonatomic, assign) NSUInteger score;
 
 @property (nonatomic, strong) CouponFullCutModel *usedCoupon;
 
-@property (nonatomic, assign) NSUInteger canUseScore;
+@property (nonatomic, readonly) BOOL hasUsedCoupon;
+
+@property (nonatomic, readonly) NSUInteger canUseScore;
 
 @property (nonatomic, assign) NSUInteger usedScore;
 

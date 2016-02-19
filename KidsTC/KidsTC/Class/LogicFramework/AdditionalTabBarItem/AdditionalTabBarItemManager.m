@@ -199,7 +199,9 @@ static AdditionalTabBarItemManager *_sharedInstance = nil;
             [self.loadImageRequestsArray addObject:client];
             [client downloadImageWithSuccess:^(HttpRequestClient *client, UIImage *image) {
                 [weakSelf saveImage:image withDownloadUrlString:string];
-            } failure:nil];
+            } failure:^(HttpRequestClient *client, NSError *error) {
+                NSLog(@"%@", error);
+            }];
         }
     }
 }

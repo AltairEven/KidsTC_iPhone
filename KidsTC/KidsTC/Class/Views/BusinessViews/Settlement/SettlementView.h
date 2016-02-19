@@ -24,6 +24,8 @@
 
 - (void)didClickedCouponOnSettlementView:(SettlementView *)settlementView;
 
+- (void)didClickedScoreEditOnSettlementView:(SettlementView *)settlementView;
+
 - (void)settlementView:(SettlementView *)settlementView didEndEditWithScore:(NSUInteger)score;
 
 - (void)settlementView:(SettlementView *)settlementView didSelectedPaymentAtIndex:(NSUInteger)index;

@@ -399,6 +399,13 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 
 #pragma mark UITextFieldDelegate
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickedScoreEditOnSettlementView:)]) {
+        [self.delegate didClickedScoreEditOnSettlementView:self];
+    }
+    return NO;
+}
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     self.model.usedScore = 0;
     NSString *scoreText = [NSString stringWithFormat:@"%lu", (unsigned long)self.model.canUseScore];

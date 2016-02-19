@@ -21,6 +21,7 @@
         self.level = [[data objectForKey:@"level"] integerValue];
         self.levelTitle = [data objectForKey:@"levelName"];
         self.score = [[data objectForKey:@"score_num"] integerValue];
+        self.carrotCount = [[data objectForKey:@"carrot_num"] integerValue];
         self.age = [[data objectForKey:@"age"] integerValue];
         self.birthday = [data objectForKey:@"birthday"];
         self.faceImageUrl = [NSURL URLWithString:[data objectForKey:@"headUrl"]];
