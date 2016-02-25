@@ -33,12 +33,17 @@
 - (CGFloat)cellHeight {
     NSUInteger count = [self.twoColumnElementsArray count];
     if (count > 0) {
+        NSUInteger row = count / 2;
         NSUInteger left = count % 2;
         if (left > 0) {
-            cellHeight = cellRatio * (SCREEN_WIDTH / 2) * ((count / 2) + 1);
-        } else {
-            cellHeight = cellRatio * (SCREEN_WIDTH / 2) * count / 2;
+            row ++;
         }
+        CGFloat hMargin = 10;
+        CGFloat vMargin = 5;
+        CGFloat gap = 5;
+        CGFloat width = (SCREEN_WIDTH - gap - hMargin * 2) / 2;
+        CGFloat singleHeight = cellRatio * width;
+        cellHeight = singleHeight * row + vMargin * 2 + (row - 1) * gap;
     }
     
     return cellHeight;

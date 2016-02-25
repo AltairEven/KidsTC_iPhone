@@ -19,8 +19,8 @@
         if ([data objectForKey:@"serveId"]) {
             self.identifier = [NSString stringWithFormat:@"%@", [data objectForKey:@"serveId"]];
         }
-        if ([data objectForKey:@"channelId"]) {
-            self.channelId = [NSString stringWithFormat:@"%@", [data objectForKey:@"channelId"]];
+        if ([data objectForKey:@"chId"]) {
+            self.channelId = [NSString stringWithFormat:@"%@", [data objectForKey:@"chId"]];
         }
         self.imageUrl = [NSURL URLWithString:[data objectForKey:@"imgurl"]];
         self.name = [data objectForKey:@"serveName"];

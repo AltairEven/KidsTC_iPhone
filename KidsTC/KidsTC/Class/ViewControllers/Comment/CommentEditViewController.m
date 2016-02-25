@@ -197,6 +197,7 @@
 
 - (void)deletePhotoAtIndex :(NSInteger)index
 {
+    NSInteger originIndex = index;
     if ([self.commentModel.thumbnailPhotoUrlStringsArray count] > index) {
         NSMutableArray *tempArray = [NSMutableArray arrayWithArray:self.commentModel.thumbnailPhotoUrlStringsArray];
         [tempArray removeObjectAtIndex:index];
@@ -281,11 +282,11 @@
     
     ////////
     NSMutableArray *tempArray = [NSMutableArray arrayWithArray:self.commentModel.combinedImagesArray];
-    [tempArray removeObjectAtIndex:index];
+    [tempArray removeObjectAtIndex:originIndex];
     self.commentModel.combinedImagesArray = [NSArray arrayWithArray:tempArray];
     [tempArray removeAllObjects];
     [tempArray addObjectsFromArray:self.mwPhotosArray];
-    [tempArray removeObjectAtIndex:index];
+    [tempArray removeObjectAtIndex:originIndex];
     self.mwPhotosArray = [NSArray arrayWithArray:tempArray];
 }
 

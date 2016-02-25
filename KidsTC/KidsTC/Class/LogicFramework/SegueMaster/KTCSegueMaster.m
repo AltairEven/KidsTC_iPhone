@@ -236,6 +236,16 @@
             toController = nil;
         }
             break;
+        case HomeSegueDestinationFlashDetail:
+        {
+            NSString *link = [model.segueParam objectForKey:@"linkUrl"];
+            if ([link isKindOfClass:[NSString class]] && [link length] > 0) {
+                KTCWebViewController *controller = [[KTCWebViewController alloc] init];
+                [controller setWebUrlString:link];
+                [controller setHidesBottomBarWhenPushed:YES];
+                toController = controller;
+            }
+        }
         default:
             break;
     }

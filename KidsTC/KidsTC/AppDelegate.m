@@ -99,15 +99,13 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
     [tabbar  createViewControllers];
     self.window.rootViewController = tabbar;
     //show user role select
-    [self showUserRoleSelectWithFinishController:tabbar];
+    [self showWelcome];
     //处理通知
     [KTCPushNotificationService sharedService].delegate = self;
     [[KTCPushNotificationService sharedService] launchServiceWithOption:launchOptions];
     
-    [self.window makeKeyAndVisible];
     
-    //map
-    [[KTCMapService sharedService] startService];
+//    [self.window makeKeyAndVisible];
     
     return YES;
 }
@@ -343,6 +341,9 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
 #pragma mark User Role
 
 - (void)showUserRoleSelectWithFinishController:(UIViewController *)controller {
+    //map
+    [[KTCMapService sharedService] startService];
+    
     NSNumber *userRoleValue = [[NSUserDefaults standardUserDefaults] objectForKey:UserRoleDefaultKey];
     NSNumber *userSexValue = [[NSUserDefaults standardUserDefaults] objectForKey:UserSexDefaultKey];
     if (userRoleValue) {
@@ -358,6 +359,9 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
     //显示选择页面
     UserRoleSelectViewController *selectVC = [[UserRoleSelectViewController alloc] initWithNibName:@"UserRoleSelectViewController" bundle:nil];
     self.window.rootViewController = selectVC;
+    if (![self.window isKeyWindow]) {
+        [self.window makeKeyAndVisible];
+    }
     [selectVC setCompleteBlock:^(UserRole selectedRole, KTCSex selectedSex){
         [[KTCUser currentUser] setUserRole:[KTCUserRole instanceWithRole:selectedRole sex:selectedSex]];
         self.window.rootViewController = controller;
@@ -379,8 +383,8 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
     [self.welcomeWindow makeKeyAndVisible];
     
     [loadingVC setLoad_complete:^(){
-        //显示欢迎或广告页面
-        [self showWelcome];
+        //显示页面
+        [self showRealWindow];
     }];
 }
 
@@ -423,17 +427,39 @@ static const NSInteger kVersionForceUpdateAlertViewTag = 31415627;
 
 
 - (void)showWelcome {
-    //检查是否第一次安装，弹出引导图
-    if ([CheckFirstInstalDataManager getHasLaunchedValue]) {//第一次安装
-        [self showRealWindow];
-    } else {
+    if ([GuideViewController needShow]) {
+        //第一次安装
         GuideViewController *guideVC = [[GuideViewController alloc] init];
+        if (!self.welcomeWindow) {
+            self.welcomeWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+            [self.welcomeWindow setBackgroundColor:[UIColor clearColor]];
+            self.welcomeWindow.windowLevel = UIWindowLevelAlert + 1;
+        }
         self.welcomeWindow.rootViewController = guideVC;
+        [UIApplication sharedApplication].statusBarHidden = YES;
+        if (![self.welcomeWindow isKeyWindow]) {
+            [self.welcomeWindow makeKeyAndVisible];
+        }
         
         __weak AppDelegate *weakSelf = self;
+        __weak UIWindow *weakWelcome = self.welcomeWindow;
+        __weak UIWindow *weakWindow = self.window;
         [guideVC setGuide_complete:^(){
-            [weakSelf showRealWindow];
+            [weakWindow makeKeyAndVisible];
+            [UIView animateWithDuration:0.5 animations:^{
+                [weakWelcome setAlpha:0];
+                [weakWindow setHidden:NO];
+                [weakWindow setAlpha:1];
+            } completion:^(BOOL finished) {
+                [weakWelcome setHidden:YES];
+                [weakWelcome setAlpha:1];
+                weakWelcome.rootViewController = nil;
+            }];
+            [weakSelf showUserRoleSelectWithFinishController:[KTCTabBarController shareTabBarController]];
+            [GuideViewController setHasDisplayed];
         }];
+    } else {
+        [self showUserRoleSelectWithFinishController:[KTCTabBarController shareTabBarController]];
     }
 }
 

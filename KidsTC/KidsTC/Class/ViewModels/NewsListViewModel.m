@@ -98,7 +98,8 @@
         [weakSelf parseTagsWithData:responseData];
         [weakSelf.view reloadNewsTag];
         weakSelf.gettingNewsTag = NO;
-        [weakSelf startUpdateDataWithNewsTagIndex:weakSelf.currentTagIndex];
+        [self.view selectNewsTagAtIndex:self.currentTagIndex];
+//        [weakSelf startUpdateDataWithNewsTagIndex:weakSelf.currentTagIndex];
     } failure:^(HttpRequestClient *client, NSError *error) {
         weakSelf.gettingNewsTag = NO;
     }];

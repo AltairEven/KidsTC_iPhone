@@ -26,7 +26,7 @@
     CGFloat rightMargin = 20;
     CGFloat badgeSide = 0;
     NSUInteger stringLentgh = [value length];
-    CGFloat barItemWidth = self.frame.size.width / TabbarItemNums;
+    CGFloat barItemWidth = self.frame.size.width / [KTCTabBarController shareTabBarController].tabCount;
     CGFloat barItemRightSide = barItemWidth * (index + 1);
     if (stringLentgh == 0 || stringLentgh >= 3) {
         badgeSide = 6;

@@ -114,16 +114,17 @@
                 [weakSelf submitComments];
             } failure:^(NSError *error) {
                 [[GAlertLoadingView sharedAlertLoadingView] hide];
-                if (error.userInfo) {
-                    NSString *errMsg = [error.userInfo objectForKey:@"data"];
-                    if ([errMsg isKindOfClass:[NSString class]] && [errMsg length] > 0) {
-                        [[iToast makeText:errMsg] show];
-                    } else {
-                        [[iToast makeText:@"照片上传失败，请重新提交"] show];
-                    }
-                } else {
-                    [[iToast makeText:@"照片上传失败，请重新提交"] show];
-                }
+//                if (error.userInfo) {
+//                    NSString *errMsg = [error.userInfo objectForKey:@"data"];
+//                    if ([errMsg isKindOfClass:[NSString class]] && [errMsg length] > 0) {
+//                        [[iToast makeText:errMsg] show];
+//                    } else {
+//                        [[iToast makeText:@"照片上传失败，请重新提交"] show];
+//                    }
+//                } else {
+//                    [[iToast makeText:@"照片上传失败，请重新提交"] show];
+//                }
+                [[iToast makeText:@"照片上传失败，请重新提交"] show];
                 //MTA
                 if (self.commentModel.orderId) {
                     NSDictionary *trackParam = [NSDictionary dictionaryWithObjectsAndKeys:self.commentModel.orderId, @"id", @"false", @"result", nil];

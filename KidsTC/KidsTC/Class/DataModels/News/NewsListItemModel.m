@@ -25,7 +25,7 @@
         self.imageUrl = [NSURL URLWithString:[data objectForKey:@"imgUrl"]];
         self.linkUrl = [data objectForKey:@"linkUrl"];
         self.viewCount = [[data objectForKey:@"viewCount"] integerValue];
-        self.commentCount = [[data objectForKey:@"viewCount"] integerValue];
+        self.commentCount = [[data objectForKey:@"commentCount"] integerValue];
     }
     return self;
 }

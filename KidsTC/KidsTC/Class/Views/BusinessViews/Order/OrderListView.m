@@ -135,6 +135,7 @@ static NSString *const kCellIdentifier = @"cellIdentifier";
 
 - (void)pullDownToRefresh {
     self.tableView.backgroundView = nil;
+    [self.tableView.mj_footer resetNoMoreData];
     if (self.delegate && [self.delegate respondsToSelector:@selector(orderListViewDidPullDownToRefresh:)]) {
         [self.delegate orderListViewDidPullDownToRefresh:self];
     }

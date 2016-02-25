@@ -18,6 +18,7 @@
 #import "AppointmentOrderListViewController.h"
 #import "NotificationCenterViewController.h"
 #import "KTCWebViewController.h"
+#import "UserGuideViewController.h"
 
 @interface UserCenterViewController () <UserCenterViewDelegate>
 
@@ -38,6 +39,12 @@
     self.userCenterView.delegate = self;
     
     self.viewModel = [[UserCenterViewModel alloc] initWithView:self.userCenterView];
+    [self.userCenterView reloadData];
+    
+    UserGuideViewController *controller = [UserGuideViewController instancetypeWithViewTag:UserGuideViewTagUserCenter];
+    if (controller) {
+        [controller showFromViewController:self];
+    }
 }
 
 
@@ -164,7 +171,23 @@
             case UserCenterTagSignUp:
             {
                 KTCWebViewController *controller = [[KTCWebViewController alloc] init];
-                controller.webUrlString = @"www.baidu.com";
+                controller.webUrlString = self.viewModel.dataModel.signLink;
+                controller.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:controller animated:YES];
+            }
+                break;
+            case UserCenterTagMyFlash:
+            {
+                KTCWebViewController *controller = [[KTCWebViewController alloc] init];
+                controller.webUrlString = self.viewModel.dataModel.flashLink;
+                controller.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:controller animated:YES];
+            }
+                break;
+            case UserCenterTagCarrotExchangeHistory:
+            {
+                KTCWebViewController *controller = [[KTCWebViewController alloc] init];
+                controller.webUrlString = self.viewModel.dataModel.carrotExchangeLink;
                 controller.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:controller animated:YES];
             }

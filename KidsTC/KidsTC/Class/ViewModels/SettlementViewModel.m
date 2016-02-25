@@ -99,11 +99,16 @@
         couponCode = @"";
     }
     
+    BOOL hasUsedCoupon = YES;
+    if (self.dataModel) {
+        hasUsedCoupon = self.dataModel.hasUsedCoupon;
+    }
+    
     NSDictionary *param = [NSDictionary dictionaryWithObjectsAndKeys:
                            [KTCUser currentUser].uid, @"uid",
                            couponCode, @"couponCode",
                            [NSNumber numberWithInteger:self.dataModel.usedScore], @"scoreNum",
-                           [NSNumber numberWithBool:!self.dataModel.hasUsedCoupon], @"isCancelCoupon", nil];
+                           [NSNumber numberWithBool:!hasUsedCoupon], @"isCancelCoupon", nil];
     
     self.lastDataModel = self.dataModel;
     

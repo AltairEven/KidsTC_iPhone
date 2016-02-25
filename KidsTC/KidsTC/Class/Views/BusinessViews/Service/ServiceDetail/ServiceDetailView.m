@@ -684,7 +684,7 @@ static NSString *const kMoreServiceCellIdentifier = @"kMoreServiceCellIdentifier
     for (ServiceDetailNoticeItem *item in self.detailModel.noticeArray) {
         CGFloat labelWidth = SCREEN_WIDTH - margin * 2;
         UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(xPosition, yPosition, labelWidth, 20)];
-        [titleLabel setTextColor:[UIColor lightGrayColor]];
+        [titleLabel setTextColor:RGBA(120, 120, 120, 1)];
         [titleLabel setFont:font];
         [titleLabel setLineBreakMode:NSLineBreakByCharWrapping];
         [titleLabel setBackgroundColor:[UIColor clearColor]];
@@ -701,7 +701,7 @@ static NSString *const kMoreServiceCellIdentifier = @"kMoreServiceCellIdentifier
             xPosition += titleLabel.frame.size.width;
         }
         UILabel *contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(xPosition, yPosition, labelWidth, 20)];
-        [contentLabel setTextColor:[UIColor lightGrayColor]];
+        [contentLabel setTextColor:RGBA(120, 120, 120, 1)];
         [contentLabel setFont:font];
         [contentLabel setLineBreakMode:NSLineBreakByCharWrapping];
         [contentLabel setBackgroundColor:[UIColor clearColor]];

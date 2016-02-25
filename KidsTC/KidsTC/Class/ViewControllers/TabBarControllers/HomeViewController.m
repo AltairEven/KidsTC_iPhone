@@ -15,6 +15,7 @@
 #import "KTCSegueMaster.h"
 #import "HomeActivityService.h"
 #import "KTCWebViewController.h"
+#import "UserGuideViewController.h"
 
 #define ActivityWebViewClosePrefix (@"hook::close_activity::")
 #define ActivityWebViewJumpPrefix (@"hook::jump_activity::")
@@ -99,7 +100,10 @@
     } failure:^(NSError *error) {
         [weakSelf createActivityViews];
     }];
-    
+    UserGuideViewController *controller = [UserGuideViewController instancetypeWithViewTag:UserGuideViewTagHome];
+    if (controller) {
+        [controller showFromViewController:self];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {

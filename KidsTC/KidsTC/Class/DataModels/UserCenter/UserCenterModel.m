@@ -21,7 +21,7 @@
         self.level = [[data objectForKey:@"level"] integerValue];
         self.levelTitle = [data objectForKey:@"levelName"];
         self.score = [[data objectForKey:@"score_num"] integerValue];
-        self.carrotCount = [[data objectForKey:@"carrot_num"] integerValue];
+        self.carrotCount = [[data objectForKey:@"userRadishNum"] integerValue];
         self.age = [[data objectForKey:@"age"] integerValue];
         self.birthday = [data objectForKey:@"birthday"];
         self.faceImageUrl = [NSURL URLWithString:[data objectForKey:@"headUrl"]];
@@ -35,6 +35,30 @@
         if ([KTCPushNotificationService sharedService].unreadCount > 0) {
             self.hasUnreadMessage = YES;
             self.unreadMessageCount = [KTCPushNotificationService sharedService].unreadCount;
+        }
+        NSDictionary *flashDic = [data objectForKey:@"fsList"];
+        if ([flashDic isKindOfClass:[NSDictionary class]]) {
+            NSString *link = [flashDic objectForKey:@"linkUrl"];
+            if ([link isKindOfClass:[NSString class]] && [link length] > 0) {
+                _hasFlashOrder = YES;
+                self.flashLink = link;
+            }
+        }
+        NSDictionary *carrotDic = [data objectForKey:@"fsList"];
+        if ([carrotDic isKindOfClass:[NSDictionary class]]) {
+            NSString *link = [carrotDic objectForKey:@"linkUrl"];
+            if ([link isKindOfClass:[NSString class]] && [link length] > 0) {
+                _hasCarrotExchangeHistory = YES;
+                self.carrotExchangeLink = link;
+            }
+        }
+        self.carrotExchangeLink = @"www.baidu.com";
+        NSDictionary *signDic = [data objectForKey:@"radish"];
+        if ([signDic isKindOfClass:[NSDictionary class]]) {
+            NSString *link = [signDic objectForKey:@"linkUrl"];
+            if ([link isKindOfClass:[NSString class]] && [link length] > 0) {
+                self.signLink = link;
+            }
         }
     }
     return self;

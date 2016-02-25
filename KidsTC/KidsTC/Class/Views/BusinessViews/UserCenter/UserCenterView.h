@@ -11,15 +11,17 @@
 
 typedef enum {
     UserCenterTagFace = 0,
-    UserCenterTagMyAppointment = 1,
-    UserCenterTagWaitingPay = 2,
-    UserCenterTagWaitingComment = 3,
-    UserCenterTagAllOrder = 4,
-    UserCenterTagMyComment = 5,
-    UserCenterTagMyFavourate = 6,
-    UserCenterTagCoupon = 7,
-    UserCenterTagMessageCenter = 8,
-    UserCenterTagSignUp = 9
+    UserCenterTagSignUp = 1,
+    UserCenterTagMyAppointment = 2,
+    UserCenterTagWaitingPay = 3,
+    UserCenterTagWaitingComment = 4,
+    UserCenterTagAllOrder = 5,
+    UserCenterTagMyFlash = 6,
+    UserCenterTagCarrotExchangeHistory = 7,
+    UserCenterTagMyComment = 8,
+    UserCenterTagMyFavourate = 9,
+    UserCenterTagCoupon = 10,
+    UserCenterTagMessageCenter = 11,
 }UserCenterTag;
 
 @class UserCenterView;

@@ -8,6 +8,11 @@
 
 #import "GuideViewController.h"
 
+#define kHasDisplayedGuideKey   @"kHasDisplayedGuideKey"
+
+//若有改动，则修改这个值，从1开始递增
+#define GuideValue (1)
+
 const CGFloat BottomDistanceForIphone4 = 0.2;
 const CGFloat BottomDistanceForIphone5 = 0.22;
 const CGFloat BottomDistanceForIphone6 = 0.26;
@@ -45,6 +50,20 @@ const CGFloat multiplierDistance = 0.3;
 
 @implementation GuideViewController
 
++ (BOOL)needShow {
+    BOOL bNeed = YES;
+    NSInteger value = [[[NSUserDefaults standardUserDefaults] objectForKey:kHasDisplayedGuideKey] integerValue];
+    if (value == GuideValue) {
+        bNeed = NO;
+    }
+    return bNeed;
+}
+
++ (void)setHasDisplayed {
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:GuideValue] forKey:kHasDisplayedGuideKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -77,8 +96,9 @@ const CGFloat multiplierDistance = 0.3;
     
     for (int i = 0; i < 4; i++) {
         NSString * imageName = [NSString stringWithFormat:@"welcome_page%i_%d_%d", i+1, (int)([UIScreen mainScreen].bounds.size.width*multiplier),(int)([UIScreen mainScreen].bounds.size.height * multiplier)];
+        NSString *imagePath = [[NSBundle mainBundle] pathForResource:imageName ofType:@".png"];
        
-        ((UIImageView*)[self.view viewWithTag:[[imageViewTags objectAtIndex: i] intValue]]).image = [UIImage imageNamed:imageName];
+        ((UIImageView*)[self.view viewWithTag:[[imageViewTags objectAtIndex: i] intValue]]).image = [UIImage imageWithContentsOfFile:imagePath];
     }
     
     //设置pageControl和底部的距离 iphone4是0.2 iphone5是0.22 iphone6是0.26 iphone6 plus是0.26

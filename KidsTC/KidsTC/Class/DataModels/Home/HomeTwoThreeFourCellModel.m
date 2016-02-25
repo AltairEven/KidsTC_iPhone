@@ -37,8 +37,9 @@
     [super setRatio:ratio];
     NSUInteger count = [self.itemsArray count];
     CGFloat hMargin = 10;
+    CGFloat hGap = 5;
     CGFloat vMargin = 5;
-    CGFloat cellWidth = (SCREEN_WIDTH - (count + 1) * hMargin) / count;
+    CGFloat cellWidth = (SCREEN_WIDTH - 2 * hMargin - (count - 1) * hGap) / count;
     cellHeight = cellRatio * cellWidth  + 2 * vMargin;
 }
 

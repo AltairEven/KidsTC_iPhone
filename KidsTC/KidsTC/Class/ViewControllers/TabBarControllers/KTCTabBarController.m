@@ -285,7 +285,7 @@ static KTCTabBarController* _shareTabBarController = nil;
 }
 
 - (void)setBadge:(NSString *)badgeString forTabIndex:(NSUInteger)index {
-    if ([self selectedButton] == 0) {
+    if ([self selectedButton] == index) {
         return;
     }
     [self.tabBar setBadgeWithValue:badgeString atIndex:(int)index];

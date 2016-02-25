@@ -22,6 +22,7 @@
 - (void)awakeFromNib {
     // Initialization code
     [self.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
+    [self.stackView setViewGap:5];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -34,10 +35,11 @@
     NSUInteger count = [model.itemsArray count];
     
     CGFloat hMargin = 10;
+    CGFloat hGap = 5;
     CGFloat vMargin = 5;
     CGFloat xPosition = hMargin;
     CGFloat yPosition = vMargin;
-    CGFloat width = (SCREEN_WIDTH - (count + 1) * hMargin) / count;
+    CGFloat width = (SCREEN_WIDTH - 2 * hMargin - (count - 1) * hGap) / count;
     CGFloat height = width * [model cellRatio];
     
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
@@ -50,7 +52,7 @@
         UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickedOnImage:)];
         [imageView addGestureRecognizer:gesture];
         [tempArray addObject:imageView];
-        xPosition += width + hMargin;
+        xPosition += width + hGap;
     }
     [self.stackView setSubViews:[NSArray arrayWithArray:tempArray]];
 }

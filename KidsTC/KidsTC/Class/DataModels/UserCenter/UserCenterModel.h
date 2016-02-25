@@ -22,6 +22,8 @@
 
 @property (nonatomic, assign) NSUInteger carrotCount; //萝卜数量
 
+@property (nonatomic, copy) NSString *signLink; //签到页面链接
+
 @property (nonatomic, assign) NSUInteger age; //年龄
 
 @property (nonatomic, strong) KTCUserRole *userRole; //角色
@@ -35,6 +37,14 @@
 @property (nonatomic, assign) BOOL hasUnreadMessage; //是否有未读信息
 
 @property (nonatomic, assign) NSUInteger unreadMessageCount; //未读消息数量
+
+@property (nonatomic, readonly) BOOL hasFlashOrder; //是否有闪购单信息
+
+@property (nonatomic, copy) NSString *flashLink; //闪购单页面链接
+
+@property (nonatomic, readonly) BOOL hasCarrotExchangeHistory; //是否有兑换历史信息
+
+@property (nonatomic, copy) NSString *carrotExchangeLink; //兑换历史页面链接
 
 @property (nonatomic, assign) NSUInteger appointmentOrderCount; // 预约订单数
 

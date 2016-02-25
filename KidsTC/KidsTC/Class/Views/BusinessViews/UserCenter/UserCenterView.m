@@ -21,7 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *levelTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *carrotLabel;
-@property (weak, nonatomic) IBOutlet UIView *myAppointmentTapView;
+@property (weak, nonatomic) IBOutlet UIView *myAppointTapView;
 @property (weak, nonatomic) IBOutlet UIView *waitingPaymentTapView;
 @property (weak, nonatomic) IBOutlet UIView *waitingCommentTapView;
 @property (weak, nonatomic) IBOutlet UILabel *appointCountLabel;
@@ -31,6 +31,8 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UITableViewCell *allOrderCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *myFlashCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *carrotExchangeHistoryCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *myCommentCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *myFavourateCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *couponCell;
@@ -42,6 +44,8 @@
 @property (nonatomic, strong) UIButton *userActivityButton;
 
 @property (nonatomic, strong) UserCenterModel *dataModel;
+
+@property (nonatomic, strong) NSMutableArray *cellsArray;
 
 - (void)buildSubviews;
 
@@ -98,7 +102,7 @@
     self.faceImageView.layer.masksToBounds = YES;
     
     UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTappedOnView:)];
-    [self.myAppointmentTapView addGestureRecognizer:tap1];
+    [self.myAppointTapView addGestureRecognizer:tap1];
     self.appointCountLabel.layer.cornerRadius = 7;
     self.appointCountLabel.layer.masksToBounds = YES;
     
@@ -151,6 +155,10 @@
     self.messageBadgeLabel.layer.masksToBounds = YES;
     [self.messageBadgeLabel setHidden:YES];
     
+//    self.appointCountLabel.layer.cornerRadius = 7;
+//    self.appointCountLabel.layer.masksToBounds = YES;
+//    [self.appointCountLabel setHidden:YES];
+    
     [self.appointCountLabel setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
     [self.waitpayCountLabel setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
     [self.waitcommentCountLabel setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalThemeColor];
@@ -160,6 +168,8 @@
     [self.myFavourateCell.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
     [self.couponCell.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
     [self.messageCenterCell.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
+    [self.myFlashCell.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
+    [self.carrotExchangeHistoryCell.contentView setBackgroundColor:[[KTCThemeManager manager] defaultTheme].globalCellBGColor];
 }
 
 /*
@@ -173,7 +183,7 @@
 #pragma mark UITableViewDataSource & UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return UserCenterTagMessageCenter - UserCenterTagWaitingComment;
+    return [self.cellsArray count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -182,56 +192,26 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.section) {
-        case 0:{
-            return self.allOrderCell;
-        }
-            break;
-        case 1:{
-            return self.myCommentCell;
-        }
-            break;
-        case 2:{
-            return self.myFavourateCell;
-        }
-            break;
-        case 3:{
-            return self.couponCell;
-        }
-            break;
-        case 4:{
-            if ([self.dataModel hasUnreadMessage]) {
-                [self.messageBadgeLabel setHidden:NO];
-                NSString *countString = @"";
-                if (self.dataModel.unreadMessageCount > 99) {
-                    countString = @"99+";
-                    [self.messageBadgeLabel setFont:[UIFont systemFontOfSize:6]];
-                } else {
-                    [self.messageBadgeLabel setFont:[UIFont systemFontOfSize:10]];
-                    countString = [NSString stringWithFormat:@"%lu", (unsigned long)self.dataModel.unreadMessageCount];
-                }
-                [self.messageBadgeLabel setText:countString];
-            } else {
-                [self.messageBadgeLabel setHidden:YES];
-            }
-            return self.messageCenterCell;
-        }
-            break;
-        default:
-            break;
+    UITableViewCell *cell = [self.cellsArray objectAtIndex:indexPath.section];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     }
-    return nil;
+    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 5;
+    return 2.5;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 2.5;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (self.delegate && [self.delegate respondsToSelector:@selector(userCenterView:didClickedWithTag:)]) {
-        UserCenterTag tag = (UserCenterTag)indexPath.section + 4;
-        [self.delegate userCenterView:self didClickedWithTag:tag];
+        UITableViewCell *cell = [self.cellsArray objectAtIndex:indexPath.section];
+        [self.delegate userCenterView:self didClickedWithTag:(UserCenterTag)cell.tag];
     }
 }
 
@@ -338,6 +318,37 @@
         self.dataModel = [self.dataSource modelForUserCenterView:self];
         [self reloadTopView];
     }
+    if (!self.cellsArray) {
+        self.cellsArray = [[NSMutableArray alloc] init];
+    } else {
+        [self.cellsArray removeAllObjects];
+    }
+    [self.cellsArray addObject:self.allOrderCell];
+    if ([self.dataModel hasFlashOrder]) {
+        [self.cellsArray addObject:self.myFlashCell];
+    }
+    if ([self.dataModel hasCarrotExchangeHistory]) {
+        [self.cellsArray addObject:self.carrotExchangeHistoryCell];
+    }
+    [self.cellsArray addObject:self.myCommentCell];
+    [self.cellsArray addObject:self.myFavourateCell];
+    [self.cellsArray addObject:self.couponCell];
+    if ([self.dataModel hasUnreadMessage]) {
+        [self.messageBadgeLabel setHidden:NO];
+        NSString *countString = @"";
+        if (self.dataModel.unreadMessageCount > 99) {
+            countString = @"99+";
+            [self.messageBadgeLabel setFont:[UIFont systemFontOfSize:6]];
+        } else {
+            [self.messageBadgeLabel setFont:[UIFont systemFontOfSize:10]];
+            countString = [NSString stringWithFormat:@"%lu", (unsigned long)self.dataModel.unreadMessageCount];
+        }
+        [self.messageBadgeLabel setText:countString];
+    } else {
+        [self.messageBadgeLabel setHidden:YES];
+    }
+    [self.cellsArray addObject:self.messageCenterCell];
+    
     [self.tableView reloadData];
     if ([self.dataModel hasUserActivity]) {
         [self.userActivityLable setText:self.dataModel.activityModel.activityDescription];

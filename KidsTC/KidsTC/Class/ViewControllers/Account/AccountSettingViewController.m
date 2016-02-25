@@ -165,16 +165,17 @@
             [weakSelf changeFaceImageWithImage:trimmedImage uploadLocationUrlString:[urlStrings firstObject]];
         } failure:^(NSError *error) {
             [[GAlertLoadingView sharedAlertLoadingView] hide];
-            if (error.userInfo) {
-                NSString *errMsg = [error.userInfo objectForKey:@"data"];
-                if ([errMsg isKindOfClass:[NSString class]]) {
-                    [[iToast makeText:errMsg] show];
-                } else {
-                    [[iToast makeText:@"头像上传失败，请重新尝试"] show];
-                }
-            } else {
-                [[iToast makeText:@"头像上传失败，请重新尝试"] show];
-            }
+//            if (error.userInfo) {
+//                NSString *errMsg = [error.userInfo objectForKey:@"data"];
+//                if ([errMsg isKindOfClass:[NSString class]]) {
+//                    [[iToast makeText:errMsg] show];
+//                } else {
+//                    [[iToast makeText:@"头像上传失败，请重新尝试"] show];
+//                }
+//            } else {
+//                [[iToast makeText:@"头像上传失败，请重新尝试"] show];
+//            }
+            [[iToast makeText:@"头像上传失败，请重新尝试"] show];
         }];
     } else {
         [[iToast makeText:@"获取图片失败"] show];

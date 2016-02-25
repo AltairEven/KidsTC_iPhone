@@ -16,4 +16,9 @@ typedef void(^guide_complete)();
 
 @property (nonatomic, assign) NSInteger imgCount;
 @property (nonatomic, strong) guide_complete guide_complete;
+
++ (BOOL)needShow;
+
++ (void)setHasDisplayed;
+
 @end
