@@ -68,7 +68,7 @@
 }
 
 - (NSArray *)historiesArrayForKTCSearchView:(KTCSearchView *)searchView {
-    return [[self searchHistory] allKeys];
+    return [self searchHistory];
 }
 
 #pragma mark Private methods
@@ -93,17 +93,28 @@
         return;
     }
     if (type == KTCSearchTypeService || type == KTCSearchTypeStore || type == KTCSearchTypeNews) {
+        NSArray *hisArray = [self.historySearchDic objectForKey:[NSNumber numberWithInteger:type]];
         BOOL alreadyExist = NO;
-        for (NSString *key in [self.historySearchDic allKeys]) {
-            if ([key isEqualToString:keyword] && [[self.historySearchDic objectForKey:key] integerValue] == type) {
-                alreadyExist = YES;
-                break;
-            }
+        if (hisArray && [hisArray indexOfObject:keyword] != NSNotFound) {
+            alreadyExist = YES;
         }
+        
+//        for (NSString *key in [self.historySearchDic allKeys]) {
+//            if ([key isEqualToString:keyword] && [[self.historySearchDic objectForKey:key] integerValue] == type) {
+//                alreadyExist = YES;
+//                break;
+//            }
+//        }
         if (alreadyExist) {
             return;
         }
-        [self.historySearchDic setObject:[NSNumber numberWithInteger:type] forKey:keyword];
+        NSMutableArray *tempArray = nil;
+        if (hisArray) {
+            tempArray = [[NSMutableArray alloc] initWithArray:hisArray];
+        } else {
+            tempArray = [[NSMutableArray alloc] initWithObjects:keyword, nil];
+        }
+        [self.historySearchDic setObject:[NSArray arrayWithArray:tempArray] forKey:[NSNumber numberWithInt:type]];
     }
 }
 
@@ -113,7 +124,7 @@
 }
 
 - (void)updateLocalSearchHistory {
-    NSString *filePath = FILE_CACHE_PATH(@"SearchHistory");
+    NSString *filePath = FILE_CACHE_PATH(@"SearchHistoryNew");
     
     NSDictionary *dic = [NSDictionary dictionaryWithDictionary:self.historySearchDic];
     if (!dic || [dic count] == 0) {
@@ -123,17 +134,19 @@
     [dic writeToFile:filePath atomically:NO];
 }
 
-- (NSDictionary *)searchHistory {
+- (NSArray *)searchHistory {
     NSDictionary *allHistory = [NSDictionary dictionaryWithDictionary:self.historySearchDic];
     
-    NSMutableDictionary *tempDic = [[NSMutableDictionary alloc] init];
-    for (NSString *key in [allHistory allKeys]) {
-        NSNumber *type = [allHistory objectForKey:key];
-        if ([type integerValue] == self.searchType) {
-            [tempDic setObject:type forKey:key];
-        }
-    }
-    return [NSDictionary dictionaryWithDictionary:tempDic];
+    NSArray *currentHistory = [allHistory objectForKey:[NSNumber numberWithInteger:self.searchType]];
+    
+//    NSMutableDictionary *tempDic = [[NSMutableDictionary alloc] init];
+//    for (NSString *key in [allHistory allKeys]) {
+//        NSNumber *type = [allHistory objectForKey:key];
+//        if ([type integerValue] == self.searchType) {
+//            [tempDic setObject:type forKey:key];
+//        }
+//    }
+    return currentHistory;
 }
 
 @end

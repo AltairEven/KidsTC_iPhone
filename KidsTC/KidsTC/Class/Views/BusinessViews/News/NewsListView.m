@@ -259,9 +259,11 @@ static NSString *const kCellIdentifier = @"kCellIdentifier";
 
 #pragma mark Public methods
 
-- (void)selectNewsTagAtIndex:(NSUInteger)index {
+- (void)selectNewsTagAtIndex:(NSUInteger)index needRefresh:(BOOL)bNeed {
     [self.segmentView setSelectedIndex:index];
-    [self segmentView:self.segmentView didSelectedAtIndex:index];
+    if (bNeed) {
+        [self segmentView:self.segmentView didSelectedAtIndex:index];
+    }
     [self.segmentView scrollToIndex:index position:UITableViewScrollPositionMiddle animated:YES];
 }
 

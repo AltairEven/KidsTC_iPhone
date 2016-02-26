@@ -98,7 +98,7 @@
         [weakSelf parseTagsWithData:responseData];
         [weakSelf.view reloadNewsTag];
         weakSelf.gettingNewsTag = NO;
-        [self.view selectNewsTagAtIndex:self.currentTagIndex];
+        [self.view selectNewsTagAtIndex:self.currentTagIndex needRefresh:YES];
 //        [weakSelf startUpdateDataWithNewsTagIndex:weakSelf.currentTagIndex];
     } failure:^(HttpRequestClient *client, NSError *error) {
         weakSelf.gettingNewsTag = NO;
@@ -263,6 +263,8 @@
     if ([self.newsTagItemModels count] == 0) {
         [self getNewsTags];
         return;
+    } else {
+        [self.view selectNewsTagAtIndex:self.currentTagIndex needRefresh:NO];
     }
     if (!self.loadNewsRequest) {
         self.loadNewsRequest = [HttpRequestClient clientWithUrlAliasName:@"ARTICLE_GET_LIST"];
@@ -373,6 +375,8 @@
     
     if ([dataArray count] == 0) {
         [self.view startRefresh];
+    } else {
+        [self.view selectNewsTagAtIndex:self.currentTagIndex needRefresh:NO];
     }
     return tagIndex;
 }
@@ -407,11 +411,11 @@
         }
     }
     if (isExisting) {
-        [self.view selectNewsTagAtIndex:index];
+        [self.view selectNewsTagAtIndex:index needRefresh:NO];
     } else {
         [self.newsTagItemModels addObject:model];
         [self.view reloadNewsTag];
-        [self.view selectNewsTagAtIndex:[self.newsTagItemModels count] - 1];
+        [self.view selectNewsTagAtIndex:[self.newsTagItemModels count] - 1 needRefresh:YES];
     }
     [self resetResultWithNewsTagIndex:index];
 }

@@ -892,6 +892,7 @@
 		8F85ADC11C0EC05700890526 /* NewSearchResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F85ADBF1C0EC05700890526 /* NewSearchResultViewController.xib */; };
 		8F8671681C107E29005C838B /* StoreDetailViewCouponCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8671661C107E29005C838B /* StoreDetailViewCouponCell.m */; };
 		8F8671691C107E29005C838B /* StoreDetailViewCouponCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F8671671C107E29005C838B /* StoreDetailViewCouponCell.xib */; };
+		8F88A9531C7ED05B00C4A11D /* guide_userCenter.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F88A9521C7ED05B00C4A11D /* guide_userCenter.png */; };
 		8F8A08D21BF9E31300134A9A /* BindPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8A08D01BF9E31300134A9A /* BindPhoneViewController.m */; };
 		8F8A08D31BF9E31300134A9A /* BindPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F8A08D11BF9E31300134A9A /* BindPhoneViewController.xib */; };
 		8F8B0B1E1C4E21D7000E9A26 /* CashierViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8B0B1C1C4E21D7000E9A26 /* CashierViewController.m */; };
@@ -947,10 +948,6 @@
 		8FA87C7F1C7C52D400B10D1E /* welcome_page3_1242_2208.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA87C6F1C7C52D400B10D1E /* welcome_page3_1242_2208.png */; };
 		8FA87C801C7C52D400B10D1E /* welcome_page3_750_1334.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA87C701C7C52D400B10D1E /* welcome_page3_750_1334.png */; };
 		8FA87C811C7C52D400B10D1E /* welcome_page3_640_960.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA87C711C7C52D400B10D1E /* welcome_page3_640_960.png */; };
-		8FA87C821C7C52D400B10D1E /* welcome_page4_640_1136.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA87C721C7C52D400B10D1E /* welcome_page4_640_1136.png */; };
-		8FA87C831C7C52D400B10D1E /* welcome_page4_1242_2208.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA87C731C7C52D400B10D1E /* welcome_page4_1242_2208.png */; };
-		8FA87C841C7C52D400B10D1E /* welcome_page4_750_1334.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA87C741C7C52D400B10D1E /* welcome_page4_750_1334.png */; };
-		8FA87C851C7C52D400B10D1E /* welcome_page4_640_960.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FA87C751C7C52D400B10D1E /* welcome_page4_640_960.png */; };
 		8FABCB281C0FCBAB005BF7AD /* FavouriteViewServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FABCB261C0FCBAB005BF7AD /* FavouriteViewServiceCell.m */; };
 		8FABCB291C0FCBAB005BF7AD /* FavouriteViewServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FABCB271C0FCBAB005BF7AD /* FavouriteViewServiceCell.xib */; };
 		8FABCB2D1C0FCBD0005BF7AD /* FavouriteViewStoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FABCB2B1C0FCBD0005BF7AD /* FavouriteViewStoreCell.m */; };
@@ -2554,6 +2551,7 @@
 		8F8671651C107E29005C838B /* StoreDetailViewCouponCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreDetailViewCouponCell.h; sourceTree = "<group>"; };
 		8F8671661C107E29005C838B /* StoreDetailViewCouponCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreDetailViewCouponCell.m; sourceTree = "<group>"; };
 		8F8671671C107E29005C838B /* StoreDetailViewCouponCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreDetailViewCouponCell.xib; sourceTree = "<group>"; };
+		8F88A9521C7ED05B00C4A11D /* guide_userCenter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide_userCenter.png; sourceTree = "<group>"; };
 		8F8A08CF1BF9E31300134A9A /* BindPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindPhoneViewController.h; sourceTree = "<group>"; };
 		8F8A08D01BF9E31300134A9A /* BindPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindPhoneViewController.m; sourceTree = "<group>"; };
 		8F8A08D11BF9E31300134A9A /* BindPhoneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindPhoneViewController.xib; sourceTree = "<group>"; };
@@ -2633,10 +2631,6 @@
 		8FA87C6F1C7C52D400B10D1E /* welcome_page3_1242_2208.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome_page3_1242_2208.png; sourceTree = "<group>"; };
 		8FA87C701C7C52D400B10D1E /* welcome_page3_750_1334.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome_page3_750_1334.png; sourceTree = "<group>"; };
 		8FA87C711C7C52D400B10D1E /* welcome_page3_640_960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome_page3_640_960.png; sourceTree = "<group>"; };
-		8FA87C721C7C52D400B10D1E /* welcome_page4_640_1136.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome_page4_640_1136.png; sourceTree = "<group>"; };
-		8FA87C731C7C52D400B10D1E /* welcome_page4_1242_2208.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome_page4_1242_2208.png; sourceTree = "<group>"; };
-		8FA87C741C7C52D400B10D1E /* welcome_page4_750_1334.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome_page4_750_1334.png; sourceTree = "<group>"; };
-		8FA87C751C7C52D400B10D1E /* welcome_page4_640_960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome_page4_640_960.png; sourceTree = "<group>"; };
 		8FABCB251C0FCBAB005BF7AD /* FavouriteViewServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouriteViewServiceCell.h; sourceTree = "<group>"; };
 		8FABCB261C0FCBAB005BF7AD /* FavouriteViewServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouriteViewServiceCell.m; sourceTree = "<group>"; };
 		8FABCB271C0FCBAB005BF7AD /* FavouriteViewServiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavouriteViewServiceCell.xib; sourceTree = "<group>"; };
@@ -5908,6 +5902,7 @@
 			isa = PBXGroup;
 			children = (
 				8FA87C631C7BF87700B10D1E /* guide_home.png */,
+				8F88A9521C7ED05B00C4A11D /* guide_userCenter.png */,
 			);
 			path = Guide;
 			sourceTree = "<group>";
@@ -5927,10 +5922,6 @@
 				8FA87C6F1C7C52D400B10D1E /* welcome_page3_1242_2208.png */,
 				8FA87C701C7C52D400B10D1E /* welcome_page3_750_1334.png */,
 				8FA87C711C7C52D400B10D1E /* welcome_page3_640_960.png */,
-				8FA87C721C7C52D400B10D1E /* welcome_page4_640_1136.png */,
-				8FA87C731C7C52D400B10D1E /* welcome_page4_1242_2208.png */,
-				8FA87C741C7C52D400B10D1E /* welcome_page4_750_1334.png */,
-				8FA87C751C7C52D400B10D1E /* welcome_page4_640_960.png */,
 			);
 			path = Welcome;
 			sourceTree = "<group>";
@@ -6179,7 +6170,6 @@
 				8F6502B91C50D4EB00C36260 /* StoreDetailServiceListViewController.xib in Resources */,
 				1E827BE01B941337008F3F08 /* PlayButtonOverlayLargeTap@2x.png in Resources */,
 				8FA361661C1566B50094A9AA /* loading_empty_child_girl.png in Resources */,
-				8FA87C851C7C52D400B10D1E /* welcome_page4_640_960.png in Resources */,
 				1E827BDC1B941337008F3F08 /* PlayButtonOverlayLarge.png in Resources */,
 				1EC73BEC1B5E5FF3008B39EA /* HomeViewThreeCell.xib in Resources */,
 				8FAFABAC1BFF1EC600082F20 /* CommonShareViewController.xib in Resources */,
@@ -6246,7 +6236,6 @@
 				1EC73BB91B5E2604008B39EA /* HomeView.xib in Resources */,
 				8F50DEC31C1F07840069E6A4 /* BigAdvertisementViewController.xib in Resources */,
 				8FABCB651C102A93005BF7AD /* KTCBrowseHistoryViewServiceCell.xib in Resources */,
-				8FA87C841C7C52D400B10D1E /* welcome_page4_750_1334.png in Resources */,
 				1E0B77FA1B6B798100A58AD4 /* KTCSearchResultSortCell.xib in Resources */,
 				1E0B7B091B6F6C1400A58AD4 /* SaiDanCommentView.xib in Resources */,
 				1E3D7E861B4BD83D00275C35 /* Images.xcassets in Resources */,
@@ -6342,7 +6331,6 @@
 				1E827BD91B941337008F3F08 /* ImageSelectedSmallOn.png in Resources */,
 				1E827B8B1B93E7B3008F3F08 /* AUIPhotoBrowserViewController.xib in Resources */,
 				1E943EF81B7AFC9F0029FE74 /* AppointmentListViewHeaderTabCell.xib in Resources */,
-				8FA87C821C7C52D400B10D1E /* welcome_page4_640_1136.png in Resources */,
 				1EC4A1111B5CCD2700206BB9 /* KTCSearchView.xib in Resources */,
 				1E943F531B7DDFDF0029FE74 /* logo_828_1472.png in Resources */,
 				1E7994D91BC614DD0099CFF9 /* ParentingStrategyDetailView.xib in Resources */,
@@ -6372,6 +6360,7 @@
 				8F30D5E31C3BF70B004EE892 /* coupon_cellBG_d.png in Resources */,
 				1E79956F1BCD25860099CFF9 /* LoveHouseListView.xib in Resources */,
 				1E15F9781BDDCFA4000C74E7 /* StoreDetailHotRecommendCell.xib in Resources */,
+				8F88A9531C7ED05B00C4A11D /* guide_userCenter.png in Resources */,
 				8FCC49311C73007B008BB836 /* SettlementScoreEditViewController.xib in Resources */,
 				1E80170E1BB006EF00B6C352 /* HomeViewNewsCell.xib in Resources */,
 				8F62C3441C52145B0013031E /* StrategyDetailRelatedServiceListViewController.xib in Resources */,
@@ -6404,7 +6393,6 @@
 				1E827BDE1B941337008F3F08 /* PlayButtonOverlayLarge@3x.png in Resources */,
 				8FBAEAF61C31701B00A8AFF0 /* HomeViewBigImageTwoDescCell.xib in Resources */,
 				8FA361681C1566B50094A9AA /* loading_empty_kids_girl.png in Resources */,
-				8FA87C831C7C52D400B10D1E /* welcome_page4_1242_2208.png in Resources */,
 				1E827BE61B941337008F3F08 /* UIBarButtonItemArrowRight@2x.png in Resources */,
 				8FEFF4F81BFCC54F001C098F /* KTCActionView.xib in Resources */,
 				1E943F111B7B5B850029FE74 /* OrderDetailConsumptionCodeCell.xib in Resources */,
@@ -7129,8 +7117,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: YE QIAN (L4HESQKF9M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: YE QIAN (L4HESQKF9M)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Tongcheng Information Technology Co., Ltd. (F8C2RFLJQX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Tongcheng Information Technology Co., Ltd. (F8C2RFLJQX)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -7154,7 +7142,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "f437d461-e830-43e7-a75d-a132e4f9fec0";
+				PROVISIONING_PROFILE = "9c12f2ec-516b-4672-8913-1762d50ce75c";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -7176,8 +7164,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: YE QIAN (L4HESQKF9M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: YE QIAN (L4HESQKF9M)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Tongcheng Information Technology Co., Ltd. (F8C2RFLJQX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Tongcheng Information Technology Co., Ltd. (F8C2RFLJQX)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -7194,7 +7182,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "f437d461-e830-43e7-a75d-a132e4f9fec0";
+				PROVISIONING_PROFILE = "9c12f2ec-516b-4672-8913-1762d50ce75c";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -7205,8 +7193,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: YE QIAN (L4HESQKF9M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: YE QIAN (L4HESQKF9M)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Tongcheng Information Technology Co., Ltd. (F8C2RFLJQX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Tongcheng Information Technology Co., Ltd. (F8C2RFLJQX)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7233,9 +7221,9 @@
 					"-ObjC",
 					"-licucore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kidstc.iPhoneDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kidstc.iPhoneKidsTC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f437d461-e830-43e7-a75d-a132e4f9fec0";
+				PROVISIONING_PROFILE = "9c12f2ec-516b-4672-8913-1762d50ce75c";
 			};
 			name = Debug;
 		};
@@ -7244,8 +7232,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: YE QIAN (L4HESQKF9M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: YE QIAN (L4HESQKF9M)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Tongcheng Information Technology Co., Ltd. (F8C2RFLJQX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Tongcheng Information Technology Co., Ltd. (F8C2RFLJQX)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7271,9 +7259,9 @@
 					"-ObjC",
 					"-licucore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kidstc.iPhoneDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kidstc.iPhoneKidsTC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f437d461-e830-43e7-a75d-a132e4f9fec0";
+				PROVISIONING_PROFILE = "9c12f2ec-516b-4672-8913-1762d50ce75c";
 			};
 			name = Release;
 		};

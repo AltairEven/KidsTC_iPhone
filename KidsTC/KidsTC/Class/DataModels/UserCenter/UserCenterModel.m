@@ -44,7 +44,7 @@
                 self.flashLink = link;
             }
         }
-        NSDictionary *carrotDic = [data objectForKey:@"fsList"];
+        NSDictionary *carrotDic = [data objectForKey:@"exHistory"];
         if ([carrotDic isKindOfClass:[NSDictionary class]]) {
             NSString *link = [carrotDic objectForKey:@"linkUrl"];
             if ([link isKindOfClass:[NSString class]] && [link length] > 0) {
@@ -52,7 +52,6 @@
                 self.carrotExchangeLink = link;
             }
         }
-        self.carrotExchangeLink = @"www.baidu.com";
         NSDictionary *signDic = [data objectForKey:@"radish"];
         if ([signDic isKindOfClass:[NSDictionary class]]) {
             NSString *link = [signDic objectForKey:@"linkUrl"];

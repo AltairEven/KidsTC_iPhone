@@ -446,6 +446,10 @@ static NSString *const kRefundDescriptionCellIdentifier = @"kRefundDescriptionCe
             [self.leftButton setTitle:@"申请退款" forState:UIControlStateNormal];
             self.leftButtonWidth.constant = LeftButtonWith;
         }
+        if ([self.detailModel canGetCode]) {
+            [self.rightButtonBGView setHidden:NO];
+            [self.rightButton setTitle:@"获取消费码" forState:UIControlStateNormal];
+        }
     } else {
         self.buttonBGHeight.constant = 0;
         [self.buttonBGView setHidden:YES];

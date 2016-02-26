@@ -122,7 +122,7 @@
             break;
         case UserGuideViewTagUserCenter:
         {
-            UIImage *image = [UIImage imageNamed:@"guide_home"];
+            UIImage *image = [UIImage imageNamed:@"guide_userCenter"];
             [self.imageView setImage:image];
         }
             break;

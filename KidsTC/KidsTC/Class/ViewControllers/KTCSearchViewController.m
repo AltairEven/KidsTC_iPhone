@@ -137,7 +137,7 @@
 }
 
 - (void)searchView:(KTCSearchView *)searchView didSelectedHistoryAtIndex:(NSUInteger)index {
-    NSString *kw = [[[self.viewModel searchHistory] allKeys] objectAtIndex:index];
+    NSString *kw = [[self.viewModel searchHistory] objectAtIndex:index];
     [self searchWithKeyword:kw saveHistory:NO];
 }
 

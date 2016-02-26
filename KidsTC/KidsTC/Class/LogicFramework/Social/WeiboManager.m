@@ -54,9 +54,9 @@ static WeiboManager *_sharedInstance = nil;
     if (self) {
         [WeiboSDK enableDebugMode:YES];
         _isOnline = [WeiboSDK registerApp:kWeiboAppKey];
-//        if (![WeiboSDK isWeiboAppInstalled]) {
-//            _isOnline = NO;
-//        }
+        if (![WeiboSDK isWeiboAppInstalled]) {
+            _isOnline = NO;
+        }
     }
     return self;
 }

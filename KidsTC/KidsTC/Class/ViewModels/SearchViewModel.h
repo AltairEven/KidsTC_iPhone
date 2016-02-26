@@ -23,6 +23,6 @@
 
 - (void)updateLocalSearchHistory;
 
-- (NSDictionary *)searchHistory;
+- (NSArray *)searchHistory;
 
 @end

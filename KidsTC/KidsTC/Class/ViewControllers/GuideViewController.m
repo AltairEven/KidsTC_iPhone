@@ -27,7 +27,7 @@ const CGFloat multiplierDistance = 0.3;
 @property (weak, nonatomic) IBOutlet UIView *guidView1;
 @property (weak, nonatomic) IBOutlet UIView *guidView3;
 @property (weak, nonatomic) IBOutlet UIView *guidView2;
-@property (weak, nonatomic) IBOutlet UIView *guidView4;
+//@property (weak, nonatomic) IBOutlet UIView *guidView4;
 
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl
 ;
@@ -35,7 +35,7 @@ const CGFloat multiplierDistance = 0.3;
 
 @property (weak, nonatomic) IBOutlet UIImageView *view2Image;
 @property (weak, nonatomic) IBOutlet UIImageView *view3Image;
-@property (weak, nonatomic) IBOutlet UIImageView *view4Image;
+//@property (weak, nonatomic) IBOutlet UIImageView *view4Image;
 @property (weak, nonatomic) IBOutlet UIImageView *view1Image;
 
 @property (nonatomic) CGFloat bottomDistance;
@@ -83,7 +83,7 @@ const CGFloat multiplierDistance = 0.3;
  *  通过屏幕分辨率，适配4个屏幕显示的4套图片
  */
 -(void) customizeImage{
-    NSArray * imageViewTags =[NSArray arrayWithObjects: @1001, @1002, @1003,@1004, nil];
+    NSArray * imageViewTags =[NSArray arrayWithObjects: @1001, @1002, @1003, nil];
     
     //根据分辨率组合图片的名字-这是自定义规则
     CGFloat multiplier = DeviceMultiplierNot6plus;
@@ -94,7 +94,7 @@ const CGFloat multiplierDistance = 0.3;
         multiplier = DeviceMultiplier6plus;
     }
     
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 3; i++) {
         NSString * imageName = [NSString stringWithFormat:@"welcome_page%i_%d_%d", i+1, (int)([UIScreen mainScreen].bounds.size.width*multiplier),(int)([UIScreen mainScreen].bounds.size.height * multiplier)];
         NSString *imagePath = [[NSBundle mainBundle] pathForResource:imageName ofType:@".png"];
        
@@ -109,24 +109,29 @@ const CGFloat multiplierDistance = 0.3;
     //iphone4s, iphone4
     if ([UIScreen mainScreen].bounds.size.width == 320.0 &&
         [UIScreen mainScreen].bounds.size.height == 480.0) {
-        self.bottomDistance = multiplierDistance *BottomDistanceForIphone4 * [UIScreen mainScreen].bounds.size.height ;
+//        self.bottomDistance = multiplierDistance *BottomDistanceForIphone4 * [UIScreen mainScreen].bounds.size.height ;
+        self.bottomDistance = 0;
         
         [self updateViewBottomDistance:self.bottomDistance updateView:self.pageControl class:[UIPageControl class]];
         
         
     }else if ([UIScreen mainScreen].bounds.size.width == 320.0 &&
               [UIScreen mainScreen].bounds.size.height == 568.0){ //iphone5, iphone5c, iphone5s
-        self.bottomDistance =multiplierDistance *BottomDistanceForIphone5 * [UIScreen mainScreen].bounds.size.height;
+//        self.bottomDistance =multiplierDistance *BottomDistanceForIphone5 * [UIScreen mainScreen].bounds.size.height;
+        self.bottomDistance = 20;
          [self updateViewBottomDistance:self.bottomDistance updateView:self.pageControl class:[UIPageControl class]];
         
     }else if ([UIScreen mainScreen].bounds.size.width == 375.0 &&
               [UIScreen mainScreen].bounds.size.height == 667.0){//iphone6
-        self.bottomDistance =multiplierDistance *BottomDistanceForIphone6 * [UIScreen mainScreen].bounds.size.height ;
+//        self.bottomDistance =multiplierDistance *BottomDistanceForIphone6 * [UIScreen mainScreen].bounds.size.height ;
+        
+        self.bottomDistance = 30;
         [self updateViewBottomDistance:self.bottomDistance updateView:self.pageControl class:[UIPageControl class]];
         
     }else if([UIScreen mainScreen].bounds.size.width == 414.0 &&
              [UIScreen mainScreen].bounds.size.height == 736.0){ //iphone6 plus
-        self.bottomDistance =multiplierDistance *BottomDistanceForIphone6plus * [UIScreen mainScreen].bounds.size.height;
+//        self.bottomDistance =multiplierDistance *BottomDistanceForIphone6plus * [UIScreen mainScreen].bounds.size.height;
+        self.bottomDistance = 40;
         [self updateViewBottomDistance:self.bottomDistance   updateView:self.pageControl class:[UIPageControl class]];
     }
     
@@ -201,7 +206,7 @@ const CGFloat multiplierDistance = 0.3;
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     //加上80是拖曳的上限限制，以免刚拖一下第四屏，就没了
-    if(_guide_complete && scrollView.contentOffset.x > (3 * [UIScreen mainScreen].bounds.size.width + 80)){
+    if(_guide_complete && scrollView.contentOffset.x > (2 * [UIScreen mainScreen].bounds.size.width + 80)){
         _guide_complete();
     }else{
         CGFloat pageIndex =scrollView.contentOffset.x / [UIScreen mainScreen].bounds.size.width;
