@@ -13,7 +13,7 @@
 #import "KTCThemeManager.h"
 
 
-//#define KIDSTC_DEBUG
+#define KIDSTC_DEBUG
 
 
 // Apple Id in App Store 

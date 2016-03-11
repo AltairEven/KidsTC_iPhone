@@ -195,8 +195,6 @@ static NSString *const kRelatedServiceCellIdentifier = @"kRelatedServiceCellIden
         if (serviceCount > ServiceMaxDisplayCount) {
             //最多3个
             serviceCount = ServiceMaxDisplayCount;
-        }
-        if (serviceCount > 0) {
             //include title
             serviceCount ++;
         }

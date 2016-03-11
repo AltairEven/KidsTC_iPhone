@@ -10,8 +10,6 @@
 #import "ServiceDetailModel.h"
 #import "ServiceDetailMoreInfoView.h"
 
-#define PULL_THRESHOLD (120)
-
 @class ServiceDetailView;
 
 @protocol ServiceDetailViewDataSource <NSObject>

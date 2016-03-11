@@ -26,6 +26,7 @@
 #import "NotificationCenterViewController.h"
 #import "NewsListTagFilterViewController.h"
 #import "NewsViewController.h"
+#import "FlashDetailViewController.h"
 
 @implementation KTCSegueMaster
 
@@ -238,12 +239,22 @@
             break;
         case HomeSegueDestinationFlashDetail:
         {
-            NSString *link = [model.segueParam objectForKey:@"linkUrl"];
-            if ([link isKindOfClass:[NSString class]] && [link length] > 0) {
-                KTCWebViewController *controller = [[KTCWebViewController alloc] init];
-                [controller setWebUrlString:link];
-                [controller setHidesBottomBarWhenPushed:YES];
-                toController = controller;
+//            NSString *link = [model.segueParam objectForKey:@"linkUrl"];
+//            if ([link isKindOfClass:[NSString class]] && [link length] > 0) {
+//                KTCWebViewController *controller = [[KTCWebViewController alloc] init];
+//                [controller setWebUrlString:link];
+//                [controller setHidesBottomBarWhenPushed:YES];
+//                toController = controller;
+//            }
+            
+            if ([model.segueParam objectForKey:@"pid"]) {
+                NSString *flashId = [NSString stringWithFormat:@"%@", [model.segueParam objectForKey:@"pid"]];
+                if ([flashId length] > 0) {
+                    flashId = @"2015074701";
+                    FlashDetailViewController *controller = [[FlashDetailViewController alloc] initWithServiceId:flashId channelId:nil];
+                    [controller setHidesBottomBarWhenPushed:YES];
+                    toController = controller;
+                }
             }
         }
         default:

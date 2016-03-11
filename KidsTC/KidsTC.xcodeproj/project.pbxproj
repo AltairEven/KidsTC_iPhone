@@ -810,6 +810,17 @@
 		8F2F874C1C52006800DD1FD1 /* StrategyDetailServiceItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2F874B1C52006800DD1FD1 /* StrategyDetailServiceItemModel.m */; };
 		8F2F87501C52045A00DD1FD1 /* StrategyDetailRelatedServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F2F874E1C52045A00DD1FD1 /* StrategyDetailRelatedServiceCell.m */; };
 		8F2F87511C52045A00DD1FD1 /* StrategyDetailRelatedServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F2F874F1C52045A00DD1FD1 /* StrategyDetailRelatedServiceCell.xib */; };
+		8F3042371C83E29D00349312 /* FlashDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3042361C83E29D00349312 /* FlashDetailView.m */; };
+		8F3042391C83E2C200349312 /* FlashDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F3042381C83E2C200349312 /* FlashDetailView.xib */; };
+		8F30423C1C83E43200349312 /* FlashDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F30423B1C83E43200349312 /* FlashDetailModel.m */; };
+		8F30423F1C83E4EF00349312 /* FlashDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F30423E1C83E4EF00349312 /* FlashDetailViewModel.m */; };
+		8F3042431C83E64700349312 /* FlashDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3042411C83E64700349312 /* FlashDetailViewController.m */; };
+		8F3042441C83E64700349312 /* FlashDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F3042421C83E64700349312 /* FlashDetailViewController.xib */; };
+		8F3042471C83F09400349312 /* FlashDetailStageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3042461C83F09400349312 /* FlashDetailStageView.m */; };
+		8F3042491C83F0A300349312 /* FlashDetailStageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F3042481C83F0A300349312 /* FlashDetailStageView.xib */; };
+		8F30424C1C83F7AD00349312 /* FlashDetailStageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F30424B1C83F7AD00349312 /* FlashDetailStageCell.m */; };
+		8F30424E1C83F7B900349312 /* FlashDetailStageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F30424D1C83F7B900349312 /* FlashDetailStageCell.xib */; };
+		8F3042511C842C5E00349312 /* FlashStageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3042501C842C5E00349312 /* FlashStageModel.m */; };
 		8F30D5E01C3B7175004EE892 /* ServiceDetailActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F30D5DE1C3B7175004EE892 /* ServiceDetailActivityCell.m */; };
 		8F30D5E11C3B7175004EE892 /* ServiceDetailActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F30D5DF1C3B7175004EE892 /* ServiceDetailActivityCell.xib */; };
 		8F30D5E31C3BF70B004EE892 /* coupon_cellBG_d.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F30D5E21C3BF70B004EE892 /* coupon_cellBG_d.png */; };
@@ -2419,6 +2430,24 @@
 		8F2F874D1C52045A00DD1FD1 /* StrategyDetailRelatedServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StrategyDetailRelatedServiceCell.h; sourceTree = "<group>"; };
 		8F2F874E1C52045A00DD1FD1 /* StrategyDetailRelatedServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StrategyDetailRelatedServiceCell.m; sourceTree = "<group>"; };
 		8F2F874F1C52045A00DD1FD1 /* StrategyDetailRelatedServiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StrategyDetailRelatedServiceCell.xib; sourceTree = "<group>"; };
+		8F3042351C83E29D00349312 /* FlashDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashDetailView.h; sourceTree = "<group>"; };
+		8F3042361C83E29D00349312 /* FlashDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlashDetailView.m; sourceTree = "<group>"; };
+		8F3042381C83E2C200349312 /* FlashDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FlashDetailView.xib; sourceTree = "<group>"; };
+		8F30423A1C83E43200349312 /* FlashDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashDetailModel.h; sourceTree = "<group>"; };
+		8F30423B1C83E43200349312 /* FlashDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlashDetailModel.m; sourceTree = "<group>"; };
+		8F30423D1C83E4EF00349312 /* FlashDetailViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashDetailViewModel.h; sourceTree = "<group>"; };
+		8F30423E1C83E4EF00349312 /* FlashDetailViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlashDetailViewModel.m; sourceTree = "<group>"; };
+		8F3042401C83E64700349312 /* FlashDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashDetailViewController.h; sourceTree = "<group>"; };
+		8F3042411C83E64700349312 /* FlashDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlashDetailViewController.m; sourceTree = "<group>"; };
+		8F3042421C83E64700349312 /* FlashDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FlashDetailViewController.xib; sourceTree = "<group>"; };
+		8F3042451C83F09400349312 /* FlashDetailStageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashDetailStageView.h; sourceTree = "<group>"; };
+		8F3042461C83F09400349312 /* FlashDetailStageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlashDetailStageView.m; sourceTree = "<group>"; };
+		8F3042481C83F0A300349312 /* FlashDetailStageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FlashDetailStageView.xib; sourceTree = "<group>"; };
+		8F30424A1C83F7AD00349312 /* FlashDetailStageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashDetailStageCell.h; sourceTree = "<group>"; };
+		8F30424B1C83F7AD00349312 /* FlashDetailStageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlashDetailStageCell.m; sourceTree = "<group>"; };
+		8F30424D1C83F7B900349312 /* FlashDetailStageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FlashDetailStageCell.xib; sourceTree = "<group>"; };
+		8F30424F1C842C5E00349312 /* FlashStageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashStageModel.h; sourceTree = "<group>"; };
+		8F3042501C842C5E00349312 /* FlashStageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlashStageModel.m; sourceTree = "<group>"; };
 		8F30D5DD1C3B7175004EE892 /* ServiceDetailActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceDetailActivityCell.h; sourceTree = "<group>"; };
 		8F30D5DE1C3B7175004EE892 /* ServiceDetailActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceDetailActivityCell.m; sourceTree = "<group>"; };
 		8F30D5DF1C3B7175004EE892 /* ServiceDetailActivityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceDetailActivityCell.xib; sourceTree = "<group>"; };
@@ -3336,6 +3365,8 @@
 				8F85AD891C0C6CE100890526 /* NotificationCenterViewModel.m */,
 				8F85ADAE1C0D50E400890526 /* MyCommentListViewModel.h */,
 				8F85ADAF1C0D50E400890526 /* MyCommentListViewModel.m */,
+				8F30423D1C83E4EF00349312 /* FlashDetailViewModel.h */,
+				8F30423E1C83E4EF00349312 /* FlashDetailViewModel.m */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -4025,6 +4056,7 @@
 		1E3D8EFA1B4CB83A00275C35 /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
+				8F3042331C83E25700349312 /* FlashBuy */,
 				8FABCB681C102ADD005BF7AD /* History */,
 				8FABCB391C0FE9FE005BF7AD /* Favourite */,
 				8F85AD7F1C0C496000890526 /* PushNotification */,
@@ -4057,6 +4089,7 @@
 		1E3D8EFC1B4CB83A00275C35 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8F3042341C83E26B00349312 /* FlashBuy */,
 				8FEAED711C12C21800DF6E5E /* News */,
 				1E7995761BCD261F0099CFF9 /* LoveHouse */,
 				1E7995751BCD261F0099CFF9 /* Hospital */,
@@ -4162,6 +4195,7 @@
 		1E3D8F471B4D1D4D00275C35 /* BusinessViews */ = {
 			isa = PBXGroup;
 			children = (
+				8F3042321C83E23F00349312 /* FlashBuy */,
 				8F1206181C1A61FE00662E01 /* Map */,
 				8FABCB581C102A6F005BF7AD /* History */,
 				1E79956A1BCD25510099CFF9 /* LoveHouse */,
@@ -5748,6 +5782,43 @@
 			path = Share;
 			sourceTree = "<group>";
 		};
+		8F3042321C83E23F00349312 /* FlashBuy */ = {
+			isa = PBXGroup;
+			children = (
+				8F3042351C83E29D00349312 /* FlashDetailView.h */,
+				8F3042361C83E29D00349312 /* FlashDetailView.m */,
+				8F3042381C83E2C200349312 /* FlashDetailView.xib */,
+				8F3042451C83F09400349312 /* FlashDetailStageView.h */,
+				8F3042461C83F09400349312 /* FlashDetailStageView.m */,
+				8F3042481C83F0A300349312 /* FlashDetailStageView.xib */,
+				8F30424A1C83F7AD00349312 /* FlashDetailStageCell.h */,
+				8F30424B1C83F7AD00349312 /* FlashDetailStageCell.m */,
+				8F30424D1C83F7B900349312 /* FlashDetailStageCell.xib */,
+			);
+			path = FlashBuy;
+			sourceTree = "<group>";
+		};
+		8F3042331C83E25700349312 /* FlashBuy */ = {
+			isa = PBXGroup;
+			children = (
+				8F30423A1C83E43200349312 /* FlashDetailModel.h */,
+				8F30423B1C83E43200349312 /* FlashDetailModel.m */,
+				8F30424F1C842C5E00349312 /* FlashStageModel.h */,
+				8F3042501C842C5E00349312 /* FlashStageModel.m */,
+			);
+			path = FlashBuy;
+			sourceTree = "<group>";
+		};
+		8F3042341C83E26B00349312 /* FlashBuy */ = {
+			isa = PBXGroup;
+			children = (
+				8F3042401C83E64700349312 /* FlashDetailViewController.h */,
+				8F3042411C83E64700349312 /* FlashDetailViewController.m */,
+				8F3042421C83E64700349312 /* FlashDetailViewController.xib */,
+			);
+			path = FlashBuy;
+			sourceTree = "<group>";
+		};
 		8F375B691C38D01A00743453 /* AdditionalTabBarItem */ = {
 			isa = PBXGroup;
 			children = (
@@ -6310,6 +6381,7 @@
 				1EC4A1151B5CCD4200206BB9 /* KTCSearchHistoryView.xib in Resources */,
 				1E0B77E31B6B669000A58AD4 /* KTCSearchFilterView.xib in Resources */,
 				1EC4A0D31B59F1D400206BB9 /* StoreDetailTitleCell.xib in Resources */,
+				8F30424E1C83F7B900349312 /* FlashDetailStageCell.xib in Resources */,
 				8F62C3501C56236F0013031E /* OrderDetailRefundDescriptionCell.xib in Resources */,
 				1E7995981BCE38020099CFF9 /* HospitalListViewController.xib in Resources */,
 				8F6502AF1C50C88F00C36260 /* KTCPoiMapViewController.xib in Resources */,
@@ -6327,6 +6399,7 @@
 				1E943F5E1B7DE67B0029FE74 /* logo_750_1334.png in Resources */,
 				8F1206261C1A622700662E01 /* KTCAnnotationTipConfirmLocationView.xib in Resources */,
 				8F5D8E441C047BCB00632390 /* NewsListTagFilterViewController.xib in Resources */,
+				8F3042441C83E64700349312 /* FlashDetailViewController.xib in Resources */,
 				8FC75DAA1C0EEBCB00D1E5F0 /* CommentEditView.xib in Resources */,
 				1E827BD91B941337008F3F08 /* ImageSelectedSmallOn.png in Resources */,
 				1E827B8B1B93E7B3008F3F08 /* AUIPhotoBrowserViewController.xib in Resources */,
@@ -6384,7 +6457,9 @@
 				8FABCB2E1C0FCBD0005BF7AD /* FavouriteViewStoreCell.xib in Resources */,
 				1E827CED1B9D318F008F3F08 /* CouponUsableListViewController.xib in Resources */,
 				1E0B7A851B6F67B800A58AD4 /* CouponPrizeShowView.xib in Resources */,
+				8F3042391C83E2C200349312 /* FlashDetailView.xib in Resources */,
 				1E827BEC1B941337008F3F08 /* VideoOverlay@2x.png in Resources */,
+				8F3042491C83F0A300349312 /* FlashDetailStageView.xib in Resources */,
 				1E7995A91BCF48C70099CFF9 /* NewsRecommendCellViewBigImageView.xib in Resources */,
 				1E7995111BC758560099CFF9 /* NewsListViewCell.xib in Resources */,
 				1E943F521B7DDFDF0029FE74 /* loadingBg_750_1334.png in Resources */,
@@ -6583,6 +6658,7 @@
 				8F2F87451C51D16100DD1FD1 /* ServiceDetailRelatedServiceListViewController.m in Sources */,
 				1EA8B6D61B660BBF00F90688 /* CategoryViewCellLayout.m in Sources */,
 				1E0B7A911B6F67B800A58AD4 /* GBigADView.m in Sources */,
+				8F30423C1C83E43200349312 /* FlashDetailModel.m in Sources */,
 				1E0B7AC21B6F67B800A58AD4 /* ICPopTipView.m in Sources */,
 				1E827CAB1B94144E008F3F08 /* UIImageView+HighlightedWebCache.m in Sources */,
 				8F6502BD1C50D92F00C36260 /* StoreDetailHotRecommendListViewController.m in Sources */,
@@ -6789,6 +6865,7 @@
 				1E3D8D6F1B4BF4A100275C35 /* CommonParser.m in Sources */,
 				1E5CD7461B4F69EF00D177CB /* ServiceListView.m in Sources */,
 				1E0B77F91B6B798100A58AD4 /* KTCSearchResultSortCell.m in Sources */,
+				8F3042371C83E29D00349312 /* FlashDetailView.m in Sources */,
 				1E0B7A971B6F67B800A58AD4 /* GComboBox.m in Sources */,
 				1E7995331BC7BD5D0099CFF9 /* HomeFloorModel.m in Sources */,
 				1E3D8F571B4D1D4D00275C35 /* UserCenterView.m in Sources */,
@@ -6880,6 +6957,7 @@
 				1E0B7B4D1B6F891100A58AD4 /* AddressValidator.m in Sources */,
 				1EC73BFE1B5F4FD0008B39EA /* HomeMoreTitleCellModel.m in Sources */,
 				1EC73BAD1B5E25A4008B39EA /* TwinklingElvesLayout.m in Sources */,
+				8F30423F1C83E4EF00349312 /* FlashDetailViewModel.m in Sources */,
 				8F6502AE1C50C88F00C36260 /* KTCPoiMapViewController.m in Sources */,
 				1E827CBF1B9BDE8F008F3F08 /* CouponBaseModel.m in Sources */,
 				1E3D8D451B4BF4A100275C35 /* DDFileLogger.m in Sources */,
@@ -6906,7 +6984,9 @@
 				1E943F221B7CB1DF0029FE74 /* HomeTitleCellModel.m in Sources */,
 				1E0B7AA11B6F67B800A58AD4 /* GEventPageViewCell1View.m in Sources */,
 				1E943EB01B7235E80029FE74 /* KTCSystemTime.m in Sources */,
+				8F3042471C83F09400349312 /* FlashDetailStageView.m in Sources */,
 				1E0B7AC11B6F67B800A58AD4 /* PlaceHolderTextView.m in Sources */,
+				8F3042431C83E64700349312 /* FlashDetailViewController.m in Sources */,
 				1E0B7AA91B6F67B800A58AD4 /* GMessageView.m in Sources */,
 				1E0B77B51B68EE9F00A58AD4 /* LoginItemModel.m in Sources */,
 				8F25A1221C2D1C9C0076A6FA /* MJRefreshNormalHeader.m in Sources */,
@@ -6979,6 +7059,7 @@
 				1E7600351B55FFF300DF0972 /* ServiceMoreDetailHotSalesItemModel.m in Sources */,
 				1E827B3A1B8C426C008F3F08 /* NewsListItemModel.m in Sources */,
 				1EC4A1191B5CD3BB00206BB9 /* KTCSearchViewController.m in Sources */,
+				8F3042511C842C5E00349312 /* FlashStageModel.m in Sources */,
 				1E3D8D581B4BF4A100275C35 /* AFHTTPClientV2.m in Sources */,
 				1E827CD51B9C145B008F3F08 /* CouponListViewController.m in Sources */,
 				8FABCB711C102B43005BF7AD /* BrowseHistoryServiceListItemModel.m in Sources */,
@@ -6993,6 +7074,7 @@
 				1E0B77CF1B6A14A200A58AD4 /* PMCalendarBackgroundView.m in Sources */,
 				1E0B7B321B6F713E00A58AD4 /* GPayment.m in Sources */,
 				1E0B7AA81B6F67B800A58AD4 /* GMatrixView.m in Sources */,
+				8F30424C1C83F7AD00349312 /* FlashDetailStageCell.m in Sources */,
 				1E3D8D5A1B4BF4A100275C35 /* HttpIcsonCookieManager.m in Sources */,
 				1E0B7AE41B6F693000A58AD4 /* GNavController.m in Sources */,
 				1E5CD7591B510F7900D177CB /* ServiceListViewCell.m in Sources */,
@@ -7117,8 +7199,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Tongcheng Information Technology Co., Ltd. (F8C2RFLJQX)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Tongcheng Information Technology Co., Ltd. (F8C2RFLJQX)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: YE QIAN (L4HESQKF9M)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: YE QIAN (L4HESQKF9M)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -7142,7 +7224,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "9c12f2ec-516b-4672-8913-1762d50ce75c";
+				PROVISIONING_PROFILE = "f437d461-e830-43e7-a75d-a132e4f9fec0";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -7164,8 +7246,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Tongcheng Information Technology Co., Ltd. (F8C2RFLJQX)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Tongcheng Information Technology Co., Ltd. (F8C2RFLJQX)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: YE QIAN (L4HESQKF9M)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: YE QIAN (L4HESQKF9M)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -7182,7 +7264,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "9c12f2ec-516b-4672-8913-1762d50ce75c";
+				PROVISIONING_PROFILE = "f437d461-e830-43e7-a75d-a132e4f9fec0";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -7193,8 +7275,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Tongcheng Information Technology Co., Ltd. (F8C2RFLJQX)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Tongcheng Information Technology Co., Ltd. (F8C2RFLJQX)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: YE QIAN (L4HESQKF9M)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: YE QIAN (L4HESQKF9M)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7221,9 +7303,9 @@
 					"-ObjC",
 					"-licucore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kidstc.iPhoneKidsTC;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kidstc.iPhoneDev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9c12f2ec-516b-4672-8913-1762d50ce75c";
+				PROVISIONING_PROFILE = "f437d461-e830-43e7-a75d-a132e4f9fec0";
 			};
 			name = Debug;
 		};
@@ -7232,8 +7314,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Tongcheng Information Technology Co., Ltd. (F8C2RFLJQX)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Tongcheng Information Technology Co., Ltd. (F8C2RFLJQX)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: YE QIAN (L4HESQKF9M)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: YE QIAN (L4HESQKF9M)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7259,9 +7341,9 @@
 					"-ObjC",
 					"-licucore",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kidstc.iPhoneKidsTC;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kidstc.iPhoneDev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9c12f2ec-516b-4672-8913-1762d50ce75c";
+				PROVISIONING_PROFILE = "f437d461-e830-43e7-a75d-a132e4f9fec0";
 			};
 			name = Release;
 		};
